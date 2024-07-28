@@ -28,9 +28,11 @@ extension Target.Dependency {
 }
 
 extension [Target.Dependency] {
-    static let shared: Self = [
+  static var shared: Self {
+    [
         .dependencies
     ]
+  }
 }
 
 extension [Package.Dependency] {
