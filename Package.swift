@@ -13,18 +13,18 @@ extension String {
 
 extension Target.Dependency {
    
-    static let css: Self = .target(name: .css)
-    static let html: Self = .target(name: .html)
-    static let htmlPointFree: Self = .target(name: .htmlPointFree)
-    static let web: Self = .target(name: .web)
-    static let webPointFree: Self = .target(name: .webPointFree)
+  static var css: Self { .target(name: .css) }
+  static var html: Self { .target(name: .html) }
+  static var htmlPointFree: Self { .target(name: .htmlPointFree) }
+  static var web: Self { .target(name: .web) }
+  static var webPointFree: Self { .target(name: .webPointFree) }
 }
 
 extension Target.Dependency {
-    static let markdown: Self = .product(name: "Markdown", package: "swift-markdown")
-    static let concurrencyExtras: Self = .product(name: "ConcurrencyExtras", package: "swift-concurrency-extras")
-    static let dependencies: Self = .product(name: "Dependencies", package: "swift-dependencies")
-    static let orderedCollections: Self = .product(name: "OrderedCollections", package: "swift-collections")
+  static var markdown: Self { .product(name: "Markdown", package: "swift-markdown") }
+  static var concurrencyExtras: Self { .product(name: "ConcurrencyExtras", package: "swift-concurrency-extras") }
+  static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
+  static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
 }
 
 extension [Target.Dependency] {
