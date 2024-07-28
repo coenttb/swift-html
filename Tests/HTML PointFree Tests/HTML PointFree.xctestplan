@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "967AC3B5-3D16-4C8A-99FC-2163C909BCC7",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "HTML PointFreeTests",
+        "name" : "HTML PointFreeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

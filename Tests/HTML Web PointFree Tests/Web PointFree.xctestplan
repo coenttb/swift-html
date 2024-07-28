@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "2218480F-2350-42C0-989A-B7CB6FE9CAB0",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Web PointFreeTests",
+        "name" : "Web PointFreeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
