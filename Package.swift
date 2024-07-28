@@ -4,20 +4,14 @@
 import PackageDescription
 
 extension String {
-    static let html: Self = "HTML"
     static let css: Self = "CSS"
-    static let htmlPointFree: Self = "HTML PointFree"
-    static let web: Self = "HTML Web"
-    static let webPointFree: Self = "HTML Web PointFree"
+    static let html: Self = "HTML"
 }
 
 extension Target.Dependency {
    
   static var css: Self { .target(name: .css) }
   static var html: Self { .target(name: .html) }
-  static var htmlPointFree: Self { .target(name: .htmlPointFree) }
-  static var web: Self { .target(name: .web) }
-  static var webPointFree: Self { .target(name: .webPointFree) }
 }
 
 extension Target.Dependency {
@@ -77,8 +71,7 @@ extension Package {
                 targets.map { target in
                     Target.target(
                         name: "\(target.name)",
-                        dependencies: .shared + [] + target.dependencies,
-                        resources: target.name == .web ? [.process("Resources")] : []
+                        dependencies: .shared + [] + target.dependencies
                     )
                 },
                 targets.map { target in
@@ -110,34 +103,5 @@ let package = Package.html(
                 .css
             ]
         ),
-        .init(
-            name: .htmlPointFree,
-            library: true,
-            dependencies: [
-                .html,
-                .dependencies,
-                .concurrencyExtras,
-                .markdown,
-                .css
-            ]
-        ),
-        .init(
-            name: .web,
-            library: true,
-            dependencies: [
-                .html,
-                .css
-            ]
-        ),
-        .init(
-            name: .webPointFree,
-            library: true,
-            dependencies: [
-                .html,
-                .css,
-                .web,
-                .htmlPointFree
-            ]
-        )
     ]
 )
