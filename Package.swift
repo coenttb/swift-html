@@ -52,18 +52,18 @@ extension Package {
             name: "swift-html",
             platforms: [.macOS(.v14), .iOS(.v17)],
             products: [
-//                targets.filter{ $0.library }.map(\.name).map { target in
-//                    Product.library(
-//                        name: "\(target)",
-//                        targets: ["\(target)"]
-//                    )
-//                }
-              [
-                .library(
-                  name: "HTML",
-                  targets: targets.filter{ $0.library }.map(\.name)
-                )
-              ]
+                targets.filter{ $0.library }.map(\.name).map { target in
+                    Product.library(
+                        name: "\(target)",
+                        targets: ["\(target)"]
+                    )
+                }
+//              [
+//                .library(
+//                  name: "HTML",
+//                  targets: targets.filter{ $0.library }.map(\.name)
+//                )
+//              ]
             ].flatMap { $0
             },
             dependencies: .default,
