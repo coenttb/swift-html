@@ -30,12 +30,14 @@ extension [Target.Dependency] {
 }
 
 extension [Package.Dependency] {
-    static let `default`: Self = [
-        .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.2"),
-        .package(url: "https://github.com/apple/swift-markdown", from: "0.4.0"),
-        .package(url: "https://github.com/pointfreeco/swift-concurrency-extras.git", from: "1.1.0"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
-    ]
+    static var `default`: Self {
+        [
+            .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.2"),
+            .package(url: "https://github.com/apple/swift-markdown", from: "0.4.0"),
+            .package(url: "https://github.com/pointfreeco/swift-concurrency-extras.git", from: "1.1.0"),
+            .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
+        ]
+    }
 }
 
 struct CustomTarget {

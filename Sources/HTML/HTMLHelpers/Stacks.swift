@@ -54,7 +54,7 @@ public struct VStack<Content: HTML>: HTML {
     }
 }
 
-public struct HorizontalAlignment {
+public struct HorizontalAlignment: Sendable {
     public var rawValue: String
     public init(rawValue: String) {
         self.rawValue = rawValue
@@ -65,7 +65,7 @@ public struct HorizontalAlignment {
     public static let trailing = Self(rawValue: "end")
 }
 
-public struct VerticalAlignment: RawRepresentable {
+public struct VerticalAlignment: RawRepresentable, Sendable {
     public var rawValue: String
     public init(rawValue: String) {
         self.rawValue = rawValue

@@ -1,7 +1,7 @@
 import Dependencies
 import OrderedCollections
 
-public struct HTMLPrinter {
+public struct HTMLPrinter: Sendable {
   public typealias Content = Never
   public var attributes: OrderedDictionary<String, String> = [:]
   public var bytes: ContiguousArray<UInt8> = []
@@ -38,7 +38,7 @@ public struct HTMLPrinter {
     return sheet
   }
 
-  public struct Configuration {
+    public struct Configuration: Sendable {
     let indentation: String
     let newline: String
 

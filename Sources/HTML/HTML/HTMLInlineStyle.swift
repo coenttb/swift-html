@@ -133,7 +133,7 @@ private struct ClassNameGenerator: DependencyKey {
   }
 }
 
-private struct Style: Hashable {
+private struct Style: Hashable, Sendable {
   let property: String
   let value: String
   let media: MediaQuery?
@@ -141,14 +141,14 @@ private struct Style: Hashable {
   let pseudo: Pseudo?
 }
 
-public struct MediaQuery: RawRepresentable, Hashable {
+public struct MediaQuery: RawRepresentable, Hashable, Sendable {
   public init(rawValue: String) {
     self.rawValue = rawValue
   }
   public var rawValue: String
 }
 
-public struct Pseudo: RawRepresentable, Hashable {
+public struct Pseudo: RawRepresentable, Hashable, Sendable {
   public var rawValue: String
   public init(rawValue: String) {
     self.rawValue = rawValue

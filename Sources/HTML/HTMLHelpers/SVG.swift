@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SVG: HTML {
+public struct SVG: HTML, Sendable {
     private enum Storage {
         case raw(String)
         case base64(String)

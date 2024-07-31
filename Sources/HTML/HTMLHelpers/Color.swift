@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 27/07/2024.
 //
 
-public struct HTMLColor {
+public struct HTMLColor: Sendable {
     public var rawValue: String
     public var darkValue: String?
     
