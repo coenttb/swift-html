@@ -15,8 +15,6 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-  static var markdown: Self { .product(name: "Markdown", package: "swift-markdown") }
-  static var concurrencyExtras: Self { .product(name: "ConcurrencyExtras", package: "swift-concurrency-extras") }
   static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
   static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
 }
@@ -33,8 +31,6 @@ extension [Package.Dependency] {
     static var `default`: Self {
         [
             .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.2"),
-            .package(url: "https://github.com/apple/swift-markdown", from: "0.4.0"),
-            .package(url: "https://github.com/pointfreeco/swift-concurrency-extras.git", from: "1.1.0"),
             .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
         ]
     }
@@ -101,8 +97,7 @@ let package = Package.html(
             dependencies: [
                 .dependencies,
                 .orderedCollections,
-                .markdown,
-                .css
+                .css,
             ]
         ),
     ]
