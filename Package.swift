@@ -6,31 +6,34 @@ import PackageDescription
 extension String {
     static let css: Self = "CSS"
     static let html: Self = "HTML"
+    static let markdown: Self = "HTML Markdown"
 }
 
 extension Target.Dependency {
-   
-  static var css: Self { .target(name: .css) }
-  static var html: Self { .target(name: .html) }
+    static var css: Self { .target(name: .css) }
+    static var html: Self { .target(name: .html) }
+    static var markdown: Self { .target(name: .markdown) }
 }
 
 extension Target.Dependency {
-  static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
-  static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
+    static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
+    static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
+    static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
 }
 
 extension [Target.Dependency] {
-  static var shared: Self {
-    [
-        .dependencies
-    ]
-  }
+    static var shared: Self {
+        [
+            .dependencies
+        ]
+    }
 }
 
 extension [Package.Dependency] {
     static var `default`: Self {
         [
             .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.2"),
+            .package(url: "https://github.com/swiftlang/swift-markdown.git", from: "0.4.0"),
             .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
         ]
     }
@@ -50,18 +53,14 @@ extension Package {
             name: "swift-html",
             platforms: [.macOS(.v14), .iOS(.v17)],
             products: [
-                targets.filter{ $0.library }.map(\.name).map { target in
-                    Product.library(
-                        name: "\(target)",
-                        targets: ["\(target)"]
+                [
+                    .library(
+                        name: .html,
+                        targets: targets.filter{ $0.library }.map(\.name).map { target in
+                            "\(target)"
+                        }
                     )
-                }
-//              [
-//                .library(
-//                  name: "HTML",
-//                  targets: targets.filter{ $0.library }.map(\.name)
-//                )
-//              ]
+                ]
             ].flatMap { $0
             },
             dependencies: .default,
@@ -98,6 +97,17 @@ let package = Package.html(
                 .dependencies,
                 .orderedCollections,
                 .css,
+            ]
+        ),
+        .init(
+            name: .markdown,
+            library: true,
+            dependencies: [
+                .dependencies,
+                .orderedCollections,
+                .css,
+                .html,
+                .swiftMarkdown
             ]
         ),
     ]
