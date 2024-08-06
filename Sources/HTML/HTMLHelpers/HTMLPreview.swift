@@ -46,4 +46,29 @@ extension HTMLPreview: NSViewRepresentable {
   }
 }
 #endif
+
+#if canImport(UIKit)
+extension HTMLPreview: UIViewRepresentable {
+  public func makeUIView(context: Context) -> WKWebView {
+    WKWebView(
+      frame: CGRect(x: 0, y: 0, width: 640, height: 480),
+      configuration: WKWebViewConfiguration()
+    )
+  }
+  
+  public func updateUIView(_ webView: WKWebView, context: Context) {
+    let bytes = Self {
+      body
+    } head: {
+      head
+    }
+      .render()
+    let htmlString = String(decoding: bytes, as: UTF8.self)
+    print(htmlString)
+    webView.loadHTMLString(htmlString, baseURL: nil)
+  }
+}
+#endif
+
+
 #endif
