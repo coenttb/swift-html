@@ -33,9 +33,9 @@ public struct HTMLMarkdown: HTML {
         self.tableOfContents = converter.tableOfContents
     }
     
-    public init(previewOnly: Bool = false, _ markdown: () -> String) {
-        self.init(markdown(), previewOnly: previewOnly)
-    }
+//    public init(previewOnly: Bool = false, _ markdown: () -> String) {
+//        self.init(markdown(), previewOnly: previewOnly)
+//    }
     
     public var body: some HTML {
         tag("pf-markdown") {
