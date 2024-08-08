@@ -56,6 +56,6 @@ public enum MarkdownBuilder {
     }
 
     public static func buildFinalResult(_ component: [String]) -> String {
-        return component.joined(separator: "\n\n")
+        return component.joined(separator: "\n")
     }
 }
