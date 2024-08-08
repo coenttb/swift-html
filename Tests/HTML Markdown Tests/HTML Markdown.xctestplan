@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "E9BE4F24-4B07-4A25-890E-C25F79DE982A",
+      "id" : "D52A528C-8638-41F9-9ABC-5C6D99B1AC05",
       "name" : "Configuration 1",
       "options" : {
 
@@ -15,8 +15,8 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "HTML Tests",
-        "name" : "HTML Tests"
+        "identifier" : "HTML Markdown Tests",
+        "name" : "HTML Markdown Tests"
       }
     }
   ],
