@@ -30,6 +30,11 @@ extension HTMLPreview where Head == _HTMLTuple<HTMLElement<HTMLText>, HTMLElemen
                     box-sizing: border-box;
                     color: #000; /* Default text color for light mode */
                 }
+                
+                h1, h2, h3, h4, h5, h6 {
+                    page-break-after: avoid;
+                }
+                
                 code, pre, tt, kbd, samp {
                     font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
                 }
