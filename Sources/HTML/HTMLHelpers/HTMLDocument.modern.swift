@@ -32,7 +32,14 @@ extension HTMLPreview where Head == _HTMLTuple<HTMLElement<HTMLText>, HTMLElemen
                 }
                 
                 h1, h2, h3, h4, h5, h6 {
-                    page-break-after: avoid;
+                    page-break-inside: avoid;
+                }
+
+                h1::after, h2::after, h3::after, h4::after, h5::after, h6::after {
+                    content: "";
+                    display: block;
+                    height: 100px;
+                    margin-bottom: -100px;
                 }
                 
                 code, pre, tt, kbd, samp {
