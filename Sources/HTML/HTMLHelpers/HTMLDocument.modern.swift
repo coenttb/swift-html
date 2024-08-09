@@ -31,15 +31,25 @@ extension HTMLPreview where Head == _HTMLTuple<HTMLElement<HTMLText>, HTMLElemen
                     color: #000; /* Default text color for light mode */
                 }
                 
+                /* Prevent page breaks after headers */
                 h1, h2, h3, h4, h5, h6 {
-                    page-break-inside: avoid;
+                    page-break-after: avoid;
+                    page-break-inside: avoid; /* Ensure headers aren't split across pages */
+                    margin-top: 0; /* Remove any top margin that might push headers to a new page */
                 }
 
-                h1::after, h2::after, h3::after, h4::after, h5::after, h6::after {
-                    content: "";
-                    display: block;
-                    height: 100px;
-                    margin-bottom: -100px;
+                /* Prevent page breaks before paragraphs, lists, and other content following headers */
+                p, ul, ol, blockquote {
+                    page-break-before: avoid;
+                    margin-top: 0; /* Ensure content starts right after the header */
+                }
+
+                /* Optional: Add some spacing between header and content, if needed */
+                h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p,
+                h1 + ul, h2 + ul, h3 + ul, h4 + ul, h5 + ul, h6 + ul,
+                h1 + ol, h2 + ol, h3 + ol, h4 + ol, h5 + ol, h6 + ol,
+                h1 + blockquote, h2 + blockquote, h3 + blockquote, h4 + blockquote, h5 + blockquote, h6 + blockquote {
+                    margin-top: 0.5em; /* Adjust spacing between headers and content */
                 }
                 
                 code, pre, tt, kbd, samp {
