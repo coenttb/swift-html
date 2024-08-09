@@ -9,7 +9,7 @@ import Foundation
 
 public struct AnyHTML: HTML {
     let base: any HTML
-    init(_ base: any HTML) {
+    public init(_ base: any HTML) {
         self.base = base
     }
     public static func _render(_ html: AnyHTML, into printer: inout HTMLPrinter) {
