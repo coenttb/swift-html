@@ -30,28 +30,6 @@ extension HTMLPreview where Head == _HTMLTuple<HTMLElement<HTMLText>, HTMLElemen
                     box-sizing: border-box;
                     color: #000; /* Default text color for light mode */
                 }
-                
-                /* Prevent page breaks after headers */
-                h1, h2, h3, h4, h5, h6 {
-                    page-break-after: avoid;
-                    page-break-inside: avoid; /* Ensure headers aren't split across pages */
-                    margin-top: 0; /* Remove any top margin that might push headers to a new page */
-                }
-
-                /* Prevent page breaks before paragraphs, lists, and other content following headers */
-                p, ul, ol, blockquote {
-                    page-break-before: avoid;
-                    margin-top: 0; /* Ensure content starts right after the header */
-                }
-
-                /* Optional: Add some spacing between header and content, if needed */
-                h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p,
-                h1 + ul, h2 + ul, h3 + ul, h4 + ul, h5 + ul, h6 + ul,
-                h1 + ol, h2 + ol, h3 + ol, h4 + ol, h5 + ol, h6 + ol,
-                h1 + blockquote, h2 + blockquote, h3 + blockquote, h4 + blockquote, h5 + blockquote, h6 + blockquote {
-                    margin-top: 0.5em; /* Adjust spacing between headers and content */
-                }
-                
                 code, pre, tt, kbd, samp {
                     font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
                 }
@@ -81,55 +59,27 @@ extension HTMLPreview where Head == _HTMLTuple<HTMLElement<HTMLText>, HTMLElemen
                         font-size: 14px;
                     }
                 }
+                /* General rule to avoid page breaks after headers */
+                h1, h2, h3, h4, h5, h6 {
+                    page-break-after: avoid;
+                    page-break-inside: avoid; /* Prevent header itself from being split */
+                    margin-bottom: 0; /* Remove any bottom margin that could cause break */
+                }
+
+                /* Specific rule to keep header with the first paragraph or block element following it */
+                h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p,
+                h1 + ul, h2 + ul, h3 + ul, h4 + ul, h5 + ul, h6 + ul,
+                h1 + ol, h2 + ol, h3 + ol, h4 + ol, h5 + ol, h6 + ol,
+                h1 + blockquote, h2 + blockquote, h3 + blockquote, h4 + blockquote, h5 + blockquote, h6 + blockquote {
+                    page-break-before: avoid;
+                    margin-top: 0; /* Ensure content starts immediately after the header */
+                }
+
+                /* Additional rule to avoid splitting paragraphs or lists across pages */
+                p, ul, ol, blockquote {
+                    page-break-inside: avoid;
+                }
                 """}
-//                style {
-//                        """
-//                        html {
-//                            font-family: ui-sans-serif, -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif;
-//                            line-height: 1.5;
-//                            -webkit-box-sizing: border-box;
-//                            -moz-box-sizing: border-box;
-//                            -ms-box-sizing: border-box;
-//                            -o-box-sizing: border-box;
-//                            box-sizing: border-box;
-//                        }
-//                        code, pre, tt, kbd, samp {
-//                            font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
-//                        }
-//                        body {
-//                            -webkit-box-sizing: border-box;
-//                            -moz-box-sizing: border-box;
-//                            -ms-box-sizing: border-box;
-//                            -o-box-sizing: border-box;
-//                            box-sizing: border-box
-//                        }
-//                        *, * ::before, * ::after {
-//                            -webkit-box-sizing: inherit;
-//                            -moz-box-sizing: inherit;
-//                            -ms-box-sizing: inherit;
-//                            -o-box-sizing: inherit;
-//                            box-sizing: inherit
-//                        }
-//                        body, html {
-//                            background: #fff;
-//                        }
-//                        @media (prefers-color-scheme: dark) {
-//                            body, html {
-//                                background: #121212;
-//                            }
-//                        }
-//                        @media only screen and (min-width: 832px) {
-//                            html {
-//                                font-size: 16px;
-//                            }
-//                        }
-//                        @media only screen and (max-width: 831px) {
-//                            html {
-//                                font-size: 14px;
-//                            }
-//                        }
-//                        """
-//                }
             }
         )
     }
