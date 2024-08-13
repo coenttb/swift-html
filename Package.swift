@@ -59,7 +59,8 @@ extension Package {
                         targets: targets.filter{ $0.library }.map(\.name).map { target in
                             "\(target)"
                         }
-                    )
+                    ),
+                    .library(name: "CSS", targets: ["CSS"])
                 ]
             ].flatMap { $0
             },

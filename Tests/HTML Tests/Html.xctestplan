@@ -18,13 +18,6 @@
         "identifier" : "HTML Tests",
         "name" : "HTML Tests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "HTML Markdown Tests",
-        "name" : "HTML Markdown Tests"
-      }
     }
   ],
   "version" : 1

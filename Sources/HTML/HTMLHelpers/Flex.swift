@@ -1,6 +1,7 @@
 import CSS
 
 extension HTML {
+    @_disfavoredOverload
     public func flexContainer(
         direction: String? = nil,
         wrap: String? = nil,
