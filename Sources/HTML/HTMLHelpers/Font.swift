@@ -20,6 +20,7 @@ extension HTML {
     }
 }
 
+
 public enum FontScale: Double {
     case h1 = 4
     case h2 = 3

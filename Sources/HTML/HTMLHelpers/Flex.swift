@@ -1,3 +1,5 @@
+import CSS
+
 extension HTML {
     public func flexContainer(
         direction: String? = nil,
@@ -35,19 +37,19 @@ extension HTML {
     public func flexContainer(
         direction: Flex.Direction? = nil,
         wrap: Flex.Wrap? = nil,
-        justification: String? = nil,
-        itemAlignment: String? = nil,
-        rowGap: String? = nil,
-        columnGap: String? = nil,
+        justification: JustifyContent? = nil,
+        itemAlignment: AlignItems? = nil,
+        rowGap: CSS.Length? = nil,
+        columnGap: CSS.Length? = nil,
         media: MediaQuery? = nil
     ) -> some HTML {
         self.flexContainer(
             direction: direction?.rawValue,
             wrap: wrap?.rawValue,
-            justification: justification,
-            itemAlignment: itemAlignment,
-            rowGap: rowGap,
-            columnGap: columnGap,
+            justification: justification?.description,
+            itemAlignment: itemAlignment?.description,
+            rowGap: rowGap?.description,
+            columnGap: columnGap?.description,
             media: media
         )
     }

@@ -148,7 +148,7 @@ public struct InlineDiagnostic: HTML {
                 .attribute("title", message)
                 .inlineStyle("min-width", "0")
                 .inlineStyle("max-width", "500px")
-                .inlineStyle("flex", "1 1")
+                .flexItem(grow: 1, shrink: 1, basis: Flex.Basis.auto)
                 .inlineStyle("padding", "3px 30px 3px 8px")
                 .inlineStyle("text-overflow", "ellipsis")
                 .inlineStyle("overflow", "hidden")

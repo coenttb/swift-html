@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "78CA4AF7-D083-4D32-B3CA-70FF8C55A3B9",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CSS Tests",
+        "name" : "CSS Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
