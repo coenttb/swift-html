@@ -38,21 +38,21 @@ public struct HTMLMarkdown: HTML {
 //    }
     
     public var body: some HTML {
-        tag("pf-markdown") {
+        tag("swift-html-markdown") {
             VStack(spacing: 0.5) {
                 content
-                    .inlineStyle(
-                        "content",
-                        previewOnly ? nil : #""❖""#,
-                        pre: "article",
-                        pseudo: .is("p") + .lastOfType + .after
-                    )
-                    .inlineStyle(
-                        "margin-left",
-                        previewOnly ? nil : "0.5rem",
-                        pre: "article",
-                        pseudo: .is("p") + .lastOfType + .after
-                    )
+//                    .inlineStyle(
+//                        "content",
+//                        previewOnly ? nil : #""❖""#,
+//                        pre: "article",
+//                        pseudo: .is("p") + .lastOfType + .after
+//                    )
+//                    .inlineStyle(
+//                        "margin-left",
+//                        previewOnly ? nil : "0.5rem",
+//                        pre: "article",
+//                        pseudo: .is("p") + .lastOfType + .after
+//                    )
             }
             .inlineStyle(
                 "mask-image",
