@@ -188,3 +188,10 @@ extension HTML {
         self.inlineStyle("max-height", value.description)
     }
 }
+
+extension HTML {
+    @discardableResult
+    public func display(_ display: CSS.Display) -> some HTML {
+        self.inlineStyle("display", display.description)
+    }
+}
