@@ -64,33 +64,7 @@ extension HTML {
         self
             .inlineStyle("flex-grow", grow.map(String.init), media: media)
             .inlineStyle("flex-shrink", shrink.map(String.init), media: media)
-            .inlineStyle("flex-basis", basis?.rawValue, media: media)
+            .inlineStyle("flex-basis", basis?.description, media: media)
     }
 }
 
-public struct Flex {    
-    public typealias Grow = Int
-    public typealias Shrink = Int
-    
-    public enum Basis: String {
-        case flexBasis = "flex-basis"
-        case auto
-        case content
-        case fitContent = "fit-content"
-        case maxContent = "max-content"
-        case minContent = "min-content"
-    }
-    public enum Direction: String {
-        case flexDirection = "flex-direction"
-        case column
-        case columnReverse = "column-reverse"
-        case row
-        case rowReverse = "row-reverse"
-    }
-    public enum Wrap: String {
-        case flexWrap = "flex-wrap"
-        case nowrap
-        case wrap
-        case wrapReverse = "wrap-reverse"
-    }
-}

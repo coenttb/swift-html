@@ -276,3 +276,5 @@ private func classID(_ value: String) -> String {
 }
 private let baseChars = Array("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 private let baseCount = UInt32(baseChars.count)
+
+
