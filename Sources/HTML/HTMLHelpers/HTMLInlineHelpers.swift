@@ -8,92 +8,92 @@
 import Foundation
 import CSS
 
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func display(_ value: String) -> HTMLInlineStyle {
+    public func display(_ value: String) -> some HTML {
         inlineStyle("display", value)
     }
     
     @discardableResult
-    public func position(_ value: String) -> HTMLInlineStyle {
+    public func position(_ value: String) -> some HTML {
         inlineStyle("position", value)
     }
     
     @discardableResult
-    public func top(_ value: String) -> HTMLInlineStyle {
+    public func top(_ value: String) -> some HTML {
         inlineStyle("top", value)
     }
     
     @discardableResult
-    public func left(_ value: String) -> HTMLInlineStyle {
+    public func left(_ value: String) -> some HTML {
         inlineStyle("left", value)
     }
     
     @discardableResult
-    public func width(_ value: String) -> HTMLInlineStyle {
+    public func width(_ value: String) -> some HTML {
         inlineStyle("width", value)
     }
     
     @discardableResult
-    public func height(_ value: String) -> HTMLInlineStyle {
+    public func height(_ value: String) -> some HTML {
         inlineStyle("height", value)
     }
     
     @discardableResult
-    public func backgroundColor(_ value: String) -> HTMLInlineStyle {
+    public func backgroundColor(_ value: String) -> some HTML {
         inlineStyle("background-color", value)
     }
     
     @discardableResult
-    public func transition(_ value: String) -> HTMLInlineStyle {
+    public func transition(_ value: String) -> some HTML {
         inlineStyle("transition", value)
     }
     
     @discardableResult
-    public func opacity(_ value: String) -> HTMLInlineStyle {
+    public func opacity(_ value: String) -> some HTML {
         inlineStyle("opacity", value)
     }
     
     @discardableResult
-    public func zIndex(_ value: String) -> HTMLInlineStyle {
+    public func zIndex(_ value: String) -> some HTML {
         inlineStyle("z-index", value)
     }
     
     // Additional common styles
     
     @discardableResult
-    public func margin(_ value: String) -> HTMLInlineStyle {
+    public func margin(_ value: String) -> some HTML {
         inlineStyle("margin", value)
     }
     
     @discardableResult
-    public func padding(_ value: String) -> HTMLInlineStyle {
+    public func padding(_ value: String) -> some HTML {
         inlineStyle("padding", value)
     }
     
     @discardableResult
-    public func color(_ value: String) -> HTMLInlineStyle {
+    public func color(_ value: String) -> some HTML {
         inlineStyle("color", value)
     }
     
     @discardableResult
-    public func fontSize(_ value: String) -> HTMLInlineStyle {
-        inlineStyle("font-size", value)
+    public func fontSize(_ value: CSS.Length) -> some HTML {
+        inlineStyle("font-size", value.description)
     }
     
     @discardableResult
-    public func fontWeight(_ value: String) -> HTMLInlineStyle {
-        inlineStyle("font-weight", value)
+    public func fontWeight(_ value: CSS.FontWeight) -> some HTML {
+        inlineStyle("font-weight", value.description)
     }
     
     @discardableResult
-    public func textAlign(_ value: String) -> HTMLInlineStyle {
+    public func textAlign(_ value: String) -> some HTML {
         inlineStyle("text-align", value)
     }
     
     // Convenience method for custom properties
     @discardableResult
-    public func custom(_ property: String, _ value: String) -> HTMLInlineStyle {
+    public func custom(_ property: String, _ value: String) -> some HTML {
         inlineStyle(property, value)
     }
 }
@@ -121,15 +121,6 @@ extension HTML {
     @discardableResult
     public func overflowY(_ value: CSS.Overflow.Value) -> some HTML {
         self.inlineStyle("overflow-y", value.rawValue)
-    }
-}
-
-
-// Extension to HTML for using the FontWeight property
-extension HTML {
-    @discardableResult
-    public func fontWeight(_ value: CSS.FontWeight) -> some HTML {
-        self.inlineStyle("font-weight", value.description)
     }
 }
 
