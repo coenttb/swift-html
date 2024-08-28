@@ -8,61 +8,61 @@
 import Foundation
 import CSS
 
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func display(_ value: String) -> HTMLInlineStyle {
+    public func display(_ value: String) -> some HTML {
         inlineStyle("display", value)
     }
     
     @discardableResult
-    public func position(_ value: String) -> HTMLInlineStyle {
+    public func position(_ value: String) -> some HTML {
         inlineStyle("position", value)
     }
     
     @discardableResult
-    public func top(_ value: String) -> HTMLInlineStyle {
+    public func top(_ value: String) -> some HTML {
         inlineStyle("top", value)
     }
     
     @discardableResult
-    public func left(_ value: String) -> HTMLInlineStyle {
+    public func left(_ value: String) -> some HTML {
         inlineStyle("left", value)
     }
     
     @discardableResult
-    public func width(_ value: String) -> HTMLInlineStyle {
+    public func width(_ value: String) -> some HTML {
         inlineStyle("width", value)
     }
     
     @discardableResult
-    public func height(_ value: String) -> HTMLInlineStyle {
+    public func height(_ value: String) -> some HTML {
         inlineStyle("height", value)
     }
     
     @discardableResult
-    public func backgroundColor(_ value: String) -> HTMLInlineStyle {
+    public func backgroundColor(_ value: String) -> some HTML {
         inlineStyle("background-color", value)
     }
     
     @discardableResult
-    public func transition(_ value: String) -> HTMLInlineStyle {
+    public func transition(_ value: String) -> some HTML {
         inlineStyle("transition", value)
     }
     
     @discardableResult
-    public func opacity(_ value: String) -> HTMLInlineStyle {
+    public func opacity(_ value: String) -> some HTML {
         inlineStyle("opacity", value)
     }
     
     @discardableResult
-    public func zIndex(_ value: String) -> HTMLInlineStyle {
+    public func zIndex(_ value: String) -> some HTML {
         inlineStyle("z-index", value)
     }
     
     // Additional common styles
     
     @discardableResult
-    public func margin(_ value: String) -> HTMLInlineStyle {
+    public func margin(_ value: String) -> some HTML {
         inlineStyle("margin", value)
     }
     
@@ -99,7 +99,7 @@ extension HTMLInlineStyle {
 }
 
 
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
     public func position(_ value: CSS.Position) -> some HTML {
         self.inlineStyle("position", value.description)
@@ -107,85 +107,82 @@ extension HTMLInlineStyle {
 }
 
 // Extension to HTML for using the Overflow property
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func overflow(_ value: CSS.Overflow) -> HTMLInlineStyle {
+    public func overflow(_ value: CSS.Overflow) -> some HTML {
         self.inlineStyle("overflow", value.description)
     }
     
     @discardableResult
-    public func overflowX(_ value: CSS.Overflow.Value) -> HTMLInlineStyle {
+    public func overflowX(_ value: CSS.Overflow.Value) -> some HTML {
         self.inlineStyle("overflow-x", value.rawValue)
     }
     
     @discardableResult
-    public func overflowY(_ value: CSS.Overflow.Value) -> HTMLInlineStyle {
+    public func overflowY(_ value: CSS.Overflow.Value) -> some HTML {
         self.inlineStyle("overflow-y", value.rawValue)
     }
 }
 
 // Extension to HTML for using the BoxSizing property
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func boxSizing(_ value: CSS.BoxSizing) -> HTMLInlineStyle {
+    public func boxSizing(_ value: CSS.BoxSizing) -> some HTML {
         self.inlineStyle("box-sizing", value.description)
     }
 }
 
 // Extension to HTML for using the Cursor property
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func cursor(_ value: CSS.Cursor) -> HTMLInlineStyle {
+    public func cursor(_ value: CSS.Cursor) -> some HTML {
         self.inlineStyle("cursor", value.description)
     }
 }
 
 // Extension to HTML for using the Visibility property
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func visibility(_ value: CSS.Visibility) -> HTMLInlineStyle {
+    public func visibility(_ value: CSS.Visibility) -> some HTML {
         self.inlineStyle("visibility", value.description)
     }
 }
 
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func width(_ value: CSS.Length) -> HTMLInlineStyle {
+    public func width(_ value: CSS.Length) -> some HTML {
         self.inlineStyle("width", value.description)
     }
 
     @discardableResult
-    public func height(_ value: CSS.Length) -> HTMLInlineStyle {
+    public func height(_ value: CSS.Length) -> some HTML {
         self.inlineStyle("height", value.description)
     }
 
     @discardableResult
-    public func minWidth(_ value: CSS.Length) -> HTMLInlineStyle {
+    public func minWidth(_ value: CSS.Length) -> some HTML {
         self.inlineStyle("min-width", value.description)
     }
 
     @discardableResult
-    public func minHeight(_ value: CSS.Length) -> HTMLInlineStyle {
+    public func minHeight(_ value: CSS.Length) -> some HTML {
         self.inlineStyle("min-height", value.description)
     }
 
     @discardableResult
-    public func maxWidth(_ value: CSS.Length) -> HTMLInlineStyle {
+    public func maxWidth(_ value: CSS.Length) -> some HTML {
         self.inlineStyle("max-width", value.description)
     }
 
     @discardableResult
-    public func maxHeight(_ value: CSS.Length) -> HTMLInlineStyle {
+    public func maxHeight(_ value: CSS.Length) -> some HTML {
         self.inlineStyle("max-height", value.description)
     }
 }
 
-extension HTMLInlineStyle {
+extension HTML {
     @discardableResult
-    public func display(_ display: CSS.Display) -> HTMLInlineStyle {
+    public func display(_ display: CSS.Display) -> some HTML {
         self.inlineStyle("display", display.description)
     }
 }
-
-
-
