@@ -4,8 +4,8 @@ import HTML
 
 extension HTML {
     @discardableResult
-    public func fontSize(_ value: CSS.Length, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("font-size", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func fontSize(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        inlineStyle("font-size", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
@@ -80,10 +80,6 @@ extension HTML {
         inlineStyle("color", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
-    @discardableResult
-    public func fontSize(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("font-size", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
 
     @discardableResult
     public func fontWeight(_ value: CSS.FontWeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
@@ -293,17 +289,16 @@ extension HTML {
 
 extension HTML {
     @discardableResult
+    @HTMLBuilder
     public func border(
-        width: CSS.Length,
+        width: CSS.Length?,
         style: CSS.Border.Style = .solid,
         color: HTMLColor
     ) -> some HTML {
-        self.border(.all(width: .width(width), style: style, color: color))
-    }
-}
-
-extension CSS.Border.Width {
-    public static func width(_ length: CSS.Length) -> Self {
-        .length(length)
+        if let width {
+            self.border(.all(width: .length(width), style: style, color: color))
+        } else {
+            self
+        }
     }
 }
