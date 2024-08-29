@@ -36,6 +36,11 @@ public enum Background: Sendable {
         public struct LinearGradient: Sendable {
             public var angle: Angle
             public var stops: [GradientStop]
+            
+            public init(angle: Angle, stops: [GradientStop]) {
+                self.angle = angle
+                self.stops = stops
+            }
         }
         
         public struct RadialGradient: Sendable {
@@ -43,6 +48,13 @@ public enum Background: Sendable {
             public var size: Size
             public var position: Position
             public var stops: [GradientStop]
+            
+            public init(shape: Shape, size: Size, position: Position, stops: [GradientStop]) {
+                self.shape = shape
+                self.size = size
+                self.position = position
+                self.stops = stops
+            }
             
             public enum Shape: String, Sendable {
                 case circle, ellipse
@@ -68,11 +80,22 @@ public enum Background: Sendable {
             public var angle: Angle
             public var position: Position
             public var stops: [GradientStop]
+            
+            public init(angle: Angle, position: Position, stops: [GradientStop]) {
+                self.angle = angle
+                self.position = position
+                self.stops = stops
+            }
         }
         
         public struct GradientStop: Sendable {
             public var color: HTMLColor
             public var position: Length?
+            
+            public init(color: HTMLColor, position: Length? = nil) {
+                self.color = color
+                self.position = position
+            }
         }
     }
 
