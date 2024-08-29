@@ -259,23 +259,19 @@ extension HTML {
 // HTML extension for size
 extension HTML {
     @discardableResult
-    public func size(_ size: CSS.Size) -> some HTML {
-        self.inlineStyle("size", size.description)
+    public func size(width: Length? = nil, height: Length? = nil) -> some HTML {
+        inlineStyle("width", width?.description)
+        .inlineStyle("height", height?.description)
+    }
+        
+    @discardableResult
+    public func width(_ width: Length?) -> some HTML {
+        self.inlineStyle("width", width?.description)
     }
     
     @discardableResult
-    public func size(width: CSS.Length, height: CSS.Length) -> some HTML {
-        self.size(.double(width: width, height: height))
-    }
-    
-    @discardableResult
-    public func width(_ width: CSS.Size) -> some HTML {
-        self.inlineStyle("width", width.description)
-    }
-    
-    @discardableResult
-    public func height(_ height: CSS.Size) -> some HTML {
-        self.inlineStyle("height", height.description)
+    public func height(_ height: Length?) -> some HTML {
+        self.inlineStyle("height", height?.description)
     }
 }
 
@@ -296,11 +292,6 @@ extension HTML {
 
 
 extension HTML {
-    @discardableResult
-    public func size(width: CSS.Size, height: CSS.Size) -> some HTML {
-        self.width(width).height(height)
-    }
-
     @discardableResult
     public func border(
         width: CSS.Length,
