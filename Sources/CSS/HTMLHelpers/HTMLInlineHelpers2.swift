@@ -238,3 +238,42 @@ extension HTML {
         inlineStyle("background", background.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
+
+
+// HTML extension for size
+extension HTML {
+    @discardableResult
+    public func size(_ size: CSS.Size) -> some HTML {
+        self.inlineStyle("size", size.description)
+    }
+    
+    @discardableResult
+    public func size(width: CSS.Length, height: CSS.Length) -> some HTML {
+        self.size(.double(width: width, height: height))
+    }
+    
+    @discardableResult
+    public func width(_ width: CSS.Size) -> some HTML {
+        self.inlineStyle("width", width.description)
+    }
+    
+    @discardableResult
+    public func height(_ height: CSS.Size) -> some HTML {
+        self.inlineStyle("height", height.description)
+    }
+}
+
+
+extension HTML {
+    @HTMLBuilder
+    public func hidden(_ hidden: Bool = true) -> some HTML {
+        if hidden {
+            size(width: .px(1), height: .px(1))
+                .inlineStyle("clip", "rect(1px,1px,1px,1px)")
+                .inlineStyle("overflow", "hidden")
+                .inlineStyle("position", "absolute")
+        } else {
+            self
+        }
+    }
+}
