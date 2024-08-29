@@ -6,12 +6,14 @@ import PackageDescription
 extension String {
     static let css: Self = "CSS"
     static let html: Self = "HTML"
+    static let html_css: Self = "HTML+CSS"
     static let markdown: Self = "HTML Markdown"
 }
 
 extension Target.Dependency {
     static var css: Self { .target(name: .css) }
     static var html: Self { .target(name: .html) }
+    static var html_css: Self { .target(name: .html_css) }
     static var markdown: Self { .target(name: .markdown) }
 }
 
@@ -19,6 +21,7 @@ extension Target.Dependency {
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
+    static var percent: Self { .product(name: "Percent", package: "swift-percent") }
 }
 
 extension [Target.Dependency] {
@@ -35,6 +38,7 @@ extension [Package.Dependency] {
             .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.2"),
             .package(url: "https://github.com/swiftlang/swift-markdown.git", from: "0.4.0"),
             .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
+            .package(url: "https://github.com/tenthijeboonkkamp/swift-percent.git", branch: "main"),
         ]
     }
 }
@@ -60,7 +64,8 @@ extension Package {
                             "\(target)"
                         }
                     ),
-                    .library(name: "CSS", targets: ["CSS"])
+                    .library(name: .css, targets: [.css]),
+                    .library(name: .html_css, targets: [.html_css])
                 ]
             ].flatMap { $0
             },
@@ -89,6 +94,8 @@ let package = Package.html(
             name: .css,
             library: true,
             dependencies: [
+                .html,
+                .percent
             ]
         ),
         .init(
@@ -97,7 +104,16 @@ let package = Package.html(
             dependencies: [
                 .dependencies,
                 .orderedCollections,
+            ]
+        ),
+        .init(
+            name: .html_css,
+            library: true,
+            dependencies: [
+                .html,
                 .css,
+                .dependencies,
+                .orderedCollections,
             ]
         ),
         .init(
@@ -108,7 +124,8 @@ let package = Package.html(
                 .orderedCollections,
                 .css,
                 .html,
-                .swiftMarkdown
+                .swiftMarkdown,
+                .html_css
             ]
         ),
     ]

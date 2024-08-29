@@ -1,5 +1,6 @@
 import HTML
 import CSS
+import HTML_CSS
 
 public struct DiagnosticLevel: Sendable {
     var icon: SVG

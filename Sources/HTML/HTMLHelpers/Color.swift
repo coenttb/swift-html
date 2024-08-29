@@ -15,6 +15,16 @@ public struct HTMLColor: Sendable {
     }
 }
 
+extension HTMLColor: CustomStringConvertible {
+    public var description: String {
+        if let darkValue = darkValue {
+            return "@media (prefers-color-scheme: light) { \(rawValue) } @media (prefers-color-scheme: dark) { \(darkValue) }"
+        } else {
+            return rawValue
+        }
+    }
+}
+
 extension HTMLColor {
     public func dark(_ other: Self) -> Self { Self(rawValue: rawValue, darkValue: other.rawValue) }
     public func light(_ other: Self) -> Self { Self(rawValue: other.rawValue, darkValue: darkValue) }

@@ -43,8 +43,6 @@ public enum Flex {
     }
 }
 
-
-
 extension Flex.Grow: CustomStringConvertible {
     public var description: String {
         switch self {

@@ -1,4 +1,5 @@
 import CSS
+import HTML
 
 extension HTML {
     @_disfavoredOverload
