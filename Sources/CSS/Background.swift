@@ -262,44 +262,44 @@ extension HTML {
     public func background(_ background: CSS.Background) -> some HTML {
         self.inlineStyle("background", background.description)
     }
-    
-    @discardableResult
-    public func backgroundColor(_ color: HTMLColor) -> some HTML {
-        self.inlineStyle("background-color", color.description)
-    }
-    
-    @discardableResult
-    public func backgroundImage(_ image: CSS.Background.Image) -> some HTML {
-        self.inlineStyle("background-image", image.description)
-    }
-    
-    @discardableResult
-    public func backgroundPosition(_ position: CSS.Background.Position) -> some HTML {
-        self.inlineStyle("background-position", position.description)
-    }
-    
-    @discardableResult
-    public func backgroundSize(_ size: CSS.Background.Size) -> some HTML {
-        self.inlineStyle("background-size", size.description)
-    }
-    
-    @discardableResult
-    public func backgroundRepeat(_ repeat: CSS.Background.Repeat) -> some HTML {
-        self.inlineStyle("background-repeat", `repeat`.rawValue)
-    }
-    
-    @discardableResult
-    public func backgroundAttachment(_ attachment: CSS.Background.Attachment) -> some HTML {
-        self.inlineStyle("background-attachment", attachment.rawValue)
-    }
-    
-    @discardableResult
-    public func backgroundOrigin(_ origin: CSS.Background.Origin) -> some HTML {
-        self.inlineStyle("background-origin", origin.rawValue)
-    }
-    
-    @discardableResult
-    public func backgroundClip(_ clip: CSS.Background.Clip) -> some HTML {
-        self.inlineStyle("background-clip", clip.rawValue)
-    }
+//    
+//    @discardableResult
+//    public func backgroundColor(_ color: HTMLColor) -> some HTML {
+//        self.inlineStyle("background-color", color.description)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundImage(_ image: CSS.Background.Image) -> some HTML {
+//        self.inlineStyle("background-image", image.description)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundPosition(_ position: CSS.Background.Position) -> some HTML {
+//        self.inlineStyle("background-position", position.description)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundSize(_ size: CSS.Background.Size) -> some HTML {
+//        self.inlineStyle("background-size", size.description)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundRepeat(_ repeat: CSS.Background.Repeat) -> some HTML {
+//        self.inlineStyle("background-repeat", `repeat`.rawValue)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundAttachment(_ attachment: CSS.Background.Attachment) -> some HTML {
+//        self.inlineStyle("background-attachment", attachment.rawValue)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundOrigin(_ origin: CSS.Background.Origin) -> some HTML {
+//        self.inlineStyle("background-origin", origin.rawValue)
+//    }
+//    
+//    @discardableResult
+//    public func backgroundClip(_ clip: CSS.Background.Clip) -> some HTML {
+//        self.inlineStyle("background-clip", clip.rawValue)
+//    }
 }
