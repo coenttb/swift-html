@@ -47,6 +47,12 @@ public enum Border: Sendable {
     }
 }
 
+extension CSS.Border.Radius {
+    public init(_ length: Length){
+        self = .all(length)
+    }
+}
+
 extension CSS.Border: CustomStringConvertible {
     public var description: String {
         switch self {
