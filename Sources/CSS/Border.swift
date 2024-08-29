@@ -53,6 +53,15 @@ extension CSS.Border {
     }
 }
 
+extension CSS.Border.Width {
+    public static func radius(_ length: Length) -> CSS.Border {
+        .radius(.all(length))
+    }
+}
+
+
+
+
 extension CSS.Border: CustomStringConvertible {
     public var description: String {
         switch self {

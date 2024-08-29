@@ -277,3 +277,26 @@ extension HTML {
         }
     }
 }
+
+
+extension HTML {
+    @discardableResult
+    public func size(width: CSS.Size, height: CSS.Size) -> some HTML {
+        self.width(width).height(height)
+    }
+
+    @discardableResult
+    public func border(
+        width: CSS.Length = 1.px,
+        style: CSS.Border.Style = .solid,
+        color: HTMLColor
+    ) -> some HTML {
+        self.border(.all(width: .width(width), style: style, color: color))
+    }
+}
+
+extension CSS.Border.Width {
+    public static func width(_ length: CSS.Length) -> Self {
+        .length(length)
+    }
+}
