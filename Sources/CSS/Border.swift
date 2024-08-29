@@ -47,9 +47,9 @@ public enum Border: Sendable {
     }
 }
 
-extension CSS.Border.Radius {
-    public init(_ length: Length){
-        self = .all(length)
+extension CSS.Border {
+    public static func radius(_ length: Length) -> CSS.Border {
+        .radius(.all(length))
     }
 }
 
