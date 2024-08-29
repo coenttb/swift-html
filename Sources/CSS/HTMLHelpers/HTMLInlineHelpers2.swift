@@ -4,7 +4,7 @@ import HTML
 
 extension HTML {
     @discardableResult
-    public func fontSize(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func fontSize(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("font-size", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
@@ -82,7 +82,7 @@ extension HTML {
 
 
     @discardableResult
-    public func fontWeight(_ value: CSS.FontWeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func fontWeight(_ value: CSS.FontWeight? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("font-weight", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
@@ -100,118 +100,118 @@ extension HTML {
 
 extension HTML {
     @discardableResult
-    public func position(_ value: CSS.Position?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func position(_ value: CSS.Position? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("position", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func overflow(_ value: CSS.Overflow?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func overflow(_ value: CSS.Overflow? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("overflow", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func overflowX(_ value: CSS.Overflow.Value?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func overflowX(_ value: CSS.Overflow.Value? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("overflow-x", value?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func overflowY(_ value: CSS.Overflow.Value?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func overflowY(_ value: CSS.Overflow.Value? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("overflow-y", value?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func boxSizing(_ value: CSS.BoxSizing?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func boxSizing(_ value: CSS.BoxSizing? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("box-sizing", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func cursor(_ value: CSS.Cursor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func cursor(_ value: CSS.Cursor? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("cursor", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func visibility(_ value: CSS.Visibility?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func visibility(_ value: CSS.Visibility? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("visibility", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func width(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func width(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("width", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func height(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func height(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("height", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func minWidth(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func minWidth(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("min-width", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func minHeight(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func minHeight(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("min-height", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func maxWidth(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func maxWidth(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("max-width", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func maxHeight(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func maxHeight(_ value: CSS.Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("max-height", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func display(_ display: CSS.Display?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func display(_ display: CSS.Display? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("display", display?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func margin(_ margin: CSS.Margin?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func margin(_ margin: CSS.Margin? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("margin", margin?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func margin(top: Length?, right: Length?, bottom: Length?, left: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func margin(top: Length? = nil, right: Length? = nil, bottom: Length? = nil, left: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         margin(.trbl(top: top, right: right, bottom: bottom, left: left), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func margin(vertical: Length?, horizontal: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func margin(vertical: Length? = nil, horizontal: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         margin(.trbl(top: vertical, right: horizontal, bottom: vertical, left: horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
 extension HTML {
     @discardableResult
-    public func padding(_ padding: CSS.Padding?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func padding(_ padding: CSS.Padding? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("padding", padding?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func padding(top: Length?, right: Length?, bottom: Length?, left: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func padding(top: Length? = nil, right: Length? = nil, bottom: Length? = nil, left: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         padding(.trbl(top: top, right: right, bottom: bottom, left: left), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func padding(vertical: Length?, horizontal: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+    public func padding(vertical: Length? = nil, horizontal: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         padding(.trbl(top: vertical, right: horizontal, bottom: vertical, left: horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
@@ -261,12 +261,12 @@ extension HTML {
     }
         
     @discardableResult
-    public func width(_ width: Length?) -> some HTML {
+    public func width(_ width: Length? = nil) -> some HTML {
         self.inlineStyle("width", width?.description)
     }
     
     @discardableResult
-    public func height(_ height: Length?) -> some HTML {
+    public func height(_ height: Length? = nil) -> some HTML {
         self.inlineStyle("height", height?.description)
     }
 }
