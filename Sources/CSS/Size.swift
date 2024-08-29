@@ -72,13 +72,3 @@ extension CSS.Size {
     public static let contain: Self = .keyword(.containingBlock)
     public static let cover: Self = .keyword(.cover)
 }
-
-// Extension to use Size with numeric types
-extension Int {
-    public var size: CSS.Size { .single(.px(Double(self))) }
-}
-
-extension Double {
-    public var size: CSS.Size { .single(.px(self)) }
-}
-

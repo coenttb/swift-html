@@ -223,12 +223,28 @@ extension HTML {
 extension HTML {
     @discardableResult
     public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("border", border.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func borderRadius(_ radius: CSS.Border.Radius, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        switch border {
+        case .all(let width, let style, let color):
+            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.description ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .top(let width, let style, let color):
+            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.description ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .right(let width, let style, let color):
+            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.description ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .bottom(let width, let style, let color):
+            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.description ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .left(let width, let style, let color):
+            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.description ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .width(let width):
+            return inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .style(let style):
+            return inlineStyle("border-style", style.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .color(let color):
+            return inlineStyle("border-color", color.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .radius(let radius):
+            return inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .global(let global):
+            return inlineStyle("border", global.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        }
     }
 }
 
@@ -287,7 +303,7 @@ extension HTML {
 
     @discardableResult
     public func border(
-        width: CSS.Length = 1.px,
+        width: CSS.Length,
         style: CSS.Border.Style = .solid,
         color: HTMLColor
     ) -> some HTML {
