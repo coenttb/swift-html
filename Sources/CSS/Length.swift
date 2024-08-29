@@ -15,31 +15,32 @@ public enum Length: Sendable, ExpressibleByIntegerLiteral, ExpressibleByFloatLit
     case keyword(Keyword)
     case calc(String) // For calc() expressions
     case global(Global)
-
+    
     public enum Unit: String, Sendable {
         case px, em, rem, vw, vh, vmin, vmax
         case cm, mm, `in`, pt, pc
         case ex, ch, lh // Typography-related units
         case fr // For CSS Grid
+        case q, cap, ic, rlh
     }
-
+    
     public enum Keyword: String, Sendable {
         case auto
         case maxContent = "max-content"
         case minContent = "min-content"
         case fitContent = "fit-content"
     }
-
+    
     public enum Global: String, Sendable {
         case inherit, initial, revert
         case revertLayer = "revert-layer"
         case unset
     }
-
+    
     public init(integerLiteral value: Int) {
         self = .length(Double(value), .px)
     }
-
+    
     public init(floatLiteral value: Double) {
         self = .length(value, .px)
     }
@@ -82,3 +83,61 @@ extension CSS.Length: CustomStringConvertible {
     }
 }
 
+
+extension Int {
+    public var px: CSS.Length { .px(Double(self)) }
+    public var em: CSS.Length { .em(Double(self)) }
+    public var rem: CSS.Length { .rem(Double(self)) }
+    public var vw: CSS.Length { .vw(Double(self)) }
+    public var vh: CSS.Length { .vh(Double(self)) }
+    public var percent: CSS.Length { .percent(Double(self)) }
+    
+    // Add other units as needed
+    public var cm: CSS.Length { .length(Double(self), .cm) }
+    public var mm: CSS.Length { .length(Double(self), .mm) }
+    public var `in`: CSS.Length { .length(Double(self), .in) }
+    public var pt: CSS.Length { .length(Double(self), .pt) }
+    public var pc: CSS.Length { .length(Double(self), .pc) }
+    public var ex: CSS.Length { .length(Double(self), .ex) }
+    public var ch: CSS.Length { .length(Double(self), .ch) }
+    public var lh: CSS.Length { .length(Double(self), .lh) }
+    public var vmin: CSS.Length { .length(Double(self), .vmin) }
+    public var vmax: CSS.Length { .length(Double(self), .vmax) }
+    public var fr: CSS.Length { .length(Double(self), .fr) }
+}
+
+extension Double {
+    public var px: CSS.Length { .px(self) }
+    public var em: CSS.Length { .em(self) }
+    public var rem: CSS.Length { .rem(self) }
+    public var vw: CSS.Length { .vw(self) }
+    public var vh: CSS.Length { .vh(self) }
+    public var percent: CSS.Length { .percent(self) }
+    
+    // Add other units as needed
+    public var cm: CSS.Length { .length(self, .cm) }
+    public var mm: CSS.Length { .length(self, .mm) }
+    public var `in`: CSS.Length { .length(self, .in) }
+    public var pt: CSS.Length { .length(self, .pt) }
+    public var pc: CSS.Length { .length(self, .pc) }
+    public var ex: CSS.Length { .length(self, .ex) }
+    public var ch: CSS.Length { .length(self, .ch) }
+    public var lh: CSS.Length { .length(self, .lh) }
+    public var vmin: CSS.Length { .length(self, .vmin) }
+    public var vmax: CSS.Length { .length(self, .vmax) }
+    public var fr: CSS.Length { .length(self, .fr) }
+}
+
+extension Int {
+    public var q: CSS.Length { .length(Double(self), .q) }
+    public var cap: CSS.Length { .length(Double(self), .cap) }
+    public var ic: CSS.Length { .length(Double(self), .ic) }
+    public var rlh: CSS.Length { .length(Double(self), .rlh) }
+}
+
+extension Double {
+    public var q: CSS.Length { .length(self, .q) }
+    public var cap: CSS.Length { .length(self, .cap) }
+    public var ic: CSS.Length { .length(self, .ic) }
+    public var rlh: CSS.Length { .length(self, .rlh) }
+}
