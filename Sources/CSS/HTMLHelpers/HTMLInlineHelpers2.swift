@@ -176,9 +176,10 @@ extension HTML {
 }
 
 extension HTML {
+    // NOTE: Display.none can conflict with Display?.none, and Display?.none gets precendence apparently. So can't have optional parameter here.
     @discardableResult
-    public func display(_ display: CSS.Display? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("display", display?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func display(_ display: CSS.Display, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        inlineStyle("display", display.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
