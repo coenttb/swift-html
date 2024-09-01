@@ -310,3 +310,10 @@ extension HTML {
         }
     }
 }
+
+extension HTML {
+    @discardableResult
+    public func clipPath(_ clipPath: ClipPath) -> some HTML {
+        self.inlineStyle("clip-path", clipPath.cssValue)
+    }
+}
