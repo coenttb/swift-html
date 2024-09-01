@@ -86,7 +86,7 @@ public struct Diagnostic<Message: HTML>: HTML {
                 }
                 .color(level.iconColor)
                 .backgroundColor(level.backgroundColor)
-                .padding(top: 8.px, right: 8.px, bottom: 7.px)
+                .padding(top: 8.px, horizontal: 8.px, bottom: 7.px)
                 
                 div {
                     VStack(spacing: 0.5) {

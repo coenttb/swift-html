@@ -98,7 +98,7 @@ private struct HTMLConverter: MarkupVisitor {
                     }
                 }
                 .href(blockDirective.argumentText.segments.map(\.trimmedText).joined(separator: " "))
-                .margin(top: 0.5.rem, right: 0)
+                .margin(vertical: 0.5.rem, horizontal: 0)
             }
             
         case "Comment":
@@ -184,7 +184,7 @@ private struct HTMLConverter: MarkupVisitor {
                     visit(child)
                 }
             }
-            .padding(top: 0, right: 1.rem)
+            .padding(vertical: 0, horizontal: 1.rem)
         } else {
             let style = BlockQuoteStyle(blockName: aside.kind.displayName)
             blockquote {
@@ -203,8 +203,8 @@ private struct HTMLConverter: MarkupVisitor {
             .backgroundColor(style.backgroundColor)
             .border(.all(width: 2.px, style: .solid, color: style.borderColor))
             .border(.radius(6.px))
-            .margin(top: 0.5.rem, right: 0)
-            .padding(top: 1.rem, right: 1.5.rem)
+            .margin(vertical: 0.5.rem, horizontal: 0)
+            .padding(vertical: 1.rem, horizontal: 1.5.rem)
         }
     }
     
@@ -233,7 +233,7 @@ private struct HTMLConverter: MarkupVisitor {
         .margin(0)
         .margin(bottom: 0.5.rem)
         .overflowX(.auto)
-        .padding(top: 1.rem, right: 1.5.rem)
+        .padding(vertical: 1.rem, horizontal: 1.5.rem)
         .border(.radius(6.px))
     }
     
@@ -302,7 +302,7 @@ private struct HTMLConverter: MarkupVisitor {
             VStack(alignment: .center) {
                 Link(href: source) {
                     Image(source: source, description: image.title ?? "")
-                        .margin(top: 0, right: 1.rem)
+                        .margin(vertical: 0, horizontal: 1.rem)
                         .border(.radius(6.px))
                 }
             }
@@ -447,7 +447,7 @@ private struct HTMLConverter: MarkupVisitor {
         div {
             Divider()
         }
-        .margin(top: 1.rem, right: 0, bottom: 2.rem)
+        .margin(top: 1.rem, horizontal: 0, bottom: 2.rem)
     }
     
     @HTMLBuilder

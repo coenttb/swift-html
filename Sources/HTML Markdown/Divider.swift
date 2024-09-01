@@ -6,6 +6,6 @@ public struct Divider: HTML {
     hr()
       .border(.none)
       .border(.top(width: 1.px, style: .solid, color: .gray800.dark(.gray300)))
-      .margin(top: 0, right: 30.percent)
+      .margin(vertical: 0, horizontal: 30.percent)
   }
 }
