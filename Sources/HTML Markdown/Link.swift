@@ -1,5 +1,6 @@
 import Dependencies
 import HTML
+import CSS
 
 struct Link<Label: HTML>: HTML {
     @Dependency(\.linkStyle) var linkStyle
@@ -20,8 +21,8 @@ struct Link<Label: HTML>: HTML {
     var body: some HTML {
         a { label }
             .attribute("href", href)
-            .color(linkStyle.color, .visited)
-            .color(linkStyle.color, .link)
+            .color(linkStyle.color, pseudo: .visited)
+            .color(linkStyle.color, pseudo: .link)
             .inlineStyle(
                 "text-decoration", linkStyle.underline == true ? "underline" : "none", pseudo: .visited
             )

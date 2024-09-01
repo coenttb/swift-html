@@ -78,11 +78,11 @@ extension HTML {
             .inlineStyle("background", color?.darkValue, media: .dark)
     }
     
-    public func color(
-        _ color: HTMLColor?,
-        _ pseudo: Pseudo? = nil
-    ) -> some HTML {
-        inlineStyle("color", color?.rawValue, pseudo: pseudo)
-            .inlineStyle("color", color?.darkValue, media: .dark, pseudo: pseudo)
-    }
+//    public func color(
+//        _ color: HTMLColor?,
+//        _ pseudo: Pseudo? = nil
+//    ) -> some HTML {
+//        inlineStyle("color", color?.rawValue, pseudo: pseudo)
+//            .inlineStyle("color", color?.darkValue, media: .dark, pseudo: pseudo)
+//    }
 }

@@ -590,11 +590,11 @@ public struct Timestamp: HTML {
                     HTMLText(speaker)
                 }
                 .color(.gray500)
-                .inlineStyle("font-size", "0.875rem")
+                .fontSize(0.875.rem)
                 .inlineStyle("line-height", "1", media: .desktop)
-                .inlineStyle("position", "relative", media: .desktop)
+                .position(.relative, media: .desktop)
                 .inlineStyle("text-transform", "uppercase")
-                .inlineStyle("top", "0.5rem", media: .desktop)
+                .top(0.5.rem, media: .desktop)
             }
             
             let duration = self.duration
@@ -607,13 +607,13 @@ public struct Timestamp: HTML {
                 }
                 .fontStyle(.body(.small))
                 .linkStyle(LinkStyle(color: .gray800.dark(.gray300), underline: nil))
-                .attribute("id", id)
+                .id(id)
                 .inlineStyle("font-variant-numeric", "tabular-nums")
                 .inlineStyle("line-height", "3", media: .desktop)
-                .inlineStyle("margin-left", "-4rem", media: .desktop)
-                .inlineStyle("position", "absolute", media: .desktop)
+                .margin(left: (-4).rem, media: .desktop)
+                .position(.absolute, media: .desktop)
                 .inlineStyle("text-align", "right", media: .desktop)
-                .inlineStyle("width", "3.25rem", media: .desktop)
+                .width(3.25.rem, media: .desktop)
             }
         }
         .flexContainer(direction: "column-reverse", rowGap: "0.5rem", media: .mobile)

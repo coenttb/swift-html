@@ -63,8 +63,8 @@ public struct Button<Label: HTML>: HTML {
         .inlineStyle("transition", "0.3s")
         .backgroundColor(color.backgroundColor(for: style))
         .color(color.foregroundColor(for: style))
-        .color(color.foregroundColor(for: style), .link)
-        .color(color.foregroundColor(for: style), .visited)
+        .color(color.foregroundColor(for: style), pseudo: .link)
+        .color(color.foregroundColor(for: style), pseudo: .visited)
         .fontScale(size.fontScale)
     }
     
