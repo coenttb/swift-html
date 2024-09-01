@@ -257,19 +257,9 @@ extension HTML {
 // HTML extension for size
 extension HTML {
     @discardableResult
-    public func size(width: Length? = nil, height: Length? = nil) -> some HTML {
-        inlineStyle("width", width?.description)
-        .inlineStyle("height", height?.description)
-    }
-        
-    @discardableResult
-    public func width(_ width: Length?) -> some HTML {
-        self.inlineStyle("width", width?.description)
-    }
-    
-    @discardableResult
-    public func height(_ height: Length?) -> some HTML {
-        self.inlineStyle("height", height?.description)
+    public func size(width: Length? = nil, height: Length? = nil, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        inlineStyle("wifth", width?.description, media: media, pre: pre, pseudo: pseudo)
+            .height(height, media: media, pre: pre, pseudo: pseudo)
     }
 }
 
