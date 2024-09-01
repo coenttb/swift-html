@@ -26,7 +26,7 @@ The popular choice for rendering HTML in Swift these days is to use templating l
 HTML documents can be created in a tree-like fashion, much like you might create a nested JSON document:
 
 ```swift
-import Html
+import HTMLCore
 
 let document: Node = .document(
   .html(

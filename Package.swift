@@ -6,12 +6,14 @@ import PackageDescription
 extension String {
     static let css: Self = "CSS"
     static let html: Self = "HTML"
+    static let htmlCore: Self = "HTMLCore"
     static let html_css: Self = "HTML+CSS"
     static let markdown: Self = "HTML Markdown"
 }
 
 extension Target.Dependency {
     static var css: Self { .target(name: .css) }
+    static var htmlCore: Self { .target(name: .htmlCore) }
     static var html: Self { .target(name: .html) }
     static var html_css: Self { .target(name: .html_css) }
     static var markdown: Self { .target(name: .markdown) }
@@ -58,13 +60,9 @@ extension Package {
             platforms: [.macOS(.v14), .iOS(.v17)],
             products: [
                 [
-                    .library(
-                        name: .html,
-                        targets: targets.filter{ $0.library }.map(\.name).map { target in
-                            "\(target)"
-                        }
-                    ),
+                    .library(name: .html, targets: [.html]),
                     .library(name: .css, targets: [.css]),
+                    .library(name: .htmlCore, targets: [.htmlCore]),
                     .library(name: .html_css, targets: [.html_css])
                 ]
             ].flatMap { $0
@@ -94,12 +92,21 @@ let package = Package.html(
             name: .css,
             library: true,
             dependencies: [
-                .html,
+                .htmlCore,
                 .percent
             ]
         ),
         .init(
             name: .html,
+            library: true,
+            dependencies: [
+                .htmlCore,
+                .css,
+                .html_css
+            ]
+        ),
+        .init(
+            name: .htmlCore,
             library: true,
             dependencies: [
                 .dependencies,
@@ -110,7 +117,7 @@ let package = Package.html(
             name: .html_css,
             library: true,
             dependencies: [
-                .html,
+                .htmlCore,
                 .css,
                 .dependencies,
                 .orderedCollections,
@@ -123,7 +130,7 @@ let package = Package.html(
                 .dependencies,
                 .orderedCollections,
                 .css,
-                .html,
+                .htmlCore,
                 .swiftMarkdown,
                 .html_css
             ]

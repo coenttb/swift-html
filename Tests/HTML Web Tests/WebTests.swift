@@ -7,6 +7,6 @@
 
 import Foundation
 import Testing
-import HTML
+import HTMLCore
 import HTML_Web
 

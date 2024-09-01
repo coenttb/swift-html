@@ -1,4 +1,4 @@
-import HTML
+import HTMLCore
 import CSS
 import HTML_CSS
 import Markdown

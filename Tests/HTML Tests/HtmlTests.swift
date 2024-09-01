@@ -7,7 +7,7 @@
 
 import Foundation
 import Testing
-import HTML
+import HTMLCore
 import CSS
 
 @Test

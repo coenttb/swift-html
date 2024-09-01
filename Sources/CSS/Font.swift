@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTML
+import HTMLCore
 import Foundation
 
 public struct Font: Sendable, Equatable {

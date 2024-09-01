@@ -1,5 +1,5 @@
 import OrderedCollections
-import HTML
+import HTMLCore
 public struct HStack<Content: HTML>: HTML {
     let alignment: VerticalAlignment
     let spacing: Length?
@@ -84,7 +84,6 @@ public struct Spacer: HTML {
         tag("swift-html-spacer").grow()
     }
 }
-
 
 public struct LazyVGrid<Content: HTML>: HTML {
     let columns: OrderedDictionary<MediaQuery?, [Int]>

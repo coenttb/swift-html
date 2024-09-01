@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import HTML
+import HTMLCore
+import CSS
 
 public struct Button<Label: HTML>: HTML {
     let tagName: String

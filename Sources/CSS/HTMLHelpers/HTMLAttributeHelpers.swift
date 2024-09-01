@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTML
+import HTMLCore
 
 extension HTML {
     @HTMLBuilder

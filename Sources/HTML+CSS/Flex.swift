@@ -1,5 +1,5 @@
 import CSS
-import HTML
+import HTMLCore
 
 extension HTML {
     @_disfavoredOverload

@@ -1,5 +1,5 @@
 import Dependencies
-import HTML
+import HTMLCore
 import CSS
 
 struct Link<Label: HTML>: HTML {

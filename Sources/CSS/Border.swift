@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTML
+import HTMLCore
 
 public enum Border: Sendable {
     case all(width: Width, style: Style, color: HTMLColor?)

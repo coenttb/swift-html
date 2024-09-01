@@ -1,4 +1,4 @@
-import HTML
+import HTMLCore
 
 public struct Divider: HTML {
   public init() {}
