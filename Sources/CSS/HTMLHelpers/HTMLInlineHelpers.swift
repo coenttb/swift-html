@@ -268,8 +268,14 @@ extension HTML {
 extension HTML {
     @discardableResult
     public func size(width: Length? = nil, height: Length? = nil, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("wifth", width?.description, media: media, pre: pre, pseudo: pseudo)
+        inlineStyle("width", width?.description, media: media, pre: pre, pseudo: pseudo)
             .height(height, media: media, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func size(_ size: Length?, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        inlineStyle("width", size?.description, media: media, pre: pre, pseudo: pseudo)
+            .height(size, media: media, pre: pre, pseudo: pseudo)
     }
 }
 
