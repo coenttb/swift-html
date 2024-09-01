@@ -60,7 +60,7 @@ extension Package {
             platforms: [.macOS(.v14), .iOS(.v17)],
             products: [
                 [
-                    .library(name: .html, targets: [.html]),
+                    .library(name: .html, targets: [.html, .markdown]),
                     .library(name: .css, targets: [.css]),
                     .library(name: .htmlCore, targets: [.htmlCore]),
                     .library(name: .html_css, targets: [.html_css])
