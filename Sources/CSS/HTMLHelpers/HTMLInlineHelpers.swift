@@ -181,6 +181,11 @@ extension HTML {
     public func margin(vertical: Length? = nil, horizontal: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         margin(.trbl(top: vertical, right: horizontal, bottom: vertical, left: horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
+    
+    @discardableResult
+    public func margin(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        margin(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
 }
 
 extension HTML {
@@ -197,6 +202,11 @@ extension HTML {
     @discardableResult
     public func padding(vertical: Length? = nil, horizontal: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         padding(.trbl(top: vertical, right: horizontal, bottom: vertical, left: horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func padding(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        padding(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
