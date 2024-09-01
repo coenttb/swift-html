@@ -205,4 +205,9 @@ extension HTML {
     public func controls(_ showControls: Bool = true) -> some HTML {
         showControls ? attribute("controls", "") : self.attribute("", nil)
     }
+    
+    @HTMLBuilder
+    public func loading(_ loading: Loading? ) -> some HTML {
+        attribute("loading", loading?.rawValue)
+    }
 }
