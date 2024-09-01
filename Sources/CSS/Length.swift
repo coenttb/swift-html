@@ -65,6 +65,90 @@ extension Length: Equatable {
     }
 }
 
+extension Length: Numeric {
+    public typealias Magnitude = Double
+    
+    public var magnitude: Double {
+        switch self {
+        case .length(let value, _), .percentage(let value):
+            return abs(value)
+        case .calc, .keyword, .global:
+            return 0 // Non-numeric types return 0 magnitude
+        }
+    }
+    
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        self = .length(Double(source), .px)
+    }
+    
+    public static func * (lhs: Length, rhs: Length) -> Length {
+        switch (lhs, rhs) {
+        case (.length(let v1, let u1), .length(let v2, _)):
+            return .length(v1 * v2, u1)
+        case (.percentage(let v1), .percentage(let v2)):
+            return .percentage(v1 * v2)
+        default:
+            return .calc("\(lhs) * \(rhs)")
+        }
+    }
+    
+    public static func *= (lhs: inout Length, rhs: Length) {
+        lhs = lhs * rhs
+    }
+    
+    public static func + (lhs: Length, rhs: Length) -> Length {
+        switch (lhs, rhs) {
+        case (.length(let v1, let u1), .length(let v2, let u2)) where u1 == u2:
+            return .length(v1 + v2, u1)
+        case (.percentage(let v1), .percentage(let v2)):
+            return .percentage(v1 + v2)
+        default:
+            return .calc("\(lhs) + \(rhs)")
+        }
+    }
+    
+    public static func += (lhs: inout Length, rhs: Length) {
+        lhs = lhs + rhs
+    }
+    
+    public static func - (lhs: Length, rhs: Length) -> Length {
+        switch (lhs, rhs) {
+        case (.length(let v1, let u1), .length(let v2, let u2)) where u1 == u2:
+            return .length(v1 - v2, u1)
+        case (.percentage(let v1), .percentage(let v2)):
+            return .percentage(v1 - v2)
+        default:
+            return .calc("\(lhs) - \(rhs)")
+        }
+    }
+    
+    public static func -= (lhs: inout Length, rhs: Length) {
+        lhs = lhs - rhs
+    }
+    
+    // Custom division operation
+    public static func / (lhs: Length, rhs: Double) -> Length {
+        guard rhs != 0 else { fatalError("Division by zero") }
+        switch lhs {
+        case .length(let value, let unit):
+            return .length(value / rhs, unit)
+        case .percentage(let value):
+            return .percentage(value / rhs)
+        case .calc(let expression):
+            return .calc("(\(expression)) / \(rhs)")
+        case .keyword, .global:
+            return lhs // Keywords and globals cannot be divided
+        }
+    }
+}
+
+// Extension to allow division by Int
+extension Length {
+    public static func / (lhs: Length, rhs: Int) -> Length {
+        return lhs / Double(rhs)
+    }
+}
+
 extension CSS.Length {
     public static func px(_ value: Double) -> Self { .length(value, .px) }
     public static func em(_ value: Double) -> Self { .length(value, .em) }
