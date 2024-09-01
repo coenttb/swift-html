@@ -82,11 +82,11 @@ public struct Diagnostic<Message: HTML>: HTML {
             drop-shadow(0 -1px 0 white)
             """
                     )
-                    .inlineStyle("width", "14px")
+                    .width(14.px)
                 }
                 .color(level.iconColor)
                 .backgroundColor(level.backgroundColor)
-                .inlineStyle("padding", "8px 8px 7px")
+                .padding(top: 8.px, right: 8.px, bottom: 7.px)
                 
                 div {
                     VStack(spacing: 0.5) {
@@ -251,7 +251,7 @@ import SwiftUI
                     }
                 }
             }
-            .inlineStyle("padding", "10px")
+            .padding(10.px)
         }
         .environment(\.colorScheme, colorScheme)
     }

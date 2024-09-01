@@ -5,8 +5,7 @@ public struct Divider: HTML {
   public var body: some HTML {
     hr()
       .inlineStyle("border", "none")
-      .inlineStyle("border-top", "1px solid \(HTMLColor.gray800.rawValue)")
-      .inlineStyle("border-top", "1px solid \(HTMLColor.gray300.rawValue)", media: .dark)
-      .inlineStyle("margin", "0 30%")
+      .border(.top(width: 1.px, style: .solid, color: .gray800.dark(.gray300)))
+      .margin(top: 0, right: 30.percent)
   }
 }

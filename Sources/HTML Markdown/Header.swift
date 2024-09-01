@@ -1,9 +1,9 @@
 import HTML
 
 struct Header<Content: HTML>: HTML {
-    let size: Int
+    let size: Length
     @HTMLBuilder let content: Content
-    init(_ size: Int = 3, @HTMLBuilder content: () -> Content) {
+    init(_ size: Length = 3, @HTMLBuilder content: () -> Content) {
         self.size = size
         self.content = content()
     }
@@ -13,51 +13,52 @@ struct Header<Content: HTML>: HTML {
             content
         }
         .inlineStyle("margin", "0")
-        .inlineStyle("margin-top", "\(marginTop)rem", pseudo: .not(.firstChild))
-        .inlineStyle("margin-bottom", "\(marginBottom)rem", pseudo: .not(.lastChild))
-        .inlineStyle("font-size", "\(fontSize)rem")
-        .inlineStyle("font-weight", "700")
-        .inlineStyle("line-height", "\(lineHeight)")
+        .margin(0)
+        .margin(top: marginTop, pseudo: .not(.firstChild))
+        .margin(bottom: marginBottom, pseudo: .not(.firstChild))
+        .fontSize(size)
+        .font(.weight(700))
+        .lineHeight(.length(lineHeight))
     }
     
-    var fontSize: Double {
+    var fontSize: Length {
         switch size {
-        case 1: 4
-        case 2: 3
-        case 3: 2
-        case 4: 1.5
-        case 5: 1
-        default: 0.875
+        case 1: 4.rem
+        case 2: 3.rem
+        case 3: 2.rem
+        case 4: 1.5.rem
+        case 5: 1.rem
+        default: 0.875.rem
         }
     }
-    var lineHeight: Double {
+    var lineHeight: Length {
         switch size {
-        case 1: 1.2
-        case 2: 1.2
-        case 3: 1.2
-        case 4: 1.2
-        case 5: 1.15
-        default: 1.15
+        case 1: 1.2.rem
+        case 2: 1.2.rem
+        case 3: 1.2.rem
+        case 4: 1.2.rem
+        case 5: 1.15.rem
+        default: 1.15.rem
         }
     }
-    var marginBottom: Double {
+    var marginBottom: Length {
         switch size {
-        case 1: 1
-        case 2: 0.75
-        case 3: 0.5
-        case 4: 0.5
-        case 5: 0.5
-        default: 0.3
+        case 1: 1.rem
+        case 2: 0.75.rem
+        case 3: 0.5.rem
+        case 4: 0.5.rem
+        case 5: 0.5.rem
+        default: 0.3.rem
         }
     }
-    var marginTop: Double {
+    var marginTop: Length {
         switch size {
-        case 1: 2
-        case 2: 1.75
-        case 3: 1.5
-        case 4: 1.5
-        case 5: 0.5
-        default: 0.5
+        case 1: 2.rem
+        case 2: 1.75.rem
+        case 3: 1.5.rem
+        case 4: 1.5.rem
+        case 5: 0.5.rem
+        default: 0.5.rem
         }
     }
 }

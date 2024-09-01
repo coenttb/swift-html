@@ -414,6 +414,11 @@ extension HTML {
     public func lineHeight(_ lineHeight: Font.LineHeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         font(.lineHeight(lineHeight), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
+    
+    @discardableResult
+    public func lineHeight(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.lineHeight(.length(length)), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
 
     @discardableResult
     public func fontStretch(_ stretch: Font.FontStretch?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
