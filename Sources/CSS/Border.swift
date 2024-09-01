@@ -19,6 +19,7 @@ public enum Border: Sendable {
     case color(HTMLColor)
     case radius(Radius)
     case global(Global)
+    case none
     
     public enum Width: Sendable {
         case length(Length)
@@ -85,6 +86,8 @@ extension CSS.Border: CustomStringConvertible {
             return "border-radius: \(radius)"
         case .global(let global):
             return global.rawValue
+        case .none:
+            return "none"
         }
     }
 }

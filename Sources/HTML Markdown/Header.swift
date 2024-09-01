@@ -12,7 +12,6 @@ struct Header<Content: HTML>: HTML {
         tag("h\(size)") {
             content
         }
-        .inlineStyle("margin", "0")
         .margin(0)
         .margin(top: marginTop, pseudo: .not(.firstChild))
         .margin(bottom: marginBottom, pseudo: .not(.firstChild))

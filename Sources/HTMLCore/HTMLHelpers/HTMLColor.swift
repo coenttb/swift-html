@@ -66,23 +66,3 @@ extension HTMLColor {
         gray(UInt8(255 * value))
     }
 }
-
-extension HTML {
-    public func backgroundColor(_ color: HTMLColor?) -> some HTML {
-        inlineStyle("background-color", color?.rawValue)
-            .inlineStyle("background-color", color?.darkValue, media: .dark)
-    }
-    
-    public func background(_ color: HTMLColor?) -> some HTML {
-        inlineStyle("background", color?.rawValue)
-            .inlineStyle("background", color?.darkValue, media: .dark)
-    }
-    
-//    public func color(
-//        _ color: HTMLColor?,
-//        _ pseudo: Pseudo? = nil
-//    ) -> some HTML {
-//        inlineStyle("color", color?.rawValue, pseudo: pseudo)
-//            .inlineStyle("color", color?.darkValue, media: .dark, pseudo: pseudo)
-//    }
-}

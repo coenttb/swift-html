@@ -59,7 +59,7 @@ public struct HTMLMarkdown: HTML {
                 previewOnly ? "linear-gradient(to bottom,black 50%,transparent 100%)" : nil
             )
         }
-        .inlineStyle("display", "block")
+        .display(.block)
     }
 }
 
@@ -98,7 +98,7 @@ private struct HTMLConverter: MarkupVisitor {
                     }
                 }
                 .href(blockDirective.argumentText.segments.map(\.trimmedText).joined(separator: " "))
-                .inlineStyle("margin", "0.5rem 0")
+                .margin(top: 0.5.rem, right: 0)
             }
             
         case "Comment":
@@ -166,7 +166,7 @@ private struct HTMLConverter: MarkupVisitor {
             .attribute("controls")
             .attribute("playsinline")
             .inlineStyle("object-fit", "cover")
-            .inlineStyle("margin-bottom", "1rem")
+            .margin(bottom: 1.rem)
             
         default:
             for child in blockDirective.children {
@@ -184,7 +184,7 @@ private struct HTMLConverter: MarkupVisitor {
                     visit(child)
                 }
             }
-            .inlineStyle("padding", "0 1rem")
+            .padding(top: 0, right: 1.rem)
         } else {
             let style = BlockQuoteStyle(blockName: aside.kind.displayName)
             blockquote {
@@ -201,11 +201,10 @@ private struct HTMLConverter: MarkupVisitor {
             }
             .color(.offBlack.dark(.offWhite))
             .backgroundColor(style.backgroundColor)
-            .inlineStyle("border", "2px solid \(style.borderColor.rawValue)")
-            .inlineStyle("border", "2px solid \(style.borderColor.darkValue!)", media: .dark)
-            .inlineStyle("border-radius", "6px")
-            .inlineStyle("margin", "0.5rem 0")
-            .inlineStyle("padding", "1rem 1.5rem")
+            .border(.all(width: 2.px, style: .solid, color: style.borderColor))
+            .border(.radius(6.px))
+            .margin(top: 0.5.rem, right: 0)
+            .padding(top: 1.rem, right: 1.5.rem)
         }
     }
     
@@ -231,11 +230,11 @@ private struct HTMLConverter: MarkupVisitor {
         .attribute("data-line", language?.dataLine)
         .backgroundColor(.offWhite.dark(.offBlack))
         .color(.black.dark(.gray900))
-        .inlineStyle("margin", "0")
-        .inlineStyle("margin-bottom", "0.5rem")
-        .inlineStyle("overflow-x", "auto")
-        .inlineStyle("padding", "1rem 1.5rem")
-        .inlineStyle("border-radius", "6px")
+        .margin(0)
+        .margin(bottom: 0.5.rem)
+        .overflowX(.auto)
+        .padding(top: 1.rem, right: 1.5.rem)
+        .border(.radius(6.px))
     }
     
     @HTMLBuilder
@@ -252,12 +251,12 @@ private struct HTMLConverter: MarkupVisitor {
         let id = ids.slug(for: heading.plainText)
         
         a {}
-            .attribute("id", id)
-            .inlineStyle("display", "block")
-            .inlineStyle("position", "relative")
-            .inlineStyle("top", "-5em")
-            .inlineStyle("top", "-0.5em", media: .desktop)
-            .inlineStyle("visibility", "hidden")
+            .id(id)
+            .display(.block)
+            .position(.relative)
+            .top((-5).rem)
+            .top((-0.5).rem, media: .desktop)
+            .visibility(.hidden)
         
         div {
             Header((heading.level + 2).rem) {
@@ -273,21 +272,21 @@ private struct HTMLConverter: MarkupVisitor {
                     }
                 }
                 .linkColor(.gray800.dark(.gray300))
-                .inlineStyle("display", "none")
-                .inlineStyle("display", "initial", pre: "article div:hover > * >")
-                .inlineStyle("left", "0")
-                .inlineStyle("position", "absolute")
+                .display(.none)
+                .display(.initial, pre: "article div:hover > * >")
+                .left(0)
+                .position(.absolute)
                 .inlineStyle("text-align", "center")
-                .inlineStyle("top", "2px", media: .mobile)
-                .inlineStyle("width", "2.5rem")
+                .top(2.px, media: .mobile)
+                .width(2.5.rem)
             }
             .color(.offBlack.dark(.offWhite))
         }
-        .inlineStyle("margin-left", "-2.25rem")
-        .inlineStyle("margin-left", "-2.5rem", media: .desktop)
-        .inlineStyle("padding-left", "2.25rem")
-        .inlineStyle("padding-left", "2.5rem", media: .desktop)
-        .inlineStyle("position", "relative")
+        .margin(left: (-2.25).rem)
+        .margin(left: (-2.5).rem, media: .desktop)
+        .padding(left: 2.25.rem)
+        .padding(left: 2.5.rem, media: .desktop)
+        .position(.relative)
         
         let _ = currentSection = (title: heading.plainText, id: id, level: heading.level)
     }
@@ -303,8 +302,8 @@ private struct HTMLConverter: MarkupVisitor {
             VStack(alignment: .center) {
                 Link(href: source) {
                     Image(source: source, description: image.title ?? "")
-                        .inlineStyle("margin", "0 1rem")
-                        .inlineStyle("border-radius", "6px")
+                        .margin(top: 0, right: 1.rem)
+                        .border(.radius(6.px))
                 }
             }
         }
@@ -365,9 +364,9 @@ private struct HTMLConverter: MarkupVisitor {
                 visit(child)
             }
         }
-        .inlineStyle("line-height", "1.5")
-        .inlineStyle("padding", "0")
-        .inlineStyle("margin", "0")
+        .lineHeight(1.5)
+        .padding(0)
+        .margin(0)
     }
     
     @HTMLBuilder
@@ -448,7 +447,7 @@ private struct HTMLConverter: MarkupVisitor {
         div {
             Divider()
         }
-        .inlineStyle("margin", "1rem 0 2rem")
+        .margin(top: 1.rem, right: 0, bottom: 2.rem)
     }
     
     @HTMLBuilder
@@ -459,8 +458,7 @@ private struct HTMLConverter: MarkupVisitor {
             }
         }
         .flexContainer(direction: "column", rowGap: "0.5rem")
-        .inlineStyle("margin-bottom", "0")
-        .inlineStyle("margin-top", "0")
+        .margin(vertical: 0)
     }
 }
 
@@ -591,7 +589,7 @@ public struct Timestamp: HTML {
                 }
                 .color(.gray500)
                 .fontSize(0.875.rem)
-                .inlineStyle("line-height", "1", media: .desktop)
+                .lineHeight(1, media: .desktop)
                 .position(.relative, media: .desktop)
                 .inlineStyle("text-transform", "uppercase")
                 .top(0.5.rem, media: .desktop)
@@ -609,7 +607,7 @@ public struct Timestamp: HTML {
                 .linkStyle(LinkStyle(color: .gray800.dark(.gray300), underline: nil))
                 .id(id)
                 .inlineStyle("font-variant-numeric", "tabular-nums")
-                .inlineStyle("line-height", "3", media: .desktop)
+                .lineHeight(3, media: .desktop)
                 .margin(left: (-4).rem, media: .desktop)
                 .position(.absolute, media: .desktop)
                 .inlineStyle("text-align", "right", media: .desktop)

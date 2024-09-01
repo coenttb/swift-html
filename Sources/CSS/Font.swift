@@ -98,9 +98,13 @@ public struct Font: Sendable, Equatable {
         case normal, smallCaps = "small-caps"
     }
     
-    public enum LineHeight: Sendable, Equatable, ExpressibleByFloatLiteral {
+    public enum LineHeight: Sendable, Equatable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral {
         public init(floatLiteral value: Double) {
             self = .number(value)
+        }
+        
+        public init(integerLiteral value: Int) {
+            self = .number(Double(value))
         }
         case normal
         case number(Double?)

@@ -13,7 +13,7 @@ extension HTML {
         media: MediaQuery? = nil
     ) -> some HTML {
         self
-            .inlineStyle("display", "flex", media: media)
+            .display(.flex, media: media)
             .inlineStyle("flex-direction", direction, media: media)
             .inlineStyle("flex-wrap", wrap, media: media)
             .inlineStyle("justify-content", justification, media: media)
