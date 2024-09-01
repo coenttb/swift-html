@@ -148,9 +148,15 @@ extension HTML {
 }
 
 extension HTML {
+    @_disfavoredOverload
     @discardableResult
     public func display(_ display: CSS.Display?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("display", display?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func display(_ display: CSS.Display, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("display", display.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
