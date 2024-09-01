@@ -1,13 +1,13 @@
 import OrderedCollections
-
+import HTML
 public struct HStack<Content: HTML>: HTML {
     let alignment: VerticalAlignment
-    let spacing: Double?
+    let spacing: Length?
     let content: Content
     
     public init(
         alignment: VerticalAlignment = .stretch,
-        spacing: Double? = nil,
+        spacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.alignment = alignment
@@ -23,18 +23,18 @@ public struct HStack<Content: HTML>: HTML {
         .inlineStyle("display", "flex")
         .inlineStyle("flex-direction", "row")
         .inlineStyle("max-height", "100%")
-        .inlineStyle("column-gap", spacing == 0 ? "0" : "\(spacing ?? .defaultSpacing)rem")
+        .inlineStyle("column-gap", spacing == 0 ? "0" : "\(spacing ?? 1.rem)")
     }
 }
 
 public struct VStack<Content: HTML>: HTML {
     let alignment: HorizontalAlignment
-    let spacing: Double?
+    let spacing: CSS.Length?
     let content: Content
     
     public init(
         alignment: HorizontalAlignment = .stretch,
-        spacing: Double? = nil,
+        spacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.alignment = alignment
@@ -50,7 +50,7 @@ public struct VStack<Content: HTML>: HTML {
         .inlineStyle("display", "flex")
         .inlineStyle("flex-direction", "column")
         .inlineStyle("max-width", "100%")
-        .inlineStyle("row-gap", spacing == 0 ? "0" : "\(spacing ?? .defaultSpacing)rem")
+        .inlineStyle("row-gap", spacing == 1.rem ? "0" : "\(spacing ?? 1.rem)")
     }
 }
 
@@ -85,27 +85,18 @@ public struct Spacer: HTML {
     }
 }
 
-extension HTML {
-    public func grow(_ n: Int? = 1, _ media: MediaQuery? = nil) -> some HTML {
-        inlineStyle("flex-grow", n.map { "\($0)" }, media: media)
-    }
-    
-    public func shrink(_ n: Int? = 1, _ media: MediaQuery? = nil) -> some HTML {
-        inlineStyle("flex-shrink", n.map { "\($0)" }, media: media)
-    }
-}
 
 public struct LazyVGrid<Content: HTML>: HTML {
     let columns: OrderedDictionary<MediaQuery?, [Int]>
     let content: Content
-    let horizontalSpacing: Double?
-    let verticalSpacing: Double?
+    let horizontalSpacing: CSS.Length?
+    let verticalSpacing: CSS.Length?
     
     public init(
         columns: OrderedDictionary<MediaQuery?, [Int]>,
         // TODO: alignment: HorizontalAlignment = .center,
-        horizontalSpacing: Double? = nil,
-        verticalSpacing: Double? = nil,
+        horizontalSpacing: CSS.Length? = nil,
+        verticalSpacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.columns = columns
@@ -117,8 +108,8 @@ public struct LazyVGrid<Content: HTML>: HTML {
     public init(
         columns: [Int],
         // TODO: alignment: HorizontalAlignment = .center,
-        horizontalSpacing: Double? = nil,
-        verticalSpacing: Double? = nil,
+        horizontalSpacing: CSS.Length? = nil,
+        verticalSpacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.columns = [nil: columns]
@@ -137,7 +128,7 @@ public struct LazyVGrid<Content: HTML>: HTML {
             html
                 .inlineStyle(
                     "column-gap",
-                    horizontalSpacing == 0 ? "0" : "\(horizontalSpacing ?? .defaultSpacing)rem",
+                    horizontalSpacing == 0 ? "0" : "\(horizontalSpacing ?? 1.rem)",
                     media: columns.key
                 )
                 .inlineStyle("display", "grid", media: columns.key)
@@ -148,13 +139,9 @@ public struct LazyVGrid<Content: HTML>: HTML {
                 )
                 .inlineStyle(
                     "row-gap",
-                    verticalSpacing == 0 ? "0" : "\(verticalSpacing ?? .defaultSpacing)rem",
+                    verticalSpacing == 0 ? "0" : "\(verticalSpacing ?? 1.rem)",
                     media: columns.key
                 )
         }
     }
-}
-
-extension Double {
-    fileprivate static let defaultSpacing: Self = 1
 }

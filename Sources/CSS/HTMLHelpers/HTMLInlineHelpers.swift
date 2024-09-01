@@ -160,7 +160,6 @@ extension HTML {
 }
 
 extension HTML {
-    // NOTE: Display.none can conflict with Display?.none, and Display?.none gets precendence apparently. So can't have optional parameter here.
     @discardableResult
     public func display(_ display: CSS.Display, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("display", display.description, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -263,8 +262,6 @@ extension HTML {
     }
 }
 
-
-// HTML extension for size
 extension HTML {
     @discardableResult
     public func size(width: Length? = nil, height: Length? = nil, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
@@ -294,7 +291,6 @@ extension HTML {
     }
 }
 
-
 extension HTML {
     @discardableResult
     @HTMLBuilder
@@ -315,5 +311,143 @@ extension HTML {
     @discardableResult
     public func clipPath(_ clipPath: ClipPath) -> some HTML {
         self.inlineStyle("clip-path", clipPath.cssValue)
+    }
+}
+
+extension HTML {
+    @HTMLBuilder
+    public func listStyle(_ listStyle: ListStyle) -> some HTML {
+        switch listStyle {
+        case .reset:
+            inlineStyle("list-style-type", "none")
+                .padding(left: 0.rem)
+        }
+    }
+}
+
+public enum ListStyle {
+    case reset
+}
+
+
+
+extension HTML {
+    public func grow(_ n: Int? = 1, _ media: MediaQuery? = nil) -> some HTML {
+        inlineStyle("flex-grow", n.map { "\($0)" }, media: media)
+    }
+    
+    public func shrink(_ n: Int? = 1, _ media: MediaQuery? = nil) -> some HTML {
+        inlineStyle("flex-shrink", n.map { "\($0)" }, media: media)
+    }
+}
+
+
+extension HTML {
+    @discardableResult
+    public func font(_ font: Font, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        self
+            .font(.family(font.family), media: mediaQuery, pre: pre, pseudo: pseudo)
+            .font(.size(font.size), media: mediaQuery, pre: pre, pseudo: pseudo)
+            .font(.weight(font.weight), media: mediaQuery, pre: pre, pseudo: pseudo)
+            .font(.style(font.style), media: mediaQuery, pre: pre, pseudo: pseudo)
+            .font(.variant(font.variant), media: mediaQuery, pre: pre, pseudo: pseudo)
+            .font(.stretch(font.stretch), media: mediaQuery, pre: pre, pseudo: pseudo)
+            .lineHeight(font.lineHeight, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func font(_ property: Font.Property?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        switch property {
+        case .family(let families):
+            let familyString = families?.map { $0.contains(" ") ? "\"\($0)\"" : $0 }.joined(separator: ", ")
+            return inlineStyle("font-family", familyString, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .size(let size):
+            return inlineStyle("font-size", size?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .weight(let weight):
+            return inlineStyle("font-weight", weight?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .style(let style):
+            return inlineStyle("font-style", style?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .variant(let variant):
+            return inlineStyle("font-variant", variant?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .lineHeight(let lineHeight):
+            return inlineStyle("line-height", lineHeight?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .stretch(let stretch):
+            return inlineStyle("font-stretch", stretch?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .none:
+            return inlineStyle("", nil, media: mediaQuery, pre: pre, pseudo: pseudo)
+        }
+    }
+
+
+    @discardableResult
+    public func fontFamily(_ families: [String]?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.family(families), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontSize(_ size: Font.FontSize?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.size(size), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontWeight(_ weight: Font.FontWeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.weight(weight), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontStyle(_ style: Font.FontStyle?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.style(style), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontVariant(_ variant: Font.FontVariant?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.variant(variant), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func lineHeight(_ lineHeight: Font.LineHeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.lineHeight(lineHeight), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontStretch(_ stretch: Font.FontStretch?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.stretch(stretch), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}
+
+extension Font.FontSize {
+    var description: String {
+        switch self {
+        case .length(let length):
+            return length.description
+        case .keyword(let keyword):
+            return keyword.rawValue
+        }
+    }
+}
+
+extension Font.FontWeight {
+    var description: String {
+        switch self {
+        case .keyword(let keyword):
+            return keyword.rawValue
+        case .number(let number):
+            return String(number)
+        }
+    }
+}
+
+extension Font.LineHeight {
+    var description: String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .number(let number):
+            return String(number)
+        case .length(let length):
+            return length.description
+        case .percentage(let percentage):
+            return "\(percentage)%"
+        }
     }
 }

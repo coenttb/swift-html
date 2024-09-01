@@ -46,6 +46,25 @@ public enum Length: Sendable, ExpressibleByIntegerLiteral, ExpressibleByFloatLit
     }
 }
 
+extension Length: Equatable {
+    public static func == (lhs: Length, rhs: Length) -> Bool {
+        switch (lhs, rhs) {
+        case let (.length(value1, unit1), .length(value2, unit2)):
+            return value1 == value2 && unit1 == unit2
+        case let (.percentage(value1), .percentage(value2)):
+            return value1 == value2
+        case let (.keyword(keyword1), .keyword(keyword2)):
+            return keyword1 == keyword2
+        case let (.calc(calc1), .calc(calc2)):
+            return calc1 == calc2
+        case let (.global(global1), .global(global2)):
+            return global1 == global2
+        default:
+            return false
+        }
+    }
+}
+
 extension CSS.Length {
     public static func px(_ value: Double) -> Self { .length(value, .px) }
     public static func em(_ value: Double) -> Self { .length(value, .em) }
