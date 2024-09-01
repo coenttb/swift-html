@@ -96,18 +96,6 @@ extension HTML {
 
 extension HTML {
     @discardableResult
-    public func fontSize(_ value: CSS.Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("font-size", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func fontWeight(_ value: CSS.FontWeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        inlineStyle("font-weight", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-}
-
-extension HTML {
-    @discardableResult
     public func boxSizing(_ value: CSS.BoxSizing?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("box-sizing", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
@@ -397,6 +385,11 @@ extension HTML {
     @discardableResult
     public func fontSize(_ size: Font.FontSize?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         font(.size(size), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func fontSize(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        font(.size(length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
