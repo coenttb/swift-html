@@ -1,6 +1,4 @@
-import HTMLCore
-import CSS
-import HTML_CSS
+import HTML
 
 public struct DiagnosticLevel: Sendable {
     var icon: SVG
@@ -94,17 +92,17 @@ public struct Diagnostic<Message: HTML>: HTML {
                     VStack(spacing: 0.5) {
                         message
                     }
-                    .attribute("class", "diagnostic")
+                    .class("diagnostic")
                 }
                 .backgroundColor(level.detailBackgroundColor)
                 .color(.black.dark(.white))
                 .grow()
-                .inlineStyle("padding", "8px")
+                .padding(8.px)
             }
-            .inlineStyle("border-radius", "8px")
-            .inlineStyle("border", "0.5px solid \(level.backgroundColor.darkValue!)44")
-            .inlineStyle("border", "0.5px solid \(level.backgroundColor.rawValue)44", media: .dark)
-            .inlineStyle("overflow", "hidden")
+            .border(.radius(8.px))
+            .border(width: 0.5.px, style: .solid, color: .init(rawValue: "\(level.backgroundColor.rawValue)44"))
+            .border(width: 0.5.px, style: .solid, color: .init(rawValue: "\(level.backgroundColor.darkValue!)44"), media: .dark)
+            .overflow(.hidden)
         }
         .inlineStyle(
             "filter",
@@ -136,11 +134,11 @@ public struct InlineDiagnostic: HTML {
             drop-shadow(0 -1px 0 white)
             """
                     )
-                    .inlineStyle("width", "14px")
+                    .width(14.px)
                 }
                 .color(level.iconColor)
                 .backgroundColor(level.backgroundColor)
-                .inlineStyle("padding", "4px 10px 3px 10px")
+                .padding(top: 4.px, right: 10.px, bottom: 3.px, left: 10.px)
                 
                 div {
                     HTMLText(message)
@@ -151,13 +149,13 @@ public struct InlineDiagnostic: HTML {
                 .inlineStyle("min-width", "0")
                 .inlineStyle("max-width", "500px")
                 .flexItem(grow: 1, shrink: 1, basis: Flex.Basis.auto)
-                .inlineStyle("padding", "3px 30px 3px 8px")
+                .padding(top: 3.px, right: 30.px, bottom: 3.px, left: 8.px)
                 .inlineStyle("text-overflow", "ellipsis")
-                .inlineStyle("overflow", "hidden")
+                .overflow(.hidden)
                 .inlineStyle("white-space", "nowrap")
             }
             .inlineStyle("border-radius", "3px 0 0 3px")
-            .inlineStyle("overflow", "hidden")
+            .overflow(.hidden)
         }
     }
 }

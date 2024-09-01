@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import HTMLCore
-import CSS
+import HTML
 
 public struct Button<Label: HTML>: HTML {
     let tagName: String
@@ -53,15 +52,15 @@ public struct Button<Label: HTML>: HTML {
             color.foregroundColor(for: style).darkValue.map { "\(style.border) \($0)" },
             media: .dark
         )
-        .inlineStyle("border-radius", "0.5rem")
+        .border(.radius(0.5.rem))
         .inlineStyle("box-shadow", "inset 0 0 0 20rem rgba(0,0,0,0.1)", pseudo: .hover)
-        .inlineStyle("cursor", "pointer")
-        .inlineStyle("font-weight", "500")
+        .cursor(.pointer)
+        .font(.weight(500))
         .inlineStyle("text-decoration", style.textDecoration)
         .inlineStyle("text-decoration", style.textDecoration, media: nil, pseudo: .link)
         .inlineStyle("white-space", "nowrap")
-        .inlineStyle("padding", "\(size.topBottomPadding)rem \(size.leftRightPadding)rem")
-        .inlineStyle("transition", "0.3s")
+        .padding(vertical: size.topBottomPadding, horizontal: size.leftRightPadding)
+        .transform("0.3s")
         .backgroundColor(color.backgroundColor(for: style))
         .color(color.foregroundColor(for: style))
         .color(color.foregroundColor(for: style), pseudo: .link)
@@ -81,18 +80,18 @@ public struct Button<Label: HTML>: HTML {
         case regular
         case large
         
-        fileprivate var leftRightPadding: Double {
+        fileprivate var leftRightPadding: Length {
             switch self {
-            case .small: 1
-            case .regular: 1.25
-            case .large: 1.5
+            case .small: 1.rem
+            case .regular: 1.25.rem
+            case .large: 1.5.rem
             }
         }
-        fileprivate var topBottomPadding: Double {
+        fileprivate var topBottomPadding: Length {
             switch self {
-            case .small: 0.75
-            case .regular: 1
-            case .large: 1.25
+            case .small: 0.75.rem
+            case .regular: 1.rem
+            case .large: 1.25.rem
             }
         }
         

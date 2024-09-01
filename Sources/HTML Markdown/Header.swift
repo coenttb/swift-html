@@ -1,4 +1,4 @@
-import HTMLCore
+import HTML
 
 struct Header<Content: HTML>: HTML {
     let size: Int

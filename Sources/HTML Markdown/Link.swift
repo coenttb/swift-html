@@ -1,6 +1,5 @@
 import Dependencies
-import HTMLCore
-import CSS
+import HTML
 
 struct Link<Label: HTML>: HTML {
     @Dependency(\.linkStyle) var linkStyle

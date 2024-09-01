@@ -1,6 +1,4 @@
-import HTMLCore
-import CSS
-import HTML_CSS
+import HTML
 import Markdown
 
 public struct HTMLMarkdown: HTML {

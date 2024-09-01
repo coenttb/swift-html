@@ -127,3 +127,21 @@ extension CSS.Border {
     public static let unset: Self = .global(.unset)
 }
 
+
+extension Border {
+    public static func all(width: Length, style: Style, color: HTMLColor?)-> Self {
+        .all(width: .length(width), style: style, color: color)
+    }
+    
+    public static func top(width: Length, style: Style, color: HTMLColor?)-> Self {
+        .top(width: .length(width), style: style, color: color)
+    }
+    
+    public static func right(width: Length, style: Style, color: HTMLColor?)-> Self {
+        .right(width: .length(width), style: style, color: color)
+    }
+    
+    public static func bottom(width: Length, style: Style, color: HTMLColor?)-> Self {
+        .bottom(width: .length(width), style: style, color: color)
+    }
+}

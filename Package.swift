@@ -129,10 +129,8 @@ let package = Package.html(
             dependencies: [
                 .dependencies,
                 .orderedCollections,
-                .css,
-                .htmlCore,
+                .html,
                 .swiftMarkdown,
-                .html_css
             ]
         ),
     ]

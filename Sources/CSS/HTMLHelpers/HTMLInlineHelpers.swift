@@ -295,10 +295,13 @@ extension HTML {
     public func border(
         width: CSS.Length?,
         style: CSS.Border.Style = .solid,
-        color: HTMLColor
+        color: HTMLColor,
+        media mediaQuery: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
     ) -> some HTML {
         if let width {
-            self.border(.all(width: .length(width), style: style, color: color))
+            self.border(.all(width: .length(width), style: style, color: color), media: mediaQuery, pre: pre, pseudo: pseudo)
         } else {
             self
         }
