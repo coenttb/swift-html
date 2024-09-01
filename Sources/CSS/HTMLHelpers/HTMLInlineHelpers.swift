@@ -3,22 +3,22 @@ import HTMLCore
 
 extension HTML {
     @discardableResult
-    public func backgroundColor(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func backgroundColor(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("background-color", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func transition(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func transition(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("transition", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
-    public func opacity(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func opacity(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("opacity", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
     @discardableResult
-    public func color(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func color(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("color", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
@@ -149,8 +149,8 @@ extension HTML {
 
 extension HTML {
     @discardableResult
-    public func display(_ display: CSS.Display, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("display", display.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func display(_ display: CSS.Display?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("display", display?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
