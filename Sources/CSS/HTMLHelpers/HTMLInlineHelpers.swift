@@ -23,7 +23,7 @@ extension HTML {
     }
 
     @discardableResult
-    public func zIndex(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func zIndex(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("z-index", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
@@ -34,23 +34,23 @@ extension HTML {
 
     
     @discardableResult
-    public func transform(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func transform(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("transform", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
     @discardableResult
-    public func backgroundSize(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func backgroundSize(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("background-size", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
     @discardableResult
-    public func background(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func background(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("background", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
     @discardableResult
-    public func opacity(_ value: CSS.Opacity, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("opacity", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func opacity(_ value: CSS.Opacity?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("opacity", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
