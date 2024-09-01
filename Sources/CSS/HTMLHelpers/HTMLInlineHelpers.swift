@@ -26,6 +26,11 @@ extension HTML {
     public func zIndex(_ value: String, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("z-index", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
+    
+    @discardableResult
+    public func zIndex(_ value: Int?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        inlineStyle("z-index", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
 
     
     @discardableResult
