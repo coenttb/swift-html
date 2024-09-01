@@ -251,6 +251,11 @@ extension HTML {
     public func background(_ background: CSS.Background, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
         inlineStyle("background", background.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
+    
+    @discardableResult
+    public func mixBlendMode(_ mixBlendMode: CSS.MixBlendMode?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        inlineStyle("mix-blend-mode", mixBlendMode?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
 }
 
 
