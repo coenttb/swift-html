@@ -425,39 +425,3 @@ extension HTML {
     }
 }
 
-extension Font.FontSize {
-    var description: String {
-        switch self {
-        case .length(let length):
-            return length.description
-        case .keyword(let keyword):
-            return keyword.rawValue
-        }
-    }
-}
-
-extension Font.FontWeight {
-    var description: String {
-        switch self {
-        case .keyword(let keyword):
-            return keyword.rawValue
-        case .number(let number):
-            return String(number)
-        }
-    }
-}
-
-extension Font.LineHeight {
-    var description: String {
-        switch self {
-        case .normal:
-            return "normal"
-        case .number(let number):
-            return String(number)
-        case .length(let length):
-            return length.description
-        case .percentage(let percentage):
-            return "\(percentage)%"
-        }
-    }
-}

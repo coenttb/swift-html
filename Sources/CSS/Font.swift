@@ -37,8 +37,9 @@ public struct Font: Sendable, Equatable {
     }
     
     public enum FontSize: Sendable, Equatable {
-        case length(Length)
-        case keyword(FontSizeKeyword)
+        case length(Length?)
+        case keyword(FontSizeKeyword?)
+        
         
         public enum FontSizeKeyword: String, Sendable {
             case xxSmall = "xx-small"
@@ -60,16 +61,15 @@ public struct Font: Sendable, Equatable {
         public static let xxxLarge: FontSize = .keyword(.xxxLarge)
         public static let smaller: FontSize = .keyword(.smaller)
         public static let larger: FontSize = .keyword(.larger)
-        
-        public static func px(_ value: Double) -> FontSize { .length(.px(value)) }
-        public static func em(_ value: Double) -> FontSize { .length(.em(value)) }
-        public static func rem(_ value: Double) -> FontSize { .length(.rem(value)) }
-        public static func percent(_ value: Double) -> FontSize { .length(.percent(value)) }
     }
     
-    public enum FontWeight: Sendable, Equatable {
+    public enum FontWeight: Sendable, Equatable, ExpressibleByIntegerLiteral {
         case keyword(FontWeightKeyword)
         case number(Int)
+        
+        public init(integerLiteral value: Int) {
+            self = .number(value)
+        }
         
         public enum FontWeightKeyword: String, Sendable {
             case normal, bold, lighter, bolder
@@ -96,20 +96,16 @@ public struct Font: Sendable, Equatable {
     
     public enum FontVariant: String, Sendable {
         case normal, smallCaps = "small-caps"
-        
-    
     }
     
     public enum LineHeight: Sendable, Equatable, ExpressibleByFloatLiteral {
         public init(floatLiteral value: Double) {
             self = .number(value)
         }
-        
-        
         case normal
-        case number(Double)
-        case length(Length)
-        case percentage(Double)
+        case number(Double?)
+        case length(Length?)
+        case percentage(Double?)
     }
     
     public enum FontStretch: String, Sendable {
@@ -132,10 +128,17 @@ public struct Font: Sendable, Equatable {
         case variant(FontVariant?)
         case lineHeight(LineHeight?)
         case stretch(FontStretch?)
+        
+        public static func size(_ length: Length?) -> Self {
+            return .size(.length(length))
+        }
+        
+        public static func lineHeight(_ length: Length?) -> Self {
+            return .lineHeight(.length(length))
+        }
     }
 }
 
-// Convenience initializers for Font
 extension Font {
     public static func system(size: FontSize) -> Font {
         Font(family: ["system-ui"], size: size)
@@ -143,5 +146,42 @@ extension Font {
     
     public static func custom(_ name: String, size: FontSize) -> Font {
         Font(family: [name], size: size)
+    }
+}
+
+extension Font.FontSize {
+    public var description: String {
+        switch self {
+        case .length(let length):
+            return length?.description ?? ""
+        case .keyword(let keyword):
+            return keyword?.rawValue ?? ""
+        }
+    }
+}
+
+extension Font.FontWeight {
+    public var description: String {
+        switch self {
+        case .keyword(let keyword):
+            return keyword.rawValue
+        case .number(let number):
+            return String(number)
+        }
+    }
+}
+
+extension Font.LineHeight {
+    public var description: String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .number(let number):
+            return number.map { "\($0)" } ?? ""
+        case .length(let length):
+            return length?.description ?? ""
+        case .percentage(let percentage):
+            return percentage.map { "\($0)%" } ?? ""
+        }
     }
 }
