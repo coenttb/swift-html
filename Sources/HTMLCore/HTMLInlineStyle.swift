@@ -3,53 +3,15 @@ import Dependencies
 import Foundation
 import OrderedCollections
 
-extension HTML {
-    public func inlineStyle(
-        _ property: String,
-        _ value: String?,
-        media mediaQuery: MediaQuery? = nil,
-        pre: String? = nil,
-        pseudo: Pseudo? = nil
-    ) -> HTMLInlineStyle<Self> {
-        HTMLInlineStyle(
-            content: self,
-            property: property,
-            value: value,
-            mediaQuery: mediaQuery,
-            pre: pre,
-            pseudo: pseudo
-        )
-    }
-}
-
 public struct HTMLInlineStyle<Content: HTML>: HTML {
     private let content: Content
     private var styles: [Style]
     
     @Dependency(ClassNameGenerator.self) fileprivate var classNameGenerator
     
-    init(
-        content: Content,
-        property: String,
-        value: String?,
-        mediaQuery: MediaQuery?,
-        pre: String? = nil,
-        pseudo: Pseudo?
-    ) {
+    init(content: Content) {
         self.content = content
-        self.styles =
-        value.map {
-            [
-                Style(
-                    property: property,
-                    value: $0,
-                    media: mediaQuery,
-                    preSelector: pre,
-                    pseudo: pseudo
-                )
-            ]
-        }
-        ?? []
+        self.styles = []
     }
     
     public func inlineStyle(
@@ -58,7 +20,7 @@ public struct HTMLInlineStyle<Content: HTML>: HTML {
         media mediaQuery: MediaQuery? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    ) -> HTMLInlineStyle {
+    ) -> Self {
         var copy = self
         if let value {
             copy.styles.append(
@@ -75,21 +37,12 @@ public struct HTMLInlineStyle<Content: HTML>: HTML {
     }
     
     public static func _render(_ html: HTMLInlineStyle<Content>, into printer: inout HTMLPrinter) {
-        // Store the original class attribute, if it exists
         let originalClass = printer.attributes["class"]
+        var classNames = Set<String>(originalClass?.split(separator: " ").map(String.init) ?? [])
         
-        // Create a set to store unique class names
-        var classNames = Set<String>()
-        if let originalClass = originalClass {
-            classNames = Set(originalClass.split(separator: " ").map(String.init))
-        }
-        
-        // Process styles and add class names
         for style in html.styles {
             let className = html.classNameGenerator.generate(style)
-            let selector = """
-                \(style.preSelector.map { "\($0) " } ?? "").\(className)\(style.pseudo?.rawValue ?? "")
-                """
+            let selector = "\(style.preSelector.map { "\($0) " } ?? "").\(className)\(style.pseudo?.rawValue ?? "")"
             
             if printer.styles[style.media, default: [:]][selector] == nil {
                 printer.styles[style.media, default: [:]][selector] = "\(style.property):\(style.value)"
@@ -98,18 +51,28 @@ public struct HTMLInlineStyle<Content: HTML>: HTML {
             classNames.insert(className)
         }
         
-        // Update the class attribute with the new set of class names
         if !classNames.isEmpty {
             printer.attributes["class"] = classNames.joined(separator: " ")
         }
         
-        // Render the content
         Content._render(html.content, into: &printer)
         
-        // Restore the original class attribute
         printer.attributes["class"] = originalClass
     }
+    
     public var body: Never { fatalError() }
+}
+
+extension HTML {
+    public func inlineStyle(
+        _ property: String,
+        _ value: String?,
+        media mediaQuery: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> HTMLInlineStyle<Self> {
+        HTMLInlineStyle(content: self).inlineStyle(property, value, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
 }
 
 private struct ClassNameGenerator: DependencyKey {
