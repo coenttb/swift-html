@@ -348,8 +348,6 @@ public enum ListStyle {
     case reset
 }
 
-
-
 extension HTML {
     public func grow(_ factor: Int? = 1, _ media: MediaQuery? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("flex-grow", factor.map { "\($0)" }, media: media)

@@ -33,10 +33,6 @@ public struct HTMLMarkdown: HTML {
         self.tableOfContents = converter.tableOfContents
     }
     
-//    public init(previewOnly: Bool = false, _ markdown: () -> String) {
-//        self.init(markdown(), previewOnly: previewOnly)
-//    }
-    
     public var body: some HTML {
         tag("swift-html-markdown") {
             VStack(spacing: 0.5) {
@@ -259,7 +255,7 @@ private struct HTMLConverter: MarkupVisitor {
             .visibility(.hidden)
         
         div {
-            Header((heading.level + 2).rem) {
+            Header(heading.level + 2) {
                 for child in heading.children {
                     visit(child)
                 }

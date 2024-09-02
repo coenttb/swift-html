@@ -1,21 +1,21 @@
 import HTML
 
-struct Header<Content: HTML>: HTML {
-    let size: Length
+public struct Header<Content: HTML>: HTML {
+    let size: Int
     @HTMLBuilder let content: Content
-    init(_ size: Length = 3, @HTMLBuilder content: () -> Content) {
+    public init(_ size: Int = 3, @HTMLBuilder content: () -> Content) {
         self.size = size
         self.content = content()
     }
     
-    var body: some HTML {
+    public var body: some HTML {
         tag("h\(size)") {
             content
         }
         .margin(0)
         .margin(top: marginTop, pseudo: .not(.firstChild))
-        .margin(bottom: marginBottom, pseudo: .not(.firstChild))
-        .fontSize(size)
+        .margin(bottom: marginBottom, pseudo: .not(.lastChild))
+        .font(.size(fontSize))
         .font(.weight(700))
         .lineHeight(.number(lineHeight))
     }

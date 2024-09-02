@@ -7,7 +7,6 @@ extension String {
     static let css: Self = "CSS"
     static let html: Self = "HTML"
     static let htmlCore: Self = "HTMLCore"
-    static let html_css: Self = "HTML+CSS"
     static let markdown: Self = "HTML Markdown"
 }
 
@@ -15,7 +14,6 @@ extension Target.Dependency {
     static var css: Self { .target(name: .css) }
     static var htmlCore: Self { .target(name: .htmlCore) }
     static var html: Self { .target(name: .html) }
-    static var html_css: Self { .target(name: .html_css) }
     static var markdown: Self { .target(name: .markdown) }
 }
 
@@ -63,7 +61,6 @@ extension Package {
                     .library(name: .html, targets: [.html, .markdown]),
                     .library(name: .css, targets: [.css]),
                     .library(name: .htmlCore, targets: [.htmlCore]),
-                    .library(name: .html_css, targets: [.html_css])
                 ]
             ].flatMap { $0
             },
@@ -101,24 +98,13 @@ let package = Package.html(
             library: true,
             dependencies: [
                 .htmlCore,
-                .css,
-                .html_css
+                .css
             ]
         ),
         .init(
             name: .htmlCore,
             library: true,
             dependencies: [
-                .dependencies,
-                .orderedCollections,
-            ]
-        ),
-        .init(
-            name: .html_css,
-            library: true,
-            dependencies: [
-                .htmlCore,
-                .css,
                 .dependencies,
                 .orderedCollections,
             ]
