@@ -238,7 +238,7 @@ private struct HTMLConverter: MarkupVisitor {
             .visibility(.hidden)
         
         div {
-            Header(heading.level + 2) {
+            Header(heading.level) {
                 for child in heading.children {
                     visit(child)
                 }
