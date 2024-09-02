@@ -146,7 +146,7 @@ extension CSS.ObjectPosition {
 import Dependencies
 
 public struct ObjectStyle: Sendable {
-    public let position: ObjectPosition
+    public var position: ObjectPosition
     
     public init(position: ObjectPosition) {
         self.position = position
