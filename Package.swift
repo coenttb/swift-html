@@ -24,14 +24,6 @@ extension Target.Dependency {
     static var percent: Self { .product(name: "Percent", package: "swift-percent") }
 }
 
-extension [Target.Dependency] {
-    static var shared: Self {
-        [
-            .dependencies
-        ]
-    }
-}
-
 extension [Package.Dependency] {
     static var `default`: Self {
         [
@@ -69,7 +61,7 @@ extension Package {
                 targets.map { target in
                     Target.target(
                         name: "\(target.name)",
-                        dependencies: .shared + [] + target.dependencies
+                        dependencies: [] + target.dependencies
                     )
                 },
                 targets.map { target in

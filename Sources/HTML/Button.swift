@@ -150,7 +150,7 @@ public struct Button<Label: HTML>: HTML {
 extension Button {
     public static func basic(
         _ label: ()->Label
-    ) -> Self {
+    ) -> Button {
         Button(
             tag: a,
             backgroundColor: { style in

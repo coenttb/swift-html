@@ -88,7 +88,17 @@ private struct HTMLConverter: MarkupVisitor {
         switch blockDirective.name {
         case "Button":
             VStack(alignment: .center) {
-                Button(color: .purple) {
+                Button(
+                    tag: a,
+                    backgroundColor: { style in
+                            .purple
+                    },
+                    foregroundColor:  { style in
+                            .white
+                    },
+                    size: .small,
+                    style: .normal
+                ) {
                     for child in blockDirective.children {
                         visit(child)
                     }

@@ -1,5 +1,3 @@
-import HTML
-
 public struct Header<Content: HTML>: HTML {
     let size: Int
     @HTMLBuilder let content: Content
