@@ -82,3 +82,26 @@ extension Flex.Basis: CustomStringConvertible {
     }
 }
 
+
+extension CSS.Flex {
+    public static let row: Direction = .row
+    public static let rowReverse: Direction = .rowReverse
+    public static let column: Direction = .column
+    public static let columnReverse: Direction = .columnReverse
+    
+    public static let nowrap: Wrap = .nowrap
+    public static let wrap: Wrap = .wrap
+    public static let wrapReverse: Wrap = .wrapReverse
+    
+    public static let grow0: Grow = 0
+    public static let grow1: Grow = 1
+    
+    public static let shrink0: Shrink = 0
+    public static let shrink1: Shrink = 1
+    
+    public static let basisAuto: Basis = .auto
+    public static let basisContent: Basis = .content
+    public static let basisFitContent: Basis = .fitContent
+    public static let basisMaxContent: Basis = .maxContent
+    public static let basisMinContent: Basis = .minContent
+}
