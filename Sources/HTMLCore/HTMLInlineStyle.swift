@@ -74,27 +74,40 @@ public struct HTMLInlineStyle<Content: HTML>: HTML {
     return copy
   }
 
-  public static func _render(_ html: HTMLInlineStyle<Content>, into printer: inout HTMLPrinter) {
-    let previousClass = printer.attributes["class"]  // TODO: should we optimize this?
-    defer {
-      Content._render(html.content, into: &printer)
-      printer.attributes["class"] = previousClass
-    }
-
-    for style in html.styles {
-      let className = html.classNameGenerator.generate(style)
-      let selector = """
-        \(style.preSelector.map { "\($0) " } ?? "").\(className)\(style.pseudo?.rawValue ?? "")
-        """
-
-      if printer.styles[style.media, default: [:]][selector] == nil {
-        printer.styles[style.media, default: [:]][selector] = "\(style.property):\(style.value)"
+    public static func _render(_ html: HTMLInlineStyle<Content>, into printer: inout HTMLPrinter) {
+      let previousClass = printer.attributes["class"]
+      defer {
+        #if DEBUG
+          print("Rendering content for HTMLInlineStyle")
+        #endif
+        Content._render(html.content, into: &printer)
+        printer.attributes["class"] = previousClass
       }
-      printer
-        .attributes["class", default: ""]
-        .append(printer.attributes.keys.contains("class") ? " \(className)" : className)
+
+      for style in html.styles {
+        #if DEBUG
+          print("Processing style: \(style.property)")
+        #endif
+        let className = html.classNameGenerator.generate(style)
+        let selector = """
+          \(style.preSelector.map { "\($0) " } ?? "").\(className)\(style.pseudo?.rawValue ?? "")
+          """
+
+        if printer.styles[style.media, default: [:]][selector] == nil {
+          #if DEBUG
+            print("Adding new style: \(selector) -> \(style.property):\(style.value)")
+          #endif
+          printer.styles[style.media, default: [:]][selector] = "\(style.property):\(style.value)"
+        }
+
+        let classAttribute = printer.attributes["class", default: ""]
+        let newClassAttribute = classAttribute.isEmpty ? className : "\(classAttribute) \(className)"
+        #if DEBUG
+          print("Updating class attribute: \(newClassAttribute)")
+        #endif
+        printer.attributes["class"] = newClassAttribute
+      }
     }
-  }
   public var body: Never { fatalError() }
 }
 
