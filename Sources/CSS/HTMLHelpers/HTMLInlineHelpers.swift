@@ -204,7 +204,7 @@ extension HTML {
     
     @discardableResult
     public func margin(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        margin(length.map { .all($0) } ?? nil, media: mediaQuery, pre: pre, pseudo: pseudo)
+        margin(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
@@ -244,7 +244,7 @@ extension HTML {
     
     @discardableResult
     public func padding(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        margin(length.map { .all($0) } ?? nil, media: mediaQuery, pre: pre, pseudo: pseudo)
+        padding(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
