@@ -1,4 +1,5 @@
 import Foundation
+import Dependencies
 
 public enum ObjectPosition: Sendable {
     case keyword(Keyword)
@@ -141,10 +142,6 @@ extension CSS.ObjectPosition {
     }
 }
 
-
-
-import Dependencies
-
 public struct ObjectStyle: Sendable {
     public var position: ObjectPosition
     
@@ -164,3 +161,4 @@ extension DependencyValues {
         set { self[ObjectStyleKey.self] = newValue }
     }
 }
+
