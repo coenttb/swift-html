@@ -5,17 +5,17 @@ public enum ObjectPosition: Sendable {
     case oneValue(Value)
     case twoValues(Value, Value)
     case global(Global)
-
+    
     public enum Keyword: String, Sendable {
         case left, center, right, top, bottom
     }
-
+    
     public enum Value: Sendable {
         case length(Length)
         case percentage(Double)
         case keyword(Keyword)
     }
-
+    
     public enum Global: String, Sendable {
         case inherit, initial, revert
         case revertLayer = "revert-layer"
@@ -52,23 +52,23 @@ extension ObjectPosition.Value: CustomStringConvertible {
 }
 
 extension ObjectPosition {
-
+    
     public static func objectPosition(_ position: ObjectPosition) -> Self {
         position
     }
-
+    
     public static func objectPosition(_ keyword: ObjectPosition.Keyword) -> Self {
         .keyword(keyword)
     }
-
+    
     public static func objectPosition(_ value: ObjectPosition.Value) -> Self {
         .oneValue(value)
     }
-
+    
     public static func objectPosition(_ value1: ObjectPosition.Value, _ value2: ObjectPosition.Value) -> Self {
         .twoValues(value1, value2)
     }
-
+    
     public static func objectPosition(_ global: ObjectPosition.Global) -> Self {
         .global(global)
     }
@@ -79,16 +79,35 @@ extension ObjectPosition {
     public static func length(_ length: Length) -> Self {
         .oneValue(.length(length))
     }
-
+    
     public static func percentage(_ percentage: Double) -> Self {
         .oneValue(.percentage(percentage))
     }
-
+    
     public static func lengths(_ length1: Length, _ length2: Length) -> Self {
         .twoValues(.length(length1), .length(length2))
     }
-
+    
     public static func percentages(_ percentage1: Double, _ percentage2: Double) -> Self {
         .twoValues(.percentage(percentage1), .percentage(percentage2))
     }
+}
+
+
+extension CSS.ObjectPosition {
+    public static let left: Self = .keyword(.left)
+    public static let center: Self = .keyword(.center)
+    public static let right: Self = .keyword(.right)
+    public static let top: Self = .keyword(.top)
+    public static let bottom: Self = .keyword(.bottom)
+    
+    // Common combinations
+    public static let topLeft: Self = .twoValues(.keyword(.left), .keyword(.top))
+    public static let topCenter: Self = .twoValues(.keyword(.center), .keyword(.top))
+    public static let topRight: Self = .twoValues(.keyword(.right), .keyword(.top))
+    public static let centerLeft: Self = .twoValues(.keyword(.left), .keyword(.center))
+    public static let centerRight: Self = .twoValues(.keyword(.right), .keyword(.center))
+    public static let bottomLeft: Self = .twoValues(.keyword(.left), .keyword(.bottom))
+    public static let bottomCenter: Self = .twoValues(.keyword(.center), .keyword(.bottom))
+    public static let bottomRight: Self = .twoValues(.keyword(.right), .keyword(.bottom))
 }
