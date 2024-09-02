@@ -495,7 +495,7 @@ public enum FontStyle {
 
 extension HTML {
     @discardableResult
-    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery?, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("background-color", color?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
             .inlineStyle("background-color", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
     }
