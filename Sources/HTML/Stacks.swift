@@ -125,10 +125,27 @@ public struct LazyVGrid<Content: HTML>: HTML {
                 .inlineStyle("width", "100%")
         ) { html, columns in
             html
+//                .inlineStyle(
+//                    "column-gap",
+////                    horizontalSpacing == 0.px ? "0" : "\(horizontalSpacing ?? 1.rem)",
+//                    "\(horizontalSpacing ?? 1.rem)",
+//                    media: columns.key
+//                )
+//                .inlineStyle("display", "grid", media: columns.key)
+//                .inlineStyle(
+//                    "grid-template-columns",
+//                    columns.value.map { "minmax(0, \($0)fr)" }.joined(separator: " "),
+//                    media: columns.key
+//                )
+//                .inlineStyle(
+//                    "row-gap",
+////                    verticalSpacing == 0.px ? "0" : "\(verticalSpacing ?? 1.rem)",
+//                    "\(verticalSpacing ?? 1.rem)",
+//                    media: columns.key
+//                )
                 .inlineStyle(
                     "column-gap",
-//                    horizontalSpacing == 0.px ? "0" : "\(horizontalSpacing ?? 1.rem)",
-                    "\(horizontalSpacing ?? 1.rem)",
+                    horizontalSpacing == .zero ? "0" : "\(horizontalSpacing ?? 1.rem)",
                     media: columns.key
                 )
                 .inlineStyle("display", "grid", media: columns.key)
@@ -139,8 +156,7 @@ public struct LazyVGrid<Content: HTML>: HTML {
                 )
                 .inlineStyle(
                     "row-gap",
-//                    verticalSpacing == 0.px ? "0" : "\(verticalSpacing ?? 1.rem)",
-                    "\(verticalSpacing ?? 1.rem)",
+                    verticalSpacing == .zero ? "0" : "\(verticalSpacing ?? 1.rem)",
                     media: columns.key
                 )
         }
