@@ -276,17 +276,8 @@ extension HTML {
     public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         switch border {
         case .all(let width, let style, let color):
-            
-            switch mediaQuery {
-            case .dark:
-                return inlineStyle("border", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-                    
-            default:
-                return inlineStyle("border", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: nil, pre: pre, pseudo: pseudo)
-                    .inlineStyle("border", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-            }
-            
-            
+            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: nil, pre: pre, pseudo: pseudo)
+                .inlineStyle("border", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
         case .top(let width, let style, let color):
             return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: nil, pre: pre, pseudo: pseudo)
                 .inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
