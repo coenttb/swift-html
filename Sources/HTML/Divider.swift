@@ -1,5 +1,3 @@
-import HTML
-
 public struct Divider: HTML {
   public init() {}
   public var body: some HTML {

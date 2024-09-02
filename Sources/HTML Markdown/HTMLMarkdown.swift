@@ -37,18 +37,18 @@ public struct HTMLMarkdown: HTML {
         tag("swift-html-markdown") {
             VStack(spacing: 0.5) {
                 content
-//                    .inlineStyle(
-//                        "content",
-//                        previewOnly ? nil : #""❖""#,
-//                        pre: "article",
-//                        pseudo: .is("p") + .lastOfType + .after
-//                    )
-//                    .inlineStyle(
-//                        "margin-left",
-//                        previewOnly ? nil : "0.5rem",
-//                        pre: "article",
-//                        pseudo: .is("p") + .lastOfType + .after
-//                    )
+                    .inlineStyle(
+                        "content",
+                        previewOnly ? nil : #""❖""#,
+                        pre: "article",
+                        pseudo: .is("p") + .lastOfType + .after
+                    )
+                    .inlineStyle(
+                        "margin-left",
+                        previewOnly ? nil : "0.5rem",
+                        pre: "article",
+                        pseudo: .is("p") + .lastOfType + .after
+                    )
             }
             .inlineStyle(
                 "mask-image",
@@ -111,33 +111,6 @@ private struct HTMLConverter: MarkupVisitor {
             HTMLEmpty()
             
         case "T":
-            /*
-             TODO: Find/replace transcripts
-             
-             FIND:
-             ^\[\d{2}:\d{2}:\d{2}\] # (.*)$
-             
-             REPLACE:
-             ## $1
-             
-             ---
-             
-             FIND:
-             ^\[(\d{2}:\d{2}:\d{2})\] \*\*([^:]+):\*\*
-             
-             REPLACE:
-             @T($1, $2)
-             (\n)
-             
-             ---
-             
-             FIND:
-             ^\[(\d{2}:\d{2}:\d{2})\]
-             
-             REPLACE:
-             @T($1)
-             (\n)
-             */
             let segments = blockDirective.argumentText.segments
                 .map(\.trimmedText)
                 .joined()
@@ -190,7 +163,7 @@ private struct HTMLConverter: MarkupVisitor {
                     visit(child)
                 }
             }
-            .padding(vertical: 0, horizontal: 1.rem)
+            .padding(horizontal: 1.rem)
         } else {
             let style = BlockQuoteStyle(blockName: aside.kind.displayName)
             blockquote {
@@ -260,8 +233,8 @@ private struct HTMLConverter: MarkupVisitor {
             .id(id)
             .display(.block)
             .position(.relative)
-            .top((-5).rem)
-            .top((-0.5).rem, media: .desktop)
+            .inlineStyle("top", "-5em")
+            .inlineStyle("top", "-0.5em", media: .desktop)
             .visibility(.hidden)
         
         div {
@@ -453,7 +426,7 @@ private struct HTMLConverter: MarkupVisitor {
         div {
             Divider()
         }
-        .margin(top: 1.rem, horizontal: 0, bottom: 2.rem)
+        .margin(top: 1.rem, bottom: 2.rem)
     }
     
     @HTMLBuilder
@@ -594,7 +567,7 @@ public struct Timestamp: HTML {
                     HTMLText(speaker)
                 }
                 .color(.gray500)
-                .fontSize(0.875.rem)
+                .inlineStyle("font-size", "0.875rem")
                 .lineHeight(1, media: .desktop)
                 .position(.relative, media: .desktop)
                 .inlineStyle("text-transform", "uppercase")
