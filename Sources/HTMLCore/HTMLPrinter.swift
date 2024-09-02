@@ -57,6 +57,7 @@ extension HTML {
 }
 
 extension HTML {
+    @_disfavoredOverload
     public func render() -> String {
         let bytes:ContiguousArray<UInt8> = self.render()
         return String(decoding: bytes, as: UTF8.self)

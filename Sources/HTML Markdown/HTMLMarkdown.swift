@@ -1,4 +1,5 @@
 import HTML
+import CSS
 import Markdown
 
 public struct HTMLMarkdown: HTML {
