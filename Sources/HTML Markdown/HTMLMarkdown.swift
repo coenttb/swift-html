@@ -169,8 +169,6 @@ private struct HTMLConverter: MarkupVisitor {
             .color(.offBlack.dark(.offWhite))
             .backgroundColor(style.backgroundColor)
             .border(.all(width: 2.px, style: .solid, color: style.borderColor))
-//            .inlineStyle("border", "2px solid \(style.borderColor.rawValue)")
-//            .inlineStyle("border", "2px solid \(style.borderColor.darkValue!)", media: .dark)
             .border(.radius(6.px))
             .margin(vertical: 0.5.rem, horizontal: 0)
             .padding(vertical: 1.rem, horizontal: 1.5.rem)
