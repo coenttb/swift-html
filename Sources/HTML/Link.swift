@@ -1,23 +1,22 @@
 import Dependencies
-import HTML
 
-struct Link<Label: HTML>: HTML {
+public struct Link<Label: HTML>: HTML {
     @Dependency(\.linkStyle) var linkStyle
     let label: Label
-    let href: String
+    let href: String?
     
-    init(href: String, @HTMLBuilder label: () -> Label) {
+    public init(href: String?, @HTMLBuilder label: () -> Label) {
         self.href = href
         self.label = label()
     }
     
-    init(_ title: String, href: String) where Label == HTMLText {
+    public init(_ title: String, href: String?) where Label == HTMLText {
         self.init(href: href) {
             HTMLText(title)
         }
     }
     
-    var body: some HTML {
+    public var body: some HTML {
         a { label }
             .attribute("href", href)
             .color(linkStyle.color, pseudo: .visited)
@@ -35,21 +34,23 @@ struct Link<Label: HTML>: HTML {
 }
 
 extension HTML {
-    func linkColor(_ linkColor: HTMLColor?) -> some HTML {
-        dependency(\.linkStyle.color, linkColor)
+    public func linkColor(_ linkColor: HTMLColor?) -> some HTML {
+        self.dependency(\.linkStyle.color, linkColor)
     }
-    func linkUnderline(_ linkUnderline: Bool?) -> some HTML {
-        dependency(\.linkStyle.underline, linkUnderline)
+    public func linkUnderline(_ linkUnderline: Bool?) -> some HTML {
+        self.dependency(\.linkStyle.underline, linkUnderline)
     }
-    func linkStyle(_ linkStyle: LinkStyle) -> some HTML {
-        dependency(\.linkStyle, linkStyle)
+    public func linkStyle(_ linkStyle: LinkStyle) -> some HTML {
+        self.dependency(\.linkStyle, linkStyle)
     }
 }
 
-struct LinkStyle: Sendable {
-    var color: HTMLColor?
-    var underline: Bool?
-    init(
+
+public struct LinkStyle: Sendable {
+    public var color: HTMLColor?
+    public var underline: Bool?
+    
+    public init(
         color: HTMLColor? = nil,
         underline: Bool? = nil
     ) {
@@ -64,7 +65,7 @@ private enum LinkStyleKey: DependencyKey {
 }
 
 extension DependencyValues {
-    var linkStyle: LinkStyle {
+    public var linkStyle: LinkStyle {
         get { self[LinkStyleKey.self] }
         set { self[LinkStyleKey.self] = newValue }
     }
