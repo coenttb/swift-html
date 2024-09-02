@@ -140,3 +140,27 @@ extension CSS.ObjectPosition {
         return .twoValues(.length(value), .length(value))
     }
 }
+
+
+
+import Dependencies
+
+public struct ObjectStyle: Sendable {
+    public let position: ObjectPosition
+    
+    public init(position: ObjectPosition) {
+        self.position = position
+    }
+}
+
+private enum ObjectStyleKey: DependencyKey {
+    static let liveValue = ObjectStyle.init(position: .inherit)
+    static let testValue = ObjectStyle.init(position: .inherit)
+}
+
+extension DependencyValues {
+    public var objectStyle: ObjectStyle {
+        get { self[ObjectStyleKey.self] }
+        set { self[ObjectStyleKey.self] = newValue }
+    }
+}
