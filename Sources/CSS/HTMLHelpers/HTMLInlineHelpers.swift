@@ -183,7 +183,7 @@ extension HTML {
     
     @discardableResult
     public func margin(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        margin(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
+        margin(length.map { .all($0) } ?? nil, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
@@ -282,13 +282,13 @@ extension HTML {
     @discardableResult
     public func size(width: Length? = nil, height: Length? = nil, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("width", width?.description, media: media, pre: pre, pseudo: pseudo)
-            .inlineStyle("width", height?.description, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("height", height?.description, media: media, pre: pre, pseudo: pseudo)
     }
     
     @discardableResult
     public func size(_ size: Length?, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("width", size?.description, media: media, pre: pre, pseudo: pseudo)
-            .inlineStyle("width", size?.description, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("height", size?.description, media: media, pre: pre, pseudo: pseudo)
     }
 }
 
@@ -351,12 +351,12 @@ public enum ListStyle {
 
 
 extension HTML {
-    public func grow(_ n: Int? = 1, _ media: MediaQuery? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("flex-grow", n.map { "\($0)" }, media: media)
+    public func grow(_ factor: Int? = 1, _ media: MediaQuery? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("flex-grow", factor.map { "\($0)" }, media: media)
     }
-    
-    public func shrink(_ n: Int? = 1, _ media: MediaQuery? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("flex-shrink", n.map { "\($0)" }, media: media)
+
+    public func shrink(_ factor: Int? = 1, _ media: MediaQuery? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("flex-shrink", factor.map { "\($0)" }, media: media)
     }
 }
 
