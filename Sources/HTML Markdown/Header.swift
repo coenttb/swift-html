@@ -17,7 +17,7 @@ struct Header<Content: HTML>: HTML {
         .margin(bottom: marginBottom, pseudo: .not(.firstChild))
         .fontSize(size)
         .font(.weight(700))
-        .lineHeight(.length(lineHeight))
+        .lineHeight(.number(lineHeight))
     }
     
     var fontSize: Length {
@@ -30,14 +30,14 @@ struct Header<Content: HTML>: HTML {
         default: 0.875.rem
         }
     }
-    var lineHeight: Length {
+    var lineHeight: Double {
         switch size {
-        case 1: 1.2.rem
-        case 2: 1.2.rem
-        case 3: 1.2.rem
-        case 4: 1.2.rem
-        case 5: 1.15.rem
-        default: 1.15.rem
+        case 1: 1.2
+        case 2: 1.2
+        case 3: 1.2
+        case 4: 1.2
+        case 5: 1.15
+        default: 1.15
         }
     }
     var marginBottom: Length {
