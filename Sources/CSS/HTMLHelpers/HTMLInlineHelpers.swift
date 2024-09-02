@@ -172,7 +172,19 @@ extension HTML {
 extension HTML {
     @discardableResult
     public func margin(_ margin: CSS.Margin? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("margin", margin?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        if let margin = margin {
+            return switch margin {
+            case .trbl(let top, let right, let bottom, let left):
+                self.inlineStyle("margin-top", top?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle("margin-right", right?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle("margin-bottom", bottom?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle("margin-left", left?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            default:
+                self.inlineStyle("margin", margin.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            }
+        }
+        // If no margin is provided, we still need to return an HTMLInlineStyle<Self>
+        return inlineStyle("margin", nil, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
@@ -196,10 +208,23 @@ extension HTML {
     }
 }
 
+
 extension HTML {
     @discardableResult
-    public func padding(_ padding: CSS.Padding?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("padding", padding?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func padding(_ padding: CSS.Padding? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        if let padding = padding {
+            return switch padding {
+            case .trbl(let top, let right, let bottom, let left):
+                self.inlineStyle("padding-top", top?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle("padding-right", right?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle("padding-bottom", bottom?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle("padding-left", left?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            default:
+                self.inlineStyle("padding", padding.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            }
+        }
+        // If no padding is provided, we still need to return an HTMLInlineStyle<Self>
+        return inlineStyle("padding", nil, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
@@ -219,9 +244,10 @@ extension HTML {
     
     @discardableResult
     public func padding(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        padding(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
+        margin(length.map { .all($0) } ?? nil, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
+
 
 extension HTML {
     @discardableResult
