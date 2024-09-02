@@ -65,6 +65,15 @@ extension HTML {
     public func position(_ value: CSS.Position?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("position", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
+    
+    @discardableResult
+    public func position(_ value: CSS.Position?, top: Length? = nil, right: Length? = nil, bottom: Length? = nil, left: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("position", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .inlineStyle("top", top?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .inlineStyle("left", left?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .inlineStyle("right", right?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .inlineStyle("bottom", bottom?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
 }
 
 extension HTML {
