@@ -44,18 +44,17 @@ extension HTML {
         rowGap: RowGap? = nil,
         columnGap: CSS.Length? = nil,
         media: MediaQuery? = nil,
-        pre: String?,
-        pseudo: Pseudo?
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
     ) -> some HTML {
         self
-            .display(.flex, media: media)
-            .inlineStyle("flex-direction", direction?.rawValue, media: media)
-            .inlineStyle("flex-wrap", wrap?.rawValue, media: media)
+            .display(.flex, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("flex-direction", direction?.rawValue, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("flex-wrap", wrap?.rawValue, media: media, pre: pre, pseudo: pseudo)
             .justifyContent(justification, media: media, pre: pre, pseudo: pseudo)
             .alignItems(itemAlignment, media: media, pre: pre, pseudo: pseudo)
-            .inlineStyle("row-gap", rowGap?.description, media: media)
-            .rowGap(rowGap)
-            .inlineStyle("column-gap", columnGap?.description, media: media)
+            .rowGap(rowGap, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("column-gap", columnGap?.description, media: media, pre: pre, pseudo: pseudo)
     }
     
     public func flexItem(
