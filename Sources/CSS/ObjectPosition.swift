@@ -113,3 +113,30 @@ extension CSS.ObjectPosition {
     public static let bottomCenter: Self = .twoValues(.keyword(.center), .keyword(.bottom))
     public static let bottomRight: Self = .twoValues(.keyword(.right), .keyword(.bottom))
 }
+
+
+extension CSS.ObjectPosition {
+
+    public static func x(_ value: Length) -> CSS.ObjectPosition {
+        return .twoValues(.length(value), .keyword(.center))
+    }
+
+    public static func y(_ value: Length) -> CSS.ObjectPosition {
+        return .twoValues(.keyword(.center), .length(value))
+    }
+}
+
+
+extension CSS.ObjectPosition {
+    public static let inherit: CSS.ObjectPosition = .global(.inherit)
+
+    public static let initial: CSS.ObjectPosition = .global(.initial)
+
+    public static let unset: CSS.ObjectPosition = .global(.unset)
+}
+
+extension CSS.ObjectPosition {
+    public static func symmetric(_ value: Length) -> CSS.ObjectPosition {
+        return .twoValues(.length(value), .length(value))
+    }
+}
