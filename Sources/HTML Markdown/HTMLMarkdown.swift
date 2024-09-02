@@ -35,20 +35,8 @@ public struct HTMLMarkdown: HTML {
     
     public var body: some HTML {
         tag("swift-html-markdown") {
-            VStack(spacing: 0.5) {
+            VStack(spacing: 0.5.rem) {
                 content
-                    .inlineStyle(
-                        "content",
-                        previewOnly ? nil : #""❖""#,
-                        pre: "article",
-                        pseudo: .is("p") + .lastOfType + .after
-                    )
-                    .inlineStyle(
-                        "margin-left",
-                        previewOnly ? nil : "0.5rem",
-                        pre: "article",
-                        pseudo: .is("p") + .lastOfType + .after
-                    )
             }
             .inlineStyle(
                 "mask-image",
@@ -238,7 +226,7 @@ private struct HTMLConverter: MarkupVisitor {
             .visibility(.hidden)
         
         div {
-            Header(heading.level) {
+            Header(heading.level + 2) {
                 for child in heading.children {
                     visit(child)
                 }
@@ -617,3 +605,6 @@ extension String {
         split(whereSeparator: { !$0.isLetter && !$0.isNumber }).joined(separator: "-").lowercased()
     }
 }
+
+
+

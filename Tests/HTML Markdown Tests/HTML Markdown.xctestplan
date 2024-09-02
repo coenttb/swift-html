@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "967AC3B5-3D16-4C8A-99FC-2163C909BCC7",
+      "id" : "6837F20C-1DFA-46F1-910A-79762AE29093",
       "name" : "Configuration 1",
       "options" : {
 
@@ -15,8 +15,8 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "HTML PointFreeTests",
-        "name" : "HTML PointFreeTests"
+        "identifier" : "HTML Markdown Tests",
+        "name" : "HTML Markdown Tests"
       }
     }
   ],

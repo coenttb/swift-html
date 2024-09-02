@@ -53,6 +53,7 @@ extension Package {
                     .library(name: .html, targets: [.html, .markdown]),
                     .library(name: .css, targets: [.css]),
                     .library(name: .htmlCore, targets: [.htmlCore]),
+                    .library(name: .markdown, targets: [.markdown]),
                 ]
             ].flatMap { $0
             },
