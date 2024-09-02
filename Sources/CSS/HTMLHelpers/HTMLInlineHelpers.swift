@@ -559,14 +559,8 @@ extension HTML {
         objectPosition(.global(global), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
-    // Convenience methods for common use cases
     @discardableResult
-    public func objectPosition(x: Length, y: Length, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func objectPosition(x: Length = 50.percent, y: Length = 50.percent, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         objectPosition(.length(x), .length(y), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func objectPosition(x: Double, y: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        objectPosition(.percentage(x), .percentage(y), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }

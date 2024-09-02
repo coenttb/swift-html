@@ -5,17 +5,17 @@ public enum ObjectPosition: Sendable {
     case oneValue(Value)
     case twoValues(Value, Value)
     case global(Global)
-    
+
     public enum Keyword: String, Sendable {
         case left, center, right, top, bottom
     }
-    
+
     public enum Value: Sendable {
         case length(Length)
         case percentage(Double)
         case keyword(Keyword)
     }
-    
+
     public enum Global: String, Sendable {
         case inherit, initial, revert
         case revertLayer = "revert-layer"
@@ -95,6 +95,8 @@ extension ObjectPosition {
 
 
 extension CSS.ObjectPosition {
+    
+    
     public static let left: Self = .keyword(.left)
     public static let center: Self = .keyword(.center)
     public static let right: Self = .keyword(.right)
