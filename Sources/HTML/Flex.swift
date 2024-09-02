@@ -41,19 +41,21 @@ extension HTML {
         wrap: Flex.Wrap? = nil,
         justification: JustifyContent? = nil,
         itemAlignment: AlignItems? = nil,
-        rowGap: CSS.Length? = nil,
+        rowGap: RowGap? = nil,
         columnGap: CSS.Length? = nil,
-        media: MediaQuery? = nil
+        media: MediaQuery? = nil,
+        pre: String?,
+        pseudo: Pseudo?
     ) -> some HTML {
-        self.flexContainer(
-            direction: direction?.rawValue,
-            wrap: wrap?.rawValue,
-            justification: justification?.description,
-            itemAlignment: itemAlignment?.description,
-            rowGap: rowGap?.description,
-            columnGap: columnGap?.description,
-            media: media
-        )
+        self
+            .display(.flex, media: media)
+            .inlineStyle("flex-direction", direction?.rawValue, media: media)
+            .inlineStyle("flex-wrap", wrap?.rawValue, media: media)
+            .justifyContent(justification, media: media, pre: pre, pseudo: pseudo)
+            .alignItems(itemAlignment, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("row-gap", rowGap?.description, media: media)
+            .rowGap(rowGap)
+            .inlineStyle("column-gap", columnGap?.description, media: media)
     }
     
     public func flexItem(

@@ -90,6 +90,8 @@ extension AlignItems {
     public static let revert: Self = .global(.revert)
     public static let revertLayer: Self = .global(.revertLayer)
     public static let unset: Self = .global(.unset)
+    public static let leading: Self = .start
+    public static let trailing: Self = .end
 }
 
 // CustomStringConvertible conformance

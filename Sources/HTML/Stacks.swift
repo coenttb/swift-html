@@ -1,12 +1,12 @@
 import OrderedCollections
 import HTMLCore
 public struct HStack<Content: HTML>: HTML {
-    let alignment: VerticalAlignment
+    let alignment: AlignItems
     let spacing: Length?
     let content: Content
     
     public init(
-        alignment: VerticalAlignment = .stretch,
+        alignment: AlignItems = .stretch,
         spacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
@@ -19,21 +19,22 @@ public struct HStack<Content: HTML>: HTML {
         tag("swift-html-hstack") {
             content
         }
-        .inlineStyle("align-items", alignment.rawValue)
+        
+        .alignItems(alignment)
         .display(.flex)
         .inlineStyle("flex-direction", "row")
-        .inlineStyle("max-height", "100%")
+        .maxHeight(100.percent)
         .inlineStyle("column-gap", spacing == 0 ? "0" : "\(spacing ?? 1.rem)")
     }
 }
 
 public struct VStack<Content: HTML>: HTML {
-    let alignment: HorizontalAlignment
+    let alignment: CSS.AlignItems
     let spacing: CSS.Length?
     let content: Content
     
     public init(
-        alignment: HorizontalAlignment = .stretch,
+        alignment: CSS.AlignItems = .stretch,
         spacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
@@ -46,37 +47,37 @@ public struct VStack<Content: HTML>: HTML {
         tag("swift-html-vstack") {
             content
         }
-        .inlineStyle("align-items", alignment.rawValue)
+        .alignItems(alignment)
         .display(.flex)
         .inlineStyle("flex-direction", "column")
-        .inlineStyle("max-width", "100%")
-        .inlineStyle("row-gap", spacing == 0 ? "0" : "\(spacing ?? 1.rem)")
+        .maxWidth(100.percent)
+        .rowGap(spacing == 0 ? 0 : (spacing ?? 1.rem))
     }
 }
 
-public struct HorizontalAlignment: Sendable {
-    public var rawValue: String
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-    public static let center = Self(rawValue: "center")
-    public static let leading = Self(rawValue: "start")
-    public static let stretch = Self(rawValue: "stretch")
-    public static let trailing = Self(rawValue: "end")
-}
+//public struct HorizontalAlignment: Sendable {
+//    public var rawValue: String
+//    public init(rawValue: String) {
+//        self.rawValue = rawValue
+//    }
+//    public static let center = Self(rawValue: "center")
+//    public static let leading = Self(rawValue: "start")
+//    public static let stretch = Self(rawValue: "stretch")
+//    public static let trailing = Self(rawValue: "end")
+//}
 
-public struct VerticalAlignment: RawRepresentable, Sendable {
-    public var rawValue: String
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-    public static let bottom = Self(rawValue: "end")
-    public static let center = Self(rawValue: "center")
-    public static let firstTextBaseline = Self(rawValue: "first baseline")
-    public static let lastTextBaseline = Self(rawValue: "last baseline")
-    public static let stretch = Self(rawValue: "stretch")
-    public static let top = Self(rawValue: "start")
-}
+//public struct VerticalAlignment: RawRepresentable, Sendable {
+//    public var rawValue: String
+//    public init(rawValue: String) {
+//        self.rawValue = rawValue
+//    }
+//    public static let bottom = Self(rawValue: "end")
+//    public static let center = Self(rawValue: "center")
+//    public static let firstTextBaseline = Self(rawValue: "first baseline")
+//    public static let lastTextBaseline = Self(rawValue: "last baseline")
+//    public static let stretch = Self(rawValue: "stretch")
+//    public static let top = Self(rawValue: "start")
+//}
 
 public struct Spacer: HTML {
     public init() {}
