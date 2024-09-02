@@ -400,80 +400,80 @@ extension HTML {
 
 
 extension HTML {
+//    @discardableResult
+//    public func font(_ font: Font, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> Self {
+//        self
+//            .fontFamily(font.family, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .fontSize(font.size, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .fontWeight(font.weight, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .fontStyle(font.style, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .fontVariant(font.variant, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .fontStretch(font.stretch, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .lineHeight(font.lineHeight, media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
+
     @discardableResult
-    public func font(_ font: Font, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        self
-            .font(.family(font.family), media: mediaQuery, pre: pre, pseudo: pseudo)
-            .font(.size(font.size), media: mediaQuery, pre: pre, pseudo: pseudo)
-            .font(.weight(font.weight), media: mediaQuery, pre: pre, pseudo: pseudo)
-            .font(.style(font.style), media: mediaQuery, pre: pre, pseudo: pseudo)
-            .font(.variant(font.variant), media: mediaQuery, pre: pre, pseudo: pseudo)
-            .font(.stretch(font.stretch), media: mediaQuery, pre: pre, pseudo: pseudo)
-            .lineHeight(font.lineHeight, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func fontFamily(_ families: [String]?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        let familyString = families?.map { $0.contains(" ") ? "\"\($0)\"" : $0 }.joined(separator: ", ")
+        return inlineStyle("font-family", familyString, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontSize(_ size: Font.FontSize?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("font-size", size?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func fontSize(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("font-size", length?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontWeight(_ weight: Font.FontWeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("font-weight", weight?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontStyle(_ style: Font.FontStyle?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("font-style", style?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontVariant(_ variant: Font.FontVariant?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("font-variant", variant?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func lineHeight(_ lineHeight: Font.LineHeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("line-height", lineHeight?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func fontStretch(_ stretch: Font.FontStretch?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("font-stretch", stretch?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
     @discardableResult
     public func font(_ property: Font.Property?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         switch property {
         case .family(let families):
-            let familyString = families?.map { $0.contains(" ") ? "\"\($0)\"" : $0 }.joined(separator: ", ")
-            return inlineStyle("font-family", familyString, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return fontFamily(families, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .size(let size):
-            return inlineStyle("font-size", size?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return fontSize(size, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .weight(let weight):
-            return inlineStyle("font-weight", weight?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return fontWeight(weight, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .style(let style):
-            return inlineStyle("font-style", style?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return fontStyle(style, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .variant(let variant):
-            return inlineStyle("font-variant", variant?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return fontVariant(variant, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .lineHeight(let lineHeight):
-            return inlineStyle("line-height", lineHeight?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return self.lineHeight(lineHeight, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .stretch(let stretch):
-            return inlineStyle("font-stretch", stretch?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return fontStretch(stretch, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .none:
-            return inlineStyle("", nil, media: mediaQuery, pre: pre, pseudo: pseudo)
+            return self
+                .inlineStyle("", "")
         }
-    }
-
-
-    @discardableResult
-    public func fontFamily(_ families: [String]?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.family(families), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func fontSize(_ size: Font.FontSize?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.size(size), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func fontSize(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.size(length), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func fontWeight(_ weight: Font.FontWeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.weight(weight), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func fontStyle(_ style: Font.FontStyle?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.style(style), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func fontVariant(_ variant: Font.FontVariant?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.variant(variant), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func lineHeight(_ lineHeight: Font.LineHeight?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.lineHeight(lineHeight), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func fontStretch(_ stretch: Font.FontStretch?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        font(.stretch(stretch), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
 
