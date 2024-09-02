@@ -3,13 +3,13 @@ import Dependencies
 import Foundation
 import OrderedCollections
 
-public struct HTMLInlineStyle<Content: HTML>: HTML {
-    private let content: Content
-    private var styles: [Style]
+public struct HTMLInlineStyle: HTML {
+    private let content: any HTML
+    private var styles: [(String, String, MediaQuery?, String?, Pseudo?)]
     
-    @Dependency(ClassNameGenerator.self) fileprivate var classNameGenerator
+    @Dependency(ClassNameGenerator.self) private var classNameGenerator
     
-    init(content: Content) {
+    public init(content: any HTML) {
         self.content = content
         self.styles = []
     }
@@ -23,29 +23,22 @@ public struct HTMLInlineStyle<Content: HTML>: HTML {
     ) -> Self {
         var copy = self
         if let value {
-            copy.styles.append(
-                Style(
-                    property: property,
-                    value: value,
-                    media: mediaQuery,
-                    preSelector: pre,
-                    pseudo: pseudo
-                )
-            )
+            copy.styles.append((property, value, mediaQuery, pre, pseudo))
         }
         return copy
     }
     
-    public static func _render(_ html: HTMLInlineStyle<Content>, into printer: inout HTMLPrinter) {
+    public static func _render(_ html: HTMLInlineStyle, into printer: inout HTMLPrinter) {
         let originalClass = printer.attributes["class"]
         var classNames = Set<String>(originalClass?.split(separator: " ").map(String.init) ?? [])
         
-        for style in html.styles {
+        for (property, value, mediaQuery, pre, pseudo) in html.styles {
+            let style = Style(property: property, value: value, media: mediaQuery, preSelector: pre, pseudo: pseudo)
             let className = html.classNameGenerator.generate(style)
-            let selector = "\(style.preSelector.map { "\($0) " } ?? "").\(className)\(style.pseudo?.rawValue ?? "")"
+            let selector = "\(pre.map { "\($0) " } ?? "").\(className)\(pseudo?.rawValue ?? "")"
             
-            if printer.styles[style.media, default: [:]][selector] == nil {
-                printer.styles[style.media, default: [:]][selector] = "\(style.property):\(style.value)"
+            if printer.styles[mediaQuery, default: [:]][selector] == nil {
+                printer.styles[mediaQuery, default: [:]][selector] = "\(property):\(value)"
             }
             
             classNames.insert(className)
@@ -55,7 +48,8 @@ public struct HTMLInlineStyle<Content: HTML>: HTML {
             printer.attributes["class"] = classNames.joined(separator: " ")
         }
         
-        Content._render(html.content, into: &printer)
+//        html.content._render(into: &printer)
+        Self._render(html, into: &printer)
         
         printer.attributes["class"] = originalClass
     }
@@ -70,10 +64,12 @@ extension HTML {
         media mediaQuery: MediaQuery? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    ) -> HTMLInlineStyle<Self> {
+    ) -> HTMLInlineStyle {
         HTMLInlineStyle(content: self).inlineStyle(property, value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
+
+// Keep the existing Style, ClassNameGenerator, and other supporting types as they were
 
 private struct ClassNameGenerator: DependencyKey {
     var generate: @Sendable (Style) -> String

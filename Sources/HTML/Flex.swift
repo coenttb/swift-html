@@ -48,6 +48,7 @@ extension HTML {
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self
+            .inlineStyle("", "")
             .display(.flex, media: media, pre: pre, pseudo: pseudo)
             .inlineStyle("flex-direction", direction?.rawValue, media: media, pre: pre, pseudo: pseudo)
             .inlineStyle("flex-wrap", wrap?.rawValue, media: media, pre: pre, pseudo: pseudo)

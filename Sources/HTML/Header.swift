@@ -13,7 +13,7 @@ public struct Header<Content: HTML>: HTML {
         .margin(0)
         .margin(top: marginTop, pseudo: .not(.firstChild))
         .margin(bottom: marginBottom, pseudo: .not(.lastChild))
-        .font(.size(fontSize))
+        .font(.size(.length(fontSize)))
         .font(.weight(700))
         .lineHeight(.number(lineHeight))
     }

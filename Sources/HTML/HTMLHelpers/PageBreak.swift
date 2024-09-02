@@ -50,7 +50,7 @@ public enum PageBreak {
 }
 
 extension HTML {
-    public func pageBreak(_ pageBreak: PageBreak)->HTMLInlineStyle<Self> {
+    public func pageBreak(_ pageBreak: PageBreak) -> some HTML {
         self.inlineStyle(pageBreak.inlineStyle.0, pageBreak.inlineStyle.1)
     }
 }
