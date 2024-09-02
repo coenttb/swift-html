@@ -321,7 +321,7 @@ private struct HTMLConverter: MarkupVisitor {
                 visit(child)
             }
         }
-        .flexContainer(direction: "column", rowGap: "0.5rem")
+        .flexContainer(direction: .column, rowGap: .length(0.5.rem))
     }
     
     @HTMLBuilder
@@ -424,7 +424,7 @@ private struct HTMLConverter: MarkupVisitor {
                 visit(child)
             }
         }
-        .flexContainer(direction: "column", rowGap: "0.5rem")
+        .flexContainer(direction: .column, rowGap: .length(0.5.rem))
         .margin(vertical: 0)
     }
 }
@@ -581,7 +581,7 @@ public struct Timestamp: HTML {
                 .width(3.25.rem, media: .desktop)
             }
         }
-        .flexContainer(direction: "column-reverse", rowGap: "0.5rem", media: .mobile)
+        .flexContainer(direction: .columnReverse, rowGap: .length(0.5.rem), media: .mobile)
     }
 }
 

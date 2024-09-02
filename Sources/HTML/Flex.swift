@@ -22,7 +22,7 @@ extension HTML {
 //            .inlineStyle("column-gap", columnGap, media: media)
 //    }
     
-    public func flexItem(
+    func flexItem(
         grow: String? = nil,
         shrink: String? = nil,
         basis: String? = nil,
