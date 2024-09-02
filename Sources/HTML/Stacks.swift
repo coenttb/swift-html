@@ -127,7 +127,8 @@ public struct LazyVGrid<Content: HTML>: HTML {
             html
                 .inlineStyle(
                     "column-gap",
-                    horizontalSpacing == 0 ? "0" : "\(horizontalSpacing ?? 1.rem)",
+//                    horizontalSpacing == 0.px ? "0" : "\(horizontalSpacing ?? 1.rem)",
+                    "\(horizontalSpacing ?? 1.rem)",
                     media: columns.key
                 )
                 .inlineStyle("display", "grid", media: columns.key)
@@ -138,7 +139,8 @@ public struct LazyVGrid<Content: HTML>: HTML {
                 )
                 .inlineStyle(
                     "row-gap",
-                    verticalSpacing == 0 ? "0" : "\(verticalSpacing ?? 1.rem)",
+//                    verticalSpacing == 0.px ? "0" : "\(verticalSpacing ?? 1.rem)",
+                    "\(verticalSpacing ?? 1.rem)",
                     media: columns.key
                 )
         }
