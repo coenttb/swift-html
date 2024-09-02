@@ -15,7 +15,8 @@ public struct Header<Content: HTML>: HTML {
         .margin(bottom: marginBottom, pseudo: .not(.lastChild))
         .font(.size(fontSize))
         .font(.weight(700))
-        .lineHeight(.number(lineHeight))
+//        .lineHeight(.number(lineHeight))
+        .inlineStyle("line-height", "\(lineHeight)")
     }
     
     var fontSize: Length {
