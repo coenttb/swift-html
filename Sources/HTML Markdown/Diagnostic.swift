@@ -89,7 +89,7 @@ public struct Diagnostic<Message: HTML>: HTML {
                 .padding(top: 8.px, horizontal: 8.px, bottom: 7.px)
                 
                 div {
-                    VStack(spacing: 0.5) {
+                    VStack(spacing: 0.5.rem) {
                         message
                     }
                     .class("diagnostic")
@@ -120,7 +120,7 @@ public struct InlineDiagnostic: HTML {
     
     public var body: some HTML {
         VStack(alignment: .trailing) {
-            HStack(spacing: 0.05) {
+            HStack(spacing: 0.05.rem) {
                 div {
                     div {
                         level.icon

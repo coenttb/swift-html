@@ -155,7 +155,7 @@ private struct HTMLConverter: MarkupVisitor {
         } else {
             let style = BlockQuoteStyle(blockName: aside.kind.displayName)
             blockquote {
-                VStack(spacing: 0.5) {
+                VStack(spacing: 0.5.rem) {
                     strong {
                         HTMLText(aside.kind.displayName)
                     }
@@ -306,7 +306,7 @@ private struct HTMLConverter: MarkupVisitor {
     @HTMLBuilder
     mutating func visitListItem(_ listItem: Markdown.ListItem) -> AnyHTML {
         li {
-            VStack(spacing: 0.5) {
+            VStack(spacing: 0.5.rem) {
                 for child in listItem.children {
                     visit(child)
                 }

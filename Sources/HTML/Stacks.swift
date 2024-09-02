@@ -50,7 +50,7 @@ public struct VStack<Content: HTML>: HTML {
         .display(.flex)
         .inlineStyle("flex-direction", "column")
         .inlineStyle("max-width", "100%")
-        .inlineStyle("row-gap", "\(spacing == 0 ? 0 : (spacing ?? 1.rem))")
+        .inlineStyle("row-gap", spacing == 0 ? "0" : "\(spacing ?? 1.rem)")
     }
 }
 
