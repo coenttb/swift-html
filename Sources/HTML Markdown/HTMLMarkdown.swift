@@ -132,7 +132,7 @@ private struct HTMLConverter: MarkupVisitor {
             .attribute("poster", value(forArgument: "poster", block: blockDirective))
             .attribute("controls")
             .attribute("playsinline")
-            .inlineStyle("object-fit", "cover")
+            .objectFit(.cover)
             .margin(bottom: 1.rem)
             
         default:
@@ -221,8 +221,8 @@ private struct HTMLConverter: MarkupVisitor {
             .id(id)
             .display(.block)
             .position(.relative)
-            .inlineStyle("top", "-5em")
-            .inlineStyle("top", "-0.5em", media: .desktop)
+            .top((-5).em)
+            .top((-0.5).em, media: .desktop)
             .visibility(.hidden)
         
         div {
@@ -243,7 +243,7 @@ private struct HTMLConverter: MarkupVisitor {
                 .display(.initial, pre: "article div:hover > * >")
                 .left(0)
                 .position(.absolute)
-                .inlineStyle("text-align", "center")
+                .textAlign(.center)
                 .top(2.px, media: .mobile)
                 .width(2.5.rem)
             }
@@ -555,7 +555,7 @@ public struct Timestamp: HTML {
                     HTMLText(speaker)
                 }
                 .color(.gray500)
-                .inlineStyle("font-size", "0.875rem")
+                .font(.size(0.875.rem))
                 .lineHeight(1, media: .desktop)
                 .position(.relative, media: .desktop)
                 .inlineStyle("text-transform", "uppercase")
@@ -577,7 +577,7 @@ public struct Timestamp: HTML {
                 .lineHeight(3, media: .desktop)
                 .margin(left: (-4).rem, media: .desktop)
                 .position(.absolute, media: .desktop)
-                .inlineStyle("text-align", "right", media: .desktop)
+                .textAlign(.right, media: .desktop)
                 .width(3.25.rem, media: .desktop)
             }
         }
