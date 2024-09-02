@@ -532,3 +532,41 @@ extension HTML {
             .inlineStyle("background", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
     }
 }
+
+extension HTML {
+    @discardableResult
+    public func objectPosition(_ value: CSS.ObjectPosition?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("object-position", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func objectPosition(_ keyword: CSS.ObjectPosition.Keyword, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        objectPosition(.keyword(keyword), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func objectPosition(_ value: CSS.ObjectPosition.Value, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        objectPosition(.oneValue(value), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func objectPosition(_ value1: CSS.ObjectPosition.Value, _ value2: CSS.ObjectPosition.Value, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        objectPosition(.twoValues(value1, value2), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func objectPosition(_ global: CSS.ObjectPosition.Global, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        objectPosition(.global(global), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    // Convenience methods for common use cases
+    @discardableResult
+    public func objectPosition(x: Length, y: Length, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        objectPosition(.length(x), .length(y), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+
+    @discardableResult
+    public func objectPosition(x: Double, y: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        objectPosition(.percentage(x), .percentage(y), media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}
