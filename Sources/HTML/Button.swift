@@ -148,7 +148,7 @@ public struct Button<Label: HTML>: HTML {
 }
 
 extension Button {
-    static func basic(
+    public static func basic(
         _ label: ()->Label
     ) -> Self {
         Button(
