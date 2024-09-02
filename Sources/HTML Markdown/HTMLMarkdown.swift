@@ -556,7 +556,7 @@ public struct Timestamp: HTML {
                     HTMLText(speaker)
                 }
                 .color(.gray500)
-                .font(.size(.length(0.875.rem)))
+                .font(.size(0.875.rem))
                 .lineHeight(1, media: .desktop)
                 .position(.relative, media: .desktop)
                 .inlineStyle("text-transform", "uppercase")

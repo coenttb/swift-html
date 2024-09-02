@@ -133,13 +133,13 @@ public struct Font: Sendable, Equatable {
         case lineHeight(LineHeight?)
         case stretch(FontStretch?)
         
-//        public static func size(_ length: Length?) -> Font.Property {
-//            return .size(.length(length))
-//        }
+        public static func size(_ length: Length?) -> Self {
+            return .size(.length(length))
+        }
         
-//        public static func lineHeight(_ length: Length?) -> Font.Property {
-//            return .lineHeight(.length(length))
-//        }
+        public static func lineHeight(_ length: Length?) -> Self {
+            return .lineHeight(.length(length))
+        }
     }
 }
 
