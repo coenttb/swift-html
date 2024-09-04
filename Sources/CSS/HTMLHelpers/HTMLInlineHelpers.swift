@@ -276,19 +276,19 @@ extension HTML {
     public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         switch border {
         case .all(let width, let style, let color):
-            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
                 .inlineStyle("border", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
         case .top(let width, let style, let color):
-            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
                 .inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
         case .right(let width, let style, let color):
-            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
                 .inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
         case .bottom(let width, let style, let color):
-            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
                 .inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
         case .left(let width, let style, let color):
-            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", media: mediaQuery, pre: pre, pseudo: pseudo)
+            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
                 .inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
         case .width(let width):
             return inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
