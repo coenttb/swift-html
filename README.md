@@ -70,7 +70,7 @@ My type-safe CSS approach ensures that you can only apply valid CSS properties t
 
 ### Can I use this with existing Swift web frameworks like Vapor?
 
-Yes!
+Yes! Conform your HTMLDocument to AsyncResponseEncondable to serve it through Vapor.
  
 ## Installation
 
