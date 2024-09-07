@@ -30,11 +30,11 @@ HTML documents can be created using a declarative, SwiftUI-like syntax, with typ
 import HTML
 
 let document = HTMLPreview.modern {
-    h1 { "Type-safe HTML" }
-      .color(.blue)
-      .fontSize(24.px)
-    p { "With type-safe CSS!" }
-      .margin(top: 10.px, bottom: 10.px)
+  h1 { "Type-safe HTML" }
+    .color(.blue)
+    .fontSize(24.px)
+  p { "With type-safe CSS!" }
+    .margin(top: 10.px, bottom: 10.px)
 }
 ```
 
@@ -48,11 +48,13 @@ import SwiftUI
 import HTML
 
 #Preview {
+  HTMLPreview.modern {
     h1 { "Welcome!" }
       .color(.blue)
       .fontSize(24.px)
     p { "You've found our site!" }
       .margin(top: 10.px, bottom: 10.px)
+    }
 }
 #endif
 ```
