@@ -29,7 +29,7 @@ HTML documents can be created using a declarative, SwiftUI-like syntax, with typ
 ```swift
 import HTML
 
-let styledDocument = div {
+let document = HTMLPreview.modern {
     h1 { "Welcome!" }
       .color(.blue)
       .fontSize(24.px)
@@ -37,6 +37,8 @@ let styledDocument = div {
       .margin(top: 10.px, bottom: 10.px)
 }
 ```
+
+> Note: For a quick and convenient way to give your HTMLDocument a modern look, use HTMLPreview.modern. I encourage you to create a custom implementation by conforming your HTMLDocument struct or enum to the HTMLDocument protocol.
 
 ## Safety
 
