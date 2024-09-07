@@ -1,12 +1,12 @@
 # 🗺 swift-html
-![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 A Swift DSL for type-safe, extensible, and transformable HTML documents and CSS styles.
+
+![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 🚧 **This package is under active development** 🚧
 
 This Swift package is currently in active development and is subject to frequent changes. Features and APIs may change without prior notice until a stable release is available.
-
 
 ## Table of Contents
 
