@@ -1,9 +1,7 @@
 # 🗺 swift-html
+![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 A Swift DSL for type-safe, extensible, and transformable HTML documents and CSS styles.
-
-![Swift](https://img.shields.io/badge/Swift-5.5-orange.svg)
-![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 🚧 **This package is under active development** 🚧
 
