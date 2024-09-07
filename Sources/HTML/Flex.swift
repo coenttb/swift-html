@@ -37,8 +37,8 @@ extension HTML {
 
 extension HTML {
     public func flexContainer(
-        direction: Flex.Direction? = nil,
-        wrap: Flex.Wrap? = nil,
+        direction: FlexDirection? = nil,
+        wrap: FlexWrap? = nil,
         justification: JustifyContent? = nil,
         itemAlignment: AlignItems? = nil,
         rowGap: RowGap? = nil,
@@ -59,9 +59,9 @@ extension HTML {
     }
     
     public func flexItem(
-        grow: Flex.Grow? = nil,
-        shrink: Flex.Shrink? = nil,
-        basis: Flex.Basis? = nil,
+        grow: FlexGrow? = nil,
+        shrink: FlexShrink? = nil,
+        basis: FlexBasis? = nil,
         media: MediaQuery? = nil
     ) -> some HTML {
         self

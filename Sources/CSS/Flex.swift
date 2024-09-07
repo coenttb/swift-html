@@ -1,67 +1,108 @@
 import Foundation
+import HTMLCore
 
-public enum Flex {
-    // Flex Container Properties
-    public enum Direction: String {
-        case row
-        case rowReverse = "row-reverse"
-        case column
-        case columnReverse = "column-reverse"
+// MARK: - Flex Container Properties
+
+public enum FlexDirection: String, CaseIterable {
+    case row, rowReverse = "row-reverse"
+    case column, columnReverse = "column-reverse"
+}
+
+public enum FlexWrap: String, CaseIterable {
+    case nowrap, wrap, wrapReverse = "wrap-reverse"
+}
+
+
+
+public enum AlignContent: String, CaseIterable {
+    case flexStart = "flex-start", flexEnd = "flex-end", center
+    case spaceBetween = "space-between", spaceAround = "space-around", stretch
+}
+
+// MARK: - Flex Item Properties
+
+public enum FlexBasis: ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral {
+    case length(Length)
+    case percentage(Double)
+    case auto
+    
+    public init(integerLiteral value: Int) {
+        self = .length(Length(integerLiteral: value))
     }
     
-    public enum Wrap: String {
-        case nowrap
-        case wrap
-        case wrapReverse = "wrap-reverse"
-    }
-    
-    // Flex Item Properties
-    public enum Grow: ExpressibleByIntegerLiteral {
-        case number(Int)
-        
-        public init(integerLiteral value: Int) {
-            self = .number(value)
-        }
-    }
-    
-    public enum Shrink: ExpressibleByIntegerLiteral {
-        case number(Int)
-        
-        public init(integerLiteral value: Int) {
-            self = .number(value)
-        }
-    }
-    
-    public enum Basis {
-        case length(CSS.Length)
-        case percentage(Double)
-        case auto
-        case content
-        case fitContent
-        case maxContent
-        case minContent
+    public init(floatLiteral value: Double) {
+        self = .length(Length(floatLiteral: value))
     }
 }
 
-extension Flex.Grow: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .number(let value):
-            return "\(value)"
-        }
+public enum FlexGrow: ExpressibleByIntegerLiteral {
+    case number(Int)
+    
+    public init(integerLiteral value: Int) {
+        self = .number(value)
     }
 }
 
-extension Flex.Shrink: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .number(let value):
-            return "\(value)"
-        }
+public enum FlexShrink: ExpressibleByIntegerLiteral {
+    case number(Int)
+    
+    public init(integerLiteral value: Int) {
+        self = .number(value)
     }
 }
 
-extension Flex.Basis: CustomStringConvertible {
+public enum AlignSelf: String, CaseIterable {
+    case auto, flexStart = "flex-start", flexEnd = "flex-end", center, baseline, stretch
+}
+
+// MARK: - Flex Container
+
+public struct FlexContainer {
+    var direction: FlexDirection?
+    var wrap: FlexWrap?
+    var justifyContent: JustifyContent?
+    var alignItems: AlignItems?
+    var alignContent: AlignContent?
+    
+    public init(
+        direction: FlexDirection? = nil,
+        wrap: FlexWrap? = nil,
+        justifyContent: JustifyContent? = nil,
+        alignItems: AlignItems? = nil,
+        alignContent: AlignContent? = nil
+    ) {
+        self.direction = direction
+        self.wrap = wrap
+        self.justifyContent = justifyContent
+        self.alignItems = alignItems
+        self.alignContent = alignContent
+    }
+}
+
+// MARK: - Flex Item
+
+public struct FlexItem {
+    var grow: FlexGrow?
+    var shrink: FlexShrink?
+    var basis: FlexBasis?
+    var alignSelf: AlignSelf?
+    
+    public init(
+        grow: FlexGrow? = nil,
+        shrink: FlexShrink? = nil,
+        basis: FlexBasis? = nil,
+        alignSelf: AlignSelf? = nil
+    ) {
+        self.grow = grow
+        self.shrink = shrink
+        self.basis = basis
+        self.alignSelf = alignSelf
+    }
+}
+
+// MARK: - CustomStringConvertible Conformances
+
+extension FlexBasis: CustomStringConvertible {
     public var description: String {
         switch self {
         case .length(let length):
@@ -70,38 +111,45 @@ extension Flex.Basis: CustomStringConvertible {
             return "\(value)%"
         case .auto:
             return "auto"
-        case .content:
-            return "content"
-        case .fitContent:
-            return "fit-content"
-        case .maxContent:
-            return "max-content"
-        case .minContent:
-            return "min-content"
         }
     }
 }
 
-
-extension CSS.Flex {
-    public static let row: Direction = .row
-    public static let rowReverse: Direction = .rowReverse
-    public static let column: Direction = .column
-    public static let columnReverse: Direction = .columnReverse
-    
-    public static let nowrap: Wrap = .nowrap
-    public static let wrap: Wrap = .wrap
-    public static let wrapReverse: Wrap = .wrapReverse
-    
-    public static let grow0: Grow = 0
-    public static let grow1: Grow = 1
-    
-    public static let shrink0: Shrink = 0
-    public static let shrink1: Shrink = 1
-    
-    public static let basisAuto: Basis = .auto
-    public static let basisContent: Basis = .content
-    public static let basisFitContent: Basis = .fitContent
-    public static let basisMaxContent: Basis = .maxContent
-    public static let basisMinContent: Basis = .minContent
+extension FlexGrow: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .number(let value):
+            return "\(value)"
+        }
+    }
 }
+
+extension FlexShrink: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .number(let value):
+            return "\(value)"
+        }
+    }
+}
+
+// MARK: - HTML Extensions
+
+
+// MARK: - Convenience Properties and Methods
+
+extension FlexContainer {
+    public static let row = FlexContainer(direction: .row)
+    public static let column = FlexContainer(direction: .column)
+    public static let spaceBetween = FlexContainer(justifyContent: .spaceBetween)
+    public static let center = FlexContainer(justifyContent: .center, alignItems: .center)
+}
+
+extension FlexItem {
+    public static let grow = FlexItem(grow: 1)
+    public static let shrink = FlexItem(shrink: 1)
+    public static let noGrow = FlexItem(grow: 0)
+    public static let noShrink = FlexItem(shrink: 0)
+}
+
+
