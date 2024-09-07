@@ -30,6 +30,24 @@ HTML documents can be created using a declarative, SwiftUI-like syntax, with typ
 import HTML
 
 let document = HTMLPreview.modern {
+    h1 { "Type-safe HTML" }
+      .color(.blue)
+      .fontSize(24.px)
+    p { "With type-safe CSS!" }
+      .margin(top: 10.px, bottom: 10.px)
+}
+```
+
+> Note: For a quick and convenient way to give your HTMLDocument a modern look, use HTMLPreview.modern. I encourage you to create a custom implementation by conforming your HTMLDocument struct or enum to the HTMLDocument protocol.
+
+You can even preview the HTML using #Preview.
+
+```
+#if canImport(SwiftUI)
+import SwiftUI
+import HTML
+
+#Preview {
     h1 { "Welcome!" }
       .color(.blue)
       .fontSize(24.px)
@@ -37,8 +55,6 @@ let document = HTMLPreview.modern {
       .margin(top: 10.px, bottom: 10.px)
 }
 ```
-
-> Note: For a quick and convenient way to give your HTMLDocument a modern look, use HTMLPreview.modern. I encourage you to create a custom implementation by conforming your HTMLDocument struct or enum to the HTMLDocument protocol.
 
 ## Safety
 
