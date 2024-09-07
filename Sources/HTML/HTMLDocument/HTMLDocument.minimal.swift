@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTMLCore
+import PointFreeHtml
 
 extension HTMLPreview where Head == HTMLEmpty {
     public static func minimal(

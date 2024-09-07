@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTMLCore
+import PointFreeHtml
 
 public enum TextAlign: String {
     case left

@@ -1,5 +1,5 @@
 import CSS
-import HTMLCore
+import PointFreeHtml
 
 extension HTML {
 //    @_disfavoredOverload

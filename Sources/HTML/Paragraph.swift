@@ -1,4 +1,4 @@
-import HTMLCore
+import PointFreeHtml
 
 public struct Paragraph<Content: HTML>: HTML {
     let size: Size

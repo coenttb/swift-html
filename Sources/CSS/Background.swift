@@ -1,5 +1,5 @@
 import Foundation
-import HTMLCore
+import PointFreeHtml
 @preconcurrency import Percent
 
 public enum Background: Sendable {

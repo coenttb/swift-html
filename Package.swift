@@ -6,7 +6,7 @@ import PackageDescription
 extension String {
     static let css: Self = "CSS"
     static let html: Self = "HTML"
-    static let htmlCore: Self = "HTMLCore"
+    static let htmlCore: Self = "PointFreeHtml"
     static let markdown: Self = "HTML Markdown"
 }
 

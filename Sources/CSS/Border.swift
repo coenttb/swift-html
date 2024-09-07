@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTMLCore
+import PointFreeHtml
 
 public enum Border: Sendable {
     case all(width: Width, style: Style, color: HTMLColor?)

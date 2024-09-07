@@ -1,5 +1,5 @@
 import Foundation
-import HTMLCore
+import PointFreeHtml
 
 // MARK: - Flex Container Properties
 

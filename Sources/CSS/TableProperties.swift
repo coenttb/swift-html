@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTMLCore
+import PointFreeHtml
 
 public enum TableLayout: String, CaseIterable {
     case auto, fixed

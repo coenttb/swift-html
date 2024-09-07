@@ -7,7 +7,7 @@
 
 import CSS
 import Foundation
-import HTMLCore
+import PointFreeHtml
 
 extension HTMLPreview where Head == _HTMLTuple<HTMLElement<HTMLText>, HTMLElement<HTMLText>> {
     public static func modern(

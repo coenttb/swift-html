@@ -1,5 +1,5 @@
 import OrderedCollections
-import HTMLCore
+import PointFreeHtml
 public struct HStack<Content: HTML>: HTML {
     let alignment: AlignItems
     let spacing: Length?

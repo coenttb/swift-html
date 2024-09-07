@@ -1,5 +1,5 @@
 import CSS
-import HTMLCore
+import PointFreeHtml
 
 public struct Button<Label: HTML>: HTML {
     let tagName: String
