@@ -1,3 +1,7 @@
+import Foundation
+import PointFreeHtml
+import CSS
+
 public struct Divider: HTML {
     public init() {}
     public var body: some HTML {

@@ -1,5 +1,6 @@
-import CSS
+import Foundation
 import PointFreeHtml
+import CSS
 
 public struct Button<Label: HTML>: HTML {
     let tagName: String

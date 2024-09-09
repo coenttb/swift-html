@@ -1,4 +1,6 @@
 import Foundation
+import PointFreeHtml
+import CSS
 
 public struct Image: HTML {
     let source: String

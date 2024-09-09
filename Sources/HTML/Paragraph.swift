@@ -1,4 +1,6 @@
+import Foundation
 import PointFreeHtml
+import CSS
 
 public struct Paragraph<Content: HTML>: HTML {
     let size: Size
