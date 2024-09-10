@@ -1,5 +1,5 @@
 {
-  "originHash" : "efcc6ff7230a9e41c2a426e48967ae799590098d494f55064ea437dee93cf6bb",
+  "originHash" : "09f80e6be8fa60df9dee4b1b52e7a34adf6be2e4dffc2dd29a3824984332cb37",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -67,7 +67,7 @@
     {
       "identity" : "swift-percent",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tenthijeboonkkamp/swift-percent.git",
+      "location" : "https://github.com/coenttb/swift-percent.git",
       "state" : {
         "branch" : "main",
         "revision" : "194f5e05b33680493f4da7ba506d618f1c9ef841"
