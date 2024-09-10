@@ -841,7 +841,7 @@ extension HTML {
         switch style {
         case .none:
             return inlineStyle("list-style-type", "none")
-                .inlineStyle("padding-left", "0 rem")
+                .inlineStyle("padding-left", "0")
         case .type(let type):
             return inlineStyle("list-style-type", type.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
         case .image(let url):
