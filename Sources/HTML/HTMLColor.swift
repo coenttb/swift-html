@@ -8,7 +8,6 @@
 import Foundation
 import PointFreeHtml
 
-
 extension HTMLColor {
     public static let gray150 = Self(rawValue: "#2a2a2a")
     public static let gray200 = Self(rawValue: "#3a3a3a")
