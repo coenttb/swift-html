@@ -71,7 +71,7 @@ public struct Button<Label: HTML>: HTML {
         self.style = style
         self.label = HTMLEmpty()
     }
-    
+
     public var body: some HTML {
         tag(tagName) {
             label
@@ -91,14 +91,19 @@ public struct Button<Label: HTML>: HTML {
         .inlineStyle("white-space", "nowrap")
         .padding(vertical: size.topBottomPadding, horizontal: size.leftRightPadding)
         .transition("0.3s")
-        .backgroundColor(backgroundColor)
+        .backgroundColor(self.backgroundColor(for: style))
         .color(foregroundColor)
         .color(foregroundColor, pseudo: .link)
         .color(foregroundColor, pseudo: .visited)
         .fontScale(size.fontScale)
     }
     
-    
+    fileprivate func backgroundColor(for style: Style) -> HTMLColor? {
+        switch style {
+        case .normal: self.backgroundColor
+        default: nil
+        }
+    }
     
     public enum Size {
         case small
