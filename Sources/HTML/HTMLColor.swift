@@ -9,6 +9,7 @@ import Foundation
 import PointFreeHtml
 
 extension HTMLColor {
+    public static let gray100 = Self(rawValue: "#1a1a1a", darkValue: "#f7f7f7")
     public static let gray150 = Self(rawValue: "#2a2a2a", darkValue: "#f0f0f0")
     public static let gray200 = Self(rawValue: "#3a3a3a", darkValue: "#e0e0e0")
     public static let gray250 = Self(rawValue: "#4a4a4a", darkValue: "#d0d0d0")
@@ -28,6 +29,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let blue100 = Self(rawValue: "#001a33", darkValue: "#e6f3ff")
     public static let blue150 = Self(rawValue: "#001f3f", darkValue: "#ccddee")
     public static let blue200 = Self(rawValue: "#003366", darkValue: "#bbccdd")
     public static let blue250 = Self(rawValue: "#004488", darkValue: "#99bbcc")
@@ -47,6 +49,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let green100 = Self(rawValue: "#002600", darkValue: "#e6ffe6")
     public static let green150 = Self(rawValue: "#003300", darkValue: "#ccffcc")
     public static let green200 = Self(rawValue: "#004400", darkValue: "#bbeebb")
     public static let green250 = Self(rawValue: "#005500", darkValue: "#99dd99")
@@ -66,6 +69,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let purple100 = Self(rawValue: "#1a0026", darkValue: "#f0e6ff")
     public static let purple150 = Self(rawValue: "#2a0033", darkValue: "#e6ccf5")
     public static let purple200 = Self(rawValue: "#3b0044", darkValue: "#d9b3ea")
     public static let purple250 = Self(rawValue: "#4c0055", darkValue: "#cc80e6")
@@ -85,6 +89,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let red100 = Self(rawValue: "#260000", darkValue: "#ffe6e6")
     public static let red150 = Self(rawValue: "#330000", darkValue: "#ffcccc")
     public static let red200 = Self(rawValue: "#440000", darkValue: "#ffb3b3")
     public static let red250 = Self(rawValue: "#550000", darkValue: "#ff9999")
@@ -104,6 +109,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let yellow100 = Self(rawValue: "#262600", darkValue: "#fffff2")
     public static let yellow150 = Self(rawValue: "#333300", darkValue: "#ffffcc")
     public static let yellow200 = Self(rawValue: "#444400", darkValue: "#ffffb3")
     public static let yellow250 = Self(rawValue: "#555500", darkValue: "#ffff99")
@@ -123,6 +129,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let orange100 = Self(rawValue: "#261300", darkValue: "#fff4e6")
     public static let orange150 = Self(rawValue: "#331a00", darkValue: "#ffe6cc")
     public static let orange200 = Self(rawValue: "#442200", darkValue: "#ffd9b3")
     public static let orange250 = Self(rawValue: "#553300", darkValue: "#ffcc99")
@@ -142,6 +149,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let teal100 = Self(rawValue: "#001a1a", darkValue: "#e6ffff")
     public static let teal150 = Self(rawValue: "#003333", darkValue: "#ccffeb")
     public static let teal200 = Self(rawValue: "#004444", darkValue: "#bbffe6")
     public static let teal250 = Self(rawValue: "#005555", darkValue: "#aaffdd")
@@ -161,6 +169,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let cyan100 = Self.teal100
     public static let cyan150 = Self.teal150
     public static let cyan200 = Self.teal200
     public static let cyan250 = Self.teal250
@@ -180,6 +189,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let pink100 = Self(rawValue: "#260013", darkValue: "#ffe6f0")
     public static let pink150 = Self(rawValue: "#33001a", darkValue: "#ffe6f2")
     public static let pink200 = Self(rawValue: "#440022", darkValue: "#ffccde")
     public static let pink250 = Self(rawValue: "#55002b", darkValue: "#ff99cc")
@@ -199,6 +209,7 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
+    public static let brown100 = Self(rawValue: "#261300", darkValue: "#f7e6d9")
     public static let brown150 = Self(rawValue: "#331a00", darkValue: "#ffebcc")
     public static let brown200 = Self(rawValue: "#442200", darkValue: "#ffddaa")
     public static let brown250 = Self(rawValue: "#553300", darkValue: "#ffcc88")
