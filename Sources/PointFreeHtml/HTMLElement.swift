@@ -1,3 +1,10 @@
+//
+//  HTMLElement.swift
+//
+//
+//  Created by Point-Free, Inc
+//
+
 import OrderedCollections
 
 public struct HTMLElement<Content: HTML>: HTML {
@@ -14,7 +21,7 @@ public struct HTMLElement<Content: HTML>: HTML {
         
         // TTB addition, not sure why this is only an issue for me.
         let isPreElement = html.tag == "pre"
-               
+        
         if html.isBlock {
             printer.bytes.append(contentsOf: printer.configuration.newline.utf8)
             printer.bytes.append(contentsOf: printer.currentIndentation.utf8)

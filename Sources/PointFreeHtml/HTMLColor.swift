@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  HTMLColor.swift
 //
 //
-//  Created by Coen ten Thije Boonkkamp on 27/07/2024.
+//  Created by Point-Free, Inc
 //
 
 public struct HTMLColor: Sendable {
@@ -31,28 +31,6 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
-    public static let currentColor = Self(rawValue: "currentColor")
-    
-    public static let black = Self(rawValue: "#121212")
-    public static let offBlack = Self(rawValue: "#171717")
-    public static let blue = Self(rawValue: "#4cccff")
-    public static let blue900 = Self(rawValue: "#e6f8ff")
-    public static let gray150 = Self(rawValue: "#242424")
-    public static let gray300 = Self(rawValue: "#555555")
-    public static let gray400 = Self(rawValue: "#666666")
-    public static let gray500 = Self(rawValue: "#808080")
-    public static let gray650 = Self(rawValue: "#a8a8a8")
-    public static let gray800 = Self(rawValue: "#ccc")
-    public static let gray850 = Self(rawValue: "#d8d8d8")
-    public static let gray900 = Self(rawValue: "#f6f6f6")
-    public static let green = Self(rawValue: "#79f2b0")
-    public static let purple = Self(rawValue: "#974dff")
-    public static let purple150 = Self(rawValue: "#291a40")
-    public static let red = Self(rawValue: "#eb1c26")
-    public static let yellow = Self(rawValue: "#fff080")
-    public static let white = Self(rawValue: "#fff")
-    public static let offWhite = Self(rawValue: "#fafafa")
-    
     public static func gray(_ value: UInt8) -> Self {
         var hex = String(value, radix: 16)
         if hex.count == 1 { hex.insert("0", at: hex.startIndex) }

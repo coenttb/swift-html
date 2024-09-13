@@ -1,8 +1,8 @@
 //
-//  File 2.swift
-//  swift-html
+//  InputType.swift
 //
-//  Created by Coen ten Thije Boonkkamp on 28/08/2024.
+//
+//  Created by Coen ten Thije Boonkkamp
 //
 
 import Foundation
