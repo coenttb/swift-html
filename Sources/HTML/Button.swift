@@ -73,13 +73,19 @@ public struct Button<Label: HTML>: HTML {
     }
 
     public var body: some HTML {
+        
+        
+       
         tag(tagName) {
             label
         }
-        .inlineStyle("border", "\(style.border) \(foregroundColor.rawValue)")
         .inlineStyle(
             "border",
-            foregroundColor.darkValue.map { "\(style.border) \($0)" },
+            (borderColorComputed?.rawValue).map { "\(style.border) \($0)" }
+        )
+        .inlineStyle(
+            "border",
+            (borderColorComputed?.darkValue).map { "\(style.border) \($0)" },
             media: .dark
         )
         .border(.radius(0.5.rem))
@@ -91,15 +97,19 @@ public struct Button<Label: HTML>: HTML {
         .inlineStyle("white-space", "nowrap")
         .padding(vertical: size.topBottomPadding, horizontal: size.leftRightPadding)
         .transition("0.3s")
-        .backgroundColor(self.backgroundColor(for: style))
+        .backgroundColor(self.backgroundColorComputed)
         .color(foregroundColor)
         .color(foregroundColor, pseudo: .link)
         .color(foregroundColor, pseudo: .visited)
         .fontScale(size.fontScale)
     }
     
-    fileprivate func backgroundColor(for style: Style) -> HTMLColor? {
-        switch style {
+    fileprivate var borderColorComputed: HTMLColor? {
+        self.backgroundColor
+    }
+    
+    fileprivate var backgroundColorComputed: HTMLColor? {
+        switch self.style {
         case .normal: self.backgroundColor
         default: nil
         }
