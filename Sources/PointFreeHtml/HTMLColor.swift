@@ -26,8 +26,8 @@ extension HTMLColor: CustomStringConvertible {
 }
 
 extension HTMLColor {
-    public func dark(_ other: Self) -> Self { Self(rawValue: self.rawValue, darkValue: other.darkValue) }
-    public func light(_ other: Self) -> Self { Self(rawValue: other.rawValue, darkValue: self.darkValue) }
+    public func dark(_ other: Self) -> Self { Self(rawValue: rawValue, darkValue: other.rawValue) }
+    public func light(_ other: Self) -> Self { Self(rawValue: other.rawValue, darkValue: darkValue) }
 }
 
 extension HTMLColor {
