@@ -313,11 +313,18 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
-    public static let buttonBackground: Self = .init(
-        light: .hsla(hue: 220, saturation: 15, lightness: 92, alpha: 0.9),
-        dark: .hsla(hue: 220, saturation: 15, lightness: 15, alpha: 0.9)  
+    public static let cardBackground: Self = .init(
+        light: .rgb(red: 245, green: 246, blue: 248),
+        dark: .rgb(red: 30, green: 30, blue: 35)
     )
 }
 
+
+extension HTMLColor {
+    public static let buttonBackground: Self = .init(
+        light: .hsla(hue: 220, saturation: 15, lightness: 92, alpha: 0.85),
+        dark: .hsla(hue: 220, saturation: 15, lightness: 15, alpha: 0.85)
+    )
+}
 
 
