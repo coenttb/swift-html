@@ -19,9 +19,11 @@ public struct HTMLPreview<Head: HTML, Body: HTML>: HTMLDocument {
     }
 }
 
-#if canImport(AppKit)
+#if os(macOS)
 import SwiftUI
+import AppKit
 import WebKit
+
 extension HTMLPreview: NSViewRepresentable {
     public func makeNSView(context: Context) -> WKWebView {
         WKWebView(
@@ -45,6 +47,8 @@ extension HTMLPreview: NSViewRepresentable {
 #endif
 
 #if canImport(UIKit)
+import SwiftUI
+import WebKit
 extension HTMLPreview: UIViewRepresentable {
     public func makeUIView(context: Context) -> WKWebView {
         WKWebView(

@@ -47,7 +47,12 @@ extension Package {
     ) -> Package {
         return Package(
             name: "swift-html",
-            platforms: [.macOS(.v14), .iOS(.v17)],
+            platforms: [
+                .iOS(.v17),
+                .macOS(.v14),
+                .tvOS(.v17),
+                .watchOS(.v10),
+              ],
             products: [
                 [
                     .library(name: .html, targets: [.html, .markdown]),
