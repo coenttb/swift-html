@@ -1,0 +1,12 @@
+//
+//  File.swift
+//  swift-html
+//
+//  Created by Coen ten Thije Boonkkamp on 14/09/2024.
+//
+
+import Foundation
+
+public enum Direction: String {
+    case ltr, rtl
+}

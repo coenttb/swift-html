@@ -78,9 +78,6 @@ public enum TextTransform: String {
     case fullSizeKana = "full-size-kana"
 }
 
-
-
-
 public struct TextShadow {
     let offsetX: Length
     let offsetY: Length
@@ -96,30 +93,9 @@ public enum TextOverflow: String {
     case clip, ellipsis
 }
 
-public enum VerticalAlign: Sendable {
-    case keyword(Keyword)
-    case length(Length)
-    case percentage(Double)
-    
-    public enum Keyword: String, Sendable {
-        case baseline, sub, `super`, top, textTop = "text-top"
-        case middle, bottom, textBottom = "text-bottom"
-    }
-}
-
-public enum Direction: String {
-    case ltr, rtl
-}
-
 public enum UnicodeBidi: String {
     case normal, embed, bidiOverride = "bidi-override"
     case isolate, isolateOverride = "isolate-override", plaintext
-}
-
-public enum WritingMode: String {
-    case horizontalTb = "horizontal-tb"
-    case verticalRl = "vertical-rl"
-    case verticalLr = "vertical-lr"
 }
 
 extension TextProperties: CustomStringConvertible {

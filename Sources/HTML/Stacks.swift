@@ -4,12 +4,12 @@ import PointFreeHtml
 import CSS
 
 public struct HStack<Content: HTML>: HTML {
-    let alignment: AlignItems
+    let alignment: VerticalAlign
     let spacing: Length?
     let content: Content
     
     public init(
-        alignment: AlignItems = .stretch,
+        alignment: VerticalAlign = .center,
         spacing: CSS.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
@@ -22,8 +22,10 @@ public struct HStack<Content: HTML>: HTML {
         tag("swift-html-hstack") {
             content
         }
+        // necessary?
+        .alignItems(.stretch)
         
-        .alignItems(alignment)
+        .verticalAlign(alignment)
         .display(.flex)
         .flexDirection(.row)
         .maxHeight(100.percent)
