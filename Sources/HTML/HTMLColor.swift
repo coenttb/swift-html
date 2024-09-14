@@ -312,3 +312,12 @@ extension HTMLColor {
     public static let transparent = Self.init(light: .transparent)
 }
 
+extension HTMLColor {
+    public static let buttonBackground: Self = .init(
+        light: .rgb(red: 245, green: 246, blue: 248),
+        dark: .rgb(red: 30, green: 30, blue: 35)
+    )
+}
+
+
+
