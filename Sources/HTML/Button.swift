@@ -163,9 +163,9 @@ public struct Button<Label: HTML>: HTML {
 }
 
 
-import Foundation
-import PointFreeHtml
-import CSS
+
+
+fileprivate typealias HTMLLabel = Label
 
 public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
     let tagName: String
@@ -191,12 +191,17 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
     public var body: some HTML {
         tag(tagName) {
             if let icon = icon {
-                icon
-                    .color(color.icon)
-                    .margin(right: 0.5.rem)
+                HTMLLabel {
+                    icon
+                } title: {
+                    label
+                }
+
+            } else {
+                label
+                    .color(color.text)
             }
-            label
-                .color(color.text)
+            
         }
         .backgroundColor(color.background)
         .padding(
