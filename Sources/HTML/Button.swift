@@ -73,9 +73,6 @@ public struct Button<Label: HTML>: HTML {
     }
 
     public var body: some HTML {
-        
-        
-       
         tag(tagName) {
             label
         }
@@ -162,5 +159,103 @@ public struct Button<Label: HTML>: HTML {
             case .underline: "underline"
             }
         }
+    }
+}
+
+
+import Foundation
+import PointFreeHtml
+import CSS
+
+public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
+    let tagName: String
+    let icon: Icon?
+    let label: Label
+    let color: StripeButton.Color
+    let style: StripeButton.Style
+
+    public init(
+        tag: HTMLTag = button,
+        icon: Icon? = nil,
+        @HTMLBuilder label: () -> Label,
+        color: StripeButton.Color = .default,
+        style: StripeButton.Style = .default
+    ) {
+        self.tagName = tag.rawValue
+        self.icon = icon
+        self.label = label()
+        self.color = color
+        self.style = style
+    }
+
+    public var body: some HTML {
+        tag(tagName) {
+            if let icon = icon {
+                icon
+                    .color(color.icon)
+                    .margin(right: 0.5.rem)
+            }
+            label
+                .color(color.text)
+        }
+        .backgroundColor(color.background)
+        .padding(
+            vertical: style.verticalPadding,
+            horizontal: style.horizontalPadding
+        )
+        .borderRadius(.all(style.cornerRadius))
+        .display(.flex)
+        .alignItems(.center)
+        .textDecoration(.none)
+        .transition("background-color 0.3s")
+        .backgroundColor(color.backgroundHover, pseudo: .hover)
+    }
+
+    public struct Color {
+        public let icon: HTMLColor
+        public let text: HTMLColor
+        public let background: HTMLColor
+        public let backgroundHover: HTMLColor
+
+        public init(
+            icon: HTMLColor,
+            text: HTMLColor,
+            background: HTMLColor,
+            backgroundHover: HTMLColor? = nil
+        ) {
+            self.icon = icon
+            self.text = text
+            self.background = background
+            self.backgroundHover = backgroundHover ?? background
+        }
+    }
+
+    public struct Style {
+        public let cornerRadius: CSS.Length
+        public let verticalPadding: CSS.Length
+        public let horizontalPadding: CSS.Length
+
+        public init(
+            cornerRadius: CSS.Length = 0.5.rem,
+            verticalPadding: CSS.Length = 0.75.rem,
+            horizontalPadding: CSS.Length = 1.rem
+        ) {
+            self.cornerRadius = cornerRadius
+            self.verticalPadding = verticalPadding
+            self.horizontalPadding = horizontalPadding
+        }
+
+        public static var `default`:Self { Style() }
+    }
+}
+
+extension StripeButton.Color {
+    public static var `default`: StripeButton.Color {
+        StripeButton.Color(
+            icon: .gray(0.3),
+            text: .gray(0.3),
+            background: .gray(0.95),
+            backgroundHover: .gray(0.9)
+        )
     }
 }
