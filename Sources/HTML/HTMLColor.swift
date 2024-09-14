@@ -349,4 +349,6 @@ extension HTMLColor {
 
 extension HTMLColor {
     public static let currentColor = Self.init(light: .currentColor, dark: .currentColor)
+    public static let transparent = Self.init(light: .transparent)
 }
+
