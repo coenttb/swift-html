@@ -176,10 +176,10 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
 
     public init(
         tag: HTMLTag = button,
-        @HTMLBuilder icon: () -> Icon,
-        @HTMLBuilder label: () -> Label,
         color: StripeButton.Color = .default,
-        style: StripeButton.Style = .default
+        style: StripeButton.Style = .default,
+        @HTMLBuilder icon: () -> Icon,
+        @HTMLBuilder label: () -> Label
     ) {
         self.tagName = tag.rawValue
         self.icon = icon()
@@ -190,9 +190,9 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
     
     public init(
         tag: HTMLTag = button,
-        @HTMLBuilder label: () -> Label,
         color: StripeButton.Color = .default,
-        style: StripeButton.Style = .default
+        style: StripeButton.Style = .default,
+        @HTMLBuilder label: () -> Label
     ) where Icon == HTMLEmpty {
         self.tagName = tag.rawValue
         self.icon = HTMLEmpty()
