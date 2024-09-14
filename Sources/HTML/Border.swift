@@ -8,225 +8,140 @@
 import CSS
 import Foundation
 
-public struct HTMLBorder {
-    private var cssBorder: CSS.Border
-    private var htmlColor: HTMLColor?
-
-    private init(cssBorder: CSS.Border, htmlColor: HTMLColor? = nil) {
-        self.cssBorder = cssBorder
-        self.htmlColor = htmlColor
-    }
-
-    public static func all(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        var lightBorder: CSS.Border?
-        var darkBorder: CSS.Border?
-
-        if let color = color {
-            lightBorder = .all(width: width, style: style, color: color.light)
-            if let darkColor = color.dark {
-                darkBorder = .all(width: width, style: style, color: darkColor)
-            }
-        }
-
-        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
-    }
-
-    public static func top(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        var lightBorder: CSS.Border?
-        var darkBorder: CSS.Border?
-
-        if let color = color {
-            lightBorder = .top(width: width, style: style, color: color.light)
-            if let darkColor = color.dark {
-                darkBorder = .top(width: width, style: style, color: darkColor)
-            }
-        }
-
-        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
-    }
-
-    public static func right(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        var lightBorder: CSS.Border?
-        var darkBorder: CSS.Border?
-
-        if let color = color {
-            lightBorder = .right(width: width, style: style, color: color.light)
-            if let darkColor = color.dark {
-                darkBorder = .right(width: width, style: style, color: darkColor)
-            }
-        }
-
-        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
-    }
-
-    public static func bottom(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        var lightBorder: CSS.Border?
-        var darkBorder: CSS.Border?
-
-        if let color = color {
-            lightBorder = .bottom(width: width, style: style, color: color.light)
-            if let darkColor = color.dark {
-                darkBorder = .bottom(width: width, style: style, color: darkColor)
-            }
-        }
-
-        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
-    }
-
-    public static func left(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        var lightBorder: CSS.Border?
-        var darkBorder: CSS.Border?
-
-        if let color = color {
-            lightBorder = .left(width: width, style: style, color: color.light)
-            if let darkColor = color.dark {
-                darkBorder = .left(width: width, style: style, color: darkColor)
-            }
-        }
-
-        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
-    }
-
-    public static func width(_ width: CSS.Border.Width) -> HTMLBorder {
-        HTMLBorder(cssBorder: .width(width))
-    }
-
-    public static func style(_ style: CSS.Border.Style) -> HTMLBorder {
-        HTMLBorder(cssBorder: .style(style))
-    }
-
-//    public static func color(_ color: HTMLColor) -> HTMLBorder {
-//        HTMLBorder(cssBorder: .color(.keyword(.currentColor)), htmlColor: color)
-//    }
-
-    public static func radius(_ radius: CSS.Border.Radius) -> HTMLBorder {
-        HTMLBorder(cssBorder: .radius(radius))
-    }
-
-    public static func global(_ global: CSS.Border.Global) -> HTMLBorder {
-        HTMLBorder(cssBorder: .global(global))
-    }
-
+public enum Border: Sendable {
+    case all(width: Width, style: Style, color: HTMLColor?)
+    case top(width: Width, style: Style, color: HTMLColor?)
+    case right(width: Width, style: Style, color: HTMLColor?)
+    case bottom(width: Width, style: Style, color: HTMLColor?)
+    case left(width: Width, style: Style, color: HTMLColor?)
+    case width(Width)
+    case style(Style)
+    case color(HTMLColor)
+    case radius(Radius)
+    case global(Global)
+    case none
     
+    public enum Width: Sendable {
+        case length(Length)
+        case keyword(Keyword)
+        
+        public enum Keyword: String, Sendable {
+            case thin, medium, thick
+        }
+    }
+    
+    public enum Style: String, Sendable {
+        case none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset
+    }
+    
+    public enum Radius: Sendable {
+        case all(Length)
+        case topLeft(Length)
+        case topRight(Length)
+        case bottomRight(Length)
+        case bottomLeft(Length)
+        case custom(topLeft: Length, topRight: Length, bottomRight: Length, bottomLeft: Length)
+    }
+    
+    public enum Global: String, Sendable {
+        case inherit, initial, revert, revertLayer = "revert-layer", unset
+    }
 }
 
-extension HTMLBorder {
-    public static func all(width: Length, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
+extension Border {
+    public static func radius(_ length: Length) -> Border {
+        .radius(.all(length))
+    }
+}
+
+extension Border.Width {
+    public static func radius(_ length: Length) -> Border {
+        .radius(.all(length))
+    }
+}
+
+extension Border: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .all(let width, let style, let color):
+            return "\(width) \(style.rawValue) \(color?.description ?? "")"
+        case .top(let width, let style, let color):
+            return "border-top: \(width) \(style.rawValue) \(color?.description ?? "")"
+        case .right(let width, let style, let color):
+            return "border-right: \(width) \(style.rawValue) \(color?.description ?? "")"
+        case .bottom(let width, let style, let color):
+            return "border-bottom: \(width) \(style.rawValue) \(color?.description ?? "")"
+        case .left(let width, let style, let color):
+            return "border-left: \(width) \(style.rawValue) \(color?.description ?? "")"
+        case .width(let width):
+            return "border-width: \(width)"
+        case .style(let style):
+            return "border-style: \(style.rawValue)"
+        case .color(let color):
+            return "border-color: \(color.description)"
+        case .radius(let radius):
+            return "border-radius: \(radius)"
+        case .global(let global):
+            return global.rawValue
+        case .none:
+            return "none"
+        }
+    }
+}
+
+extension Border.Width: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .length(let length):
+            return length.description
+        case .keyword(let keyword):
+            return keyword.rawValue
+        }
+    }
+}
+
+extension Border.Radius: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .all(let length):
+            return length.description
+        case .topLeft(let length):
+            return "\(length) 0 0 0"
+        case .topRight(let length):
+            return "0 \(length) 0 0"
+        case .bottomRight(let length):
+            return "0 0 \(length) 0"
+        case .bottomLeft(let length):
+            return "0 0 0 \(length)"
+        case .custom(let topLeft, let topRight, let bottomRight, let bottomLeft):
+            return "\(topLeft) \(topRight) \(bottomRight) \(bottomLeft)"
+        }
+    }
+}
+
+extension Border {
+    public static let inherit: Self = .global(.inherit)
+    public static let initial: Self = .global(.initial)
+    public static let revert: Self = .global(.revert)
+    public static let revertLayer: Self = .global(.revertLayer)
+    public static let unset: Self = .global(.unset)
+}
+
+
+extension Border {
+    public static func all(width: Length, style: Style, color: HTMLColor?)-> Self {
         .all(width: .length(width), style: style, color: color)
     }
-
-    public static func top(width: Length, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
+    
+    public static func top(width: Length, style: Style, color: HTMLColor?)-> Self {
         .top(width: .length(width), style: style, color: color)
     }
-
-    public static func right(width: Length, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
+    
+    public static func right(width: Length, style: Style, color: HTMLColor?)-> Self {
         .right(width: .length(width), style: style, color: color)
     }
-
-    public static func bottom(width: Length, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
+    
+    public static func bottom(width: Length, style: Style, color: HTMLColor?)-> Self {
         .bottom(width: .length(width), style: style, color: color)
-    }
-
-    public static func left(width: Length, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        .left(width: .length(width), style: style, color: color)
-    }
-}
-
-extension HTMLBorder: CustomStringConvertible {
-    public var description: String {
-        switch cssBorder {
-        case .all(let width, let style, _),
-             .top(let width, let style, _),
-             .right(let width, let style, _),
-             .bottom(let width, let style, _),
-             .left(let width, let style, _):
-            let colorDesc = htmlColor?.description ?? ""
-            return "\(width) \(style.rawValue) \(colorDesc)"
-        default:
-            return cssBorder.description
-        }
-    }
-}
-
-
-import Foundation
-
-extension HTML {
-    @discardableResult
-    public func border(_ border: HTMLBorder, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border", border.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderTop(_ border: HTMLBorder, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-top", border.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderRight(_ border: HTMLBorder, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-right", border.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderBottom(_ border: HTMLBorder, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-bottom", border.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderLeft(_ border: HTMLBorder, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-left", border.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderColor(_ color: HTMLColor, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-color", color.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderWidth(_ width: CSS.Border.Width, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderStyle(_ style: CSS.Border.Style, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-style", style.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderRadius(_ radius: CSS.Border.Radius, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-}
-
-// Convenience methods for common use cases
-extension HTML {
-    @discardableResult
-    public func border(width: Length, style: CSS.Border.Style, color: HTMLColor, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let border = HTMLBorder.all(width: width, style: style, color: color)
-        return self.border(border, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderTop(width: Length, style: CSS.Border.Style, color: HTMLColor, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let border = HTMLBorder.top(width: width, style: style, color: color)
-        return self.borderTop(border, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderRight(width: Length, style: CSS.Border.Style, color: HTMLColor, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let border = HTMLBorder.right(width: width, style: style, color: color)
-        return self.borderRight(border, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderBottom(width: Length, style: CSS.Border.Style, color: HTMLColor, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let border = HTMLBorder.bottom(width: width, style: style, color: color)
-        return self.borderBottom(border, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func borderLeft(width: Length, style: CSS.Border.Style, color: HTMLColor, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let border = HTMLBorder.left(width: width, style: style, color: color)
-        return self.borderLeft(border, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }

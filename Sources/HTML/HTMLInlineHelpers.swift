@@ -1198,28 +1198,62 @@ extension HTML {
 
 extension HTML {
     @discardableResult
-    public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+    public func border(_ border: Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         switch border {
         case .all(let width, let style, let color):
-            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+            let lightStyle = inlineStyle("border", "\(width) \(style.rawValue) \(color?.light.description ?? "")", pre: pre, pseudo: pseudo)
+            if let darkColor = color?.dark {
+                return lightStyle.inlineStyle("border", "\(width) \(style.rawValue) \(darkColor.description)", media: .dark, pre: pre, pseudo: pseudo)
+            }
+            return lightStyle
+
         case .top(let width, let style, let color):
-            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+            let lightStyle = inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.light.description ?? "")", pre: pre, pseudo: pseudo)
+            if let darkColor = color?.dark {
+                return lightStyle.inlineStyle("border-top", "\(width) \(style.rawValue) \(darkColor.description)", media: .dark, pre: pre, pseudo: pseudo)
+            }
+            return lightStyle
+
         case .right(let width, let style, let color):
-            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+            let lightStyle = inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.light.description ?? "")", pre: pre, pseudo: pseudo)
+            if let darkColor = color?.dark {
+                return lightStyle.inlineStyle("border-right", "\(width) \(style.rawValue) \(darkColor.description)", media: .dark, pre: pre, pseudo: pseudo)
+            }
+            return lightStyle
+
         case .bottom(let width, let style, let color):
-            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+            let lightStyle = inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.light.description ?? "")", pre: pre, pseudo: pseudo)
+            if let darkColor = color?.dark {
+                return lightStyle.inlineStyle("border-bottom", "\(width) \(style.rawValue) \(darkColor.description)", media: .dark, pre: pre, pseudo: pseudo)
+            }
+            return lightStyle
+
         case .left(let width, let style, let color):
-            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+            let lightStyle = inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.light.description ?? "")", pre: pre, pseudo: pseudo)
+            if let darkColor = color?.dark {
+                return lightStyle.inlineStyle("border-left", "\(width) \(style.rawValue) \(darkColor.description)", media: .dark, pre: pre, pseudo: pseudo)
+            }
+            return lightStyle
+
         case .width(let width):
             return inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+
         case .style(let style):
             return inlineStyle("border-style", style.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+
         case .color(let color):
-            return inlineStyle("border-color", color.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            let lightStyle = inlineStyle("border-color", color.light.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+            if let darkColor = color.dark {
+                return lightStyle.inlineStyle("border-color", darkColor.description, media: .dark, pre: pre, pseudo: pseudo)
+            }
+            return lightStyle
+
         case .radius(let radius):
             return inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+
         case .global(let global):
             return inlineStyle("border", global.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+
         case .none:
             return inlineStyle("border", "none", media: mediaQuery, pre: pre, pseudo: pseudo)
         }
@@ -1231,7 +1265,7 @@ extension HTML {
     @HTMLBuilder
     public func border(
         width: CSS.Length?,
-        style: CSS.Border.Style = .solid,
+        style: Border.Style = .solid,
         color: HTMLColor?,
         media mediaQuery: MediaQuery? = nil,
         pre: String? = nil,

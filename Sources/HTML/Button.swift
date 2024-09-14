@@ -219,7 +219,7 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
             vertical: style.verticalPadding,
             horizontal: style.horizontalPadding
         )
-        .borderRadius(.all(style.cornerRadius))
+        .border(.radius(.all(style.cornerRadius)))
         .display(.flex)
         .alignItems(.center)
         .textDecoration(.none)
