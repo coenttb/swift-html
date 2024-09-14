@@ -18,23 +18,73 @@ public struct HTMLBorder {
     }
 
     public static func all(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        HTMLBorder(cssBorder: .all(width: width, style: style, color: nil), htmlColor: color)
+        var lightBorder: CSS.Border?
+        var darkBorder: CSS.Border?
+
+        if let color = color {
+            lightBorder = .all(width: width, style: style, color: color.light)
+            if let darkColor = color.dark {
+                darkBorder = .all(width: width, style: style, color: darkColor)
+            }
+        }
+
+        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
     }
 
     public static func top(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        HTMLBorder(cssBorder: .top(width: width, style: style, color: nil), htmlColor: color)
+        var lightBorder: CSS.Border?
+        var darkBorder: CSS.Border?
+
+        if let color = color {
+            lightBorder = .top(width: width, style: style, color: color.light)
+            if let darkColor = color.dark {
+                darkBorder = .top(width: width, style: style, color: darkColor)
+            }
+        }
+
+        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
     }
 
     public static func right(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        HTMLBorder(cssBorder: .right(width: width, style: style, color: nil), htmlColor: color)
+        var lightBorder: CSS.Border?
+        var darkBorder: CSS.Border?
+
+        if let color = color {
+            lightBorder = .right(width: width, style: style, color: color.light)
+            if let darkColor = color.dark {
+                darkBorder = .right(width: width, style: style, color: darkColor)
+            }
+        }
+
+        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
     }
 
     public static func bottom(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        HTMLBorder(cssBorder: .bottom(width: width, style: style, color: nil), htmlColor: color)
+        var lightBorder: CSS.Border?
+        var darkBorder: CSS.Border?
+
+        if let color = color {
+            lightBorder = .bottom(width: width, style: style, color: color.light)
+            if let darkColor = color.dark {
+                darkBorder = .bottom(width: width, style: style, color: darkColor)
+            }
+        }
+
+        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
     }
 
     public static func left(width: CSS.Border.Width, style: CSS.Border.Style, color: HTMLColor?) -> HTMLBorder {
-        HTMLBorder(cssBorder: .left(width: width, style: style, color: nil), htmlColor: color)
+        var lightBorder: CSS.Border?
+        var darkBorder: CSS.Border?
+
+        if let color = color {
+            lightBorder = .left(width: width, style: style, color: color.light)
+            if let darkColor = color.dark {
+                darkBorder = .left(width: width, style: style, color: darkColor)
+            }
+        }
+
+        return HTMLBorder(lightBorder: lightBorder, darkBorder: darkBorder)
     }
 
     public static func width(_ width: CSS.Border.Width) -> HTMLBorder {
