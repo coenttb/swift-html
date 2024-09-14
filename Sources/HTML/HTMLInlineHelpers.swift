@@ -2,16 +2,34 @@ import Foundation
 import PointFreeHtml
 
 extension HTML {
+    
     @discardableResult
-    public func backgroundColor(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("background-color", value, media: mediaQuery, pre: pre, pseudo: pseudo)
+    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        let lightStyle = inlineStyle("background-color", color?.light.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        
+        if let darkColor = color?.dark {
+            return lightStyle.inlineStyle("background-color", darkColor.description, media: .dark, pre: pre, pseudo: pseudo)
+        } else {
+            return lightStyle
+        }
+    }
+    
+    @discardableResult
+    public func background(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        let lightStyle = inlineStyle("background", color?.light.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        
+        if let darkColor = color?.dark {
+            return lightStyle.inlineStyle("background", darkColor.description, media: .dark, pre: pre, pseudo: pseudo)
+        } else {
+            return lightStyle
+        }
     }
 
     @discardableResult
     public func transition(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("transition", value, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
-
+    
     @discardableResult
     public func opacity(_ value: String?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("opacity", value, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -1264,17 +1282,7 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @discardableResult
-    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("background-color", color?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func background(_ color: HTMLColor?, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("background", color?.description, pre: pre, pseudo: pseudo)
-    }
-}
+
 
 extension HTML {
     @discardableResult
@@ -1307,7 +1315,6 @@ public struct TextShadow {
         self.color = color
     }
 }
-
 
 public struct BorderSpacing {
     let horizontal: CSS.Length
