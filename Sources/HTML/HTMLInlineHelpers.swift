@@ -984,29 +984,7 @@ extension HTML {
     public func alignContent(_ value: AlignContent?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("align-content", value?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
-    
-    // Flex Container Properties
-    @discardableResult
-    public func flexContainer(_ container: FlexContainer, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        self
-            .display(.flex, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .flexDirection(container.direction, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .flexWrap(container.wrap, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .justifyContent(container.justifyContent, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .alignItems(container.alignItems, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .alignContent(container.alignContent, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
-    // Flex Item Properties
-    @discardableResult
-    public func flexItem(_ item: FlexItem, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        self
-            .flexGrow(item.grow, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .flexShrink(item.shrink, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .flexBasis(item.basis, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .alignSelf(item.alignSelf, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
+
     
     
     @discardableResult
@@ -1029,6 +1007,95 @@ extension HTML {
         inlineStyle("align-self", value?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
+
+
+
+
+extension HTML {
+    func flexItem(
+        grow: String? = nil,
+        shrink: String? = nil,
+        basis: String? = nil,
+        media: MediaQuery? = nil
+    ) -> some HTML {
+        self
+            .inlineStyle("flex-grow", grow, media: media)
+            .inlineStyle("flex-shrink", shrink, media: media)
+            .inlineStyle("flex-basis", basis, media: media)
+    }
+}
+
+
+
+
+
+extension HTML {
+    
+    // Flex Container Properties
+    @discardableResult
+    public func flexContainer(
+        _ container: FlexContainer,
+        media mediaQuery: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self
+            .display(.flex, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .flexDirection(container.direction, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .flexWrap(container.wrap, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .justifyContent(container.justifyContent, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .alignItems(container.alignItems, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .alignContent(container.alignContent, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    
+    public func flexContainer(
+        direction: FlexDirection? = nil,
+        wrap: FlexWrap? = nil,
+        justification: JustifyContent? = nil,
+        itemAlignment: AlignItems? = nil,
+        rowGap: RowGap? = nil,
+        columnGap: CSS.Length? = nil,
+        media: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self
+            .display(.flex, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("flex-direction", direction?.rawValue, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("flex-wrap", wrap?.rawValue, media: media, pre: pre, pseudo: pseudo)
+            .justifyContent(justification, media: media, pre: pre, pseudo: pseudo)
+            .alignItems(itemAlignment, media: media, pre: pre, pseudo: pseudo)
+            .rowGap(rowGap, media: media, pre: pre, pseudo: pseudo)
+            .inlineStyle("column-gap", columnGap?.description, media: media, pre: pre, pseudo: pseudo)
+    }
+//    
+    public func flexItem(
+        grow: FlexGrow? = nil,
+        shrink: FlexShrink? = nil,
+        basis: FlexBasis? = nil,
+        media: MediaQuery? = nil
+    ) -> some HTML {
+        self
+            .inlineStyle("flex-grow", grow.map(String.init), media: media)
+            .inlineStyle("flex-shrink", shrink.map(String.init), media: media)
+            .inlineStyle("flex-basis", basis?.description, media: media)
+    }
+    
+    // Flex Item Properties
+    @discardableResult
+    public func flexItem(_ item: FlexItem, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        self
+            .flexGrow(item.grow, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .flexShrink(item.shrink, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .flexBasis(item.basis, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .alignSelf(item.alignSelf, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+}
+
+
+
 
 extension HTML {
     @discardableResult
