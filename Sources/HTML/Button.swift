@@ -212,11 +212,9 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
 
             } else {
                 label
-                    .color(color.text)
             }
             
         }
-        .backgroundColor(color.background)
         .padding(
             vertical: style.verticalPadding,
             horizontal: style.horizontalPadding
@@ -227,22 +225,17 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
         .textDecoration(.none)
         .transition("background-color 0.3s")
         .backgroundColor(color.backgroundHover, pseudo: .hover)
+        .backgroundColor(color.background)
     }
 
     public struct Color {
-        public let icon: HTMLColor
-        public let text: HTMLColor
         public let background: HTMLColor
         public let backgroundHover: HTMLColor
 
         public init(
-            icon: HTMLColor,
-            text: HTMLColor,
             background: HTMLColor,
             backgroundHover: HTMLColor? = nil
         ) {
-            self.icon = icon
-            self.text = text
             self.background = background
             self.backgroundHover = backgroundHover ?? background
         }
@@ -270,8 +263,6 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
 extension StripeButton.Color {
     public static var `default`: StripeButton.Color {
         StripeButton.Color(
-            icon: .gray(0.3),
-            text: .gray(0.3),
             background: .gray(0.95),
             backgroundHover: .gray(0.9)
         )
