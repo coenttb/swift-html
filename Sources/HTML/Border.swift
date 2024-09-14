@@ -57,7 +57,7 @@ public struct HTMLBorder {
         HTMLBorder(cssBorder: .global(global))
     }
 
-    public static let none: HTMLBorder = HTMLBorder(cssBorder: .none)
+    
 }
 
 extension HTMLBorder {
