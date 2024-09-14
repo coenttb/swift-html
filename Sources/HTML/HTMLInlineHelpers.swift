@@ -1232,15 +1232,32 @@ extension HTML {
     public func border(
         width: CSS.Length?,
         style: CSS.Border.Style = .solid,
-        color: HTMLColor,
+        color: HTMLColor?,
         media mediaQuery: MediaQuery? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
-        if let width {
-            self
-                .border(.all(width: .length(width), style: style, color: color.light), media: mediaQuery, pre: pre, pseudo: pseudo)
-                .border(.all(width: .length(width), style: style, color: color.dark), media: .dark, pre: pre, pseudo: pseudo)
+
+        if let width, let color {
+            let lightStyle = inlineStyle(
+                "border",
+                "\(width.description) \(style.rawValue) \(color.light.description)",
+                media: mediaQuery,
+                pre: pre,
+                pseudo: pseudo
+            )
+
+            if let darkColor = color.dark {
+                 lightStyle.inlineStyle(
+                    "border",
+                    "\(width.description) \(style.rawValue) \(darkColor.description)",
+                    media: .dark,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+            } else {
+                 lightStyle
+            }
         } else {
             self
         }
