@@ -1,171 +1,271 @@
+////
+////  HTMLColor.swift
+////
+////
+////  Created by Point-Free, Inc
+////
 //
-//  File.swift
-//  swift-html
+//public struct HTMLColor: Sendable {
+//    public var rawValue: String
+//    public var darkValue: String?
+//    
+//    public init(rawValue: String, darkValue: String? = nil) {
+//        self.rawValue = rawValue
+//        self.darkValue = darkValue
+//    }
+//}
 //
-//  Created by Coen ten Thije Boonkkamp on 13/09/2024.
+//extension HTMLColor: CustomStringConvertible {
+//    public var description: String {
+//        if let darkValue = darkValue {
+//            return "@media (prefers-color-scheme: light) { \(rawValue) } @media (prefers-color-scheme: dark) { \(darkValue) }"
+//        } else {
+//            return rawValue
+//        }
+//    }
+//}
 //
+//extension HTMLColor {
+//    public func dark(_ other: Self) -> Self { Self(rawValue: rawValue, darkValue: other.rawValue) }
+//    public func light(_ other: Self) -> Self { Self(rawValue: other.rawValue, darkValue: darkValue) }
+//}
+//
+//extension HTMLColor {
+//    public static func gray(_ value: UInt8) -> Self {
+//        var hex = String(value, radix: 16)
+//        if hex.count == 1 { hex.insert("0", at: hex.startIndex) }
+//        var darkHex = String(255 - value, radix: 16)
+//        if darkHex.count == 1 { darkHex.insert("0", at: darkHex.startIndex) }
+//        return Self(rawValue: "#\(hex)\(hex)\(hex)")
+//            .dark(Self(rawValue: "#\(darkHex)\(darkHex)\(darkHex)"))
+//    }
+//    @_disfavoredOverload
+//    public static func gray(_ value: Double) -> Self {
+//        gray(UInt8(255 * value))
+//    }
+//}
+
 
 import Foundation
-import PointFreeHtml
 
-extension HTMLColor {
-    public static let gray100 = Self(rawValue: "#1a1a1a", darkValue: "#f7f7f7")
-    public static let gray150 = Self(rawValue: "#2a2a2a", darkValue: "#f0f0f0")
-    public static let gray200 = Self(rawValue: "#3a3a3a", darkValue: "#e0e0e0")
-    public static let gray250 = Self(rawValue: "#4a4a4a", darkValue: "#d0d0d0")
-    public static let gray300 = Self(rawValue: "#5a5a5a", darkValue: "#c0c0c0")
-    public static let gray350 = Self(rawValue: "#666666", darkValue: "#a0a0a0")
-    public static let gray400 = Self(rawValue: "#707070", darkValue: "#909090")
-    public static let gray450 = Self(rawValue: "#808080", darkValue: "#808080")
-    public static let gray500 = Self(rawValue: "#888888", darkValue: "#707070")
-    public static let gray550 = Self(rawValue: "#8f8f8f", darkValue: "#606060")
-    public static let gray600 = Self(rawValue: "#999999", darkValue: "#606060")
-    public static let gray650 = Self(rawValue: "#aaaaaa", darkValue: "#505050")
-    public static let gray700 = Self(rawValue: "#bbbbbb", darkValue: "#404040")
-    public static let gray750 = Self(rawValue: "#c5c5c5", darkValue: "#303030")
-    public static let gray800 = Self(rawValue: "#d0d0d0", darkValue: "#303030")
-    public static let gray850 = Self(rawValue: "#e0e0e0", darkValue: "#202020")
-    public static let gray900 = Self(rawValue: "#f5f5f5", darkValue: "#101010")
+public struct HTMLColor: Sendable {
+    public let light: CSS.Color
+    public let dark: CSS.Color?
+    
+    public init(light: CSS.Color, dark: CSS.Color? = nil) {
+        self.light = light
+        self.dark = dark
+    }
+}
+
+extension HTMLColor: CustomStringConvertible {
+    public var description: String {
+        if let dark = dark {
+            return "@media (prefers-color-scheme: light) { \(light) } @media (prefers-color-scheme: dark) { \(dark) }"
+        } else {
+            return light.description
+        }
+    }
 }
 
 extension HTMLColor {
-    public static let blue100 = Self(rawValue: "#001a33", darkValue: "#e6f3ff")
-    public static let blue150 = Self(rawValue: "#001f3f", darkValue: "#ccddee")
-    public static let blue200 = Self(rawValue: "#003366", darkValue: "#bbccdd")
-    public static let blue250 = Self(rawValue: "#004488", darkValue: "#99bbcc")
-    public static let blue300 = Self(rawValue: "#0055aa", darkValue: "#7799bb")
-    public static let blue350 = Self(rawValue: "#0066cc", darkValue: "#5588aa")
-    public static let blue400 = Self(rawValue: "#0077ee", darkValue: "#336699")
-    public static let blue450 = Self(rawValue: "#0088ff", darkValue: "#115588")
-    public static let blue500 = Self(rawValue: "#3399ff", darkValue: "#004477")
-    public static let blue550 = Self(rawValue: "#4d9cff", darkValue: "#004466")
-    public static let blue600 = Self(rawValue: "#66aaff", darkValue: "#003366")
-    public static let blue650 = Self(rawValue: "#99bbff", darkValue: "#002255")
-    public static let blue700 = Self(rawValue: "#b3ccff", darkValue: "#001144")
-    public static let blue750 = Self(rawValue: "#b3d9ff", darkValue: "#002244")
-    public static let blue800 = Self(rawValue: "#cce5ff", darkValue: "#001133")
-    public static let blue850 = Self(rawValue: "#e6f2ff", darkValue: "#001122")
-    public static let blue900 = Self(rawValue: "#f0f8ff", darkValue: "#001011")
+    public func dark(_ color: CSS.Color) -> Self {
+        HTMLColor(light: self.light, dark: color)
+    }
+    
+    public func light(_ color: CSS.Color) -> Self {
+        HTMLColor(light: color, dark: self.dark)
+    }
 }
 
 extension HTMLColor {
-    public static let green100 = Self(rawValue: "#002600", darkValue: "#e6ffe6")
-    public static let green150 = Self(rawValue: "#003300", darkValue: "#ccffcc")
-    public static let green200 = Self(rawValue: "#004400", darkValue: "#bbeebb")
-    public static let green250 = Self(rawValue: "#005500", darkValue: "#99dd99")
-    public static let green300 = Self(rawValue: "#006600", darkValue: "#77cc77")
-    public static let green350 = Self(rawValue: "#007700", darkValue: "#55bb55")
-    public static let green400 = Self(rawValue: "#009900", darkValue: "#33aa33")
-    public static let green450 = Self(rawValue: "#00b300", darkValue: "#229922")
-    public static let green500 = Self(rawValue: "#33cc33", darkValue: "#008800")
-    public static let green550 = Self(rawValue: "#4ddb4d", darkValue: "#006600")
-    public static let green600 = Self(rawValue: "#66d966", darkValue: "#007700")
-    public static let green650 = Self(rawValue: "#99e699", darkValue: "#006600")
-    public static let green700 = Self(rawValue: "#b3f0b3", darkValue: "#005500")
-    public static let green750 = Self(rawValue: "#bdeabf", darkValue: "#004400")
-    public static let green800 = Self(rawValue: "#ccf5cc", darkValue: "#004400")
-    public static let green850 = Self(rawValue: "#e6ffe6", darkValue: "#003300")
-    public static let green900 = Self(rawValue: "#f0fff0", darkValue: "#002200")
+    public static func gray(_ value: UInt8) -> Self {
+        let lightHex = String(format: "%02X", value)
+        let darkHex = String(format: "%02X", 255 - value)
+        return Self(light: .hex(lightHex + lightHex + lightHex))
+            .dark(.hex(darkHex + darkHex + darkHex))
+    }
+    
+    @_disfavoredOverload
+    public static func gray(_ value: Double) -> Self {
+        gray(UInt8(255 * value))
+    }
+}
+//
+//// Extension to CSS.Color for easy conversion to HTMLColor
+//extension HTMLColor {
+//    public var darkMode: HTMLColor {
+//        HTMLColor(light: self.dark)
+//    }
+//    
+//    public func dark(_ color: CSS.Color) -> HTMLColor {
+//        HTMLColor(light: self, dark: color)
+//    }
+//}
+
+
+    
+
+extension HTMLColor {
+    public static let gray100 = HTMLColor(light: .gray100, dark: .hex("#f7f7f7"))
+    public static let gray150 = HTMLColor(light: .gray150, dark: .hex("#f0f0f0"))
+    public static let gray200 = HTMLColor(light: .gray200, dark: .hex("#e0e0e0"))
+    public static let gray250 = HTMLColor(light: .gray250, dark: .hex("#d0d0d0"))
+    public static let gray300 = HTMLColor(light: .gray300, dark: .hex("#c0c0c0"))
+    public static let gray350 = HTMLColor(light: .gray350, dark: .hex("#a0a0a0"))
+    public static let gray400 = HTMLColor(light: .gray400, dark: .hex("#909090"))
+    public static let gray450 = HTMLColor(light: .gray450, dark: .hex("#808080"))
+    public static let gray500 = HTMLColor(light: .gray500, dark: .hex("#707070"))
+    public static let gray550 = HTMLColor(light: .gray550, dark: .hex("#606060"))
+    public static let gray600 = HTMLColor(light: .gray600, dark: .hex("#606060"))
+    public static let gray650 = HTMLColor(light: .gray650, dark: .hex("#505050"))
+    public static let gray700 = HTMLColor(light: .gray700, dark: .hex("#404040"))
+    public static let gray750 = HTMLColor(light: .gray750, dark: .hex("#303030"))
+    public static let gray800 = HTMLColor(light: .gray800, dark: .hex("#303030"))
+    public static let gray850 = HTMLColor(light: .gray850, dark: .hex("#202020"))
+    public static let gray900 = HTMLColor(light: .gray900, dark: .hex("#101010"))
+}
+
+
+
+extension HTMLColor {
+    public static let blue100 = Self(light: .blue100, dark: .hex("#e6f3ff"))
+    public static let blue150 = Self(light: .blue150, dark: .hex("#ccddee"))
+    public static let blue200 = Self(light: .blue200, dark: .hex("#bbccdd"))
+    public static let blue250 = Self(light: .blue250, dark: .hex("#99bbcc"))
+    public static let blue300 = Self(light: .blue300, dark: .hex("#7799bb"))
+    public static let blue350 = Self(light: .blue350, dark: .hex("#5588aa"))
+    public static let blue400 = Self(light: .blue400, dark: .hex("#336699"))
+    public static let blue450 = Self(light: .blue450, dark: .hex("#115588"))
+    public static let blue500 = Self(light: .blue500, dark: .hex("#004477"))
+    public static let blue550 = Self(light: .blue550, dark: .hex("#004466"))
+    public static let blue600 = Self(light: .blue600, dark: .hex("#003366"))
+    public static let blue650 = Self(light: .blue650, dark: .hex("#002255"))
+    public static let blue700 = Self(light: .blue700, dark: .hex("#001144"))
+    public static let blue750 = Self(light: .blue750, dark: .hex("#002244"))
+    public static let blue800 = Self(light: .blue800, dark: .hex("#001133"))
+    public static let blue850 = Self(light: .blue850, dark: .hex("#001122"))
+    public static let blue900 = Self(light: .blue900, dark: .hex("#001011"))
 }
 
 extension HTMLColor {
-    public static let purple100 = Self(rawValue: "#1a0026", darkValue: "#f0e6ff")
-    public static let purple150 = Self(rawValue: "#2a0033", darkValue: "#e6ccf5")
-    public static let purple200 = Self(rawValue: "#3b0044", darkValue: "#d9b3ea")
-    public static let purple250 = Self(rawValue: "#4c0055", darkValue: "#cc80e6")
-    public static let purple300 = Self(rawValue: "#5d0066", darkValue: "#b366d6")
-    public static let purple350 = Self(rawValue: "#6e0088", darkValue: "#a300cc")
-    public static let purple400 = Self(rawValue: "#7f0099", darkValue: "#8f00b3")
-    public static let purple450 = Self(rawValue: "#8f00b3", darkValue: "#7f0099")
-    public static let purple500 = Self(rawValue: "#a300cc", darkValue: "#6e0088")
-    public static let purple550 = Self(rawValue: "#a866d6", darkValue: "#5d0077")
-    public static let purple600 = Self(rawValue: "#b366e0", darkValue: "#5d0066")
-    public static let purple650 = Self(rawValue: "#cc80e6", darkValue: "#4c0055")
-    public static let purple700 = Self(rawValue: "#d9b3f0", darkValue: "#3b0044")
-    public static let purple750 = Self(rawValue: "#e0b3f0", darkValue: "#3b0033")
-    public static let purple800 = Self(rawValue: "#e6ccf5", darkValue: "#2a0033")
-    public static let purple850 = Self(rawValue: "#f2e6ff", darkValue: "#200022")
-    public static let purple900 = Self(rawValue: "#f9f0ff", darkValue: "#110011")
+    public static let green100 = Self(light: .green100, dark: .hex("#e6ffe6"))
+    public static let green150 = Self(light: .green150, dark: .hex("#ccffcc"))
+    public static let green200 = Self(light: .green200, dark: .hex("#bbeebb"))
+    public static let green250 = Self(light: .green250, dark: .hex("#99dd99"))
+    public static let green300 = Self(light: .green300, dark: .hex("#77cc77"))
+    public static let green350 = Self(light: .green350, dark: .hex("#55bb55"))
+    public static let green400 = Self(light: .green400, dark: .hex("#33aa33"))
+    public static let green450 = Self(light: .green450, dark: .hex("#229922"))
+    public static let green500 = Self(light: .green500, dark: .hex("#008800"))
+    public static let green550 = Self(light: .green550, dark: .hex("#006600"))
+    public static let green600 = Self(light: .green600, dark: .hex("#007700"))
+    public static let green650 = Self(light: .green650, dark: .hex("#006600"))
+    public static let green700 = Self(light: .green700, dark: .hex("#005500"))
+    public static let green750 = Self(light: .green750, dark: .hex("#004400"))
+    public static let green800 = Self(light: .green800, dark: .hex("#004400"))
+    public static let green850 = Self(light: .green850, dark: .hex("#003300"))
+    public static let green900 = Self(light: .green900, dark: .hex("#002200"))
 }
 
 extension HTMLColor {
-    public static let red100 = Self(rawValue: "#260000", darkValue: "#ffe6e6")
-    public static let red150 = Self(rawValue: "#330000", darkValue: "#ffcccc")
-    public static let red200 = Self(rawValue: "#440000", darkValue: "#ffb3b3")
-    public static let red250 = Self(rawValue: "#550000", darkValue: "#ff9999")
-    public static let red300 = Self(rawValue: "#660000", darkValue: "#ff8080")
-    public static let red350 = Self(rawValue: "#880000", darkValue: "#ff6666")
-    public static let red400 = Self(rawValue: "#990000", darkValue: "#ff4d4d")
-    public static let red450 = Self(rawValue: "#b30000", darkValue: "#ff3333")
-    public static let red500 = Self(rawValue: "#cc3333", darkValue: "#ff1a1a")
-    public static let red550 = Self(rawValue: "#dd6666", darkValue: "#cc0000")
-    public static let red600 = Self(rawValue: "#e06666", darkValue: "#ff0000")
-    public static let red650 = Self(rawValue: "#e69999", darkValue: "#dd0000")
-    public static let red700 = Self(rawValue: "#f0b3b3", darkValue: "#bb0000")
-    public static let red750 = Self(rawValue: "#f5b3b3", darkValue: "#aa0000")
-    public static let red800 = Self(rawValue: "#f5cccc", darkValue: "#990000")
-    public static let red850 = Self(rawValue: "#ffe6e6", darkValue: "#770000")
-    public static let red900 = Self(rawValue: "#fff0f0", darkValue: "#550000")
+    public static let purple100 = Self(light: .purple100, dark: .hex("#f0e6ff"))
+    public static let purple150 = Self(light: .purple150, dark: .hex("#e6ccf5"))
+    public static let purple200 = Self(light: .purple200, dark: .hex("#d9b3ea"))
+    public static let purple250 = Self(light: .purple250, dark: .hex("#cc80e6"))
+    public static let purple300 = Self(light: .purple300, dark: .hex("#b366d6"))
+    public static let purple350 = Self(light: .purple350, dark: .hex("#a300cc"))
+    public static let purple400 = Self(light: .purple400, dark: .hex("#8f00b3"))
+    public static let purple450 = Self(light: .purple450, dark: .hex("#7f0099"))
+    public static let purple500 = Self(light: .purple500, dark: .hex("#6e0088"))
+    public static let purple550 = Self(light: .purple550, dark: .hex("#5d0077"))
+    public static let purple600 = Self(light: .purple600, dark: .hex("#5d0066"))
+    public static let purple650 = Self(light: .purple650, dark: .hex("#4c0055"))
+    public static let purple700 = Self(light: .purple700, dark: .hex("#3b0044"))
+    public static let purple750 = Self(light: .purple750, dark: .hex("#3b0033"))
+    public static let purple800 = Self(light: .purple800, dark: .hex("#2a0033"))
+    public static let purple850 = Self(light: .purple850, dark: .hex("#200022"))
+    public static let purple900 = Self(light: .purple900, dark: .hex("#110011"))
 }
 
 extension HTMLColor {
-    public static let yellow100 = Self(rawValue: "#262600", darkValue: "#fffff2")
-    public static let yellow150 = Self(rawValue: "#333300", darkValue: "#ffffcc")
-    public static let yellow200 = Self(rawValue: "#444400", darkValue: "#ffffb3")
-    public static let yellow250 = Self(rawValue: "#555500", darkValue: "#ffff99")
-    public static let yellow300 = Self(rawValue: "#666600", darkValue: "#ffff80")
-    public static let yellow350 = Self(rawValue: "#808000", darkValue: "#ffff66")
-    public static let yellow400 = Self(rawValue: "#999900", darkValue: "#ffff4d")
-    public static let yellow450 = Self(rawValue: "#b3b300", darkValue: "#ffff33")
-    public static let yellow500 = Self(rawValue: "#cccc33", darkValue: "#ffff1a")
-    public static let yellow550 = Self(rawValue: "#dedd66", darkValue: "#d6d600")
-    public static let yellow600 = Self(rawValue: "#d6d666", darkValue: "#e6e600")
-    public static let yellow650 = Self(rawValue: "#e0e099", darkValue: "#cccc00")
-    public static let yellow700 = Self(rawValue: "#ebebcc", darkValue: "#b3b300")
-    public static let yellow750 = Self(rawValue: "#f0eebf", darkValue: "#b3b300")
-    public static let yellow800 = Self(rawValue: "#f5f5e0", darkValue: "#999900")
-    public static let yellow850 = Self(rawValue: "#ffffe6", darkValue: "#808000")
-    public static let yellow900 = Self(rawValue: "#fffff0", darkValue: "#666600")
+    public static let red100 = Self(light: .red100, dark: .hex("#ffe6e6"))
+    public static let red150 = Self(light: .red150, dark: .hex("#ffcccc"))
+    public static let red200 = Self(light: .red200, dark: .hex("#ffb3b3"))
+    public static let red250 = Self(light: .red250, dark: .hex("#ff9999"))
+    public static let red300 = Self(light: .red300, dark: .hex("#ff8080"))
+    public static let red350 = Self(light: .red350, dark: .hex("#ff6666"))
+    public static let red400 = Self(light: .red400, dark: .hex("#ff4d4d"))
+    public static let red450 = Self(light: .red450, dark: .hex("#ff3333"))
+    public static let red500 = Self(light: .red500, dark: .hex("#ff1a1a"))
+    public static let red550 = Self(light: .red550, dark: .hex("#cc0000"))
+    public static let red600 = Self(light: .red600, dark: .hex("#ff0000"))
+    public static let red650 = Self(light: .red650, dark: .hex("#dd0000"))
+    public static let red700 = Self(light: .red700, dark: .hex("#bb0000"))
+    public static let red750 = Self(light: .red750, dark: .hex("#aa0000"))
+    public static let red800 = Self(light: .red800, dark: .hex("#990000"))
+    public static let red850 = Self(light: .red850, dark: .hex("#770000"))
+    public static let red900 = Self(light: .red900, dark: .hex("#550000"))
 }
 
 extension HTMLColor {
-    public static let orange100 = Self(rawValue: "#261300", darkValue: "#fff4e6")
-    public static let orange150 = Self(rawValue: "#331a00", darkValue: "#ffe6cc")
-    public static let orange200 = Self(rawValue: "#442200", darkValue: "#ffd9b3")
-    public static let orange250 = Self(rawValue: "#553300", darkValue: "#ffcc99")
-    public static let orange300 = Self(rawValue: "#663300", darkValue: "#ffbf80")
-    public static let orange350 = Self(rawValue: "#884400", darkValue: "#ffb366")
-    public static let orange400 = Self(rawValue: "#994d00", darkValue: "#ffa64d")
-    public static let orange450 = Self(rawValue: "#b35900", darkValue: "#ff9933")
-    public static let orange500 = Self(rawValue: "#cc6600", darkValue: "#ff8c1a")
-    public static let orange550 = Self(rawValue: "#e68a4d", darkValue: "#a64d00")
-    public static let orange600 = Self(rawValue: "#e67333", darkValue: "#ff8000")
-    public static let orange650 = Self(rawValue: "#f29466", darkValue: "#cc6600")
-    public static let orange700 = Self(rawValue: "#f5a366", darkValue: "#b35900")
-    public static let orange750 = Self(rawValue: "#f7c299", darkValue: "#773300")
-    public static let orange800 = Self(rawValue: "#f9d1cc", darkValue: "#884400")
-    public static let orange850 = Self(rawValue: "#fde8d9", darkValue: "#663300")
-    public static let orange900 = Self(rawValue: "#fff4e6", darkValue: "#553300")
+    public static let yellow100 = Self(light: .yellow100, dark: .hex("#fffff2"))
+    public static let yellow150 = Self(light: .yellow150, dark: .hex("#ffffcc"))
+    public static let yellow200 = Self(light: .yellow200, dark: .hex("#ffffb3"))
+    public static let yellow250 = Self(light: .yellow250, dark: .hex("#ffff99"))
+    public static let yellow300 = Self(light: .yellow300, dark: .hex("#ffff80"))
+    public static let yellow350 = Self(light: .yellow350, dark: .hex("#ffff66"))
+    public static let yellow400 = Self(light: .yellow400, dark: .hex("#ffff4d"))
+    public static let yellow450 = Self(light: .yellow450, dark: .hex("#ffff33"))
+    public static let yellow500 = Self(light: .yellow500, dark: .hex("#ffff1a"))
+    public static let yellow550 = Self(light: .yellow550, dark: .hex("#d6d600"))
+    public static let yellow600 = Self(light: .yellow600, dark: .hex("#e6e600"))
+    public static let yellow650 = Self(light: .yellow650, dark: .hex("#cccc00"))
+    public static let yellow700 = Self(light: .yellow700, dark: .hex("#b3b300"))
+    public static let yellow750 = Self(light: .yellow750, dark: .hex("#b3b300"))
+    public static let yellow800 = Self(light: .yellow800, dark: .hex("#999900"))
+    public static let yellow850 = Self(light: .yellow850, dark: .hex("#808000"))
+    public static let yellow900 = Self(light: .yellow900, dark: .hex("#666600"))
 }
 
 extension HTMLColor {
-    public static let teal100 = Self(rawValue: "#001a1a", darkValue: "#e6ffff")
-    public static let teal150 = Self(rawValue: "#003333", darkValue: "#ccffeb")
-    public static let teal200 = Self(rawValue: "#004444", darkValue: "#bbffe6")
-    public static let teal250 = Self(rawValue: "#005555", darkValue: "#aaffdd")
-    public static let teal300 = Self(rawValue: "#006666", darkValue: "#88ffd1")
-    public static let teal350 = Self(rawValue: "#007777", darkValue: "#66ffc4")
-    public static let teal400 = Self(rawValue: "#008888", darkValue: "#33ffb8")
-    public static let teal450 = Self(rawValue: "#009999", darkValue: "#00ffaa")
-    public static let teal500 = Self(rawValue: "#33aaaa", darkValue: "#00e699")
-    public static let teal550 = Self(rawValue: "#4dbfbf", darkValue: "#007777")
-    public static let teal600 = Self(rawValue: "#66bfbf", darkValue: "#00cc88")
-    public static let teal650 = Self(rawValue: "#99cccc", darkValue: "#00b377")
-    public static let teal700 = Self(rawValue: "#b3d6d6", darkValue: "#009966")
-    public static let teal750 = Self(rawValue: "#b3e0e0", darkValue: "#005544")
-    public static let teal800 = Self(rawValue: "#cce5e5", darkValue: "#008855")
-    public static let teal850 = Self(rawValue: "#e6f2f2", darkValue: "#007744")
-    public static let teal900 = Self(rawValue: "#f0f8f8", darkValue: "#006633")
+    public static let orange100 = Self(light: .orange100, dark: .hex("#fff4e6"))
+    public static let orange150 = Self(light: .orange150, dark: .hex("#ffe6cc"))
+    public static let orange200 = Self(light: .orange200, dark: .hex("#ffd9b3"))
+    public static let orange250 = Self(light: .orange250, dark: .hex("#ffcc99"))
+    public static let orange300 = Self(light: .orange300, dark: .hex("#ffbf80"))
+    public static let orange350 = Self(light: .orange350, dark: .hex("#ffb366"))
+    public static let orange400 = Self(light: .orange400, dark: .hex("#ffa64d"))
+    public static let orange450 = Self(light: .orange450, dark: .hex("#ff9933"))
+    public static let orange500 = Self(light: .orange500, dark: .hex("#ff8c1a"))
+    public static let orange550 = Self(light: .orange550, dark: .hex("#a64d00"))
+    public static let orange600 = Self(light: .orange600, dark: .hex("#ff8000"))
+    public static let orange650 = Self(light: .orange650, dark: .hex("#cc6600"))
+    public static let orange700 = Self(light: .orange700, dark: .hex("#b35900"))
+    public static let orange750 = Self(light: .orange750, dark: .hex("#773300"))
+    public static let orange800 = Self(light: .orange800, dark: .hex("#884400"))
+    public static let orange850 = Self(light: .orange850, dark: .hex("#663300"))
+    public static let orange900 = Self(light: .orange900, dark: .hex("#553300"))
+}
+
+extension HTMLColor {
+    public static let teal100 = Self(light: .teal100, dark: .hex("#e6ffff"))
+    public static let teal150 = Self(light: .teal150, dark: .hex("#ccffeb"))
+    public static let teal200 = Self(light: .teal200, dark: .hex("#bbffe6"))
+    public static let teal250 = Self(light: .teal250, dark: .hex("#aaffdd"))
+    public static let teal300 = Self(light: .teal300, dark: .hex("#88ffd1"))
+    public static let teal350 = Self(light: .teal350, dark: .hex("#66ffc4"))
+    public static let teal400 = Self(light: .teal400, dark: .hex("#33ffb8"))
+    public static let teal450 = Self(light: .teal450, dark: .hex("#00ffaa"))
+    public static let teal500 = Self(light: .teal500, dark: .hex("#00e699"))
+    public static let teal550 = Self(light: .teal550, dark: .hex("#007777"))
+    public static let teal600 = Self(light: .teal600, dark: .hex("#00cc88"))
+    public static let teal650 = Self(light: .teal650, dark: .hex("#00b377"))
+    public static let teal700 = Self(light: .teal700, dark: .hex("#009966"))
+    public static let teal750 = Self(light: .teal750, dark: .hex("#005544"))
+    public static let teal800 = Self(light: .teal800, dark: .hex("#008855"))
+    public static let teal850 = Self(light: .teal850, dark: .hex("#007744"))
+    public static let teal900 = Self(light: .teal900, dark: .hex("#006633"))
 }
 
 extension HTMLColor {
@@ -189,50 +289,50 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
-    public static let pink100 = Self(rawValue: "#260013", darkValue: "#ffe6f0")
-    public static let pink150 = Self(rawValue: "#33001a", darkValue: "#ffe6f2")
-    public static let pink200 = Self(rawValue: "#440022", darkValue: "#ffccde")
-    public static let pink250 = Self(rawValue: "#55002b", darkValue: "#ff99cc")
-    public static let pink300 = Self(rawValue: "#660033", darkValue: "#ff66b3")
-    public static let pink350 = Self(rawValue: "#88003d", darkValue: "#ff4da6")
-    public static let pink400 = Self(rawValue: "#990047", darkValue: "#ff3399")
-    public static let pink450 = Self(rawValue: "#b30052", darkValue: "#ff1a80")
-    public static let pink500 = Self(rawValue: "#cc3366", darkValue: "#ff0066")
-    public static let pink550 = Self(rawValue: "#e66699", darkValue: "#cc0044")
-    public static let pink600 = Self(rawValue: "#e06699", darkValue: "#e6005c")
-    public static let pink650 = Self(rawValue: "#e699b3", darkValue: "#cc0052")
-    public static let pink700 = Self(rawValue: "#f0b3cc", darkValue: "#b30047")
-    public static let pink750 = Self(rawValue: "#f0aacc", darkValue: "#aa0044")
-    public static let pink800 = Self(rawValue: "#f5cce0", darkValue: "#99003d")
-    public static let pink850 = Self(rawValue: "#f9e6f2", darkValue: "#770033")
-    public static let pink900 = Self(rawValue: "#fceff5", darkValue: "#550029")
+    public static let pink100 = Self(light: .pink100, dark: .hex("#ffe6f0"))
+    public static let pink150 = Self(light: .pink150, dark: .hex("#ffe6f2"))
+    public static let pink200 = Self(light: .pink200, dark: .hex("#ffccde"))
+    public static let pink250 = Self(light: .pink250, dark: .hex("#ff99cc"))
+    public static let pink300 = Self(light: .pink300, dark: .hex("#ff66b3"))
+    public static let pink350 = Self(light: .pink350, dark: .hex("#ff4da6"))
+    public static let pink400 = Self(light: .pink400, dark: .hex("#ff3399"))
+    public static let pink450 = Self(light: .pink450, dark: .hex("#ff1a80"))
+    public static let pink500 = Self(light: .pink500, dark: .hex("#ff0066"))
+    public static let pink550 = Self(light: .pink550, dark: .hex("#cc0044"))
+    public static let pink600 = Self(light: .pink600, dark: .hex("#e6005c"))
+    public static let pink650 = Self(light: .pink650, dark: .hex("#cc0052"))
+    public static let pink700 = Self(light: .pink700, dark: .hex("#b30047"))
+    public static let pink750 = Self(light: .pink750, dark: .hex("#aa0044"))
+    public static let pink800 = Self(light: .pink800, dark: .hex("#99003d"))
+    public static let pink850 = Self(light: .pink850, dark: .hex("#770033"))
+    public static let pink900 = Self(light: .pink900, dark: .hex("#550029"))
 }
 
 extension HTMLColor {
-    public static let brown100 = Self(rawValue: "#261300", darkValue: "#f7e6d9")
-    public static let brown150 = Self(rawValue: "#331a00", darkValue: "#ffebcc")
-    public static let brown200 = Self(rawValue: "#442200", darkValue: "#ffddaa")
-    public static let brown250 = Self(rawValue: "#553300", darkValue: "#ffcc88")
-    public static let brown300 = Self(rawValue: "#663300", darkValue: "#ffbb66")
-    public static let brown350 = Self(rawValue: "#884400", darkValue: "#ffaa44")
-    public static let brown400 = Self(rawValue: "#994d00", darkValue: "#ff9933")
-    public static let brown450 = Self(rawValue: "#b35900", darkValue: "#ff8822")
-    public static let brown500 = Self(rawValue: "#cc6600", darkValue: "#ff7700")
-    public static let brown550 = Self(rawValue: "#e6884d", darkValue: "#b34d00")
-    public static let brown600 = Self(rawValue: "#e67333", darkValue: "#e66a00")
-    public static let brown650 = Self(rawValue: "#f0b366", darkValue: "#cc5e00")
-    public static let brown700 = Self(rawValue: "#f5cc99", darkValue: "#b35200")
-    public static let brown750 = Self(rawValue: "#f5d1b3", darkValue: "#aa5500")
-    public static let brown800 = Self(rawValue: "#f7e0cc", darkValue: "#994700")
-    public static let brown850 = Self(rawValue: "#fdeee6", darkValue: "#773b00")
-    public static let brown900 = Self(rawValue: "#fef5f0", darkValue: "#553000")
+    public static let brown100 = Self(light: .brown100, dark: .hex("#f7e6d9"))
+    public static let brown150 = Self(light: .brown150, dark: .hex("#ffebcc"))
+    public static let brown200 = Self(light: .brown200, dark: .hex("#ffddaa"))
+    public static let brown250 = Self(light: .brown250, dark: .hex("#ffcc88"))
+    public static let brown300 = Self(light: .brown300, dark: .hex("#ffbb66"))
+    public static let brown350 = Self(light: .brown350, dark: .hex("#ffaa44"))
+    public static let brown400 = Self(light: .brown400, dark: .hex("#ff9933"))
+    public static let brown450 = Self(light: .brown450, dark: .hex("#ff8822"))
+    public static let brown500 = Self(light: .brown500, dark: .hex("#ff7700"))
+    public static let brown550 = Self(light: .brown550, dark: .hex("#b34d00"))
+    public static let brown600 = Self(light: .brown600, dark: .hex("#e66a00"))
+    public static let brown650 = Self(light: .brown650, dark: .hex("#cc5e00"))
+    public static let brown700 = Self(light: .brown700, dark: .hex("#b35200"))
+    public static let brown750 = Self(light: .brown750, dark: .hex("#aa5500"))
+    public static let brown800 = Self(light: .brown800, dark: .hex("#994700"))
+    public static let brown850 = Self(light: .brown850, dark: .hex("#773b00"))
+    public static let brown900 = Self(light: .brown900, dark: .hex("#553000"))
 }
 
 extension HTMLColor {
-    public static let black = Self(rawValue: "#121212")
-    public static let offBlack = Self(rawValue: "#171717")
-    public static let white = Self(rawValue: "#fff")
-    public static let offWhite = Self(rawValue: "#fafafa")
+    public static let black = Self.init(light: .hex("#121212"))
+    public static let offBlack = Self.init(light: .hex("#171717"))
+    public static let white = Self.init(light: .hex("#fff"))
+    public static let offWhite = Self.init(light: .hex("#fafafa"))
     
     public static let cyan = Self.teal500
     public static let teal = Self.teal500
@@ -248,5 +348,5 @@ extension HTMLColor {
 }
 
 extension HTMLColor {
-    public static let currentColor = Self(rawValue: "currentColor")
+    public static let currentColor = Self.init(light: .currentColor, dark: .currentColor)
 }

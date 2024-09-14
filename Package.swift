@@ -4,20 +4,19 @@
 import PackageDescription
 
 extension String {
-    static let css: Self = "CSS"
     static let html: Self = "HTML"
     static let htmlCore: Self = "PointFreeHtml"
     static let markdown: Self = "HTML Markdown"
 }
 
 extension Target.Dependency {
-    static var css: Self { .target(name: .css) }
     static var htmlCore: Self { .target(name: .htmlCore) }
     static var html: Self { .target(name: .html) }
     static var markdown: Self { .target(name: .markdown) }
 }
 
 extension Target.Dependency {
+    static var css: Self { .product(name: "CSS", package: "swift-css") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
@@ -28,6 +27,7 @@ extension [Package.Dependency] {
     static var `default`: Self {
         [
             .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.2"),
+            .package(url: "https://github.com/coenttb/swift-css.git", branch: "main"),
             .package(url: "https://github.com/coenttb/swift-percent.git", branch: "main"),
             .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
             .package(url: "https://github.com/swiftlang/swift-markdown.git", from: "0.4.0"),
@@ -51,7 +51,6 @@ extension Package {
             products: [
                 [
                     .library(name: .html, targets: [.html, .markdown]),
-                    .library(name: .css, targets: [.css]),
                     .library(name: .htmlCore, targets: [.htmlCore]),
                     .library(name: .markdown, targets: [.markdown]),
                 ]
@@ -78,14 +77,6 @@ extension Package {
 
 let package = Package.html(
     targets: [
-        .init(
-            name: .css,
-            library: true,
-            dependencies: [
-                .htmlCore,
-                .percent
-            ]
-        ),
         .init(
             name: .html,
             library: true,

@@ -81,11 +81,11 @@ public struct Button<Label: HTML>: HTML {
         }
         .inlineStyle(
             "border",
-            (borderColorComputed?.rawValue).map { "\(style.border) \($0)" }
+            (borderColorComputed?.light).map { "\(style.border) \($0)" }
         )
         .inlineStyle(
             "border",
-            (borderColorComputed?.darkValue).map { "\(style.border) \($0)" },
+            (borderColorComputed?.dark).map { "\(style.border) \($0)" },
             media: .dark
         )
         .border(.radius(0.5.rem))

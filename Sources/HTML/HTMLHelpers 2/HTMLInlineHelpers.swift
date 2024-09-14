@@ -76,16 +76,7 @@ extension HTML {
     }
 }
 
-extension HTML {
-    public func color(
-        _ color: HTMLColor?,
-        pre: String? = nil,
-        pseudo: Pseudo? = nil
-    ) -> HTMLInlineStyle<Self> {
-        inlineStyle("color", color?.rawValue, media: nil, pre: pre, pseudo: pseudo)
-            .inlineStyle("color", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
-    }
-}
+
 extension HTML {
     @discardableResult
     public func overflow(_ value: CSS.Overflow?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -271,40 +262,7 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @discardableResult
-    public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        switch border {
-        case .all(let width, let style, let color):
-            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
-                .inlineStyle("border", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-        case .top(let width, let style, let color):
-            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
-                .inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-        case .right(let width, let style, let color):
-            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
-                .inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-        case .bottom(let width, let style, let color):
-            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
-                .inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-        case .left(let width, let style, let color):
-            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
-                .inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
-        case .width(let width):
-            return inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-        case .style(let style):
-            return inlineStyle("border-style", style.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
-        case .color(let color):
-            return inlineStyle("border-color", color.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-        case .radius(let radius):
-            return inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
-        case .global(let global):
-            return inlineStyle("border", global.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
-        case .none:
-            return inlineStyle("border", "none", media: mediaQuery, pre: pre, pseudo: pseudo)
-        }
-    }
-}
+
 
 extension HTML {
     @discardableResult
@@ -347,31 +305,7 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @discardableResult
-    @HTMLBuilder
-    public func border(
-        width: CSS.Length?,
-        style: CSS.Border.Style = .solid,
-        color: HTMLColor,
-        media mediaQuery: MediaQuery? = nil,
-        pre: String? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
-        if let width {
-            self.border(.all(width: .length(width), style: style, color: color), media: mediaQuery, pre: pre, pseudo: pseudo)
-        } else {
-            self
-        }
-    }
-}
 
-extension HTML {
-    @discardableResult
-    public func clipPath(_ clipPath: ClipPath) -> HTMLInlineStyle<Self> {
-        self.inlineStyle("clip-path", clipPath.cssValue)
-    }
-}
 
 
 extension HTML {
@@ -505,19 +439,7 @@ public enum FontStyle {
 }
 
 
-extension HTML {
-    @discardableResult
-    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("background-color", color?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .inlineStyle("background-color", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
-    }
-    
-    @discardableResult
-    public func background(_ color: HTMLColor?, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("background", color?.rawValue, pre: pre, pseudo: pseudo)
-            .inlineStyle("background", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
-    }
-}
+
 
 extension HTML {
     @discardableResult
@@ -783,11 +705,7 @@ extension HTML {
     
 
     
-    @discardableResult
-    public func textShadow(_ value: TextShadow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let shadowValue = "\(value.offsetX) \(value.offsetY) \(value.blurRadius) \(value.color.description)"
-        return inlineStyle("text-shadow", shadowValue, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
+    
     
     @discardableResult
     public func textOrientation(_ value: TextOrientation, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -1032,18 +950,6 @@ extension HTML {
 
 
 extension HTML {
-    // Flex Container Properties
-    @discardableResult
-    public func flexContainer(_ container: FlexContainer, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
-        self
-            .display(.flex, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .flexDirection(container.direction, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .flexWrap(container.wrap, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .justifyContent(container.justifyContent, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .alignItems(container.alignItems, media: mediaQuery, pre: pre, pseudo: pseudo)
-            .alignContent(container.alignContent, media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-    
     @discardableResult
     public func flexDirection(_ value: FlexDirection?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
         inlineStyle("flex-direction", value?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -1061,6 +967,18 @@ extension HTML {
         inlineStyle("align-content", value?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
+    // Flex Container Properties
+    @discardableResult
+    public func flexContainer(_ container: FlexContainer, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
+        self
+            .display(.flex, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .flexDirection(container.direction, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .flexWrap(container.wrap, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .justifyContent(container.justifyContent, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .alignItems(container.alignItems, media: mediaQuery, pre: pre, pseudo: pseudo)
+            .alignContent(container.alignContent, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
     // Flex Item Properties
     @discardableResult
     public func flexItem(_ item: FlexItem, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> some HTML {
@@ -1070,6 +988,8 @@ extension HTML {
             .flexBasis(item.basis, media: mediaQuery, pre: pre, pseudo: pseudo)
             .alignSelf(item.alignSelf, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
+    
+    
     
     @discardableResult
     public func flexGrow(_ value: FlexGrow?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -1147,3 +1067,254 @@ extension HTML {
 //        inlineStyle("flex", "\(grow.description) \(shrink.description) \(basis.description)", media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
 //}
+
+// HTML methods
+extension HTML {
+    @discardableResult
+    public func tableLayout(_ value: TableLayout, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("table-layout", value.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func borderCollapse(_ value: BorderCollapse, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("border-collapse", value.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+  
+    
+    @discardableResult
+    public func captionSide(_ value: CaptionSide, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("caption-side", value.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func emptyCells(_ value: EmptyCells, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("empty-cells", value.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}
+
+extension HTML {
+    @discardableResult
+    public func clipPath(_ clipPath: ClipPath) -> HTMLInlineStyle<Self> {
+        self.inlineStyle("clip-path", clipPath.description)
+    }
+}
+
+
+
+
+//extension HTML {
+//    public func color(
+//        _ color: HTMLColor?,
+//        pre: String? = nil,
+//        pseudo: Pseudo? = nil
+//    ) -> HTMLInlineStyle<Self> {
+//        inlineStyle("color", color?.rawValue, media: nil, pre: pre, pseudo: pseudo)
+//            .inlineStyle("color", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
+//    }
+//}
+//
+//extension HTML {
+//    @discardableResult
+//    public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        switch border {
+//        case .all(let width, let style, let color):
+//            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
+//                .inlineStyle("border", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
+//        case .top(let width, let style, let color):
+//            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
+//                .inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
+//        case .right(let width, let style, let color):
+//            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
+//                .inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
+//        case .bottom(let width, let style, let color):
+//            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
+//                .inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
+//        case .left(let width, let style, let color):
+//            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.rawValue ?? "")", pre: pre, pseudo: pseudo)
+//                .inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.darkValue ?? "")", media: .dark, pre: pre, pseudo: pseudo)
+//        case .width(let width):
+//            return inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//        case .style(let style):
+//            return inlineStyle("border-style", style.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+//        case .color(let color):
+//            return inlineStyle("border-color", color.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//        case .radius(let radius):
+//            return inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//        case .global(let global):
+//            return inlineStyle("border", global.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+//        case .none:
+//            return inlineStyle("border", "none", media: mediaQuery, pre: pre, pseudo: pseudo)
+//        }
+//    }
+//}
+//
+//extension HTML {
+//    @discardableResult
+//    @HTMLBuilder
+//    public func border(
+//        width: CSS.Length?,
+//        style: CSS.Border.Style = .solid,
+//        color: HTMLColor,
+//        media mediaQuery: MediaQuery? = nil,
+//        pre: String? = nil,
+//        pseudo: Pseudo? = nil
+//    ) -> some HTML {
+//        if let width {
+//            self.border(.all(width: .length(width), style: style, color: color), media: mediaQuery, pre: pre, pseudo: pseudo)
+//        } else {
+//            self
+//        }
+//    }
+//}
+//
+//extension HTML {
+//    @discardableResult
+//    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        inlineStyle("background-color", color?.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+//            .inlineStyle("background-color", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
+//    }
+//    
+//    @discardableResult
+//    public func background(_ color: HTMLColor?, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        inlineStyle("background", color?.rawValue, pre: pre, pseudo: pseudo)
+//            .inlineStyle("background", color?.darkValue, media: .dark, pre: pre, pseudo: pseudo)
+//    }
+//}
+//
+//extension HTML {
+//    @discardableResult
+//    public func textShadow(_ value: TextShadow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        let shadowValue = "\(value.offsetX) \(value.offsetY) \(value.blurRadius) \(value.color.description)"
+//        return inlineStyle("text-shadow", shadowValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
+//}
+//
+//
+//extension HTML {
+//    @discardableResult
+//    public func borderSpacing(_ value: BorderSpacing, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        let spacingValue = value.vertical != nil ? "\(value.horizontal) \(value.vertical!)" : value.horizontal.description
+//        return inlineStyle("border-spacing", spacingValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
+//}
+
+
+import Foundation
+
+extension HTML {
+    @discardableResult
+    public func color(
+        _ color: HTMLColor?,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> HTMLInlineStyle<Self> {
+        inlineStyle("color", color?.description, pre: pre, pseudo: pseudo)
+    }
+}
+
+extension HTML {
+    @discardableResult
+    public func border(_ border: CSS.Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        switch border {
+        case .all(let width, let style, let color):
+            return inlineStyle("border", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+        case .top(let width, let style, let color):
+            return inlineStyle("border-top", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+        case .right(let width, let style, let color):
+            return inlineStyle("border-right", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+        case .bottom(let width, let style, let color):
+            return inlineStyle("border-bottom", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+        case .left(let width, let style, let color):
+            return inlineStyle("border-left", "\(width) \(style.rawValue) \(color?.description ?? "")", pre: pre, pseudo: pseudo)
+        case .width(let width):
+            return inlineStyle("border-width", width.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .style(let style):
+            return inlineStyle("border-style", style.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .color(let color):
+            return inlineStyle("border-color", color.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .radius(let radius):
+            return inlineStyle("border-radius", radius.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .global(let global):
+            return inlineStyle("border", global.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        case .none:
+            return inlineStyle("border", "none", media: mediaQuery, pre: pre, pseudo: pseudo)
+        }
+    }
+}
+
+extension HTML {
+    @discardableResult
+    @HTMLBuilder
+    public func border(
+        width: CSS.Length?,
+        style: CSS.Border.Style = .solid,
+        color: HTMLColor,
+        media mediaQuery: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        if let width {
+            self
+                .border(.all(width: .length(width), style: style, color: color.light), media: mediaQuery, pre: pre, pseudo: pseudo)
+                .border(.all(width: .length(width), style: style, color: color.dark), media: mediaQuery, pre: pre, pseudo: pseudo)
+        } else {
+            self
+        }
+    }
+}
+
+extension HTML {
+    @discardableResult
+    public func backgroundColor(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("background-color", color?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+    
+    @discardableResult
+    public func background(_ color: HTMLColor?, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        inlineStyle("background", color?.description, pre: pre, pseudo: pseudo)
+    }
+}
+
+extension HTML {
+    @discardableResult
+    public func textShadow(_ value: TextShadow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        let shadowValue = "\(value.offsetX) \(value.offsetY) \(value.blurRadius) \(value.color.description)"
+        return inlineStyle("text-shadow", shadowValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}
+
+extension HTML {
+    @discardableResult
+    public func borderSpacing(_ value: BorderSpacing, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+        let spacingValue = value.vertical != nil ? "\(value.horizontal) \(value.vertical!)" : value.horizontal.description
+        return inlineStyle("border-spacing", spacingValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}
+
+// Assuming these structs need to be updated as well:
+
+public struct TextShadow {
+    let offsetX: CSS.Length
+    let offsetY: CSS.Length
+    let blurRadius: CSS.Length
+    let color: HTMLColor
+
+    public init(offsetX: CSS.Length, offsetY: CSS.Length, blurRadius: CSS.Length, color: HTMLColor) {
+        self.offsetX = offsetX
+        self.offsetY = offsetY
+        self.blurRadius = blurRadius
+        self.color = color
+    }
+}
+
+
+public struct BorderSpacing {
+    let horizontal: CSS.Length
+    let vertical: CSS.Length?
+
+    public init(horizontal: CSS.Length, vertical: CSS.Length? = nil) {
+        self.horizontal = horizontal
+        self.vertical = vertical
+    }
+}
