@@ -231,7 +231,7 @@ extension CSS.Color {
 extension CSS.Color {
     public static let black = Self.hex("121212")
     public static let offBlack = Self.hex("171717")
-    public static let white = Self.hex("fff")
+    public static let white = Self.hex("FFFFFF")
     public static let offWhite = Self.hex("fafafa")
     
     public static let cyan = Self.teal500
