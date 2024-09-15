@@ -1,4 +1,5 @@
 import Foundation
+import CSS
 import PointFreeHtml
 
 extension HTML {
@@ -1794,4 +1795,11 @@ extension HTML {
 //    public func willChange(_ properties: WillChange.Property..., media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        willChange(WillChange(properties), media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
+}
+
+
+extension HTML {
+    public func pageBreak(_ pageBreak: PageBreak) -> some HTML {
+        self.inlineStyle(pageBreak.description.0, pageBreak.description.1)
+    }
 }
