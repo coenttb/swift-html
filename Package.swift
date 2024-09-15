@@ -6,20 +6,17 @@ import PackageDescription
 extension String {
     static let html: Self = "HTML"
     static let htmlCore: Self = "PointFreeHtml"
-    static let markdown: Self = "HTML Markdown"
 }
 
 extension Target.Dependency {
     static var htmlCore: Self { .target(name: .htmlCore) }
     static var html: Self { .target(name: .html) }
-    static var markdown: Self { .target(name: .markdown) }
 }
 
 extension Target.Dependency {
     static var css: Self { .product(name: "CSS", package: "swift-css") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
-    static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
     static var percent: Self { .product(name: "Percent", package: "swift-percent") }
 }
 
@@ -30,7 +27,6 @@ extension [Package.Dependency] {
             .package(url: "https://github.com/coenttb/swift-css.git", branch: "main"),
             .package(url: "https://github.com/coenttb/swift-percent.git", branch: "main"),
             .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.3.5"),
-            .package(url: "https://github.com/swiftlang/swift-markdown.git", from: "0.4.0"),
         ]
     }
 }
@@ -55,9 +51,8 @@ extension Package {
               ],
             products: [
                 [
-                    .library(name: .html, targets: [.html, .markdown]),
+                    .library(name: .html, targets: [.html]),
                     .library(name: .htmlCore, targets: [.htmlCore]),
-                    .library(name: .markdown, targets: [.markdown]),
                 ]
             ].flatMap { $0
             },
@@ -96,16 +91,6 @@ let package = Package.html(
             dependencies: [
                 .dependencies,
                 .orderedCollections,
-            ]
-        ),
-        .init(
-            name: .markdown,
-            library: true,
-            dependencies: [
-                .dependencies,
-                .orderedCollections,
-                .html,
-                .swiftMarkdown,
             ]
         ),
     ]
