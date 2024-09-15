@@ -273,6 +273,14 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
                 horizontalPadding: 0.9.rem
             )
         }
+        
+        public static var tertiary:Self {
+            Style(
+                cornerRadius: 0.25.rem,
+                verticalPadding: 0.3.rem,
+                horizontalPadding: 0.4.rem
+            )
+        }
     }
 }
 
