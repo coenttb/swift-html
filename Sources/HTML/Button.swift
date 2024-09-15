@@ -255,8 +255,24 @@ public struct StripeButton<Label: HTML, Icon: HTML>: HTML {
             self.verticalPadding = verticalPadding
             self.horizontalPadding = horizontalPadding
         }
+        
+        public static var `default`: Self { primary }
 
-        public static var `default`:Self { Style() }
+        public static var primary:Self {
+            Style(
+                cornerRadius: 0.5.rem,
+                verticalPadding: 0.75.rem,
+                horizontalPadding: 1.rem
+            )
+        }
+        
+        public static var secondary:Self {
+            Style(
+                cornerRadius: 0.25.rem,
+                verticalPadding: 0.6.rem,
+                horizontalPadding: 0.9.rem
+            )
+        }
     }
 }
 
