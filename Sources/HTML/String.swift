@@ -13,3 +13,9 @@ extension String {
         self = String(decoding: html.render(), as: UTF8.self)
     }
 }
+
+extension CustomStringConvertible where Self: HTML {
+    public var description: String {
+        String(html: self)
+    }
+}
