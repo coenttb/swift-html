@@ -33,14 +33,12 @@ extension HTMLPreview: NSViewRepresentable {
     }
     
     public func updateNSView(_ webView: WKWebView, context: Context) {
-        let bytes = Self {
+        let html = Self {
             body
         } head: {
             head
         }
-            .render()
-        let htmlString = String(decoding: bytes, as: UTF8.self)
-        print(htmlString)
+        let htmlString = String(html: html)
         webView.loadHTMLString(htmlString, baseURL: nil)
     }
 }
@@ -58,14 +56,13 @@ extension HTMLPreview: UIViewRepresentable {
     }
     
     public func updateUIView(_ webView: WKWebView, context: Context) {
-        let bytes = Self {
+        let html = Self {
             body
         } head: {
             head
         }
-            .render()
-        let htmlString = String(decoding: bytes, as: UTF8.self)
-        print(htmlString)
+            
+        let htmlString = String(html: html)
         webView.loadHTMLString(htmlString, baseURL: nil)
     }
 }
