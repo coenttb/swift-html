@@ -19,7 +19,6 @@ public struct Image: HTML {
     }
 }
 
-
 extension Image {
     public init?(baseURL: URL, base64EncodedFromURL relativeURL: String, description: String) {
         guard let imageURL = URL(string: relativeURL, relativeTo: baseURL),
