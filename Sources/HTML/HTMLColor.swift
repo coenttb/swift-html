@@ -30,6 +30,59 @@ extension HTMLColor {
         )
     }
 }
+
+extension HTMLColor {
+    
+    static func keyword(_ keyword: CSS.Color.Keyword) -> HTMLColor {
+        return HTMLColor(.keyword(keyword))
+    }
+    
+    static func hex(_ hex: String) -> HTMLColor {
+        return HTMLColor(.hex(hex))
+    }
+    
+    static func rgb(red: Int, green: Int, blue: Int) -> HTMLColor {
+        return HTMLColor(.rgb(red: red, green: green, blue: blue))
+    }
+    
+    static func rgba(red: Int, green: Int, blue: Int, alpha: Double) -> HTMLColor {
+        return HTMLColor(.rgba(red: red, green: green, blue: blue, alpha: alpha))
+    }
+    
+    static func hsl(hue: Int, saturation: Double, lightness: Double) -> HTMLColor {
+        return HTMLColor(.hsl(hue: hue, saturation: saturation, lightness: lightness))
+    }
+    
+    static func hsla(hue: Int, saturation: Double, lightness: Double, alpha: Double) -> HTMLColor {
+        return HTMLColor(.hsla(hue: hue, saturation: saturation, lightness: lightness, alpha: alpha))
+    }
+    
+    static func hwb(hue: Int, whiteness: Double, blackness: Double) -> HTMLColor {
+        return HTMLColor(.hwb(hue: hue, whiteness: whiteness, blackness: blackness))
+    }
+    
+    static func lab(lightness: Double, a: Double, b: Double) -> HTMLColor {
+        return HTMLColor(.lab(lightness: lightness, a: a, b: b))
+    }
+    
+    static func lch(lightness: Double, chroma: Double, hue: Double) -> HTMLColor {
+        return HTMLColor(.lch(lightness: lightness, chroma: chroma, hue: hue))
+    }
+    
+    static func system(_ system: CSS.Color.SystemColor) -> HTMLColor {
+        return HTMLColor(.system(system))
+    }
+    
+    static func global(_ global: CSS.Color.Global) -> HTMLColor {
+        return HTMLColor(.global(global))
+    }
+    
+    static let currentColor: HTMLColor = HTMLColor(.currentColor)
+    static let transparent: HTMLColor = HTMLColor(.transparent)
+}
+
+
+
 extension HTMLColor: CustomStringConvertible {
     public var description: String {
         if let dark = dark {
@@ -344,11 +397,6 @@ extension HTMLColor {
     public static let blue = Self.blue500
     public static let red = Self.red500
     public static let yellow = Self.yellow500
-}
-
-extension HTMLColor {
-    public static let currentColor = Self.init(light: .currentColor, dark: .currentColor)
-    public static let transparent = Self.init(light: .transparent)
 }
 
 extension HTMLColor {
