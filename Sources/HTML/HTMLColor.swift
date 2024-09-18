@@ -14,10 +14,22 @@ public struct HTMLColor: Sendable {
     
     public init(light: CSS.Color, dark: CSS.Color? = nil) {
         self.light = light
-        self.dark = dark
+        if let dark = dark {
+            self.dark = dark
+        } else {
+            self.dark = light.darker()
+        }
     }
 }
 
+extension HTMLColor {
+    public init(_ color: CSS.Color){
+        self = .init(
+            light: color,
+            dark: color.darker()
+        )
+    }
+}
 extension HTMLColor: CustomStringConvertible {
     public var description: String {
         if let dark = dark {
