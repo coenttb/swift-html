@@ -24,8 +24,7 @@ public struct HStack<Content: HTML>: HTML {
         }
         // necessary?
         .alignItems(.stretch)
-        
-//        .verticalAlign(alignment)
+        .verticalAlign(alignment)
         .display(.flex)
         .flexDirection(.row)
         .maxHeight(100.percent)
