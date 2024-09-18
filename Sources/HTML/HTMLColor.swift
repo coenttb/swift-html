@@ -29,11 +29,54 @@ extension HTMLColor: CustomStringConvertible {
 }
 
 extension HTMLColor {
+    public func map(_ transform: (CSS.Color) -> CSS.Color) -> HTMLColor {
+        HTMLColor(
+            light: transform(light),
+            dark: dark.map(transform)
+        )
+    }
+    
+    public func flatMap(_ transform: (CSS.Color) -> HTMLColor) -> HTMLColor {
+        let lightTransformed = transform(light)
+        let darkTransformed = dark.map(transform)
+        
+        return HTMLColor(
+            light: lightTransformed.light,
+            dark: darkTransformed?.dark ?? lightTransformed.dark
+        )
+    }
+}
+
+extension HTMLColor {
+    public func adjustBrightness(by percentage: Double) -> HTMLColor {
+        self.map { $0.adjustBrightness(by: percentage) }
+    }
+    
+    public func darker(by percentage: Double = 0.2) -> HTMLColor {
+        self.map { $0.darker(by: percentage) }
+    }
+    
+    public func lighter(by percentage: Double = 0.2) -> HTMLColor {
+        self.map { $0.lighter(by: percentage) }
+    }
+}
+
+extension HTMLColor {
+    @available(*, deprecated, renamed: "withDarkColor(_:)")
     public func dark(_ color: CSS.Color) -> Self {
+        withDarkColor(color)
+    }
+    
+    @available(*, deprecated, renamed: "withLightColor(_:)")
+    public func light(_ color: CSS.Color) -> Self {
+        withLightColor(color)
+    }
+    
+    public func withDarkColor(_ color: CSS.Color) -> Self {
         HTMLColor(light: self.light, dark: color)
     }
     
-    public func light(_ color: CSS.Color) -> Self {
+    public func withLightColor(_ color: CSS.Color) -> Self {
         HTMLColor(light: color, dark: self.dark)
     }
 }
@@ -43,7 +86,7 @@ extension HTMLColor {
         let lightHex = String(format: "%02X", value)
         let darkHex = String(format: "%02X", 255 - value)
         return Self(light: .hex(lightHex + lightHex + lightHex))
-            .dark(.hex(darkHex + darkHex + darkHex))
+            .withDarkColor(.hex(darkHex + darkHex + darkHex))
     }
     
     @_disfavoredOverload
@@ -51,20 +94,6 @@ extension HTMLColor {
         gray(UInt8(255 * value))
     }
 }
-//
-//// Extension to CSS.Color for easy conversion to HTMLColor
-//extension HTMLColor {
-//    public var darkMode: HTMLColor {
-//        HTMLColor(light: self.dark)
-//    }
-//    
-//    public func dark(_ color: CSS.Color) -> HTMLColor {
-//        HTMLColor(light: self, dark: color)
-//    }
-//}
-
-
-    
 
 extension HTMLColor {
     public static let gray100 = HTMLColor(light: .gray100, dark: .hex("f7f7f7"))
@@ -85,8 +114,6 @@ extension HTMLColor {
     public static let gray850 = HTMLColor(light: .gray850, dark: .hex("202020"))
     public static let gray900 = HTMLColor(light: .gray900, dark: .hex("101010"))
 }
-
-
 
 extension HTMLColor {
     public static let blue100 = Self(light: .blue100, dark: .hex("e6f3ff"))
@@ -326,5 +353,7 @@ extension HTMLColor {
         dark: .hsla(hue: 220, saturation: 15, lightness: 15, alpha: 0.85)
     )
 }
+
+
 
 
