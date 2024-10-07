@@ -38,7 +38,11 @@ public struct HTMLPrinter: Sendable {
             }
             for (className, style) in styles {
                 sheet.append(currentIndentation)
-                sheet.append("\(className){\(style)}")
+                if configuration.forceImportant {
+                    sheet.append("\(className){\(style) !important}")
+                } else {
+                    sheet.append("\(className){\(style)}")
+                }
                 sheet.append(configuration.newline)
             }
         }
@@ -46,11 +50,13 @@ public struct HTMLPrinter: Sendable {
     }
     
     public struct Configuration: Sendable {
+        let forceImportant: Bool
         let indentation: String
         let newline: String
         
-        public static let `default` = Self(indentation: "", newline: "")
-        public static let pretty = Self(indentation: "  ", newline: "\n")
+        public static let `default` = Self(forceImportant: false, indentation: "", newline: "")
+        public static let pretty = Self(forceImportant: false, indentation: "  ", newline: "\n")
+        public static let email = Self(forceImportant: true, indentation: "", newline: "")
     }
 }
 
@@ -84,3 +90,4 @@ private enum HTMLPrinterKey: DependencyKey {
     static var previewValue: HTMLPrinter { HTMLPrinter(.pretty) }
     static var testValue: HTMLPrinter { HTMLPrinter(.pretty) }
 }
+

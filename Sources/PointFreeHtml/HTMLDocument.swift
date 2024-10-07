@@ -11,7 +11,6 @@ public protocol HTMLDocument: HTML {
     associatedtype Head: HTML
     @HTMLBuilder
     var head: Head { get }
-    static func _render(_ html: Self, into printer: inout HTMLPrinter)
 }
 
 extension HTMLDocument {
