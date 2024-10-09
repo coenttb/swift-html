@@ -8,9 +8,14 @@
 import Foundation
 import PointFreeHtml
 
+
+//make an HTML.if in the style of HTMLForEach
 extension HTML {
     @HTMLBuilder
-    public func `if`(_ condition: Bool, @HTMLBuilder _ modification: (Self) -> some HTML) -> some HTML {
+    public func `if`(
+        _ condition: Bool,
+        @HTMLBuilder _ modification: (Self) -> some HTML
+    ) -> some HTML {
         if condition {
             modification(self)
         } else {
