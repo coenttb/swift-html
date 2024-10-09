@@ -19,15 +19,16 @@ public struct Image: HTML {
     }
 }
 
+
 extension Image {
-    public init?(baseURL: URL, base64EncodedFromURL relativeURL: String, description: String) {
-        guard let imageURL = URL(string: relativeURL, relativeTo: baseURL),
-              let imageData = try? Data(contentsOf: imageURL) else {
+    public init?(base64EncodedFromURL url: URL, description: String) {
+        guard
+              let imageData = try? Data(contentsOf: url) else {
             return nil
         }
         
         let base64String = imageData.base64EncodedString()
-        let mimeType = Image.mimeTypeForImage(relativeURL: relativeURL)
+        let mimeType = Image.mimeTypeForImage(relativeURL: url.relativeString)
         let dataURL = "data:\(mimeType);base64,\(base64String)"
         
         self.init(source: dataURL, description: description)
@@ -47,5 +48,15 @@ extension Image {
         default:
             return "application/octet-stream"
         }
+    }
+}
+
+extension Image {
+    public init?(baseURL: URL, base64EncodedFromURL relativeURL: String, description: String) {
+        guard let fullURL = URL(string: relativeURL, relativeTo: baseURL) else {
+            return nil
+        }
+        
+        self.init(base64EncodedFromURL: fullURL, description: description)
     }
 }
