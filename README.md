@@ -1,6 +1,6 @@
 # swift-html
 
-A Swift DSL for HTML and CSS that streamlines building HTML documents, built upon [pointfreeco/swift-html](https://www.github.com/coenttb/swift-html) and integrated with [swift-css](https://www.github.com/coenttb/swift-css).
+A Swift DSL for HTML and CSS that streamlines building HTML documents, built upon [coenttb/pointfree-html](https://www.github.com/coenttb/pointfree-html) and integrated with [swift-css](https://www.github.com/coenttb/swift-css).
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -58,7 +58,7 @@ Yes, you can! See [coenttb-com-server](https://www.github.com/coenttb/coenttb-co
 
 ## Related projects
 
-* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Builds on [swift-html](https://www.github.com/coenttb/coenttb-html) and includes additional modules related to html components, html-to-pdf, markdown, and email.
+* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Builds on [swift-html](https://www.github.com/coenttb/swift-html) and includes additional modules related to html components, html-to-pdf, markdown, and email.
 * [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for CSS.
 * [swift-web](https://www.github.com/coenttb/swift-web): A collection of types and functions for dealing with common web server concerns. Forked from PointFree and updated where necessary.
 * [coenttb-web](https://www.github.com/coenttb/swift-web): Builds on [swift-web](https://www.github.com/coenttb/swift-web) and includes additional modules related to web development.
