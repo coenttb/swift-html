@@ -160,4 +160,8 @@ extension HTMLColor {
     }
 }
 
-
+extension HTMLColor {
+    public func opacity(_ opacity: Double) -> HTMLColor {
+        self.map { $0.opacity(opacity) }
+    }
+}
