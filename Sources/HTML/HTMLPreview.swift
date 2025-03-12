@@ -38,7 +38,7 @@ extension HTMLPreview: NSViewRepresentable {
         } head: {
             head
         }
-        let htmlString = String(html)
+        let htmlString = try! String(html)
         webView.loadHTMLString(htmlString, baseURL: nil)
     }
 }
