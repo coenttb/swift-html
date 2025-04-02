@@ -1,5 +1,5 @@
 {
-  "originHash" : "4317fd340d569d75e1c0c5c95618874958857c26b564f0396dbb8c85cd5a3c27",
+  "originHash" : "a2a44e3e440c0b058224fd7a76b2b6033b7a05abddc7ff2b644d31ac698013a3",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f9f34189a23da8c443f311ab56c8f7c8c384aa07"
+        "revision" : "4d195064eface038ac5d4d4e3b32a063fcef639e"
       }
     },
     {
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-css.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "fce32749fbe3ff7d2df9055f0179cd19e25749da"
+        "branch" : "mdn-types-properties",
+        "revision" : "8adf3b3ae9ad938b82b4f4912b55d1b2e42e07ad"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies.git",
       "state" : {
-        "revision" : "ec2862d1364536fc22ec56a3094e7a034bbc7da8",
-        "version" : "1.8.1"
+        "revision" : "4e6b6a814675daf2c1973514314283448f95f941",
+        "version" : "1.9.0"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-syntax",
       "state" : {
-        "revision" : "0687f71944021d616d34d922343dcef086855920",
-        "version" : "600.0.1"
+        "revision" : "1103c45ece4f7fe160b8f75b4ea1ee2e5fac1841",
+        "version" : "601.0.0"
       }
     },
     {
