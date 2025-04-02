@@ -1,0 +1,22 @@
+//
+//  FloodColor.swift
+//  swift-html
+//
+//  Created by Coen ten Thije Boonkkamp on 02/04/2025.
+//
+
+import CSS
+import Foundation
+import PointFreeHTML
+
+extension HTML {
+    @discardableResult
+    public func floodColor(
+        _ floodColor: Properties.FloodColor?,
+        media mediaQuery: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> HTMLInlineStyle<Self> {
+        inlineStyle(Properties.FloodColor.property, floodColor?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}

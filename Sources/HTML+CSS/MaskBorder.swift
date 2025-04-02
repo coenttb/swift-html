@@ -1,0 +1,22 @@
+//
+//  MaskBorder.swift
+//  swift-html
+//
+//  Created by Coen ten Thije Boonkkamp on 02/04/2025.
+//
+
+import CSS
+import Foundation
+import PointFreeHTML
+
+extension HTML {
+    @discardableResult
+    public func maskBorder(
+        _ maskBorder: Properties.MaskBorder?,
+        media mediaQuery: MediaQuery? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> HTMLInlineStyle<Self> {
+        inlineStyle(Properties.MaskBorder.property, maskBorder?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+    }
+}

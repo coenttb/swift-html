@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  AlignmentBaseline.swift
 //  swift-html
 //
 //  Created by Coen ten Thije Boonkkamp on 02/04/2025.
@@ -12,11 +12,11 @@ import PointFreeHTML
 extension HTML {
     @discardableResult
     public func alignmentBaseline(
-        _ alignmentBaseline: AlignmentBaseline?,
+        _ alignmentBaseline: Properties.AlignmentBaseline?,
         media mediaQuery: MediaQuery? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
     ) -> HTMLInlineStyle<Self> {
-        inlineStyle(CSS.AccentColor.property, alignmentBaseline?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+        inlineStyle(Properties.AlignmentBaseline.property, alignmentBaseline?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 }
