@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "4EEB99F4-1650-4BD8-8B87-E29EF240A47C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "HTML Attributes Tests",
+        "name" : "HTML Attributes Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

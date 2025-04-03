@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "60AC38B1-FB1A-49C6-9FCF-79AE61EBD425",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "HTML+CSS Tests",
+        "name" : "HTML+CSS Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
