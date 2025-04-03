@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "FB27F610-2503-425D-82B6-CCA9E0F0A642",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "HTML Elements Tests",
+        "name" : "HTML Elements Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
