@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Allows selection and styling of elements within nested shadow trees by exporting their part names.
 ///
@@ -110,47 +109,5 @@ extension Exportparts: CustomStringConvertible {
     /// Returns the string representation of the exportparts value
     public var description: String {
         return self.partMappings.map { $0.description }.joined(separator: ", ")
-    }
-}
-
-extension HTML {
-    /// Sets the exportparts attribute with part names to export
-    @discardableResult
-    public func exportparts(
-        _ parts: [String]
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Exportparts.attribute, parts.joined(separator: ", "))
-    }
-    
-    /// Sets the exportparts attribute with part names to export as variadic parameters
-    @discardableResult
-    public func exportparts(
-        _ parts: String...
-    ) -> _HTMLAttributes<Self> {
-        self.exportparts(parts)
-    }
-    
-    /// Sets the exportparts attribute with explicit part mappings
-    @discardableResult
-    public func exportparts(
-        _ mappings: [Exportparts.PartMapping]
-    ) -> _HTMLAttributes<Self> {
-        let value = mappings.map { mapping in
-            if mapping.originalName == mapping.exposedName {
-                return mapping.originalName
-            } else {
-                return "\(mapping.originalName):\(mapping.exposedName)"
-            }
-        }.joined(separator: ", ")
-        
-        return self.attribute(Exportparts.attribute, value)
-    }
-    
-    /// Sets the exportparts attribute using an Exportparts struct
-    @discardableResult
-    public func exportparts(
-        _ attribute: Exportparts
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Exportparts.attribute, attribute.description)
     }
 }

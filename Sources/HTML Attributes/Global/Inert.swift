@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Indicates that the element and all its descendants should be made inert.
 ///
@@ -84,12 +83,3 @@ extension Inert: CustomStringConvertible {
         return ""
     }
 }
-
-extension HTML {
-    /// Sets the inert attribute, making the element and all its descendants non-interactive
-    @discardableResult
-    public func inert() -> _HTMLAttributes<Self> {
-        self.attribute(Inert.attribute)
-    }
-}
-//

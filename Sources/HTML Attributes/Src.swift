@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import PointFreeHTML
 
-public struct Src: Attribute, ExpressibleByStringLiteral, CustomStringConvertible {
+public struct Src: Attribute, ExpressibleByStringLiteral, ExpressibleByStringInterpolation, CustomStringConvertible {
     public static let attribute: String = "src"
     
     public var value: String
@@ -26,14 +25,4 @@ public struct Src: Attribute, ExpressibleByStringLiteral, CustomStringConvertibl
     }
     
     public var description: String { value }
-}
-
-extension HTML {
-    /// Sets the step attribute on an element
-    @discardableResult
-    package func src(
-        _ value: Src?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Src.attribute, value?.description)
-    }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A Boolean attribute that indicates whether a form control is checked or selected.
 ///
@@ -56,20 +55,3 @@ public struct Checked: Attribute, ExpressibleByBooleanLiteral {
     public static let attribute: String = "checked"
 }
 
-extension HTML {
-    
-    /// Adds the checked attribute to the element
-    package var checked: _HTMLAttributes<Self> {
-        self.attribute(Checked.attribute)
-    }
-    
-    /// Conditionally adds the checked attribute to the element
-    @HTMLBuilder
-    package func checked(_ value: Bool?) -> some HTML {
-        if value == true {
-            self.attribute(Checked.attribute)
-        } else {
-            self
-        }
-    }
-}

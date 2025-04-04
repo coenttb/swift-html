@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// References elements that are not direct descendants of an item in microdata.
 ///
@@ -106,39 +105,5 @@ extension Itemref: CustomStringConvertible {
 extension Itemref: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.value = value
-    }
-}
-
-extension HTML {
-    /// Sets the itemref attribute with a single element ID
-    @discardableResult
-    public func itemref(
-        _ id: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Itemref.attribute, id)
-    }
-    
-    /// Sets the itemref attribute with multiple element IDs
-    @discardableResult
-    public func itemref(
-        _ ids: [String]
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Itemref.attribute, ids.joined(separator: " "))
-    }
-    
-    /// Sets the itemref attribute with multiple element IDs as variadic parameters
-    @discardableResult
-    public func itemref(
-        _ ids: String...
-    ) -> _HTMLAttributes<Self> {
-        self.itemref(ids)
-    }
-    
-    /// Sets the itemref attribute using an Itemref struct
-    @discardableResult
-    public func itemref(
-        _ attribute: Itemref
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Itemref.attribute, attribute.description)
     }
 }

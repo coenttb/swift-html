@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Defines a unique identifier for an HTML element.
 ///
@@ -89,23 +88,5 @@ extension Id: CustomStringConvertible {
 extension Id: Equatable {
     public static func == (lhs: Id, rhs: Id) -> Bool {
         return lhs.value == rhs.value
-    }
-}
-
-extension HTML {
-    /// Sets the ID attribute for an HTML element
-    @discardableResult
-    public func id(
-        _ id: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Id.attribute, id)
-    }
-    
-    /// Sets the ID attribute using an Id struct
-    @discardableResult
-    public func id(
-        _ id: Id
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Id.attribute, id.description)
     }
 }

@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "67D568AB-2F5A-41F0-9DC7-E9A477DB6CC5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "HTML Attributes Tests",
+        "name" : "HTML Attributes Tests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "HTML Elements Tests",
+        "name" : "HTML Elements Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

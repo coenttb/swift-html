@@ -6,8 +6,6 @@
 ///
 
 import Foundation
-import HTML_Attributes
-import PointFreeHTML
 
 /// An attribute that specifies where to display the response after form submission.
 ///
@@ -127,15 +125,5 @@ extension Target: CustomStringConvertible {
     /// Returns the string representation of the target value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Add a target attribute to a form to specify where to display the response
-    @discardableResult
-    package func target(
-        form value: Target?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Target.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies which camera or device should be used for capturing media.
 ///
@@ -76,15 +75,5 @@ extension Capture: CustomStringConvertible {
     /// Returns the string representation of the capture value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    @discardableResult
-    package func capture(
-        _ value: Capture?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Capture.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Assigns an element to a specific slot in a shadow DOM.
 ///
@@ -102,23 +101,5 @@ extension Slot: CustomStringConvertible {
 extension Slot: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.value = value
-    }
-}
-
-extension HTML {
-    /// Sets the slot attribute with a slot name
-    @discardableResult
-    public func slot(
-        _ name: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Slot.attribute, name)
-    }
-    
-    /// Sets the slot attribute using a Slot struct
-    @discardableResult
-    public func slot(
-        _ attribute: Slot
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Slot.attribute, attribute.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Controls an element's participation in sequential keyboard navigation.
 ///
@@ -85,35 +84,5 @@ extension Tabindex: CustomStringConvertible {
     /// Returns the string representation of the tabindex value
     public var description: String {
         return String(self.value)
-    }
-}
-
-extension HTML {
-    /// Sets the tabindex attribute with an integer value
-    @discardableResult
-    public func tabindex(
-        _ value: Int
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Tabindex.attribute, String(value))
-    }
-    
-    /// Sets the tabindex attribute using a Tabindex struct
-    @discardableResult
-    public func tabindex(
-        _ attribute: Tabindex
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Tabindex.attribute, attribute.description)
-    }
-    
-    /// Makes the element not focusable via keyboard but focusable programmatically
-    @discardableResult
-    public func notTabbable() -> _HTMLAttributes<Self> {
-        self.tabindex(Tabindex.notTabbable)
-    }
-    
-    /// Makes the element focusable in the natural document order
-    @discardableResult
-    public func tabbableInDocumentOrder() -> _HTMLAttributes<Self> {
-        self.tabindex(Tabindex.inDocumentOrder)
     }
 }

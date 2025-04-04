@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Designates an element as a popover element that appears above other page content.
 ///
@@ -100,29 +99,7 @@ extension Popover: CustomStringConvertible {
     }
 }
 
-extension HTML {
-    /// Sets the popover attribute as a boolean (equivalent to popover="auto")
-    @discardableResult
-    public func popover() -> _HTMLAttributes<Self> {
-        self.attribute(Popover.attribute, "")
-    }
-    
-    /// Sets the popover attribute with a specific type
-    @discardableResult
-    public func popover(
-        _ type: Popover
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Popover.attribute, type.description)
-    }
-    
-    /// Sets the popover attribute with a value
-    @discardableResult
-    public func popover(
-        _ value: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Popover.attribute, value)
-    }
-}
+
 
 /// The popovertarget attribute that associates a control element with a popover
 public struct PopoverTarget: Attribute {
@@ -151,23 +128,7 @@ extension PopoverTarget: ExpressibleByStringLiteral {
     }
 }
 
-extension HTML {
-    /// Sets the popovertarget attribute with the ID of the target popover
-    @discardableResult
-    public func popovertarget(
-        _ id: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(PopoverTarget.attribute, id)
-    }
-    
-    /// Sets the popovertarget attribute using a PopoverTarget struct
-    @discardableResult
-    public func popovertarget(
-        _ attribute: PopoverTarget
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(PopoverTarget.attribute, attribute.description)
-    }
-}
+
 
 /// The popovertargetaction attribute that defines the action for a control element
 public enum PopoverTargetAction: Attribute {
@@ -198,12 +159,4 @@ extension PopoverTargetAction: CustomStringConvertible {
     }
 }
 
-extension HTML {
-    /// Sets the popovertargetaction attribute with an action
-    @discardableResult
-    public func popovertargetaction(
-        _ action: PopoverTargetAction
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(PopoverTargetAction.attribute, action.description)
-    }
-}
+

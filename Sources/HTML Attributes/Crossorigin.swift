@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that controls how the element handles cross-origin requests.
 ///
@@ -103,22 +102,5 @@ extension Crossorigin: CustomStringConvertible {
     /// Returns the string representation of the crossorigin value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    @discardableResult
-    package func crossorigin(
-        _ value: Crossorigin?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Crossorigin.attribute, value?.description)
-    }
-    
-    @discardableResult
-    package func crossorigin(
-        _ policy: Crossorigin.Policy
-    ) -> _HTMLAttributes<Self> {
-        self.crossorigin(Crossorigin(policy))
     }
 }

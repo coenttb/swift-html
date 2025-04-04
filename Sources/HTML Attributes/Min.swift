@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the minimum value allowed for an input element or other form controls.
 ///
@@ -180,25 +179,5 @@ extension Min: CustomStringConvertible {
     /// Returns the string representation of the min value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the min attribute on an element
-    @discardableResult
-    package func min(
-        _ value: Min?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Min.attribute, value?.description)
-    }
-    
-    /// Sets the min attribute with a date value and format
-    @discardableResult
-    package func min(
-        date: Date,
-        format: Min.DateFormat = .fullDate
-    ) -> _HTMLAttributes<Self> {
-        self.min(Min(date: date, format: format))
     }
 }

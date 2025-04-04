@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Provides a unique, global identifier for an item in microdata.
 ///
@@ -77,21 +76,3 @@ extension Itemid: ExpressibleByStringLiteral {
     }
 }
 
-
-extension HTML {
-    /// Sets the itemid attribute with a global identifier
-    @discardableResult
-    public func itemid(
-        _ identifier: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Itemid.attribute, Itemid.init(identifier).description)
-    }
-    
-    /// Sets the itemid attribute using an Itemid struct
-    @discardableResult
-    public func itemid(
-        _ value: Itemid
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Itemid.attribute, value.description)
-    }
-}

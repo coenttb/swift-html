@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A Boolean attribute that indicates whether a form control is disabled.
 ///
@@ -70,21 +69,4 @@ public struct Disabled: Attribute, ExpressibleByBooleanLiteral {
     
     /// The name of the HTML attribute
     public static let attribute: String = "disabled"
-}
-
-extension HTML {
-    /// Adds the disabled attribute to the element
-    package var disabled: _HTMLAttributes<Self> {
-        self.attribute(Disabled.attribute)
-    }
-    
-    /// Conditionally adds the disabled attribute to the element
-    @HTMLBuilder
-    package func disabled(_ value: Bool?) -> some HTML {
-        if value == true {
-            self.attribute(Disabled.attribute)
-        } else {
-            self
-        }
-    }
 }

@@ -6,8 +6,6 @@
 ///
 
 import Foundation
-import HTML_Attributes
-import PointFreeHTML
 
 /// An attribute that disables browser validation for form submissions.
 ///
@@ -65,24 +63,14 @@ import PointFreeHTML
 ///     input().type(.submit).value("Save as Draft").formnovalidate
 /// }
 /// ```
-public enum Novalidate: Attribute {
-    /// The name of the HTML attribute
-    public static let attribute: String = "novalidate"
-}
-
-extension HTML {
-    /// Add the novalidate attribute to disable browser validation for a form
-    package var novalidate: _HTMLAttributes<Self> {
-        self.attribute(Novalidate.attribute)
-    }
+public struct Novalidate: Attribute, ExpressibleByBooleanLiteral {
     
-    /// Conditionally adds the novalidate attribute to the element
-    @discardableResult
-    @HTMLBuilder
-    package func novalidate(_ value: Bool?) -> some HTML {
-        if value == true {
-            self.novalidate
-        }
-        self
+    public static let attribute: String = "novalidate"
+    
+    fileprivate let value: Bool
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.value = value
     }
+    /// The name of the HTML attribute
 }

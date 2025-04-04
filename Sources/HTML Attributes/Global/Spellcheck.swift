@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Controls whether spell checking is enabled for an element.
 ///
@@ -73,15 +72,5 @@ public struct Spellcheck: Attribute, ExpressibleByBooleanLiteral {
 extension Spellcheck: CustomStringConvertible {
     public var description: String {
         self.value.description
-    }
-}
-
-extension HTML {
-    /// Sets the spellcheck attribute using a Spellcheck enum value
-    @discardableResult
-    package func spellcheck(
-        _ attribute: Spellcheck
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Spellcheck.attribute, attribute.description)
     }
 }

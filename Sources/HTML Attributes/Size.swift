@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the width or height of form controls.
 ///
@@ -90,15 +89,5 @@ extension Size: CustomStringConvertible {
     /// Returns the string representation of the size value
     public var description: String {
         return String(self.value)
-    }
-}
-
-extension HTML {
-    /// Sets the size attribute on an element
-    @discardableResult
-    package func size(
-        _ value: Size?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Size.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Specifies the text direction for the content in an element.
 ///
@@ -90,15 +89,5 @@ extension Dir: CustomStringConvertible {
     /// Returns the string representation of the dir value
     public var description: String {
         return self.rawValue
-    }
-}
-
-extension HTML {
-    /// Sets the text direction for an HTML element
-    @discardableResult
-    public func dir(
-        _ value: Dir
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Dir.attribute, value.description)
     }
 }

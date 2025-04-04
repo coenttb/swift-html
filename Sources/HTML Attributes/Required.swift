@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A Boolean attribute that indicates a form control must be filled out before form submission.
 ///
@@ -70,21 +69,4 @@ public struct Required: Attribute, ExpressibleByBooleanLiteral {
     
     /// The name of the HTML attribute
     public static let attribute: String = "required"
-}
-
-extension HTML {
-    /// Adds the required attribute to the element
-    package var required: _HTMLAttributes<Self> {
-        self.attribute(Required.attribute)
-    }
-    
-    /// Adds the required attribute to the element
-    @HTMLBuilder
-    package func required(_ value: Bool?) -> some HTML {
-        if value == true {
-            self.attribute(Required.attribute)
-        } else {
-            self
-        }
-    }
 }

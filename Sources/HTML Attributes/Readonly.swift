@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A Boolean attribute that makes a form control non-editable but still functional.
 ///
@@ -67,22 +66,4 @@ public struct Readonly: Attribute, ExpressibleByBooleanLiteral {
     /// The name of the HTML attribute
     public static let attribute: String = "readonly"
     
-}
-
-extension HTML {
-    
-    /// Adds the readonly attribute to the element
-    package var readonly: _HTMLAttributes<Self> {
-        self.attribute(Readonly.attribute)
-    }
-    
-    /// Conditionally adds the readonly attribute to the element
-    @discardableResult
-    @HTMLBuilder
-    package func readonly(_ value: Bool?) -> some HTML {
-        if value == true {
-            self.readonly
-        }
-        self
-    }
 }

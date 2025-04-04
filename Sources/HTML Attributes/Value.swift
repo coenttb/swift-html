@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the value of an HTML element, primarily used with form controls.
 ///
@@ -130,29 +129,5 @@ extension Value: CustomStringConvertible {
     /// Returns the string representation of the value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the value attribute on an element
-    @discardableResult
-    package func value(
-        _ value: Value?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Value.attribute, value?.description)
-    }
-    
-    /// Sets the value attribute with a string value
-    @discardableResult
-    @HTMLBuilder
-    package func value(
-        _ value: (some CustomStringConvertible)?
-    ) -> some HTML {
-        if let description = value?.description {
-            self.value(.init(description))
-        } else {
-            self
-        }
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that enables the submission of the text directionality with form data.
 ///
@@ -78,14 +77,5 @@ extension Dirname: CustomStringConvertible {
     /// Returns the string representation of the dirname value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    @discardableResult
-    package func dirname(
-        _ value: Dirname?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Dirname.attribute, value?.description)
     }
 }

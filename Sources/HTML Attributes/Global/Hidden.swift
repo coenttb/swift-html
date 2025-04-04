@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Indicates that the browser should not render the contents of the element.
 ///
@@ -101,21 +100,5 @@ extension Hidden: CustomStringConvertible {
     /// Returns the string representation of the hidden value
     public var description: String {
         return self.rawValue
-    }
-}
-
-extension HTML {
-    /// Sets the hidden attribute with a specific value
-    @discardableResult
-    public func hidden(
-        _ hidden: Hidden
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Hidden.attribute, hidden.description)
-    }
-    
-    /// Sets the hidden attribute without a value (equivalent to hidden="")
-    @discardableResult
-    public func hidden() -> _HTMLAttributes<Self> {
-        self.attribute(Hidden.attribute)
     }
 }

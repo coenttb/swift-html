@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Controls whether and how user input should be automatically capitalized as it is entered by the user.
 ///
@@ -114,14 +113,5 @@ extension Autocapitalize {
     /// Returns the string representation of the autocapitalize value
     public var description: String {
         return self.rawValue
-    }
-}
-
-extension HTML {
-    @discardableResult
-    public func autocapitalize(
-        _ value: Autocapitalize?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Autocapitalize.attribute, value?.description)
     }
 }

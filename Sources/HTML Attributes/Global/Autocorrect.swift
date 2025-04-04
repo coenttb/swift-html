@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Controls whether automatic correction of spelling and punctuation errors is enabled for editable text.
 ///
@@ -77,14 +76,5 @@ extension Autocorrect {
     /// Returns the string representation of the autocorrect value
     public var description: String {
         return self.rawValue
-    }
-}
-
-extension HTML {
-    @discardableResult
-    public func autocorrect(
-        _ value: Autocorrect?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Autocorrect.attribute, value?.description)
     }
 }

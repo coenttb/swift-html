@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that provides alternative text for images or other non-text content.
 ///
@@ -76,15 +75,5 @@ extension Alt: CustomStringConvertible {
     /// Returns the string representation of the alternative text
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Sets the alt attribute on an element
-    @discardableResult
-    package func alt(
-        _ value: Alt?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Alt.attribute, value?.description)
     }
 }

@@ -6,8 +6,6 @@
 ///
 
 import Foundation
-import HTML_Attributes
-import PointFreeHTML
 
 /// An attribute that specifies how form data should be encoded when submitted.
 ///
@@ -114,15 +112,5 @@ extension Enctype: CustomStringConvertible {
     /// Returns the string representation of the encoding type
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Add an enctype attribute to specify the form data encoding type
-    @discardableResult
-    package func enctype(
-        _ value: Enctype?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Enctype.attribute, value?.description)
     }
 }

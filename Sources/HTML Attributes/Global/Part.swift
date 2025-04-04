@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Designates an element as a named part that can be styled from outside its shadow DOM.
 ///
@@ -99,39 +98,5 @@ extension Part: CustomStringConvertible {
 extension Part: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.value = value
-    }
-}
-
-extension HTML {
-    /// Sets the part attribute with a single part name
-    @discardableResult
-    public func part(
-        _ partName: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Part.attribute, partName)
-    }
-    
-    /// Sets the part attribute with multiple part names
-    @discardableResult
-    public func part(
-        _ partNames: [String]
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Part.attribute, partNames.joined(separator: " "))
-    }
-    
-    /// Sets the part attribute with multiple part names as variadic parameters
-    @discardableResult
-    public func part(
-        _ partNames: String...
-    ) -> _HTMLAttributes<Self> {
-        self.part(partNames)
-    }
-    
-    /// Sets the part attribute using a Part struct
-    @discardableResult
-    public func part(
-        _ attribute: Part
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Part.attribute, attribute.description)
     }
 }

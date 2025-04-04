@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the width of an element.
 ///
@@ -81,16 +80,5 @@ extension Width: CustomStringConvertible {
     /// Returns the string representation of the width value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the width attribute on an element
-    @discardableResult
-    package func width(
-        _ value: Width?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Width.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies whether form fields should have autocomplete functionality.
 ///
@@ -378,15 +377,5 @@ extension Autocomplete.Token {
         
         /// URL of an image
         case photo
-    }
-}
-
-extension HTML {
-    
-    @discardableResult
-    package func autocomplete(
-        _ value: Autocomplete?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Autocomplete.attribute, value?.description)
     }
 }

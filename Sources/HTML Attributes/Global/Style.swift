@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Defines inline CSS styles for an HTML element.
 ///
@@ -103,35 +102,5 @@ extension Style: ExpressibleByDictionaryLiteral {
     public init(dictionaryLiteral elements: (String, String)...) {
         let dict = Dictionary(uniqueKeysWithValues: elements)
         self.init(dict)
-    }
-}
-
-extension HTML {
-    /// Sets the style attribute with CSS declarations as a string
-    @discardableResult
-    public func style(
-        _ css: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Style.attribute, css)
-    }
-    
-    /// Sets the style attribute with CSS declarations as key-value pairs
-    @discardableResult
-    public func style(
-        _ declarations: [String: String]
-    ) -> _HTMLAttributes<Self> {
-        let formattedDeclarations = declarations.map { key, value in
-            "\(key): \(value)"
-        }.joined(separator: "; ")
-        
-        return self.attribute(Style.attribute, formattedDeclarations)
-    }
-    
-    /// Sets the style attribute using a Style struct
-    @discardableResult
-    public func style(
-        _ attribute: Style
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Style.attribute, attribute.description)
     }
 }

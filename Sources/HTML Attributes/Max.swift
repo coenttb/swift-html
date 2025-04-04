@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the maximum value allowed for an input element or other form controls.
 ///
@@ -170,24 +169,5 @@ extension Max: CustomStringConvertible {
     /// Returns the string representation of the max value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Sets the max attribute on an element
-    @discardableResult
-    package func max(
-        _ value: Max?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Max.attribute, value?.description)
-    }
-
-    /// Sets the max attribute with a date value and format
-    @discardableResult
-    package func max(
-        date: Date,
-        format: Max.DateFormat = .fullDate
-    ) -> _HTMLAttributes<Self> {
-        self.max(Max(date: date, format: format))
     }
 }

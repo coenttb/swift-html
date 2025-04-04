@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that establishes a relationship between elements.
 ///
@@ -94,16 +93,5 @@ extension For: CustomStringConvertible {
     /// Returns the string representation of the for value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the for attribute on an element
-    @discardableResult
-    package func `for`(
-        _ value: For?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(For.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Hints at the type of data that might be entered by the user, helping browsers display appropriate virtual keyboards.
 ///
@@ -146,14 +145,3 @@ extension Inputmode: CustomStringConvertible {
         return self.rawValue
     }
 }
-
-extension HTML {
-    /// Sets the inputmode attribute to hint at what type of virtual keyboard to display
-    @discardableResult
-    public func inputmode(
-        _ mode: Inputmode?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Inputmode.attribute, mode?.description)
-    }
-}
-//

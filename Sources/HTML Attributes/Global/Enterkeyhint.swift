@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Defines what action label or icon to present for the Enter key on virtual keyboards.
 ///
@@ -131,15 +130,5 @@ extension Enterkeyhint: CustomStringConvertible {
     /// Returns the string representation of the enterkeyhint value
     public var description: String {
         return self.rawValue
-    }
-}
-
-extension HTML {
-    /// Sets the Enter key label/action hint for virtual keyboards
-    @discardableResult
-    public func enterkeyhint(
-        _ value: Enterkeyhint
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Enterkeyhint.attribute, value.description)
     }
 }

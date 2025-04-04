@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Specifies that a standard HTML element should behave like a defined custom built-in element.
 ///
@@ -87,23 +86,5 @@ extension Is: CustomStringConvertible {
     /// Returns the string representation of the is value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Sets the is attribute to extend a standard HTML element with custom behavior
-    @discardableResult
-    public func `is`(
-        _ value: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Is.attribute, Is(value).description)
-    }
-    
-    /// Sets the is attribute using an Is struct
-    @discardableResult
-    public func `is`(
-        _ value: Is
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Is.attribute, value.description)
     }
 }

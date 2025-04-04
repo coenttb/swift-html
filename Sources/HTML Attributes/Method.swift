@@ -6,8 +6,6 @@
 ///
 
 import Foundation
-import HTML_Attributes
-import PointFreeHTML
 
 /// An attribute that specifies the HTTP method for form submission.
 ///
@@ -114,15 +112,5 @@ extension Method: CustomStringConvertible {
     /// Returns the string representation of the method value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Add a method attribute to specify the HTTP method for form submission
-    @discardableResult
-    package func method(
-        _ value: Method?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Method.attribute, value?.description)
     }
 }

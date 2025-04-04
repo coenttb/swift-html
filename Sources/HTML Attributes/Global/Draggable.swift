@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Specifies whether an element is draggable or not.
 ///
@@ -85,19 +84,3 @@ extension Draggable: CustomStringConvertible {
         return self.rawValue
     }
 }
-
-extension HTML {
-    /// Sets whether an element is draggable
-    @discardableResult
-    public func draggable(
-        _ value: Draggable
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Draggable.attribute, value.description)
-    }
-    
-    /// Shorthand to set draggable="true"
-    public var draggable: _HTMLAttributes<Self> {
-        self.draggable(.true)
-    }
-}
-//

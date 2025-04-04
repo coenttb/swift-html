@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the maximum number of characters allowed in a text input.
 ///
@@ -77,15 +76,5 @@ extension Maxlength: CustomStringConvertible {
     /// Returns the string representation of the maxlength value
     public var description: String {
         return String(self.value)
-    }
-}
-
-extension HTML {
-    /// Sets the maxlength attribute on an element
-    @discardableResult
-    package func maxlength(
-        _ value: Maxlength?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Maxlength.attribute, value?.description)
     }
 }

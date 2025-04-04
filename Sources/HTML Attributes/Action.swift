@@ -6,8 +6,6 @@
 ///
 
 import Foundation
-import HTML_Attributes
-import PointFreeHTML
 
 /// An attribute that specifies the URL for form submission.
 ///
@@ -104,20 +102,3 @@ extension Action: CustomStringConvertible {
     }
 }
 
-extension HTML {
-    /// Add an action attribute to specify the URL for form submission
-    @discardableResult
-    public func action(
-        _ value: Action?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Action.attribute, value?.description)
-    }
-    
-        /// Add an action attribute with a URL object
-    @discardableResult
-    public func action(
-        _ url: URL
-    ) -> _HTMLAttributes<Self> {
-        self.action(.init(url))
-    }
-}

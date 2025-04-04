@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A Boolean attribute that enables selection of multiple values in form controls.
 ///
@@ -70,21 +69,4 @@ public struct Multiple: Attribute, ExpressibleByBooleanLiteral {
     
     /// The name of the HTML attribute
     public static let attribute: String = "multiple"
-}
-
-extension HTML {
-    /// Adds the multiple attribute to the element
-    package var multiple: _HTMLAttributes<Self> {
-        self.attribute(Multiple.attribute)
-    }
-    
-    /// Conditionally adds the multiple attribute to the element
-    @discardableResult
-    @HTMLBuilder
-    package func multiple(_ value: Bool?) -> some HTML {
-        if value == true {
-            self.multiple
-        }
-        self
-    }
 }

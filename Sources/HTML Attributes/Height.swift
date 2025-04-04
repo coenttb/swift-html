@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the height of an element.
 ///
@@ -81,16 +80,5 @@ extension Height: CustomStringConvertible {
     /// Returns the string representation of the height value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the height attribute on an element
-    @discardableResult
-    package func height(
-        _ value: Height?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Height.attribute, value?.description)
     }
 }

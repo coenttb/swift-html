@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Specifies that an element should be focused when the page loads or when a dialog containing
 /// the element is displayed.
@@ -54,10 +53,3 @@ public enum Autofocus: Attribute, CaseIterable {
     /// The name of the HTML attribute
     public static let attribute: String = "autofocus"
 }
-
-extension HTML {
-    public var autofocus: _HTMLAttributes<Self> {
-        self.attribute(Autofocus.attribute)
-    }
-}
-

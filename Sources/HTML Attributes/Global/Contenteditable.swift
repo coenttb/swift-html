@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A global attribute that indicates whether the element's content is editable by the user.
 ///
@@ -84,18 +83,5 @@ extension Contenteditable {
     /// Returns the string representation of the contenteditable value
     public var description: String {
         return self.rawValue
-    }
-}
-
-extension HTML {
-    @discardableResult
-    public func contenteditable(
-        _ value: Contenteditable
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Contenteditable.attribute, value.description)
-    }
-    
-    public var contenteditable: _HTMLAttributes<Self> {
-        self.contenteditable(.true)
     }
 }

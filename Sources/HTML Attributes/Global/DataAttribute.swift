@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A class of global attributes (data-*) that allows storing custom data private to the page or application.
 ///
@@ -77,7 +76,7 @@ public struct DataAttribute: Attribute {
     }
     
     /// The full attribute name including the "data-" prefix
-    internal var attributeName: String {
+    public var attributeName: String {
         return "data-\(name)"
     }
 }
@@ -86,23 +85,5 @@ extension DataAttribute: CustomStringConvertible {
     /// Returns the value of the data attribute
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    @discardableResult
-    public func data(
-        _ name: some CustomStringConvertible,
-        _ value: some CustomStringConvertible
-    ) -> _HTMLAttributes<Self> {
-        let attribute = DataAttribute(name: name, value: value)
-        return self.attribute(attribute.attributeName, attribute.description)
-    }
-    
-    @discardableResult
-    public func data(
-        _ value: DataAttribute
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(value.attributeName, value.description)
     }
 }

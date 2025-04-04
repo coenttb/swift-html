@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that provides a hint about the expected content of a form control.
 ///
@@ -83,15 +82,5 @@ extension Placeholder: CustomStringConvertible {
     /// Returns the string representation of the placeholder value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Sets the placeholder attribute on an element
-    @discardableResult
-    package func placeholder(
-        _ value: Placeholder?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Placeholder.attribute, value?.description)
     }
 }

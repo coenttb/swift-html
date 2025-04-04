@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that defines the relationship between the current document and a linked resource.
 ///
@@ -164,24 +163,5 @@ extension Rel: CustomStringConvertible {
     /// Returns the string representation of the rel value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the rel attribute on an element
-    @discardableResult
-    package func rel(
-        _ value: Rel?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Rel.attribute, value?.description)
-    }
-
-    /// Sets the rel attribute with multiple link type values
-    @discardableResult
-    package func rel(
-        _ values: Rel.LinkType...
-    ) -> _HTMLAttributes<Self> {
-        self.rel(Rel(values))
     }
 }

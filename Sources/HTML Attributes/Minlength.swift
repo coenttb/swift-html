@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the minimum number of characters required in a text input.
 ///
@@ -81,15 +80,5 @@ extension Minlength: CustomStringConvertible {
     /// Returns the string representation of the minlength value
     public var description: String {
         return String(self.value)
-    }
-}
-
-extension HTML {
-    /// Sets the minlength attribute on an element
-    @discardableResult
-    package func minlength(
-        _ value: Minlength?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Minlength.attribute, value?.description)
     }
 }

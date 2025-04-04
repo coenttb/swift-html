@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the increment granularity for numeric or date/time inputs.
 ///
@@ -143,15 +142,5 @@ extension Step: CustomStringConvertible {
         case .any:
             return "any"
         }
-    }
-}
-
-extension HTML {
-    /// Sets the step attribute on an element
-    @discardableResult
-    package func step(
-        _ value: Step?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Step.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that specifies the name of an HTML element, primarily used with form controls.
 ///
@@ -81,15 +80,5 @@ extension Name: CustomStringConvertible {
     /// Returns the string representation of the name value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    /// Sets the name attribute on an element
-    @discardableResult
-    package func name(
-        _ value: Name?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Name.attribute, value?.description)
     }
 }

@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// An attribute that associates an input element with a datalist of predefined options.
 ///
@@ -85,16 +84,5 @@ extension List: CustomStringConvertible {
     /// Returns the string representation of the list value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    /// Sets the list attribute on an element
-    @discardableResult
-    package func list(
-        _ value: List?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(List.attribute, value?.description)
     }
 }

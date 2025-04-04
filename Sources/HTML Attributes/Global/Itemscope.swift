@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// Defines the scope of associated microdata items.
 ///
@@ -78,21 +77,5 @@ extension Itemscope: CustomStringConvertible {
     /// Returns an empty string, as itemscope is a boolean attribute
     public var description: String {
         return ""
-    }
-}
-
-extension HTML {
-    /// Sets the itemscope attribute, creating a new microdata item
-    @discardableResult
-    public func itemscope() -> _HTMLAttributes<Self> {
-        self.attribute(Itemscope.attribute, "")
-    }
-    
-    /// Sets the itemscope attribute using an Itemscope enum value
-    @discardableResult
-    public func itemscope(
-        _ attribute: Itemscope
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Itemscope.attribute, attribute.description)
     }
 }

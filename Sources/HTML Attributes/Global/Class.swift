@@ -6,7 +6,6 @@
 ///
 
 import Foundation
-import PointFreeHTML
 
 /// A global attribute that specifies one or more class names for an HTML element.
 ///
@@ -75,29 +74,5 @@ extension Class: CustomStringConvertible {
     /// Returns the string representation of the class value
     public var description: String {
         return self.value
-    }
-}
-
-extension HTML {
-    
-    @discardableResult
-    public func `class`(
-        _ value: Class?
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Class.attribute, value?.description)
-    }
-    
-    @discardableResult
-    public func `class`(
-        _ value: [Class?]
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Class.attribute, Class(value.compactMap{ $0 }.map(\.description)).description)
-    }
-    
-    @discardableResult
-    public func `class`(
-        _ value: Class?...
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Class.attribute, Class(value.compactMap{ $0 }.map(\.description)).description)
     }
 }
