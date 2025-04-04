@@ -61,23 +61,30 @@ import PointFreeHTML
 ///   <option>Option 3</option>
 /// </select>
 /// ```
-public enum Multiple: Attribute {
+public struct Multiple: Attribute, ExpressibleByBooleanLiteral {
+    fileprivate let value: Bool
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.value = value
+    }
+    
     /// The name of the HTML attribute
     public static let attribute: String = "multiple"
 }
 
-extension Multiple: CustomStringConvertible {
-    /// Returns the string representation of the multiple attribute
-    public var description: String {
-        switch self {
-            
-        }
-    }
-}
-
 extension HTML {
     /// Adds the multiple attribute to the element
-    public var multiple: _HTMLAttributes<Self> {
+    package var multiple: _HTMLAttributes<Self> {
         self.attribute(Multiple.attribute)
+    }
+    
+    /// Conditionally adds the multiple attribute to the element
+    @discardableResult
+    @HTMLBuilder
+    package func multiple(_ value: Bool?) -> some HTML {
+        if value == true {
+            self.multiple
+        }
+        self
     }
 }

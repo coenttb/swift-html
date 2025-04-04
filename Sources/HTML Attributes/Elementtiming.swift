@@ -76,36 +76,47 @@ public struct Elementtiming: Attribute {
     }
     
     /// Common predefined timing categories for semantic naming
-    public enum Category: String {
+    public struct Category: Sendable, Equatable, ExpressibleByStringLiteral, CustomStringConvertible {
+        private let value: String
+        
+        public init(_ value: String){
+            self.value = value
+        }
+        
+        public init(stringLiteral value: StringLiteralType) {
+            self.value = value
+        }
         /// Main page hero or feature element
-        case hero
+        public static let hero: Self = "hero"
         
         /// Primary content elements
-        case main
+        public static let main: Self = "main"
         
         /// Header elements
-        case header
+        public static let header: Self = "header"
         
         /// Navigation elements
-        case nav
+        public static let nav: Self = "nav"
         
         /// Footer elements
-        case footer
+        public static let footer: Self = "footer"
         
         /// Image elements
-        case image
+        public static let image: Self = "image"
         
         /// Text content elements
-        case text
+        public static let text: Self = "text"
         
         /// Interactive elements
-        case interactive
+        public static let interactive: Self = "interactive"
         
         /// Layout or structural elements
-        case layout
+        public static let layout: Self = "layout"
         
         /// Custom category
-        case custom
+        public static let custom: Self = "custom"
+        
+        public var description: String { self.value }
     }
     
     /// Create an elementtiming value with a predefined category
@@ -113,7 +124,7 @@ public struct Elementtiming: Attribute {
         if category == .custom {
             self.value = name
         } else {
-            self.value = "\(category.rawValue)\(separator)\(name)"
+            self.value = "\(category.description)\(separator)\(name)"
         }
     }
 }
@@ -134,33 +145,16 @@ extension Elementtiming: CustomStringConvertible {
 extension HTML {
     
     @discardableResult
-    public func elementtiming(
+    package func elementtiming(
         _ value: Elementtiming?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Elementtiming.attribute, value?.description)
     }
-    
-    @discardableResult
-    public func elementtiming(
-        _ identifier: String
-    ) -> _HTMLAttributes<Self> {
-        self.elementtiming(Elementtiming(identifier))
-    }
-    
+        
     /// Adds element timing with a categorized identifier
     @discardableResult
-    public func elementtiming(
-        category: Elementtiming.Category, 
-        name: String,
-        separator: String = "-"
-    ) -> _HTMLAttributes<Self> {
-        self.elementtiming(Elementtiming(category: category, name: name, separator: separator))
-    }
-    
-    /// Adds element timing with a categorized identifier and explicit category string
-    @discardableResult
-    public func elementtiming(
-        category: String, 
+    package func elementtiming(
+        category: Elementtiming.Category,
         name: String,
         separator: String = "-"
     ) -> _HTMLAttributes<Self> {

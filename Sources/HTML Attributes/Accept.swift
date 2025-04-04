@@ -71,12 +71,30 @@ public struct Accept: Attribute {
     }
 }
 
-
+extension Accept: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        self = .init(rawValue: value)
+    }
+}
 extension Accept: CustomStringConvertible {
     /// Returns the string representation of the accept value
     public var description: String {
         return self.fileTypes.map(\.description).joined(separator: ", ")
     }
+}
+
+extension Accept {
+    /// Accept any image file
+    public static let images: Self = "image/*"
+    
+    /// Accept any video file
+    public static let videos: Self = "video/*"
+    
+    /// Accept any audio file
+    public static let audio: Self = "audio/*"
+    
+    /// Accept common document files (PDF, Word, Excel, PowerPoint)
+    public static let documents: Self = ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
 }
 
 extension Accept {
@@ -101,12 +119,10 @@ extension Accept {
     }
 }
 
-
-
 extension HTML {
     /// Add an accept attribute to specify which file types are allowed
     @discardableResult
-    public func accept(
+    package func accept(
         _ value: Accept?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Accept.attribute, value?.description)
@@ -114,7 +130,7 @@ extension HTML {
 
     /// Add an accept attribute with multiple file types
     @discardableResult
-    public func accept(
+    package func accept(
         _ fileTypes: Accept.FileType?...
     ) -> _HTMLAttributes<Self> {
         self.accept(Accept(fileTypes.compactMap { $0 }))
@@ -122,7 +138,7 @@ extension HTML {
     
     /// Add an accept attribute with multiple file types
     @discardableResult
-    public func accept(
+    package func accept(
         _ fileTypes: [Accept.FileType?]
     ) -> _HTMLAttributes<Self> {
         self.accept(Accept(fileTypes.compactMap { $0 }))
@@ -146,13 +162,13 @@ extension Accept.FileType {
     // MARK: - Common Image Formats
     
     /// JPEG image (.jpg)
-    public static let jpg: Self = .extension("jpg")
+    public static let jpg: Self = "image/jpeg,.jpg,.jpeg"
     
     /// JPEG image (.jpeg)
-    public static let jpeg: Self = .extension("jpeg")
+    public static let jpeg: Self = .jpg
     
     /// PNG image (.png)
-    public static let png: Self = .extension("png")
+    public static let png: Self = "image/png,.png"
     
     /// GIF image (.gif)
     public static let gif: Self = .extension("gif")
@@ -169,7 +185,7 @@ extension Accept.FileType {
     // MARK: - Common Document Formats
     
     /// PDF document (.pdf)
-    public static let pdf: Self = .extension("pdf")
+    public static let pdf: Self = "application/pdf,.pdf"
     
     /// Microsoft Word document (.doc)
     public static let doc: Self = .extension("doc")

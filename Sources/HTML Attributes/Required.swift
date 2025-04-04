@@ -61,64 +61,30 @@ import PointFreeHTML
 /// ```html
 /// <input type="checkbox" required> I agree to the terms
 /// ```
-public enum Required: Attribute {
+public struct Required: Attribute, ExpressibleByBooleanLiteral {
+    fileprivate let value: Bool
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.value = value
+    }
+    
     /// The name of the HTML attribute
     public static let attribute: String = "required"
-    
-
-}
-
-extension Required: CustomStringConvertible {
-    /// Returns the string representation of the required attribute
-    public var description: String {
-        switch self {
-            
-        }
-    }
 }
 
 extension HTML {
-    
     /// Adds the required attribute to the element
-    public var required: _HTMLAttributes<Self> {
+    package var required: _HTMLAttributes<Self> {
         self.attribute(Required.attribute)
     }
     
     /// Adds the required attribute to the element
     @HTMLBuilder
-    public func required(_ value: Bool?) -> some HTML {
+    package func required(_ value: Bool?) -> some HTML {
         if value == true {
             self.attribute(Required.attribute)
         } else {
             self
         }
     }
-
-    
-//    /// Sets up a required field with proper labeling and indication
-//    @discardableResult
-//    public func requiredField(
-//        id: String,
-//        type: String = "text",
-//        name: String? = nil,
-//        label: String
-//    ) -> HTML {
-//        let input = HTML.input
-//            .id(id)
-//            .attribute("type", type)
-//            .required()
-//            .attribute("aria-required", "true")
-//        
-//        let inputWithName = name != nil ? input.attribute("name", name!) : input
-//        
-//        return HTML.div([
-//            HTML.label.for(id)([
-//                HTML.text(label),
-//                HTML.span.attribute("class", "required-indicator")
-//                    .attribute("aria-hidden", "true")
-//                    .text(" *")
-//            ]),
-//            inputWithName
-//        ])
-//    }
 }

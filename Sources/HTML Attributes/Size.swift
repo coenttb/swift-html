@@ -94,10 +94,9 @@ extension Size: CustomStringConvertible {
 }
 
 extension HTML {
-    
     /// Sets the size attribute on an element
     @discardableResult
-    public func size(
+    package func size(
         _ value: Size?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Size.attribute, value?.description)

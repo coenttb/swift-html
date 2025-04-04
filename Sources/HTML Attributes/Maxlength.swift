@@ -81,31 +81,11 @@ extension Maxlength: CustomStringConvertible {
 }
 
 extension HTML {
-    
     /// Sets the maxlength attribute on an element
     @discardableResult
-    public func maxlength(
+    package func maxlength(
         _ value: Maxlength?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Maxlength.attribute, value?.description)
     }
-    
-    /// Sets the maxlength attribute with an integer value
-    @discardableResult
-    public func maxlength(
-        _ value: Int
-    ) -> _HTMLAttributes<Self> {
-        self.maxlength(Maxlength(value))
-    }
-    
-//    /// Sets both minlength and maxlength attributes to define a valid length range
-//    @discardableResult
-//    public func lengthRange(
-//        min: Int,
-//        max: Int
-//    ) -> _HTMLAttributes<Self> {
-//        return self
-//            .attribute("minlength", String(max(0, min)))
-//            .attribute("maxlength", String(max(0, max)))
-//    }
 }

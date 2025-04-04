@@ -120,7 +120,7 @@ extension Method: CustomStringConvertible {
 extension HTML {
     /// Add a method attribute to specify the HTTP method for form submission
     @discardableResult
-    public func method(
+    package func method(
         _ value: Method?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Method.attribute, value?.description)

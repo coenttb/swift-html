@@ -85,47 +85,11 @@ extension Minlength: CustomStringConvertible {
 }
 
 extension HTML {
-    
     /// Sets the minlength attribute on an element
     @discardableResult
-    public func minlength(
+    package func minlength(
         _ value: Minlength?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Minlength.attribute, value?.description)
     }
-}
-
-extension HTML {
-    
-//    /// Makes the field required and sets a minimum length
-//    @discardableResult
-//    public func requiredWithMinlength(
-//        _ length: Int
-//    ) -> _HTMLAttributes<Self> {
-//        return self
-//            .attribute("required", "")
-//            .minlength(length)
-//    }
-//
-//    /// Sets both minlength and maxlength attributes to define a valid length range
-//    @discardableResult
-//    public func lengthRange(
-//        min: Int,
-//        max: Int
-//    ) -> _HTMLAttributes<Self> {
-//        return self
-//            .attribute("minlength", String(max(0, min)))
-//            .attribute("maxlength", String(max(0, max)))
-//    }
-//
-//    /// Sets both minlength and maxlength attributes and makes the field required
-//    @discardableResult
-//    public func requiredWithLengthRange(
-//        min: Int,
-//        max: Int
-//    ) -> _HTMLAttributes<Self> {
-//        return self
-//            .attribute("required", "")
-//            .lengthRange(min: min, max: max)
-//    }
 }

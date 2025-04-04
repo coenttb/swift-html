@@ -113,29 +113,11 @@ extension HTML {
         self.attribute(Action.attribute, value?.description)
     }
     
-    /// Add an action attribute with a URL string
-    @discardableResult
-    public func action(
-        _ url: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Action.attribute, url)
-    }
-    
-    /// Add an action attribute with a URL object
+        /// Add an action attribute with a URL object
     @discardableResult
     public func action(
         _ url: URL
     ) -> _HTMLAttributes<Self> {
         self.action(.init(url))
-    }
-    
-    /// Create a form with specific action and default POST method
-    public static func submitForm(
-        action: String,
-        @HTMLBuilder content: () -> some HTML
-    ) -> some HTML {
-        form { content() }
-            .action(action)
-            .method(.post)
     }
 }

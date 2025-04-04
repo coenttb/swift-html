@@ -27,16 +27,39 @@ extension Input {
         public var value: String?
         
         /// A boolean attribute indicating whether this checkbox is checked by default (when the page loads).
-        public var checked: Bool?
+        public var checked: Checked?
         
         /// Creates a new checkbox input configuration
         public init(
             value: String? = nil,
-            checked: Bool? = nil
+            checked: Checked? = nil
         ) {
             self.value = value
             self.checked = checked
         }
+    }
+}
+
+extension Input {
+    /// Creates a new checkbox input element
+    public static func checkbox(
+        name: String,
+        value: String? = nil,
+        checked: Checked? = nil,
+        disabled: Disabled? = nil,
+        form: Form.ID? = nil
+    ) -> Self {
+        .init(
+            name: name,
+            disabled: disabled,
+            form: form,
+            type: .checkbox(
+                .init(
+                    value: value,
+                    checked: checked
+                )
+            )
+        )
     }
 }
 

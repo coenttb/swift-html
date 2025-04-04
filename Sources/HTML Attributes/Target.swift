@@ -84,7 +84,7 @@ import PointFreeHTML
 ///     input().type(.submit).value("Open in New Tab").formtarget("_blank")
 /// }
 /// ```
-public struct FormTarget: Attribute {
+public struct Target: Attribute {
     /// The name of the HTML attribute
     public static let attribute: String = "target"
     
@@ -112,18 +112,18 @@ public struct FormTarget: Attribute {
     public static let unfencedTop: Self = "_unfencedTop"
     
     /// Creates a target for a specific named browsing context (e.g., an iframe's name)
-    public static func named(_ name: String) -> FormTarget {
-        return FormTarget(name)
+    public static func named(_ name: String) -> Target {
+        return Target(name)
     }
 }
 
-extension FormTarget: ExpressibleByStringLiteral {
+extension Target: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.value = value
     }
 }
 
-extension FormTarget: CustomStringConvertible {
+extension Target: CustomStringConvertible {
     /// Returns the string representation of the target value
     public var description: String {
         return self.value
@@ -133,34 +133,9 @@ extension FormTarget: CustomStringConvertible {
 extension HTML {
     /// Add a target attribute to a form to specify where to display the response
     @discardableResult
-    public func target(
-        form value: FormTarget?
+    package func target(
+        form value: Target?
     ) -> _HTMLAttributes<Self> {
-        self.attribute(FormTarget.attribute, value?.description)
-    }
-    
-    /// Create a form that opens the response in a new tab
-    public static func newTabForm(
-        action: String,
-        method: Method = .post,
-        @HTMLBuilder content: () -> some HTML
-    ) -> some HTML {
-        form { content() }
-            .action(action)
-            .method(method)
-            .target(form: .blank)
-    }
-    
-    /// Create a form that targets a specific iframe
-    public static func iframeTargetForm(
-        action: String,
-        targetFrame: String,
-        method: Method = .post,
-        @HTMLBuilder content: () -> some HTML
-    ) -> some HTML {
-        form { content() }
-            .action(action)
-            .method(method)
-            .target(form: FormTarget.named(targetFrame))
+        self.attribute(Target.attribute, value?.description)
     }
 }

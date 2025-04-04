@@ -83,7 +83,7 @@ extension Dirname: CustomStringConvertible {
 
 extension HTML {
     @discardableResult
-    public func dirname(
+    package func dirname(
         _ value: Dirname?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Dirname.attribute, value?.description)

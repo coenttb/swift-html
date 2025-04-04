@@ -78,11 +78,6 @@ public struct Min: Attribute {
         self.value = value
     }
     
-    /// Initialize with a numeric value
-    public init<T: Numeric & CustomStringConvertible>(_ value: T) {
-        self.value = value.description
-    }
-    
     /// Initialize with a date
     public init(date: Date, format: DateFormat = .fullDate) {
         let formatter: DateFormatter
@@ -113,7 +108,7 @@ public struct Min: Attribute {
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
         }
         
-        self.value = formatter.string(from: date)
+        self = .init(formatter.string(from: date))
     }
     
     /// Date format types for the min attribute
@@ -192,7 +187,7 @@ extension HTML {
     
     /// Sets the min attribute on an element
     @discardableResult
-    public func min(
+    package func min(
         _ value: Min?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Min.attribute, value?.description)
@@ -200,38 +195,10 @@ extension HTML {
     
     /// Sets the min attribute with a date value and format
     @discardableResult
-    public func min(
+    package func min(
         date: Date,
         format: Min.DateFormat = .fullDate
     ) -> _HTMLAttributes<Self> {
         self.min(Min(date: date, format: format))
-    }
-}
-
-extension HTML {
-    /// Sets both min and max attributes to define a numeric range
-    @discardableResult
-    public func range<T: Numeric & CustomStringConvertible>(
-        min: T,
-        max: T
-    ) -> _HTMLAttributes<Self> {
-        return self
-            .attribute(Min.attribute, min.description)
-            .attribute("max", max.description)
-    }
-    
-    /// Sets both min and max attributes to define a date range
-    @discardableResult
-    public func dateRange(
-        min: Date,
-        max: Date,
-        format: Min.DateFormat = .fullDate
-    ) -> _HTMLAttributes<Self> {
-        let minInstance = Min(date: min, format: format)
-        let maxInstance = Min(date: max, format: format) // Reusing the same date format logic
-        
-        return self
-            .attribute(Min.attribute, minInstance.description)
-            .attribute("max", maxInstance.description)
     }
 }

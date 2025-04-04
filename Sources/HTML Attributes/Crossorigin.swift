@@ -109,14 +109,14 @@ extension Crossorigin: CustomStringConvertible {
 extension HTML {
     
     @discardableResult
-    public func crossorigin(
+    package func crossorigin(
         _ value: Crossorigin?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Crossorigin.attribute, value?.description)
     }
     
     @discardableResult
-    public func crossorigin(
+    package func crossorigin(
         _ policy: Crossorigin.Policy
     ) -> _HTMLAttributes<Self> {
         self.crossorigin(Crossorigin(policy))

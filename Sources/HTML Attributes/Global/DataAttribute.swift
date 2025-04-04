@@ -82,7 +82,7 @@ public struct DataAttribute: Attribute {
     }
 }
 
-extension DataAttribute {
+extension DataAttribute: CustomStringConvertible {
     /// Returns the value of the data attribute
     public var description: String {
         return self.value

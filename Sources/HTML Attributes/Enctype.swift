@@ -120,39 +120,9 @@ extension Enctype: CustomStringConvertible {
 extension HTML {
     /// Add an enctype attribute to specify the form data encoding type
     @discardableResult
-    public func enctype(
+    package func enctype(
         _ value: Enctype?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Enctype.attribute, value?.description)
     }
-//    
-//    /// Add an enctype attribute with a string value
-//    @discardableResult
-//    public func enctype(
-//        _ value: String
-//    ) -> _HTMLAttributes<Self> {
-//        self.attribute(Enctype.attribute, value)
-//    }
-//    
-//    /// Add an enctype attribute with a predefined encoding type
-//    @discardableResult
-//    public func enctype(
-//        _ type: Enctype.EncodingType
-//    ) -> _HTMLAttributes<Self> {
-//        self.enctype(Enctype(type))
-//    }
-//    
-//    /// Create a file upload form with the required enctype
-//    @HTMLBuilder
-//    public static func fileUploadForm(
-//        action: String,
-//        @HTMLBuilder content: () -> some HTML
-//    ) -> some HTML {
-//        form {
-//            content()
-//        }
-//            .action(action)
-//            .method(.post)
-//            .enctype(.multipartFormData)
-//    }
 }

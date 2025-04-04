@@ -58,41 +58,28 @@ import PointFreeHTML
 /// <label for="password">Password:</label>
 /// <input type="password" id="password" name="password" spellcheck="false">
 /// ```
-public enum Spellcheck: Attribute {
-    /// Enable spell checking
-    case `true`
+public struct Spellcheck: Attribute, ExpressibleByBooleanLiteral {
     
-    /// Disable spell checking
-    case `false`
-    
-    /// The name of the HTML attribute
     public static let attribute: String = "spellcheck"
+    
+    fileprivate let value: Bool
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.value = value
+    }
+    /// The name of the HTML attribute
 }
 
 extension Spellcheck: CustomStringConvertible {
-    /// Returns the string representation of the spellcheck value
     public var description: String {
-        switch self {
-        case .true:
-            return "true"
-        case .false:
-            return "false"
-        }
+        self.value.description
     }
 }
 
 extension HTML {
-    /// Sets the spellcheck attribute with a boolean value
-    @discardableResult
-    public func spellcheck(
-        _ value: Bool
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Spellcheck.attribute, value ? "true" : "false")
-    }
-    
     /// Sets the spellcheck attribute using a Spellcheck enum value
     @discardableResult
-    public func spellcheck(
+    package func spellcheck(
         _ attribute: Spellcheck
     ) -> _HTMLAttributes<Self> {
         self.attribute(Spellcheck.attribute, attribute.description)

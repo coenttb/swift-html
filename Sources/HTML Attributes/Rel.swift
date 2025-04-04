@@ -171,31 +171,15 @@ extension HTML {
     
     /// Sets the rel attribute on an element
     @discardableResult
-    public func rel(
+    package func rel(
         _ value: Rel?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Rel.attribute, value?.description)
     }
-    
-    /// Sets the rel attribute with a string value
-    @discardableResult
-    public func rel(
-        _ value: String
-    ) -> _HTMLAttributes<Self> {
-        self.rel(.init(value))
-    }
-    
-    /// Sets the rel attribute with multiple string values
-    @discardableResult
-    public func rel(
-        _ values: String...
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Rel.attribute, values.joined(separator: " "))
-    }
-    
+
     /// Sets the rel attribute with multiple link type values
     @discardableResult
-    public func rel(
+    package func rel(
         _ values: Rel.LinkType...
     ) -> _HTMLAttributes<Self> {
         self.rel(Rel(values))

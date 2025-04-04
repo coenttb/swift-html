@@ -58,79 +58,52 @@ extension Input {
 }
 
 extension Input.Image {
-    public struct Form: Sendable, Equatable {
-        
-        /// A string indicating the URL to which to submit the data. This takes precedence over the action attribute on the `<form>` element that owns the `<input>`.
-        ///
-        /// This attribute is also available on `<input type="submit">` and `<button>` elements.
-        public var action: Form.Action?
-        
-        /// A string that identifies the encoding method to use when submitting the form data to the server.
-        public var enctype: Form.EncType?
-        
-        /// A string indicating the HTTP method to use when submitting the form's data; this value overrides any method attribute given on the owning form.
-        public var method: Form.Method?
-        
-        /// A Boolean attribute which, if present, specifies that the form should not be validated before submission to the server. This overrides the value of the novalidate attribute on the element's owning form.
-        public var novalidate: Bool?
-        
-        /// A string which specifies a name or keyword that indicates where to display the response received after submitting the form. The string must be the name of a browsing context (that is, a tab, window, or `<iframe>`. A value specified here overrides any target given by the target attribute on the `<form>` that owns this input.
-        public var target: Form.Target?
-        
-        /// Create a new form override configuration
-        public init(
-            action: Form.Action? = nil,
-            enctype: Form.EncType? = nil,
-            method: Form.Method? = nil,
-            novalidate: Bool? = nil,
-            target: Form.Target? = nil
-        ) {
-            self.action = action
-            self.enctype = enctype
-            self.method = method
-            self.novalidate = novalidate
-            self.target = target
-        }
-    }
+    public typealias Form = HTML_Attributes.Form
 }
 
 extension Input.Image {
-    public struct Src: Sendable, Equatable, ExpressibleByStringLiteral, CustomStringConvertible {
-        public var value: String
-        
-        public init(_ value: String) {
-            self.value = value
-        }
-        
-        public init(_ url: URL) {
-            self.value = url.absoluteString
-        }
-        
-        public init(stringLiteral value: StringLiteralType) {
-            self = .init(value)
-        }
-        
-        public var description: String { value }
-    }
+    public typealias Src = HTML_Attributes.Src
 }
 
 extension Input.Image {
-    public typealias Alt = String
+    public typealias Alt = HTML_Attributes.Alt
 }
 
-extension Input.Image.Form {
-    public typealias ID = String
-    public typealias EncType = HTML_Elements.Enctype
-    public typealias Target = HTML_Elements.Target
-    public typealias Action = HTML_Elements.Action
-    public typealias Method = HTML_Elements.Method
+extension Input {
+    /// Creates a new image input element (graphical submit button)
+    public static func image(
+        name: String,
+        src: Src,
+        alt: Alt? = nil,
+        height: Double? = nil,
+        width: Double? = nil,
+        formId: Form.ID? = nil,
+        form: Form,
+        disabled: Disabled? = nil
+    ) -> Self {
+        .init(
+            name: name,
+            disabled: disabled,
+            form: formId,
+            type: .image(
+                .init(
+                    src: src,
+                    alt: alt,
+                    height: height,
+                    width: width,
+                    form: form
+                )
+            )
+        )
+    }
 }
-
 
 //<input type="image">
 //
 //
 //Baseline Widely available
+
+
 //
 //
 //

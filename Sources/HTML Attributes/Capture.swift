@@ -82,7 +82,7 @@ extension Capture: CustomStringConvertible {
 extension HTML {
     
     @discardableResult
-    public func capture(
+    package func capture(
         _ value: Capture?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Capture.attribute, value?.description)

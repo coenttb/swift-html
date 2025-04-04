@@ -49,6 +49,17 @@ public struct Autocomplete: Attribute {
     }
 }
 
+extension Autocomplete: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: BooleanLiteralType) {
+        switch value {
+        case true:
+            self = .on
+        case false:
+            self = .off
+        }
+    }
+}
+
 extension Autocomplete: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.value = value
@@ -373,28 +384,9 @@ extension Autocomplete.Token {
 extension HTML {
     
     @discardableResult
-    public func autocomplete(
+    package func autocomplete(
         _ value: Autocomplete?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Autocomplete.attribute, value?.description)
-    }
-    
-//    @discardableResult
-//    public func autocomplete(
-//        _ value: [Autocomplete]
-//    ) -> _HTMLAttributes<Self> {
-//        self.attribute(Autocomplete.attribute, Autocomplete(value.map(\.description)).description)
-//    }
-//    
-//    @discardableResult
-//    public func autocomplete(
-//        _ value: Autocomplete...
-//    ) -> _HTMLAttributes<Self> {
-//        self.attribute(Autocomplete.attribute, Autocomplete(value.map(\.description)).description)
-//    }
-//    
-    @discardableResult
-    public func autocomplete(on: Bool) -> _HTMLAttributes<Self> {
-        self.attribute(Autocomplete.attribute, (on ? Autocomplete.on : .off).description)
     }
 }

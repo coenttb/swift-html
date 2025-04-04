@@ -55,15 +55,6 @@ public enum Autofocus: Attribute, CaseIterable {
     public static let attribute: String = "autofocus"
 }
 
-extension Autofocus {
-    /// Returns the string representation of the autofocus value
-    public var description: String {
-        switch self {
-            
-        }
-    }
-}
-
 extension HTML {
     public var autofocus: _HTMLAttributes<Self> {
         self.attribute(Autofocus.attribute)

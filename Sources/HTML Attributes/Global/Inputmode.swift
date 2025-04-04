@@ -151,9 +151,9 @@ extension HTML {
     /// Sets the inputmode attribute to hint at what type of virtual keyboard to display
     @discardableResult
     public func inputmode(
-        _ mode: Inputmode
+        _ mode: Inputmode?
     ) -> _HTMLAttributes<Self> {
-        self.attribute(Inputmode.attribute, mode.description)
+        self.attribute(Inputmode.attribute, mode?.description)
     }
 }
 //

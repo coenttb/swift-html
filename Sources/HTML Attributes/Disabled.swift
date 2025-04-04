@@ -56,24 +56,35 @@ import PointFreeHTML
 ///   <input type="email" name="email">
 /// </fieldset>
 /// ```
-public enum Disabled: Attribute {
+public struct Disabled: Attribute, ExpressibleByBooleanLiteral {
+    fileprivate let value: Bool
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.value = value
+    }
+    
+    /// Initialize with a boolean value
+    public init(_ value: Bool) {
+        self.value = value
+    }
+    
     /// The name of the HTML attribute
     public static let attribute: String = "disabled"
-    
-}
-
-extension Disabled: CustomStringConvertible {
-    /// Returns the string representation of the disabled attribute
-    public var description: String {
-        switch self {
-            
-        }
-    }
 }
 
 extension HTML {
     /// Adds the disabled attribute to the element
-    public var disabled: _HTMLAttributes<Self> {
+    package var disabled: _HTMLAttributes<Self> {
         self.attribute(Disabled.attribute)
+    }
+    
+    /// Conditionally adds the disabled attribute to the element
+    @HTMLBuilder
+    package func disabled(_ value: Bool?) -> some HTML {
+        if value == true {
+            self.attribute(Disabled.attribute)
+        } else {
+            self
+        }
     }
 }

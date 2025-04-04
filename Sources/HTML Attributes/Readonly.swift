@@ -57,114 +57,32 @@ import PointFreeHTML
 /// ```html
 /// <input type="date" value="2025-01-01" readonly>
 /// ```
-public struct Readonly: Attribute {
+public struct Readonly: Attribute, ExpressibleByBooleanLiteral {
+    fileprivate let value: Bool
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self.value = value
+    }
+    
     /// The name of the HTML attribute
     public static let attribute: String = "readonly"
     
-    /// The value of the readonly attribute (always empty for Boolean attributes)
-    private let value: String = ""
-    
-    /// Initialize a readonly attribute
-    public init() {}
-    
-    /// Initialize with a boolean value to conditionally include the attribute
-    public init(_ isReadonly: Bool) {
-        // This initializer exists for API consistency, but
-        // the actual boolean value is not stored as readonly is a Boolean attribute
-    }
-    
-    /// A shared instance to use since all instances are identical
-    public static let readonly = Readonly()
-}
-
-extension Readonly: CustomStringConvertible {
-    /// Returns the string representation of the readonly attribute
-    public var description: String {
-        return self.value
-    }
 }
 
 extension HTML {
     
     /// Adds the readonly attribute to the element
-    @discardableResult
-    public func readonly() -> _HTMLAttributes<Self> {
-        self.attribute(Readonly.attribute, Readonly.readonly.description)
+    package var readonly: _HTMLAttributes<Self> {
+        self.attribute(Readonly.attribute)
     }
     
     /// Conditionally adds the readonly attribute to the element
     @discardableResult
     @HTMLBuilder
-    public func readonly(_ isReadonly: Bool) -> some HTML {
-        if isReadonly {
-            self.readonly()
+    package func readonly(_ value: Bool?) -> some HTML {
+        if value == true {
+            self.readonly
         }
         self
     }
-    
-//    /// Creates a text display field (readonly input with value)
-//    @discardableResult
-//    public func displayField(
-//        id: String,
-//        name: String? = nil,
-//        label: String,
-//        value: String
-//    ) -> HTML {
-//        let input = HTML.input
-//            .id(id)
-//            .attribute("type", "text")
-//            .attribute("value", value)
-//            .readonly()
-//        
-//        let inputWithName = name != nil ? input.attribute("name", name!) : input
-//        
-//        return HTML.div([
-//            HTML.label
-//                .for(id)
-//                .text(label),
-//            inputWithName
-//        ])
-//    }
-//    
-//    /// Creates a static text display area (readonly textarea with content)
-//    @discardableResult
-//    public func displayArea(
-//        id: String,
-//        name: String? = nil,
-//        label: String,
-//        content: String
-//    ) -> HTML {
-//        let textarea = HTML.textarea
-//            .id(id)
-//            .readonly()
-//            .text(content)
-//        
-//        let textareaWithName = name != nil ? textarea.attribute("name", name!) : textarea
-//        
-//        return HTML.div([
-//            HTML.label
-//                .for(id)
-//                .text(label),
-//            textareaWithName
-//        ])
-//    }
-//    
-//    /// Sets either readonly or disabled based on preference
-//    @discardableResult
-//    public func editability(
-//        readonly: Bool = false,
-//        disabled: Bool = false
-//    ) -> _HTMLAttributes<Self> {
-//        var result = self
-//        
-//        if readonly {
-//            result = result.attribute(Readonly.attribute, "")
-//        }
-//        
-//        if disabled {
-//            result = result.attribute("disabled", "")
-//        }
-//        
-//        return result
-//    }
 }

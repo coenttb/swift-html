@@ -174,10 +174,9 @@ extension Max: CustomStringConvertible {
 }
 
 extension HTML {
-    
     /// Sets the max attribute on an element
     @discardableResult
-    public func max(
+    package func max(
         _ value: Max?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Max.attribute, value?.description)
@@ -185,7 +184,7 @@ extension HTML {
 
     /// Sets the max attribute with a date value and format
     @discardableResult
-    public func max(
+    package func max(
         date: Date,
         format: Max.DateFormat = .fullDate
     ) -> _HTMLAttributes<Self> {

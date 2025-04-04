@@ -101,21 +101,9 @@ extension HTML {
     
     /// Sets the for attribute on an element
     @discardableResult
-    public func `for`(
+    package func `for`(
         _ value: For?
     ) -> _HTMLAttributes<Self> {
         self.attribute(For.attribute, value?.description)
-    }
-    
-    /// Sets the for attribute on an element
-    @discardableResult
-    public func `for`(
-        _ value: String?
-    ) -> _HTMLAttributes<Self> {
-        if let value {
-            self.for(For(value))
-        } else {
-            self.for(For?.none)
-        }
     }
 }

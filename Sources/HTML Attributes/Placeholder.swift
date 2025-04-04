@@ -87,71 +87,11 @@ extension Placeholder: CustomStringConvertible {
 }
 
 extension HTML {
-    
     /// Sets the placeholder attribute on an element
     @discardableResult
-    public func placeholder(
+    package func placeholder(
         _ value: Placeholder?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Placeholder.attribute, value?.description)
     }
-    
-    /// Sets the placeholder attribute with a string value
-    @discardableResult
-    public func placeholder(
-        _ value: String
-    ) -> _HTMLAttributes<Self> {
-        self.attribute(Placeholder.attribute, value)
-    }
-    
-//    /// Sets up a standard email input with label and placeholder
-//    @discardableResult
-//    @HTMLBuilder
-//    public func emailField(
-//        id: String,
-//        name: String? = nil,
-//        label: String = "Email address:",
-//        placeholder: String = "example@domain.com",
-//        required: Bool = false
-//    ) -> some HTML {
-//        let input = input()
-//            .id(id)
-//            .attribute("type", "email")
-//            .placeholder(placeholder)
-//        
-//        let inputWithName = name != nil ? input.attribute("name", name!) : input
-//        let inputWithRequired = required ? inputWithName.attribute("required", "") : inputWithName
-//        
-//        return div {
-//            label()
-//                .for(id)
-//                .text(label)
-//            inputWithRequired
-//        
-//    }
-//    
-//    /// Sets up a standard text input with label and placeholder
-//    @discardableResult
-//    public func textField(
-//        id: String,
-//        name: String? = nil,
-//        label: String,
-//        placeholder: String,
-//        required: Bool = false
-//    ) -> HTML {
-//        let input = HTML.input
-//            .id(id)
-//            .attribute("type", "text")
-//            .placeholder(placeholder)
-//        
-//        let inputWithName = name != nil ? input.attribute("name", name!) : input
-//        let inputWithRequired = required ? inputWithName.attribute("required", "") : inputWithName
-//        
-//        return HTML.div([
-//            HTML.label
-//                .for(id)
-//                .text(label),
-//            inputWithRequired
-//        ])
-//    }
 }

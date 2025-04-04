@@ -70,43 +70,19 @@ public enum Novalidate: Attribute {
     public static let attribute: String = "novalidate"
 }
 
-extension Novalidate: CustomStringConvertible {
-    /// Returns the string representation of the novalidate attribute
-    public var description: String {
-        switch self {
-            
-        }
-    }
-}
-
 extension HTML {
     /// Add the novalidate attribute to disable browser validation for a form
-    public var novalidate: _HTMLAttributes<Self> {
+    package var novalidate: _HTMLAttributes<Self> {
         self.attribute(Novalidate.attribute)
     }
-//    
-//    /// Add the novalidate attribute to disable browser validation for a form
-//    @discardableResult
-//    public var novalidate: _HTMLAttributes<Self> {
-//        self.attribute(Novalidate.attribute, "")
-//    }
-//    
-//    /// Add the formnovalidate attribute to a submit button or input
-//    @discardableResult
-//    public var formnovalidate: _HTMLAttributes<Self> {
-//        self.attribute("formnovalidate", "")
-//    }
-//    
-//    /// Create a form with validation disabled
-//    public static func novalidateForm(
-//        action: String,
-//        method: String = "post",
-//        @HTMLBuilder content: () -> HTML
-//    ) -> HTML {
-//        form()
-//            .action(action)
-//            .method(method)
-//            .novalidate
-//            .content(content)
-//    }
+    
+    /// Conditionally adds the novalidate attribute to the element
+    @discardableResult
+    @HTMLBuilder
+    package func novalidate(_ value: Bool?) -> some HTML {
+        if value == true {
+            self.novalidate
+        }
+        self
+    }
 }

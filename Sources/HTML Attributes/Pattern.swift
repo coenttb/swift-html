@@ -90,10 +90,9 @@ extension Pattern: CustomStringConvertible {
 }
 
 extension HTML {
-    
     /// Sets the pattern attribute on an element
     @discardableResult
-    public func pattern(
+    package func pattern(
         _ value: Pattern?
     ) -> _HTMLAttributes<Self> {
         self.attribute(Pattern.attribute, value?.description)
