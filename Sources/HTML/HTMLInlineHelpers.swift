@@ -597,10 +597,10 @@ extension HTML {
         rowGap(.length(length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
-    @discardableResult
-    public func rowGap(percentage value: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        rowGap(.percentage(value), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
+//    @discardableResult
+//    public func rowGap(percentage value: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        rowGap(.percentage(value), media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
     
     @discardableResult
     public func rowGapNormal(media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -625,10 +625,10 @@ extension HTML {
         maxWidth(.length(length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
-    @discardableResult
-    public func maxWidth(percentage value: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        maxWidth(.percentage(value), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
+//    @discardableResult
+//    public func maxWidth(percentage value: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        maxWidth(.percentage(value), media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
     
     @discardableResult
     public func maxWidth(keyword value: CSS.MaxWidth.Keyword, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -653,10 +653,10 @@ extension HTML {
         maxHeight(.length(length), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
-    @discardableResult
-    public func maxHeight(percentage value: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        maxHeight(.percentage(value), media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
+//    @discardableResult
+//    public func maxHeight(percentage value: Double, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        maxHeight(.percentage(value), media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
     
     @discardableResult
     public func maxHeight(keyword value: CSS.MaxHeight.Keyword, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -750,16 +750,7 @@ extension HTML {
     
     @discardableResult
     public func verticalAlign(_ value: VerticalAlign, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        let alignValue: String
-        switch value {
-        case .keyword(let keyword):
-            alignValue = keyword.rawValue
-        case .length(let length):
-            alignValue = length.description
-        case .percentage(let percentage):
-            alignValue = "\(percentage)%"
-        }
-        return inlineStyle("vertical-align", alignValue, media: mediaQuery, pre: pre, pseudo: pseudo)
+        return inlineStyle("vertical-align", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
     @discardableResult
@@ -1567,15 +1558,15 @@ extension HTML {
         inlineStyle("grid-row-end", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
     }
 
-    @discardableResult
-    public func gridColumn(_ value: GridColumn, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("grid-column", "\(value.start.description) / \(value.end.description)", media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
-
-    @discardableResult
-    public func gridRow(_ value: GridRow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
-        inlineStyle("grid-row", "\(value.start.description) / \(value.end.description)", media: mediaQuery, pre: pre, pseudo: pseudo)
-    }
+//    @discardableResult
+//    public func gridColumn(_ value: GridColumn, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        inlineStyle("grid-column", "\(value.start.description) / \(value.end.description)", media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
+//
+//    @discardableResult
+//    public func gridRow(_ value: GridRow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
+//        inlineStyle("grid-row", "\(value.start.description) / \(value.end.description)", media: mediaQuery, pre: pre, pseudo: pseudo)
+//    }
 
     @discardableResult
     public func gridArea(_ value: GridArea, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {

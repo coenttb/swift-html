@@ -18,11 +18,11 @@ extension Font {
         case lineHeight(CSS.LineHeight?)
         case stretch(CSS.Font.Stretch?)
         
-        public static func size(_ length: Length?) -> Self {
+        public static func size(_ length: Length) -> Self {
             return .size(.length(length))
         }
         
-        public static func lineHeight(_ length: Length?) -> Self {
+        public static func lineHeight(_ length: Length) -> Self {
             return .lineHeight(.length(length))
         }
     }

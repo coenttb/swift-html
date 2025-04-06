@@ -39,12 +39,12 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @HTMLBuilder
-    public func type(_ type: InputType) -> some HTML {
-        attribute("type", type.rawValue)
-    }
-}
+//extension HTML {
+//    @HTMLBuilder
+//    public func type(_ type: InputType) -> some HTML {
+//        attribute("type", type.rawValue)
+//    }
+//}
 
 extension HTML {
     @HTMLBuilder
