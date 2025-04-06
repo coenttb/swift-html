@@ -55,18 +55,13 @@ import Foundation
 ///   <input type="email" name="email">
 /// </fieldset>
 /// ```
-public struct Disabled: Attribute, ExpressibleByBooleanLiteral {
-    fileprivate let value: Bool
-    
-    public init(booleanLiteral value: BooleanLiteralType) {
-        self.value = value
-    }
-    
-    /// Initialize with a boolean value
-    public init(_ value: Bool) {
-        self.value = value
-    }
-    
+public struct Disabled: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "disabled"
+    
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
+    }
 }

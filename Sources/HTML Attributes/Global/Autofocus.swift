@@ -49,7 +49,13 @@ import Foundation
 ///   </form>
 /// </dialog>
 /// ```
-public enum Autofocus: Attribute, CaseIterable {
+public struct Autofocus: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "autofocus"
+    
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
+    }
 }

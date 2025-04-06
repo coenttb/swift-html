@@ -3,11 +3,12 @@
 /// swift-html
 ///
 /// Created by Coen ten Thije Boonkkamp on 03/04/2025.
+/// Updated by Claude on 04/06/2025.
 ///
 
 import Foundation
 
-/// An attribute that controls how the element handles cross-origin requests.
+/// An enumeration that controls how the element handles cross-origin requests.
 ///
 /// The `crossorigin` attribute enables Cross-Origin Resource Sharing (CORS) for elements
 /// that fetch external resources. It specifies whether to use CORS and if so, whether
@@ -22,9 +23,9 @@ import Foundation
 ///
 /// ## Values
 ///
-/// - `"anonymous"`: Sends CORS request without credentials (cookies, client certificates, etc.)
-/// - `"use-credentials"`: Sends CORS request with credentials
-/// - An empty string or invalid value is equivalent to `"anonymous"`
+/// - `anonymous`: Sends CORS request without credentials (cookies, client certificates, etc.)
+/// - `useCredentials`: Sends CORS request with credentials
+/// - An empty string or invalid value is equivalent to `anonymous`
 ///
 /// ## Element-Specific Behavior
 ///
@@ -45,62 +46,36 @@ import Foundation
 /// ```html
 /// <link rel="manifest" href="/app.webmanifest" crossorigin="use-credentials">
 /// ```
-public struct Crossorigin: Attribute {
+public enum Crossorigin: String, Sendable, Equatable, CustomStringConvertible {
+    /// A cross-origin request is performed, but no credentials are sent
+    case anonymous
+    
+    /// A cross-origin request is performed along with credentials
+    case useCredentials = "use-credentials"
+    
     /// The name of the HTML attribute
     public static let attribute: String = "crossorigin"
     
-    /// The crossorigin policy value
-    private let value: String
-    
-    /// Initialize with a raw value
-    private init(_ value: String) {
-        self.value = value
+    /// Returns the string representation of the crossorigin value
+    public var description: String {
+        return self.rawValue
     }
     
-    /// Initialize with a policy type
-    public init(_ policy: Policy) {
-        switch policy {
-        case .anonymous:
-            self.value = "anonymous"
-        case .useCredentials:
-            self.value = "use-credentials"
+    /// Initialize from a string, defaulting to anonymous for invalid values
+    ///
+    /// According to the HTML spec, any value other than "use-credentials"
+    /// (including empty string or invalid values) should be treated as "anonymous".
+    public init(_ value: String) {
+        if value == "use-credentials" {
+            self = .useCredentials
+        } else {
+            self = .anonymous
         }
-    }
-    
-    /// The CORS policy represented by this attribute
-    public enum Policy {
-        /// Request uses CORS headers without credentials
-        case anonymous
-        
-        /// Request uses CORS headers with credentials included
-        case useCredentials
-    }
-    
-    /// Use anonymous CORS (no credentials)
-    public static var anonymous: Crossorigin {
-        return Crossorigin(.anonymous)
-    }
-    
-    /// Use CORS with credentials included
-    public static var useCredentials: Crossorigin {
-        return Crossorigin(.useCredentials)
     }
 }
 
 extension Crossorigin: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
-        if value == "use-credentials" {
-            self.value = "use-credentials"
-        } else {
-            // Any invalid value or empty string defaults to "anonymous"
-            self.value = "anonymous"
-        }
-    }
-}
-
-extension Crossorigin: CustomStringConvertible {
-    /// Returns the string representation of the crossorigin value
-    public var description: String {
-        return self.value
+        self.init(value)
     }
 }

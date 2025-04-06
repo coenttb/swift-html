@@ -72,14 +72,14 @@ import Foundation
 ///   <button onclick="closeDialog()">Close</button>
 /// </dialog>
 /// ```
-public enum Inert: Attribute, CaseIterable {
+public struct Inert: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "inert"
-}
-
-extension Inert: CustomStringConvertible {
-    /// Returns the string representation of the inert attribute
-    public var description: String {
-        return ""
+    
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
     }
 }
+

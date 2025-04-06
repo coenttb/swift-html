@@ -60,13 +60,14 @@ import Foundation
 ///   <option>Option 3</option>
 /// </select>
 /// ```
-public struct Multiple: Attribute, ExpressibleByBooleanLiteral {
-    fileprivate let value: Bool
-    
-    public init(booleanLiteral value: BooleanLiteralType) {
-        self.value = value
-    }
-    
+public struct Multiple: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "multiple"
+    
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
+    }
 }
+

@@ -63,14 +63,14 @@ import Foundation
 ///     input().type(.submit).value("Save as Draft").formnovalidate
 /// }
 /// ```
-public struct Novalidate: Attribute, ExpressibleByBooleanLiteral {
-    
+public struct Novalidate: BooleanAttribute {
+    /// The name of the HTML attribute
     public static let attribute: String = "novalidate"
     
-    fileprivate let value: Bool
-    
-    public init(booleanLiteral value: BooleanLiteralType) {
+    public var value: Bool
+  
+    public init(value: Bool) {
         self.value = value
     }
-    /// The name of the HTML attribute
 }
+

@@ -39,19 +39,13 @@ import Foundation
 /// <input type="radio" name="gender" value="female" checked> Female
 /// <input type="radio" name="gender" value="other"> Other
 /// ```
-public struct Checked: Attribute, ExpressibleByBooleanLiteral {
-    fileprivate let value: Bool
-    
-    public init(booleanLiteral value: BooleanLiteralType) {
-        self.value = value
-    }
-    
-    /// Initialize with a boolean value
-    public init(_ value: Bool) {
-        self.value = value
-    }
-    
+public struct Checked: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "checked"
+    
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
+    }
 }
-

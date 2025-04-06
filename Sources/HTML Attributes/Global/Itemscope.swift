@@ -65,17 +65,14 @@ import Foundation
 ///   </div>
 /// </div>
 /// ```
-public enum Itemscope: Attribute {
-    /// A case representing the presence of the itemscope attribute
-    case empty
-    
+public struct Itemscope: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "itemscope"
-}
-
-extension Itemscope: CustomStringConvertible {
-    /// Returns an empty string, as itemscope is a boolean attribute
-    public var description: String {
-        return ""
+    
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
     }
 }
+

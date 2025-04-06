@@ -56,14 +56,14 @@ import Foundation
 /// ```html
 /// <input type="date" value="2025-01-01" readonly>
 /// ```
-public struct Readonly: Attribute, ExpressibleByBooleanLiteral {
-    fileprivate let value: Bool
-    
-    public init(booleanLiteral value: BooleanLiteralType) {
-        self.value = value
-    }
-    
+public struct Readonly: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "readonly"
     
+    public var value: Bool
+  
+    public init(value: Bool) {
+        self.value = value
+    }
 }
+

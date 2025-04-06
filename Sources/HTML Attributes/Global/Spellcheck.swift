@@ -57,17 +57,18 @@ import Foundation
 /// <label for="password">Password:</label>
 /// <input type="password" id="password" name="password" spellcheck="false">
 /// ```
-public struct Spellcheck: Attribute, ExpressibleByBooleanLiteral {
-    
+public struct Spellcheck: BooleanAttribute {
+    /// The name of the HTML attribute
     public static let attribute: String = "spellcheck"
     
-    fileprivate let value: Bool
-    
-    public init(booleanLiteral value: BooleanLiteralType) {
+    public var value: Bool
+  
+    public init(value: Bool) {
         self.value = value
     }
-    /// The name of the HTML attribute
 }
+
+
 
 extension Spellcheck: CustomStringConvertible {
     public var description: String {
