@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Formnovalidate: BooleanAttribute {
+public struct FormNovalidate: BooleanAttribute {
     /// The name of the HTML attribute
     public static let attribute: String = "formnovalidate"
     

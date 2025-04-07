@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+public struct Legend<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "legend" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias legend = Legend

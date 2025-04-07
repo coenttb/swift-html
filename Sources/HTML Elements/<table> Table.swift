@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+public struct Table<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "table" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias table = Table

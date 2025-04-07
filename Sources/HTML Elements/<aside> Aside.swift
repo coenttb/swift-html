@@ -41,7 +41,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<aside>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Aside<HTML> {
+public struct Aside<HTML>: Element {
+    public static var tag: String { "aside" }
     
     /// The content of the aside element, which can include any flow content.
     ///

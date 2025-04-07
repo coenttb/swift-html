@@ -17,30 +17,30 @@ extension Input {
         public var value: String?
         
         /// A string indicating the URL to which to submit the data. This takes precedence over the action attribute on the `<form>` element.
-        public var formaction: HTML_Attributes.Form.Action?
+        public var formaction: HTML_Attributes.FormAction?
         
         /// A string that identifies the encoding method to use when submitting the form data to the server.
-        public var formenctype: HTML_Attributes.Form.Enctype?
+        public var formenctype: HTML_Attributes.FormEncType?
         
         /// A string indicating the HTTP method to use when submitting the form's data.
-        public var formmethod: HTML_Attributes.Form.Method?
+        public var formmethod: HTML_Attributes.FormMethod?
         
         /// A Boolean attribute which, if present, specifies that the form should not be validated before submission to the server.
-        public var formnovalidate: HTML_Attributes.Form.Novalidate?
+        public var formnovalidate: HTML_Attributes.FormNovalidate?
         
         /// A string which specifies a name or keyword that indicates where to display the response received after submitting the form.
-        public var formtarget: HTML_Attributes.Form.Target?
+        public var formtarget: HTML_Attributes.FormTarget?
         
         public var required: Required?
         
         /// Creates a new submit input configuration
         public init(
             value: String? = nil,
-            formaction: HTML_Attributes.Form.Action? = nil,
-            formenctype: HTML_Attributes.Form.Enctype? = nil,
-            formmethod: HTML_Attributes.Form.Method? = nil,
-            formnovalidate: HTML_Attributes.Form.Novalidate? = nil,
-            formtarget: HTML_Attributes.Form.Target? = nil,
+            formaction: HTML_Attributes.FormAction? = nil,
+            formenctype: HTML_Attributes.FormEncType? = nil,
+            formmethod: HTML_Attributes.FormMethod? = nil,
+            formnovalidate: HTML_Attributes.FormNovalidate? = nil,
+            formtarget: HTML_Attributes.FormTarget? = nil,
             required: Required? = nil
         ) {
             self.value = value
@@ -64,11 +64,11 @@ extension Input {
     public static func submit(
         name: String,
         value: String? = nil,
-        formaction: HTML_Attributes.Form.Action? = nil,
-        formenctype: HTML_Attributes.Form.Enctype? = nil, 
-        formmethod: HTML_Attributes.Form.Method? = nil,
-        formnovalidate: HTML_Attributes.Form.Novalidate? = nil,
-        formtarget: HTML_Attributes.Form.Target? = nil,
+        formaction: HTML_Attributes.FormAction? = nil,
+        formenctype: HTML_Attributes.FormEncType? = nil,
+        formmethod: HTML_Attributes.FormMethod? = nil,
+        formnovalidate: HTML_Attributes.FormNovalidate? = nil,
+        formtarget: HTML_Attributes.FormTarget? = nil,
         disabled: Disabled? = nil,
         form: HTML_Attributes.Form.ID? = nil
     ) -> Self {

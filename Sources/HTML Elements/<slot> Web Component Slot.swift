@@ -6,3 +6,22 @@
 //
 
 import Foundation
+import HTML_Attributes
+
+public struct WebComponentSlot<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "slot" }
+    
+    public var name: Name?
+    public let content: () -> HTML
+    
+    public init(
+        name: Name? = nil,
+        content: @escaping () -> HTML
+    ) {
+        self.name = name
+        self.content = content
+    }
+}
+
+public typealias slot = WebComponentSlot

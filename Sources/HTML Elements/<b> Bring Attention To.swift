@@ -43,7 +43,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<b>` element with bold styling but no
 ///   additional semantic weight beyond bringing attention to the text.
-public struct B<HTML> {
+public struct B<HTML>: Element {
+    public static var tag: String { "b" }
     
     /// The content of the b element, which can include text and other elements.
     public var content: () -> HTML

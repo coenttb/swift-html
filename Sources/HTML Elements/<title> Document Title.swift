@@ -49,7 +49,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates the HTML `<title>` element, which must be
 ///   placed within the `<head>` element of an HTML document.
-public struct Title<HTML> {
+public struct Title<HTML>: Element {
+    public static var tag: String { "title" }
     
     /// The text content of the title element.
     ///

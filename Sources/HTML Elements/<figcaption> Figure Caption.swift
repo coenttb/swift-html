@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+public struct FigureCaption<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "figcaption" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias figcaption = FigureCaption

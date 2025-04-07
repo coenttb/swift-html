@@ -7,7 +7,9 @@
 
 import Foundation
 
-public struct Head<HTML> {
+public struct Head<HTML>: Element {
+    
+    public static var tag: String { "head" }
     
     /// The content of the aside element, which can include any flow content.
     ///

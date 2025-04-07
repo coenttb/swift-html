@@ -39,7 +39,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<a>` element with the appropriate
 ///   attributes based on the link configuration.
-public struct Anchor<HTML> {
+public struct Anchor<HTML>: Element {
+    public static var tag: String { "a" }
     
     /// Indicates that Attribution-Reporting-Eligible header should be sent.
     ///

@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+public struct Cite<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "cite" }
+    
+
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias cite = Cite

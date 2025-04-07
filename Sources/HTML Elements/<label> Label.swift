@@ -39,7 +39,9 @@ import HTML_Attributes
 /// ```
 ///
 /// - Note: When rendered, this generates an HTML `<label>` element that improves form accessibility.
-public struct Label<HTML> {
+public struct Label<HTML>: Element {
+    public static var tag: String { "label" }
+    
     /// Associates the label with a form control using its ID.
     ///
     /// When specified, this attributes creates an explicit relationship between

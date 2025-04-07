@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 package protocol BooleanAttribute: Attribute, ExpressibleByBooleanLiteral {
     var value: Bool { get }
     

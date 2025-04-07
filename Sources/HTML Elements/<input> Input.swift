@@ -23,7 +23,9 @@
 import Foundation
 import HTML_Attributes
 
-public struct Input {
+public struct Input: Element {
+    public static var tag: String { "input" }
+    
     /// Name of the form control. Submitted with the form as part of a name/value pair.
     public var name: String?
     

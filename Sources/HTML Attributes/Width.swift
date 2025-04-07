@@ -51,34 +51,23 @@ public struct Width: Attribute {
     public static let attribute: String = "width"
     
     /// The width value
-    private let value: String
+    private let value: Int
     
     /// Initialize with a width value
-    public init(_ value: String) {
-        self.value = value
-    }
-    
-    /// Initialize with a numeric width value (treated as pixels)
     public init(_ value: Int) {
-        self.value = String(value)
-    }
-}
-
-extension Width: ExpressibleByStringLiteral {
-    public init(stringLiteral value: StringLiteralType) {
         self.value = value
     }
 }
 
 extension Width: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: IntegerLiteralType) {
-        self.value = String(value)
+        self.value = value
     }
 }
 
 extension Width: CustomStringConvertible {
     /// Returns the string representation of the width value
     public var description: String {
-        return self.value
+        return self.value.description
     }
 }

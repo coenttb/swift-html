@@ -54,7 +54,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<area>` element with the 
 ///   appropriate attributes based on the configuration.
-public struct Area {
+public struct Area: Element {
+    public static var tag: String { "area" }
     
     /// The shape of the associated hot spot.
     ///

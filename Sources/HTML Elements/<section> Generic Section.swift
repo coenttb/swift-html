@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+public struct Section<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "section" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias section = Section

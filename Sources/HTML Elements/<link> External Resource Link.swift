@@ -43,7 +43,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<link>` element with the specified attributes.
 ///   It is a void element and does not have a closing tag.
-public struct Link {
+public struct Link: Element {
+    public static var tag: String { "link" }
     
     /// The type of resource being loaded (for preload/modulepreload).
     public var `as`: As?

@@ -19,91 +19,79 @@ import Foundation
 /// These elements only include the global attributes.
 
 // MARK: - H1 Element
-public struct H1 {
-    public let attributes: [String: String]
-    public let children: [Any]
+public struct H1<HTML>: Element {
+    public static var tag: String { "h1" }
 
-    public init(_ children: [Any], _ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = children
-    }
+    public var content: () -> HTML
     
-    public init(_ text: String, _ attributes: [String: String] = [:]) {
-        self.init([text], attributes)
+    public init(content: @escaping () -> HTML) {
+        self.content = content
     }
 }
+
+public typealias h1 = H1
 
 // MARK: - H2 Element
-public struct H2 {
-    public let attributes: [String: String]
-    public let children: [Any]
+public struct H2<HTML>: Element {
+    public static var tag: String { "h2" }
 
-    public init(_ children: [Any], _ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = children
-    }
+    public var content: () -> HTML
     
-    public init(_ text: String, _ attributes: [String: String] = [:]) {
-        self.init([text], attributes)
+    public init(content: @escaping () -> HTML) {
+        self.content = content
     }
 }
+
+public typealias h2 = H2
 
 // MARK: - H3 Element
-public struct H3 {
-    public let attributes: [String: String]
-    public let children: [Any]
+public struct H3<HTML>: Element {
+    public static var tag: String { "h3" }
 
-    public init(_ children: [Any], _ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = children
-    }
+    public var content: () -> HTML
     
-    public init(_ text: String, _ attributes: [String: String] = [:]) {
-        self.init([text], attributes)
+    public init(content: @escaping () -> HTML) {
+        self.content = content
     }
 }
+
+public typealias h3 = H3
 
 // MARK: - H4 Element
-public struct H4 {
-    public let attributes: [String: String]
-    public let children: [Any]
+public struct H4<HTML>: Element {
+    public static var tag: String { "h4" }
 
-    public init(_ children: [Any], _ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = children
-    }
+    public var content: () -> HTML
     
-    public init(_ text: String, _ attributes: [String: String] = [:]) {
-        self.init([text], attributes)
+    public init(content: @escaping () -> HTML) {
+        self.content = content
     }
 }
+
+public typealias h4 = H4
 
 // MARK: - H5 Element
-public struct H5 {
-    public let attributes: [String: String]
-    public let children: [Any]
+public struct H5<HTML>: Element {
+    public static var tag: String { "h5" }
 
-    public init(_ children: [Any], _ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = children
-    }
+    public var content: () -> HTML
     
-    public init(_ text: String, _ attributes: [String: String] = [:]) {
-        self.init([text], attributes)
+    public init(content: @escaping () -> HTML) {
+        self.content = content
     }
 }
+
+public typealias h5 = H5
 
 // MARK: - H6 Element
-public struct H6 {
-    public let attributes: [String: String]
-    public let children: [Any]
+public struct H6<HTML>: Element {
+    public static var tag: String { "h6" }
 
-    public init(_ children: [Any], _ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = children
-    }
+    public var content: () -> HTML
     
-    public init(_ text: String, _ attributes: [String: String] = [:]) {
-        self.init([text], attributes)
+    public init(content: @escaping () -> HTML) {
+        self.content = content
     }
 }
+
+public typealias h6 = H6

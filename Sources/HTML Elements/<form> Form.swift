@@ -52,7 +52,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<form>` element with the appropriate
 ///   attributes based on the form configuration.
-public struct Form<HTML> {
+public struct Form<HTML>: Element {
+    public static var tag: String { "form" }
     
     /// DEPRECATED: A comma-separated list of content types the server accepts.
     ///
@@ -142,7 +143,7 @@ public struct Form<HTML> {
     /// - `_blank`: New tab or window
     /// - `_parent`: Parent browsing context
     /// - `_top`: Top-level browsing context
-    public var target: HTML_Attributes.Form.Target?
+    public var target: HTML_Attributes.FormTarget?
     
     /// The content of the form, including input fields, buttons, and other controls.
     ///
@@ -171,7 +172,7 @@ public struct Form<HTML> {
         enctype: HTML_Attributes.Enctype? = nil,
         method: HTML_Attributes.Method? = nil,
         novalidate: HTML_Attributes.Novalidate? = nil,
-        target: HTML_Attributes.Form.Target? = nil,
+        target: HTML_Attributes.FormTarget? = nil,
         content: @escaping () -> HTML
     ) {
         self.autocapitalize = autocapitalize

@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+public struct PreformattedText<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "pre" }
+    
+    public let content: () -> HTML
+    
+    @available(*, deprecated)
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias pre = PreformattedText

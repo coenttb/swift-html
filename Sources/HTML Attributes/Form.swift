@@ -12,7 +12,7 @@ public struct Form: Sendable, Equatable {
     /// A string indicating the URL to which to submit the data. This takes precedence over the action attribute on the `<form>` element that owns the `<input>`.
     ///
     /// This attribute is also available on `<input type="submit">` and `<button>` elements.
-    public var action: Form.Action?
+    public var action: HTML_Attributes.Action?
     
     /// A string that identifies the encoding method to use when submitting the form data to the server.
     public var enctype: HTML_Attributes.Enctype?
@@ -28,7 +28,7 @@ public struct Form: Sendable, Equatable {
     
     /// Create a new form override configuration
     public init(
-        action: Form.Action? = nil,
+        action: HTML_Attributes.Action? = nil,
         enctype: HTML_Attributes.Enctype? = nil,
         method: HTML_Attributes.Method? = nil,
         novalidate: HTML_Attributes.Novalidate? = nil,
@@ -43,7 +43,7 @@ public struct Form: Sendable, Equatable {
 }
 
 extension Form {
-    public mutating func action(_ value: Form.Action?) {
+    public mutating func action(_ value: HTML_Attributes.Action?) {
         self.action = value
     }
     
@@ -63,10 +63,10 @@ extension Form {
 
 extension Form {
     public typealias ID = String
-    public typealias Enctype = HTML_Attributes.Enctype
-    public typealias Target = HTML_Attributes.Target
-    public typealias Action = HTML_Attributes.Action
-    public typealias Method = HTML_Attributes.Method
-    public typealias Novalidate = HTML_Attributes.Novalidate
+//    public typealias Enctype = HTML_Attributes.Enctype
+//    public typealias Target = HTML_Attributes.Target
+//    public typealias Action = HTML_Attributes.Action
+//    public typealias Method = HTML_Attributes.Method
+//    public typealias Novalidate = HTML_Attributes.Novalidate
 }
 

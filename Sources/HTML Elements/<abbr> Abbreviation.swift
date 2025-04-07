@@ -40,7 +40,9 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<abbr>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Abbreviation<HTML> {
+public struct Abbreviation<HTML>: Element {
+    public static var tag: String { "abbr" }
+    
     /// The content of the abbreviation element, typically the abbreviated form.
     ///
     /// This should be the short form of the term that is being marked up as an abbreviation.

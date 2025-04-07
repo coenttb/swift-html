@@ -1,7 +1,9 @@
 import Foundation
 import HTML_Attributes
 
-public struct Image {
+public struct Image: Element {
+    public static var tag: String { "image" }
+    
     public var src: Src?
     public var alt: Alt?
     public var loading: Image.Loading?
@@ -20,7 +22,7 @@ public struct Image {
 extension Image {
     public init?(base64EncodedFromURL url: URL, description: String) {
         guard
-              let imageData = try? Data(contentsOf: url) else {
+            let imageData = try? Foundation.Data(contentsOf: url) else {
             return nil
         }
         

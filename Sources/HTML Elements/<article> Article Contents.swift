@@ -43,7 +43,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<article>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Article<HTML> {
+public struct Article<HTML>: Element {
+    public static var tag: String { "article" }
     
     /// The content of the article element, which can include any flow content.
     ///

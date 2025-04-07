@@ -32,25 +32,13 @@ import HTML_Attributes
 /// instead, use CSS margin properties with appropriate elements like `<p>`.
 ///
 /// - Note: When rendered, this generates an HTML `<br>` element, which creates a line break.
-public struct BR<Content> {
-    public let tag = "br"
-    public let attributes: [String: String]
-    public let children: [Content]
+public struct BR: Element  {
+    public static var tag: String { "br" }
     
     /// Creates a new BR element with the specified attributes.
     ///
     /// - Parameter attributes: Optional attributes for the br element.
-    public init(_ attributes: [String: String] = [:]) {
-        self.attributes = attributes
-        self.children = []
-    }
-}
-
-extension BR {
-    /// A convenience static property to create a line break.
-    public static var lineBreak: BR {
-        BR()
-    }
+    public init() { }
 }
 
 /// Lowercase typealias for creating BR elements with a more HTML-like syntax.

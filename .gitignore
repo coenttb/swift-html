@@ -70,3 +70,5 @@ fastlane/test_output
 .DS_Store
 Packages/*
 .swiftpm
+
+CLAUDE.md

@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+
+public struct LineBreakOpportunity<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "wbr" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias wbr = LineBreakOpportunity

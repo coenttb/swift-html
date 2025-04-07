@@ -32,7 +32,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<base>` element with the specified attributes.
 ///   It is a void element and does not have a closing tag.
-public struct Base {
+public struct Base: Element {
+    public static var tag: String { "base" }
     
     /// The configuration for the base element, which must include an href, a target, or both.
     public var configuration: Configuration

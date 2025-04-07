@@ -50,7 +50,9 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<meta>` element with the appropriate
 ///   attributes based on the metadata type.
-public struct Meta {
+public struct Meta: Element {
+    public static var tag: String { "meta" }
+    
     /// Declares the document's character encoding.
     ///
     /// In HTML5, the only valid value is "utf-8". The charset meta element

@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+public struct Header<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "header" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias header = Header

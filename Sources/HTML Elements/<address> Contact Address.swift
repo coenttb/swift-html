@@ -39,7 +39,8 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<address>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Address<HTML> {
+public struct Address<HTML>: Element {
+    public static var tag: String { "address" }
     
     /// The content of the address element, which can include text and other elements
     /// like anchors, line breaks, etc.

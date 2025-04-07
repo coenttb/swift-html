@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+public struct EmbedFallback<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "noembed" }
+    
+    public let content: () -> HTML
+    
+    @available(*, deprecated)
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias noembed = EmbedFallback

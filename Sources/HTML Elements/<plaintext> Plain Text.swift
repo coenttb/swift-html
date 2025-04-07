@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+public struct PlainText<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "plaintext" }
+    
+    public let content: () -> HTML
+    
+    @available(*, deprecated)
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias plaintext = PlainText

@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+public struct IdiomaticText<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "i" }
+    
+    public let content: () -> HTML
+    
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias i = IdiomaticText

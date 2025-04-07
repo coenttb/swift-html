@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+public struct Strikethrough<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "s" }
+    
+    public let content: () -> HTML
+    
+    @available(*, deprecated)
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+public typealias s = Strikethrough
