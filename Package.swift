@@ -4,6 +4,7 @@
 import PackageDescription
 
 extension String {
+    static let htmlTypes: Self = "HTML Types"
     static let htmlAttributes: Self = "HTML Attributes"
     static let htmlElements: Self = "HTML Elements"
 }
@@ -28,7 +29,7 @@ let package = Package(
         .macCatalyst(.v17),
       ],
     products: [
-        .library(name: "HTML Domain Model", targets: [.htmlAttributes, .htmlElements]),
+        .library(name: .htmlTypes, targets: [.htmlTypes]),
         .library(name: .htmlAttributes, targets: [.htmlAttributes]),
         .library(name: .htmlElements, targets: [.htmlElements]),
     ],
@@ -37,6 +38,13 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", branch: "1.9.0"),
     ],
     targets: [
+        .target(
+            name: .htmlTypes,
+            dependencies: [
+                .htmlAttributes,
+                .htmlElements,
+            ]
+        ),
         .target(
             name: .htmlAttributes,
             dependencies: []
