@@ -259,3 +259,233 @@ public struct Body<HTML>: Element {
 /// }
 /// ```
 public typealias body = Body
+
+
+/* MDN Documentation
+ * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body
+ */
+// <body>: The Document Body element
+// Baseline
+// Widely available
+// This feature is well established and works across many devices and browser versions. Itâs been available across browsers since
+// July 2015
+// .
+// Learn more
+// See full compatibility
+// Report feedback
+// The
+// <body>
+// HTML
+// element represents the content of an HTML document. There can be only one
+// <body>
+// element in a document.
+// Attributes
+// This element includes the
+// global attributes
+// , event attributes, and deprecated attributes:
+// Event attributes
+// Note:
+// Each of the below event attribute names is linked to its equivalent
+// Window
+// interface event. You can listen to these events using
+// addEventListener()
+// instead of adding the
+// oneventname
+// attribute to the
+// <body>
+// element.
+// onafterprint
+// Function to call after the user has printed the document.
+// onbeforeprint
+// Function to call when the user requests printing of the document.
+// onbeforeunload
+// Function to call when the document is about to be unloaded.
+// onblur
+// Function to call when the document loses focus.
+// onerror
+// Function to call when the document fails to load properly.
+// onfocus
+// Function to call when the document receives focus.
+// onhashchange
+// Function to call when the fragment identifier part (starting with the hash (
+// '#'
+// ) character) of the document's current address has changed.
+// onlanguagechange
+// Function to call when the preferred languages changed.
+// onload
+// Function to call when the document has finished loading.
+// onmessage
+// Function to call when the document has received a message.
+// onmessageerror
+// Function to call when the document has received a message that cannot be deserialized.
+// onoffline
+// Function to call when network communication has failed.
+// ononline
+// Function to call when network communication has been restored.
+// onpageswap
+// Function to call when you navigate across documents, when the previous document is about to unload.
+// onpagehide
+// Function to call when the browser hides the current page in the process of presenting a different page from the session's history.
+// onpagereveal
+// Function to call when a document is first rendered, either when loading a fresh document from the network or activating a document.
+// onpageshow
+// Function to call when the browser displays the window's document due to navigation.
+// onpopstate
+// Function to call when the user has navigated session history.
+// onresize
+// Function to call when the document has been resized.
+// onrejectionhandled
+// Function to call when a JavaScript
+// Promise
+// is handled late.
+// onstorage
+// Function to call when the storage area has changed.
+// onunhandledrejection
+// Function to call when a JavaScript
+// Promise
+// that has no rejection handler is rejected.
+// onunload
+// Function to call when the document is going away.
+// Deprecated attributes
+// Warning:
+// Do not use these deprecated attributes; opt for the CSS alternatives listed with each deprecated attribute instead.
+// alink
+// Deprecated
+// Color of text for hyperlinks when selected.
+// Use the CSS
+// color
+// property in conjunction with the
+// :active
+// and
+// :focus
+// pseudo-classes instead.
+// background
+// Deprecated
+// URI of an image to use as a background.
+// Use the CSS
+// background-image
+// property instead.
+// bgcolor
+// Deprecated
+// Background color for the document.
+// Use the CSS
+// background-color
+// property instead.
+// bottommargin
+// Deprecated
+// The margin of the bottom of the body.
+// Use the CSS
+// margin-bottom
+// property (or the logical
+// margin-block-end
+// property) instead.
+// leftmargin
+// Deprecated
+// The margin of the left of the body.
+// Use the CSS
+// margin-left
+// property (or the logical
+// margin-inline-start
+// property) instead.
+// link
+// Deprecated
+// Color of text for unvisited hypertext links.
+// Use the CSS
+// color
+// property in conjunction with the
+// :link
+// pseudo-class instead.
+// rightmargin
+// Deprecated
+// The margin of the right of the body.
+// Use the CSS
+// margin-right
+// property or the logical
+// margin-inline-end
+// property) instead.
+// text
+// Deprecated
+// Foreground color of text.
+// Use the CSS
+// color
+// property instead.
+// topmargin
+// Deprecated
+// The margin of the top of the body.
+// Use the CSS
+// margin-top
+// property (or the logical
+// margin-block-start
+// property) instead.
+// vlink
+// Deprecated
+// Color of text for visited hypertext links.
+// Use the CSS
+// color
+// property in conjunction with the
+// :visited
+// pseudo-class instead.
+// Examples
+// html
+// <html lang="en">
+//  <head>
+//  <title>Document title</title>
+//  </head>
+//  <body>
+//  <p>
+//  The <code>&lt;body&gt;</code> HTML element represents the content of an
+//  HTML document. There can be only one <code>&lt;body&gt;</code> element in
+//  a document.
+//  </p>
+//  </body>
+// </html>
+// Result
+// Technical summary
+// Content categories
+// None.
+// Permitted content
+// Flow content
+// .
+// Tag omission
+// The start tag may be omitted if the first thing inside it is not a space
+//  character, comment,
+// <script>
+// element or
+// <style>
+// element. The end tag may be omitted if
+//  the
+// <body>
+// element has contents or has a start tag,
+//  and is not immediately followed by a comment.
+// Permitted parents
+// It must be the second element of an
+// <html>
+// element.
+// Implicit ARIA role
+// generic
+// Permitted ARIA roles
+// No
+// role
+// permitted
+// DOM interface
+// HTMLBodyElement
+// The
+// <body>
+// element exposes the
+// HTMLBodyElement
+// interface.
+// You can access the
+// <body>
+// element through the
+// document.body
+// property.
+// Specifications
+// Specification
+// HTML
+// #
+// the-body-element
+// Browser compatibility
+// See also
+// <html>
+// <head>
+// Event handling overview

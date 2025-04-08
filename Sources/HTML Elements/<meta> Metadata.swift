@@ -296,3 +296,258 @@ extension Meta {
         }
     }
 }
+
+
+/* MDN Documentation
+ * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+ */
+// <meta>: The metadata element
+// Baseline
+// Widely available
+// *
+// This feature is well established and works across many devices and browser versions. Itâs been available across browsers since
+// July 2015
+// .
+// * Some parts of this feature may have varying levels of support.
+// Learn more
+// See full compatibility
+// Report feedback
+// The
+// <meta>
+// HTML
+// element represents
+// metadata
+// that cannot be represented by other HTML meta-related elements, like
+// <base>
+// ,
+// <link>
+// ,
+// <script>
+// ,
+// <style>
+// or
+// <title>
+// .
+// The type of metadata provided by the
+// <meta>
+// element can be one of the following:
+// If the
+// name
+// attribute is set, the
+// <meta>
+// element provides
+// document-level metadata
+// , applying to the whole page.
+// If the
+// http-equiv
+// attribute is set, the
+// <meta>
+// element is a
+// pragma directive
+// , providing information equivalent to what can be given by a similarly-named HTTP header.
+// If the
+// charset
+// attribute is set, the
+// <meta>
+// element is a
+// charset declaration
+// , giving the character encoding in which the document is encoded.
+// If the
+// itemprop
+// attribute is set, the
+// <meta>
+// element provides
+// user-defined metadata
+// .
+// Attributes
+// This element includes the
+// global attributes
+// .
+// Note:
+// The attribute
+// name
+// has a specific meaning for the
+// <meta>
+// element, and the
+// itemprop
+// attribute must not be set on the same
+// <meta>
+// element that has any existing
+// name
+// ,
+// http-equiv
+// or
+// charset
+// attributes.
+// charset
+// This attribute declares the document's character encoding. If the attribute is present, its value must be an ASCII case-insensitive match for the string
+// "utf-8"
+// , because UTF-8 is the only valid encoding for HTML5 documents.
+// <meta>
+// elements which declare a character encoding must be located entirely within the first 1024 bytes of the document.
+// content
+// This attribute contains the value for the
+// http-equiv
+// or
+// name
+// attribute, depending on which is used.
+// http-equiv
+// Defines a pragma directive. The attribute's name, short for
+// http-equivalent
+// , is because all the allowed values are names of particular HTTP headers:
+// content-security-policy
+// Allows page authors to define a
+// content policy
+// for the current page. Content policies mostly specify allowed server origins and script endpoints which help guard against cross-site scripting attacks.
+// Also see
+// Content-Security-Policy
+// .
+// content-type
+// Declares the
+// MIME type
+// and the document's character encoding. The
+// content
+// attribute must have the value
+// "text/html; charset=utf-8"
+// if specified. This is equivalent to a
+// <meta>
+// element with the
+// charset
+// attribute specified and carries the same restriction on placement within the document.
+// Note:
+// Can only be used in documents served with a
+// text/html
+// â not in documents served with an XML MIME type.
+// Also see
+// Content-Type
+// .
+// default-style
+// Sets the name of the default
+// CSS style sheet
+// set.
+// x-ua-compatible
+// If specified, the
+// content
+// attribute must have the value
+// "IE=edge"
+// . User agents are required to ignore this pragma.
+// refresh
+// This instruction specifies:
+// The number of seconds until the page should be reloaded - if the
+// content
+// attribute's value is a non-negative integer.
+// The number of seconds until the page should redirect to another - if the
+// content
+// attribute's value is a non-negative integer followed by
+// ;url=
+// and a valid URL.
+// The timer starts when the page is
+// completely loaded
+// , which is after the
+// load
+// and
+// pageshow
+// events have both fired.
+// Also see
+// Refresh
+// .
+// Warning:
+// Pages set with a
+// refresh
+// value run the risk of having the time interval being too short. People navigating with the aid of assistive technology such as a screen reader may be unable to read through and understand the page's content before being automatically redirected. The abrupt, unannounced updating of the page content may also be disorienting for people experiencing low vision conditions.
+// MDN Understanding WCAG, Guideline 2.2 explanations
+// MDN Understanding WCAG, Guideline 3.2 explanations
+// Understanding Success Criterion 2.2.1 | W3C Understanding WCAG 2.0
+// Understanding Success Criterion 2.2.4 | W3C Understanding WCAG 2.0
+// Understanding Success Criterion 3.2.5 | W3C Understanding WCAG 2.0
+// media
+// The
+// media
+// attribute defines which media the theme color defined in the
+// content
+// attribute should be applied to. Its value is a
+// media query
+// , which defaults to
+// all
+// if the attribute is missing. This attribute is only relevant when the element's
+// name
+// attribute is set to
+// theme-color
+// . Otherwise, it has no effect, and should not be included.
+// name
+// The
+// name
+// and
+// content
+// attributes can be used together to provide document metadata in terms of name-value pairs, with the
+// name
+// attribute giving the metadata name, and the
+// content
+// attribute giving the value.
+// See
+// standard metadata names
+// for details about the set of standard metadata names defined in the HTML specification.
+// Examples
+// html
+// <meta charset="utf-8" />
+// <!-- Redirect page after 3 seconds -->
+// <meta http-equiv="refresh" content="3;url=https://www.mozilla.org" />
+// Technical summary
+// Content categories
+// Metadata content
+// . If the
+// itemprop
+// attribute is present:
+// flow content
+// ,
+// phrasing content
+// .
+// Permitted content
+// None; it is a
+// void element
+// .
+// Tag omission
+// Must have a start tag and must not have an end tag.
+// Permitted parents
+// <meta charset>
+// ,
+// <meta http-equiv>
+// : a
+// <head>
+// element. If the
+// http-equiv
+// is not an
+//  encoding declaration, it can also be inside a
+// <noscript>
+// element, itself inside a
+// <head>
+// element.
+// <meta name>
+// : any element that accepts
+// metadata content
+// .
+// <meta itemprop>
+// : any element that accepts
+// metadata content
+// or
+// flow content
+// .
+// Implicit ARIA role
+// No corresponding role
+// Permitted ARIA roles
+// No
+// role
+// permitted
+// DOM interface
+// HTMLMetaElement
+// Specifications
+// Specification
+// HTML
+// #
+// the-meta-element
+// Browser compatibility
+// See also
+// Standard metadata names
+// Learn:
+// <meta>
+// The viewport meta tag
