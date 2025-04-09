@@ -37,7 +37,7 @@ import Foundation
 /// - Include `<li>` elements as direct children of `<menu>`
 /// - For styling, you may want to apply `list-style-type: none` and adjust the display property
 ///
-public struct Menu<HTML>: Element {
+public struct Menu: Element {
     /// The HTML tag name
     public static var tag: String { "menu" }
     
@@ -48,9 +48,9 @@ public struct Menu<HTML>: Element {
     ///
     /// - Parameter content: The content of the menu element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

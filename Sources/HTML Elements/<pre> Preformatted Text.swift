@@ -43,7 +43,7 @@ import HTML_Attributes
 /// - Often combined with elements like `<code>`, `<samp>`, or `<kbd>`
 /// - Remember that < characters may need to be escaped as &lt; in the content
 ///
-public struct PreformattedText<HTML>: Element {
+public struct PreformattedText: Element {
     /// The HTML tag name
     public static var tag: String { "pre" }
     
@@ -54,9 +54,9 @@ public struct PreformattedText<HTML>: Element {
     ///
     /// - Parameter content: The content of the element, displayed with preserved whitespace and formatting
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

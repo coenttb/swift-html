@@ -40,7 +40,7 @@ import HTML_Attributes
 /// - Use CSS properties instead of deprecated attributes for styling
 /// - Ensure tables have a clear structure with `<thead>`, `<tbody>`, and `<tfoot>` when appropriate
 ///
-public struct TableDataCell<HTML>: Element {
+public struct TableDataCell: Element {
     /// The HTML tag name
     public static var tag: String { "td" }
     
@@ -67,12 +67,12 @@ public struct TableDataCell<HTML>: Element {
         colspan: ColSpan? = nil,
         headers: Headers? = nil,
         rowspan: RowSpan? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.colspan = colspan
         self.headers = headers
         self.rowspan = rowspan
-        self.content = content
+        
     }
 }
 

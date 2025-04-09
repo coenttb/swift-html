@@ -46,7 +46,7 @@ import HTML_Attributes
 /// - Use semantic table structure with `<thead>`, `<tbody>`, and `<tfoot>` elements for better accessibility
 /// - Avoid deprecated presentational attributes; use CSS for styling instead
 ///
-public struct TableHeader<HTML>: Element {
+public struct TableHeader: Element {
     /// The HTML tag name
     public static var tag: String { "th" }
     
@@ -83,14 +83,14 @@ public struct TableHeader<HTML>: Element {
         headers: String? = nil,
         rowspan: Int? = nil,
         scope: Scope? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.abbr = abbr
         self.colspan = colspan
         self.headers = headers
         self.rowspan = rowspan
         self.scope = scope
-        self.content = content
+        
     }
 }
 

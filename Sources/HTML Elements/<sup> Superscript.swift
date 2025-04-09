@@ -36,7 +36,7 @@ import HTML_Attributes
 ///
 /// For purely presentational superscript, consider using CSS `vertical-align: super` instead.
 ///
-public struct Superscript<HTML>: Element {
+public struct Superscript: Element {
     /// The HTML tag name
     public static var tag: String { "sup" }
     
@@ -47,9 +47,9 @@ public struct Superscript<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

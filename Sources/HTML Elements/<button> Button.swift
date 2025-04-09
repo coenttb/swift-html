@@ -48,7 +48,7 @@ import HTML_Attributes
 /// For toggle buttons, use the `aria-pressed` attribute to indicate state.
 ///
 /// - Note: When rendered, this generates an HTML `<button>` element that is interactive and clickable.
-public struct Button<HTML>: Element {
+public struct Button: Element {
     /// The HTML tag name
     public static var tag: String { "button" }
     
@@ -91,9 +91,6 @@ public struct Button<HTML>: Element {
     /// The action to perform on the popover (show, hide, or toggle)
     public var popovertargetaction: HTML_Attributes.PopoverTargetAction?
     
-    /// The button's content
-    public let content: () -> HTML
-    
     /// Creates a new Button element with the specified attributes and content.
     ///
     /// - Parameters:
@@ -110,7 +107,6 @@ public struct Button<HTML>: Element {
     ///   - formtarget: Where to display the response after form submission (for submit buttons)
     ///   - popovertarget: The ID of the popover element to control
     ///   - popovertargetaction: The action to perform on the popover (show, hide, or toggle)
-    ///   - content: The content to be rendered inside the button element
     public init(
         type: ButtonType? = nil,
         disabled: HTML_Attributes.Disabled? = nil,
@@ -125,7 +121,7 @@ public struct Button<HTML>: Element {
         formtarget: HTML_Attributes.Target? = nil,
         popovertarget: HTML_Attributes.PopoverTarget? = nil,
         popovertargetaction: HTML_Attributes.PopoverTargetAction? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.type = type
         self.disabled = disabled
@@ -139,8 +135,7 @@ public struct Button<HTML>: Element {
         self.formnovalidate = formnovalidate
         self.formtarget = formtarget
         self.popovertarget = popovertarget
-        self.popovertargetaction = popovertargetaction
-        self.content = content
+        self.popovertargetaction = popovertargetaction        
     }
 }
 

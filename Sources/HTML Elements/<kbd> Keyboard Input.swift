@@ -42,7 +42,7 @@ import HTML_Attributes
 ///   that the user inputs (like menu names).
 /// - By default, browsers typically render `<kbd>` content in a monospace font.
 ///
-public struct KeyboardInput<HTML>: Element {
+public struct KeyboardInput: Element {
     /// The HTML tag name
     public static var tag: String { "kbd" }
     
@@ -53,9 +53,9 @@ public struct KeyboardInput<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -31,7 +31,7 @@ import HTML_Attributes
 /// - Use the `cite` attribute to specify the source URL of the quotation
 /// - Consider using the `<cite>` element in conjunction with `<q>` to attribute the source
 ///
-public struct InlineQuotation<HTML>: Element {
+public struct InlineQuotation: Element {
     /// The HTML tag name
     public static var tag: String { "q" }
     
@@ -49,10 +49,10 @@ public struct InlineQuotation<HTML>: Element {
     ///   - content: The content of the element
     public init(
         cite: HTML_Attributes.Cite? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.cite = cite
-        self.content = content
+        
     }
 }
 

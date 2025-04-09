@@ -48,7 +48,7 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<canvas>` element that can be used 
 ///   for drawing graphics with JavaScript.
-public struct Canvas<HTML>: Element {
+public struct Canvas: Element {
     /// The HTML tag name
     public static var tag: String { "canvas" }
     
@@ -70,11 +70,11 @@ public struct Canvas<HTML>: Element {
     public init(
         width: HTML_Attributes.Width? = nil,
         height: HTML_Attributes.Height? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.width = width
         self.height = height
-        self.content = content
+        
     }
 }
 

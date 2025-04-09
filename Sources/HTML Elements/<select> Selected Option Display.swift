@@ -36,7 +36,7 @@ import HTML_Attributes
 /// - Keep the dropdown list reasonably sized for usability
 /// - Consider using `<optgroup>` to organize long lists of options
 ///
-public struct Select<HTML>: Element {
+public struct Select: Element {
     /// The HTML tag name
     public static var tag: String { "select" }
     
@@ -83,7 +83,7 @@ public struct Select<HTML>: Element {
         disabled: HTML_Attributes.Disabled? = nil,
         form: HTML_Attributes.Form? = nil,
         autofocus: HTML_Attributes.Autofocus? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.multiple = multiple
         self.name = name
@@ -92,7 +92,7 @@ public struct Select<HTML>: Element {
         self.disabled = disabled
         self.form = form
         self.autofocus = autofocus
-        self.content = content
+        
     }
 }
 

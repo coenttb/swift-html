@@ -61,7 +61,7 @@ import HTML_Attributes
 /// - Consider responsive design techniques for tables on small screens
 /// - Keep table structure simple when possible for better accessibility
 ///
-public struct Table<HTML>: Element {
+public struct Table: Element {
     /// The HTML tag name
     public static var tag: String { "table" }
     
@@ -73,9 +73,9 @@ public struct Table<HTML>: Element {
     /// - Parameter content: The content of the element, typically including `<caption>`, 
     ///                      `<thead>`, `<tbody>`, `<tfoot>`, and `<tr>` elements
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -33,7 +33,7 @@ import Foundation
 ///   similar functionality to what would be available in the frames.
 ///
 @available(*, deprecated, message: "The noframes element is obsolete and shouldn't be used in modern web development")
-public struct FrameFallback<HTML>: Element {
+public struct FrameFallback: Element {
     /// The HTML tag name
     public static var tag: String { "noframes" }
     
@@ -44,9 +44,9 @@ public struct FrameFallback<HTML>: Element {
     ///
     /// - Parameter content: The content to display in browsers that don't support frames
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

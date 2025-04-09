@@ -39,7 +39,7 @@ import HTML_Attributes
 /// - Never use empty paragraphs for spacing, as screen readers may announce them without any content, causing confusion
 /// - Use CSS properties like `margin` to create spacing between paragraphs
 ///
-public struct Paragraph<HTML>: Element {
+public struct Paragraph: Element {
     /// The HTML tag name
     public static var tag: String { "p" }
     
@@ -50,9 +50,9 @@ public struct Paragraph<HTML>: Element {
     ///
     /// - Parameter content: The content of the paragraph
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

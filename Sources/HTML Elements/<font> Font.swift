@@ -29,7 +29,7 @@ import HTML_Attributes
 /// - Avoid using this element as it is deprecated
 /// - Use CSS styling with proper font properties instead
 ///
-public struct Font<HTML>: Element {
+public struct Font: Element {
     /// The HTML tag name
     public static var tag: String { "font" }
     
@@ -56,12 +56,12 @@ public struct Font<HTML>: Element {
         color: HTML_Attributes.Color? = nil,
         face: HTML_Attributes.Face? = nil,
         size: HTML_Attributes.FontSize? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.color = color
         self.face = face
         self.size = size
-        self.content = content
+        
     }
 }
 

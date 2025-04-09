@@ -30,7 +30,7 @@ import HTML_Attributes
 /// - Use `<ul>` for lists, including lists of files
 /// - If needed for legacy compatibility, ensure proper accessibility
 ///
-public struct Directory<HTML>: Element {
+public struct Directory: Element {
     /// The HTML tag name
     public static var tag: String { "dir" }
     
@@ -47,10 +47,10 @@ public struct Directory<HTML>: Element {
     ///   - content: The content of the element
     public init(
         compact: HTML_Attributes.Compact? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.compact = compact
-        self.content = content
+        
     }
 }
 

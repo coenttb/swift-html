@@ -36,7 +36,7 @@ import HTML_Attributes
 /// - Consider accessibility concerns; continuous scrolling text can be difficult to read for some users.
 /// - If you must use animation, include support for the `prefers-reduced-motion` CSS media query.
 ///
-public struct Marquee<HTML>: Element {
+public struct Marquee: Element {
     /// The HTML tag name
     public static var tag: String { "marquee" }
     
@@ -103,7 +103,7 @@ public struct Marquee<HTML>: Element {
         truespeed: HTML_Attributes.Truespeed? = nil,
         vspace: String? = nil,
         width: HTML_Attributes.Width? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.behavior = behavior
         self.bgcolor = bgcolor
@@ -116,7 +116,7 @@ public struct Marquee<HTML>: Element {
         self.truespeed = truespeed
         self.vspace = vspace
         self.width = width
-        self.content = content
+        
     }
 }
 

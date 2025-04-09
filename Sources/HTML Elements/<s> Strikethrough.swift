@@ -35,7 +35,7 @@ import HTML_Attributes
 /// You can use CSS `::before` and `::after` pseudo-elements with the `content` property
 /// to make it announced by screen readers when necessary.
 ///
-public struct Strikethrough<HTML>: Element {
+public struct Strikethrough: Element {
     /// The HTML tag name
     public static var tag: String { "s" }
     
@@ -46,9 +46,9 @@ public struct Strikethrough<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

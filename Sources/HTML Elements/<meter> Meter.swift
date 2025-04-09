@@ -37,7 +37,7 @@ import HTML_Attributes
 /// - Use `low` and `high` to indicate thresholds for acceptable ranges
 /// - Use `optimum` to indicate the ideal value within the range
 ///
-public struct Meter<HTML>: Element {
+public struct Meter: Element {
     /// The HTML tag name
     public static var tag: String { "meter" }
     
@@ -84,7 +84,7 @@ public struct Meter<HTML>: Element {
         high: High? = nil,
         optimum: Optimum? = nil,
         form: HTML_Attributes.Form.ID? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.value = value
         self.min = min
@@ -93,7 +93,7 @@ public struct Meter<HTML>: Element {
         self.high = high
         self.optimum = optimum
         self.form = form
-        self.content = content
+        
     }
 }
 

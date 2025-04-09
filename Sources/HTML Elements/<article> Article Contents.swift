@@ -43,23 +43,12 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<article>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Article<HTML>: Element {
+public struct Article: Element {
     public static var tag: String { "article" }
-    
-    /// The content of the article element, which can include any flow content.
-    ///
-    /// This should include a heading element (`<h1>-<h6>`) to identify the article,
-    /// and can contain nested articles for related content like comments.
-    public var content: () -> HTML
+
     
     /// Creates a new Article element with the specified content.
-    ///
-    /// - Parameter content: The content of the article element, typically including a heading
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Article elements with a more HTML-like syntax.

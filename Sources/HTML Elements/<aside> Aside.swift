@@ -41,23 +41,11 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<aside>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Aside<HTML>: Element {
+public struct Aside: Element {
     public static var tag: String { "aside" }
     
-    /// The content of the aside element, which can include any flow content.
-    ///
-    /// This should contain content that is tangentially related to the surrounding content
-    /// but could be removed without diminishing the meaning of the main content.
-    public var content: () -> HTML
-    
     /// Creates a new Aside element with the specified content.
-    ///
-    /// - Parameter content: The content of the aside element, typically including supplementary information
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Aside elements with a more HTML-like syntax.

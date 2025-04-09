@@ -53,7 +53,7 @@ import HTML_Attributes
 /// - Use CSS for styling rather than deprecated presentational attributes
 /// - Remember that even if you don't explicitly use `<tbody>`, browsers will implicitly create one
 ///
-public struct TableBody<HTML>: Element {
+public struct TableBody: Element {
     /// The HTML tag name
     public static var tag: String { "tbody" }
     
@@ -65,9 +65,9 @@ public struct TableBody<HTML>: Element {
     /// - Parameter content: The content of the element, typically one or more `<tr>` elements
     ///                      containing the main data for the table
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

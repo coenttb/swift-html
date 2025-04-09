@@ -59,7 +59,7 @@ import HTML_Attributes
 ///   of individual columns
 ///
 /// - Note: When rendered, this generates an HTML `<colgroup>` element containing column definitions.
-public struct TableColumnGroup<HTML>: Element {
+public struct TableColumnGroup: Element {
     /// The HTML tag name
     public static var tag: String { "colgroup" }
     
@@ -81,10 +81,10 @@ public struct TableColumnGroup<HTML>: Element {
     ///   the colgroup element cannot contain any col elements.
     public init(
         span: HTML_Attributes.Span? = nil,
-        content: @escaping () -> HTML = { fatalError("Content not provided for TableColumnGroup") }
+         = { fatalError("Content not provided for TableColumnGroup") }
     ) {
         self.span = span
-        self.content = content
+        
     }
 }
 

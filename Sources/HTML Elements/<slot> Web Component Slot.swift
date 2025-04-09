@@ -30,7 +30,7 @@ import HTML_Attributes
 /// - Ensure slot names are unique within a shadow root
 /// - Remember that unnamed slots (without a name attribute) will capture all unassigned content
 ///
-public struct WebComponentSlot<HTML>: Element {
+public struct WebComponentSlot: Element {
     /// The HTML tag name
     public static var tag: String { "slot" }
     
@@ -49,10 +49,10 @@ public struct WebComponentSlot<HTML>: Element {
     ///   - content: The default content of the slot, shown when no slotted content is provided
     public init(
         name: Name? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.name = name
-        self.content = content
+        
     }
 }
 

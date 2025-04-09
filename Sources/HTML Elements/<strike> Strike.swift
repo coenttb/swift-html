@@ -31,7 +31,7 @@ import HTML_Attributes
 /// - Use `<del>` for content that has been deleted from a document.
 /// - Consider using CSS `text-decoration: line-through` for styling purposes instead.
 ///
-public struct Strike<HTML>: Element {
+public struct Strike: Element {
     /// The HTML tag name
     public static var tag: String { "strike" }
     
@@ -42,9 +42,9 @@ public struct Strike<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

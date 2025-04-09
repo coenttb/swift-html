@@ -36,7 +36,7 @@ import HTML_Attributes
 /// - When using multiple `<style>` and `<link>` elements, they are applied in the order they appear in the document.
 /// - You can use the `media` attribute to apply styles conditionally based on media queries.
 ///
-public struct Style<HTML>: Element {
+public struct Style: Element {
     /// The HTML tag name
     public static var tag: String { "style" }
     
@@ -68,13 +68,13 @@ public struct Style<HTML>: Element {
         blocking: HTML_Attributes.Blocking? = nil,
         nonce: HTML_Attributes.Nonce? = nil,
         title: HTML_Attributes.Title? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.media = media
         self.blocking = blocking
         self.nonce = nonce
         self.title = title
-        self.content = content
+        
     }
 }
 

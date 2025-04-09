@@ -53,7 +53,7 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates the HTML `<body>` element that contains
 ///   all the visible content of the webpage.
-public struct Body<HTML>: Element {
+public struct Body: Element {
     public static var tag: String { "body" }
     
     /// Function to call after the user has printed the document.
@@ -148,21 +148,14 @@ public struct Body<HTML>: Element {
     @available(*, deprecated, message: "Use JavaScript addEventListener('unload') instead")
     public var onUnload: String?
     
-    /// The content of the body element, which includes all the visible content
-    /// that appears on a webpage.
-    ///
-    /// This can include any flow content, such as text, headings, paragraphs,
-    /// images, links, tables, lists, forms, and more.
-    public var content: () -> HTML
-    
     /// Creates a new Body element with the specified content and event handlers.
     ///
     /// - Parameters:
     ///   - content: The content to be contained within the body element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
     
     /// Creates a new Body element with the specified content and event handlers.
@@ -191,7 +184,6 @@ public struct Body<HTML>: Element {
     ///   - onStorage: Function to call when storage area changes
     ///   - onUnhandledRejection: Function to call on unhandled Promise rejection
     ///   - onUnload: Function to call when document is unloaded
-    ///   - content: The content to be contained within the body element
     @available(*, deprecated, message: "Use JavaScript event listeners instead of HTML event handler attributes")
     public init(
         onAfterPrint: String? = nil,
@@ -216,8 +208,7 @@ public struct Body<HTML>: Element {
         onRejectionHandled: String? = nil,
         onStorage: String? = nil,
         onUnhandledRejection: String? = nil,
-        onUnload: String? = nil,
-        content: @escaping () -> HTML
+        onUnload: String? = nil
     ) {
         self.onAfterPrint = onAfterPrint
         self.onBeforePrint = onBeforePrint
@@ -242,7 +233,6 @@ public struct Body<HTML>: Element {
         self.onStorage = onStorage
         self.onUnhandledRejection = onUnhandledRejection
         self.onUnload = onUnload
-        self.content = content
     }
 }
 

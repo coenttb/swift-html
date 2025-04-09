@@ -39,7 +39,7 @@ import HTML_Attributes
 /// The presence of the `del` element is not announced by most screen reading technology in its default configuration.
 /// For critical content, consider using CSS with `::before` and `::after` pseudo-elements to make deletions more apparent.
 ///
-public struct Del<HTML>: Element {
+public struct Del: Element {
     /// The HTML tag name
     public static var tag: String { "del" }
     
@@ -61,11 +61,11 @@ public struct Del<HTML>: Element {
     public init(
         cite: HTML_Attributes.Cite? = nil,
         datetime: HTML_Attributes.DateTime? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.cite = cite
         self.datetime = datetime
-        self.content = content
+        
     }
 }
 

@@ -43,7 +43,7 @@ import HTML_Attributes
 /// - Instead, use CSS `text-align: center` with `<div>` or `<p>` elements
 /// - For centering blocks, use CSS properties like `margin-left` and `margin-right` set to `auto`
 ///
-public struct Center<HTML>: Element {
+public struct Center: Element {
     /// The HTML tag name
     public static var tag: String { "center" }
     
@@ -54,9 +54,9 @@ public struct Center<HTML>: Element {
     ///
     /// - Parameter content: The content to be centered
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

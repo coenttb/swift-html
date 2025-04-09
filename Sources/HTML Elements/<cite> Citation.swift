@@ -49,7 +49,7 @@ import HTML_Attributes
 /// - Browsers typically style the contents of a `<cite>` element in italics by default.
 /// - The `<cite>` element should only include the title of the work, not the author's name.
 ///
-public struct Cite<HTML>: Element {
+public struct Cite: Element {
     /// The HTML tag name
     public static var tag: String { "cite" }
     
@@ -60,9 +60,9 @@ public struct Cite<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

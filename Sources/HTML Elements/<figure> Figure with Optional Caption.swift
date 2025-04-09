@@ -40,7 +40,7 @@ import Foundation
 /// - Typically used for images, illustrations, diagrams, code snippets, etc.
 /// - Can be moved to another part of the document without affecting the main flow
 ///
-public struct Figure<HTML>: Element {
+public struct Figure: Element {
     /// The HTML tag name
     public static var tag: String { "figure" }
     
@@ -52,9 +52,9 @@ public struct Figure<HTML>: Element {
     /// - Parameter content: The content of the figure, which may include images, code,
     ///   text, and an optional figcaption element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

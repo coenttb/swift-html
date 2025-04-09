@@ -47,7 +47,7 @@ import HTML_Attributes
 /// - The `value` attribute only has meaning within ordered lists
 /// - Use CSS for styling rather than deprecated attributes like `type`
 ///
-public struct ListItem<HTML>: Element {
+public struct ListItem: Element {
     /// The HTML tag name
     public static var tag: String { "li" }
     
@@ -66,10 +66,10 @@ public struct ListItem<HTML>: Element {
     ///   - content: The content of the list item
     public init(
         value: Int? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.value = value
-        self.content = content
+        
     }
 }
 

@@ -42,22 +42,12 @@ import HTML_Attributes
 /// - `<noscript>`: Provides fallback content for browsers with JavaScript disabled
 /// - `<template>`: Holds client-side template content
 ///
-public struct Head<HTML>: Element {
+public struct Head: Element {
     /// The HTML tag name
     public static var tag: String { "head" }
     
-    /// The element's content, which should contain metadata elements
-    public var content: () -> HTML
-    
     /// Creates a new Head element with the specified content.
-    ///
-    /// - Parameter content: The content of the head element, typically including metadata elements
-    ///   like title, meta tags, scripts, and stylesheets
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Head elements with a more HTML-like syntax.

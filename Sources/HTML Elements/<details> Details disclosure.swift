@@ -55,7 +55,7 @@ import HTML_Attributes
 /// - The `name` attribute allows multiple details elements to be connected in an accordion-like pattern
 /// - Use CSS to style the disclosure widget for better visual appearance
 /// 
-public struct Details<HTML>: Element {
+public struct Details: Element {
     /// The HTML tag name
     public static var tag: String { "details" }
     
@@ -79,11 +79,11 @@ public struct Details<HTML>: Element {
     public init(
         open: Open? = nil,
         name: Name? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.open = open
         self.name = name
-        self.content = content
+        
     }
 }
 

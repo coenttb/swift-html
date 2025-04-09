@@ -53,22 +53,12 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<bdi>` element that isolates its content from
 ///   the bidirectional algorithm's influence.
-public struct BidirectionalIsolate<HTML>: Element {
+public struct BidirectionalIsolate: Element {
     /// The HTML tag name
     public static var tag: String { "bdi" }
     
-    /// The content of the bidirectional isolate element
-    public let content: () -> HTML
-    
     /// Creates a new BidirectionalIsolate element with the specified content.
-    ///
-    /// - Parameters:
-    ///   - content: The content to be rendered inside the bidirectional isolate element
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating BidirectionalIsolate elements with a more HTML-like syntax.

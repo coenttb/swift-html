@@ -36,7 +36,7 @@ import HTML_Attributes
 /// presentation (like `<b>` and `<i>`), it is valid in HTML when used for its semantic purpose rather than
 /// just visual styling.
 ///
-public struct Small<HTML>: Element {
+public struct Small: Element {
     /// The HTML tag name
     public static var tag: String { "small" }
     
@@ -47,9 +47,9 @@ public struct Small<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

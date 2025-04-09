@@ -31,7 +31,7 @@ import HTML_Attributes
 /// <span style="white-space: nowrap;">Long line with no breaks</span>
 /// ```
 ///
-public struct NoBr<HTML>: Element {
+public struct NoBr: Element {
     /// The HTML tag name
     public static var tag: String { "nobr" }
     
@@ -43,9 +43,9 @@ public struct NoBr<HTML>: Element {
     /// - Parameter content: The content of the element
     @available(*, deprecated, message: "Although this element is widely supported, it was never standard HTML. Use CSS property `white-space: nowrap` instead.")
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

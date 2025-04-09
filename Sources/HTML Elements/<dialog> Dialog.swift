@@ -46,7 +46,7 @@ import HTML_Attributes
 /// - Modal dialogs automatically make content outside inert, but care should be taken with non-modal dialogs
 /// - When the dialog is opened with `showModal()`, it automatically gets `aria-modal="true"`
 ///
-public struct Dialog<HTML>: Element {
+public struct Dialog: Element {
     /// The HTML tag name
     public static var tag: String { "dialog" }
     
@@ -67,10 +67,10 @@ public struct Dialog<HTML>: Element {
     ///   - content: The content of the dialog
     public init(
         open: Open? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.open = open
-        self.content = content
+        
     }
 }
 

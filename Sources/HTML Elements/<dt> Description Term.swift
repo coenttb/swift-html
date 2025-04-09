@@ -44,7 +44,7 @@ import HTML_Attributes
 /// - The `<dt>` element should be followed by a `<dd>` element or another `<dt>` element.
 /// - Multiple `<dt>` elements in a row indicate multiple terms defined by the next `<dd>` element.
 ///
-public struct DescriptionTerm<HTML>: Element {
+public struct DescriptionTerm: Element {
     /// The HTML tag name
     public static var tag: String { "dt" }
     
@@ -55,9 +55,9 @@ public struct DescriptionTerm<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

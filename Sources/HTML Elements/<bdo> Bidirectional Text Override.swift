@@ -44,27 +44,21 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<bdo>` element that overrides the default
 ///   text direction for its content.
-public struct BidirectionalTextOverride<HTML>: Element {
+public struct BidirectionalTextOverride: Element {
     /// The HTML tag name
     public static var tag: String { "bdo" }
     
     /// The required direction attribute for the bidirectional text override element
     public let dir: HTML_Attributes.Dir
     
-    /// The content of the bidirectional text override element
-    public let content: () -> HTML
-    
     /// Creates a new BidirectionalTextOverride element with the specified direction and content.
     ///
     /// - Parameters:
     ///   - dir: The text direction to apply to the content (required)
-    ///   - content: The content to be rendered with the specified direction
     public init(
-        dir: HTML_Attributes.Dir,
-        content: @escaping () -> HTML
+        dir: HTML_Attributes.Dir
     ) {
         self.dir = dir
-        self.content = content
     }
 }
 

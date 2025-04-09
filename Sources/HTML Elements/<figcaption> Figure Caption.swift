@@ -32,7 +32,7 @@ import HTML_Attributes
 /// - Use `<figcaption>` to provide an accessible description for the figure content
 /// - Only include one `<figcaption>` per `<figure>` element
 ///
-public struct FigureCaption<HTML>: Element {
+public struct FigureCaption: Element {
     /// The HTML tag name
     public static var tag: String { "figcaption" }
     
@@ -43,9 +43,9 @@ public struct FigureCaption<HTML>: Element {
     ///
     /// - Parameter content: The content of the figure caption
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

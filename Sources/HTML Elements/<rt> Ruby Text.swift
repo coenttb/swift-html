@@ -37,7 +37,7 @@ import HTML_Attributes
 /// - Use with `<rp>` elements to provide fallback parentheses for browsers that don't support ruby annotations
 /// - For complex text layout, consider using with `<rb>` and `<rtc>` elements
 ///
-public struct RubyText<HTML>: Element {
+public struct RubyText: Element {
     /// The HTML tag name
     public static var tag: String { "rt" }
 
@@ -51,9 +51,9 @@ public struct RubyText<HTML>: Element {
     ///   - class: The CSS classes for this element
     ///   - content: The content of the element, typically the pronunciation or meaning of the base text
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

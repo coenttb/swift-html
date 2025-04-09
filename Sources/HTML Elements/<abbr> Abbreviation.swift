@@ -54,22 +54,11 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<abbr>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Abbreviation<HTML>: Element {
+public struct Abbreviation: Element {
     public static var tag: String { "abbr" }
     
-    /// The content of the abbreviation element, typically the abbreviated form.
-    ///
-    /// This should be the short form of the term that is being marked up as an abbreviation.
-    public var content: () -> HTML
-    
     /// Creates a new Abbreviation element with the specified content.
-    ///
-    /// - Parameter content: The content of the abbreviation element, typically the abbreviated form
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Abbreviation elements with a more HTML-like syntax.

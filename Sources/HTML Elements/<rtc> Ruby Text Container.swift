@@ -44,7 +44,7 @@ import HTML_Attributes
 /// - Note that this element is deprecated; consider simpler ruby structures for better compatibility
 /// - Only use within a `<ruby>` element
 ///
-public struct RubyTextContainer<HTML>: Element {
+public struct RubyTextContainer: Element {
     /// The HTML tag name
     public static var tag: String { "rtc" }
 
@@ -58,9 +58,9 @@ public struct RubyTextContainer<HTML>: Element {
     ///   - class: The CSS classes for this element
     ///   - content: The content of the element, typically containing `<rt>` elements
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

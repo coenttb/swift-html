@@ -56,7 +56,7 @@ import HTML_Attributes
 /// - Make sure video controls are accessible via keyboard
 /// - Videos with important visual information should include audio descriptions
 ///
-public struct Video<HTML>: Element {
+public struct Video: Element {
     /// The HTML tag name for the video element
     public static var tag: String { "video" }
     
@@ -138,7 +138,7 @@ public struct Video<HTML>: Element {
         controlslist: HTML_Attributes.ControlsList? = nil,
         disablepictureinpicture: HTML_Attributes.DisablePictureInPicture? = nil,
         disableremoteplayback: HTML_Attributes.DisableRemotePlayback? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.src = src
         self.controls = controls
@@ -154,7 +154,7 @@ public struct Video<HTML>: Element {
         self.controlslist = controlslist
         self.disablepictureinpicture = disablepictureinpicture
         self.disableremoteplayback = disableremoteplayback
-        self.content = content
+        
     }
 }
 

@@ -39,7 +39,7 @@ import HTML_Attributes
 /// - For high-DPI (Retina) display versions, consider using `srcset` on the `<img>` element directly instead of `<picture>`.
 /// - Apply `object-position` and `object-fit` CSS properties on the child `<img>` element, not on the `<picture>` element.
 ///
-public struct Picture<HTML>: Element {
+public struct Picture: Element {
     /// The HTML tag name
     public static var tag: String { "picture" }
     
@@ -50,9 +50,9 @@ public struct Picture<HTML>: Element {
     ///
     /// - Parameter content: The content of the element, which should typically contain `<source>` elements followed by an `<img>` element.
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

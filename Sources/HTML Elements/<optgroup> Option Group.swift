@@ -37,7 +37,7 @@ import HTML_Attributes
 /// - Optgroup elements may not be nested
 /// - Use optgroups to organize related options in a select element
 ///
-public struct OptionGroup<HTML>: Element {
+public struct OptionGroup: Element {
     /// The HTML tag name
     public static var tag: String { "optgroup" }
     
@@ -62,11 +62,11 @@ public struct OptionGroup<HTML>: Element {
     public init(
         disabled: Disabled? = nil,
         label: String? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.disabled = disabled
         self.label = label
-        self.content = content
+        
     }
 }
 

@@ -33,7 +33,7 @@ import HTML_Attributes
 /// - Nest lists as needed to show hierarchical information
 /// - For styling, prefer CSS over the `type` attribute when possible
 ///
-public struct OrderedList<HTML>: Element {
+public struct OrderedList: Element {
     /// The HTML tag name
     public static var tag: String { "ol" }
     
@@ -60,12 +60,12 @@ public struct OrderedList<HTML>: Element {
         reversed: HTML_Attributes.Reversed? = nil,
         start: HTML_Attributes.Start? = nil,
         type: HTML_Attributes.ListType? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.reversed = reversed
         self.start = start
         self.type = type
-        self.content = content
+        
     }
 }
 

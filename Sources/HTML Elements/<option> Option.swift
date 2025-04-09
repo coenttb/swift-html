@@ -39,7 +39,7 @@ import HTML_Attributes
 /// - Use the `disabled` attribute to make an option unselectable when appropriate
 /// - Consider using `optgroup` to organize options into logical groups for better usability
 ///
-public struct Option<HTML>: Element {
+public struct Option: Element {
     /// The HTML tag name
     public static var tag: String { "option" }
     
@@ -75,13 +75,13 @@ public struct Option<HTML>: Element {
         label: String? = nil,
         selected: Selected? = nil,
         value: Value<String>,
-        content: @escaping () -> HTML
+        
     ) {
         self.disabled = disabled
         self.label = label
         self.selected = selected
         self.value = value
-        self.content = content
+        
     }
 }
 

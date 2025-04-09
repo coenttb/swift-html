@@ -43,18 +43,11 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<b>` element with bold styling but no
 ///   additional semantic weight beyond bringing attention to the text.
-public struct B<HTML>: Element {
+public struct B: Element {
     public static var tag: String { "b" }
     
-    /// The content of the b element, which can include text and other elements.
-    public var content: () -> HTML
-    
     /// Creates a new B element with the specified content.
-    ///
-    /// - Parameter content: The content to be rendered inside the b element.
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating B elements with a more HTML-like syntax.

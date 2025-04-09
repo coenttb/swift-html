@@ -34,7 +34,7 @@ import HTML_Attributes
 /// - The end tag may be omitted if this element is immediately followed by another
 ///   `<dd>` element, a `<dt>` element, or if there is no more content in the parent element
 ///
-public struct DescriptionDetails<HTML>: Element {
+public struct DescriptionDetails: Element {
     /// The HTML tag name
     public static var tag: String { "dd" }
 
@@ -45,9 +45,9 @@ public struct DescriptionDetails<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

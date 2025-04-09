@@ -36,7 +36,7 @@ import HTML_Attributes
 /// - Screen readers may use verbal stress or a different tone when reading `<em>` content
 /// - The element has an implicit ARIA role of "emphasis"
 ///
-public struct Emphasis<HTML>: Element {
+public struct Emphasis: Element {
     /// The HTML tag name
     public static var tag: String { "em" }
     
@@ -47,9 +47,9 @@ public struct Emphasis<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

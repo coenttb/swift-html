@@ -55,7 +55,7 @@ import Foundation
 /// Unlike the `<br>` element which forces a line break, `<wbr>` only suggests where a break *may* occur if needed.
 /// The browser will only break at the `<wbr>` position if it would otherwise overflow its container.
 ///
-public struct LineBreakOpportunity<HTML>: Element {
+public struct LineBreakOpportunity: Element {
     /// The HTML tag name
     public static var tag: String { "wbr" }
     
@@ -66,9 +66,9 @@ public struct LineBreakOpportunity<HTML>: Element {
     ///
     /// - Parameter content: The content of the element (typically empty as WBR is a void element)
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

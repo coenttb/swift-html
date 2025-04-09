@@ -61,7 +61,7 @@ import HTML_Attributes
 /// - Use `colspan` attributes when a footer cell needs to span multiple columns
 /// - Consider accessibility by using `<th>` elements with appropriate `scope` attributes for footer headers
 ///
-public struct TableFoot<HTML>: Element {
+public struct TableFoot: Element {
     /// The HTML tag name
     public static var tag: String { "tfoot" }
     
@@ -73,9 +73,9 @@ public struct TableFoot<HTML>: Element {
     /// - Parameter content: The content of the element, typically one or more `<tr>` elements
     ///                      containing summary data or totals for the table columns
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -33,27 +33,21 @@ import HTML_Attributes
 /// - For shorter inline quotes, use the `q` element instead
 /// - The content is typically rendered visually by indentation
 ///
-public struct BlockQuote<HTML>: Element {
+public struct BlockQuote: Element {
     /// The HTML tag name
     public static var tag: String { "blockquote" }
     
     /// A URL that designates a source document or message for the quoted information
     public var cite: HTML_Attributes.Cite?
     
-    /// The content of the block quotation element
-    public let content: () -> HTML
-    
     /// Creates a new BlockQuote element with the specified citation source and content.
     ///
     /// - Parameters:
     ///   - cite: A URL that designates the source document for the quotation
-    ///   - content: The content of the block quotation
     public init(
-        cite: HTML_Attributes.Cite? = nil,
-        content: @escaping () -> HTML
+        cite: HTML_Attributes.Cite? = nil
     ) {
         self.cite = cite
-        self.content = content
     }
 }
 

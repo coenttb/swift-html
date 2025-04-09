@@ -56,7 +56,7 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<audio>` element with the appropriate
 ///   attributes and content based on the configuration.
-public struct Audio<HTML>: Element {
+public struct Audio: Element {
     public static var tag: String { "audio" }
     
     /// The URL of the audio file to embed.
@@ -114,12 +114,6 @@ public struct Audio<HTML>: Element {
     /// attached using wired or wireless technologies.
     public var disableremoteplayback: DisableRemotePlayback?
     
-    /// The content of the audio element, which can include source elements for
-    /// different formats and fallback content for browsers that don't support audio.
-    ///
-    /// If the browser doesn't support the audio element, this content will be displayed instead.
-    public var content: () -> HTML
-    
     /// Creates a new Audio element with the specified attributes and content.
     ///
     /// - Parameters:
@@ -132,7 +126,6 @@ public struct Audio<HTML>: Element {
     ///   - crossorigin: CORS settings for the audio resource
     ///   - controlslist: Which controls to show in the audio player
     ///   - disableremoteplayback: Whether to disable remote playback
-    ///   - content: Fallback content or sources for different formats
     public init(
         src: Src? = nil,
         controls: Controls? = nil,
@@ -142,8 +135,7 @@ public struct Audio<HTML>: Element {
         preload: Preload? = nil,
         crossorigin: Crossorigin? = nil,
         controlslist: ControlsList? = nil,
-        disableremoteplayback: DisableRemotePlayback? = nil,
-        content: @escaping () -> HTML
+        disableremoteplayback: DisableRemotePlayback? = nil
     ) {
         self.src = src
         self.controls = controls
@@ -154,7 +146,7 @@ public struct Audio<HTML>: Element {
         self.crossorigin = crossorigin
         self.controlslist = controlslist
         self.disableremoteplayback = disableremoteplayback
-        self.content = content
+        
     }
 }
 

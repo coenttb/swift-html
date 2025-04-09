@@ -32,7 +32,7 @@ import HTML_Attributes
 /// - Keep legend text concise and informative
 /// - Consider accessibility by using clear, descriptive text
 ///
-public struct Legend<HTML>: Element {
+public struct Legend: Element {
     /// The HTML tag name
     public static var tag: String { "legend" }
     
@@ -43,9 +43,9 @@ public struct Legend<HTML>: Element {
     ///
     /// - Parameter content: The content of the legend element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -31,7 +31,7 @@ import HTML_Attributes
 /// - Use `<object>` with fallback content instead
 /// - Provide descriptive alternative content that explains what would be shown
 ///
-public struct EmbedFallback<HTML>: Element {
+public struct EmbedFallback: Element {
     /// The HTML tag name
     public static var tag: String { "noembed" }
     
@@ -43,9 +43,9 @@ public struct EmbedFallback<HTML>: Element {
     /// - Parameter content: The fallback content to display when embed is not supported
     @available(*, deprecated, message: "The <noembed> element is deprecated in HTML standards. Use <object> with fallback content instead.")
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -39,7 +39,7 @@ import HTML_Attributes
 /// - Unlike `div` (which is block-level), span is an inline-level element
 /// - Commonly used with CSS classes to apply styling to portions of text
 ///
-public struct ContentSpan<HTML>: Element {
+public struct ContentSpan: Element {
     /// The HTML tag name
     public static var tag: String { "span" }
     
@@ -51,9 +51,9 @@ public struct ContentSpan<HTML>: Element {
     /// - Parameters:
     ///   - content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -32,7 +32,7 @@ import HTML_Attributes
 ///   - Chemical formulas (e.g., H₂O)
 /// - For presentational subscripts, use CSS (e.g., `vertical-align: sub`)
 ///
-public struct Subscript<HTML>: Element {
+public struct Subscript: Element {
     /// The HTML tag name
     public static var tag: String { "sub" }
     
@@ -43,9 +43,9 @@ public struct Subscript<HTML>: Element {
     ///
     /// - Parameter content: The content of the subscript element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

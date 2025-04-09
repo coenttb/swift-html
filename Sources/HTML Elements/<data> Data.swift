@@ -31,7 +31,7 @@ import HTML_Attributes
 /// - Use the `value` attribute to provide the machine-readable translation of the content.
 /// - This element can be used to associate additional data with content that is displayed to users.
 ///
-public struct Data<HTML>: Element {
+public struct Data: Element {
     /// The HTML tag name
     public static var tag: String { "data" }
     
@@ -48,10 +48,10 @@ public struct Data<HTML>: Element {
     ///   - content: The content of the element
     public init(
         value: Value<String>,
-        content: @escaping () -> HTML
+        
     ) {
         self.value = value
-        self.content = content
+        
     }
 }
 

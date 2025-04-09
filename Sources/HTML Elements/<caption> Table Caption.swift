@@ -47,22 +47,12 @@ import HTML_Attributes
 /// - Any `background-color` applied to a table will not be applied to its caption. Add a 
 ///   `background-color` to the `<caption>` element as well if you want the same color to be behind both
 
-public struct Caption<HTML>: Element {
+public struct Caption: Element {
     /// The HTML tag name
     public static var tag: String { "caption" }
     
-    /// The content of the table caption
-    public let content: () -> HTML
-    
     /// Creates a new Caption element with the specified content.
-    ///
-    /// - Parameters:
-    ///   - content: The content to be rendered inside the table caption element
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Caption elements with a more HTML-like syntax.

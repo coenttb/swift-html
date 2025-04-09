@@ -35,7 +35,7 @@ import HTML_Attributes
 /// - Use CSS for styling rather than relying on HTML attributes
 /// - Consider disabling textarea resizing with CSS `resize: none` if needed
 ///
-public struct Textarea<HTML>: Element {
+public struct Textarea: Element {
     /// The HTML tag name
     public static var tag: String { "textarea" }
     
@@ -137,7 +137,7 @@ public struct Textarea<HTML>: Element {
         rows: Int? = nil,
         spellcheck: HTML_Attributes.Spellcheck? = nil,
         wrap: TextareaWrap? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.autocapitalize = autocapitalize
         self.autocomplete = autocomplete
@@ -157,7 +157,7 @@ public struct Textarea<HTML>: Element {
         self.rows = rows
         self.spellcheck = spellcheck
         self.wrap = wrap
-        self.content = content
+        
     }
 }
 

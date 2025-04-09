@@ -34,7 +34,7 @@ import HTML_Attributes
 /// - It can be made to be announced by using the CSS `content` property, along with the `::before` and `::after` pseudo-elements.
 /// - Only use this when it's important for users to know that content was inserted.
 ///
-public struct InsertedText<HTML>: Element {
+public struct InsertedText: Element {
     /// The HTML tag name
     public static var tag: String { "ins" }
     
@@ -56,11 +56,11 @@ public struct InsertedText<HTML>: Element {
     public init(
         cite: HTML_Attributes.Cite? = nil,
         datetime: HTML_Attributes.DateTime? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.cite = cite
         self.datetime = datetime
-        self.content = content
+        
     }
 }
 

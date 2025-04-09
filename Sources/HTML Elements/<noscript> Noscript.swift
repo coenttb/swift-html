@@ -31,7 +31,7 @@ import Foundation
 /// - When outside the `<head>` element, `<noscript>` can contain any content that would be valid in its parent element
 /// - A `<noscript>` element cannot contain another `<noscript>` element
 ///
-public struct Noscript<HTML>: Element {
+public struct Noscript: Element {
     /// The HTML tag name
     public static var tag: String { "noscript" }
     
@@ -43,9 +43,9 @@ public struct Noscript<HTML>: Element {
     /// - Parameters:
     ///   - content: The content to display when scripting is disabled
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

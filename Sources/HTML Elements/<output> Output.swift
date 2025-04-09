@@ -29,7 +29,7 @@ import HTML_Attributes
 /// - Use the `form` attribute to associate the output with a form outside its hierarchy
 /// - Many browsers implement this element as an `aria-live` region, making it useful for accessibility
 ///
-public struct Output<HTML>: Element {
+public struct Output: Element {
     /// The HTML tag name
     public static var tag: String { "output" }
     
@@ -58,12 +58,12 @@ public struct Output<HTML>: Element {
         `for`: For? = nil,
         form: HTML_Attributes.Form.ID? = nil,
         name: Name? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.`for` = `for`
         self.form = form
         self.name = name
-        self.content = content
+        
     }
 }
 

@@ -45,7 +45,7 @@ import HTML_Attributes
 /// - For images, audio, or video, prefer the specialized elements (<img>, <audio>, <video>)
 /// - For modern web applications, avoid using object for Flash content
 ///
-public struct ExternalObject<HTML>: Element {
+public struct ExternalObject: Element {
     /// The HTML tag name
     public static var tag: String { "object" }
     
@@ -92,7 +92,7 @@ public struct ExternalObject<HTML>: Element {
         height: HTML_Attributes.Height? = nil,
         width: HTML_Attributes.Width? = nil,
         usemap: HTML_Attributes.Usemap? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.data = data
         self.type = type
@@ -101,7 +101,7 @@ public struct ExternalObject<HTML>: Element {
         self.height = height
         self.width = width
         self.usemap = usemap
-        self.content = content
+        
     }
 }
 

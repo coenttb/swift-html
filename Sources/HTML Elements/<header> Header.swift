@@ -38,7 +38,7 @@ import HTML_Attributes
 /// - Do not nest a `<header>` inside an `<address>`, `<footer>` or another `<header>` element
 /// - The `<header>` element should not contain another `<header>` or a `<footer>` element
 ///
-public struct Header<HTML>: Element {
+public struct Header: Element {
     /// The HTML tag name
     public static var tag: String { "header" }
     
@@ -49,9 +49,9 @@ public struct Header<HTML>: Element {
     ///
     /// - Parameter content: The content of the header element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

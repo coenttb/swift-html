@@ -43,7 +43,7 @@ import HTML_Attributes
 ///   - Use `<mark>` for relevance
 ///   - Use `<cite>` for names of works
 ///   - Use `<dfn>` for defining terms
-public struct IdiomaticText<HTML>: Element {
+public struct IdiomaticText: Element {
     /// The HTML tag name
     public static var tag: String { "i" }
     
@@ -54,9 +54,9 @@ public struct IdiomaticText<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

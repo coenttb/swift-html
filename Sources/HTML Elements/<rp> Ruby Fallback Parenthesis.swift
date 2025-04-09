@@ -38,7 +38,7 @@ import HTML_Attributes
 /// - Include both opening and closing parentheses for better fallback appearance
 /// - Only use within a `<ruby>` element
 ///
-public struct RubyParenthesis<HTML>: Element {
+public struct RubyParenthesis: Element {
     /// The HTML tag name
     public static var tag: String { "rp" }
     
@@ -50,9 +50,9 @@ public struct RubyParenthesis<HTML>: Element {
     /// - Parameters:
     ///   - content: The content of the element, typically "(" or ")" for fallback display
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

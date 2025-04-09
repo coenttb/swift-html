@@ -31,7 +31,7 @@ import HTML_Attributes
 /// - Ensure the `name` attribute matches the corresponding `usemap` attribute on the `<img>` element
 /// - Include `alt` attributes on all `<area>` elements for accessibility
 ///
-public struct Map<HTML>: Element {
+public struct Map: Element {
     /// The HTML tag name
     public static var tag: String { "map" }
     
@@ -49,10 +49,10 @@ public struct Map<HTML>: Element {
     ///   - content: The content of the element, typically containing `<area>` elements
     public init(
         name: Name? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.name = name
-        self.content = content
+        
     }
 }
 

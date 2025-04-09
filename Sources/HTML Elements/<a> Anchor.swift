@@ -64,7 +64,7 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<a>` element with the appropriate
 ///   attributes based on the link configuration.
-public struct Anchor<HTML>: Element {
+public struct Anchor: Element {
     public static var tag: String { "a" }
     
     /// Indicates that Attribution-Reporting-Eligible header should be sent.
@@ -152,12 +152,6 @@ public struct Anchor<HTML>: Element {
     /// behavior as setting `rel="noopener"` in modern browsers.
     public var target: HTML_Attributes.Target?
     
-    /// The content of the anchor, which can include text and other elements.
-    ///
-    /// The content should ideally indicate the link's destination to provide
-    /// context for users, especially those using assistive technologies.
-    public var content: () -> HTML
-    
     /// Creates a new Anchor element with the specified attributes.
     ///
     /// - Parameters:
@@ -169,7 +163,6 @@ public struct Anchor<HTML>: Element {
     ///   - referrerpolicy: How much referrer information to send
     ///   - rel: Relationship between the current document and linked resource
     ///   - target: Where to display the linked URL
-    ///   - content: The content of the anchor element
     public init(
         attributionsrc: HTML_Attributes.AttributionSrc? = nil,
         download: HTML_Attributes.Download? = nil,
@@ -179,7 +172,7 @@ public struct Anchor<HTML>: Element {
         referrerpolicy: HTML_Attributes.ReferrerPolicy? = nil,
         rel: HTML_Attributes.Rel? = nil,
         target: HTML_Attributes.Target? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.attributionsrc = attributionsrc
         self.download = download
@@ -189,7 +182,6 @@ public struct Anchor<HTML>: Element {
         self.referrerpolicy = referrerpolicy
         self.rel = rel
         self.target = target
-        self.content = content
     }
 }
 

@@ -65,7 +65,7 @@ import Foundation
 /// Most browsers render the `<var>` element in an italicized font style, although this can vary
 /// across browsers and can be overridden with CSS.
 ///
-public struct Variable<HTML>: Element {
+public struct Variable: Element {
     /// The HTML tag name
     public static var tag: String { "var" }
     
@@ -76,9 +76,9 @@ public struct Variable<HTML>: Element {
     ///
     /// - Parameter content: The content of the element, typically the variable name
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

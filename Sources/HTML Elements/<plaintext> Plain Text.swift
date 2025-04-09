@@ -39,7 +39,7 @@ import HTML_Attributes
 /// - Apply monospaced fonts via CSS using `font-family: monospace` where needed.
 ///
 @available(*, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead.")
-public struct PlainText<HTML>: Element {
+public struct PlainText: Element {
     /// The HTML tag name
     public static var tag: String { "plaintext" }
     
@@ -51,9 +51,9 @@ public struct PlainText<HTML>: Element {
     /// - Parameter content: The content to be displayed as plain text
     @available(*, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead.")
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

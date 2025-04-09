@@ -38,7 +38,7 @@ import HTML_Attributes
 /// - This element should not be used for dates prior to the introduction of the Gregorian calendar
 /// - If the element doesn't have a `datetime` attribute, the content must be in a valid datetime format
 ///
-public struct Time<HTML>: Element {
+public struct Time: Element {
     /// The HTML tag name
     public static var tag: String { "time" }
     
@@ -55,10 +55,10 @@ public struct Time<HTML>: Element {
     ///   - content: The content of the element, typically a human-readable date or time
     public init(
         datetime: HTML_Attributes.DateTime? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.datetime = datetime
-        self.content = content
+        
     }
 }
 

@@ -40,7 +40,7 @@ import HTML_Attributes
 /// - Consider using the `disabled` attribute to disable all form controls within the fieldset at once
 /// - Form controls inside the `<legend>` element won't be disabled when the fieldset is disabled
 ///
-public struct FieldSet<HTML>: Element {
+public struct FieldSet: Element {
     /// The HTML tag name
     public static var tag: String { "fieldset" }
     
@@ -67,12 +67,12 @@ public struct FieldSet<HTML>: Element {
         disabled: HTML_Attributes.Disabled? = nil,
         form: HTML_Attributes.Form? = nil,
         name: HTML_Attributes.Name? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.disabled = disabled
         self.form = form
         self.name = name
-        self.content = content
+        
     }
 }
 

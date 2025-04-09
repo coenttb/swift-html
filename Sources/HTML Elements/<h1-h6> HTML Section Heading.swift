@@ -19,79 +19,55 @@ import Foundation
 /// These elements only include the global attributes.
 
 // MARK: - H1 Element
-public struct H1<HTML>: Element {
+public struct H1: Element {
     public static var tag: String { "h1" }
-
-    public var content: () -> HTML
     
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 public typealias h1 = H1
 
 // MARK: - H2 Element
-public struct H2<HTML>: Element {
+public struct H2: Element {
     public static var tag: String { "h2" }
-
-    public var content: () -> HTML
     
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 public typealias h2 = H2
 
 // MARK: - H3 Element
-public struct H3<HTML>: Element {
+public struct H3: Element {
     public static var tag: String { "h3" }
-
-    public var content: () -> HTML
     
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 public typealias h3 = H3
 
 // MARK: - H4 Element
-public struct H4<HTML>: Element {
+public struct H4: Element {
     public static var tag: String { "h4" }
-
-    public var content: () -> HTML
     
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 public typealias h4 = H4
 
 // MARK: - H5 Element
-public struct H5<HTML>: Element {
+public struct H5: Element {
     public static var tag: String { "h5" }
-
-    public var content: () -> HTML
     
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 public typealias h5 = H5
 
 // MARK: - H6 Element
-public struct H6<HTML>: Element {
+public struct H6: Element {
     public static var tag: String { "h6" }
-
-    public var content: () -> HTML
     
-    public init(content: @escaping () -> HTML) {
-        self.content = content
-    }
+    public init(){}
 }
 
 public typealias h6 = H6

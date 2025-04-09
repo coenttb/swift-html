@@ -28,21 +28,12 @@ import HTML_Attributes
 /// - Consider using CSS `font-size` property instead as `<big>` is deprecated
 /// - For modern development, prefer using semantic elements with appropriate CSS styling
 ///
-public struct Big<HTML>: Element {
+public struct Big: Element {
     /// The HTML tag name
     public static var tag: String { "big" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Big element.
-    ///
-    /// - Parameter content: The content of the element
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Big elements with a more HTML-like syntax.

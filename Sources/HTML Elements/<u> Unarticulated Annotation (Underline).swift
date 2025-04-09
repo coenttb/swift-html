@@ -38,7 +38,7 @@ import HTML_Attributes
 ///   - `<i>` for technical terms, transliterations, thoughts, or vessel names
 /// - For non-semantic underlining, use CSS `text-decoration: underline` with a `<span>` element instead
 ///
-public struct UnarticulatedAnnotation<HTML>: Element {
+public struct UnarticulatedAnnotation: Element {
     /// The HTML tag name
     public static var tag: String { "u" }
     
@@ -49,9 +49,9 @@ public struct UnarticulatedAnnotation<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

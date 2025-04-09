@@ -45,7 +45,7 @@ import HTML_Attributes
 /// - Use CSS selectors like `:nth-of-type`, `:first-of-type`, and `:last-of-type` to style rows
 /// - Avoid deprecated attributes like `align`, `bgcolor`, `char`, `charoff`, and `valign`; use CSS instead
 ///
-public struct TableRow<HTML>: Element {
+public struct TableRow: Element {
     /// The HTML tag name
     public static var tag: String { "tr" }
     
@@ -56,9 +56,9 @@ public struct TableRow<HTML>: Element {
     ///
     /// - Parameter content: The content of the element, typically a sequence of `<td>` and/or `<th>` elements
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

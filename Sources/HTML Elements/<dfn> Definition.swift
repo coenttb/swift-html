@@ -48,7 +48,7 @@ import HTML_Attributes
 /// In some cases, you may wish to use an abbreviation for a term when defining it. This can be done by 
 /// using the `<dfn>` and `<abbr>` elements together.
 ///
-public struct Definition<HTML>: Element {
+public struct Definition: Element {
     /// The HTML tag name
     public static var tag: String { "dfn" }
     
@@ -66,10 +66,10 @@ public struct Definition<HTML>: Element {
     ///   - content: The content of the element
     public init(
         title: HTML_Attributes.Title? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.title = title
-        self.content = content
+        
     }
 }
 

@@ -49,7 +49,7 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates the HTML `<title>` element, which must be
 ///   placed within the `<head>` element of an HTML document.
-public struct Title<HTML>: Element {
+public struct Title: Element {
     /// The HTML tag name
     public static var tag: String { "title" }
     
@@ -63,9 +63,9 @@ public struct Title<HTML>: Element {
     ///
     /// - Parameter content: The text content of the title element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

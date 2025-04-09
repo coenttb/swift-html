@@ -64,7 +64,7 @@ import Foundation
 /// - `list-style-image`: Uses a custom image for bullets
 /// - `margin` and `padding`: Control list indentation and spacing
 ///
-public struct UnorderedList<HTML>: Element {
+public struct UnorderedList: Element {
     /// The HTML tag name
     public static var tag: String { "ul" }
     
@@ -75,9 +75,9 @@ public struct UnorderedList<HTML>: Element {
     ///
     /// - Parameter content: The content of the list, typically a collection of list items (`<li>`)
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

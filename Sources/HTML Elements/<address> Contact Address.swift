@@ -49,23 +49,11 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<address>` element with the appropriate
 ///   attributes based on the configuration.
-public struct Address<HTML>: Element {
+public struct Address: Element {
     public static var tag: String { "address" }
-    
-    /// The content of the address element, which can include text and other elements
-    /// like anchors, line breaks, etc.
-    ///
-    /// The content should contain contact information for a person, people, or organization.
-    public var content: () -> HTML
-    
+
     /// Creates a new Address element with the specified content.
-    ///
-    /// - Parameter content: The contact information to be contained within the address element
-    public init(
-        content: @escaping () -> HTML
-    ) {
-        self.content = content
-    }
+    public init(){}
 }
 
 /// Lowercase typealias for creating Address elements with a more HTML-like syntax.

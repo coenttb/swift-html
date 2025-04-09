@@ -31,7 +31,7 @@ import HTML_Attributes
 /// - Use `<iframe>` instead for embedding content
 /// - A frameset document has a `<frameset>` element instead of a `<body>` element
 ///
-public struct Frameset<HTML>: Element {
+public struct Frameset: Element {
     /// The HTML tag name
     public static var tag: String { "frameset" }
     
@@ -53,11 +53,11 @@ public struct Frameset<HTML>: Element {
     public init(
         cols: String? = nil,
         rows: String? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.cols = cols
         self.rows = rows
-        self.content = content
+        
     }
 }
 

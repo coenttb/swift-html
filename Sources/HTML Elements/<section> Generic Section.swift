@@ -34,7 +34,7 @@ import HTML_Attributes
 /// - If content represents the main content area, use `<main>` instead
 /// - If you only need a styling wrapper, use `<div>` instead
 ///
-public struct Section<HTML>: Element {
+public struct Section: Element {
     /// The HTML tag name
     public static var tag: String { "section" }
     
@@ -46,9 +46,9 @@ public struct Section<HTML>: Element {
     /// - Parameters:
     ///   - content: The content of the section
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -58,7 +58,7 @@ import HTML_Attributes
 /// - Use the `integrity` attribute for subresource integrity when loading external scripts
 /// - Specify `type="module"` for ES modules
 ///
-public struct Script<HTML>: Element {
+public struct Script: Element {
     /// The HTML tag name
     public static var tag: String { "script" }
     
@@ -130,7 +130,7 @@ public struct Script<HTML>: Element {
         crossorigin: HTML_Attributes.Crossorigin? = nil,
         nonce: HTML_Attributes.Nonce? = nil,
         attributionsrc: HTML_Attributes.AttributionSrc? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.src = src
         self.async = async
@@ -144,7 +144,7 @@ public struct Script<HTML>: Element {
         self.crossorigin = crossorigin
         self.nonce = nonce
         self.attributionsrc = attributionsrc
-        self.content = content
+        
     }
 }
 

@@ -35,7 +35,7 @@ import HTML_Attributes
 /// Use the `title` global attribute to provide a description of the embedded content for assistive technologies.
 /// Without this label, users of screen readers would need to navigate into the fencedframe to understand its content.
 ///
-public struct FencedFrame<HTML>: Element {
+public struct FencedFrame: Element {
     /// The HTML tag name
     public static var tag: String { "fencedframe" }
     
@@ -62,12 +62,12 @@ public struct FencedFrame<HTML>: Element {
         allow: FencedFrame.Allow? = nil,
         height: HTML_Attributes.Height? = nil,
         width: HTML_Attributes.Width? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.allow = allow
         self.height = height
         self.width = width
-        self.content = content
+        
     }
 }
 

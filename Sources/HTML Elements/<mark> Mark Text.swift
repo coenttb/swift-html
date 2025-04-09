@@ -7,16 +7,16 @@
 
 import Foundation
 
-public struct Mark<HTML>: Element {
+public struct Mark: Element {
     /// The HTML tag name
     public static var tag: String { "mark" }
     
     public let content: () -> HTML
     
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

@@ -36,7 +36,7 @@ import HTML_Attributes
 /// - Note that this element is deprecated; consider using plain text within the `<ruby>` element instead
 /// - Only use within a `<ruby>` element
 ///
-public struct RubyBase<HTML>: Element {
+public struct RubyBase: Element {
     /// The HTML tag name
     public static var tag: String { "rb" }
     
@@ -48,9 +48,9 @@ public struct RubyBase<HTML>: Element {
     /// - Parameters:
     ///   - content: The content of the element, typically the base text to be annotated
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

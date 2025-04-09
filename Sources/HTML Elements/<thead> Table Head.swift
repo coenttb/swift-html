@@ -47,7 +47,7 @@ import HTML_Attributes
 /// - Use CSS for styling rather than deprecated presentational attributes
 /// - For complex tables, consider using multiple header rows within a single `<thead>` element
 ///
-public struct TableHead<HTML>: Element {
+public struct TableHead: Element {
     /// The HTML tag name
     public static var tag: String { "thead" }
     
@@ -59,9 +59,9 @@ public struct TableHead<HTML>: Element {
     /// - Parameter content: The content of the element, typically one or more `<tr>` elements
     ///                      containing `<th>` elements that define the column headers
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

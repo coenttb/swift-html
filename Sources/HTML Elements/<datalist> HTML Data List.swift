@@ -60,7 +60,7 @@ import HTML_Attributes
 /// - Some screen reader/browser combinations may not announce the dropdown contents
 ///
 /// - Note: When rendered, this generates an HTML `<datalist>` element containing option elements.
-public struct DataList<HTML>: Element {
+public struct DataList: Element {
     /// The HTML tag name
     public static var tag: String { "datalist" }
     
@@ -77,10 +77,10 @@ public struct DataList<HTML>: Element {
     ///   - content: The content of the datalist, typically option elements
     public init(
         id: HTML_Attributes.Id? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.id = id
-        self.content = content
+        
     }
 }
 

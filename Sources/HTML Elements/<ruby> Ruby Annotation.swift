@@ -37,7 +37,7 @@ import HTML_Attributes
 /// - Keep annotations concise and directly related to the base text
 /// - For complex ruby annotations, consider using `<rb>` (Ruby Base) and `<rtc>` (Ruby Text Container) elements
 ///
-public struct Ruby<HTML>: Element {
+public struct Ruby: Element {
     /// The HTML tag name
     public static var tag: String { "ruby" }
     /// The element's content
@@ -50,9 +50,9 @@ public struct Ruby<HTML>: Element {
     ///   - class: The CSS classes for this element
     ///   - content: The content of the element, typically containing base text, rt (ruby text) and optional rp (ruby parentheses) elements
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

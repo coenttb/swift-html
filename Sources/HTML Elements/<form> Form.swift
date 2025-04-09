@@ -52,7 +52,7 @@ import HTML_Attributes
 ///
 /// - Note: When rendered, this generates an HTML `<form>` element with the appropriate
 ///   attributes based on the form configuration.
-public struct Form<HTML>: Element {
+public struct Form: Element {
     public static var tag: String { "form" }
     
     /// DEPRECATED: A comma-separated list of content types the server accepts.
@@ -145,11 +145,6 @@ public struct Form<HTML>: Element {
     /// - `_top`: Top-level browsing context
     public var target: HTML_Attributes.FormTarget?
     
-    /// The content of the form, including input fields, buttons, and other controls.
-    ///
-    /// This closure returns the HTML content that will be rendered inside the form element.
-    public var content: () -> HTML
-    
     /// Creates a new HTML form element with the specified attributes and content.
     ///
     /// - Parameters:
@@ -162,7 +157,6 @@ public struct Form<HTML>: Element {
     ///   - method: HTTP method for form submission
     ///   - novalidate: Whether to disable browser validation
     ///   - target: Where to display the response
-    ///   - content: The form contents (input fields, buttons, etc.)
     public init(
         autocapitalize: Autocapitalize? = nil,
         autocomplete: Autocomplete? = nil,
@@ -172,8 +166,7 @@ public struct Form<HTML>: Element {
         enctype: HTML_Attributes.Enctype? = nil,
         method: HTML_Attributes.Method? = nil,
         novalidate: HTML_Attributes.Novalidate? = nil,
-        target: HTML_Attributes.FormTarget? = nil,
-        content: @escaping () -> HTML
+        target: HTML_Attributes.FormTarget? = nil
     ) {
         self.autocapitalize = autocapitalize
         self.autocomplete = autocomplete
@@ -184,7 +177,6 @@ public struct Form<HTML>: Element {
         self.method = method
         self.novalidate = novalidate
         self.target = target
-        self.content = content
     }
 }
 

@@ -36,7 +36,7 @@ import HTML_Attributes
 /// - Note that only the heading element contributes to the document outline
 /// - The `<hgroup>` has an implicit ARIA role of "group"
 ///
-public struct HeadingGroup<HTML>: Element {
+public struct HeadingGroup: Element {
     /// The HTML tag name
     public static var tag: String { "hgroup" }
     
@@ -48,9 +48,9 @@ public struct HeadingGroup<HTML>: Element {
     /// - Parameter content: The content of the element, typically one heading element
     ///   (`<h1>` through `<h6>`) and one or more paragraph (`<p>`) elements
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 

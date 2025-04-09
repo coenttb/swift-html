@@ -44,7 +44,7 @@ import HTML_Attributes
 /// - The `<search>` element defines a "search" landmark, removing the need to add `role="search"` to a `<form>` element.
 /// - When multiple search elements exist on a page, consider using the `title` attribute to distinguish between them.
 ///
-public struct Search<HTML>: Element {
+public struct Search: Element {
     /// The HTML tag name
     public static var tag: String { "search" }
     
@@ -54,8 +54,8 @@ public struct Search<HTML>: Element {
     /// Creates a new Search element.
     ///
     /// - Parameter content: The content of the search element
-    public init(content: @escaping () -> HTML) {
-        self.content = content
+    public init() {
+        
     }
 }
 

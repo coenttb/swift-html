@@ -47,7 +47,7 @@ import HTML_Attributes
 ///   `<meter>`, `<output>`, `<progress>`, `<select>`, and `<textarea>`
 ///
 /// - Note: When rendered, this generates an HTML `<label>` element that improves form accessibility.
-public struct Label<HTML>: Element {
+public struct Label: Element {
     public static var tag: String { "label" }
     
     /// Associates the label with a form control using its ID.
@@ -68,10 +68,10 @@ public struct Label<HTML>: Element {
     ///   - content: The content of the label
     public init(
         for: For? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.for = `for`
-        self.content = content
+        
     }
 }
 

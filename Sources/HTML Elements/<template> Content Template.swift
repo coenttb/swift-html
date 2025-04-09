@@ -37,7 +37,7 @@ import HTML_Attributes
 /// - Remember that CSS styles inside a template are not applied until the template is cloned and inserted into the document
 /// - Consider using declarative shadow DOM by specifying `shadowrootmode` attribute when appropriate
 ///
-public struct ContentTemplate<HTML>: Element {
+public struct ContentTemplate: Element {
     /// The HTML tag name
     public static var tag: String { "template" }
 
@@ -64,12 +64,12 @@ public struct ContentTemplate<HTML>: Element {
         shadowrootmode: HTML_Attributes.ShadowRootMode? = nil,
         shadowrootclonable: HTML_Attributes.ShadowRootClonable? = nil,
         shadowrootdelegatesfocus: HTML_Attributes.ShadowRootDelegatesFocus? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.shadowrootmode = shadowrootmode
         self.shadowrootclonable = shadowrootclonable
         self.shadowrootdelegatesfocus = shadowrootdelegatesfocus
-        self.content = content
+        
     }
 }
 

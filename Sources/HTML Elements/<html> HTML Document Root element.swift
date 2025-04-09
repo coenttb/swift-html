@@ -34,7 +34,7 @@ import HTML_Attributes
 /// - Include both `<head>` and `<body>` elements as children
 /// - The `<html>` element should be the root of your document, preceded only by the DOCTYPE declaration
 ///
-public struct HtmlRoot<HTML>: Element {
+public struct HtmlRoot: Element {
     /// The HTML tag name
     public static var tag: String { "html" }
    
@@ -51,10 +51,10 @@ public struct HtmlRoot<HTML>: Element {
     ///   - content: The content of the element, typically head and body elements
     public init(
         xmlns: String? = nil,
-        content: @escaping () -> HTML
+        
     ) {
         self.xmlns = xmlns
-        self.content = content
+        
     }
 }
 

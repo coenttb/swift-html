@@ -46,7 +46,7 @@ import HTML_Attributes
 /// - Browser reader mode functionality looks for the presence of the `<main>` element when converting
 ///   content into a specialized reader view.
 ///
-public struct Main<HTML>: Element {
+public struct Main: Element {
     /// The HTML tag name
     public static var tag: String { "main" }
     
@@ -57,9 +57,9 @@ public struct Main<HTML>: Element {
     ///
     /// - Parameter content: The content of the element
     public init(
-        content: @escaping () -> HTML
+        
     ) {
-        self.content = content
+        
     }
 }
 
