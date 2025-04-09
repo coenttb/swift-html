@@ -38,34 +38,16 @@ public struct Section<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "section" }
     
-    /// The element's class attribute
-    public var `class`: HTML_Attributes.Class?
-    
-    /// The element's ID attribute
-    public var id: HTML_Attributes.Id?
-    
-    /// The element's style attribute
-    public var style: HTML_Attributes.Style?
-    
     /// The element's content
     public let content: () -> HTML
     
     /// Creates a new Section element with the specified attributes.
     ///
     /// - Parameters:
-    ///   - class: The CSS class name(s) to apply to the section
-    ///   - id: The unique identifier for the section
-    ///   - style: Inline CSS styles to apply to the section
     ///   - content: The content of the section
     public init(
-        class: HTML_Attributes.Class? = nil,
-        id: HTML_Attributes.Id? = nil,
-        style: HTML_Attributes.Style? = nil,
         content: @escaping () -> HTML
     ) {
-        self.class = `class`
-        self.id = id
-        self.style = style
         self.content = content
     }
 }

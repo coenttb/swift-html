@@ -72,7 +72,7 @@ extension Input {
 extension Input {
     /// Creates a new datetime-local input element
     public static func datetimeLocal(
-        name: String,
+        name: Name,
         value: String? = nil,
         min: Min? = nil,
         max: Max? = nil,

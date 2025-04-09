@@ -27,7 +27,7 @@ public struct Input: Element {
     public static var tag: String { "input" }
     
     /// Name of the form control. Submitted with the form as part of a name/value pair.
-    public var name: String?
+    public var name: Name?
     
     /// Whether the form control is disabled.
     /// When set, the input element is disabled and cannot be interacted with or submitted.
@@ -50,7 +50,7 @@ public struct Input: Element {
     ///   - form: The ID of the form this input belongs to (optional)
     ///   - type: The type of input element to create
     public init(
-        name: String?,
+        name: Name?,
         disabled: Disabled?,
         form: HTML_Attributes.Form.ID? = nil,
         type: Input.Variant

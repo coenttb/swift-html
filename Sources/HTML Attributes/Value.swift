@@ -70,64 +70,56 @@ import Foundation
 ///   <option value="mx">Mexico</option>
 /// </select>
 /// ```
-public struct Value: Attribute {
+public struct Value<Element: Sendable & Equatable>: Attribute {
     /// The name of the HTML attribute
-    public static let attribute: String = "value"
+    public static var attribute: String { "value" }
     
     /// The value
-    private let value: String
+    private let value: Element
     
-    /// Initialize with a string value
-    public init(_ value: String) {
+    public init(value: Element) {
         self.value = value
-    }
-    
-    /// Initialize with a numeric value (converted to string)
-    public init(_ value: Int) {
-        self.value = String(value)
-    }
-    
-    /// Initialize with a floating-point value (converted to string)
-    public init(_ value: Double) {
-        self.value = String(value)
-    }
-    
-    /// Initialize with a boolean value (converted to string)
-    public init(_ value: Bool) {
-        self.value = value ? "true" : "false"
     }
 }
 
 
-extension Value: ExpressibleByStringLiteral {
+
+extension Value: ExpressibleByStringLiteral where Element: ExpressibleByStringLiteral {
+    public typealias StringLiteralType = Element.StringLiteralType
+    
     public init(stringLiteral value: StringLiteralType) {
-        self.value = value
+        self.value = Element(stringLiteral: value)
     }
 }
 
-extension Value: ExpressibleByStringInterpolation {}
-
-extension Value: ExpressibleByIntegerLiteral {
-    public init(integerLiteral value: IntegerLiteralType) {
-        self.value = String(value)
+extension Value: ExpressibleByExtendedGraphemeClusterLiteral where Element: ExpressibleByExtendedGraphemeClusterLiteral {
+    public typealias ExtendedGraphemeClusterLiteralType = Element.ExtendedGraphemeClusterLiteralType
+    
+    public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
+        self.value = Element(extendedGraphemeClusterLiteral: value)
     }
 }
 
-extension Value: ExpressibleByFloatLiteral {
+extension Value: ExpressibleByUnicodeScalarLiteral where Element: ExpressibleByUnicodeScalarLiteral {
+    public typealias UnicodeScalarLiteralType = Element.UnicodeScalarLiteralType
+    
+    public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
+        self.value = Element(unicodeScalarLiteral: value)
+    }
+}
+
+extension Value: ExpressibleByIntegerLiteral where Element: ExpressibleByIntegerLiteral {
+    public typealias IntLiteralType = Element.IntegerLiteralType
+    
+    public init(integerLiteral value: IntLiteralType) {
+        self.value = Element(integerLiteral: value)
+    }
+}
+
+extension Value: ExpressibleByFloatLiteral where Element: ExpressibleByFloatLiteral {
+    public typealias FloatLiteralType = Element.FloatLiteralType
+    
     public init(floatLiteral value: FloatLiteralType) {
-        self.value = String(value)
-    }
-}
-
-extension Value: ExpressibleByBooleanLiteral {
-    public init(booleanLiteral value: BooleanLiteralType) {
-        self.value = value ? "true" : "false"
-    }
-}
-
-extension Value: CustomStringConvertible {
-    /// Returns the string representation of the value
-    public var description: String {
-        return self.value
+        self.value = Element(floatLiteral: value)
     }
 }

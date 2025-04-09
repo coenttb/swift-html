@@ -1,93 +1,61 @@
-//<rt>: MDN Documentation
-//
-// Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rt
-//
-// <rt>: The Ruby Text element
-// Baseline
-// Widely available
-// This feature is well established and works across many devices and browser versions. Itâs been available across browsers since
-// July 2015
-// .
-// Learn more
-// See full compatibility
-// Report feedback
-// The
-// <rt>
-// HTML
-// element specifies the ruby text component of a ruby annotation, which is used to provide pronunciation, translation, or transliteration information for East Asian typography. The
-// <rt>
-// element must always be contained within a
-// <ruby>
-// element.
-// Try it
-// <ruby>
-//  æ¼¢ <rp>(</rp><rt>kan</rt><rp>)</rp> å­ <rp>(</rp><rt>ji</rt><rp>)</rp>
-// </ruby>
-// ruby {
-//  font-size: 2em;
-// }
-// See the article about the
-// <ruby>
-// element for more examples.
-// Attributes
-// This element only includes the
-// global attributes
-// .
-// Examples
-// Using ruby annotations
-// This example provides Romaji transliteration for the kanji characters within the
-// <ruby>
-// element:
-// html
-// <ruby> æ¼¢ <rt>Kan</rt> å­ <rt>ji</rt> </ruby>
-// body {
-//  font-size: 22px;
-// }
-// Result
-// Technical summary
-// Content categories
-// None.
-// Permitted content
-// Phrasing content
-// .
-// Tag omission
-// The end tag may be omitted if the
-// <rt>
-// element is
-//  immediately followed by an
-// <rt>
-// or
-// <rp>
-// element, or if there is no more content in
-//  the parent element
-// Permitted parents
-// A
-// <ruby>
-// element.
-// Implicit ARIA role
-// No corresponding role
-// Permitted ARIA roles
-// Any
-// DOM interface
-// HTMLElement
-// Specifications
-// Specification
-// HTML
-// #
-// the-rt-element
-// Browser compatibility
-// See also
-// <ruby>
-// <rp>
-// <rb>
-// <rtc>
-// text-transform: full-size-kana
-
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <rt> Ruby Text.swift
+/// swift-html
+///
+/// Represents the HTML Ruby Text element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
+
+/// Represents an HTML Ruby Text element (`<rt>`), which specifies the ruby text component of a ruby annotation, 
+/// providing pronunciation, translation, or transliteration information for East Asian characters.
+///
+/// The `RubyText` struct must always be contained within a `Ruby` element.
+///
+/// ## Example
+///
+/// ```swift
+/// ruby {
+///     "漢"
+///     rp { "(" }
+///     rt { "Kan" }
+///     rp { ")" }
+///     "字"
+///     rp { "(" }
+///     rt { "ji" }
+///     rp { ")" }
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Always place `<rt>` elements inside a `<ruby>` container
+/// - Keep ruby text concise, typically providing only pronunciation or meaning
+/// - Use with `<rp>` elements to provide fallback parentheses for browsers that don't support ruby annotations
+/// - For complex text layout, consider using with `<rb>` and `<rtc>` elements
+///
+public struct RubyText<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "rt" }
+
+    /// The element's content
+    public let content: () -> HTML
+    
+    /// Creates a new RubyText element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - id: The unique identifier for this element
+    ///   - class: The CSS classes for this element
+    ///   - content: The content of the element, typically the pronunciation or meaning of the base text
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+/// Lowercase typealias for creating RubyText elements with a more HTML-like syntax.
+public typealias rt = RubyText

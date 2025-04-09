@@ -57,7 +57,7 @@ public struct Button<HTML>: Element {
     public var name: HTML_Attributes.Name?
     
     /// The value associated with the button, used when submitting forms
-    public var value: HTML_Attributes.Value?
+    public var value: HTML_Attributes.Value<String>?
     
     /// Whether the button should automatically get focus on page load
     public var autofocus: HTML_Attributes.Autofocus?
@@ -100,7 +100,7 @@ public struct Button<HTML>: Element {
         disabled: HTML_Attributes.Disabled? = nil,
         form: HTML_Attributes.Form.ID? = nil,
         name: HTML_Attributes.Name? = nil,
-        value: HTML_Attributes.Value? = nil,
+        value: HTML_Attributes.Value<String>? = nil,
         autofocus: HTML_Attributes.Autofocus? = nil,
         formaction: HTML_Attributes.FormAction? = nil,
         formenctype: HTML_Attributes.FormEncType? = nil,

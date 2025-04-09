@@ -1,104 +1,68 @@
-//<rtc>: MDN Documentation
-//
-// Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rtc
-//
-// <rtc>: The Ruby Text Container element
-// Deprecated:
-// This feature is no longer recommended. Though some browsers might still support it, it may have already been removed from the relevant web standards, may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using it, and update existing code if possible; see the
-// compatibility table
-// at the bottom of this page to guide your decision. Be aware that this feature may cease to work at any time.
-// The
-// <rtc>
-// HTML
-// element embraces semantic annotations of characters presented in a ruby of
-// <rb>
-// elements used inside of
-// <ruby>
-// element.
-// <rb>
-// elements can have both pronunciation (
-// <rt>
-// ) and semantic (
-// <rtc>
-// ) annotations.
-// Try it
-// <ruby xml:lang="zh-Hant" style="ruby-position: under;">
-//  <rbc>
-//  <rb>é¦¬</rb><rp>(</rp><rt>mÇ</rt><rp>)</rp>
-//  <rb>ä¾</rb><rp>(</rp><rt>lÃ¡i</rt><rp>)</rp>
-//  <rb>è¥¿</rb><rp>(</rp><rt>xÄ«</rt><rp>)</rp>
-//  <rb>äº</rb><rp>(</rp><rt>yÃ </rt><rp>)</rp>
-//  </rbc>
-//  <rtc xml:lang="en" style="ruby-position: over;">
-//  <rp>(</rp><rt>Malaysia</rt><rp>)</rp>
-//  </rtc>
-// </ruby>
-// ruby {
-//  font-size: 2em;
-// }
-// Attributes
-// This element only includes the
-// global attributes
-// .
-// Examples
-// html
-// <div class="info">
-//  <ruby>
-//  <rtc>
-//  <rb>æ§</rb><rt>jiÃ¹</rt>
-//  <rb>é</rb><rt>jÄ«n</rt>
-//  <rb>å±±</rb><rt>shÄn</rt>
-//  </rtc>
-//  <rtc>San Francisco</rtc>
-//  </ruby>
-// </div>
-// .info {
-//  padding-top: 10px;
-//  font-size: 36px;
-// }
-// Result
-// Technical summary
-// Content categories
-// None.
-// Permitted content
-// Phrasing content
-// or
-// <rt>
-// elements.
-// Tag omission
-// The closing tag can be omitted if it is immediately followed by a
-// <rb>
-// ,
-// <rtc>
-// or
-// <rt>
-// element opening tag or by its parent
-//  closing tag.
-// Permitted parents
-// A
-// <ruby>
-// element.
-// Permitted ARIA roles
-// Any
-// DOM interface
-// HTMLElement
-// Specifications
-// Specification
-// HTML
-// #
-// rtc
-// Browser compatibility
-// See also
-// <ruby>
-// <rp>
-// <rb>
-// <rt>
-
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <rtc> Ruby Text Container.swift
+/// swift-html
+///
+/// Represents the HTML Ruby Text Container element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
+
+/// Represents an HTML Ruby Text Container element (`<rtc>`), which embraces semantic annotations 
+/// of characters presented in ruby annotations.
+///
+/// The `RubyTextContainer` element is used to group ruby text (`<rt>`) elements when there are 
+/// multiple levels of annotations. While this element is deprecated in modern HTML specifications, 
+/// it is included for completeness.
+///
+/// ## Example
+///
+/// ```swift
+/// ruby {
+///     rb { "馬" }
+///     rb { "來" }
+///     rb { "西" }
+///     rb { "亞" }
+///     rtc {
+///         rt { "mǎ" }
+///         rt { "lái" }
+///         rt { "xī" }
+///         rt { "yà" }
+///     }
+///     rtc {
+///         rt { "Malaysia" }
+///     }
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Use `<rtc>` for complex ruby annotations with multiple levels (e.g., pronunciation and meaning)
+/// - Include `<rt>` elements inside the `<rtc>` for specific annotations
+/// - Note that this element is deprecated; consider simpler ruby structures for better compatibility
+/// - Only use within a `<ruby>` element
+///
+public struct RubyTextContainer<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "rtc" }
+
+    /// The element's content
+    public let content: () -> HTML
+    
+    /// Creates a new RubyTextContainer element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - id: The unique identifier for this element
+    ///   - class: The CSS classes for this element
+    ///   - content: The content of the element, typically containing `<rt>` elements
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+/// Lowercase typealias for creating RubyTextContainer elements with a more HTML-like syntax.
+public typealias rtc = RubyTextContainer

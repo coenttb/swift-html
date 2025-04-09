@@ -66,7 +66,7 @@ extension Input.File {
 extension Input {
     /// Creates a new file input element
     public static func file(
-        name: String,
+        name: Name,
         accept: Accept? = nil,
         capture: Capture? = nil,
         multiple: Multiple? = nil,

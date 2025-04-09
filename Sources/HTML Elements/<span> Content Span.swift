@@ -43,40 +43,16 @@ public struct ContentSpan<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "span" }
     
-    /// The class attribute
-    public var `class`: HTML_Attributes.Class?
-    
-    /// The ID attribute
-    public var id: HTML_Attributes.Id?
-    
-    /// The style attribute
-    public var style: HTML_Attributes.Style?
-    
-    /// The lang attribute
-    public var lang: HTML_Attributes.Lang?
-    
     /// The element's content
     public let content: () -> HTML
     
     /// Creates a new span element with the specified attributes.
     ///
     /// - Parameters:
-    ///   - class: The class attribute
-    ///   - id: The ID attribute
-    ///   - style: The style attribute
-    ///   - lang: The language attribute
     ///   - content: The content of the element
     public init(
-        class: HTML_Attributes.Class? = nil,
-        id: HTML_Attributes.Id? = nil,
-        style: HTML_Attributes.Style? = nil,
-        lang: HTML_Attributes.Lang? = nil,
         content: @escaping () -> HTML
     ) {
-        self.class = `class`
-        self.id = id
-        self.style = style
-        self.lang = lang
         self.content = content
     }
 }

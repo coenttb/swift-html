@@ -89,7 +89,7 @@ extension Input {
 extension Input {
     /// Creates a new email input element
     public static func email(
-        name: String,
+        name: Name,
         value: String? = nil,
         maxlength: Maxlength? = nil,
         minlength: Minlength? = nil,

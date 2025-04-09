@@ -95,7 +95,7 @@ extension Input {
 extension Input {
     /// Creates a new search input element
     public static func search(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         maxlength: Maxlength? = nil,

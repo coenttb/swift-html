@@ -40,10 +40,7 @@ import HTML_Attributes
 public struct ContentTemplate<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "template" }
-    
-    /// The element's ID for JavaScript access
-    public var id: HTML_Attributes.Id?
-    
+
     /// Creates a shadow root for the parent element in "open" or "closed" mode
     public var shadowrootmode: HTML_Attributes.ShadowRootMode?
     
@@ -59,19 +56,16 @@ public struct ContentTemplate<HTML>: Element {
     /// Creates a new ContentTemplate element with the specified attributes.
     ///
     /// - Parameters:
-    ///   - id: Unique identifier for the template element
     ///   - shadowrootmode: Specifies "open" or "closed" mode for declarative shadow DOM
     ///   - shadowrootclonable: Whether shadow roots are cloned with their hosts
     ///   - shadowrootdelegatesfocus: Whether focus should be delegated in the shadow tree
     ///   - content: The HTML content to be stored in the template
     public init(
-        id: HTML_Attributes.Id? = nil,
         shadowrootmode: HTML_Attributes.ShadowRootMode? = nil,
         shadowrootclonable: HTML_Attributes.ShadowRootClonable? = nil,
         shadowrootdelegatesfocus: HTML_Attributes.ShadowRootDelegatesFocus? = nil,
         content: @escaping () -> HTML
     ) {
-        self.id = id
         self.shadowrootmode = shadowrootmode
         self.shadowrootclonable = shadowrootclonable
         self.shadowrootdelegatesfocus = shadowrootdelegatesfocus

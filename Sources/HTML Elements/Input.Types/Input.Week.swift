@@ -65,7 +65,7 @@ extension Input.Week {
 extension Input {
     /// Creates a new week input element
     public static func week(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         min: Min? = nil,

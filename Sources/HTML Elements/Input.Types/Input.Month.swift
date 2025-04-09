@@ -68,7 +68,7 @@ extension Input.Month {
 extension Input {
     /// Creates a new month input element
     public static func month(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         min: Min? = nil,

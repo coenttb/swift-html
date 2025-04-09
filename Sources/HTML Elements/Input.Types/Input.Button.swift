@@ -70,7 +70,7 @@ extension Input {
 
 extension Input {
     public static func button(
-        name: String,
+        name: Name,
         value: String? = nil,
         disabled: Disabled? = nil,
         form: HTML_Attributes.Form.ID? = nil,

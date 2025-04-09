@@ -71,7 +71,7 @@ extension Input {
 extension Input {
     /// Creates a new date input element
     public static func date(
-        name: String,
+        name: Name,
         value: String? = nil,
         min: Min? = nil,
         max: Max? = nil,

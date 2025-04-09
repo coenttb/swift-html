@@ -78,7 +78,7 @@ public typealias Telephone = Input.Tel
 extension Input {
     /// Creates a new telephone input element
     public static func tel(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         maxlength: Maxlength? = nil,

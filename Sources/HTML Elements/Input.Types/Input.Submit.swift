@@ -62,7 +62,7 @@ extension Input {
 extension Input {
     /// Creates a new submit input element
     public static func submit(
-        name: String,
+        name: Name,
         value: String? = nil,
         formaction: HTML_Attributes.FormAction? = nil,
         formenctype: HTML_Attributes.FormEncType? = nil,

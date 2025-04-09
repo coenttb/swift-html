@@ -1,128 +1,124 @@
-//<marquee>: MDN Documentation
-//
-// Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee
-//
-// <marquee>: The Marquee element
-// Deprecated:
-// This feature is no longer recommended. Though some browsers might still support it, it may have already been removed from the relevant web standards, may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using it, and update existing code if possible; see the
-// compatibility table
-// at the bottom of this page to guide your decision. Be aware that this feature may cease to work at any time.
-// The
-// <marquee>
-// HTML
-// element is used to insert a scrolling area of text. You can control what happens when the text reaches the edges of its content area using its attributes.
-// The HTML
-// <marquee>
-// element is deprecated and its use is strongly discouraged. If you must create the effect of scrolling text or continuous elements, consider using
-// CSS animations
-// with
-// CSS transforms
-// instead of
-// <marquee>
-// elements to smoothly animate content. Additionally, include the
-// prefers-reduced-motion
-// CSS
-// @media
-// query to stop the animation based on user preference, thereby improving user experience and accessibility.
-// Attributes
-// behavior
-// Deprecated
-// Sets how the text is scrolled within the marquee. Possible values are
-// scroll
-// ,
-// slide
-// and
-// alternate
-// . If no value is specified, the default value is
-// scroll
-// .
-// bgcolor
-// Deprecated
-// Sets the background color through color name or hexadecimal value.
-// direction
-// Deprecated
-// Sets the direction of the scrolling within the marquee. Possible values are
-// left
-// ,
-// right
-// ,
-// up
-// and
-// down
-// . If no value is specified, the default value is
-// left
-// .
-// height
-// Deprecated
-// Sets the height in pixels or percentage value.
-// hspace
-// Deprecated
-// Sets the horizontal margin
-// loop
-// Deprecated
-// Sets the number of times the marquee will scroll. If no value is specified, the default value is â1, which means the marquee will scroll continuously.
-// scrollamount
-// Deprecated
-// Sets the amount of scrolling at each interval in pixels. The default value is 6.
-// scrolldelay
-// Deprecated
-// Sets the interval between each scroll movement in milliseconds. The default value is 85. Note that any value smaller than 60 is ignored and the value 60 is used instead unless
-// truespeed
-// is specified.
-// truespeed
-// Deprecated
-// By default,
-// scrolldelay
-// values lower than 60 are ignored. If
-// truespeed
-// is present, those values are not ignored.
-// vspace
-// Deprecated
-// Sets the vertical margin in pixels or percentage value.
-// width
-// Deprecated
-// Sets the width in pixels or percentage value.
-// Examples
-// html
-// <marquee>This text will scroll from right to left</marquee>
-// <marquee direction="up">This text will scroll from bottom to top</marquee>
-// <marquee
-//  direction="down"
-//  width="250"
-//  height="200"
-//  behavior="alternate"
-//  style="border:solid">
-//  <marquee behavior="alternate">This text will bounce</marquee>
-// </marquee>
-// Result
-// Technical summary
-// DOM interface
-// HTMLMarqueeElement
-// Specifications
-// Specification
-// HTML
-// #
-// the-marquee-element-2
-// Browser compatibility
-// See also
-// CSS
-// transform
-// property
-// CSS
-// translate
-// property
-// CSS transforms
-// module
-// CSS animations
-// module
-// HTMLMarqueeElement
-
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <marquee> Marquee.swift
+/// swift-html
+///
+/// Represents the HTML marquee element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
 
+/// Represents an HTML marquee element (`<marquee>`), which creates a scrolling area of text or content.
+///
+/// The `Marquee` struct provides a type-safe way to create marquee elements with various attributes.
+/// 
+/// > Warning: The `<marquee>` element is deprecated and its use is strongly discouraged.
+/// > Consider using CSS animations with CSS transforms instead for scrolling text effects.
+///
+/// ## Example
+///
+/// ```swift
+/// marquee {
+///     "This text will scroll from right to left"
+/// }
+///
+/// marquee(direction: .up) {
+///     "This text will scroll from bottom to top"
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Avoid using the marquee element as it is deprecated and may not be supported in all browsers.
+/// - Use CSS animations and transforms instead for scrolling text effects.
+/// - Consider accessibility concerns; continuous scrolling text can be difficult to read for some users.
+/// - If you must use animation, include support for the `prefers-reduced-motion` CSS media query.
+///
+public struct Marquee<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "marquee" }
+    
+    /// Sets how the text is scrolled within the marquee.
+    public var behavior: HTML_Attributes.Behavior?
+    
+    /// Sets the background color through color name or hexadecimal value.
+    public var bgcolor: String?
+    
+    /// Sets the direction of the scrolling within the marquee.
+    public var direction: HTML_Attributes.Direction?
+    
+    /// Sets the height in pixels or percentage value.
+    public var height: HTML_Attributes.Height?
+    
+    /// Sets the horizontal margin
+    public var hspace: String?
+    
+    /// Sets the number of times the marquee will scroll.
+    public var loop: HTML_Attributes.Loop?
+    
+    /// Sets the amount of scrolling at each interval in pixels.
+    public var scrollamount: String?
+    
+    /// Sets the interval between each scroll movement in milliseconds.
+    public var scrolldelay: String?
+    
+    /// By default, scrolldelay values lower than 60 are ignored. If truespeed is present, those values are not ignored.
+    public var truespeed: HTML_Attributes.Truespeed?
+    
+    /// Sets the vertical margin in pixels or percentage value.
+    public var vspace: String?
+    
+    /// Sets the width in pixels or percentage value.
+    public var width: HTML_Attributes.Width?
+    
+    /// The element's content
+    public let content: () -> HTML
+    
+    /// Creates a new Marquee element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - behavior: How the text scrolls within the marquee
+    ///   - bgcolor: Background color
+    ///   - direction: Scrolling direction
+    ///   - height: Height in pixels or percentage
+    ///   - hspace: Horizontal margin
+    ///   - loop: Number of scrolling repetitions
+    ///   - scrollamount: Amount of scrolling at each interval in pixels
+    ///   - scrolldelay: Interval between scroll movements in milliseconds
+    ///   - truespeed: Allow scrolldelay values lower than 60ms
+    ///   - vspace: Vertical margin
+    ///   - width: Width in pixels or percentage
+    ///   - content: The content of the element
+    public init(
+        behavior: HTML_Attributes.Behavior? = nil,
+        bgcolor: String? = nil,
+        direction: HTML_Attributes.Direction? = nil,
+        height: HTML_Attributes.Height? = nil,
+        hspace: String? = nil,
+        loop: HTML_Attributes.Loop? = nil,
+        scrollamount: String? = nil,
+        scrolldelay: String? = nil,
+        truespeed: HTML_Attributes.Truespeed? = nil,
+        vspace: String? = nil,
+        width: HTML_Attributes.Width? = nil,
+        content: @escaping () -> HTML
+    ) {
+        self.behavior = behavior
+        self.bgcolor = bgcolor
+        self.direction = direction
+        self.height = height
+        self.hspace = hspace
+        self.loop = loop
+        self.scrollamount = scrollamount
+        self.scrolldelay = scrolldelay
+        self.truespeed = truespeed
+        self.vspace = vspace
+        self.width = width
+        self.content = content
+    }
+}
+
+/// Lowercase typealias for creating Marquee elements with a more HTML-like syntax.
+public typealias marquee = Marquee

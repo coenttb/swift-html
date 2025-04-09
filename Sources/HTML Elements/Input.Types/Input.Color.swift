@@ -42,7 +42,7 @@ extension Input {
 extension Input {
     /// Creates a new color input element
     public static func color(
-        name: String,
+        name: Name,
         value: String? = nil,
         disabled: Disabled? = nil,
         form: HTML_Attributes.Form.ID? = nil

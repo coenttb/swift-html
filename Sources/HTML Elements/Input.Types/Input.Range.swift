@@ -89,7 +89,7 @@ extension Input.Range {
 extension Input {
     /// Creates a new range input element
     public static func range(
-        name: String,
+        name: Name,
         value: String? = nil,
         min: Min? = nil,
         max: Max? = nil,

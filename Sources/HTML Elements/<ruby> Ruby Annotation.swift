@@ -1,85 +1,60 @@
-//<ruby>: MDN Documentation
-//
-// Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ruby
-//
-// <ruby>: The Ruby Annotation element
-// Baseline
-// Widely available
-// This feature is well established and works across many devices and browser versions. Itâs been available across browsers since
-// July 2015
-// .
-// Learn more
-// See full compatibility
-// Report feedback
-// The
-// <ruby>
-// HTML
-// element represents small annotations that are rendered above, below, or next to base text, usually used for showing the pronunciation of East Asian characters. It can also be used for annotating other kinds of text, but this usage is less common.
-// The term
-// ruby
-// originated as
-// a unit of measurement used by typesetters
-// , representing the smallest size that text can be printed on newsprint while remaining legible.
-// Try it
-// <ruby> ææ¥ <rp>(</rp><rt>Ashita</rt><rp>)</rp> </ruby>
-// ruby {
-//  font-size: 2em;
-// }
-// Attributes
-// This element only includes the
-// global attributes
-// .
-// Examples
-// Example 1: Character
-// html
-// <ruby>
-//  æ¼¢ <rp>(</rp><rt>Kan</rt><rp>)</rp> å­ <rp>(</rp><rt>ji</rt><rp>)</rp>
-// </ruby>
-// Result
-// Example 2: Word
-// html
-// <ruby> ææ¥ <rp>(</rp><rt>Ashita</rt><rp>)</rp> </ruby>
-// Result
-// Technical summary
-// Content categories
-// Flow content
-// ,
-// phrasing content
-// , palpable content.
-// Permitted content
-// Phrasing content
-// .
-// Tag omission
-// None, both the starting and ending tag are mandatory.
-// Permitted parents
-// Any element that accepts
-// phrasing content
-// .
-// Implicit ARIA role
-// No corresponding role
-// Permitted ARIA roles
-// Any
-// DOM interface
-// HTMLElement
-// Specifications
-// Specification
-// HTML
-// #
-// the-ruby-element
-// Browser compatibility
-// See also
-// <rt>
-// <rp>
-// <rb>
-// <rtc>
-// text-transform
-// : full-size-kana
-
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <ruby> Ruby Annotation.swift
+/// swift-html
+///
+/// Represents the HTML Ruby Annotation element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
+
+/// Represents an HTML Ruby Annotation element (`<ruby>`), which displays small annotations above, below, or next to text, 
+/// commonly used for showing pronunciation of East Asian characters.
+///
+/// The `Ruby` struct provides a type-safe way to create ruby annotations with various attributes.
+///
+/// ## Example
+///
+/// ```swift
+/// ruby {
+///     "漢"
+///     rp { "(" }
+///     rt { "Kan" }
+///     rp { ")" }
+///     "字"
+///     rp { "(" }
+///     rt { "ji" }
+///     rp { ")" }
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Use ruby annotations to provide pronunciation guides for characters
+/// - Include fallback parentheses using `<rp>` elements for browsers that don't support ruby
+/// - Keep annotations concise and directly related to the base text
+/// - For complex ruby annotations, consider using `<rb>` (Ruby Base) and `<rtc>` (Ruby Text Container) elements
+///
+public struct Ruby<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "ruby" }
+    /// The element's content
+    public let content: () -> HTML
+    
+    /// Creates a new Ruby element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - id: The unique identifier for this element
+    ///   - class: The CSS classes for this element
+    ///   - content: The content of the element, typically containing base text, rt (ruby text) and optional rp (ruby parentheses) elements
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+/// Lowercase typealias for creating Ruby elements with a more HTML-like syntax.
+public typealias ruby = Ruby

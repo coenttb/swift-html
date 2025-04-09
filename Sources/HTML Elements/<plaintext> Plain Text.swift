@@ -1,19 +1,55 @@
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <plaintext> Plain Text.swift
+/// swift-html
+///
+/// Represents the HTML plaintext element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
 
+/// Represents an HTML `<plaintext>` element, which renders everything following the start tag as raw text.
+///
+/// > **Warning**: This element is deprecated since HTML 2 and should not be used.
+/// > Browsers may treat it as a `<pre>` element that still interprets HTML within.
+///
+/// The `<plaintext>` element has no closing tag, as everything after it is considered raw text.
+///
+/// ## Alternatives
+///
+/// Instead of `<plaintext>`, use:
+/// - The `<pre>` element for preformatted text
+/// - The `<code>` element for inline code
+/// - A text file with the `text/plain` MIME-type if plaintext is needed as the first element
+///
+/// ## Example
+///
+/// ```swift
+/// plaintext {
+///     "This text will be displayed as-is, without HTML parsing."
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - **Do not use this element** in new code as it is deprecated.
+/// - Use `<pre>` or `<code>` elements instead and escape special characters.
+/// - Apply monospaced fonts via CSS using `font-family: monospace` where needed.
+///
+@available(*, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead.")
 public struct PlainText<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "plaintext" }
     
+    /// The element's content
     public let content: () -> HTML
     
-    @available(*, deprecated)
+    /// Creates a new plaintext element.
+    ///
+    /// - Parameter content: The content to be displayed as plain text
+    @available(*, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead.")
     public init(
         content: @escaping () -> HTML
     ) {
@@ -21,78 +57,6 @@ public struct PlainText<HTML>: Element {
     }
 }
 
+/// Lowercase typealias for creating PlainText elements with a more HTML-like syntax.
+@available(*, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead.")
 public typealias plaintext = PlainText
-
-
-/* MDN Documentation
- * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/plaintext
- */
-// <plaintext>: The Plain Text element (Deprecated)
-// Deprecated:
-// This feature is no longer recommended. Though some browsers might still support it, it may have already been removed from the relevant web standards, may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using it, and update existing code if possible; see the
-// compatibility table
-// at the bottom of this page to guide your decision. Be aware that this feature may cease to work at any time.
-// The
-// <plaintext>
-// HTML
-// element renders everything following the start tag as raw text, ignoring any following HTML. There is no closing tag, since everything after it is considered raw text.
-// Warning:
-// Do not use this element.
-// <plaintext>
-// is deprecated since HTML 2, and not all browsers implemented it. Browsers that did implement it didn't do so consistently.
-// <plaintext>
-// is obsolete; browsers that accept it may instead treat it as a
-// <pre>
-// element that still interprets HTML within.
-// If
-// <plaintext>
-// is the first element on the page (other than any non-displayed elements, like
-// <head>
-// ), do not use HTML at all. Instead serve a text file with the
-// text/plain
-// MIME-type
-// .
-// Instead of
-// <plaintext>
-// , use the
-// <pre>
-// element or, if semantically accurate (such as for inline text), the
-// <code>
-// element. Escape any
-// <
-// ,
-// >
-// and
-// &
-// characters, to prevent browsers inadvertently parsing the element content as HTML.
-// A monospaced font can be applied to any HTML element via a
-// CSS
-// font-family
-// style with the
-// monospace
-// generic value.
-// Attributes
-// This element has no other attributes than the
-// global attributes
-// common to all elements.
-// DOM interface
-// This element implements the
-// HTMLElement
-// interface.
-// Specifications
-// Specification
-// HTML
-// #
-// plaintext
-// Browser compatibility
-// See also
-// The
-// <pre>
-// and
-// <code>
-// elements, which should be used instead.
-// The
-// <xmp>
-// element, also obsolete, similar to
-// <plaintext>
-// .

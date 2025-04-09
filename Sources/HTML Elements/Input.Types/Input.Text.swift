@@ -71,7 +71,7 @@ extension Input {
 extension Input {
     /// Creates a new text input element
     public static func text(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         maxlength: Maxlength? = nil,

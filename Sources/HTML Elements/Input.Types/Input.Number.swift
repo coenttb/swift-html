@@ -94,7 +94,7 @@ extension Input.Number {
 extension Input {
     /// Creates a new number input element
     public static func number(
-        name: String,
+        name: Name,
         value: String? = nil,
         min: Min? = nil,
         max: Max? = nil,

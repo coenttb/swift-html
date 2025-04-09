@@ -1,183 +1,109 @@
-//<object>: MDN Documentation
-//
-// Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object
-//
-// <object>: The External Object element
-// Baseline
-// Widely available
-// This feature is well established and works across many devices and browser versions. Itâs been available across browsers since
-// July 2015
-// .
-// Learn more
-// See full compatibility
-// Report feedback
-// The
-// <object>
-// HTML
-// element represents an external resource, which can be treated as an image, a nested browsing context, or a resource to be handled by a plugin.
-// Try it
-// <object
-//  type="video/mp4"
-//  data="/shared-assets/videos/flower.mp4"
-//  width="250"
-//  height="200"></object>
-// Attributes
-// This element includes the
-// global attributes
-// .
-// archive
-// Deprecated
-// A space-separated list of URIs for archives of resources for the object.
-// border
-// Deprecated
-// The width of a border around the control, in pixels.
-// classid
-// Deprecated
-// The URI of the object's implementation. It can be used together with, or in place of, the
-// data
-// attribute.
-// codebase
-// Deprecated
-// The base path used to resolve relative URIs specified by
-// classid
-// ,
-// data
-// , or
-// archive
-// . If not specified, the default is the base URI of the current document.
-// codetype
-// Deprecated
-// The content type of the data specified by
-// classid
-// .
-// data
-// The address of the resource as a valid URL. At least one of
-// data
-// and
-// type
-// must be defined.
-// declare
-// Deprecated
-// The presence of this Boolean attribute makes this element a declaration only. The object must be instantiated by a subsequent
-// <object>
-// element. Repeat the
-// <object>
-// element completely each time the resource is reused.
-// form
-// The form element, if any, that the object element is associated with (its
-// form owner
-// ). The value of the attribute must be an ID of a
-// <form>
-// element in the same document.
-// height
-// The height of the displayed resource, as in
-// <integer>
-// in
-// CSS pixels
-// .
-// name
-// The name of valid browsing context (HTML5), or the name of the control (HTML 4).
-// standby
-// Deprecated
-// A message that the browser can show while loading the object's implementation and data.
-// type
-// The
-// content type
-// of the resource specified by
-// data
-// . At least one of
-// data
-// and
-// type
-// must be defined.
-// usemap
-// Deprecated
-// A hash-name reference to a
-// <map>
-// element; that is a '#' followed by the value of a
-// name
-// of a map element.
-// width
-// The width of the display resource, as in
-// <integer>
-// in
-// CSS pixels
-// .
-// Examples
-// Embed a video
-// HTML
-// html
-// <object
-//  type="video/webm"
-//  data="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
-//  width="600"
-//  height="140">
-//  <img src="path/image.jpg" alt="useful image description" />
-// </object>
-// Result
-// If the video in the example fails to load, the user will be provided with an image as fallback content. The
-// <img>
-// tag is used to display an image. We include the
-// src
-// attribute set to the path to the image we want to embed. We also include the
-// alt
-// attribute, which provides the image with an accessible name. If the image also fails to load, the content of the
-// alt
-// attribute will be displayed.
-// Technical summary
-// Content categories
-// Flow content
-// ;
-// phrasing content
-// ;
-// embedded content
-// , palpable content; if the element has a
-// usemap
-// attribute,
-// interactive content
-// ;
-// listed
-// ,
-// submittable
-// form-associated
-// element.
-// Permitted content
-// zero or more
-// <param>
-// elements, then
-// transparent
-// .
-// Tag omission
-// None, both the starting and ending tag are mandatory.
-// Permitted parents
-// Any element that accepts
-// embedded content
-// .
-// Implicit ARIA role
-// No corresponding role
-// Permitted ARIA roles
-// application
-// ,
-// document
-// ,
-// img
-// DOM interface
-// HTMLObjectElement
-// Specifications
-// Specification
-// HTML
-// #
-// the-object-element
-// Browser compatibility
-// See also
-// <embed>
-// <param>
-
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <object> External Object.swift
+/// swift-html
+///
+/// Represents the HTML object element.
+///
+/// Created by Claude on 09/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
+
+/// Represents an HTML `<object>` element, which embeds external resources such as images, 
+/// audio, video, PDFs, or content to be handled by browser plugins.
+///
+/// The Object element provides a versatile way to include external content in a web page.
+/// It can be used for multimedia, PDFs, web pages, Flash (legacy), and more. The element
+/// also supports fallback content for browsers that cannot display the resource.
+///
+/// ## Example
+///
+/// ```swift
+/// object(
+///     data: "document.pdf",
+///     type: .pdf,
+///     width: 600,
+///     height: 400
+/// ) {
+///     p {
+///         "Your browser doesn't support PDFs. "
+///         a(href: "document.pdf") {
+///             "Download the PDF"
+///         }
+///         " instead."
+///     }
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Always provide fallback content within the object for browsers that can't render the resource
+/// - Specify both data and type attributes whenever possible
+/// - Set width and height attributes to prevent layout shifts
+/// - Consider accessibility implications - ensure content is accessible to all users
+/// - For images, audio, or video, prefer the specialized elements (<img>, <audio>, <video>)
+/// - For modern web applications, avoid using object for Flash content
+///
+public struct ExternalObject<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "object" }
+    
+    /// The URL of the resource to embed
+    public var data: HTML_Attributes.ObjectData?
+    
+    /// The content type (MIME type) of the embedded resource
+    public var type: HTML_Attributes.ObjectType?
+    
+    /// The form element that the object is associated with
+    public var form: HTML_Attributes.ObjectForm?
+    
+    /// The name of the browsing context or control
+    public var name: HTML_Attributes.Name?
+    
+    /// The height of the object in pixels
+    public var height: HTML_Attributes.Height?
+    
+    /// The width of the object in pixels
+    public var width: HTML_Attributes.Width?
+    
+    /// Specifies an image map for the object
+    public var usemap: HTML_Attributes.Usemap?
+    
+    /// The element's content (fallback content if object cannot be displayed)
+    public let content: () -> HTML
+    
+    /// Creates a new object element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - data: The URL of the resource to embed
+    ///   - type: The MIME type of the resource
+    ///   - form: The ID of the form element this object is associated with
+    ///   - name: The name of the object
+    ///   - height: The height of the object in pixels
+    ///   - width: The width of the object in pixels
+    ///   - usemap: Reference to an image map
+    ///   - content: The fallback content if the object cannot be displayed
+    public init(
+        data: HTML_Attributes.ObjectData? = nil,
+        type: HTML_Attributes.ObjectType? = nil,
+        form: HTML_Attributes.ObjectForm? = nil,
+        name: HTML_Attributes.Name? = nil,
+        height: HTML_Attributes.Height? = nil,
+        width: HTML_Attributes.Width? = nil,
+        usemap: HTML_Attributes.Usemap? = nil,
+        content: @escaping () -> HTML
+    ) {
+        self.data = data
+        self.type = type
+        self.form = form
+        self.name = name
+        self.height = height
+        self.width = width
+        self.usemap = usemap
+        self.content = content
+    }
+}
+
+/// Lowercase typealias for creating Object elements with a more HTML-like syntax.
+public typealias object = ExternalObject

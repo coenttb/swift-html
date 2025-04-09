@@ -63,7 +63,7 @@ extension Input.Time {
 extension Input {
     /// Creates a new time input element
     public static func time(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         min: Min? = nil,

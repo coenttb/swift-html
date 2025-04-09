@@ -72,7 +72,7 @@ extension Input {
 extension Input {
     /// Creates a new URL input element
     public static func url(
-        name: String,
+        name: Name,
         value: String? = nil,
         list: List? = nil,
         maxlength: Maxlength? = nil,
