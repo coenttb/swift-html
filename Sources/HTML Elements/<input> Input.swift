@@ -50,8 +50,8 @@ public struct Input: Element {
     ///   - form: The ID of the form this input belongs to (optional)
     ///   - type: The type of input element to create
     public init(
-        name: Name?,
-        disabled: Disabled?,
+        name: Name? = nil,
+        disabled: Disabled? = nil,
         form: HTML_Attributes.Form.ID? = nil,
         type: Input.Variant
     ) {
