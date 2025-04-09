@@ -78,13 +78,13 @@ public struct Script<HTML>: Element {
     public var integrity: HTML_Attributes.Integrity?
     
     /// Indicates which referrer to send when fetching the script
-    public var referrerpolicy: HTML_Attributes.Referrerpolicy?
+    public var referrerpolicy: HTML_Attributes.ReferrerPolicy?
     
     /// Indicates that the script should not be executed in browsers that support ES modules
     public var nomodule: HTML_Attributes.Nomodule?
     
     /// Provides a hint of the relative priority to use when fetching the script
-    public var fetchpriority: HTML_Attributes.Fetchpriority?
+    public var fetchpriority: HTML_Attributes.FetchPriority?
     
     /// Explicitly indicates that certain operations should be blocked on the fetching of the script
     public var blocking: HTML_Attributes.Blocking?
@@ -123,9 +123,9 @@ public struct Script<HTML>: Element {
         defer: HTML_Attributes.Defer? = nil,
         type: HTML_Attributes.ScriptType? = nil,
         integrity: HTML_Attributes.Integrity? = nil,
-        referrerpolicy: HTML_Attributes.Referrerpolicy? = nil,
+        referrerpolicy: HTML_Attributes.ReferrerPolicy? = nil,
         nomodule: HTML_Attributes.Nomodule? = nil,
-        fetchpriority: HTML_Attributes.Fetchpriority? = nil,
+        fetchpriority: HTML_Attributes.FetchPriority? = nil,
         blocking: HTML_Attributes.Blocking? = nil,
         crossorigin: HTML_Attributes.Crossorigin? = nil,
         nonce: HTML_Attributes.Nonce? = nil,

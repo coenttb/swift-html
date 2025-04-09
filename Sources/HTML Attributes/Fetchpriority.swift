@@ -1,5 +1,5 @@
 ///
-/// Fetchpriority.swift
+/// FetchPriority.swift
 /// swift-html
 ///
 /// Represents the HTML fetchpriority attribute which provides a hint of the relative 
@@ -39,7 +39,7 @@ import Foundation
 /// - `<link>`: For prioritizing preloaded resources
 /// - `<script>`: For prioritizing script loading
 /// - `<iframe>`: For prioritizing iframe content loading
-public enum Fetchpriority: String, Sendable, Equatable, Attribute {
+public enum FetchPriority: String, Sendable, Equatable, Attribute {
     /// The name of the HTML attribute
     public static let attribute: String = "fetchpriority"
     
@@ -71,4 +71,4 @@ public enum Fetchpriority: String, Sendable, Equatable, Attribute {
     }
 }
 
-extension Fetchpriority: CustomStringConvertible {}
+extension FetchPriority: CustomStringConvertible {}

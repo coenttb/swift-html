@@ -38,7 +38,7 @@ import Foundation
 ///
 /// This attribute is supported on various elements including `<a>`, `<area>`, `<img>`, `<iframe>`,
 /// `<script>`, and `<link>` elements.
-public enum Referrerpolicy: String, Attribute, CustomStringConvertible {
+public enum ReferrerPolicy: String, Attribute, CustomStringConvertible {
     public static let attribute: String = "referrerpolicy"
     
     /// No referrer information is sent
@@ -82,7 +82,7 @@ public enum Referrerpolicy: String, Attribute, CustomStringConvertible {
     }
 }
 
-extension Referrerpolicy: ExpressibleByStringLiteral {
+extension ReferrerPolicy: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.init(value)
     }

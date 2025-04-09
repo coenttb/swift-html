@@ -98,8 +98,8 @@ final class ScriptTests: XCTestCase {
             defer: Defer(value: false),
             type: ScriptType.module,
             integrity: Integrity("sha384-hash"),
-            referrerpolicy: Referrerpolicy("no-referrer"),
-            fetchpriority: Fetchpriority.high,
+            referrerpolicy: ReferrerPolicy("no-referrer"),
+            fetchpriority: FetchPriority.high,
             crossorigin: Crossorigin.anonymous
         ) {
             ""

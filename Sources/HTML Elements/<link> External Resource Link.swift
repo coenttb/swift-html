@@ -23,7 +23,7 @@ import HTML_Attributes
 /// ```swift
 /// // Link to stylesheet
 /// link(href: "styles.css", rel: "stylesheet")
-/
+///
 /// // Link to favicon
 /// link(href: "favicon.ico", rel: "icon")
 ///
