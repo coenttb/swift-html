@@ -1,27 +1,77 @@
 //
-//  File.swift
-//  swift-html-pointfree
+//  <section> Generic Section.swift
+//  swift-html
+//
+//  Represents the HTML section element.
 //
 //  Created by Coen ten Thije Boonkkamp on 05/04/2025.
 //
 
 import Foundation
+import HTML_Attributes
 
+/// Represents an HTML section element (`<section>`), which represents a generic standalone 
+/// section of a document that doesn't have a more specific semantic element to represent it.
+///
+/// The `Section` struct provides a type-safe way to create HTML section elements with appropriate attributes.
+/// Sections should always have a heading (h1-h6), with very few exceptions.
+///
+/// ## Example
+///
+/// ```swift
+/// section {
+///     h2 { "Introduction" }
+///     p { "This document provides a guide to help with the important task of choosing the correct Apple." }
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Use `<section>` only if there isn't a more specific element to represent it
+/// - Each section should typically include a heading (h1-h6) as a child element
+/// - If content represents a standalone unit (like an article), use `<article>` instead
+/// - If content represents tangential information, use `<aside>` instead
+/// - If content represents the main content area, use `<main>` instead
+/// - If you only need a styling wrapper, use `<div>` instead
+///
 public struct Section<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "section" }
     
+    /// The element's class attribute
+    public var `class`: HTML_Attributes.Class?
+    
+    /// The element's ID attribute
+    public var id: HTML_Attributes.Id?
+    
+    /// The element's style attribute
+    public var style: HTML_Attributes.Style?
+    
+    /// The element's content
     public let content: () -> HTML
     
+    /// Creates a new Section element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - class: The CSS class name(s) to apply to the section
+    ///   - id: The unique identifier for the section
+    ///   - style: Inline CSS styles to apply to the section
+    ///   - content: The content of the section
     public init(
+        class: HTML_Attributes.Class? = nil,
+        id: HTML_Attributes.Id? = nil,
+        style: HTML_Attributes.Style? = nil,
         content: @escaping () -> HTML
     ) {
+        self.class = `class`
+        self.id = id
+        self.style = style
         self.content = content
     }
 }
 
+/// Lowercase typealias for creating Section elements with a more HTML-like syntax.
 public typealias section = Section
-
 
 /* MDN Documentation
  * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section

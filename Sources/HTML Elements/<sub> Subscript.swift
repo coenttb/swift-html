@@ -1,18 +1,47 @@
 //
-//  File.swift
-//  swift-html-pointfree
+// <sub> Subscript.swift
+// swift-html
 //
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
+// Represents the HTML subscript element.
+//
+// Created by Coen ten Thije Boonkkamp on 05/04/2025.
 //
 
 import Foundation
+import HTML_Attributes
 
+/// Represents an HTML subscript element (`<sub>`), which specifies inline text that should 
+/// be displayed as subscript for typographical reasons.
+///
+/// Subscripts are typically rendered with a lowered baseline using smaller text.
+///
+/// ## Example
+///
+/// ```swift
+/// sub {
+///     "2"
+/// }
+/// ```
+///
+/// ## Usage Notes
+///
+/// - Use `<sub>` only for typographical reasons, not solely for presentation
+/// - Appropriate use cases include:
+///   - Footnote numbers
+///   - Mathematical variable subscripts
+///   - Chemical formulas (e.g., H₂O)
+/// - For presentational subscripts, use CSS (e.g., `vertical-align: sub`)
+///
 public struct Subscript<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "sub" }
     
+    /// The element's content
     public let content: () -> HTML
     
+    /// Creates a new subscript element.
+    ///
+    /// - Parameter content: The content of the subscript element
     public init(
         content: @escaping () -> HTML
     ) {
@@ -20,6 +49,7 @@ public struct Subscript<HTML>: Element {
     }
 }
 
+/// Lowercase typealias for creating Subscript elements with a more HTML-like syntax.
 public typealias sub = Subscript
 
 

@@ -1,25 +1,87 @@
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <span> Content Span.swift
+/// swift-html
+///
+/// Represents the HTML span element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
 
+/// Represents an HTML span element (`<span>`), which is a generic inline container
+/// for phrasing content that doesn't inherently represent anything specific.
+///
+/// The `ContentSpan` struct provides a type-safe way to create HTML span elements.
+/// Spans are typically used to group elements for styling purposes (using class or id attributes),
+/// or because they share attribute values.
+///
+/// ## Example
+///
+/// ```swift
+/// span {
+///     "Some text"
+/// }
+/// ```
+///
+/// ```swift
+/// span {
+///     a(href: "portfolio.html", target: "_blank") {
+///         "See my portfolio"
+///     }
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Use span only when no other semantic element is appropriate
+/// - Unlike `div` (which is block-level), span is an inline-level element
+/// - Commonly used with CSS classes to apply styling to portions of text
+///
 public struct ContentSpan<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "span" }
     
+    /// The class attribute
+    public var `class`: HTML_Attributes.Class?
+    
+    /// The ID attribute
+    public var id: HTML_Attributes.Id?
+    
+    /// The style attribute
+    public var style: HTML_Attributes.Style?
+    
+    /// The lang attribute
+    public var lang: HTML_Attributes.Lang?
+    
+    /// The element's content
     public let content: () -> HTML
     
+    /// Creates a new span element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - class: The class attribute
+    ///   - id: The ID attribute
+    ///   - style: The style attribute
+    ///   - lang: The language attribute
+    ///   - content: The content of the element
     public init(
+        class: HTML_Attributes.Class? = nil,
+        id: HTML_Attributes.Id? = nil,
+        style: HTML_Attributes.Style? = nil,
+        lang: HTML_Attributes.Lang? = nil,
         content: @escaping () -> HTML
     ) {
+        self.class = `class`
+        self.id = id
+        self.style = style
+        self.lang = lang
         self.content = content
     }
 }
 
+/// Lowercase typealias for creating span elements with a more HTML-like syntax.
 public typealias span = ContentSpan
 
 

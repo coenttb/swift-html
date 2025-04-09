@@ -38,7 +38,7 @@ import Foundation
 ///
 /// This attribute is supported on various elements including `<a>`, `<area>`, `<img>`, `<iframe>`,
 /// `<script>`, and `<link>` elements.
-public enum ReferrerPolicy: String, Attribute, CustomStringConvertible {
+public enum Referrerpolicy: String, Attribute, CustomStringConvertible {
     public static let attribute: String = "referrerpolicy"
     
     /// No referrer information is sent
@@ -66,4 +66,24 @@ public enum ReferrerPolicy: String, Attribute, CustomStringConvertible {
     case unsafeUrl = "unsafe-url"
     
     public var description: String { rawValue }
+    
+    /// Initialize from a string, defaulting to strictOriginWhenCrossOrigin for invalid values
+    public init(_ value: String) {
+        switch value {
+        case "no-referrer": self = .noReferrer
+        case "no-referrer-when-downgrade": self = .noReferrerWhenDowngrade
+        case "origin": self = .origin
+        case "origin-when-cross-origin": self = .originWhenCrossOrigin
+        case "same-origin": self = .sameOrigin
+        case "strict-origin": self = .strictOrigin
+        case "unsafe-url": self = .unsafeUrl
+        default: self = .strictOriginWhenCrossOrigin
+        }
+    }
+}
+
+extension Referrerpolicy: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        self.init(value)
+    }
 }

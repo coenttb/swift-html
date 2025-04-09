@@ -23,7 +23,7 @@ import HTML_Attributes
 /// ```swift
 /// // Link to stylesheet
 /// link(href: "styles.css", rel: "stylesheet")
-///
+/
 /// // Link to favicon
 /// link(href: "favicon.ico", rel: "icon")
 ///
@@ -135,14 +135,14 @@ public struct Link: Element {
     public init(
         `as`: As? = nil,
         blocking: Blocking? = nil,
-        crossorigin: Crossorigin? = nil,
+        crossorigin: HTML_Attributes.Crossorigin? = nil,
         disabled: HTML_Attributes.Disabled? = nil,
-        fetchpriority: FetchPriority? = nil,
+        fetchpriority: HTML_Attributes.FetchPriority? = nil,
         href: HTML_Attributes.Href? = nil,
         hreflang: HTML_Attributes.Hreflang? = nil,
-        imagesizes: ImageSizes? = nil,
-        imagesrcset: ImageSrcSet? = nil,
-        integrity: Integrity? = nil,
+        imagesizes: HTML_Attributes.ImageSizes? = nil,
+        imagesrcset: HTML_Attributes.ImageSrcSet? = nil,
+        integrity: HTML_Attributes.Integrity? = nil,
         media: String? = nil,
         referrerpolicy: HTML_Attributes.ReferrerPolicy? = nil,
         rel: String? = nil,

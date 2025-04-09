@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  swift-html-pointfree
+//  <time> (Date) Time.swift
+//  swift-html
 //
 //  Created by Coen ten Thije Boonkkamp on 05/04/2025.
 //
@@ -8,13 +8,51 @@
 import Foundation
 import HTML_Attributes
 
-public struct DateTime<HTML>: Element {
+/// Represents an HTML time element (`<time>`), which represents a specific period in time.
+///
+/// The `Time` element is used to encode dates and times in a machine-readable format. It can represent:
+/// - A time on a 24-hour clock
+/// - A precise date in the Gregorian calendar (with optional time and timezone information)
+/// - A valid time duration
+///
+/// ## Example
+///
+/// ```swift
+/// time(datetime: "2018-07-07") {
+///     "July 7, 2018"
+/// }
+///
+/// time(datetime: "20:00") {
+///     "8:00 PM"
+/// }
+///
+/// time(datetime: "PT2H30M") {
+///     "2 hours and 30 minutes"
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Use the `datetime` attribute to provide a machine-readable representation of the date or time
+/// - Format the content to be human-readable while keeping the machine-readable format in the attribute
+/// - This element should not be used for dates prior to the introduction of the Gregorian calendar
+/// - If the element doesn't have a `datetime` attribute, the content must be in a valid datetime format
+///
+public struct Time<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "time" }
     
+    /// The datetime attribute that provides a machine-readable format of the date and/or time
     public var datetime: HTML_Attributes.DateTime?
+    
+    /// The element's content
     public let content: () -> HTML
     
+    /// Creates a new Time element with the specified attributes.
+    ///
+    /// - Parameters:
+    ///   - datetime: A machine-readable representation of the date or time
+    ///   - content: The content of the element, typically a human-readable date or time
     public init(
         datetime: HTML_Attributes.DateTime? = nil,
         content: @escaping () -> HTML
@@ -24,8 +62,8 @@ public struct DateTime<HTML>: Element {
     }
 }
 
-public typealias time = DateTime
-
+/// Lowercase typealias for creating Time elements with a more HTML-like syntax.
+public typealias time = Time
 
 /* MDN Documentation
  * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time

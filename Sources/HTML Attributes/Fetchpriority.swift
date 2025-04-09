@@ -39,7 +39,9 @@ import Foundation
 /// - `<link>`: For prioritizing preloaded resources
 /// - `<script>`: For prioritizing script loading
 /// - `<iframe>`: For prioritizing iframe content loading
-public enum FetchPriority: String, Sendable, Equatable {
+public enum Fetchpriority: String, Sendable, Equatable, Attribute {
+    /// The name of the HTML attribute
+    public static let attribute: String = "fetchpriority"
     
     /// Fetch the resource at a high priority relative to other resources of the same type.
     ///
@@ -62,4 +64,11 @@ public enum FetchPriority: String, Sendable, Equatable {
     /// This is used if no value is explicitly set or if an invalid value is set.
     /// The browser will use its default prioritization heuristics.
     case auto
+    
+    /// Returns the string representation of the fetchpriority value
+    public var description: String {
+        return self.rawValue
+    }
 }
+
+extension Fetchpriority: CustomStringConvertible {}

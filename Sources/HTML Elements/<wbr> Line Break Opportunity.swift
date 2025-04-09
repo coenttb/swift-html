@@ -1,19 +1,70 @@
-//
-//  File.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <wbr> Line Break Opportunity.swift
+/// swift-html
+///
+/// Represents the HTML word break opportunity element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
 
-
+/// Represents an HTML word break opportunity element (`<wbr>`), which indicates a position within text 
+/// where the browser may optionally break a line, though its line-breaking rules would not otherwise 
+/// create a break at that location.
+///
+/// The `LineBreakOpportunity` struct provides a type-safe way to create HTML word break opportunity elements.
+///
+/// ## Example
+///
+/// ```swift
+/// // Breaking a long word for better responsive layout
+/// p {
+///     "FernstraßenbauprivatfinanzierungsgesetzÖf".forEach { char in
+///         "\(char)"
+///         if "aeioußÖ".contains(char) {
+///             wbr {}
+///         }
+///     }
+/// }
+/// ```
+///
+/// For URLs:
+///
+/// ```swift
+/// p {
+///     "http://this"; wbr {}
+///     ".is"; wbr {}
+///     ".a"; wbr {}
+///     ".really"; wbr {}
+///     ".long"; wbr {}
+///     ".example"; wbr {}
+///     ".com"
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Use `<wbr>` to suggest where long words or URLs can break if needed for responsive layouts
+/// - Unlike `&shy;` (soft hyphen), `<wbr>` does not introduce a hyphen at the line break point
+/// - For URLs, add break opportunities before punctuation to avoid leaving punctuation marks at the end of the line
+/// - In RTL (right-to-left) text, `<wbr>` behaves like a Unicode zero-width space and has no effect on bidirectional ordering
+///
+/// ## Difference from `<br>`
+///
+/// Unlike the `<br>` element which forces a line break, `<wbr>` only suggests where a break *may* occur if needed.
+/// The browser will only break at the `<wbr>` position if it would otherwise overflow its container.
+///
 public struct LineBreakOpportunity<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "wbr" }
     
+    /// The element's content (though WBR is typically a void element)
     public let content: () -> HTML
     
+    /// Creates a new LineBreakOpportunity element.
+    ///
+    /// - Parameter content: The content of the element (typically empty as WBR is a void element)
     public init(
         content: @escaping () -> HTML
     ) {
@@ -21,103 +72,5 @@ public struct LineBreakOpportunity<HTML>: Element {
     }
 }
 
+/// Lowercase typealias for creating LineBreakOpportunity elements with a more HTML-like syntax.
 public typealias wbr = LineBreakOpportunity
-
-
-/* MDN Documentation
- * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr
- */
-// <wbr>: The Line Break Opportunity element
-// Baseline
-// Widely available
-// This feature is well established and works across many devices and browser versions. Itâs been available across browsers since
-// July 2015
-// .
-// Learn more
-// See full compatibility
-// Report feedback
-// The
-// <wbr>
-// HTML
-// element represents a word break opportunityâa position within text where the browser may optionally break a line, though its line-breaking rules would not otherwise create a break at that location.
-// Try it
-// <div id="example-paragraphs">
-//  <p>FernstraÃenbauprivatfinanzierungsgesetz</p>
-//  <p>FernstraÃen<wbr />bau<wbr />privat<wbr />finanzierungs<wbr />gesetz</p>
-//  <p>FernstraÃen&shy;bau&shy;privat&shy;finanzierungs&shy;gesetz</p>
-// </div>
-// #example-paragraphs {
-//  background-color: white;
-//  overflow: hidden;
-//  resize: horizontal;
-//  width: 9rem;
-//  border: 2px dashed #999;
-// }
-// Attributes
-// This element only includes the
-// global attributes
-// .
-// Notes
-// On UTF-8 encoded pages,
-// <wbr>
-// behaves like the
-// U+200B ZERO-WIDTH SPACE
-// code point. In particular, it behaves like a Unicode bidi BN code point, meaning it has no effect on
-// bidi
-// -ordering:
-// <div dir=rtl>123,<wbr>456</div>
-// displays, when not broken on two lines,
-// 123,456
-// and not
-// 456,123
-// .
-// For the same reason, the
-// <wbr>
-// element does not introduce a hyphen at the line break point. To make a hyphen appear only at the end of a line, use the soft hyphen character entity (
-// &shy;
-// ) instead.
-// Examples
-// The Yahoo Style Guide
-// recommends
-// breaking a URL
-// before
-// punctuation
-// , to avoid leaving a punctuation mark at the end of the line, which the reader might mistake for the end of the URL.
-// html
-// <p>
-//  http://this<wbr />.is<wbr />.a<wbr />.really<wbr />.long<wbr />.example<wbr />.com/With<wbr />/deeper<wbr />/level<wbr />/pages<wbr />/deeper<wbr />/level<wbr />/pages<wbr />/deeper<wbr />/level<wbr />/pages<wbr />/deeper<wbr />/level<wbr />/pages<wbr />/deeper<wbr />/level<wbr />/pages
-// </p>
-// Result
-// Technical summary
-// Content categories
-// Flow content
-// ,
-// phrasing content
-// .
-// Permitted content
-// Empty
-// Tag omission
-// Must have a start tag and must not have an end tag.
-// Permitted parents
-// Any element that accepts
-// phrasing content
-// .
-// Implicit ARIA role
-// No corresponding role
-// Permitted ARIA roles
-// Any
-// DOM interface
-// HTMLElement
-// Specifications
-// Specification
-// HTML
-// #
-// the-wbr-element
-// Browser compatibility
-// See also
-// overflow-wrap
-// word-break
-// hyphens
-// The
-// <br>
-// element

@@ -1,63 +1,53 @@
-//<strike>: MDN Documentation
-//
-// Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strike
-//
-// <strike>
-// Deprecated:
-// This feature is no longer recommended. Though some browsers might still support it, it may have already been removed from the relevant web standards, may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using it, and update existing code if possible; see the
-// compatibility table
-// at the bottom of this page to guide your decision. Be aware that this feature may cease to work at any time.
-// The
-// <strike>
-// HTML
-// element places a strikethrough (horizontal line) over text.
-// Warning:
-// This element is deprecated in HTML 4 and XHTML 1, and obsoleted in the
-// HTML Living Standard
-// . If semantically appropriate, i.e., if it represents
-// deleted
-// content, use
-// <del>
-// instead. In all other cases use
-// <s>
-// .
-// Attributes
-// This element includes the
-// global attributes
-// .
-// Examples
-// html
-// &lt;strike&gt;: <strike>Today's Special: Salmon</strike> SOLD OUT<br />
-// &lt;s&gt;: <s>Today's Special: Salmon</s> SOLD OUT
-// Result
-// Technical summary
-// DOM interface
-// HTMLElement
-// Specifications
-// Specification
-// HTML
-// #
-// strike
-// Browser compatibility
-// See also
-// The
-// <s>
-// element.
-// The
-// <del>
-// element should be used if the data has been
-// deleted
-// .
-// The CSS
-// text-decoration
-// property can be used to style text with a strikethrough.
-
-//
-//  File 2.swift
-//  swift-html-pointfree
-//
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
-//
+///
+/// <strike> Strike.swift
+/// swift-html
+///
+/// Represents the HTML strike element.
+///
+/// Created by Coen ten Thije Boonkkamp on 05/04/2025.
+///
 
 import Foundation
+import HTML_Attributes
+
+/// Represents an HTML `<strike>` element, which places a strikethrough (horizontal line) over text.
+///
+/// > **Deprecated**: This element is deprecated in HTML 4 and XHTML 1, and obsoleted in the HTML Living Standard.
+/// > - If semantically representing deleted content, use `<del>` instead.
+/// > - In all other cases, use `<s>` element.
+///
+/// ## Example
+///
+/// ```swift
+/// strike {
+///     "Today's Special: Salmon"
+/// }
+/// ```
+///
+/// ## Best Practices
+///
+/// - Avoid using this element in new code as it is deprecated.
+/// - Use `<s>` for content that is no longer relevant or accurate.
+/// - Use `<del>` for content that has been deleted from a document.
+/// - Consider using CSS `text-decoration: line-through` for styling purposes instead.
+///
+public struct Strike<HTML>: Element {
+    /// The HTML tag name
+    public static var tag: String { "strike" }
+    
+    /// The element's content
+    public let content: () -> HTML
+    
+    /// Creates a new Strike element.
+    ///
+    /// - Parameter content: The content of the element
+    public init(
+        content: @escaping () -> HTML
+    ) {
+        self.content = content
+    }
+}
+
+/// Lowercase typealias for creating Strike elements with a more HTML-like syntax.
+public typealias strike = Strike
 

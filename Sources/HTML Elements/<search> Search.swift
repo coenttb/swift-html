@@ -1,27 +1,66 @@
 //
-//  File.swift
-//  swift-html-pointfree
+// <search> Search.swift
+// swift-html
 //
-//  Created by Coen ten Thije Boonkkamp on 05/04/2025.
+// Represents the HTML search element.
+//
+// Created by Coen ten Thije Boonkkamp on 05/04/2025.
 //
 
 import Foundation
+import HTML_Attributes
 
+/// Represents an HTML search element (`<search>`), which is a container representing parts of the document or application with form controls or other content related to performing a search or filtering operation.
+///
+/// The `Search` struct provides a type-safe way to create HTML search elements.
+///
+/// ## Example
+///
+/// ```swift
+/// search {
+///     form {
+///         label {
+///             "Find a Movie"
+///             for_("movie")
+///         }
+///         input.search {
+///             id("movie")
+///             name("q")
+///         }
+///         button.submit {
+///             "Search"
+///         }
+///     }
+/// }
+/// ```
+///
+/// ## Usage Notes
+///
+/// - The `<search>` element is not for presenting search results. Rather, search results should be presented as part of the main content of the web page.
+/// - Suggestions and links that are part of "quick search" functionality are appropriately nested within the contents of the `<search>` element as they are search features.
+///
+/// ## Accessibility
+///
+/// - The `<search>` element defines a "search" landmark, removing the need to add `role="search"` to a `<form>` element.
+/// - When multiple search elements exist on a page, consider using the `title` attribute to distinguish between them.
+///
 public struct Search<HTML>: Element {
     /// The HTML tag name
     public static var tag: String { "search" }
     
+    /// The element's content
     public let content: () -> HTML
     
-    public init(
-        content: @escaping () -> HTML
-    ) {
+    /// Creates a new Search element.
+    ///
+    /// - Parameter content: The content of the search element
+    public init(content: @escaping () -> HTML) {
         self.content = content
     }
 }
 
+/// Lowercase typealias for creating Search elements with a more HTML-like syntax.
 public typealias search = Search
-
 
 /* MDN Documentation
  * Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search
