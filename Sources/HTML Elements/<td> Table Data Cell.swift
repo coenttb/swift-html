@@ -53,26 +53,20 @@ public struct TableDataCell: Element {
     /// Number of rows this cell spans
     public var rowspan: RowSpan?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new TableDataCell element with the specified attributes.
     ///
     /// - Parameters:
     ///   - colspan: Number of columns this cell spans (default is 1)
     ///   - headers: IDs of related header cells for accessibility
     ///   - rowspan: Number of rows this cell spans (default is 1)
-    ///   - content: The content of the element
     public init(
         colspan: ColSpan? = nil,
         headers: Headers? = nil,
-        rowspan: RowSpan? = nil,
-        
+        rowspan: RowSpan? = nil
     ) {
         self.colspan = colspan
         self.headers = headers
         self.rowspan = rowspan
-        
     }
 }
 

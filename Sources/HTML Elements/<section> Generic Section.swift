@@ -38,13 +38,7 @@ public struct Section: Element {
     /// The HTML tag name
     public static var tag: String { "section" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Section element with the specified attributes.
-    ///
-    /// - Parameters:
-    ///   - content: The content of the section
     public init(
         
     ) {

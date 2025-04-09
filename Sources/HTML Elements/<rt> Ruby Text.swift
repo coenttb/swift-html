@@ -40,16 +40,12 @@ import HTML_Attributes
 public struct RubyText: Element {
     /// The HTML tag name
     public static var tag: String { "rt" }
-
-    /// The element's content
-    public let content: () -> HTML
     
     /// Creates a new RubyText element with the specified attributes.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this element
-    ///   - class: The CSS classes for this element
-    ///   - content: The content of the element, typically the pronunciation or meaning of the base text
+    ///   - class: The CSS classes for this element, typically the pronunciation or meaning of the base text
     public init(
         
     ) {

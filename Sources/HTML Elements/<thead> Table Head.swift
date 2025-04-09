@@ -51,13 +51,7 @@ public struct TableHead: Element {
     /// The HTML tag name
     public static var tag: String { "thead" }
     
-    /// The element's content, typically one or more `<tr>` elements containing `<th>` elements
-    public let content: () -> HTML
-    
     /// Creates a new TableHead element.
-    ///
-    /// - Parameter content: The content of the element, typically one or more `<tr>` elements
-    ///                      containing `<th>` elements that define the column headers
     public init(
         
     ) {

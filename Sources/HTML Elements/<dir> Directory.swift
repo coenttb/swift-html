@@ -37,17 +37,12 @@ public struct Directory: Element {
     /// Boolean attribute that hints the list should be rendered in a compact style
     public var compact: HTML_Attributes.Compact?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Directory element with the specified attributes.
     ///
     /// - Parameters:
     ///   - compact: Boolean attribute that hints the list should be rendered in a compact style
-    ///   - content: The content of the element
     public init(
-        compact: HTML_Attributes.Compact? = nil,
-        
+        compact: HTML_Attributes.Compact? = nil
     ) {
         self.compact = compact
         

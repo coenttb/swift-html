@@ -38,17 +38,12 @@ public struct Data: Element {
     /// The machine-readable translation of the content
     public var value: Value<String>
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Data element with the specified value.
     ///
     /// - Parameters:
     ///   - value: The machine-readable translation of the content
-    ///   - content: The content of the element
     public init(
-        value: Value<String>,
-        
+        value: Value<String>
     ) {
         self.value = value
         

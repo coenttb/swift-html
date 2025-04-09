@@ -40,13 +40,9 @@ public struct RubyBase: Element {
     /// The HTML tag name
     public static var tag: String { "rb" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new RubyBase element with the specified attributes.
     ///
-    /// - Parameters:
-    ///   - content: The content of the element, typically the base text to be annotated
+    /// - Parameters:, typically the base text to be annotated
     public init(
         
     ) {

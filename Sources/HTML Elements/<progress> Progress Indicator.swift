@@ -49,19 +49,14 @@ public struct ProgressIndicator: Element {
     /// is ongoing with no indication of how long it is expected to take.
     public var value: Value<Float>?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new ProgressIndicator element with the specified attributes.
     ///
     /// - Parameters:
     ///   - max: The maximum value, describing how much work the task requires. Default is 1.
-    ///   - value: The current progress value. If nil, the progress bar is indeterminate.
-    ///   - content: The content of the element, typically a text fallback for browsers that don't support the progress element.
+    ///   - value: The current progress value. If nil, the progress bar is indeterminate., typically a text fallback for browsers that don't support the progress element.
     public init(
         max: Max? = nil,
-        value: Value<Float>? = nil,
-        
+        value: Value<Float>? = nil
     ) {
         self.max = max
         self.value = value

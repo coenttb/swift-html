@@ -39,12 +39,7 @@ public struct Strikethrough: Element {
     /// The HTML tag name
     public static var tag: String { "s" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Strikethrough element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

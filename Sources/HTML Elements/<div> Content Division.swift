@@ -40,12 +40,7 @@ public struct ContentDivision: Element {
     /// The HTML tag name
     public static var tag: String { "div" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new ContentDivision element.
-    ///
-    /// - Parameter content: The content of the div element
     public init(
         
     ) {

@@ -36,12 +36,7 @@ public struct Subscript: Element {
     /// The HTML tag name
     public static var tag: String { "sub" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new subscript element.
-    ///
-    /// - Parameter content: The content of the subscript element
     public init(
         
     ) {

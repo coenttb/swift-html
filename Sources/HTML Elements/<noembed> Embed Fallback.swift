@@ -35,12 +35,7 @@ public struct EmbedFallback: Element {
     /// The HTML tag name
     public static var tag: String { "noembed" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new EmbedFallback element with the specified content.
-    ///
-    /// - Parameter content: The fallback content to display when embed is not supported
     @available(*, deprecated, message: "The <noembed> element is deprecated in HTML standards. Use <object> with fallback content instead.")
     public init(
         

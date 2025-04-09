@@ -42,12 +42,7 @@ public struct UnarticulatedAnnotation: Element {
     /// The HTML tag name
     public static var tag: String { "u" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new UnarticulatedAnnotation element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

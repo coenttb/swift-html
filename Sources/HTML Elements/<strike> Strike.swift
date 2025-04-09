@@ -35,12 +35,7 @@ public struct Strike: Element {
     /// The HTML tag name
     public static var tag: String { "strike" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Strike element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

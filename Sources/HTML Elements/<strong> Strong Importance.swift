@@ -40,12 +40,7 @@ public struct StrongImportance: Element {
     /// The HTML tag name
     public static var tag: String { "strong" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new StrongImportance element.
-    ///
-    /// - Parameter content: The content to be marked as having strong importance
     public init(
         
     ) {

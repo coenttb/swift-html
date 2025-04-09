@@ -40,12 +40,7 @@ public struct Small: Element {
     /// The HTML tag name
     public static var tag: String { "small" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Small element with the specified content.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

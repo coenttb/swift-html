@@ -39,17 +39,12 @@ public struct Map: Element {
     /// The name must be non-empty with no space characters and must be unique across all maps in the document.
     public var name: Name?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Map element with the specified attributes.
     ///
     /// - Parameters:
-    ///   - name: A unique identifier for the map, used to reference it from an image's `usemap` attribute
-    ///   - content: The content of the element, typically containing `<area>` elements
+    ///   - name: A unique identifier for the map, used to reference it from an image's `usemap` attribute, typically containing `<area>` elements
     public init(
-        name: Name? = nil,
-        
+        name: Name? = nil
     ) {
         self.name = name
         

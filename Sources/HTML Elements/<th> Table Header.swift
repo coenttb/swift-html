@@ -64,10 +64,7 @@ public struct TableHeader: Element {
     
     /// Defines which cells this header relates to (row, col, rowgroup, colgroup)
     public var scope: Scope?
-    
-    /// The element's content
-    public let content: () -> HTML
-    
+
     /// Creates a new TableHeader element with the specified attributes.
     ///
     /// - Parameters:
@@ -76,14 +73,12 @@ public struct TableHeader: Element {
     ///   - headers: IDs of related header cells
     ///   - rowspan: Number of rows this cell spans (default is 1)
     ///   - scope: Defines which cells this header relates to
-    ///   - content: The content of the element
     public init(
         abbr: String? = nil,
         colspan: Int? = nil,
         headers: String? = nil,
         rowspan: Int? = nil,
-        scope: Scope? = nil,
-        
+        scope: Scope? = nil
     ) {
         self.abbr = abbr
         self.colspan = colspan

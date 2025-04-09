@@ -53,12 +53,7 @@ public struct Cite: Element {
     /// The HTML tag name
     public static var tag: String { "cite" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Cite element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

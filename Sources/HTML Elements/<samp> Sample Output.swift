@@ -37,12 +37,7 @@ public struct Samp: Element {
     /// The HTML tag name
     public static var tag: String { "samp" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Sample Output element with the specified content.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

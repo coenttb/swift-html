@@ -47,12 +47,7 @@ public struct IdiomaticText: Element {
     /// The HTML tag name
     public static var tag: String { "i" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new IdiomaticText element with the specified content.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

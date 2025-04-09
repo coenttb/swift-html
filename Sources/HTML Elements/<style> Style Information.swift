@@ -52,9 +52,6 @@ public struct Style: Element {
     /// Specifies alternative style sheet sets.
     public var title: HTML_Attributes.Title?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Style element with the specified attributes.
     ///
     /// - Parameters:
@@ -62,19 +59,16 @@ public struct Style: Element {
     ///   - blocking: Indicates operations to be blocked on fetching critical subresources
     ///   - nonce: A cryptographic nonce for Content-Security-Policy
     ///   - title: Specifies alternative style sheet sets
-    ///   - content: The CSS content of the style element
     public init(
         media: HTML_Attributes.Media? = nil,
         blocking: HTML_Attributes.Blocking? = nil,
         nonce: HTML_Attributes.Nonce? = nil,
-        title: HTML_Attributes.Title? = nil,
-        
+        title: HTML_Attributes.Title? = nil
     ) {
         self.media = media
         self.blocking = blocking
         self.nonce = nonce
         self.title = title
-        
     }
 }
 

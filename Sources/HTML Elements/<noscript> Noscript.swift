@@ -35,13 +35,7 @@ public struct Noscript: Element {
     /// The HTML tag name
     public static var tag: String { "noscript" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Noscript element with the specified content.
-    ///
-    /// - Parameters:
-    ///   - content: The content to display when scripting is disabled
     public init(
         
     ) {

@@ -70,9 +70,6 @@ public struct ExternalObject: Element {
     /// Specifies an image map for the object
     public var usemap: HTML_Attributes.Usemap?
     
-    /// The element's content (fallback content if object cannot be displayed)
-    public let content: () -> HTML
-    
     /// Creates a new object element with the specified attributes.
     ///
     /// - Parameters:
@@ -83,7 +80,6 @@ public struct ExternalObject: Element {
     ///   - height: The height of the object in pixels
     ///   - width: The width of the object in pixels
     ///   - usemap: Reference to an image map
-    ///   - content: The fallback content if the object cannot be displayed
     public init(
         data: HTML_Attributes.ObjectData? = nil,
         type: HTML_Attributes.ObjectType? = nil,
@@ -91,8 +87,7 @@ public struct ExternalObject: Element {
         name: HTML_Attributes.Name? = nil,
         height: HTML_Attributes.Height? = nil,
         width: HTML_Attributes.Width? = nil,
-        usemap: HTML_Attributes.Usemap? = nil,
-        
+        usemap: HTML_Attributes.Usemap? = nil
     ) {
         self.data = data
         self.type = type

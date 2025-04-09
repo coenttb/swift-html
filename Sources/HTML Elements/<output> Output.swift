@@ -44,21 +44,16 @@ public struct Output: Element {
     /// The element's name. Used in the form.elements API.
     public var name: Name?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Output element with the specified attributes.
     ///
     /// - Parameters:
     ///   - for: IDs of elements that contributed to the calculation
     ///   - form: ID of the form to associate with
     ///   - name: Name of the output element
-    ///   - content: The content of the element
     public init(
         `for`: For? = nil,
         form: HTML_Attributes.Form.ID? = nil,
-        name: Name? = nil,
-        
+        name: Name? = nil
     ) {
         self.`for` = `for`
         self.form = form

@@ -171,8 +171,7 @@ public struct Anchor: Element {
         ping: HTML_Attributes.Ping? = nil,
         referrerpolicy: HTML_Attributes.ReferrerPolicy? = nil,
         rel: HTML_Attributes.Rel? = nil,
-        target: HTML_Attributes.Target? = nil,
-        
+        target: HTML_Attributes.Target? = nil
     ) {
         self.attributionsrc = attributionsrc
         self.download = download

@@ -41,12 +41,7 @@ public struct Footer: Element {
     /// The HTML tag name
     public static var tag: String { "footer" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Footer element.
-    ///
-    /// - Parameter content: The content of the footer element
     public init(
         
     ) {

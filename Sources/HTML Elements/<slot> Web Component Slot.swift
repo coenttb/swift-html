@@ -39,17 +39,12 @@ public struct WebComponentSlot: Element {
     /// custom element's child that has a matching slot attribute.
     public var name: Name?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new WebComponentSlot element with the specified attributes.
     ///
     /// - Parameters:
     ///   - name: The slot's name. Elements with a matching slot attribute will be inserted here.
-    ///   - content: The default content of the slot, shown when no slotted content is provided
     public init(
-        name: Name? = nil,
-        
+        name: Name? = nil
     ) {
         self.name = name
         

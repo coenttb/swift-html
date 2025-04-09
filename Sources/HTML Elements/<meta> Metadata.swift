@@ -99,7 +99,7 @@ public struct Meta: Element {
         name: Name? = nil,
     ) {
         self.charset = charset
-        
+        self.content = content
         self.httpEquiv = httpEquiv
         self.media = media
         self.name = name
@@ -120,7 +120,7 @@ public struct Meta: Element {
         media: String? = nil
     ) {
         self.name = name
-        
+        self.content = content
         self.media = media
     }
     
@@ -136,7 +136,7 @@ public struct Meta: Element {
         content: String,
         media: String? = nil
     ) {
-        
+        self.content = content
         self.media = media
     }
     
@@ -152,7 +152,7 @@ public struct Meta: Element {
         content: String
     ) {
         self.httpEquiv = httpEquiv
-        
+        self.content = content
     }
 }
 

@@ -67,17 +67,12 @@ public struct DataList: Element {
     /// The ID of the datalist, used to associate it with an input element
     public var id: HTML_Attributes.Id?
     
-    /// The content of the datalist, typically option elements
-    public let content: () -> HTML
-    
     /// Creates a new DataList element with the specified attributes and content.
     ///
     /// - Parameters:
     ///   - id: The ID attribute, used to associate the datalist with an input element
-    ///   - content: The content of the datalist, typically option elements
     public init(
-        id: HTML_Attributes.Id? = nil,
-        
+        id: HTML_Attributes.Id? = nil
     ) {
         self.id = id
         

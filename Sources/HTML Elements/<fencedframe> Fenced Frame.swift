@@ -48,21 +48,16 @@ public struct FencedFrame: Element {
     /// Width of the fencedframe in CSS pixels (default is 300)
     public var width: HTML_Attributes.Width?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new FencedFrame element with the specified attributes.
     ///
     /// - Parameters:
     ///   - allow: Permissions Policy for the fencedframe
     ///   - height: Height in CSS pixels
     ///   - width: Width in CSS pixels
-    ///   - content: The content of the element
     public init(
         allow: FencedFrame.Allow? = nil,
         height: HTML_Attributes.Height? = nil,
-        width: HTML_Attributes.Width? = nil,
-        
+        width: HTML_Attributes.Width? = nil
     ) {
         self.allow = allow
         self.height = height

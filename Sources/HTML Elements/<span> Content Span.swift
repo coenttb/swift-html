@@ -43,13 +43,7 @@ public struct ContentSpan: Element {
     /// The HTML tag name
     public static var tag: String { "span" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new span element with the specified attributes.
-    ///
-    /// - Parameters:
-    ///   - content: The content of the element
     public init(
         
     ) {

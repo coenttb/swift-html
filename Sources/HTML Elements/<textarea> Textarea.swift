@@ -93,9 +93,6 @@ public struct Textarea: Element {
     /// Indicates how the control wraps text for form submission
     public var wrap: TextareaWrap?
     
-    /// The element's content (initial text value)
-    public let content: () -> HTML
-    
     /// Creates a new Textarea element with the specified attributes.
     ///
     /// - Parameters:
@@ -117,7 +114,6 @@ public struct Textarea: Element {
     ///   - rows: Height of control in number of text lines
     ///   - spellcheck: Whether spelling should be checked
     ///   - wrap: How text should wrap for form submission
-    ///   - content: The initial text content of the textarea
     public init(
         autocapitalize: HTML_Attributes.Autocapitalize? = nil,
         autocomplete: HTML_Attributes.Autocomplete? = nil,
@@ -136,8 +132,7 @@ public struct Textarea: Element {
         required: HTML_Attributes.Required? = nil,
         rows: Int? = nil,
         spellcheck: HTML_Attributes.Spellcheck? = nil,
-        wrap: TextareaWrap? = nil,
-        
+        wrap: TextareaWrap? = nil
     ) {
         self.autocapitalize = autocapitalize
         self.autocomplete = autocomplete

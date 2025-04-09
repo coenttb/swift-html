@@ -48,12 +48,7 @@ public struct DisclosureSummary: Element {
     /// The HTML tag name
     public static var tag: String { "summary" }
     
-    /// The element's content (text, other elements, etc.)
-    public let content: () -> HTML
-    
     /// Creates a new DisclosureSummary element.
-    ///
-    /// - Parameter content: The content of the summary element
     public init(
         
     ) {

@@ -48,12 +48,7 @@ public struct Search: Element {
     /// The HTML tag name
     public static var tag: String { "search" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Search element.
-    ///
-    /// - Parameter content: The content of the search element
     public init() {
         
     }

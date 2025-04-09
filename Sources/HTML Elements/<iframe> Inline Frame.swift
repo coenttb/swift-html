@@ -67,10 +67,7 @@ public struct InlineFrame: Element {
     
     /// Controls referrer policy when fetching the frame's resource
     public var referrerpolicy: HTML_Attributes.ReferrerPolicy?
-    
-    /// The element's content
-    public let content: () -> HTML
-    
+        
     /// Creates a new InlineFrame element with the specified attributes.
     ///
     /// - Parameters:
@@ -83,8 +80,7 @@ public struct InlineFrame: Element {
     ///   - width: The width of the frame in CSS pixels
     ///   - height: The height of the frame in CSS pixels
     ///   - loading: Indicates how the browser should load the iframe
-    ///   - referrerpolicy: Controls referrer policy when fetching the frame's resource
-    ///   - content: The content of the element (typically empty for iframes)
+    ///   - referrerpolicy: Controls referrer policy when fetching the frame's resource (typically empty for iframes)
     public init(
         src: HTML_Attributes.Src? = nil,
         srcdoc: String? = nil,
@@ -95,8 +91,7 @@ public struct InlineFrame: Element {
         width: HTML_Attributes.Width? = nil,
         height: HTML_Attributes.Height? = nil,
         loading: String? = nil,
-        referrerpolicy: HTML_Attributes.ReferrerPolicy? = nil,
-        
+        referrerpolicy: HTML_Attributes.ReferrerPolicy? = nil
     ) {
         self.src = src
         self.srcdoc = srcdoc

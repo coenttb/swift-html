@@ -48,12 +48,7 @@ public struct DescriptionTerm: Element {
     /// The HTML tag name
     public static var tag: String { "dt" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new DescriptionTerm element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

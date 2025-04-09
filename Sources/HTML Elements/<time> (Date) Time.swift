@@ -45,17 +45,12 @@ public struct Time: Element {
     /// The datetime attribute that provides a machine-readable format of the date and/or time
     public var datetime: HTML_Attributes.DateTime?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Time element with the specified attributes.
     ///
     /// - Parameters:
-    ///   - datetime: A machine-readable representation of the date or time
-    ///   - content: The content of the element, typically a human-readable date or time
+    ///   - datetime: A machine-readable representation of the date or time, typically a human-readable date or time
     public init(
-        datetime: HTML_Attributes.DateTime? = nil,
-        
+        datetime: HTML_Attributes.DateTime? = nil
     ) {
         self.datetime = datetime
         

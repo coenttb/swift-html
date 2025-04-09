@@ -40,15 +40,8 @@ import HTML_Attributes
 public struct Ruby: Element {
     /// The HTML tag name
     public static var tag: String { "ruby" }
-    /// The element's content
-    public let content: () -> HTML
     
     /// Creates a new Ruby element with the specified attributes.
-    ///
-    /// - Parameters:
-    ///   - id: The unique identifier for this element
-    ///   - class: The CSS classes for this element
-    ///   - content: The content of the element, typically containing base text, rt (ruby text) and optional rp (ruby parentheses) elements
     public init(
         
     ) {

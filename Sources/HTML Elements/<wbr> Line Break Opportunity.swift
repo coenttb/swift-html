@@ -59,12 +59,7 @@ public struct LineBreakOpportunity: Element {
     /// The HTML tag name
     public static var tag: String { "wbr" }
     
-    /// The element's content (though WBR is typically a void element)
-    public let content: () -> HTML
-    
     /// Creates a new LineBreakOpportunity element.
-    ///
-    /// - Parameter content: The content of the element (typically empty as WBR is a void element)
     public init(
         
     ) {

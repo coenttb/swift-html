@@ -49,12 +49,7 @@ public struct DescriptionList: Element {
     /// The HTML tag name
     public static var tag: String { "dl" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Description List element.
-    ///
-    /// - Parameter content: The content of the description list, typically consisting of `<dt>` and `<dd>` elements
     public init(
         
     ) {

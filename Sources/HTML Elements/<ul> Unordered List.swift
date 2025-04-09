@@ -68,12 +68,7 @@ public struct UnorderedList: Element {
     /// The HTML tag name
     public static var tag: String { "ul" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new UnorderedList element.
-    ///
-    /// - Parameter content: The content of the list, typically a collection of list items (`<li>`)
     public init(
         
     ) {

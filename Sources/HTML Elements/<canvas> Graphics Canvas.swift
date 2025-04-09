@@ -58,23 +58,17 @@ public struct Canvas: Element {
     /// The height of the canvas in CSS pixels (defaults to 150 if not specified)
     public var height: HTML_Attributes.Height?
     
-    /// The fallback content for browsers that don't support canvas
-    public let content: () -> HTML
-    
     /// Creates a new Canvas element with the specified dimensions and fallback content.
     ///
     /// - Parameters:
     ///   - width: The width of the canvas in CSS pixels
     ///   - height: The height of the canvas in CSS pixels
-    ///   - content: The fallback content for browsers that don't support canvas
     public init(
         width: HTML_Attributes.Width? = nil,
-        height: HTML_Attributes.Height? = nil,
-        
+        height: HTML_Attributes.Height? = nil
     ) {
         self.width = width
         self.height = height
-        
     }
 }
 

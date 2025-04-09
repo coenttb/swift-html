@@ -43,12 +43,7 @@ public struct Paragraph: Element {
     /// The HTML tag name
     public static var tag: String { "p" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new paragraph element with the specified content.
-    ///
-    /// - Parameter content: The content of the paragraph
     public init(
         
     ) {

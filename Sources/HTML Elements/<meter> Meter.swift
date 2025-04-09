@@ -62,9 +62,6 @@ public struct Meter: Element {
     /// The ID of the form element that the meter is associated with
     public var form: HTML_Attributes.Form.ID?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new meter element with the specified attributes.
     ///
     /// - Parameters:
@@ -75,7 +72,6 @@ public struct Meter: Element {
     ///   - high: The lower bound of the high end of the range
     ///   - optimum: The optimal value within the range
     ///   - form: The ID of the form element that the meter is associated with
-    ///   - content: The content of the element
     public init(
         value: Value<Double>,
         min: Min? = nil,
@@ -83,8 +79,7 @@ public struct Meter: Element {
         low: Low? = nil,
         high: High? = nil,
         optimum: Optimum? = nil,
-        form: HTML_Attributes.Form.ID? = nil,
-        
+        form: HTML_Attributes.Form.ID? = nil
     ) {
         self.value = value
         self.min = min

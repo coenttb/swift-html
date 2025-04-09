@@ -40,12 +40,7 @@ public struct Superscript: Element {
     /// The HTML tag name
     public static var tag: String { "sup" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new superscript element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

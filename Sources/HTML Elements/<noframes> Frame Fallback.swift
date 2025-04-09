@@ -37,12 +37,7 @@ public struct FrameFallback: Element {
     /// The HTML tag name
     public static var tag: String { "noframes" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new FrameFallback element with the specified content.
-    ///
-    /// - Parameter content: The content to display in browsers that don't support frames
     public init(
         
     ) {

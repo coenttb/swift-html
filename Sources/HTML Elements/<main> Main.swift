@@ -50,12 +50,7 @@ public struct Main: Element {
     /// The HTML tag name
     public static var tag: String { "main" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Main element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

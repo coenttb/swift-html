@@ -151,7 +151,6 @@ public struct Body: Element {
     /// Creates a new Body element with the specified content and event handlers.
     ///
     /// - Parameters:
-    ///   - content: The content to be contained within the body element
     public init(
         
     ) {

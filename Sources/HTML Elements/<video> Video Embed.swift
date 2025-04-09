@@ -102,9 +102,6 @@ public struct Video: Element {
     /// Disables remote playback capabilities
     public var disableremoteplayback: HTML_Attributes.DisableRemotePlayback?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Video element with the specified attributes.
     ///
     /// - Parameters:
@@ -121,8 +118,7 @@ public struct Video: Element {
     ///   - crossorigin: How to handle cross-origin requests
     ///   - controlslist: Helps the browser select what controls to show when controls are enabled
     ///   - disablepictureinpicture: Prevents the browser from suggesting Picture-in-Picture
-    ///   - disableremoteplayback: Disables remote playback capabilities
-    ///   - content: The content of the element, typically source elements or fallback content
+    ///   - disableremoteplayback: Disables remote playback capabilities, typically source elements or fallback content
     public init(
         src: HTML_Attributes.Src? = nil,
         controls: HTML_Attributes.Controls? = nil,
@@ -137,8 +133,7 @@ public struct Video: Element {
         crossorigin: HTML_Attributes.Crossorigin? = nil,
         controlslist: HTML_Attributes.ControlsList? = nil,
         disablepictureinpicture: HTML_Attributes.DisablePictureInPicture? = nil,
-        disableremoteplayback: HTML_Attributes.DisableRemotePlayback? = nil,
-        
+        disableremoteplayback: HTML_Attributes.DisableRemotePlayback? = nil
     ) {
         self.src = src
         self.controls = controls

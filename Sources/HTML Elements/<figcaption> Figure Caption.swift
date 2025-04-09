@@ -36,12 +36,7 @@ public struct FigureCaption: Element {
     /// The HTML tag name
     public static var tag: String { "figcaption" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new FigureCaption element.
-    ///
-    /// - Parameter content: The content of the figure caption
     public init(
         
     ) {

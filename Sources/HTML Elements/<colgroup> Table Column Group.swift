@@ -66,22 +66,18 @@ public struct TableColumnGroup: Element {
     /// The number of consecutive columns this column group spans
     /// Note: Cannot be used if the column group contains col elements
     public var span: HTML_Attributes.Span?
-    
-    /// The content of the column group, typically col elements
-    public let content: () -> HTML
+
     
     /// Creates a new TableColumnGroup element with an optional span attribute and content.
     ///
     /// - Parameters:
     ///   - span: The number of consecutive columns this column group spans
-    ///   - content: The content of the column group, typically col elements
     ///
     /// - Note: Either use the span attribute OR include col elements as content, not both.
     ///   According to the HTML specification, if the span attribute is present, 
     ///   the colgroup element cannot contain any col elements.
     public init(
-        span: HTML_Attributes.Span? = nil,
-         = { fatalError("Content not provided for TableColumnGroup") }
+        span: HTML_Attributes.Span? = nil
     ) {
         self.span = span
         

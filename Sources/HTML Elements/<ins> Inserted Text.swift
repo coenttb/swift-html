@@ -44,19 +44,14 @@ public struct InsertedText: Element {
     /// Indicates the time and date of the change.
     public var datetime: HTML_Attributes.DateTime?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new InsertedText element with the specified attributes.
     ///
     /// - Parameters:
     ///   - cite: The URI of a resource that explains the change.
-    ///   - datetime: The time and date of the change.
-    ///   - content: The content of the element.
+    ///   - datetime: The time and date of the change..
     public init(
         cite: HTML_Attributes.Cite? = nil,
-        datetime: HTML_Attributes.DateTime? = nil,
-        
+        datetime: HTML_Attributes.DateTime? = nil
     ) {
         self.cite = cite
         self.datetime = datetime

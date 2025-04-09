@@ -52,16 +52,8 @@ import HTML_Attributes
 public struct Title: Element {
     /// The HTML tag name
     public static var tag: String { "title" }
-    
-    /// The text content of the title element.
-    ///
-    /// This should be a descriptive phrase that clearly communicates the purpose of the page.
-    /// Only text content is permitted; any HTML tags will be ignored by browsers.
-    public let content: () -> HTML
-    
+
     /// Creates a new Title element with the specified text content.
-    ///
-    /// - Parameter content: The text content of the title element
     public init(
         
     ) {

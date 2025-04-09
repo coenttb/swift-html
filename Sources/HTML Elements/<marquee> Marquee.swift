@@ -73,9 +73,6 @@ public struct Marquee: Element {
     /// Sets the width in pixels or percentage value.
     public var width: HTML_Attributes.Width?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Marquee element with the specified attributes.
     ///
     /// - Parameters:
@@ -90,7 +87,6 @@ public struct Marquee: Element {
     ///   - truespeed: Allow scrolldelay values lower than 60ms
     ///   - vspace: Vertical margin
     ///   - width: Width in pixels or percentage
-    ///   - content: The content of the element
     public init(
         behavior: HTML_Attributes.Behavior? = nil,
         bgcolor: String? = nil,
@@ -102,8 +98,7 @@ public struct Marquee: Element {
         scrolldelay: String? = nil,
         truespeed: HTML_Attributes.Truespeed? = nil,
         vspace: String? = nil,
-        width: HTML_Attributes.Width? = nil,
-        
+        width: HTML_Attributes.Width? = nil
     ) {
         self.behavior = behavior
         self.bgcolor = bgcolor

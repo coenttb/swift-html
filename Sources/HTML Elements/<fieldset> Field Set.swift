@@ -53,26 +53,20 @@ public struct FieldSet: Element {
     /// The name associated with the fieldset group
     public var name: HTML_Attributes.Name?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new FieldSet element with the specified attributes.
     ///
     /// - Parameters:
     ///   - disabled: If set, all form controls that are descendants of the fieldset will be disabled
     ///   - form: Associates the fieldset with a form element using the form's ID
     ///   - name: The name associated with the fieldset group
-    ///   - content: The content of the fieldset, typically including a legend element followed by form controls
     public init(
         disabled: HTML_Attributes.Disabled? = nil,
         form: HTML_Attributes.Form? = nil,
-        name: HTML_Attributes.Name? = nil,
-        
+        name: HTML_Attributes.Name? = nil
     ) {
         self.disabled = disabled
         self.form = form
         self.name = name
-        
     }
 }
 

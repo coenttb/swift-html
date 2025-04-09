@@ -39,17 +39,12 @@ public struct InlineQuotation: Element {
     /// This attribute is intended to point to information explaining the context or the reference for the quote
     public var cite: HTML_Attributes.Cite?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new InlineQuotation element with the specified attributes.
     ///
     /// - Parameters:
     ///   - cite: The URL that designates a source document or message for the information quoted
-    ///   - content: The content of the element
     public init(
-        cite: HTML_Attributes.Cite? = nil,
-        
+        cite: HTML_Attributes.Cite? = nil
     ) {
         self.cite = cite
         

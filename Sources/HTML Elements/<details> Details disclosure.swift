@@ -67,19 +67,14 @@ public struct Details: Element {
     /// When multiple details elements have the same name value, only one can be open at a time.
     public var name: Name?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Details element with the specified attributes.
     ///
     /// - Parameters:
     ///   - open: When present, indicates that the details should be visible
     ///   - name: Group name for connected details elements (accordion behavior)
-    ///   - content: The content of the element, which should include a `<summary>` element
     public init(
         open: Open? = nil,
-        name: Name? = nil,
-        
+        name: Name? = nil
     ) {
         self.open = open
         self.name = name

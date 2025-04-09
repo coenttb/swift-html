@@ -50,21 +50,16 @@ public struct ContentTemplate: Element {
     /// When true, focus is delegated to the first focusable element in the shadow tree
     public var shadowrootdelegatesfocus: HTML_Attributes.ShadowRootDelegatesFocus?
     
-    /// The element's content, not rendered by default
-    public let content: () -> HTML
-    
     /// Creates a new ContentTemplate element with the specified attributes.
     ///
     /// - Parameters:
     ///   - shadowrootmode: Specifies "open" or "closed" mode for declarative shadow DOM
     ///   - shadowrootclonable: Whether shadow roots are cloned with their hosts
     ///   - shadowrootdelegatesfocus: Whether focus should be delegated in the shadow tree
-    ///   - content: The HTML content to be stored in the template
     public init(
         shadowrootmode: HTML_Attributes.ShadowRootMode? = nil,
         shadowrootclonable: HTML_Attributes.ShadowRootClonable? = nil,
-        shadowrootdelegatesfocus: HTML_Attributes.ShadowRootDelegatesFocus? = nil,
-        
+        shadowrootdelegatesfocus: HTML_Attributes.ShadowRootDelegatesFocus? = nil
     ) {
         self.shadowrootmode = shadowrootmode
         self.shadowrootclonable = shadowrootclonable

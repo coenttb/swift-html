@@ -59,9 +59,6 @@ public struct Option: Element {
     /// If omitted, the value is taken from the text content of the option element.
     public var value: Value<String>
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Option element with the specified attributes.
     ///
     /// - Parameters:
@@ -69,19 +66,16 @@ public struct Option: Element {
     ///   - label: Text label for the option
     ///   - selected: If set, this option is initially selected
     ///   - value: The value to be submitted if this option is selected
-    ///   - content: The text content of the option
     public init(
         disabled: Disabled? = nil,
         label: String? = nil,
         selected: Selected? = nil,
-        value: Value<String>,
-        
+        value: Value<String>
     ) {
         self.disabled = disabled
         self.label = label
         self.selected = selected
         self.value = value
-        
     }
 }
 

@@ -58,17 +58,12 @@ public struct Label: Element {
     /// can have multiple associated labels.
     public var `for`: For?
     
-    /// The content of the label, which can include both text and nested controls.
-    public var content: () -> HTML
-    
     /// Creates a new Label element with optional explicit association.
     ///
     /// - Parameters:
     ///   - htmlFor: ID of the form control this label is associated with (optional)
-    ///   - content: The content of the label
     public init(
-        for: For? = nil,
-        
+        for: For? = nil
     ) {
         self.for = `for`
         

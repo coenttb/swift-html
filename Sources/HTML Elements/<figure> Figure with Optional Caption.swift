@@ -44,13 +44,7 @@ public struct Figure: Element {
     /// The HTML tag name
     public static var tag: String { "figure" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Figure element with the specified content.
-    ///
-    /// - Parameter content: The content of the figure, which may include images, code,
-    ///   text, and an optional figcaption element
     public init(
         
     ) {

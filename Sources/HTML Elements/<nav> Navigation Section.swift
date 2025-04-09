@@ -38,12 +38,7 @@ public struct NavigationSection: Element {
     /// The HTML tag name
     public static var tag: String { "nav" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new NavigationSection element.
-    ///
-    /// - Parameter content: The content of the navigation section
     public init(
         
     ) {

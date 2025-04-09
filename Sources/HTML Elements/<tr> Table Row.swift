@@ -49,12 +49,7 @@ public struct TableRow: Element {
     /// The HTML tag name
     public static var tag: String { "tr" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new TableRow element.
-    ///
-    /// - Parameter content: The content of the element, typically a sequence of `<td>` and/or `<th>` elements
     public init(
         
     ) {

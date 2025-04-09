@@ -36,12 +36,7 @@ public struct Legend: Element {
     /// The HTML tag name
     public static var tag: String { "legend" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Legend element.
-    ///
-    /// - Parameter content: The content of the legend element
     public init(
         
     ) {

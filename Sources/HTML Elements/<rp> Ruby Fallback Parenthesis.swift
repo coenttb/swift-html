@@ -42,13 +42,9 @@ public struct RubyParenthesis: Element {
     /// The HTML tag name
     public static var tag: String { "rp" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new RubyParenthesis element with the specified attributes.
     ///
-    /// - Parameters:
-    ///   - content: The content of the element, typically "(" or ")" for fallback display
+    /// - Parameters:, typically "(" or ")" for fallback display
     public init(
         
     ) {

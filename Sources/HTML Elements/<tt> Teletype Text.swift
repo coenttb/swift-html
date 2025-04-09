@@ -38,12 +38,7 @@ public struct TeletypeText: Element {
     /// The HTML tag name
     public static var tag: String { "tt" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new TeletypeText element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

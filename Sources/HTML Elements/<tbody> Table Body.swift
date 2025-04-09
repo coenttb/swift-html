@@ -57,13 +57,7 @@ public struct TableBody: Element {
     /// The HTML tag name
     public static var tag: String { "tbody" }
     
-    /// The element's content, typically one or more `<tr>` elements containing table data
-    public let content: () -> HTML
-    
     /// Creates a new TableBody element.
-    ///
-    /// - Parameter content: The content of the element, typically one or more `<tr>` elements
-    ///                      containing the main data for the table
     public init(
         
     ) {

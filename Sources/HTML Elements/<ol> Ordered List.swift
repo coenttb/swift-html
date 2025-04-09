@@ -46,21 +46,16 @@ public struct OrderedList: Element {
     /// Specifies the numbering type (1, a, A, i, I)
     public var type: HTML_Attributes.ListType?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new OrderedList element with the specified attributes.
     ///
     /// - Parameters:
     ///   - reversed: Boolean attribute that reverses the order of items
     ///   - start: The starting number for the list
-    ///   - type: The numbering type to use
-    ///   - content: The content of the element (list items)
+    ///   - type: The numbering type to use (list items)
     public init(
         reversed: HTML_Attributes.Reversed? = nil,
         start: HTML_Attributes.Start? = nil,
-        type: HTML_Attributes.ListType? = nil,
-        
+        type: HTML_Attributes.ListType? = nil
     ) {
         self.reversed = reversed
         self.start = start

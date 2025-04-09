@@ -57,17 +57,12 @@ public struct Dialog: Element {
     /// rather than this attribute to display dialogs.
     public var open: Open?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Dialog element with the specified attributes.
     ///
     /// - Parameters:
     ///   - open: Indicates if the dialog is initially open
-    ///   - content: The content of the dialog
     public init(
-        open: Open? = nil,
-        
+        open: Open? = nil
     ) {
         self.open = open
         

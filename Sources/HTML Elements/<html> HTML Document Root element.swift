@@ -41,17 +41,12 @@ public struct HtmlRoot: Element {
     /// The XML namespace of the document (required for XHTML)
     public var xmlns: Xmlns?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new HTML root element with the specified attributes.
     ///
     /// - Parameters:
-    ///   - xmlns: The XML namespace (required for XHTML, optional for HTML)
-    ///   - content: The content of the element, typically head and body elements
+    ///   - xmlns: The XML namespace (required for XHTML, optional for HTML), typically head and body elements
     public init(
-        xmlns: String? = nil,
-        
+        xmlns: String? = nil
     ) {
         self.xmlns = xmlns
         

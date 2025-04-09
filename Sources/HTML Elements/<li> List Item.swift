@@ -56,17 +56,12 @@ public struct ListItem: Element {
     /// parent `<ol>` element. List items that follow this one continue numbering from this value.
     public var value: Int?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new list item element with the specified value.
     ///
     /// - Parameters:
     ///   - value: The ordinal value of the list item (only meaningful within `<ol>` elements)
-    ///   - content: The content of the list item
     public init(
-        value: Int? = nil,
-        
+        value: Int? = nil
     ) {
         self.value = value
         

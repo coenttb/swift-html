@@ -61,9 +61,6 @@ public struct Select: Element {
     /// Automatically focuses the select when the page loads
     public var autofocus: HTML_Attributes.Autofocus?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Select element with the specified attributes.
     ///
     /// - Parameters:
@@ -73,8 +70,7 @@ public struct Select: Element {
     ///   - size: The number of visible options
     ///   - disabled: Whether the select should be disabled
     ///   - form: A form to which the select belongs
-    ///   - autofocus: Whether the select should be focused when the page loads
-    ///   - content: The content of the element (typically option elements)
+    ///   - autofocus: Whether the select should be focused when the page loads (typically option elements)
     public init(
         multiple: HTML_Attributes.Multiple? = nil,
         name: HTML_Attributes.Name? = nil,
@@ -82,8 +78,7 @@ public struct Select: Element {
         size: HTML_Attributes.Size? = nil,
         disabled: HTML_Attributes.Disabled? = nil,
         form: HTML_Attributes.Form? = nil,
-        autofocus: HTML_Attributes.Autofocus? = nil,
-        
+        autofocus: HTML_Attributes.Autofocus? = nil
     ) {
         self.multiple = multiple
         self.name = name
@@ -92,7 +87,6 @@ public struct Select: Element {
         self.disabled = disabled
         self.form = form
         self.autofocus = autofocus
-        
     }
 }
 

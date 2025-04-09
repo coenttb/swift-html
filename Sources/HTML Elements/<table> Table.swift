@@ -65,13 +65,7 @@ public struct Table: Element {
     /// The HTML tag name
     public static var tag: String { "table" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Table element.
-    ///
-    /// - Parameter content: The content of the element, typically including `<caption>`, 
-    ///                      `<thead>`, `<tbody>`, `<tfoot>`, and `<tr>` elements
     public init(
         
     ) {

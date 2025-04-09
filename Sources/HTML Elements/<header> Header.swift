@@ -42,12 +42,7 @@ public struct Header: Element {
     /// The HTML tag name
     public static var tag: String { "header" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Header element.
-    ///
-    /// - Parameter content: The content of the header element
     public init(
         
     ) {

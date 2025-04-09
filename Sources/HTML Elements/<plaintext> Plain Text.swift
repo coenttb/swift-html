@@ -43,12 +43,7 @@ public struct PlainText: Element {
     /// The HTML tag name
     public static var tag: String { "plaintext" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new plaintext element.
-    ///
-    /// - Parameter content: The content to be displayed as plain text
     @available(*, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead.")
     public init(
         

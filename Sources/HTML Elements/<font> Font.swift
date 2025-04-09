@@ -42,21 +42,16 @@ public struct Font: Element {
     /// The font size
     public var size: HTML_Attributes.FontSize?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Font element with the specified attributes.
     ///
     /// - Parameters:
     ///   - color: The color of the text
     ///   - face: The font face to use
     ///   - size: The font size
-    ///   - content: The content of the element
     public init(
         color: HTML_Attributes.Color? = nil,
         face: HTML_Attributes.Face? = nil,
-        size: HTML_Attributes.FontSize? = nil,
-        
+        size: HTML_Attributes.FontSize? = nil
     ) {
         self.color = color
         self.face = face

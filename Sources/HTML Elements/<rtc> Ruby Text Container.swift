@@ -47,16 +47,8 @@ import HTML_Attributes
 public struct RubyTextContainer: Element {
     /// The HTML tag name
     public static var tag: String { "rtc" }
-
-    /// The element's content
-    public let content: () -> HTML
     
     /// Creates a new RubyTextContainer element with the specified attributes.
-    ///
-    /// - Parameters:
-    ///   - id: The unique identifier for this element
-    ///   - class: The CSS classes for this element
-    ///   - content: The content of the element, typically containing `<rt>` elements
     public init(
         
     ) {

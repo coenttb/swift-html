@@ -65,13 +65,7 @@ public struct TableFoot: Element {
     /// The HTML tag name
     public static var tag: String { "tfoot" }
     
-    /// The element's content, typically one or more `<tr>` elements containing summary information
-    public let content: () -> HTML
-    
     /// Creates a new TableFoot element.
-    ///
-    /// - Parameter content: The content of the element, typically one or more `<tr>` elements
-    ///                      containing summary data or totals for the table columns
     public init(
         
     ) {

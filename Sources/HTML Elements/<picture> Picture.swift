@@ -43,12 +43,7 @@ public struct Picture: Element {
     /// The HTML tag name
     public static var tag: String { "picture" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Picture element.
-    ///
-    /// - Parameter content: The content of the element, which should typically contain `<source>` elements followed by an `<img>` element.
     public init(
         
     ) {

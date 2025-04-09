@@ -40,13 +40,7 @@ public struct HeadingGroup: Element {
     /// The HTML tag name
     public static var tag: String { "hgroup" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new HeadingGroup element.
-    ///
-    /// - Parameter content: The content of the element, typically one heading element
-    ///   (`<h1>` through `<h6>`) and one or more paragraph (`<p>`) elements
     public init(
         
     ) {

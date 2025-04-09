@@ -98,9 +98,6 @@ public struct Script: Element {
     /// For registration with the Attribution Reporting API
     public var attributionsrc: HTML_Attributes.AttributionSrc?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Script element with the specified attributes.
     ///
     /// - Parameters:
@@ -116,7 +113,6 @@ public struct Script: Element {
     ///   - crossorigin: Indicates how the element handles crossorigin requests
     ///   - nonce: A cryptographic nonce for Content-Security-Policy
     ///   - attributionsrc: For registration with the Attribution Reporting API
-    ///   - content: The content of the script element (inline script code or data)
     public init(
         src: HTML_Attributes.Src? = nil,
         async: HTML_Attributes.Async? = nil,
@@ -129,8 +125,7 @@ public struct Script: Element {
         blocking: HTML_Attributes.Blocking? = nil,
         crossorigin: HTML_Attributes.Crossorigin? = nil,
         nonce: HTML_Attributes.Nonce? = nil,
-        attributionsrc: HTML_Attributes.AttributionSrc? = nil,
-        
+        attributionsrc: HTML_Attributes.AttributionSrc? = nil
     ) {
         self.src = src
         self.async = async

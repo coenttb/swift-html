@@ -47,12 +47,7 @@ public struct PreformattedText: Element {
     /// The HTML tag name
     public static var tag: String { "pre" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new PreformattedText element.
-    ///
-    /// - Parameter content: The content of the element, displayed with preserved whitespace and formatting
     public init(
         
     ) {

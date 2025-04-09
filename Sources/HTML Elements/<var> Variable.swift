@@ -69,12 +69,7 @@ public struct Variable: Element {
     /// The HTML tag name
     public static var tag: String { "var" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Variable element.
-    ///
-    /// - Parameter content: The content of the element, typically the variable name
     public init(
         
     ) {

@@ -46,12 +46,7 @@ public struct KeyboardInput: Element {
     /// The HTML tag name
     public static var tag: String { "kbd" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new keyboard input element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

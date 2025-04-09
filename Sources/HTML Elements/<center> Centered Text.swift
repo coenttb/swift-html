@@ -47,12 +47,7 @@ public struct Center: Element {
     /// The HTML tag name
     public static var tag: String { "center" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Center element.
-    ///
-    /// - Parameter content: The content to be centered
     public init(
         
     ) {

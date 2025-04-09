@@ -50,19 +50,14 @@ public struct OptionGroup: Element {
     /// the options in the user interface. This attribute is mandatory if this element is used.
     public var label: String?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new OptionGroup element with the specified attributes.
     ///
     /// - Parameters:
     ///   - disabled: If set, none of the items in this option group will be selectable
-    ///   - label: The name of the group of options (mandatory)
-    ///   - content: The content of the element (typically `<option>` elements)
+    ///   - label: The name of the group of options (mandatory) (typically `<option>` elements)
     public init(
         disabled: Disabled? = nil,
-        label: String? = nil,
-        
+        label: String? = nil
     ) {
         self.disabled = disabled
         self.label = label

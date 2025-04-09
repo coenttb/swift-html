@@ -49,23 +49,17 @@ public struct Del: Element {
     /// The time and date of the change as a valid date string with an optional time.
     public var datetime: HTML_Attributes.DateTime?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Del element to mark deleted text.
     ///
     /// - Parameters:
     ///   - cite: A URI for a resource that explains the change
     ///   - datetime: The time and date of the change
-    ///   - content: The content to be marked as deleted
     public init(
         cite: HTML_Attributes.Cite? = nil,
-        datetime: HTML_Attributes.DateTime? = nil,
-        
+        datetime: HTML_Attributes.DateTime? = nil
     ) {
         self.cite = cite
         self.datetime = datetime
-        
     }
 }
 

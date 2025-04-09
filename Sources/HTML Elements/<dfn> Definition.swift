@@ -56,17 +56,12 @@ public struct Definition: Element {
     /// If present, its value is considered to be the term being defined.
     public var title: HTML_Attributes.Title?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Definition element with the specified content.
     ///
     /// - Parameters:
     ///   - title: If present, its value is considered to be the term being defined
-    ///   - content: The content of the element
     public init(
-        title: HTML_Attributes.Title? = nil,
-        
+        title: HTML_Attributes.Title? = nil
     ) {
         self.title = title
         

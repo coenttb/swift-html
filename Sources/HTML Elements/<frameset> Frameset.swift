@@ -41,19 +41,14 @@ public struct Frameset: Element {
     /// Specifies the number and size of vertical spaces in a frameset
     public var rows: String?
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Frameset element with the specified attributes.
     ///
     /// - Parameters:
     ///   - cols: Specifies the number and size of horizontal spaces in a frameset
-    ///   - rows: Specifies the number and size of vertical spaces in a frameset
-    ///   - content: The content of the element (typically `<frame>` elements)
+    ///   - rows: Specifies the number and size of vertical spaces in a frameset (typically `<frame>` elements)
     public init(
         cols: String? = nil,
-        rows: String? = nil,
-        
+        rows: String? = nil
     ) {
         self.cols = cols
         self.rows = rows

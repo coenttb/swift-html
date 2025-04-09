@@ -37,13 +37,8 @@ import HTML_Attributes
 public struct DescriptionDetails: Element {
     /// The HTML tag name
     public static var tag: String { "dd" }
-
-    /// The element's content
-    public let content: () -> HTML
     
     /// Creates a new DescriptionDetails element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {

@@ -35,12 +35,7 @@ public struct NoBr: Element {
     /// The HTML tag name
     public static var tag: String { "nobr" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new NoBr element with the specified content.
-    ///
-    /// - Parameter content: The content of the element
     @available(*, deprecated, message: "Although this element is widely supported, it was never standard HTML. Use CSS property `white-space: nowrap` instead.")
     public init(
         

@@ -40,12 +40,7 @@ public struct Emphasis: Element {
     /// The HTML tag name
     public static var tag: String { "em" }
     
-    /// The element's content
-    public let content: () -> HTML
-    
     /// Creates a new Emphasis element.
-    ///
-    /// - Parameter content: The content of the element
     public init(
         
     ) {
