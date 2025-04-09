@@ -120,8 +120,7 @@ public struct Button: Element {
         formnovalidate: HTML_Attributes.FormNovalidate? = nil,
         formtarget: HTML_Attributes.Target? = nil,
         popovertarget: HTML_Attributes.PopoverTarget? = nil,
-        popovertargetaction: HTML_Attributes.PopoverTargetAction? = nil,
-        
+        popovertargetaction: HTML_Attributes.PopoverTargetAction? = nil
     ) {
         self.type = type
         self.disabled = disabled
