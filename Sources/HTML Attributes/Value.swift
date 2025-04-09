@@ -82,8 +82,6 @@ public struct Value<Element: Sendable & Equatable>: Attribute {
     }
 }
 
-
-
 extension Value: ExpressibleByStringLiteral where Element: ExpressibleByStringLiteral {
     public typealias StringLiteralType = Element.StringLiteralType
     
@@ -121,5 +119,11 @@ extension Value: ExpressibleByFloatLiteral where Element: ExpressibleByFloatLite
     
     public init(floatLiteral value: FloatLiteralType) {
         self.value = Element(floatLiteral: value)
+    }
+}
+
+extension Value: CustomStringConvertible where Element: CustomStringConvertible {
+    public var description: String {
+        value.description
     }
 }
