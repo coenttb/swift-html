@@ -7,6 +7,7 @@
 
 import Foundation
 
-package protocol Element {
+public protocol Element {
     static var tag: String { get }
 }
+
