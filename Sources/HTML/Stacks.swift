@@ -55,8 +55,8 @@ public struct VStack<Content: HTML>: HTML {
         .alignItems(alignment)
         .display(.flex)
         .flexDirection(.column)
-//        .maxWidth(.size(.single(100.percent)))
-//        .rowGap(spacing == 0 ? 0 : (spacing ?? 1.rem))
+        .maxWidth(.percentage(100))
+        .rowGap(.length(spacing == .zero ? .zero : (spacing ?? 1.rem)))
     }
 }
 
@@ -107,24 +107,6 @@ public struct LazyVGrid<Content: HTML>: HTML {
                 .inlineStyle("width", "100%")
         ) { html, columns in
             html
-//                .inlineStyle(
-//                    "column-gap",
-////                    horizontalSpacing == 0.px ? "0" : "\(horizontalSpacing ?? 1.rem)",
-//                    "\(horizontalSpacing ?? 1.rem)",
-//                    media: columns.key
-//                )
-//                .inlineStyle("display", "grid", media: columns.key)
-//                .inlineStyle(
-//                    "grid-template-columns",
-//                    columns.value.map { "minmax(0, \($0)fr)" }.joined(separator: " "),
-//                    media: columns.key
-//                )
-//                .inlineStyle(
-//                    "row-gap",
-////                    verticalSpacing == 0.px ? "0" : "\(verticalSpacing ?? 1.rem)",
-//                    "\(verticalSpacing ?? 1.rem)",
-//                    media: columns.key
-//                )
                 .inlineStyle(
                     "column-gap",
                     horizontalSpacing == .zero ? "0" : "\(horizontalSpacing ?? 1.rem)",
