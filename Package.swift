@@ -11,6 +11,11 @@ extension Target.Dependency {
     static var html: Self { .target(name: .html) }
 }
 
+extension Target.Dependency {
+    static var inlineSnapshotTesting: Self { .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing") }
+    static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
+}
+
 let package = Package(
     name: "swift-html",
     platforms: [
@@ -25,6 +30,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree.git", branch: "main"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.18.3"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", branch: "1.9.0"),
     ],
     targets: [
         .target(
@@ -32,6 +39,18 @@ let package = Package(
             dependencies: [
                 .product(name: "HTML+CSS+PointFreeHTML", package: "swift-html-css-pointfree"),
             ]
+        ),
+        .testTarget(
+            name: .html.tests,
+            dependencies: [
+                .html,
+                .inlineSnapshotTesting,
+                .dependenciesTestSupport
+            ]
         )
     ]
 )
+
+extension String {
+    var tests: Self { "\(self) Tests" }
+}
