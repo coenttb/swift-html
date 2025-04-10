@@ -24,15 +24,13 @@ let package = Package(
         .library(name: .html, targets: [.html]),
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/swift-css.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/pointfree-html.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/swift-html-css-pointfree.git", branch: "main"),
     ],
     targets: [
         .target(
             name: .html,
             dependencies: [
-                .product(name: "CSS", package: "swift-css"),
-                .product(name: "PointFreeHTML", package: "pointfree-html"),
+                .product(name: "HTML+CSS+PointFreeHTML", package: "swift-html-css-pointfree"),
             ]
         )
     ]

@@ -6,17 +6,17 @@
 //
 
 import Foundation
-import CSS
+import HTML_CSS_PointFreeHTML
 
-extension Font {
+extension CSSPropertyTypes.Font {
     public enum Property: Sendable {
         case family([String]?)
-        case size(Font.Size?)
-        case weight(Font.Weight?)
-        case style(Font.Style?)
-        case variant(Font.Variant?)
-        case lineHeight(CSS.LineHeight?)
-        case stretch(CSS.Font.Stretch?)
+        case size(CSSPropertyTypes.Font.Size?)
+        case weight(CSSPropertyTypes.Font.Weight?)
+        case style(CSSPropertyTypes.Font.Style?)
+        case variant(CSSPropertyTypes.Font.Variant?)
+        case lineHeight(CSSPropertyTypes.LineHeight?)
+        case stretch(CSSPropertyTypes.Font.Stretch?)
         
         public static func size(_ length: Length) -> Self {
             return .size(.length(length))
