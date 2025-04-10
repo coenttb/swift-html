@@ -20,9 +20,8 @@ struct Tests {
     @Test("Label and input with light- and darkmode color")
     func labelAndInputWithLightAndDarkmodeColor() {
         assertInlineSnapshot(
-            of: label(for: "input") {
-                input(name: "input", type: .text(.init()))
-            }.color(light: .red, dark: .blue),
+            of: label { input.text }
+                .color(light: .red, dark: .blue),
             as: .html
         ) {
             """
@@ -34,7 +33,7 @@ struct Tests {
 
                 </style>
               </head>
-              <body><label class="color-xzFcW" for="test"><input type="text" name="test"></label>
+              <body><label class="color-xzFcW"><input type="text"></label>
               </body>
             </html>
             """
