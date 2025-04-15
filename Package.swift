@@ -14,6 +14,8 @@ extension Target.Dependency {
 extension Target.Dependency {
     static var inlineSnapshotTesting: Self { .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
+    static var htmlTestSupport: Self { .product(name: "HTMLTestSupport", package: "swift-html-css-pointfree") }
+    static var htmlCssPointFreeHTML: Self { .product(name: "HTML+CSS+PointFreeHTML", package: "swift-html-css-pointfree") }
 }
 
 let package = Package(
@@ -37,15 +39,14 @@ let package = Package(
         .target(
             name: .html,
             dependencies: [
-                .product(name: "HTML+CSS+PointFreeHTML", package: "swift-html-css-pointfree"),
+                .htmlCssPointFreeHTML
             ]
         ),
         .testTarget(
             name: .html.tests,
             dependencies: [
                 .html,
-                .inlineSnapshotTesting,
-                .dependenciesTestSupport
+                .htmlTestSupport
             ]
         )
     ]
