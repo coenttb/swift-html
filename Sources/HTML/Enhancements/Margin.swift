@@ -11,7 +11,7 @@ import OrderedCollections
 
 extension HTML {
     @HTMLBuilder
-    public func padding(
+    public func margin(
         vertical: LengthPercentage?,
         horizontal: LengthPercentage?,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
@@ -20,49 +20,49 @@ extension HTML {
     )-> some HTML {
         switch (vertical, horizontal) {
         case let (.some(vertical), .some(horizontal)):
-            self.padding(.verticalHorizontal(vertical, horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
+            self.margin(.verticalHorizontal(vertical, horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
         case let (.none, .some(horizontal)):
             self
-                .paddingRight(.lengthPercentage(horizontal))
-                .paddingLeft(.lengthPercentage(horizontal))
+                .marginRight(.lengthPercentage(horizontal))
+                .marginLeft(.lengthPercentage(horizontal))
         case let (.some(vertical), .none):
             self
-                .paddingTop(.lengthPercentage(vertical))
-                .paddingBottom(.lengthPercentage(vertical))
+                .marginTop(.lengthPercentage(vertical))
+                .marginBottom(.lengthPercentage(vertical))
         case (.none, .none):
             self
         }
     }
 }
 
-extension Padding {
+extension Margin {
     public typealias Variant = Side
 }
 
 extension HTML {
     @HTMLBuilder
-    public func padding(
-        _ padding: Padding.Variant...,
+    public func margin(
+        _ margin: Margin.Variant...,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
     )-> some HTML {
-        self.padding(.init(padding), media: mediaQuery, pre: pre, pseudo: pseudo)
+        self.margin(.init(margin), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
     
     @HTMLBuilder
-    public func padding(
-        _ padding: OrderedSet<Padding.Variant>,
+    public func margin(
+        _ margin: OrderedSet<Margin.Variant>,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
     )-> some HTML {
-        if padding.count == 4 {
+        if margin.count == 4 {
             // Extract values for each side from the ordered set
-            let topValue = padding.first(where: { if case .top = $0 { return true } else { return false } })
-            let rightValue = padding.first(where: { if case .right = $0 { return true } else { return false } })
-            let bottomValue = padding.first(where: { if case .bottom = $0 { return true } else { return false } })
-            let leftValue = padding.first(where: { if case .left = $0 { return true } else { return false } })
+            let topValue = margin.first(where: { if case .top = $0 { return true } else { return false } })
+            let rightValue = margin.first(where: { if case .right = $0 { return true } else { return false } })
+            let bottomValue = margin.first(where: { if case .bottom = $0 { return true } else { return false } })
+            let leftValue = margin.first(where: { if case .left = $0 { return true } else { return false } })
             
             // Convert to LengthPercentage if found
             let top: LengthPercentage? = topValue.flatMap {
@@ -97,8 +97,8 @@ extension HTML {
                 }
             }
             
-            self.padding(
-                CSSPropertyTypes.Padding.sides(
+            self.margin(
+                CSSPropertyTypes.Margin.sides(
                     top: top,
                     right: right,
                     bottom: bottom,
@@ -109,8 +109,8 @@ extension HTML {
                 pseudo: pseudo
             )
         } else {
-            paddingSides(
-                padding: padding,
+            marginSides(
+                margin: margin,
                 media: mediaQuery,
                 pre: pre,
                 pseudo: pseudo
@@ -118,48 +118,48 @@ extension HTML {
         }
     }
     
-    private func paddingSides(
-        padding: OrderedSet<Padding.Variant>,
+    private func marginSides(
+        margin: OrderedSet<Margin.Variant>,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String?,
         pseudo: Pseudo?
     ) -> some HTML {
         self
-            .if(padding.contains(where: { if case .top = $0 { return true } else { return false } })) { element in
+            .if(margin.contains(where: { if case .top = $0 { return true } else { return false } })) { element in
                 HTMLGroup {
-                    let lengthPercentage = padding.first(where: { if case .top = $0 { return true } else { return false } })!
+                    let lengthPercentage = margin.first(where: { if case .top = $0 { return true } else { return false } })!
                     if case .top(let value) = lengthPercentage {
-                        element.inlineStyle("padding-top", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("margin-top", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
                     } else {
                         element
                     }
                 }
             }
-            .if(padding.contains(where: { if case .bottom = $0 { return true } else { return false } })) { element in
+            .if(margin.contains(where: { if case .bottom = $0 { return true } else { return false } })) { element in
                 HTMLGroup {
-                    let lengthPercentage = padding.first(where: { if case .bottom = $0 { return true } else { return false } })!
+                    let lengthPercentage = margin.first(where: { if case .bottom = $0 { return true } else { return false } })!
                     if case .bottom(let value) = lengthPercentage {
-                        element.inlineStyle("padding-bottom", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("margin-bottom", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
                     } else {
                         element
                     }
                 }
             }
-            .if(padding.contains(where: { if case .left = $0 { return true } else { return false } })) { element in
+            .if(margin.contains(where: { if case .left = $0 { return true } else { return false } })) { element in
                 HTMLGroup {
-                    let lengthPercentage = padding.first(where: { if case .left = $0 { return true } else { return false } })!
+                    let lengthPercentage = margin.first(where: { if case .left = $0 { return true } else { return false } })!
                     if case .left(let value) = lengthPercentage {
-                        element.inlineStyle("padding-left", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("margin-left", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
                     } else {
                         element
                     }
                 }
             }
-            .if(padding.contains(where: { if case .right = $0 { return true } else { return false } })) { element in
+            .if(margin.contains(where: { if case .right = $0 { return true } else { return false } })) { element in
                 HTMLGroup {
-                    let lengthPercentage = padding.first(where: { if case .right = $0 { return true } else { return false } })!
+                    let lengthPercentage = margin.first(where: { if case .right = $0 { return true } else { return false } })!
                     if case .right(let value) = lengthPercentage {
-                        element.inlineStyle("padding-right", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("margin-right", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
                     } else {
                         element
                     }
