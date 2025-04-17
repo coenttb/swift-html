@@ -25,7 +25,7 @@ struct Tests {
             as: .html
         ) {
             """
-            <label class="color-TkQYe2"><input type="text"></label>
+            <label class="color-0EFBf4 color-ILzRW1"><input type="text"></label>
             """
         }
     }
