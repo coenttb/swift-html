@@ -65,35 +65,35 @@ extension HTML {
             let leftValue = margin.first(where: { if case .left = $0 { return true } else { return false } })
             
             // Convert to LengthPercentage if found
-            let top: LengthPercentage? = topValue.flatMap {
-                if case .top(let lp) = $0 { 
-                    return lp
+            let top = topValue.flatMap {
+                if case .top(let lp) = $0 {
+                    return MarginTop.lengthPercentage(lp)
                 } else {
-                    return nil 
+                    return nil
                 }
             }
             
-            let right: LengthPercentage? = rightValue.flatMap {
-                if case .right(let lp) = $0 { 
-                    return lp
+            let right = rightValue.flatMap {
+                if case .right(let lp) = $0 {
+                    return MarginRight.lengthPercentage(lp)
                 } else {
-                    return nil 
+                    return nil
                 }
             }
             
-            let bottom: LengthPercentage? = bottomValue.flatMap {
-                if case .bottom(let lp) = $0 { 
-                    return lp
+            let bottom = bottomValue.flatMap {
+                if case .bottom(let lp) = $0 {
+                    return MarginBottom.lengthPercentage(lp)
                 } else {
-                    return nil 
+                    return nil
                 }
             }
             
-            let left: LengthPercentage? = leftValue.flatMap {
-                if case .left(let lp) = $0 { 
-                    return lp
+            let left = leftValue.flatMap {
+                if case .left(let lp) = $0 {
+                    return MarginLeft.lengthPercentage(lp)
                 } else {
-                    return nil 
+                    return nil
                 }
             }
             
@@ -182,7 +182,7 @@ extension HTML {
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch (top, right, bottom, left) {
-        // All four values provided
+            // All four values provided
         case let (.some(top), .some(right), .some(bottom), .some(left)):
             // Check for optimization opportunities
             if top == right && right == bottom && bottom == left {
@@ -202,16 +202,20 @@ extension HTML {
                     pseudo: pseudo
                 )
             } else {
-                // All different: margin: top right bottom left
                 self.margin(
-                    .sides(top, right, bottom, left),
+                    .sides(
+                        top: .lengthPercentage(top),
+                        right: .lengthPercentage(right),
+                        bottom: .lengthPercentage(bottom),
+                        left: .lengthPercentage(left)
+                    ),
                     media: media,
                     pre: pre,
                     pseudo: pseudo
                 )
             }
-        
-        // Three values provided
+            
+            // Three values provided
         case let (.some(top), .some(right), .some(bottom), .none):
             self
                 .marginTop(.lengthPercentage(top))
@@ -232,8 +236,8 @@ extension HTML {
                 .marginRight(.lengthPercentage(right))
                 .marginBottom(.lengthPercentage(bottom))
                 .marginLeft(.lengthPercentage(left))
-        
-        // Two values provided
+            
+            // Two values provided
         case let (.some(top), .some(right), .none, .none):
             self
                 .marginTop(.lengthPercentage(top))
@@ -268,8 +272,8 @@ extension HTML {
             self
                 .marginBottom(.lengthPercentage(bottom))
                 .marginLeft(.lengthPercentage(left))
-        
-        // Single value provided
+            
+            // Single value provided
         case let (.some(top), .none, .none, .none):
             self.marginTop(.lengthPercentage(top))
         case let (.none, .some(right), .none, .none):
@@ -278,8 +282,8 @@ extension HTML {
             self.marginBottom(.lengthPercentage(bottom))
         case let (.none, .none, .none, .some(left)):
             self.marginLeft(.lengthPercentage(left))
-        
-        // No values provided - do nothing, return self unchanged
+            
+            // No values provided - do nothing, return self unchanged
         case (.none, .none, .none, .none):
             self
         }
