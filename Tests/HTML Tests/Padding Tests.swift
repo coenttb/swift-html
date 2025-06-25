@@ -148,4 +148,41 @@ struct PaddingTests {
             """
         }
     }
+    
+    @Test("Padding with optional inputs")
+    func paddingWithOptionalInputs() {
+        assertInlineSnapshot(
+            of: HTMLDocument {
+                div(){ HTMLEmpty() }
+                    .padding(
+                        top: .px(10),
+                        bottom: .px(10),
+                        left: .px(10),
+                        right: nil,
+                        media: nil,
+                        pre: nil,
+                        pseudo: nil
+                    )
+            },
+            as: .html
+        ) {
+            """
+            <!doctype html>
+            <html lang="en">
+              <head>
+                <style>
+            .padding-left-Fqw6a1{padding-left:10px}
+            .padding-bottom-Fqw6a1{padding-bottom:10px}
+            .padding-top-Fqw6a1{padding-top:10px}
+
+                </style>
+              </head>
+              <body>
+            <div class="padding-left-Fqw6a1 padding-bottom-Fqw6a1 padding-top-Fqw6a1">
+            </div>
+              </body>
+            </html>
+            """
+        }
+    }
 }

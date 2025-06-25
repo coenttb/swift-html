@@ -167,3 +167,54 @@ extension HTML {
             }
     }
 }
+
+
+extension HTML {
+    @discardableResult
+    @HTMLBuilder
+    public func padding(
+        top: LengthPercentage,
+        horizontal: LengthPercentage,
+        bottom: LengthPercentage,
+        media: CSSAtRuleTypes.Media? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self.padding(.top(top), .bottom(bottom), .left(horizontal), .right(horizontal))
+    }
+}
+
+extension HTML {
+    @discardableResult
+    @HTMLBuilder
+    public func padding(
+        top: LengthPercentage? = nil,
+        bottom: LengthPercentage? = nil,
+        left: LengthPercentage? = nil,
+        right: LengthPercentage? = nil,
+        media: CSSAtRuleTypes.Media? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        
+        var x: OrderedSet<Padding.Variant> = []
+        
+        if let top {
+            let _ = x.insert(.top(top), at: x.count)
+        }
+        
+        if let bottom {
+            let _ = x.insert(.bottom(bottom), at: x.count)
+        }
+        
+        if let left {
+            let _ = x.insert(.left(left), at: x.count)
+        }
+        
+        if let right {
+            let _ = x.insert(.right(right), at: x.count)
+        }
+        
+        self.padding(x)
+    }
+}

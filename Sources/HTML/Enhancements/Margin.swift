@@ -167,3 +167,121 @@ extension HTML {
             }
     }
 }
+
+
+extension HTML {
+    @discardableResult
+    @HTMLBuilder
+    public func margin(
+        top: LengthPercentage? = nil,
+        right: LengthPercentage? = nil,
+        bottom: LengthPercentage? = nil,
+        left: LengthPercentage? = nil,
+        media: CSSAtRuleTypes.Media? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        switch (top, right, bottom, left) {
+        // All four values provided
+        case let (.some(top), .some(right), .some(bottom), .some(left)):
+            // Check for optimization opportunities
+            if top == right && right == bottom && bottom == left {
+                // All equal: margin: x
+                self.margin(
+                    .all(top),
+                    media: media,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+            } else if top == bottom && left == right {
+                // Vertical and horizontal: margin: top/bottom left/right
+                self.margin(
+                    .verticalHorizontal(top, left),
+                    media: media,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+            } else {
+                // All different: margin: top right bottom left
+                self.margin(
+                    .sides(top, right, bottom, left),
+                    media: media,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+            }
+        
+        // Three values provided
+        case let (.some(top), .some(right), .some(bottom), .none):
+            self
+                .marginTop(.lengthPercentage(top))
+                .marginRight(.lengthPercentage(right))
+                .marginBottom(.lengthPercentage(bottom))
+        case let (.some(top), .some(right), .none, .some(left)):
+            self
+                .marginTop(.lengthPercentage(top))
+                .marginRight(.lengthPercentage(right))
+                .marginLeft(.lengthPercentage(left))
+        case let (.some(top), .none, .some(bottom), .some(left)):
+            self
+                .marginTop(.lengthPercentage(top))
+                .marginBottom(.lengthPercentage(bottom))
+                .marginLeft(.lengthPercentage(left))
+        case let (.none, .some(right), .some(bottom), .some(left)):
+            self
+                .marginRight(.lengthPercentage(right))
+                .marginBottom(.lengthPercentage(bottom))
+                .marginLeft(.lengthPercentage(left))
+        
+        // Two values provided
+        case let (.some(top), .some(right), .none, .none):
+            self
+                .marginTop(.lengthPercentage(top))
+                .marginRight(.lengthPercentage(right))
+        case let (.some(top), .none, .some(bottom), .none):
+            self
+                .marginTop(.lengthPercentage(top))
+                .marginBottom(.lengthPercentage(bottom))
+        case let (.some(top), .none, .none, .some(left)):
+            self
+                .marginTop(.lengthPercentage(top))
+                .marginLeft(.lengthPercentage(left))
+        case let (.none, .some(right), .some(bottom), .none):
+            self
+                .marginRight(.lengthPercentage(right))
+                .marginBottom(.lengthPercentage(bottom))
+        case let (.none, .some(right), .none, .some(left)):
+            // Check if both are equal for optimization
+            if right == left {
+                self.margin(
+                    .verticalHorizontal(.zero, right),
+                    media: media,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+            } else {
+                self
+                    .marginRight(.lengthPercentage(right))
+                    .marginLeft(.lengthPercentage(left))
+            }
+        case let (.none, .none, .some(bottom), .some(left)):
+            self
+                .marginBottom(.lengthPercentage(bottom))
+                .marginLeft(.lengthPercentage(left))
+        
+        // Single value provided
+        case let (.some(top), .none, .none, .none):
+            self.marginTop(.lengthPercentage(top))
+        case let (.none, .some(right), .none, .none):
+            self.marginRight(.lengthPercentage(right))
+        case let (.none, .none, .some(bottom), .none):
+            self.marginBottom(.lengthPercentage(bottom))
+        case let (.none, .none, .none, .some(left)):
+            self.marginLeft(.lengthPercentage(left))
+        
+        // No values provided - do nothing, return self unchanged
+        case (.none, .none, .none, .none):
+            self
+        }
+    }
+}
