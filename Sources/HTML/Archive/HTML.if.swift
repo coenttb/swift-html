@@ -12,7 +12,7 @@ import PointFreeHTML
 extension HTML {
     @discardableResult
     @HTMLBuilder
-    func `if`<T: HTML>(
+    public func `if`<T: HTML>(
         _ condition: Bool,
         then modification: (Self) -> T
     ) -> some HTML {
