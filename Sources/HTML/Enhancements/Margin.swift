@@ -12,8 +12,8 @@ import OrderedCollections
 extension HTML {
     @HTMLBuilder
     public func margin(
-        vertical: LengthPercentage?,
-        horizontal: LengthPercentage?,
+        vertical: LengthPercentage? = nil,
+        horizontal: LengthPercentage? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
