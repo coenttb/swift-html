@@ -109,10 +109,10 @@ struct MarginTests {
             of: HTMLDocument {
                 div(){ HTMLEmpty() }
                     .margin(
-                        .top(.px(10)),
-                        .right(.px(20)),
-                        .bottom(.px(15)),
-                        .left(.px(25))
+                        top: .px(10),
+                        right: .px(20),
+                        bottom: .px(15),
+                        left: .px(25)
                     )
             }
             ,
@@ -142,10 +142,8 @@ struct MarginTests {
             of: HTMLDocument {
                 div(){ HTMLEmpty() }
                     .margin(
-                        [
-                            .top(.px(10)),
-                            .bottom(.px(15))
-                        ],
+                        top: .px(10),
+                        bottom: .px(15),
                         media: .screen && .minWidth(.px(768))
                     )
             }
