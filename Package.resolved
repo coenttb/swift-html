@@ -16,7 +16,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "bbbf17aadf6d7028ec0e18fae3e3c056a6032048"
+        "revision" : "543f771e0aeb716bcbf85acd20fcdf981ec0e6cc"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/swift-css-types.git",
       "state" : {
         "branch" : "main",
-        "revision" : "dccd721ab7dee289ef442899241439ed095f2acb"
+        "revision" : "13cc6204b8dae03342f0f91f34083ea609097288"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/swift-html-css-pointfree.git",
       "state" : {
         "branch" : "main",
-        "revision" : "69b1f25dcc1a4ca93c43339b90cbe1fce78ffb8b"
+        "revision" : "a765c9793ffd38ae2f8aedffc300f086756ed302"
       }
     },
     {

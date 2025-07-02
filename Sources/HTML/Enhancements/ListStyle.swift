@@ -34,3 +34,23 @@ public enum ListStyle {
     case reset
     case cssPropertyTypesListStyle(CSSPropertyTypes.ListStyle)
 }
+
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+#Preview {
+    HTMLDocument {
+        ul {
+            li {
+                "1"
+            }
+            li {
+                "2"
+            }
+            li {
+                "3"
+            }
+        }
+        .listStyle(.reset)
+    }
+}
+#endif
