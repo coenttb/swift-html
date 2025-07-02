@@ -68,13 +68,13 @@ public struct Spacer: HTML {
 }
 
 public struct LazyVGrid<Content: HTML>: HTML {
-    let columns: OrderedDictionary<MediaQuery?, [Int]>
+    let columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]>
     let content: Content
     let horizontalSpacing: CSSPropertyTypes.Length?
     let verticalSpacing: CSSPropertyTypes.Length?
     
     public init(
-        columns: OrderedDictionary<MediaQuery?, [Int]>,
+        columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]>,
         // TODO: alignment: HorizontalAlignment = .center,
         horizontalSpacing: CSSPropertyTypes.Length? = nil,
         verticalSpacing: CSSPropertyTypes.Length? = nil,
@@ -105,14 +105,20 @@ public struct LazyVGrid<Content: HTML>: HTML {
                 content
             }
                 .inlineStyle("width", "100%")
-        ) { html, columns in
+        ) {
+            html,
+            columns in
             html
                 .inlineStyle(
                     "column-gap",
                     horizontalSpacing == .zero ? "0" : "\(horizontalSpacing ?? 1.rem)",
                     media: columns.key
                 )
-                .inlineStyle("display", "grid", media: columns.key)
+                .inlineStyle(
+                    "display",
+                    "grid",
+                    media: columns.key
+                )
                 .inlineStyle(
                     "grid-template-columns",
                     columns.value.map { "minmax(0, \($0)fr)" }.joined(separator: " "),
@@ -124,5 +130,23 @@ public struct LazyVGrid<Content: HTML>: HTML {
                     media: columns.key
                 )
         }
+    }
+}
+
+extension HTMLInlineStyle {
+    public func inlineStyle(
+        _ property: String,
+        _ value: String?,
+        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> HTMLInlineStyle {
+        self.inlineStyle(
+            property,
+            value,
+            media: mediaQuery.map(\.rawValue).map(MediaQuery.init(rawValue:)),
+            pre: pre,
+            pseudo: pseudo
+        )
     }
 }

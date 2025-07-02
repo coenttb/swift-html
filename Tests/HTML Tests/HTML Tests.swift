@@ -164,7 +164,7 @@ struct Tests {
     
     @Test("LazyVGrid with media queries")
     func lazyVGridWithMediaQueries() {
-        let columns: OrderedDictionary<MediaQuery?, [Int]> = [
+        let columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]> = [
             nil: [1],
             .desktop: [1, 1]
         ]
