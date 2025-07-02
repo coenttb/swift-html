@@ -39,7 +39,7 @@ public struct VStack<Content: HTML>: HTML {
     let content: Content
     
     public init(
-        alignment: AlignItems = .center,
+        alignment: AlignItems = .stretch,
         spacing: CSSPropertyTypes.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
