@@ -4,7 +4,7 @@ import PointFreeHTML
 import HTML_CSS_PointFreeHTML
 import HTMLAttributeTypes
 import HTMLAttributes_PointFreeHTML
-import HTML_CSS
+import CSS_PointFreeHTML
 
 public struct HStack<Content: HTML>: HTML {
     let alignment: VerticalAlign
