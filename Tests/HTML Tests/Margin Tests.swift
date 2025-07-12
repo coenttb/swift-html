@@ -14,7 +14,7 @@ import OrderedCollections
 
 @Suite(
     "Tests",
-    .snapshots(record: .failed)
+    .snapshots(record: nil)
 )
 struct MarginTests {
     @Test("Margin Vertical Horizontal Test")

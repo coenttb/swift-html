@@ -14,7 +14,7 @@ import OrderedCollections
 
 @Suite(
     "Background Tests",
-    .snapshots(record: .failed)
+    .snapshots(record: nil)
 )
 struct BackgroundTests {
     @Test("Background")

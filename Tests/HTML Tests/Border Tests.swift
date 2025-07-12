@@ -49,7 +49,7 @@ struct BorderTests {
                 </style>
               </head>
               <body>
-            <div class="border-Slrts3 border-3JxMp">
+            <div class="border-3JxMp border-Slrts3">
             </div>
               </body>
             </html>
@@ -93,7 +93,7 @@ struct BorderTests {
                 </style>
               </head>
               <body>
-            <div class="border-right-Slrts3 border-right-3JxMp border-bottom-Slrts3 border-bottom-3JxMp border-left-Slrts3 border-left-3JxMp">
+            <div class="border-right-3JxMp border-right-Slrts3 border-bottom-3JxMp border-bottom-Slrts3 border-left-3JxMp border-left-Slrts3">
             </div>
               </body>
             </html>
@@ -137,7 +137,7 @@ struct BorderTests {
                 </style>
               </head>
               <body>
-            <div class="border-right-Slrts3 border-right-3JxMp border-bottom-Slrts3 border-bottom-3JxMp border-left-Slrts3 border-left-3JxMp">
+            <div class="border-right-3JxMp border-right-Slrts3 border-bottom-3JxMp border-bottom-Slrts3 border-left-3JxMp border-left-Slrts3">
             </div>
               </body>
             </html>

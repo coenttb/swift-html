@@ -14,7 +14,7 @@ import OrderedCollections
 
 @Suite(
     "Tests",
-    .snapshots(record: .failed)
+    .snapshots(record: nil)
 )
 struct PaddingTests {
     @Test("Border Test")

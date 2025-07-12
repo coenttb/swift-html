@@ -14,7 +14,7 @@ import OrderedCollections
 
 @Suite(
     "Tests",
-    .snapshots(record: .failed)
+    .snapshots(record: nil)
 )
 struct Tests {
     @Test("Label and input with light- and darkmode color")
@@ -25,7 +25,7 @@ struct Tests {
             as: .html
         ) {
             """
-            <label class="color-0EFBf4 color-ILzRW1"><input type="text"></label>
+            <label class="color-ILzRW1 color-Hx6Lg1"><input type="text"></label>
             """
         }
     }
@@ -83,7 +83,7 @@ struct Tests {
         ) {
             """
 
-            <swift-html-vstack class="row-gap-dnNPN1 max-width-C8uWv flex-direction-7gclL display-BvS8W3 align-items-CdPBO2">
+            <swift-html-vstack class="row-gap-dnNPN1 max-width-C8uWv flex-direction-7gclL display-BvS8W3 align-items-msN8p3">
               <div>First item
               </div>
               <div>Second item
@@ -182,7 +182,7 @@ struct Tests {
         ) {
             """
 
-            <swift-html-vgrid class="width-C8uWv column-gap-Fqw6a1 display-mqllb2 grid-template-columns-DrUWy row-gap-6PqSI column-gap-exu3i3 display-jdJkm4 grid-template-columns-AWWfa row-gap-pdWkF1">
+            <swift-html-vgrid class="width-C8uWv column-gap-Fqw6a1 display-mqllb2 grid-template-columns-DrUWy row-gap-6PqSI column-gap-mELsu1 display-dKpjI2 grid-template-columns-ofQqx2 row-gap-WT66U">
               <div>Item 1
               </div>
               <div>Item 2
