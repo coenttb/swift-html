@@ -5,10 +5,10 @@
 ////  Created by Coen ten Thije Boonkkamp on 14/09/2024.
 ////
 //
-//import CSS
-//import Foundation
+// import CSS
+// import Foundation
 //
-//public enum Border: Sendable {
+// public enum Border: Sendable {
 //    case all(width: Width, style: Style, color: HTMLColor?)
 //    case top(width: Width, style: Style, color: HTMLColor?)
 //    case right(width: Width, style: Style, color: HTMLColor?)
@@ -46,21 +46,21 @@
 //    public enum Global: String, Sendable {
 //        case inherit, initial, revert, revertLayer = "revert-layer", unset
 //    }
-//}
+// }
 //
-//extension Border {
+// extension Border {
 //    public static func radius(_ length: Length) -> Border {
 //        .radius(.all(length))
 //    }
-//}
+// }
 //
-//extension Border.Width {
+// extension Border.Width {
 //    public static func radius(_ length: Length) -> Border {
 //        .radius(.all(length))
 //    }
-//}
+// }
 //
-//extension Border: CustomStringConvertible {
+// extension Border: CustomStringConvertible {
 //    public var description: String {
 //        switch self {
 //        case .all(let width, let style, let color):
@@ -87,9 +87,9 @@
 //            return "none"
 //        }
 //    }
-//}
+// }
 //
-//extension Border.Width: CustomStringConvertible {
+// extension Border.Width: CustomStringConvertible {
 //    public var description: String {
 //        switch self {
 //        case .length(let length):
@@ -98,9 +98,9 @@
 //            return keyword.rawValue
 //        }
 //    }
-//}
+// }
 //
-//extension Border.Radius: CustomStringConvertible {
+// extension Border.Radius: CustomStringConvertible {
 //    public var description: String {
 //        switch self {
 //        case .all(let length):
@@ -117,18 +117,18 @@
 //            return "\(topLeft) \(topRight) \(bottomRight) \(bottomLeft)"
 //        }
 //    }
-//}
+// }
 //
-//extension Border {
+// extension Border {
 //    public static let inherit: Self = .global(.inherit)
 //    public static let initial: Self = .global(.initial)
 //    public static let revert: Self = .global(.revert)
 //    public static let revertLayer: Self = .global(.revertLayer)
 //    public static let unset: Self = .global(.unset)
-//}
+// }
 //
 //
-//extension Border {
+// extension Border {
 //    public static func all(width: Length, style: Style, color: HTMLColor?)-> Self {
 //        .all(width: .length(width), style: style, color: color)
 //    }
@@ -144,4 +144,4 @@
 //    public static func bottom(width: Length, style: Style, color: HTMLColor?)-> Self {
 //        .bottom(width: .length(width), style: style, color: color)
 //    }
-//}
+// }

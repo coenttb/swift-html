@@ -17,7 +17,7 @@ extension HTML {
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    )-> some HTML {
+    ) -> some HTML {
         switch (vertical, horizontal) {
         case let (.some(vertical), .some(horizontal)):
             self.padding(.verticalHorizontal(vertical, horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -46,57 +46,57 @@ extension HTML {
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    )-> some HTML {
+    ) -> some HTML {
         self.padding(.init(padding), media: mediaQuery, pre: pre, pseudo: pseudo)
     }
-    
+
     @HTMLBuilder
     public func padding(
         _ padding: OrderedSet<Padding.Variant>,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    )-> some HTML {
+    ) -> some HTML {
         if padding.count == 4 {
             // Extract values for each side from the ordered set
             let topValue = padding.first(where: { if case .top = $0 { return true } else { return false } })
             let rightValue = padding.first(where: { if case .right = $0 { return true } else { return false } })
             let bottomValue = padding.first(where: { if case .bottom = $0 { return true } else { return false } })
             let leftValue = padding.first(where: { if case .left = $0 { return true } else { return false } })
-            
+
             // Convert to LengthPercentage if found
             let top: LengthPercentage? = topValue.flatMap {
-                if case .top(let lp) = $0 { 
+                if case .top(let lp) = $0 {
                     return lp
                 } else {
-                    return nil 
+                    return nil
                 }
             }
-            
+
             let right: LengthPercentage? = rightValue.flatMap {
-                if case .right(let lp) = $0 { 
+                if case .right(let lp) = $0 {
                     return lp
                 } else {
-                    return nil 
+                    return nil
                 }
             }
-            
+
             let bottom: LengthPercentage? = bottomValue.flatMap {
-                if case .bottom(let lp) = $0 { 
+                if case .bottom(let lp) = $0 {
                     return lp
                 } else {
-                    return nil 
+                    return nil
                 }
             }
-            
+
             let left: LengthPercentage? = leftValue.flatMap {
-                if case .left(let lp) = $0 { 
+                if case .left(let lp) = $0 {
                     return lp
                 } else {
-                    return nil 
+                    return nil
                 }
             }
-            
+
             self.padding(
                 CSSPropertyTypes.Padding.sides(
                     top: top,
@@ -117,7 +117,7 @@ extension HTML {
             )
         }
     }
-    
+
     private func paddingSides(
         padding: OrderedSet<Padding.Variant>,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
@@ -168,7 +168,6 @@ extension HTML {
     }
 }
 
-
 extension HTML {
     @discardableResult
     @HTMLBuilder
@@ -180,41 +179,49 @@ extension HTML {
         pre: String? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
-        self.padding(.top(top), .bottom(bottom), .left(horizontal), .right(horizontal))
+        self.padding(
+            .top(top),
+            .bottom(bottom),
+            .left(horizontal),
+            .right(horizontal),
+            media: media,
+            pre: pre,
+            pseudo: pseudo
+        )
     }
 }
 
-extension HTML {
-    @discardableResult
-    @HTMLBuilder
-    public func padding(
-        top: LengthPercentage? = nil,
-        bottom: LengthPercentage? = nil,
-        left: LengthPercentage? = nil,
-        right: LengthPercentage? = nil,
-        media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
-        
-        var x: OrderedSet<Padding.Variant> = []
-        
-        if let top {
-            let _ = x.insert(.top(top), at: x.count)
-        }
-        
-        if let bottom {
-            let _ = x.insert(.bottom(bottom), at: x.count)
-        }
-        
-        if let left {
-            let _ = x.insert(.left(left), at: x.count)
-        }
-        
-        if let right {
-            let _ = x.insert(.right(right), at: x.count)
-        }
-        
-        self.padding(x)
-    }
-}
+//extension HTML {
+//    @discardableResult
+//    @HTMLBuilder
+//    public func padding(
+//        top: LengthPercentage? = nil,
+//        bottom: LengthPercentage? = nil,
+//        left: LengthPercentage? = nil,
+//        right: LengthPercentage? = nil,
+//        media: CSSAtRuleTypes.Media? = nil,
+//        pre: String? = nil,
+//        pseudo: Pseudo? = nil
+//    ) -> some HTML {
+//
+//        var x: OrderedSet<Padding.Variant> = []
+//
+//        if let top {
+//            _ = x.insert(.top(top), at: x.count)
+//        }
+//
+//        if let bottom {
+//            _ = x.insert(.bottom(bottom), at: x.count)
+//        }
+//
+//        if let left {
+//            _ = x.insert(.left(left), at: x.count)
+//        }
+//
+//        if let right {
+//            _ = x.insert(.right(right), at: x.count)
+//        }
+//
+//        self.padding(x)
+//    }
+//}

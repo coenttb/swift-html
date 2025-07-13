@@ -5,24 +5,24 @@
 ////  Created by Coen ten Thije Boonkkamp on 28/08/2024.
 ////
 //
-//import Foundation
-//import PointFreeHTML
+// import Foundation
+// import PointFreeHTML
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func id(_ id: String) -> some HTML {
 //        attribute("id", id)
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func `class`(_ class: String) -> some HTML {
 //        attribute("class", `class`)
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func onClick(unsafe javascript: String) -> some HTML {
 //        attribute("onClick", javascript)
@@ -37,26 +37,26 @@
 //    public func onclick(_ javascript: String) -> some HTML {
 //        self.onClick(unsafe: javascript)
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func type(_ type: InputType) -> some HTML {
 //        attribute("type", type.rawValue)
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func placeholder(_ placeholder: String) -> some HTML {
 //        attribute("placeholder", placeholder)
 //    }
-//}
+// }
 //
 //
-//import Foundation
+// import Foundation
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func name(_ name: String) -> some HTML {
 //        attribute("name", name)
@@ -164,10 +164,10 @@
 //    public func role(_ role: String) -> some HTML {
 //        attribute("role", role)
 //    }
-//}
+// }
 //
 //// Form-specific extensions
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func action(_ url: String) -> some HTML {
 //        attribute("action", url)
@@ -182,24 +182,24 @@
 //    public func enctype(_ type: String) -> some HTML {
 //        attribute("enctype", type)
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func method(_ method: HTMLMethod) -> some HTML {
 //        attribute("method", method.rawValue.lowercased())
 //    }
-//}
+// }
 //
-//public enum HTMLMethod: String, Sendable, Codable, Hashable {
+// public enum HTMLMethod: String, Sendable, Codable, Hashable {
 //    case post
 //    case get
 //    case put
 //    case delete
-//}
+// }
 //
 //// Media-specific extensions
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func width(_ value: Int) -> some HTML {
 //        attribute("width", String(value))
@@ -224,4 +224,4 @@
 //    public func loading(_ loading: Loading? ) -> some HTML {
 //        attribute("loading", loading?.rawValue)
 //    }
-//}
+// }

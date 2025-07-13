@@ -16,7 +16,7 @@ extension HTML {
         right: Right?,
         bottom: Bottom?,
         left: Left?,
-        media : CSSAtRuleTypes.Media? = nil,
+        media: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {

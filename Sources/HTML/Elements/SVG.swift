@@ -5,20 +5,20 @@ public struct SVG: HTML, Sendable {
         case raw(String)
         case base64(String)
     }
-    
+
     let description: String
     private let storage: Storage
-    
+
     public init(_ description: String, content: () -> String) {
         self.storage = .raw(content())
         self.description = description
     }
-    
+
     public init(base64: String, description: String) {
         self.storage = .base64(base64)
         self.description = description
     }
-    
+
     public var body: some HTML {
         HTMLGroup {
             switch storage {
@@ -31,7 +31,6 @@ public struct SVG: HTML, Sendable {
         .alt(self.description)
     }
 }
-
 
 extension SVG {
     public static let error = Self("Error") {
@@ -49,7 +48,7 @@ extension SVG {
     </svg>
     """
     }
-    
+
     public static let failure = Self("Failure") {
     """
     <?xml version="1.0" encoding="UTF-8"?>
@@ -65,7 +64,7 @@ extension SVG {
     </svg>
     """
     }
-    
+
     public static let warning = Self("Warning") {
     """
     <?xml version="1.0" encoding="UTF-8"?>

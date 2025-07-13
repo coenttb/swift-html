@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 10/04/2025.
 //
 
-import HTML
-import Testing
-import Foundation
 import Dependencies
+import Foundation
+import HTML
 import HTMLTestSupport
 import OrderedCollections
+import Testing
 
 @Suite(
     "Border Tests",
@@ -21,7 +21,7 @@ struct BorderTests {
     func borderAllSides() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){
+                div {
                     HTMLEmpty()
                 }
                 .border(
@@ -56,12 +56,12 @@ struct BorderTests {
             """
         }
     }
-    
+
     @Test("Border with light- and darkmode color for some sides")
     func borderSomeSides() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){
+                div {
                     HTMLEmpty()
                 }
                 .border(
@@ -100,12 +100,12 @@ struct BorderTests {
             """
         }
     }
-    
+
     @Test("Border with light- and darkmode color for some sides using variadic")
     func borderSomeSidesVariadic() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){
+                div {
                     HTMLEmpty()
                 }
                 .border(

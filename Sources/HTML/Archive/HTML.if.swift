@@ -8,7 +8,6 @@
 import Foundation
 import PointFreeHTML
 
-
 extension HTML {
     @discardableResult
     @HTMLBuilder

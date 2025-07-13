@@ -13,7 +13,7 @@ private struct _DependencyKeyWritingModifier<Base: HTML, Value>: HTML {
     let base: Base
     let keyPath: WritableKeyPath<DependencyValues, Value>
     let value: Value
-    
+
     static func _render(_ html: Self, into printer: inout HTMLPrinter) {
         withDependencies {
             $0[keyPath: html.keyPath] = html.value
@@ -26,8 +26,8 @@ private struct _DependencyKeyWritingModifier<Base: HTML, Value>: HTML {
 
 // Unsure whether this should be added.
 private enum ObjectStyleKey: DependencyKey {
-    static let liveValue = ObjectStyle.init(position: .inherit)
-    static let testValue = ObjectStyle.init(position: .inherit)
+    static let liveValue = ObjectStyle(position: .inherit)
+    static let testValue = ObjectStyle(position: .inherit)
 }
 
 extension DependencyValues {
@@ -36,5 +36,3 @@ extension DependencyValues {
         set { self[ObjectStyleKey.self] = newValue }
     }
 }
-
-

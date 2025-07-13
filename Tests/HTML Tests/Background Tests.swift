@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 10/04/2025.
 //
 
-import HTML
-import Testing
-import Foundation
 import Dependencies
+import Foundation
+import HTML
 import HTMLTestSupport
 import OrderedCollections
+import Testing
 
 @Suite(
     "Background Tests",
@@ -21,7 +21,7 @@ struct BackgroundTests {
     func background() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .border(
                         .init(
                             width: .length(1.px),

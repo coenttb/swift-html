@@ -8,7 +8,7 @@
 import Foundation
 import PointFreeHTML
 
-//extension MediaQuery {
+// extension MediaQuery {
 //    public static let desktop = Self(rawValue: "only screen and (min-width: 832px)")
 //    public static let mobile = Self(rawValue: "only screen and (max-width: 831px)")
 //    public static let tablet = Self(rawValue: "only screen and (min-width: 768px) and (max-width: 1024px)")
@@ -20,4 +20,4 @@ import PointFreeHTML
 //    public static let largeDesktop = Self(rawValue: "only screen and (min-width: 1200px)")
 //    public static let hover = Self(rawValue: "(hover: hover)")
 //    public static let reducedMotion = Self(rawValue: "(prefers-reduced-motion: reduce)")
-//}
+// }

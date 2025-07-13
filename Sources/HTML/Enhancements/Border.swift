@@ -9,17 +9,17 @@ import Foundation
 import HTML_CSS_PointFreeHTML
 
 public struct Border: Equatable, Sendable {
-    public var sides: Set<Side>? = nil
-    public var width: BorderWidth? = nil
-    public var style: CSSTypeTypes.LineStyle? = nil
-    public var color: HTMLColor? = nil
-    
+    public var sides: Set<Side>?
+    public var width: BorderWidth?
+    public var style: CSSTypeTypes.LineStyle?
+    public var color: HTMLColor?
+
     public enum Side: String, Sendable, CaseIterable {
         case top, left, right, bottom
-        
+
         public static let all: [Self] = allCases
     }
-    
+
     public init(
         sides: Set<Side>? = nil,
         width: BorderWidth? = nil,
@@ -45,14 +45,13 @@ extension HTML {
         switch border {
         case .none:
             self
-            
+
         case .some(let border):
             // Extract common border properties
             let borderStyle = "\(border.width?.description ?? "") \(border.style?.description ?? "")"
             let lightColor = border.color?.light.description ?? ""
             let darkColor = border.color?.dark.description ?? ""
-            
-            
+
             if border.sides == nil || border.sides?.count == Border.Side.allCases.count {
                 self
                     .inlineStyle("border", "\(borderStyle) \(lightColor)", media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -88,7 +87,7 @@ extension HTML {
             pseudo: pseudo
         )
     }
-    
+
     @discardableResult
     @_disfavoredOverload
     @HTMLBuilder
@@ -120,8 +119,7 @@ extension HTML {
         pre: String?,
         pseudo: Pseudo?
     ) -> some HTML {
-        
-        
+
         self
             .if(border.sides?.contains(.top) == true) { element in
                 element

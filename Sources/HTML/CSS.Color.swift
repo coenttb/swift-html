@@ -233,12 +233,12 @@ extension CSSTypeTypes.Color {
     public static let offBlack = Self.hex("171717")
     public static let white = Self.hex("FFFFFF")
     public static let offWhite = Self.hex("fafafa")
-    
+
     public static let cyan = Self.teal500
     public static let teal = Self.teal500
     public static let pink = Self.pink500
     public static let brown = Self.brown500
-    
+
     public static let orange = Self.orange500
     public static let green = Self.green500
     public static let purple = Self.purple500
@@ -246,5 +246,3 @@ extension CSSTypeTypes.Color {
     public static let red = Self.red500
     public static let yellow = Self.yellow500
 }
-
-

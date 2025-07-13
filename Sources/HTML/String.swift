@@ -14,9 +14,6 @@ import Foundation
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
-import Foundation
-
-/// Extensions for converting HTML to String.
 extension String {
     /// Creates a String from rendered HTML content.
     ///
@@ -62,7 +59,6 @@ extension HTMLPrinter {
         let message: String
     }
 }
-
 
 extension CustomStringConvertible where Self: HTML {
     public var description: String {

@@ -269,7 +269,6 @@ public typealias colgroup = HTMLElementTypes.TableColumnGroup
 /// Lowercase typealias for creating Data elements with a more HTML-like syntax.
 public typealias data = HTMLElementTypes.Data
 
-
 /// Lowercase typealias for creating DataList elements with a more HTML-like syntax.
 ///
 /// This typealias allows you to use the lowercase `datalist` identifier when creating

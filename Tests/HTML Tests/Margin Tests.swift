@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 01/07/2025.
 //
 
-import HTML
-import Testing
-import Foundation
 import Dependencies
+import Foundation
+import HTML
 import HTMLTestSupport
 import OrderedCollections
+import Testing
 
 @Suite(
     "Tests",
@@ -21,7 +21,7 @@ struct MarginTests {
     func marginVerticalHorizontal() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(vertical: .px(10), horizontal: .px(20))
             }
             ,
@@ -44,12 +44,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin Vertical Only Test")
     func marginVerticalOnly() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(vertical: .px(15))
             }
             ,
@@ -73,12 +73,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin Horizontal Only Test")
     func marginHorizontalOnly() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(horizontal: .px(25))
             }
             ,
@@ -102,12 +102,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin Set Variant Test")
     func marginVariants() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(
                         top: .px(10),
                         right: .px(20),
@@ -135,12 +135,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin with Media Query")
     func marginWithMediaQuery() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(
                         top: .px(10),
                         bottom: .px(15),
@@ -170,12 +170,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin with optional inputs")
     func marginWithOptionalInputs() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(
                         top: .px(10),
                         right: nil,
@@ -207,12 +207,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin all sides equal optimization")
     func marginAllSidesEqual() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(
                         top: .px(15),
                         right: .px(15),
@@ -239,12 +239,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin vertical horizontal optimization")
     func marginVerticalHorizontalOptimization() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(
                         top: .px(10),
                         right: .px(20),
@@ -271,12 +271,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin horizontal equal optimization")
     func marginHorizontalEqual() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(
                         right: .px(12),
                         left: .px(12)
@@ -301,12 +301,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin single side")
     func marginSingleSide() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(top: .px(8))
             },
             as: .html
@@ -328,12 +328,12 @@ struct MarginTests {
             """
         }
     }
-    
+
     @Test("Margin no values provided")
     func marginNoValues() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .margin(vertical: nil, horizontal: nil)
             },
             as: .html

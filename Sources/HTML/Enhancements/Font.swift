@@ -5,11 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 26/06/2025.
 //
 
+import Dependencies
 import Foundation
 import HTML_CSS_PointFreeHTML
-import Dependencies
 
-public struct Font:  Hashable, Sendable {
+public struct Font: Hashable, Sendable {
     public let family: CSSPropertyTypes.FontFamily
     public let size: CSSPropertyTypes.FontSize
     public let stretch: CSSPropertyTypes.FontStretch
@@ -17,7 +17,7 @@ public struct Font:  Hashable, Sendable {
     public let variant: CSSPropertyTypes.FontVariant
     public let weight: CSSPropertyTypes.FontWeight
     public let lineHeight: CSSPropertyTypes.LineHeight
-    
+
     public init(
         family: CSSPropertyTypes.FontFamily,
         size: CSSPropertyTypes.FontSize,

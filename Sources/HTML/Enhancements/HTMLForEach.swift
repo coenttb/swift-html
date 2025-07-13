@@ -11,7 +11,7 @@ import HTML_CSS_PointFreeHTML
 public struct HTMLForEach<Content: HTML>: HTML {
     /// The array of HTML content generated from the collection.
     let content: _HTMLArray<Content>
-    
+
     /// Creates a new HTML component that generates content for each element in a collection.
     ///
     /// - Parameters:
@@ -23,7 +23,7 @@ public struct HTMLForEach<Content: HTML>: HTML {
     ) {
         self.content = HTMLBuilder.buildArray(data.map(content))
     }
-    
+
     /// The body of this component, which is the array of HTML content.
     public var body: some HTML {
         content
@@ -42,7 +42,7 @@ import SwiftUI
                     }
                 }
             }
-            
+
             for element in 1...10 {
                 AnyHTML {
                     li {
@@ -50,7 +50,7 @@ import SwiftUI
                     }
                 }
             }
-            
+
             // TO-DO: currently doesn't compile.
 //            for element in 1...10 {
 //                li {
@@ -61,5 +61,3 @@ import SwiftUI
     }
 }
 #endif
-
-

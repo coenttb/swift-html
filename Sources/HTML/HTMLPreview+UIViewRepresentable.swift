@@ -10,11 +10,10 @@ extension HTMLDocument: @retroactive UIViewRepresentable {
             configuration: WKWebViewConfiguration()
         )
     }
-    
+
     public func updateUIView(_ webView: WKWebView, context: Context) {
         let htmlString = (try? String(self)) ?? "HTML could not be parsed into a String"
         webView.loadHTMLString(htmlString, baseURL: nil)
     }
 }
 #endif
-

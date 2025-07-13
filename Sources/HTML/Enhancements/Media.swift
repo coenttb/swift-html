@@ -24,4 +24,3 @@ extension CSSAtRuleTypes.Media {
     public static let hover = Self(rawValue: "@media (hover: hover)")
     public static let reducedMotion = Self(rawValue: "@media (prefers-reduced-motion: reduce)")
 }
-

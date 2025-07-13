@@ -1,8 +1,8 @@
 #if os(macOS)
-import SwiftUI
 import AppKit
-import WebKit
 import HTML_CSS_PointFreeHTML
+import SwiftUI
+import WebKit
 
 extension HTMLDocument: @retroactive View {}
 extension HTMLDocument: @retroactive NSViewRepresentable {
@@ -12,7 +12,7 @@ extension HTMLDocument: @retroactive NSViewRepresentable {
             configuration: WKWebViewConfiguration()
         )
     }
-    
+
     public func updateNSView(_ webView: WKWebView, context: Context) {
         let htmlString = (try? String(self)) ?? "HTML could not be parsed into a String"
         webView.loadHTMLString(htmlString, baseURL: nil)

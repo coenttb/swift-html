@@ -1,10 +1,8 @@
 import Foundation
 import HTML_CSS_PointFreeHTML
 
-
-
 //
-//extension HTML {
+// extension HTML {
 //    
 //    @discardableResult
 //    public func color(_ color: HTMLColor?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
@@ -38,10 +36,10 @@ import HTML_CSS_PointFreeHTML
 //            return lightStyle
 //        }
 //    }
-//}
+// }
 //
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func position(_ value: CSS.Position?, top: Length? = nil, right: Length? = nil, bottom: Length? = nil, left: Length? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        inlineStyle("position", value?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -50,11 +48,11 @@ import HTML_CSS_PointFreeHTML
 //            .inlineStyle("right", right?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
 //            .inlineStyle("bottom", bottom?.description, media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
-//}
+// }
 //
 //
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func margin(_ margin: CSS.Margin? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        if let margin = margin {
@@ -91,10 +89,10 @@ import HTML_CSS_PointFreeHTML
 //    public func margin(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        margin(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
-//}
+// }
 //
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func padding(_ padding: CSS.Padding? = nil, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        if let padding = padding {
@@ -131,10 +129,10 @@ import HTML_CSS_PointFreeHTML
 //    public func padding(_ length: Length?, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        padding(.trbl(top: length, right: length, bottom: length, left: length), media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
-//}
+// }
 
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func size(width: Length? = nil, height: Length? = nil, media: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        inlineStyle("width", width?.description, media: media, pre: pre, pseudo: pseudo)
@@ -146,10 +144,10 @@ import HTML_CSS_PointFreeHTML
 //        inlineStyle("width", size?.description, media: media, pre: pre, pseudo: pseudo)
 //            .inlineStyle("height", size?.description, media: media, pre: pre, pseudo: pseudo)
 //    }
-//}
+// }
 //
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func hidden(_ hidden: Bool = true) -> some HTML {
 //        if hidden {
@@ -161,11 +159,11 @@ import HTML_CSS_PointFreeHTML
 //            self
 //        }
 //    }
-//}
+// }
 //
 //
 //
-//extension HTML {
+// extension HTML {
 //    //    @discardableResult
 //    //    public func font(_ font: Font, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> Self {
 //    //        self
@@ -241,9 +239,9 @@ import HTML_CSS_PointFreeHTML
 //                .inlineStyle("", "")
 //        }
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @HTMLBuilder
 //    public func fontScale(_ fontScale: FontScale) -> HTMLInlineStyle<Self> {
 //        font(.size(.rem(fontScale.rawValue)))
@@ -263,32 +261,32 @@ import HTML_CSS_PointFreeHTML
 //                .lineHeight(.number(1.5))
 //        }
 //    }
-//}
+// }
 //
 //
-//public enum FontScale: Double {
+// public enum FontScale: Double {
 //    case h1 = 4
 //    case h2 = 3
 //    case h3 = 2
 //    case h4 = 1.5
 //    case h5 = 1
 //    case h6 = 0.875
-//}
+// }
 //
-//public enum FontStyle {
+// public enum FontStyle {
 //    case body(Body)
 //    
 //    public enum Body {
 //        case regular
 //        case small
 //    }
-//}
+// }
 //
 
 //
 //
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func textAlign(_ value: TextAlign, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        inlineStyle("text-align", value.rawValue, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -337,10 +335,10 @@ import HTML_CSS_PointFreeHTML
 //        return inlineStyle("vertical-align", alignValue, media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
 
-//}
+// }
 //
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func listStyle(_ style: ListStyle, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        switch style {
@@ -367,11 +365,11 @@ import HTML_CSS_PointFreeHTML
 //            return inlineStyle("list-style", parts.joined(separator: " "), media: mediaQuery, pre: pre, pseudo: pseudo)
 //        }
 //    }
-//}
+// }
 //
 
 //
-//extension HTML {
+// extension HTML {
 //    func flexItem(
 //        grow: String? = nil,
 //        shrink: String? = nil,
@@ -383,13 +381,13 @@ import HTML_CSS_PointFreeHTML
 //            .inlineStyle("flex-shrink", shrink, media: media)
 //            .inlineStyle("flex-basis", basis, media: media)
 //    }
-//}
+// }
 //
 //
 //
 //
 //
-//extension HTML {
+// extension HTML {
 //    
 //    // Flex Container Properties
 //    @discardableResult
@@ -452,13 +450,13 @@ import HTML_CSS_PointFreeHTML
 //            .alignSelf(item.alignSelf, media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
 //    
-//}
+// }
 //
 
 //
 //
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func border(_ border: Border, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        switch border {
@@ -520,9 +518,9 @@ import HTML_CSS_PointFreeHTML
 //            return inlineStyle("border", "none", media: mediaQuery, pre: pre, pseudo: pseudo)
 //        }
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    @HTMLBuilder
 //    public func border(
@@ -558,9 +556,9 @@ import HTML_CSS_PointFreeHTML
 //            self
 //        }
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func textShadow(_ value: TextShadow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        let lightShadowValue = "\(value.offsetX) \(value.offsetY) \(value.blurRadius) \(value.color.light.description)"
@@ -573,19 +571,19 @@ import HTML_CSS_PointFreeHTML
 //            return lightStyle
 //        }
 //    }
-//}
+// }
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func borderSpacing(_ value: BorderSpacing, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        let spacingValue = value.vertical != nil ? "\(value.horizontal) \(value.vertical!)" : value.horizontal.description
 //        return inlineStyle("border-spacing", spacingValue, media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
-//}
+// }
 //
 //// Assuming these structs need to be updated as well:
 //
-//public struct TextShadow {
+// public struct TextShadow {
 //    let offsetX: CSS.Length
 //    let offsetY: CSS.Length
 //    let blurRadius: CSS.Length
@@ -597,9 +595,9 @@ import HTML_CSS_PointFreeHTML
 //        self.blurRadius = blurRadius
 //        self.color = color
 //    }
-//}
+// }
 //
-//public struct BorderSpacing {
+// public struct BorderSpacing {
 //    let horizontal: CSS.Length
 //    let vertical: CSS.Length?
 //    
@@ -607,9 +605,9 @@ import HTML_CSS_PointFreeHTML
 //        self.horizontal = horizontal
 //        self.vertical = vertical
 //    }
-//}
+// }
 
-//extension HTML {
+// extension HTML {
 //    public func transform(_ transform: Transform) -> HTMLInlineStyle<Self> {
 //        inlineStyle("transform", transform.description)
 //    }
@@ -670,7 +668,7 @@ import HTML_CSS_PointFreeHTML
 //    public func backfaceVisibility(_ visibility: BackfaceVisibility) -> HTMLInlineStyle<Self> {
 //        inlineStyle("backface-visibility", visibility.rawValue)
 //    }
-//}
+// }
 
 ////
 ////    // Convenience method for setting up a grid container
@@ -707,11 +705,11 @@ import HTML_CSS_PointFreeHTML
 ////        }
 ////        return style
 ////    }
-//}
+// }
 
 ////
 ////// HTML helper methods
-////extension HTML {
+//// extension HTML {
 ////    @discardableResult
 ////    public func boxShadow(_ shadow: BoxShadow, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 ////        let lightStyle = inlineStyle("box-shadow", shadow.description, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -733,13 +731,13 @@ import HTML_CSS_PointFreeHTML
 ////    public func boxShadow(_ shadows: BoxShadow.Shadow..., media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 ////        boxShadow(BoxShadow(shadows), media: mediaQuery, pre: pre, pseudo: pseudo)
 ////    }
-////}
+//// }
 //
 //
 //
 
 //
-//extension HTML {
+// extension HTML {
 //    @discardableResult
 //    public func columnCount(_ count: ColumnCount, media mediaQuery: MediaQuery? = nil, pre: String? = nil, pseudo: Pseudo? = nil) -> HTMLInlineStyle<Self> {
 //        inlineStyle("column-count", count.description, media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -761,5 +759,5 @@ import HTML_CSS_PointFreeHTML
 ////        }
 ////        return style
 ////    }
-//}
+// }
 //

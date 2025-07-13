@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 10/04/2025.
 //
 
-import HTML
-import Testing
-import Foundation
 import Dependencies
+import Foundation
+import HTML
 import HTMLTestSupport
 import OrderedCollections
+import Testing
 
 @Suite(
     "Tests",
@@ -29,7 +29,7 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("HStack")
     func hstack() {
         assertInlineSnapshot(
@@ -50,7 +50,7 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("HStack with custom spacing and alignment")
     func hstackCustom() {
         assertInlineSnapshot(
@@ -71,7 +71,7 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("VStack")
     func vstack() {
         assertInlineSnapshot(
@@ -92,7 +92,7 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("VStack with custom spacing and alignment")
     func vstackCustom() {
         assertInlineSnapshot(
@@ -113,7 +113,7 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("Spacer")
     func spacer() {
         assertInlineSnapshot(
@@ -137,7 +137,7 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("LazyVGrid with simple columns")
     func lazyVGrid() {
         assertInlineSnapshot(
@@ -161,14 +161,14 @@ struct Tests {
             """
         }
     }
-    
+
     @Test("LazyVGrid with media queries")
     func lazyVGridWithMediaQueries() {
         let columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]> = [
             nil: [1],
             .desktop: [1, 1]
         ]
-        
+
         assertInlineSnapshot(
             of: LazyVGrid(
                 columns: columns,

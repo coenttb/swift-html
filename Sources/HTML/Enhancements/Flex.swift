@@ -28,7 +28,7 @@ extension HTML {
             .rowGap(rowGap, media: media, pre: pre, pseudo: pseudo)
             .columnGap(columnGap, media: media, pre: pre, pseudo: pseudo)
     }
-    
+
     public func flexItem(
         grow: FlexGrow? = nil,
         shrink: FlexShrink? = nil,

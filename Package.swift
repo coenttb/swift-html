@@ -25,15 +25,15 @@ let package = Package(
         .macOS(.v14),
         .tvOS(.v17),
         .watchOS(.v10),
-        .macCatalyst(.v17),
-      ],
+        .macCatalyst(.v17)
+    ],
     products: [
-        .library(name: .html, targets: [.html]),
+        .library(name: .html, targets: [.html])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree.git", branch: "main"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.18.3"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", branch: "1.9.0"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", branch: "1.9.0")
     ],
     targets: [
         .target(

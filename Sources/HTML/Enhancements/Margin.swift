@@ -17,7 +17,7 @@ extension HTML {
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    )-> some HTML {
+    ) -> some HTML {
         switch (vertical, horizontal) {
         case let (.some(vertical), .some(horizontal)):
             self.margin(.verticalHorizontal(vertical, horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
@@ -49,7 +49,7 @@ extension HTML {
 //    )-> some HTML {
 //        self.margin(.init(margin), media: mediaQuery, pre: pre, pseudo: pseudo)
 //    }
-    
+
 //    @HTMLBuilder
 //    public func margin(
 //        _ margin: OrderedSet<Margin.Variant>,
@@ -117,7 +117,7 @@ extension HTML {
 //            )
 //        }
 //    }
-    
+
 //    private func marginSides(
 //        margin: OrderedSet<Margin.Variant>,
 //        media mediaQuery: CSSAtRuleTypes.Media? = nil,
@@ -159,7 +159,6 @@ extension HTML {
 //            }
 //    }
 }
-
 
 extension HTML {
     @discardableResult
@@ -206,7 +205,7 @@ extension HTML {
                     pseudo: pseudo
                 )
             }
-            
+
             // Three values provided
         case let (.some(top), .some(right), .some(bottom), .none):
             self
@@ -288,7 +287,7 @@ extension HTML {
                     pre: pre,
                     pseudo: pseudo
                 )
-            
+
             // Two values provided
         case let (.some(top), .some(right), .none, .none):
             self
@@ -384,7 +383,7 @@ extension HTML {
                     pre: pre,
                     pseudo: pseudo
                 )
-            
+
             // Single value provided
         case let (.some(top), .none, .none, .none):
             self.marginTop(
@@ -414,7 +413,7 @@ extension HTML {
                 pre: pre,
                 pseudo: pseudo
             )
-            
+
             // No values provided - do nothing, return self unchanged
         case (.none, .none, .none, .none):
             self

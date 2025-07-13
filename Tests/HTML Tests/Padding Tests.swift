@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 10/04/2025.
 //
 
-import HTML
-import Testing
-import Foundation
 import Dependencies
+import Foundation
+import HTML
 import HTMLTestSupport
 import OrderedCollections
+import Testing
 
 @Suite(
     "Tests",
@@ -21,7 +21,7 @@ struct PaddingTests {
     func border() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .border(
                         .init(
                             width: .length(1.px),
@@ -50,12 +50,12 @@ struct PaddingTests {
             """
         }
     }
-    
+
     @Test("Padding Vertical Horizontal Test")
     func paddingVerticalHorizontal() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .padding(vertical: .px(10), horizontal: .px(20))
             }
             ,
@@ -78,12 +78,12 @@ struct PaddingTests {
             """
         }
     }
-    
+
     @Test("Padding Set Variant Test")
     func paddingVariants() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .padding(
                         .top(.px(10)),
                         .right(.px(20)),
@@ -111,12 +111,12 @@ struct PaddingTests {
             """
         }
     }
-    
+
     @Test("Padding with Media Query")
     func paddingWithMediaQuery() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .padding(
                         [
                             .top(.px(10)),
@@ -148,12 +148,12 @@ struct PaddingTests {
             """
         }
     }
-    
+
     @Test("Padding with optional inputs")
     func paddingWithOptionalInputs() {
         assertInlineSnapshot(
             of: HTMLDocument {
-                div(){ HTMLEmpty() }
+                div { HTMLEmpty() }
                     .padding(
                         top: .px(10),
                         bottom: .px(10),

@@ -22,13 +22,12 @@ extension HTML {
         case .reset:
             self
                 .listStyleType(ListStyleType.none)
-                .padding(left: .zero)
+                .paddingLeft(.zero)
         case .cssPropertyTypesListStyle(let listStyle):
             self.listStyle(listStyle)
         }
     }
 }
-
 
 public enum ListStyle {
     case reset

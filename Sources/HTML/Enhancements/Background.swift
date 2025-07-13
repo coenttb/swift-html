@@ -14,9 +14,9 @@ extension HTML {
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
         pseudo: Pseudo? = nil
-    )-> some HTML {
+    ) -> some HTML {
         let lightStyle = inlineStyle("background", color?.light.description, media: mediaQuery.map(\.rawValue).map(MediaQuery.init), pre: pre, pseudo: pseudo)
-        
+
         if let darkColor = color?.dark {
             return lightStyle.inlineStyle("background", darkColor.description, media: MediaQuery(rawValue: CSSAtRuleTypes.Media.dark.rawValue), pre: pre, pseudo: pseudo)
         } else {

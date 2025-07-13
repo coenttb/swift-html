@@ -1,16 +1,16 @@
-import OrderedCollections
-import Foundation
-import PointFreeHTML
-import HTML_CSS_PointFreeHTML
-import HTMLAttributeTypes
-import HTMLAttributes_PointFreeHTML
 import CSS_PointFreeHTML
+import Foundation
+import HTML_CSS_PointFreeHTML
+import HTMLAttributes_PointFreeHTML
+import HTMLAttributeTypes
+import OrderedCollections
+import PointFreeHTML
 
 public struct HStack<Content: HTML>: HTML {
     let alignment: VerticalAlign
     let spacing: Length?
     let content: Content
-    
+
     public init(
         alignment: VerticalAlign = .middle,
         spacing: CSSPropertyTypes.Length? = nil,
@@ -20,7 +20,7 @@ public struct HStack<Content: HTML>: HTML {
         self.spacing = spacing
         self.content = content()
     }
-    
+
     public var body: some HTML {
         tag("swift-html-hstack") { content }
         // necessary?
@@ -37,7 +37,7 @@ public struct VStack<Content: HTML>: HTML {
     let alignment: AlignItems
     let spacing: CSSPropertyTypes.Length?
     let content: Content
-    
+
     public init(
         alignment: AlignItems = .stretch,
         spacing: CSSPropertyTypes.Length? = nil,
@@ -47,7 +47,7 @@ public struct VStack<Content: HTML>: HTML {
         self.spacing = spacing
         self.content = content()
     }
-    
+
     public var body: some HTML {
         tag("swift-html-vstack") {
             content
@@ -72,7 +72,7 @@ public struct LazyVGrid<Content: HTML>: HTML {
     let content: Content
     let horizontalSpacing: CSSPropertyTypes.Length?
     let verticalSpacing: CSSPropertyTypes.Length?
-    
+
     public init(
         columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]>,
         // TODO: alignment: HorizontalAlignment = .center,
@@ -85,7 +85,7 @@ public struct LazyVGrid<Content: HTML>: HTML {
         self.verticalSpacing = verticalSpacing
         self.content = content()
     }
-    
+
     public init(
         columns: [Int],
         // TODO: alignment: HorizontalAlignment = .center,
@@ -98,7 +98,7 @@ public struct LazyVGrid<Content: HTML>: HTML {
         self.verticalSpacing = verticalSpacing
         self.content = content()
     }
-    
+
     public var body: some HTML {
         columns.reduce(
             tag("swift-html-vgrid") {
