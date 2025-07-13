@@ -191,37 +191,37 @@ extension HTML {
     }
 }
 
-//extension HTML {
-//    @discardableResult
-//    @HTMLBuilder
-//    public func padding(
-//        top: LengthPercentage? = nil,
-//        bottom: LengthPercentage? = nil,
-//        left: LengthPercentage? = nil,
-//        right: LengthPercentage? = nil,
-//        media: CSSAtRuleTypes.Media? = nil,
-//        pre: String? = nil,
-//        pseudo: Pseudo? = nil
-//    ) -> some HTML {
-//
-//        var x: OrderedSet<Padding.Variant> = []
-//
-//        if let top {
-//            _ = x.insert(.top(top), at: x.count)
-//        }
-//
-//        if let bottom {
-//            _ = x.insert(.bottom(bottom), at: x.count)
-//        }
-//
-//        if let left {
-//            _ = x.insert(.left(left), at: x.count)
-//        }
-//
-//        if let right {
-//            _ = x.insert(.right(right), at: x.count)
-//        }
-//
-//        self.padding(x)
-//    }
-//}
+extension HTML {
+    @discardableResult
+    public func padding(
+        top: LengthPercentage? = nil,
+        bottom: LengthPercentage? = nil,
+        left: LengthPercentage? = nil,
+        right: LengthPercentage? = nil,
+        media: CSSAtRuleTypes.Media? = nil,
+        pre: String? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+
+        
+        var x: OrderedSet<Padding.Variant> = []
+
+        if let top {
+            _ = x.insert(.top(top), at: x.count)
+        }
+
+        if let bottom {
+            _ = x.insert(.bottom(bottom), at: x.count)
+        }
+
+        if let left {
+            _ = x.insert(.left(left), at: x.count)
+        }
+
+        if let right {
+            _ = x.insert(.right(right), at: x.count)
+        }
+
+        return self.padding(x, media: media, pre: pre, pseudo: pseudo)
+    }
+}
