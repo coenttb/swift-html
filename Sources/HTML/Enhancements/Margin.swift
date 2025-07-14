@@ -20,15 +20,40 @@ extension HTML {
     ) -> some HTML {
         switch (vertical, horizontal) {
         case let (.some(vertical), .some(horizontal)):
-            self.margin(.verticalHorizontal(vertical, horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
+            self.margin(
+                .verticalHorizontal(vertical, horizontal),
+                media: mediaQuery,
+                pre: pre,
+                pseudo: pseudo
+            )
         case let (.none, .some(horizontal)):
             self
-                .marginRight(.lengthPercentage(horizontal))
-                .marginLeft(.lengthPercentage(horizontal))
+                .marginRight(
+                    .lengthPercentage(horizontal),
+                    media: mediaQuery,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+                .marginLeft(
+                    .lengthPercentage(horizontal),
+                    media: mediaQuery,
+                    pre: pre,
+                    pseudo: pseudo
+                )
         case let (.some(vertical), .none):
             self
-                .marginTop(.lengthPercentage(vertical))
-                .marginBottom(.lengthPercentage(vertical))
+                .marginTop(
+                    .lengthPercentage(vertical),
+                    media: mediaQuery,
+                    pre: pre,
+                    pseudo: pseudo
+                )
+                .marginBottom(
+                    .lengthPercentage(vertical),
+                    media: mediaQuery,
+                    pre: pre,
+                    pseudo: pseudo
+                )
         case (.none, .none):
             self
         }
