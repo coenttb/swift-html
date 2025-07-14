@@ -23,7 +23,7 @@ public struct Border: Equatable, Sendable {
     public init(
         sides: Set<Side>? = nil,
         width: BorderWidth? = nil,
-        style: CSSTypeTypes.LineStyle? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
         color: HTMLColor? = nil,
     ) {
         self.width = width
@@ -74,7 +74,7 @@ extension HTML {
     public func border(
         _ sides: [Border.Side] = Border.Side.allCases,
         width: BorderWidth? = nil,
-        style: CSSTypeTypes.LineStyle? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
@@ -94,7 +94,7 @@ extension HTML {
     public func border(
         _ sides: Border.Side...,
         width: BorderWidth? = nil,
-        style: CSSTypeTypes.LineStyle? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         pre: String? = nil,
