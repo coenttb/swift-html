@@ -12,9 +12,7 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var inlineSnapshotTesting: Self { .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing") }
-    static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
-    static var htmlTestSupport: Self { .product(name: "HTMLTestSupport", package: "swift-html-css-pointfree") }
+    static var pointFreeHtmlTestSupport: Self { .product(name: "PointFreeHtmlTestSupport", package: "pointfree-html") }
     static var htmlCssPointFreeHTML: Self { .product(name: "HTML+CSS+PointFreeHTML", package: "swift-html-css-pointfree") }
 }
 
@@ -32,8 +30,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree.git", branch: "main"),
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.18.3"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", branch: "1.9.0")
+        .package(url: "https://github.com/coenttb/pointfree-html.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -46,7 +43,7 @@ let package = Package(
             name: .html.tests,
             dependencies: [
                 .html,
-                .htmlTestSupport
+                .pointFreeHtmlTestSupport
             ]
         )
     ]

@@ -8,7 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
-import HTMLTestSupport
+import PointFreeHtmlTestSupport
 import OrderedCollections
 import Testing
 
