@@ -7,12 +7,12 @@
 
 import HTML
 import Dependencies
-import PointFreeHtmlTestSupport
+import PointFreeHTMLTestSupport
 import Testing
 
 @Suite(
     "Color Tests",
-    .snapshots(record: nil)
+    .snapshots(record: .missing)
 )
 struct ColorTests {
     @Test("General")
@@ -33,7 +33,7 @@ struct ColorTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .font-size-t6pNK3{font-size:24px}
@@ -54,6 +54,36 @@ struct ColorTests {
               <video autoplay src="/public/video/example.mp4">
               </video>
             </div>
+              </body>
+            </html>
+            """
+        }
+    }
+    
+    @Test("General2")
+    func general2() {
+        assertInlineSnapshot(
+            of: HTMLDocument {
+                p { "Hello World" }
+                    .color(.red)
+             },
+            as: .html
+        ) {
+            """
+            <!doctype html>
+            <html>
+              <head>
+                <style>
+            .color-ILzRW1{color:#cc3333}
+            @media (prefers-color-scheme: dark){
+              .color-CA97y2{color:rgb(163, 40, 40)}
+            }
+
+                </style>
+              </head>
+              <body>
+            <p class="color-ILzRW1 color-CA97y2">Hello World
+            </p>
               </body>
             </html>
             """
@@ -201,15 +231,18 @@ struct ColorTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
-            .color-dMYaj4{color:red}
+            .color-ILzRW1{color:#cc3333}
+            @media (prefers-color-scheme: dark){
+              .color-CA97y2{color:rgb(163, 40, 40)}
+            }
 
                 </style>
               </head>
               <body>
-            <div class="color-dMYaj4">
+            <div class="color-ILzRW1 color-CA97y2">
             </div>
               </body>
             </html>
@@ -228,7 +261,7 @@ struct ColorTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .color-bQ3ZC1{color:#FF0000}
@@ -255,7 +288,7 @@ struct ColorTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .color-bQ3ZC1{color:#FF0000}
@@ -285,7 +318,7 @@ struct ColorTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             @media print{
@@ -316,7 +349,7 @@ struct ColorTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             @media screen and (max-width: 768px){
@@ -338,4 +371,8 @@ struct ColorTests {
             """
         }
     }
+}
+
+extension HTMLColor {
+    static let red = HTMLColor.init(light: .red, dark: .red.darker(by: 0.2))
 }

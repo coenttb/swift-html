@@ -9,7 +9,7 @@ import Foundation
 import HTML_CSS_PointFreeHTML
 
 public typealias Color = CSSPropertyTypes.Color.WithDarkMode.Color
-public typealias HTMLColor = CSSPropertyTypes.Color.WithDarkMode.Color
+public typealias HTMLColor = Color
 
 extension HTML {
     @discardableResult

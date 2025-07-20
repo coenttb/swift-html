@@ -8,7 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
-import PointFreeHtmlTestSupport
+import PointFreeHTMLTestSupport
 import OrderedCollections
 import Testing
 
@@ -35,7 +35,7 @@ struct PaddingTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .border-cAjok1{border:1px solid red}
@@ -63,7 +63,7 @@ struct PaddingTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .padding-UnnKO3{padding:10px 20px}
@@ -96,7 +96,7 @@ struct PaddingTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .padding-3kdGx2{padding:10px 20px 15px 25px}
@@ -130,7 +130,7 @@ struct PaddingTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             @media screen and (min-width: 768px){
@@ -168,7 +168,7 @@ struct PaddingTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .padding-left-Fqw6a1{padding-left:10px}

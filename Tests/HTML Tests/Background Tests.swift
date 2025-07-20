@@ -8,7 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
-import PointFreeHtmlTestSupport
+import PointFreeHTMLTestSupport
 import OrderedCollections
 import Testing
 
@@ -35,7 +35,7 @@ struct BackgroundTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .border-cAjok1{border:1px solid red}

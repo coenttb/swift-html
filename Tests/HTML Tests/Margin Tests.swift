@@ -8,7 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
-import PointFreeHtmlTestSupport
+import PointFreeHTMLTestSupport
 import OrderedCollections
 import Testing
 
@@ -29,7 +29,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-UnnKO3{margin:10px 20px}
@@ -57,7 +57,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-bottom-8DJ5t4{margin-bottom:15px}
@@ -86,7 +86,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-left-dbugm3{margin-left:25px}
@@ -120,7 +120,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-3kdGx2{margin:10px 20px 15px 25px}
@@ -152,7 +152,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             @media screen and (min-width: 768px){
@@ -190,7 +190,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-left-Fqw6a1{margin-left:10px}
@@ -224,7 +224,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-8DJ5t4{margin:15px}
@@ -256,7 +256,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-UnnKO3{margin:10px 20px}
@@ -286,7 +286,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-yRPDN3{margin:0px 12px}
@@ -313,7 +313,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .margin-top-GcgQe4{margin-top:8px}
@@ -340,7 +340,7 @@ struct MarginTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
 

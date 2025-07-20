@@ -8,7 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
-import PointFreeHtmlTestSupport
+import PointFreeHTMLTestSupport
 import OrderedCollections
 import Testing
 
@@ -38,7 +38,7 @@ struct BorderTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .border-3JxMp{border:1px solid #cc3333}
@@ -78,7 +78,7 @@ struct BorderTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .border-right-3JxMp{border-right:1px solid #cc3333}
@@ -122,7 +122,7 @@ struct BorderTests {
         ) {
             """
             <!doctype html>
-            <html lang="en">
+            <html>
               <head>
                 <style>
             .border-right-3JxMp{border-right:1px solid #cc3333}

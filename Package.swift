@@ -12,7 +12,7 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var pointFreeHtmlTestSupport: Self { .product(name: "PointFreeHtmlTestSupport", package: "pointfree-html") }
+    static var pointFreeHtmlTestSupport: Self { .product(name: "PointFreeHTMLTestSupport", package: "pointfree-html") }
     static var htmlCssPointFreeHTML: Self { .product(name: "HTML+CSS+PointFreeHTML", package: "swift-html-css-pointfree") }
 }
 
