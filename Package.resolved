@@ -1,5 +1,5 @@
 {
-  "originHash" : "254c02620923238163dd7299101e6006a591fb41722806d1036e5f8b2872ce57",
+  "originHash" : "a981a0ea247fb938a9650ad9d2020c896d8f182ffc718f368dd5910ab9d21ca2",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "9d67d59fdd5c37fa2b3d6c446fac7f1e7a206636"
+        "revision" : "8df71866c8ee813d71dee438d11ade8d4c2b5318"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/swift-html-css-pointfree.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4b16ab9e7a971526e4f691fddcccef04a5cb6b9c"
+        "revision" : "845dfa7ef6031c9df9552d1a09f76869744a6d56"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
       "state" : {
-        "revision" : "37230a37e83f1b7023be08e1b1a2603fcb1567fb",
-        "version" : "1.18.4"
+        "revision" : "b198a568ad24c5a22995c5ff0ecf9667634e860e",
+        "version" : "1.18.5"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "39de59b2d47f7ef3ca88a039dff3084688fe27f4",
-        "version" : "1.5.2"
+        "revision" : "23e3442166b5122f73f9e3e622cd1e4bafeab3b7",
+        "version" : "1.6.0"
       }
     }
   ],

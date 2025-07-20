@@ -24,15 +24,3 @@ private struct _DependencyKeyWritingModifier<Base: HTML, Value>: HTML {
     var body: Never { fatalError() }
 }
 
-// Unsure whether this should be added.
-private enum ObjectStyleKey: DependencyKey {
-    static let liveValue = ObjectStyle(position: .inherit)
-    static let testValue = ObjectStyle(position: .inherit)
-}
-
-extension DependencyValues {
-    public var objectStyle: ObjectStyle {
-        get { self[ObjectStyleKey.self] }
-        set { self[ObjectStyleKey.self] = newValue }
-    }
-}
