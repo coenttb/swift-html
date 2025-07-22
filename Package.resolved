@@ -1,5 +1,5 @@
 {
-  "originHash" : "a981a0ea247fb938a9650ad9d2020c896d8f182ffc718f368dd5910ab9d21ca2",
+  "originHash" : "65453d4adab02eb016db8bc8514f61b1b09db4ec3433b9a5ee9b18c21fac3836",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/swift-html-css-pointfree.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4e8e1634e978948d7945ab96304fcc4b1f9a1f0e"
+        "revision" : "c1f30c480c05e80b10de44bac66a709524aff5f9"
       }
     },
     {
