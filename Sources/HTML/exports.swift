@@ -6,3 +6,4 @@
 //
 
 @_exported import HTML_CSS_PointFreeHTML
+@_exported import HTMLTypesFoundation
