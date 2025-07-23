@@ -39,7 +39,7 @@ extension HTML {
     public func border(
         _ border: Border?,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch border {
@@ -54,15 +54,15 @@ extension HTML {
 
             if border.sides == nil || border.sides?.count == Border.Side.allCases.count {
                 self
-                    .inlineStyle("border", "\(borderStyle) \(lightColor)", media: mediaQuery, pre: pre, pseudo: pseudo)
-                    .inlineStyle("border", "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle(CSSPropertyTypes.Border.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
+                    .inlineStyle(CSSPropertyTypes.Border.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             } else {
                 borderSides(
                     border: border,
                     borderStyle: borderStyle,
                     lightColor: lightColor,
                     darkColor: darkColor,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
             }
@@ -77,13 +77,13 @@ extension HTML {
         style: CSSTypeTypes.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.border(
             Border(sides: .init(sides), width: width, style: style, color: color),
             media: mediaQuery,
-            pre: pre,
+            selector: selector,
             pseudo: pseudo
         )
     }
@@ -97,13 +97,13 @@ extension HTML {
         style: CSSTypeTypes.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.border(
             Border(sides: .init(sides), width: width, style: style, color: color),
             media: mediaQuery,
-            pre: pre,
+            selector: selector,
             pseudo: pseudo
         )
     }
@@ -116,31 +116,29 @@ extension HTML {
         lightColor: String,
         darkColor: String,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String?,
+        selector: PointFreeHTML.Selector?,
         pseudo: Pseudo?
     ) -> some HTML {
-
         self
             .if(border.sides?.contains(.top) == true) { element in
                 element
-                    .inlineStyle("border-top", "\(borderStyle) \(lightColor)", media: mediaQuery, pre: pre, pseudo: pseudo)
-                    .inlineStyle("border-top", "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle(BorderTop.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
+                    .inlineStyle(BorderTop.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
             .if(border.sides?.contains(.left) == true) { element in
                 element
-                    .inlineStyle("border-left", "\(borderStyle) \(lightColor)", media: mediaQuery, pre: pre, pseudo: pseudo)
-                    .inlineStyle("border-left", "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle(BorderLeft.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
+                    .inlineStyle(BorderLeft.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
             .if(border.sides?.contains(.bottom) == true) { element in
                 element
-                    .inlineStyle("border-bottom", "\(borderStyle) \(lightColor)", media: mediaQuery, pre: pre, pseudo: pseudo)
-                    .inlineStyle("border-bottom", "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle(BorderBottom.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
+                    .inlineStyle(BorderBottom.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
             .if(border.sides?.contains(.right) == true) { element in
                 element
-                    .inlineStyle("border-right", "\(borderStyle) \(lightColor)", media: mediaQuery, pre: pre, pseudo: pseudo)
-                    .inlineStyle("border-right", "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, pre: pre, pseudo: pseudo)
+                    .inlineStyle(BorderRight.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
+                    .inlineStyle(BorderRight.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
-
     }
 }

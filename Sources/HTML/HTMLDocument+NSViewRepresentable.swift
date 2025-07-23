@@ -1,11 +1,10 @@
-#if DEBUG && os(macOS)
+#if DEBUG && canImport(SwiftUI)
 import AppKit
-import HTML_CSS_PointFreeHTML
 import SwiftUI
 import WebKit
 
-extension HTMLDocument: @retroactive SwiftUI.View {}
-extension HTMLDocument: @retroactive SwiftUI.NSViewRepresentable {
+extension HTMLDocument: SwiftUI.View {}
+extension HTMLDocument: SwiftUI.NSViewRepresentable {
     public func makeNSView(context: Context) -> WKWebView {
         let webView = WKWebView(
             frame: NSRect(x: 0, y: 0, width: 640, height: 480),

@@ -23,8 +23,7 @@ struct MarginTests {
             of: HTMLDocument {
                 div { HTMLEmpty() }
                     .margin(vertical: .px(10), horizontal: .px(20))
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -51,8 +50,7 @@ struct MarginTests {
             of: HTMLDocument {
                 div { HTMLEmpty() }
                     .margin(vertical: .px(15))
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -80,8 +78,7 @@ struct MarginTests {
             of: HTMLDocument {
                 div { HTMLEmpty() }
                     .margin(horizontal: .px(25))
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -114,8 +111,7 @@ struct MarginTests {
                         bottom: .px(15),
                         left: .px(25)
                     )
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -146,8 +142,7 @@ struct MarginTests {
                         bottom: .px(15),
                         media: .screen && .minWidth(.px(768))
                     )
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -182,7 +177,7 @@ struct MarginTests {
                         bottom: .px(10),
                         left: .px(10),
                         media: nil,
-                        pre: nil,
+                        selector: nil,
                         pseudo: nil
                     )
             },

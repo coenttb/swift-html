@@ -15,7 +15,7 @@ extension HTML {
     public func listStyle(
         _ listStyle: ListStyle,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch listStyle {

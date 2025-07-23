@@ -15,12 +15,12 @@ extension HTML {
         vertical: LengthPercentage?,
         horizontal: LengthPercentage?,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch (vertical, horizontal) {
         case let (.some(vertical), .some(horizontal)):
-            self.padding(.verticalHorizontal(vertical, horizontal), media: mediaQuery, pre: pre, pseudo: pseudo)
+            self.padding(.verticalHorizontal(vertical, horizontal), media: mediaQuery, selector: selector, pseudo: pseudo)
         case let (.none, .some(horizontal)):
             self
                 .paddingRight(.lengthPercentage(horizontal))
@@ -44,17 +44,17 @@ extension HTML {
     public func padding(
         _ padding: Padding.Variant...,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
-        self.padding(.init(padding), media: mediaQuery, pre: pre, pseudo: pseudo)
+        self.padding(.init(padding), media: mediaQuery, selector: selector, pseudo: pseudo)
     }
 
     @HTMLBuilder
     public func padding(
         _ padding: OrderedSet<Padding.Variant>,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         if padding.count == 4 {
@@ -105,14 +105,14 @@ extension HTML {
                     left: left
                 ),
                 media: mediaQuery,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
         } else {
             paddingSides(
                 padding: padding,
                 media: mediaQuery,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
         }
@@ -121,7 +121,7 @@ extension HTML {
     private func paddingSides(
         padding: OrderedSet<Padding.Variant>,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String?,
+        selector: PointFreeHTML.Selector?,
         pseudo: Pseudo?
     ) -> some HTML {
         self
@@ -129,7 +129,7 @@ extension HTML {
                 HTMLGroup {
                     let lengthPercentage = padding.first(where: { if case .top = $0 { return true } else { return false } })!
                     if case .top(let value) = lengthPercentage {
-                        element.inlineStyle("padding-top", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("padding-top", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
                     } else {
                         element
                     }
@@ -139,7 +139,7 @@ extension HTML {
                 HTMLGroup {
                     let lengthPercentage = padding.first(where: { if case .bottom = $0 { return true } else { return false } })!
                     if case .bottom(let value) = lengthPercentage {
-                        element.inlineStyle("padding-bottom", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("padding-bottom", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
                     } else {
                         element
                     }
@@ -149,7 +149,7 @@ extension HTML {
                 HTMLGroup {
                     let lengthPercentage = padding.first(where: { if case .left = $0 { return true } else { return false } })!
                     if case .left(let value) = lengthPercentage {
-                        element.inlineStyle("padding-left", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("padding-left", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
                     } else {
                         element
                     }
@@ -159,7 +159,7 @@ extension HTML {
                 HTMLGroup {
                     let lengthPercentage = padding.first(where: { if case .right = $0 { return true } else { return false } })!
                     if case .right(let value) = lengthPercentage {
-                        element.inlineStyle("padding-right", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+                        element.inlineStyle("padding-right", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
                     } else {
                         element
                     }
@@ -176,7 +176,7 @@ extension HTML {
         horizontal: LengthPercentage,
         bottom: LengthPercentage,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.padding(
@@ -185,7 +185,7 @@ extension HTML {
             .left(horizontal),
             .right(horizontal),
             media: media,
-            pre: pre,
+            selector: selector,
             pseudo: pseudo
         )
     }
@@ -199,7 +199,7 @@ extension HTML {
         left: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
 
@@ -222,6 +222,6 @@ extension HTML {
             _ = x.insert(.right(right), at: x.count)
         }
 
-        return self.padding(x, media: media, pre: pre, pseudo: pseudo)
+        return self.padding(x, media: media, selector: selector, pseudo: pseudo)
     }
 }

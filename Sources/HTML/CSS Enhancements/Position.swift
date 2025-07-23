@@ -17,14 +17,14 @@ extension HTML {
         bottom: Bottom?,
         left: Left?,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self
-            .position(value, media: media, pre: pre, pseudo: pseudo)
-            .top(top, media: media, pre: pre, pseudo: pseudo)
-            .left(left, media: media, pre: pre, pseudo: pseudo)
-            .right(right, media: media, pre: pre, pseudo: pseudo)
-            .bottom(bottom, media: media, pre: pre, pseudo: pseudo)
+            .position(value, media: media, selector: selector, pseudo: pseudo)
+            .top(top, media: media, selector: selector, pseudo: pseudo)
+            .left(left, media: media, selector: selector, pseudo: pseudo)
+            .right(right, media: media, selector: selector, pseudo: pseudo)
+            .bottom(bottom, media: media, selector: selector, pseudo: pseudo)
     }
 }

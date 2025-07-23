@@ -17,11 +17,11 @@ extension HTML {
     public func color(
         _ color: HTMLColor?,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         if let color {
-            self.color(light: color.light, dark: color.dark, media: media, pre: pre, pseudo: pseudo)
+            self.color(light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
         } else {
             self
         }
@@ -47,14 +47,14 @@ extension HTML {
     public func color(
         _ color: CSSPropertyTypes.Color.WithDarkMode?,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch color {
         case .global:
-            self.inlineStyle(color, media: media, pre: pre, pseudo: pseudo)
+            self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
         case let .darkMode(color):
-            self.color(light: color.light, dark: color.dark, media: media, pre: pre, pseudo: pseudo)
+            self.color(light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
         case .none:
             self
         }
@@ -67,12 +67,12 @@ extension HTML {
         light: CSSTypeTypes.Color,
         dark: CSSTypeTypes.Color?,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self
-            .inlineStyle("color", light.description, media: media, pre: pre, pseudo: pseudo)
-            .inlineStyle("color", dark?.description, media: .prefersColorScheme(.dark), pre: pre, pseudo: pseudo)
+            .inlineStyle("color", light.description, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle("color", dark?.description, media: .prefersColorScheme(.dark), selector: selector, pseudo: pseudo)
     }
 }
 

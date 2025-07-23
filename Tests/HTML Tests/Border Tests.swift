@@ -30,7 +30,7 @@ struct BorderTests {
                     style: .solid,
                     color: .init(light: .red, dark: .blue),
                     media: nil,
-                    pre: nil,
+                    selector: nil,
                     pseudo: nil
                 )
             },

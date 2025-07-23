@@ -16,17 +16,17 @@ extension HTML {
         rowGap: RowGap? = nil,
         columnGap: ColumnGap? = nil,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self
-            .display(.flex, media: media, pre: pre, pseudo: pseudo)
-            .flexDirection(direction, media: media, pre: pre, pseudo: pseudo)
-            .flexWrap(wrap, media: media, pre: pre, pseudo: pseudo)
-            .justifyContent(justification, media: media, pre: pre, pseudo: pseudo)
-            .alignItems(itemAlignment, media: media, pre: pre, pseudo: pseudo)
-            .rowGap(rowGap, media: media, pre: pre, pseudo: pseudo)
-            .columnGap(columnGap, media: media, pre: pre, pseudo: pseudo)
+            .display(.flex, media: media, selector: selector, pseudo: pseudo)
+            .flexDirection(direction, media: media, selector: selector, pseudo: pseudo)
+            .flexWrap(wrap, media: media, selector: selector, pseudo: pseudo)
+            .justifyContent(justification, media: media, selector: selector, pseudo: pseudo)
+            .alignItems(itemAlignment, media: media, selector: selector, pseudo: pseudo)
+            .rowGap(rowGap, media: media, selector: selector, pseudo: pseudo)
+            .columnGap(columnGap, media: media, selector: selector, pseudo: pseudo)
     }
 
     public func flexItem(
@@ -34,12 +34,12 @@ extension HTML {
         shrink: FlexShrink? = nil,
         basis: FlexBasis? = nil,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self
-            .flexGrow(grow, media: media, pre: pre, pseudo: pseudo)
-            .flexShrink(shrink, media: media, pre: pre, pseudo: pseudo)
-            .flexBasis(basis, media: media, pre: pre, pseudo: pseudo)
+            .flexGrow(grow, media: media, selector: selector, pseudo: pseudo)
+            .flexShrink(shrink, media: media, selector: selector, pseudo: pseudo)
+            .flexBasis(basis, media: media, selector: selector, pseudo: pseudo)
     }
 }

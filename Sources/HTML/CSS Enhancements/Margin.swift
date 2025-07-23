@@ -15,7 +15,7 @@ extension HTML {
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch (vertical, horizontal) {
@@ -23,7 +23,7 @@ extension HTML {
             self.margin(
                 .verticalHorizontal(vertical, horizontal),
                 media: mediaQuery,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
         case let (.none, .some(horizontal)):
@@ -31,13 +31,13 @@ extension HTML {
                 .marginRight(
                     .lengthPercentage(horizontal),
                     media: mediaQuery,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginLeft(
                     .lengthPercentage(horizontal),
                     media: mediaQuery,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.some(vertical), .none):
@@ -45,13 +45,13 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(vertical),
                     media: mediaQuery,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginBottom(
                     .lengthPercentage(vertical),
                     media: mediaQuery,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case (.none, .none):
@@ -69,17 +69,17 @@ extension HTML {
 //    public func margin(
 //        _ margin: Margin.Variant...,
 //        media mediaQuery: CSSAtRuleTypes.Media? = nil,
-//        pre: String? = nil,
+//        selector: PointFreeHTML.Selector? = nil,
 //        pseudo: Pseudo? = nil
 //    )-> some HTML {
-//        self.margin(.init(margin), media: mediaQuery, pre: pre, pseudo: pseudo)
+//        self.margin(.init(margin), media: mediaQuery, selector: selector, pseudo: pseudo)
 //    }
 
 //    @HTMLBuilder
 //    public func margin(
 //        _ margin: OrderedSet<Margin.Variant>,
 //        media mediaQuery: CSSAtRuleTypes.Media? = nil,
-//        pre: String? = nil,
+//        selector: PointFreeHTML.Selector? = nil,
 //        pseudo: Pseudo? = nil
 //    )-> some HTML {
 //        if margin.count == 4 {
@@ -130,14 +130,14 @@ extension HTML {
 //                    left: left
 //                ),
 //                media: mediaQuery,
-//                pre: pre,
+//                selector: selector,
 //                pseudo: pseudo
 //            )
 //        } else {
 //            marginSides(
 //                margin: margin,
 //                media: mediaQuery,
-//                pre: pre,
+//                selector: selector,
 //                pseudo: pseudo
 //            )
 //        }
@@ -153,7 +153,7 @@ extension HTML {
 //            .if(margin.contains(where: { if case .top = $0 { return true } else { return false } })) { element in
 //                let lengthPercentage = margin.first(where: { if case .top = $0 { return true } else { return false } })!
 //                if case .top(let value) = lengthPercentage {
-//                    return element.inlineStyle("margin-top", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//                    return element.inlineStyle("margin-top", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
 //                } else {
 //                    return element
 //                }
@@ -161,7 +161,7 @@ extension HTML {
 //            .if(margin.contains(where: { if case .bottom = $0 { return true } else { return false } })) { element in
 //                let lengthPercentage = margin.first(where: { if case .bottom = $0 { return true } else { return false } })!
 //                if case .bottom(let value) = lengthPercentage {
-//                    return element.inlineStyle("margin-bottom", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//                    return element.inlineStyle("margin-bottom", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
 //                } else {
 //                    return element
 //                }
@@ -169,7 +169,7 @@ extension HTML {
 //            .if(margin.contains(where: { if case .left = $0 { return true } else { return false } })) { element in
 //                let lengthPercentage = margin.first(where: { if case .left = $0 { return true } else { return false } })!
 //                if case .left(let value) = lengthPercentage {
-//                    return element.inlineStyle("margin-left", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//                    return element.inlineStyle("margin-left", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
 //                } else {
 //                    return element
 //                }
@@ -177,7 +177,7 @@ extension HTML {
 //            .if(margin.contains(where: { if case .right = $0 { return true } else { return false } })) { element in
 //                let lengthPercentage = margin.first(where: { if case .right = $0 { return true } else { return false } })!
 //                if case .right(let value) = lengthPercentage {
-//                    return element.inlineStyle("margin-right", value.description, media: mediaQuery, pre: pre, pseudo: pseudo)
+//                    return element.inlineStyle("margin-right", value.description, media: mediaQuery, selector: selector, pseudo: pseudo)
 //                } else {
 //                    return element
 //                }
@@ -194,7 +194,7 @@ extension HTML {
         bottom: LengthPercentage? = nil,
         left: LengthPercentage? = nil,
         media: CSSAtRuleTypes.Media? = nil,
-        pre: String? = nil,
+        selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         switch (top, right, bottom, left) {
@@ -206,7 +206,7 @@ extension HTML {
                 self.margin(
                     .all(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
             } else if top == bottom && left == right {
@@ -214,7 +214,7 @@ extension HTML {
                 self.margin(
                     .verticalHorizontal(top, left),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
             } else {
@@ -226,7 +226,7 @@ extension HTML {
                         left: .lengthPercentage(left)
                     ),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
             }
@@ -237,19 +237,19 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.some(top), .some(right), .none, .some(left)):
@@ -257,19 +257,19 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginLeft(
                     .lengthPercentage(left),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.some(top), .none, .some(bottom), .some(left)):
@@ -277,19 +277,19 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginLeft(
                     .lengthPercentage(left),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.none, .some(right), .some(bottom), .some(left)):
@@ -297,19 +297,19 @@ extension HTML {
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginLeft(
                     .lengthPercentage(left),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
 
@@ -319,13 +319,13 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.some(top), .none, .some(bottom), .none):
@@ -333,13 +333,13 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.some(top), .none, .none, .some(left)):
@@ -347,13 +347,13 @@ extension HTML {
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginLeft(
                     .lengthPercentage(left),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.none, .some(right), .some(bottom), .none):
@@ -361,13 +361,13 @@ extension HTML {
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
         case let (.none, .some(right), .none, .some(left)):
@@ -376,7 +376,7 @@ extension HTML {
                 self.margin(
                     .verticalHorizontal(.zero, right),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
             } else {
@@ -384,13 +384,13 @@ extension HTML {
                     .marginRight(
                         .lengthPercentage(right),
                         media: media,
-                        pre: pre,
+                        selector: selector,
                         pseudo: pseudo
                     )
                     .marginLeft(
                         .lengthPercentage(left),
                         media: media,
-                        pre: pre,
+                        selector: selector,
                         pseudo: pseudo
                     )
             }
@@ -399,13 +399,13 @@ extension HTML {
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
                 .marginLeft(
                     .lengthPercentage(left),
                     media: media,
-                    pre: pre,
+                    selector: selector,
                     pseudo: pseudo
                 )
 
@@ -414,28 +414,28 @@ extension HTML {
             self.marginTop(
                 .lengthPercentage(top),
                 media: media,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
         case let (.none, .some(right), .none, .none):
             self.marginRight(
                 .lengthPercentage(right),
                 media: media,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
         case let (.none, .none, .some(bottom), .none):
             self.marginBottom(
                 .lengthPercentage(bottom),
                 media: media,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
         case let (.none, .none, .none, .some(left)):
             self.marginLeft(
                 .lengthPercentage(left),
                 media: media,
-                pre: pre,
+                selector: selector,
                 pseudo: pseudo
             )
 

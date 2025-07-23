@@ -29,8 +29,7 @@ struct BackgroundTests {
                             color: .red
                         )
                     )
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -38,12 +37,15 @@ struct BackgroundTests {
             <html>
               <head>
                 <style>
-            .border-cAjok1{border:1px solid red}
+            .border-3JxMp{border:1px solid #cc3333}
+            @media (prefers-color-scheme: dark){
+              .border-CRwQB2{border:1px solid rgb(163, 40, 40)}
+            }
 
                 </style>
               </head>
               <body>
-            <div class="border-cAjok1">
+            <div class="border-3JxMp border-CRwQB2">
             </div>
               </body>
             </html>

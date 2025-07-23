@@ -29,8 +29,7 @@ struct PaddingTests {
                             color: .red
                         )
                     )
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -38,12 +37,15 @@ struct PaddingTests {
             <html>
               <head>
                 <style>
-            .border-cAjok1{border:1px solid red}
+            .border-3JxMp{border:1px solid #cc3333}
+            @media (prefers-color-scheme: dark){
+              .border-CRwQB2{border:1px solid rgb(163, 40, 40)}
+            }
 
                 </style>
               </head>
               <body>
-            <div class="border-cAjok1">
+            <div class="border-3JxMp border-CRwQB2">
             </div>
               </body>
             </html>
@@ -57,8 +59,7 @@ struct PaddingTests {
             of: HTMLDocument {
                 div { HTMLEmpty() }
                     .padding(vertical: .px(10), horizontal: .px(20))
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -90,8 +91,7 @@ struct PaddingTests {
                         .bottom(.px(15)),
                         .left(.px(25))
                     )
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -124,8 +124,7 @@ struct PaddingTests {
                         ],
                         media: .screen && .minWidth(.px(768))
                     )
-            }
-            ,
+            },
             as: .html
         ) {
             """
@@ -160,7 +159,7 @@ struct PaddingTests {
                         left: .px(10),
                         right: nil,
                         media: nil,
-                        pre: nil,
+                        selector: nil,
                         pseudo: nil
                     )
             },
