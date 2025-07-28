@@ -8,18 +8,18 @@
 import Foundation
 import PointFreeHTML
 
-
-//make an HTML.if in the style of HTMLForEach
 extension HTML {
+    @discardableResult
     @HTMLBuilder
-    public func `if`(
+    public func `if`<T: HTML>(
         _ condition: Bool,
-        @HTMLBuilder _ modification: (Self) -> some HTML
+        then modification: (Self) -> T
     ) -> some HTML {
         if condition {
-            modification(self)
+             modification(self)
         } else {
-            self
+            // This requires that T can be initialized from Self
+             self
         }
     }
 }

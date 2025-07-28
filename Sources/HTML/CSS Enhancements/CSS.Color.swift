@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import CSS
+import HTMLCSSPointFreeHTML
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let gray100 = Self.hex("1a1a1a")
     public static let gray150 = Self.hex("2a2a2a")
     public static let gray200 = Self.hex("3a3a3a")
@@ -28,7 +28,7 @@ extension CSS.Color {
     public static let gray900 = Self.hex("f5f5f5")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let blue100 = Self.hex("001a33")
     public static let blue150 = Self.hex("001f3f")
     public static let blue200 = Self.hex("003366")
@@ -48,7 +48,7 @@ extension CSS.Color {
     public static let blue900 = Self.hex("f0f8ff")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let green100 = Self.hex("002600")
     public static let green150 = Self.hex("003300")
     public static let green200 = Self.hex("004400")
@@ -68,7 +68,7 @@ extension CSS.Color {
     public static let green900 = Self.hex("f0fff0")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let purple100 = Self.hex("1a0026")
     public static let purple150 = Self.hex("2a0033")
     public static let purple200 = Self.hex("3b0044")
@@ -88,7 +88,7 @@ extension CSS.Color {
     public static let purple900 = Self.hex("f9f0ff")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let red100 = Self.hex("260000")
     public static let red150 = Self.hex("330000")
     public static let red200 = Self.hex("440000")
@@ -108,7 +108,7 @@ extension CSS.Color {
     public static let red900 = Self.hex("fff0f0")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let yellow100 = Self.hex("262600")
     public static let yellow150 = Self.hex("333300")
     public static let yellow200 = Self.hex("444400")
@@ -128,7 +128,7 @@ extension CSS.Color {
     public static let yellow900 = Self.hex("fffff0")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let orange100 = Self.hex("261300")
     public static let orange150 = Self.hex("331a00")
     public static let orange200 = Self.hex("442200")
@@ -148,7 +148,7 @@ extension CSS.Color {
     public static let orange900 = Self.hex("fff4e6")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let teal100 = Self.hex("001a1a")
     public static let teal150 = Self.hex("003333")
     public static let teal200 = Self.hex("004444")
@@ -168,7 +168,7 @@ extension CSS.Color {
     public static let teal900 = Self.hex("f0f8f8")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let cyan100 = Self.teal100
     public static let cyan150 = Self.teal150
     public static let cyan200 = Self.teal200
@@ -188,7 +188,7 @@ extension CSS.Color {
     public static let cyan900 = Self.teal900
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let pink100 = Self.hex("260013")
     public static let pink150 = Self.hex("33001a")
     public static let pink200 = Self.hex("440022")
@@ -208,7 +208,7 @@ extension CSS.Color {
     public static let pink900 = Self.hex("fceff5")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let brown100 = Self.hex("261300")
     public static let brown150 = Self.hex("331a00")
     public static let brown200 = Self.hex("442200")
@@ -228,17 +228,17 @@ extension CSS.Color {
     public static let brown900 = Self.hex("fef5f0")
 }
 
-extension CSS.Color {
+extension CSSTypeTypes.Color {
     public static let black = Self.hex("121212")
     public static let offBlack = Self.hex("171717")
     public static let white = Self.hex("FFFFFF")
     public static let offWhite = Self.hex("fafafa")
-    
+
     public static let cyan = Self.teal500
     public static let teal = Self.teal500
     public static let pink = Self.pink500
     public static let brown = Self.brown500
-    
+
     public static let orange = Self.orange500
     public static let green = Self.green500
     public static let purple = Self.purple500
@@ -246,5 +246,3 @@ extension CSS.Color {
     public static let red = Self.red500
     public static let yellow = Self.yellow500
 }
-
-

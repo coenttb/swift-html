@@ -1,105 +1,373 @@
 # swift-html
 
-A Swift DSL for HTML and CSS that streamlines building HTML documents, built upon [pointfreeco/swift-html](https://www.github.com/coenttb/swift-html) and integrated with [swift-css](https://www.github.com/coenttb/swift-css).
+<p align="center">
+  <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0">
+  <img src="https://img.shields.io/badge/Platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS%20|%20Linux-lightgray.svg" alt="Platforms">
+  <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/Release-0.0.1-green.svg" alt="Release">
+</p>
 
-![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
+<p align="center">
+  <strong>Type-safe HTML and CSS generation in Swift</strong><br>
+  Build websites, email templates, and server-side rendered pages with the full power of Swift's type system
+</p>
 
-This package is currently in active development and is subject to frequent changes. Features and APIs may change without prior notice until a stable release is available.
+## Overview
 
-## Examples
-
-You can create HTML documents using a declarative, SwiftUI-like syntax, with support for type-safe CSS:
+**swift-html** is your entry point into a comprehensive ecosystem for type-safe web development in Swift. It combines the power of strongly-typed HTML elements, compile-time validated CSS properties, and an efficient rendering engine to help you build web content with confidence.
 
 ```swift
 import HTML
 
-let document = HTMLPreview.modern {
-  h1 { "Type-safe HTML" }
-    .color(.blue)
-    .fontSize(24.px)
-  p { "With type-safe CSS!" }
-    .margin(top: 10.px, bottom: 10.px)
+// Type-safe HTML with SwiftUI-like syntax
+let page = HTMLDocument {
+    div {
+        h1 { "Welcome to swift-html" }
+            .color(.systemBlue)
+            .fontSize(.rem(2.5))
+        
+        p { "Build beautiful, type-safe web pages with Swift" }
+            .color(light: .gray800, dark: .gray200)
+            .lineHeight(1.6)
+        
+        a(href: "https://github.com/coenttb/swift-html") {
+            "Get Started →"
+        }
+        .padding(.rem(1))
+        .backgroundColor(.systemBlue)
+        .color(.white)
+        .borderRadius(.px(8))
+        .textDecoration(.none)
+    }
+    .padding(.rem(2))
+    .maxWidth(.px(800))
+    .margin(.auto)
+} head: {
+    title { "swift-html - Type-safe HTML in Swift" }
+    meta(charset: .utf8)
+    meta(name: .viewport, content: "width=device-width, initial-scale=1")
 }
+
+// Render to string
+let bytes: ContiguousArray<UInt8> = element.render() // highly optimized
+let string: String = try String(page) // render HTML as String
 ```
 
-For a quick start, use HTMLPreview.modern to give your document a modern look. Alternatively, create a custom implementation by conforming your HTMLDocument struct or enum to the HTMLDocument protocol.
+## Why swift-html?
 
-### SwiftUI Preview Example
+### 🛡️ Type Safety First
+- **Compile-time validation**: Catch HTML and CSS errors before runtime
+- **Impossible invalid states**: Can't put a `href` on a `div` or use `px` for `color`
+- **IDE support**: Full autocomplete, inline documentation, and refactoring
 
-You can preview your HTML directly using SwiftUI:
+### 🎨 Modern CSS Support
+- **Type-safe properties**: Every CSS property is strongly typed
+- **Dark mode built-in**: First-class support for light/dark color schemes
+- **Responsive helpers**: Media queries and container queries with type safety
+
+### ⚡ Performance
+- **Zero runtime overhead**: All validation happens at compile time
+- **Efficient rendering**: Direct byte-level rendering for server applications
+- **Minimal dependencies**: Lightweight and focused
+
+### 🧩 Composable Architecture
+- **SwiftUI-like syntax**: Familiar patterns for Swift developers
+- **Reusable components**: Build once, use everywhere
+- **Modular design**: Use only what you need
+
+## Quick Start
+
+### Installation
+
+Add swift-html to your Swift package:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/coenttb/swift-html", from: "0.0.1")
+]
 ```
-#if canImport(SwiftUI)
-import SwiftUI
+
+For Xcode projects, add the package URL: `https://github.com/coenttb/swift-html`
+
+### Your First Page
+
+```swift
 import HTML
 
+struct WelcomePage: HTMLDocument {
+    var head: some HTML {
+        title { "Welcome" }
+        meta(charset: .utf8)
+    }
+    
+    var body: some HTML {
+        h1 { "Hello, World!" }
+            .textAlign(.center)
+            .color(.systemBlue)
+    }
+}
+
+// Render it
+let page = WelcomePage().render()
+let html = try String(page)
+```
+
+### SwiftUI Preview Support
+
+Preview your HTML in Xcode while developing:
+
+```swift
+#if canImport(SwiftUI)
+import SwiftUI
+
 #Preview {
-  HTMLPreview.modern {
-    h1 { "Welcome!" }
-      .color(.blue)
-      .fontSize(24.px)
-    p { "You've found our site!" }
-      .margin(top: 10.px, bottom: 10.px)
-  }
+    HTMLDocument {
+        div {
+            h1 { "Live Preview" }
+                .color(.systemBlue)
+            p { "Edit and see changes instantly!" }
+        }
+        .padding(.rem(2))
+    }
 }
 #endif
 ```
 
-## HTML & CSS domain specific language in Swift
+## Core Concepts
 
-This DSL leverages Swift’s type system to make constructing HTML documents and elements safer and more reliable. The APIs enforce proper types, minimizing the use of raw strings and reducing common errors.
+### 🏗️ HTML Elements
 
-The integration with [swift-css](https://www.github.com/coenttb/swift-css) ensures a type-safe system that allows that only valid CSS properties to be applied to HTML elements, helping catch styling mistakes at compile time.
+Every HTML element is a strongly-typed Swift type:
 
-## FAQ
+```swift
+// Type-safe elements
+h1 { "Title" }
+p { "Paragraph" }
+a(href: "/about") { "About" }
+img(src: "/logo.png", alt: "Logo")
 
-**Can I use this with existing Swift web frameworks like Vapor?** 
-
-Yes, you can! See [coenttb-com-server](https://www.github.com/coenttb/coenttb-com-server) for an example implementation. 
-
-## Related projects
-
-* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Builds on [swift-html](https://www.github.com/coenttb/coenttb-html) and includes additional modules related to html components, html-to-pdf, markdown, and email.
-* [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for CSS.
-* [swift-web](https://www.github.com/coenttb/swift-web): A collection of types and functions for dealing with common web server concerns. Forked from PointFree and updated where necessary.
-* [coenttb-web](https://www.github.com/coenttb/swift-web): Builds on [swift-web](https://www.github.com/coenttb/swift-web) and includes additional modules related to web development.
-* [coenttb-com-server](https://www.github.com/coenttb/coenttb-com-server): The coentt.com website, built with `swift-html`.
-* [swift-languages](https://www.github.com/coenttb/swift-languages): A package for for cross platform translations using Swift.
-
-## Installation
-
-You can add `swift-html` to an Xcode project by including it as a package dependency:
-
-Repository URL: https://github.com/coenttb/swift-html
-
-For a Swift Package Manager project, add the dependency in your Package.swift file:
-```
-dependencies: [
-  .package(url: "https://github.com/coenttb/swift-html", branch: "main")
-]
+// Impossible to write invalid HTML
+// div(href: "/") { } // ❌ Compile error: 'href' is not valid for div
 ```
 
-## Related Projects
+### 🎨 CSS Styling
 
-* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Extends [coenttb/swift-html](https://www.github.com/coenttb/swift-html) with additional functionality and integrations for HTML, Markdown, Email, and printing HTML to PDF.
-* [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for type-safe, extensible, and transformable CSS styles.
-* [coenttb/swift-web](https://www.github.com/coenttb/swift-web): A modern fork of [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web), providing modular tools to simplify web development in Swift.
-* [coenttb-web](https://www.github.com/coenttb/coenttb-web): Builds on [coenttb/swift-web](https://www.github.com/coenttb/swift-web) with additional features and integrations for Vapor and other frameworks.
-* [coenttb-com-server](https://www.github.com/coenttb/coenttb-com-server): The backend server for coenttb.com, written entirely in Swift and powered by [Vapor](https://www.github.com/vapor/vapor) and [coenttb-web](https://www.github.com/coenttb/coenttb-web).
-* [swift-languages](https://www.github.com/coenttb/swift-languages): A cross-platform translation library written in Swift.
+Apply styles with type-safe modifiers:
 
-## Feedback is much appreciated!
+```swift
+div { "Styled content" }
+    .padding(.rem(2))                    // Type-safe units
+    .backgroundColor(.systemBackground)   // Semantic colors
+    .borderRadius(.px(8))                // Multiple unit types
+    .boxShadow(                          // Complex properties
+        x: .px(0),
+        y: .px(2),
+        blur: .px(4),
+        color: .rgba(0, 0, 0, 0.1)
+    )
+```
 
-If you’re working on your own Swift project, feel free to learn, fork, and contribute.
+### 🌓 Dark Mode Support
 
-Got thoughts? Found something you love? Something you hate? Let me know! Your feedback helps make this project better for everyone. Open an issue or start a discussion—I’m all ears.
+First-class support for color schemes:
 
-> [Subscribe to my newsletter](http://coenttb.com/en/newsletter/subscribe)
->
-> [Follow me on X](http://x.com/coenttb)
-> 
-> [Link on Linkedin](https://www.linkedin.com/in/tenthijeboonkkamp)
+```swift
+p { "Adaptive text" }
+    .color(light: .gray900, dark: .gray100)
+    .backgroundColor(light: .white, dark: .gray900)
+```
+
+or use the convenient `Color` from `swift-html`:
+```swift
+extension Color {
+    static let lightBackground: Self = .init(light: .white, dark: .gray900)
+}
+
+p { "Adaptive text" }
+    .backgroundColor(.lightBackground)
+```
+
+### ♻️ Reusable Components
+
+Build components that compose:
+
+```swift
+struct Button: HTML {
+    let title: String
+    let action: String
+    
+    var body: some HTML {
+        a(href: action) { title }
+            .display(.inlineBlock)
+            .padding(.vertical(.rem(0.5)), .horizontal(.rem(1)))
+            .backgroundColor(.systemBlue)
+            .color(.white)
+            .borderRadius(.px(6))
+            .textDecoration(.none)
+            .transition(.all, duration: .ms(150))
+    }
+}
+
+// Use it anywhere
+Button(title: "Learn More", action: "/docs")
+```
+
+## Real-World Examples
+
+### 📱 Responsive Layout
+
+```swift
+div {
+    header { "Mobile First" }
+    nav { "Navigation" }
+    main { "Content" }
+}
+.display(.grid)
+.gridTemplateColumns(.fr(1))
+.gap(.rem(1))
+```
+
+### 📧 Email Template
+
+```swift
+struct EmailTemplate: HTMLDocument {
+    let userName: String
+    
+    var head: some HTML {
+        title { "Welcome Email" }
+        style {
+            """
+            body { font-family: system-ui; line-height: 1.6; }
+            """
+        }
+    }
+    
+    var body: some HTML {
+        div {
+            h1 { "Welcome, \(userName)!" }
+            p { "Thanks for joining us." }
+            Button(title: "Get Started", action: "https://app.example.com")
+        }
+        .class("container")
+    }
+}
+```
+
+### 🚀 Server-Side Rendering
+
+```swift
+import Vapor
+
+func routes(_ app: Application) throws {
+    app.get { req async throws -> Response in
+        let page = HomePage(user: req.user)
+        let html = try String(page)
+        
+        return Response(
+            status: .ok,
+            headers: ["Content-Type": "text/html; charset=utf-8"],
+            body: .init(string: html)
+        )
+    }
+}
+```
+
+## Architecture
+
+swift-html integrates four specialized packages:
+
+```
+swift-html (You are here!)
+    ├── swift-html-types      → HTML element types & attributes
+    ├── swift-css-types       → CSS property types & values  
+    ├── pointfree-html        → Rendering engine
+    └── swift-html-css-pointfree → Integration layer
+```
+
+Each package has a focused responsibility while working seamlessly together.
+
+## Testing
+
+swift-html includes powerful testing utilities:
+
+```swift
+import Testing
+import PointFreeHTMLTestSupport
+
+@Suite("Button Tests")
+struct ButtonTests {
+    @Test("Button renders correctly")
+    func buttonRendering() {
+        let button = Button(title: "Click Me", action: "/action")
+        
+        assertInlineSnapshot(of: button, as: .html) {
+            """
+            <a href="/action" style="display: inline-block; padding: 0.5rem 1rem; background-color: #007AFF; color: white; border-radius: 6px; text-decoration: none; transition: all 150ms">Click Me</a>
+            """
+        }
+    }
+}
+```
+
+## Documentation
+
+Comprehensive documentation is available:
+
+- 📚 **[Getting Started Guide](Sources/HTML/Documentation.docc/Articles/GettingStarted.md)** - Installation and first steps
+- 🏗️ **[HTML Elements Reference](Sources/HTML/Documentation.docc/Extensions)** - All available elements and modifiers
+- 🎨 **[CSS Properties Guide](Sources/HTML/Documentation.docc/Articles/StylingWithCSS.md)** - Type-safe styling
+- 🧩 **[Building Components](Sources/HTML/Documentation.docc/Articles/CustomComponents.md)** - Reusable patterns
+
+## Ecosystem
+
+### Core Stack
+
+- **[swift-html-types](https://github.com/coenttb/swift-html-types)** - Type-safe HTML elements
+- **[swift-css-types](https://github.com/coenttb/swift-css-types)** - Type-safe CSS properties
+- **[pointfree-html](https://github.com/coenttb/pointfree-html)** - High-performance rendering
+- **[swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree)** - Integration layer
+
+### Extensions
+
+- **[coenttb-html](https://github.com/coenttb/coenttb-html)** - Additional components, markdown, PDF generation
+- **[swift-web](https://github.com/coenttb/swift-web)** - Web server utilities
+- **[coenttb-server](https://github.com/coenttb/coenttb-server)** - Server framework integration
+
+### Examples
+
+- **[coenttb.com](https://github.com/coenttb/coenttb-com-server)** - Full production website built 100% with swift-html
+  - Complete server-side rendered website
+  - Real-world implementation patterns
+  - Production-ready architecture
+
+## Requirements
+
+- Swift 5.10+ (Full Swift 6 support)
+- macOS 14+ / iOS 17+ / tvOS 17+ / watchOS 10+ / Linux
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## Support
+
+- 🐛 **[Issue Tracker](https://github.com/coenttb/swift-html/issues)** - Report bugs or request features
+- 💬 **[Discussions](https://github.com/coenttb/swift-html/discussions)** - Ask questions and share ideas
+- 📧 **[Newsletter](http://coenttb.com/en/newsletter/subscribe)** - Stay updated
+- 🐦 **[X (Twitter)](http://x.com/coenttb)** - Follow for updates
+- 💼 **[LinkedIn](https://www.linkedin.com/in/tenthijeboonkkamp)** - Connect professionally
+
+## Acknowledgements
+
+This project builds upon foundational work by Point-Free (Brandon Williams and Stephen Celis). This package's HTML rendering engine (`pointfree-html`) is a fork of their `swift-html` library, but updated to their current approach on `pointfreeco`.
 
 ## License
 
-This project is licensed by coenttb under the Apache 2.0 License. See [LICENSE](LICENSE) for details.
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://coenttb.com">coenttb</a><br>
+</p>
 
