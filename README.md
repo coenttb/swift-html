@@ -260,13 +260,10 @@ import Vapor
 
 func routes(_ app: Application) throws {
     app.get { req async throws -> Response in
-        let page = HomePage(user: req.user)
-        let html = try String(page)
-        
         return Response(
             status: .ok,
             headers: ["Content-Type": "text/html; charset=utf-8"],
-            body: .init(string: html)
+            body: .init(data: Data(HomePage(user: req.user).render()))
         )
     }
 }
