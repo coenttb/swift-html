@@ -23,4 +23,3 @@ private struct _DependencyKeyWritingModifier<Base: HTML, Value>: HTML {
     }
     var body: Never { fatalError() }
 }
-

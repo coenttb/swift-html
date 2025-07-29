@@ -13,7 +13,7 @@
     {
       "identity" : "pointfree-html",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/pointfree-html.git",
+      "location" : "https://github.com/coenttb/pointfree-html",
       "state" : {
         "revision" : "0867cb15127d9db0fe54e53d5a47fb5438d84710",
         "version" : "2.0.0"
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-css-types.git",
       "state" : {
-        "revision" : "3e54aa7d8b61510edd1d8bad2697476908f4f1d8",
-        "version" : "0.0.1"
+        "revision" : "be78ecea36f036ab165cbf7b1134b3fb7bcf036b",
+        "version" : "0.1.0"
       }
     },
     {

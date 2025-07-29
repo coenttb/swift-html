@@ -8,8 +8,8 @@
 import Dependencies
 import Foundation
 import HTML
-import PointFreeHTMLTestSupport
 import OrderedCollections
+import PointFreeHTMLTestSupport
 import Testing
 
 @Suite(

@@ -23,7 +23,7 @@ import HTML
 let page = HTMLDocument {
     div {
         h1 { "Welcome to swift-html" }
-            .color(.systemBlue)
+            .color(.red)
             .fontSize(.rem(2.5))
         
         p { "Build beautiful, type-safe web pages with Swift" }
@@ -34,18 +34,18 @@ let page = HTMLDocument {
             "Get Started →"
         }
         .padding(.rem(1))
-        .backgroundColor(.systemBlue)
+        .backgroundColor(.yellow)
         .color(.white)
         .borderRadius(.px(8))
-        .textDecoration(.none)
+        .textDecoration(TextDecoration.none)
     }
     .padding(.rem(2))
     .maxWidth(.px(800))
     .margin(.auto)
 } head: {
     title { "swift-html - Type-safe HTML in Swift" }
-    meta(charset: .utf8)
-    meta(name: .viewport, content: "width=device-width, initial-scale=1")
+    meta(charset: .utf8)()
+    meta(name: .viewport, content: "width=device-width, initial-scale=1")()
 }
 
 // Render to string
@@ -97,13 +97,13 @@ import HTML
 struct WelcomePage: HTMLDocument {
     var head: some HTML {
         title { "Welcome" }
-        meta(charset: .utf8)
+        meta(charset: .utf8)()
     }
     
     var body: some HTML {
         h1 { "Hello, World!" }
             .textAlign(.center)
-            .color(.systemBlue)
+            .color(.blue)
     }
 }
 
@@ -124,7 +124,7 @@ import SwiftUI
     HTMLDocument {
         div {
             h1 { "Live Preview" }
-                .color(.systemBlue)
+                .color(.blue)
             p { "Edit and see changes instantly!" }
         }
         .padding(.rem(2))
@@ -200,7 +200,7 @@ struct Button: HTML {
         a(href: action) { title }
             .display(.inlineBlock)
             .padding(.vertical(.rem(0.5)), .horizontal(.rem(1)))
-            .backgroundColor(.systemBlue)
+            .backgroundColor(.blue)
             .color(.white)
             .borderRadius(.px(6))
             .textDecoration(.none)
@@ -298,11 +298,13 @@ import PointFreeHTMLTestSupport
 struct ButtonTests {
     @Test("Button renders correctly")
     func buttonRendering() {
-        let button = Button(title: "Click Me", action: "/action")
-        
-        assertInlineSnapshot(of: button, as: .html) {
+        let button = HTMLElementTypes.Button.submit { "Submit Form" }
+        assertInlineSnapshot(
+            of: button,
+            as: .html
+        ) {
             """
-            <a href="/action" style="display: inline-block; padding: 0.5rem 1rem; background-color: #007AFF; color: white; border-radius: 6px; text-decoration: none; transition: all 150ms">Click Me</a>
+            <button type="reset">Submit Form</button>
             """
         }
     }

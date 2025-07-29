@@ -32,7 +32,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-html-types", from: "0.1.0"),
-        .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
+        .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0")
     ],
     targets: [
         .target(

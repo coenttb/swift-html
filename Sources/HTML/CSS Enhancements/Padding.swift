@@ -203,7 +203,6 @@ extension HTML {
         pseudo: Pseudo? = nil
     ) -> some HTML {
 
-        
         var x: OrderedSet<Padding.Variant> = []
 
         if let top {

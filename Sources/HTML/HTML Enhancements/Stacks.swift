@@ -1,8 +1,8 @@
 import CSSPointFreeHTML
 import Foundation
-import HTMLCSSPointFreeHTML
 import HTMLAttributesPointFreeHTML
 import HTMLAttributeTypes
+import HTMLCSSPointFreeHTML
 import OrderedCollections
 import PointFreeHTML
 
@@ -108,7 +108,7 @@ public struct LazyVGrid<Content: HTML>: HTML {
         ) {
             html,
             columns in
-            
+
             html
                 .inlineStyle(
                     "column-gap",

@@ -3,7 +3,7 @@ import PointFreeHTML
 import SwiftUI
 import WebKit
 
-extension HTMLDocument: SwiftUI.View {}
+extension HTMLDocument: @retroactive SwiftUI.View {}
 extension HTMLDocument: SwiftUI.UIViewRepresentable {
     public func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()

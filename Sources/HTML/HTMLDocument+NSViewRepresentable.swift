@@ -3,7 +3,7 @@ import AppKit
 import SwiftUI
 import WebKit
 
-extension HTMLDocument: SwiftUI.View {}
+extension HTMLDocument: @retroactive View {}
 extension HTMLDocument: SwiftUI.NSViewRepresentable {
     public func makeNSView(context: Context) -> WKWebView {
         let webView = WKWebView(
