@@ -1,4 +1,4 @@
-#if canImport(UIKit) && !os(macOS)
+#if canImport(UIKit) && os(iOS)
 import PointFreeHTML
 import SwiftUI
 import WebKit

@@ -1,4 +1,4 @@
-#if DEBUG && canImport(SwiftUI)
+#if canImport(SwiftUI) && os(macOS)
 import AppKit
 import SwiftUI
 import WebKit
