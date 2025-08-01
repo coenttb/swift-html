@@ -8,7 +8,7 @@ extension HTMLDocument: SwiftUI.UIViewRepresentable {
     public func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
-        webView.loadHTMLString(self.html, baseURL: nil)
+        webView.loadHTMLString(try! .init(self), baseURL: nil)
         return webView
     }
 
