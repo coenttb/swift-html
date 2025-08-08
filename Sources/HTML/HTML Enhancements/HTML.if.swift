@@ -7,6 +7,7 @@
 
 import Foundation
 import PointFreeHTML
+import Dependencies
 
 extension HTML {
     @discardableResult
@@ -15,11 +16,17 @@ extension HTML {
         _ condition: Bool,
         then modification: (Self) -> T
     ) -> some HTML {
-        if condition {
-             modification(self)
-        } else {
-            // This requires that T can be initialized from Self
-             self
+        withEscapedDependencies { continuation in
+            HTMLGroup {
+                if condition {
+                    continuation.yield {
+                        modification(self)
+                    }
+                } else {
+                    // This requires that T can be initialized from Self
+                    self
+                }
+            }
         }
     }
 }
