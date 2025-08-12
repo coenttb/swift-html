@@ -329,8 +329,6 @@ Comprehensive documentation is available:
 ### Extensions
 
 - **[coenttb-html](https://github.com/coenttb/coenttb-html)** - Additional components, markdown, PDF generation
-- **[swift-web](https://github.com/coenttb/swift-web)** - Web server utilities
-- **[coenttb-server](https://github.com/coenttb/coenttb-server)** - Server framework integration
 
 ### Examples
 
