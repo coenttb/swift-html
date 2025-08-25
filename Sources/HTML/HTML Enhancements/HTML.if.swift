@@ -30,3 +30,17 @@ extension HTML {
         }
     }
 }
+
+extension HTML {
+    @HTMLBuilder
+    public func `if`<X>(
+        `let` value: X?,
+        _ then: (Self, X) -> some HTML
+    ) -> some HTML {
+        if let value = value {
+            then(self, value)
+        } else {
+            self
+        }
+    }
+}
