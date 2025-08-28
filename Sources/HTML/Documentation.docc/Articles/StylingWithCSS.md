@@ -304,7 +304,7 @@ Style element states and create virtual elements:
 ```swift
 a(href: "/") { "Link" }
     .color(.blue)
-    .textDecoration(.none)
+    .textDecoration(TextDecoration.none)
     .hover {
         $0.textDecoration(.underline)
           .color(.darkBlue)

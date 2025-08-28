@@ -53,7 +53,7 @@ a(href: "/products", target: .self) {
     "View Products"
 }
 .color(.blue600)
-.textDecoration(.none)
+.textDecoration(TextDecoration.none)
 .fontWeight(.medium)
 .padding(.vertical(.rem(0.5)), .horizontal(.rem(1)))
 .borderRadius(.px(4))

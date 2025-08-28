@@ -23,6 +23,12 @@ extension HTMLColor {
     }
 }
 
+extension HTMLColor {
+    public func opacity(_ alpha: Double) -> HTMLColor {
+        self.map { $0.opacity(alpha) }
+    }
+}
+
 extension CSSPropertyTypes.Color {
     public enum WithDarkMode: Sendable, Hashable, GlobalConvertible, ColorConvertible {
 
@@ -290,26 +296,6 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @discardableResult
-    @_disfavoredOverload
-    @HTMLBuilder
-    func backgroundColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
-        switch color {
-        case .global:
-            self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
-        case let .darkMode(color):
-            self.backgroundColor(light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
-        case .none:
-            self
-        }
-    }
-}
 
 // MARK: HTML extension - BorderBlockColor
 

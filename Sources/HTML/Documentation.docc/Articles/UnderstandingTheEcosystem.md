@@ -321,7 +321,7 @@ struct ArticleCard: HTML {
             
             a(href: article.url) { "Read more" }
                 .color(.accent)
-                .textDecoration(.none)
+                .textDecoration(TextDecoration.none)
         }
         .padding(.rem(1))
         .border(.px(1), .solid, .gray200)

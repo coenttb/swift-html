@@ -142,3 +142,91 @@ extension HTML {
             }
     }
 }
+
+// MARK: - Individual Border Side Functions
+
+extension HTML {
+    @discardableResult
+    @HTMLBuilder
+    public func borderTop(
+        width: BorderWidth? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
+        color: HTMLColor? = nil,
+        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        selector: PointFreeHTML.Selector? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self.border(
+            [.top],
+            width: width,
+            style: style,
+            color: color,
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+        )
+    }
+    
+    @discardableResult
+    @HTMLBuilder
+    public func borderBottom(
+        width: BorderWidth? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
+        color: HTMLColor? = nil,
+        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        selector: PointFreeHTML.Selector? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self.border(
+            [.bottom],
+            width: width,
+            style: style,
+            color: color,
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+        )
+    }
+    
+    @discardableResult
+    @HTMLBuilder
+    public func borderLeft(
+        width: BorderWidth? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
+        color: HTMLColor? = nil,
+        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        selector: PointFreeHTML.Selector? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self.border(
+            [.left],
+            width: width,
+            style: style,
+            color: color,
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+        )
+    }
+    
+    @discardableResult
+    @HTMLBuilder
+    public func borderRight(
+        width: BorderWidth? = nil,
+        style: CSSTypeTypes.LineStyle? = .solid,
+        color: HTMLColor? = nil,
+        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        selector: PointFreeHTML.Selector? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self.border(
+            [.right],
+            width: width,
+            style: style,
+            color: color,
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+        )
+    }
+}

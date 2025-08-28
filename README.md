@@ -203,7 +203,7 @@ struct Button: HTML {
             .backgroundColor(.blue)
             .color(.white)
             .borderRadius(.px(6))
-            .textDecoration(.none)
+            .textDecoration(TextDecoration.none)
             .transition(.all, duration: .ms(150))
     }
 }
