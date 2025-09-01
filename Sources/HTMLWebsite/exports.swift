@@ -7,4 +7,7 @@
 
 @_exported import HTML
 @_exported import HTMLComponents
+@_exported import PointFreeHTMLTranslating
+@_exported import Translating
+
 

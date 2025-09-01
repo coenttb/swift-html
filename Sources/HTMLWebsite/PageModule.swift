@@ -16,16 +16,16 @@ public struct PageModule<Title: HTML, Content: HTML>: HTML {
         self.content = content()
     }
     
-//    public init(
-//        title: String,
-//        seeAllURL: String? = nil,
-//        theme: PageModule.Theme,
-//        @HTMLBuilder content: () -> Content
-//    ) where Title == Header<HTMLText> {
-//        self.title = Header(3) { HTMLText(title) }
-//        self.theme = theme
-//        self.content = content()
-//    }
+    //    public init(
+    //        title: String,
+    //        seeAllURL: String? = nil,
+    //        theme: PageModule.Theme,
+    //        @HTMLBuilder content: () -> Content
+    //    ) where Title == Header<HTMLText> {
+    //        self.title = Header(3) { HTMLText(title) }
+    //        self.theme = theme
+    //        self.content = content()
+    //    }
     
     public init(
         theme: PageModule.Theme,
@@ -88,22 +88,22 @@ public struct PageModuleSeeAllTitle<Title: HTML>: HTML {
     
     
     public var body: some HTML {
-            div {
-                title
-                Link(
-                    href: .init(seeAllURL)) {
-                        "\'(String.see_all.capitalizingFirstLetter().description) →"
-                    }
-
-            }
-            .width(.percent(100))
-            .flexContainer(
-                direction: .row,
-                wrap: .nowrap,
-                justification: .spaceBetween,
-                itemAlignment: .center
-            )
-            .flexItem(basis: .percent(100))
+        div {
+            title
+            Link(
+                href: .init(seeAllURL)) {
+                    "\'(String.see_all.capitalizingFirstLetter().description) →"
+                }
+            
+        }
+        .width(.percent(100))
+        .flexContainer(
+            direction: .row,
+            wrap: .nowrap,
+            justification: .spaceBetween,
+            itemAlignment: .center
+        )
+        .flexItem(basis: .percent(100))
     }
 }
 

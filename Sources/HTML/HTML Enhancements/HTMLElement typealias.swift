@@ -70,7 +70,7 @@ public typealias area = HTMLElementTypes.Area
 /// ```swift
 /// article {
 ///   heading2 { "Blog Post Title" }
-///   paragraph { "Content goes here..." }
+///   HTMLComponents.Paragraph { "Content goes here..." }
 /// }
 /// ```
 public typealias article = HTMLElementTypes.Article
@@ -83,7 +83,7 @@ public typealias article = HTMLElementTypes.Article
 /// Example:
 /// ```swift
 /// aside {
-///   paragraph { "This is supplementary information that enhances the main content." }
+///   HTMLComponents.Paragraph { "This is supplementary information that enhances the main content." }
 /// }
 /// ```
 public typealias aside = HTMLElementTypes.Aside
@@ -135,7 +135,7 @@ public typealias base = HTMLElementTypes.Base
 /// ```swift
 /// body {
 ///   heading1 { "Welcome to My Website" }
-///   paragraph { "This is the content of my webpage." }
+///   HTMLComponents.Paragraph { "This is the content of my webpage." }
 /// }
 /// ```
 public typealias body = HTMLElementTypes.Body

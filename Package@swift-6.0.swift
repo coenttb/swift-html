@@ -95,7 +95,8 @@ let package = Package(
                 .htmlComponents,
                 .htmlMarkdown,
                 .htmlTheme,
-                .dependencies
+                .dependencies,
+                .translating
             ]
         ),
         .target(

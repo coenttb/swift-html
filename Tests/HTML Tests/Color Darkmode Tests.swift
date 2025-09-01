@@ -23,7 +23,7 @@ struct ColorTests {
                     H1 { "Type-safe HTML" }
                         .color(light: .named(.blue), dark: .named(.red))
                         .fontSize(.px(24))
-                    Paragraph { "With type-safe CSS!" }
+                    HTMLComponents.Paragraph { "With type-safe CSS!" }
                         .marginTop(.px(10))
 
                     Video(src: "/public/video/example.mp4", autoplay: true) {}

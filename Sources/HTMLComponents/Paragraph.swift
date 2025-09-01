@@ -4,7 +4,10 @@ import HTML
 public struct Paragraph<Content: HTML>: HTML {
     let size: Size
     @HTMLBuilder let content: Content
-    public init(_ size: Size = .regular, @HTMLBuilder content: () -> Content) {
+    public init(
+        _ size: Size = .regular,
+        @HTMLBuilder content: () -> Content
+    ) {
         self.size = size
         self.content = content()
     }
