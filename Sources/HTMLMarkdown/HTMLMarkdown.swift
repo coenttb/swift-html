@@ -1,4 +1,5 @@
 import HTML
+import HTMLTheme
 import Markdown
 
 public struct HTMLMarkdown: HTML {
@@ -155,7 +156,7 @@ private struct HTMLConverter: MarkupVisitor {
                     }
                 }
             }
-            .color(.offBlack.withDarkColor(.offWhite))
+            .color(CSSTypeTypes.Color.offBlack.withDarkColor(.offWhite))
             .backgroundColor(style.backgroundColor)
             .border(width: .px(2), style: .solid, color: style.borderColor)
             .borderRadius(.uniform(.px(6)))

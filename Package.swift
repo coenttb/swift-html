@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -9,6 +9,7 @@ extension String {
     static let htmlComponents: Self = "HTMLComponents"
     static let htmlMarkdown: Self = "HTMLMarkdown"
     static let htmlEmail: Self = "HTMLEmail"
+    static let htmlWebsite: Self = "HTMLWebsite"
     static let htmlKit: Self = "HTMLKit"
 }
 
@@ -18,6 +19,7 @@ extension Target.Dependency {
     static var htmlComponents: Self { .target(name: .htmlComponents) }
     static var htmlMarkdown: Self { .target(name: .htmlMarkdown) }
     static var htmlEmail: Self { .target(name: .htmlEmail) }
+    static var htmlWebsite: Self { .target(name: .htmlWebsite) }
 }
 
 extension Target.Dependency {
@@ -50,7 +52,7 @@ let package = Package(
         .library(name: .htmlComponents, targets: [.htmlComponents]),
         .library(name: .htmlMarkdown, targets: [.htmlMarkdown]),
         .library(name: .htmlEmail, targets: [.htmlEmail]),
-        
+        .library(name: .htmlWebsite, targets: [.htmlWebsite]),
         // Convenience product with common features
         .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
     ],
@@ -82,6 +84,16 @@ let package = Package(
             name: .htmlTheme,
             dependencies: [
                 .html,
+                .dependencies
+            ]
+        ),
+        .target(
+            name: .htmlWebsite,
+            dependencies: [
+                .html,
+                .htmlComponents,
+                .htmlMarkdown,
+                .htmlTheme,
                 .dependencies
             ]
         ),
@@ -154,7 +166,7 @@ let package = Package(
             ]
         )
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [.v5]
 )
 
 extension String {

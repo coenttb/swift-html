@@ -9,6 +9,7 @@ import HTML
 import HTMLMarkdown
 import Foundation
 import Markdown
+import HTMLTheme
 
 public struct EmailMarkdown: HTML {
     public let markdown: String
