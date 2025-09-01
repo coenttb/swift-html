@@ -1,14 +1,23 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 extension String {
     static let html: Self = "HTML"
+    static let htmlTheme: Self = "HTMLTheme"
+    static let htmlComponents: Self = "HTMLComponents"
+    static let htmlMarkdown: Self = "HTMLMarkdown"
+    static let htmlEmail: Self = "HTMLEmail"
+    static let htmlKit: Self = "HTMLKit"
 }
 
 extension Target.Dependency {
     static var html: Self { .target(name: .html) }
+    static var htmlTheme: Self { .target(name: .htmlTheme) }
+    static var htmlComponents: Self { .target(name: .htmlComponents) }
+    static var htmlMarkdown: Self { .target(name: .htmlMarkdown) }
+    static var htmlEmail: Self { .target(name: .htmlEmail) }
 }
 
 extension Target.Dependency {
@@ -16,6 +25,13 @@ extension Target.Dependency {
     static var pointFreeHtmlTestSupport: Self { .product(name: "PointFreeHTMLTestSupport", package: "pointfree-html") }
     static var htmlCssPointFreeHTML: Self { .product(name: "HTMLCSSPointFreeHTML", package: "swift-html-css-pointfree") }
     static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
+    static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
+    static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
+    static var markdownBuilder: Self { .product(name: "MarkdownBuilder", package: "swift-builders") }
+    static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
+    static var translating: Self { .product(name: "Translating", package: "swift-translating") }
+    static var htmlTranslating: Self { .product(name: "PointFreeHTMLTranslating", package: "pointfree-html-translating") }
+    static var builders: Self { .product(name: "Builders", package: "swift-builders") }
 }
 
 let package = Package(
@@ -28,13 +44,26 @@ let package = Package(
         .macCatalyst(.v17)
     ],
     products: [
-        .library(name: .html, targets: [.html])
+        // Individual targets
+        .library(name: .html, targets: [.html]),
+        .library(name: .htmlTheme, targets: [.htmlTheme]),
+        .library(name: .htmlComponents, targets: [.htmlComponents]),
+        .library(name: .htmlMarkdown, targets: [.htmlMarkdown]),
+        .library(name: .htmlEmail, targets: [.htmlEmail]),
+        
+        // Convenience product with common features
+        .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-html-types", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
-        .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1")
+        .package(url: "https://github.com/coenttb/pointfree-html-translating", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
+        .package(url: "https://github.com/swiftlang/swift-markdown", from: "0.4.0"),
+        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2")
     ],
     targets: [
         .target(
@@ -42,7 +71,51 @@ let package = Package(
             dependencies: [
                 .htmlCssPointFreeHTML,
                 .htmlTypesFoundation,
-                .stringBuilder
+                .stringBuilder,
+                .dependencies,
+                .orderedCollections,
+                .htmlTranslating,
+                .builders
+            ]
+        ),
+        .target(
+            name: .htmlTheme,
+            dependencies: [
+                .html,
+                .dependencies
+            ]
+        ),
+        .target(
+            name: .htmlComponents,
+            dependencies: [
+                .html,
+                .htmlTheme,
+                .dependencies,
+                .orderedCollections,
+                .htmlTranslating
+            ]
+        ),
+        .target(
+            name: .htmlMarkdown,
+            dependencies: [
+                .html,
+                .htmlTheme,
+                .swiftMarkdown,
+                .markdownBuilder,
+                .dependencies,
+                .orderedCollections
+            ]
+        ),
+        .target(
+            name: .htmlEmail,
+            dependencies: [
+                .html,
+                .htmlTheme,
+                .htmlComponents,
+                .htmlMarkdown,
+                .dependencies,
+                .orderedCollections,
+                .translating
             ]
         ),
         .testTarget(
@@ -51,9 +124,37 @@ let package = Package(
                 .html,
                 .pointFreeHtmlTestSupport
             ]
+        ),
+        .testTarget(
+            name: .htmlTheme.tests,
+            dependencies: [
+                .htmlTheme,
+                .pointFreeHtmlTestSupport
+            ]
+        ),
+        .testTarget(
+            name: .htmlComponents.tests,
+            dependencies: [
+                .htmlComponents,
+                .pointFreeHtmlTestSupport
+            ]
+        ),
+        .testTarget(
+            name: .htmlMarkdown.tests,
+            dependencies: [
+                .htmlMarkdown,
+                .pointFreeHtmlTestSupport
+            ]
+        ),
+        .testTarget(
+            name: .htmlEmail.tests,
+            dependencies: [
+                .htmlEmail,
+                .pointFreeHtmlTestSupport
+            ]
         )
     ],
-    swiftLanguageModes: [.v5]
+    swiftLanguageModes: [.v6]
 )
 
 extension String {

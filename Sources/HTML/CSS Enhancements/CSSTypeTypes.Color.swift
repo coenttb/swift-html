@@ -8,15 +8,6 @@
 import CSSTypeTypes
 import Foundation
 
-extension HTMLColor {
-    public func reverse() -> Self {
-        .init(
-            light: self.dark,
-            dark: self.light
-        )
-    }
-}
-
 extension CSSTypeTypes.Color {
     /// Creates a darker version of this color
     ///

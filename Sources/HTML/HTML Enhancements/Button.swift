@@ -7,8 +7,10 @@
 
 import Foundation
 import HTMLCSSPointFreeHTML
+import HTMLElementTypes
 
 extension Button {
+    @HTMLBuilder
     public static func submit(
         disabled: HTMLAttributeTypes.Disabled? = nil,
         form: HTMLAttributeTypes.Form.ID? = nil,
@@ -24,7 +26,7 @@ extension Button {
         popovertargetaction: HTMLAttributeTypes.PopoverTargetAction? = nil,
         @HTMLBuilder content: () -> some HTML
     ) -> some HTML {
-        Button(
+        HTMLElementTypes.Button(
             type: .submit,
             disabled: disabled,
             form: form,
