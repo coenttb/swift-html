@@ -151,7 +151,7 @@ public struct NavDropdown<Items: HTML>: NavItem {
                 items
             }
             .class("dropdown-menu")
-            .display(.none)
+            .display(Display.none)
             .position(.absolute)
             .top(.percent(100))
             .right(.px(0))
