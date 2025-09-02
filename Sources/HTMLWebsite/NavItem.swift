@@ -175,7 +175,9 @@ public struct NavSpacer: NavItem {
     
     public var body: some HTML {
         div {}
-            .flexGrow()
+            .flexGrow(1)  // Takes up all available space between items
+            .display(.block, media: .desktop)
+            .display(Display.none, media: .mobile)  // Hide on mobile
     }
 }
 

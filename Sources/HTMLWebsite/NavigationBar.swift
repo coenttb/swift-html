@@ -45,52 +45,77 @@ public struct NavigationBar: HTML {
     
     public var body: some HTML {
         nav {
+            // CSS for proper mobile menu behavior
+            Style {
+                """
+                /* Hide mobile menu by default */
+                .mobile-menu {
+                    display: none !important;
+                    position: absolute;
+                    top: 51px;
+                    left: 0;
+                    right: 0;
+                    z-index: 1000;
+                }
+                
+                /* Desktop styles (769px and up) */
+                @media (min-width: 769px) {
+                    .nav-item {
+                        display: block;
+                    }
+                    
+                    #menu-icon {
+                        display: none !important;
+                    }
+                    
+                    .mobile-menu {
+                        display: none !important;
+                    }
+                }
+                
+                /* Mobile styles (768px and below) */
+                @media (max-width: 768px) {
+                    .nav-item {
+                        display: none !important;
+                    }
+                    
+                    #menu-icon {
+                        display: block;
+                        margin-left: auto;
+                    }
+                    
+                    #menu-checkbox:checked ~ .mobile-menu {
+                        display: block !important;
+                    }
+                }
+                """
+            }
+            
+            // Checkbox at nav level for mobile menu toggle
+            input.checkbox
+                .id("menu-checkbox")
+                .display(Display.none)
+            
+            // Main navigation bar
             div {
                 // Logo
                 AnyHTML(logo)
                     .lineHeight(0)
                 
-                // Desktop navigation items
-                div {
-                    HTMLForEach(items) { item in
-                        AnyHTML(item)
-                    }
+                // Desktop navigation items rendered as direct children
+                HTMLForEach(items) { item in
+                    AnyHTML(item)
+                        .class("nav-item")
                 }
-                .display(.flex)
-                .alignItems(.center)
-                .gap(.rem(1))
-                .display(Display.none, media: .mobile)
                 
-                // Mobile menu button
-                MenuButton()
-                
-                // Mobile navigation items
-                div {
-                    HTMLForEach(items) { item in
-                        div {
-                            AnyHTML(item)
-                        }
-                        .padding(.rem(0.75))
-                    }
-                }
-                .class("mobile-menu")
-                .flexItem(
-                    grow: 1,
-                    shrink: 1,
-                    basis: .percent(100)
-                )
-                .backgroundColor(backgroundColor ?? .background.secondary)
-                .borderTop(width: .px(1), style: .solid, color: .border.secondary)
-                .marginTop(.rem(1))
-                .display(Display.none)
-                .display(.block, media: .mobile, selector: "input:checked ~ .mobile-menu")
+                // Mobile menu button (label only)
+                MenuButtonLabel()
             }
-            .flexContainer(
-                direction: .row,
-                wrap: .wrap,
-                justification: .spaceBetween,
-                itemAlignment: .center
-            )
+            .display(.flex)
+            .flexDirection(.row)
+            .alignItems(.center)
+            .gap(.rem(1))  // Space between all flex items
+            .position(.relative)
             .padding(
                 top: .rem(1.5),
                 bottom: .rem(1.5),
@@ -100,6 +125,26 @@ public struct NavigationBar: HTML {
             .padding(.rem(1.5), media: .desktop)
             .maxWidth(.px(1280))
             .margin(vertical: .zero, horizontal: .auto)
+            
+            // Mobile navigation dropdown - simplified
+            div {
+                HTMLForEach(items) { item in
+                    // Skip NavSpacer in mobile menu
+                    if "\(type(of: item))".contains("NavSpacer") {
+                        HTMLEmpty()
+                    } else {
+                        div {
+                            AnyHTML(item)
+                        }
+                        .padding(.rem(1))
+                        .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
+                    }
+                    
+                }.backgroundColor(backgroundColor)
+            }
+            .class("mobile-menu")
+            .borderTop(width: .px(1), style: .solid, color: .border.secondary)
+            .backgroundColor(backgroundColor)
         }
         .width(.percent(100))
         .if(sticky) { nav in
@@ -107,23 +152,18 @@ public struct NavigationBar: HTML {
                 .top(.zero)
                 .zIndex(9999)
         }
-        .if(backgroundColor != nil) { nav in
-            nav.backgroundColor(backgroundColor!)
-        }
+        .backgroundColor(backgroundColor)
+        
     }
     
     
-    struct MenuButton: HTML {
+    struct MenuButtonLabel: HTML {
         var body: some HTML {
-            
-            input.checkbox
-                .id("menu-checkbox")
-                .display(Display.none)
-            
             Bars()
                 .id("menu-icon")
                 .attribute("for", "menu-checkbox")
                 .cursor(.pointer)
+                .marginLeft(.auto)  // Push to right side
                 .display(Display.none, media: .desktop)
                 .userSelect(UserSelect.none)
         }
