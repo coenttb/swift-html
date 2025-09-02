@@ -12,8 +12,8 @@ import OrderedCollections
 extension HTML {
     @HTMLBuilder
     public func padding(
-        vertical: LengthPercentage?,
-        horizontal: LengthPercentage?,
+        vertical: LengthPercentage? = nil,
+        horizontal: LengthPercentage? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
