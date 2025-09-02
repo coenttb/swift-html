@@ -93,6 +93,7 @@ extension HTMLColor.Theme {
         public var success: HTMLColor
         public var warning: HTMLColor
         
+        public var info: HTMLColor { highlighted }
 
         public init(
             primary: HTMLColor,
@@ -136,6 +137,8 @@ extension HTMLColor.Theme {
         public var error: HTMLColor
         public var success: HTMLColor
         public var warning: HTMLColor
+        
+        public var info: HTMLColor { highlighted }
         
 
         public init(
