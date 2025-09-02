@@ -9,6 +9,7 @@ import Foundation
 import HTML
 import HTMLComponents
 import Dependencies
+import Builders
 
 public struct NavigationBar: HTML {
     let logo: any HTML
