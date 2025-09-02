@@ -13,10 +13,23 @@ import Builders
 
 public struct NavigationBar: HTML {
     let logo: any HTML
-    let centeredNavItems: any HTML
-    let trailingNavItems: any HTML
-    let mobileNavItems: any HTML
+    let items: [any NavItem]
+    let sticky: Bool
+    let backgroundColor: HTMLColor?
     
+    public init(
+        sticky: Bool = false,
+        backgroundColor: HTMLColor? = nil,
+        @HTMLBuilder logo: () -> any HTML,
+        @ArrayBuilder<NavItem> items: () -> [any NavItem]
+    ) {
+        self.logo = logo()
+        self.items = items()
+        self.sticky = sticky
+        self.backgroundColor = backgroundColor
+    }
+    
+    // Legacy init for backward compatibility
     public init(
         @HTMLBuilder logo: () -> any HTML,
         @HTMLBuilder centeredNavItems: () -> any HTML,
@@ -24,33 +37,53 @@ public struct NavigationBar: HTML {
         @HTMLBuilder mobileNavItems: () -> any HTML
     ) {
         self.logo = logo()
-        self.centeredNavItems = centeredNavItems()
-        self.trailingNavItems = trailingNavItems()
-        self.mobileNavItems = mobileNavItems()
+        self.items = []
+        self.sticky = false
+        self.backgroundColor = nil
+        // Note: This init is deprecated and will be removed in future versions
     }
     
     public var body: some HTML {
         nav {
             div {
+                // Logo
                 AnyHTML(logo)
                     .lineHeight(0)
-                AnyHTML(centeredNavItems)
-                    .listStyle(.reset)
-                    .display(Display.none, media: .mobile)
-                AnyHTML(trailingNavItems)
-                    .listStyle(.reset)
-                    .display(Display.none, media: .mobile)
+                
+                // Desktop navigation items
+                div {
+                    HTMLForEach(items) { item in
+                        AnyHTML(item)
+                    }
+                }
+                .display(.flex)
+                .alignItems(.center)
+                .gap(.rem(1))
+                .display(Display.none, media: .mobile)
+                
+                // Mobile menu button
                 MenuButton()
-                AnyHTML(mobileNavItems)
-                    .listStyle(.reset)
-                    .flexItem(
-                        grow: 1,
-                        shrink: 1,
-                        basis: .percent(100)
-                    )
-                    .margin(.zero)
-                    .display(Display.none)
-                    .display(.block, media: .mobile, selector: "input:checked ~")
+                
+                // Mobile navigation items
+                div {
+                    HTMLForEach(items) { item in
+                        div {
+                            AnyHTML(item)
+                        }
+                        .padding(.rem(0.75))
+                    }
+                }
+                .class("mobile-menu")
+                .flexItem(
+                    grow: 1,
+                    shrink: 1,
+                    basis: .percent(100)
+                )
+                .backgroundColor(backgroundColor ?? .background.secondary)
+                .borderTop(width: .px(1), style: .solid, color: .border.secondary)
+                .marginTop(.rem(1))
+                .display(Display.none)
+                .display(.block, media: .mobile, selector: "input:checked ~ .mobile-menu")
             }
             .flexContainer(
                 direction: .row,
@@ -69,9 +102,14 @@ public struct NavigationBar: HTML {
             .margin(vertical: .zero, horizontal: .auto)
         }
         .width(.percent(100))
-        .position(.sticky, media: .mobile)
-        .top(.zero, media: .mobile)
-        .zIndex(9999)
+        .if(sticky) { nav in
+            nav.position(.sticky)
+                .top(.zero)
+                .zIndex(9999)
+        }
+        .if(backgroundColor != nil) { nav in
+            nav.backgroundColor(backgroundColor!)
+        }
     }
     
     
@@ -248,104 +286,6 @@ public struct NavigationBarTrailingNavItems: HTML {
     }
 }
 
-public struct NavigationBarMobileNavItems: HTML {
-    let login: Login?
-    let items: [NavListItem]
-    
-    public init(
-        login: Login?,
-        items: [NavListItem]
-    ) {
-        self.login = login
-        self.items = items
-    }
-    
-    public var body: some HTML {
-        HTMLText("TO BE DELETED")
-        //        ul {
-        //            HTMLForEach(self.items) { item in
-        //                li {
-        //                    item
-        //                }
-        //            }
-        //            .padding(top: 1.5.rem)
-        //
-        //            if let login {
-        //                switch login.isLoggedIn {
-        //                case true:
-        //                    li {
-        //                        Button(
-        //                            tag: a,
-        //                            backgroundColor: .purple,
-        //                            foregroundColor: .white.withDarkColor(.black)
-        //                        ) {
-        //                            HTMLText("Account")
-        //                        }
-        //                        .textAlign(.center)
-        //                        .attribute("href", login.accountHref)
-        //                        .display(.block)
-        //                    }
-        //                case false:
-        //                    li {
-        //                        Button(
-        //                            tag: a,
-        //                            backgroundColor: .purple,
-        //                            foregroundColor: .white.withDarkColor(.black)
-        //                        ) {
-        //                            HTMLText("Login")
-        //                        }
-        //                        .textAlign(.center)
-        //                        .attribute(
-        //                            "href",
-        //                            login.loginHref
-        //                        )
-        //                        .display(.block)
-        //                    }
-        //
-        //                    li {
-        //
-        //                        Button(
-        //                            tag: a,
-        //                            backgroundColor: .purple,
-        //                            foregroundColor: .white.withDarkColor(.black)
-        //                        ) {
-        //                            HTMLText("Sign up")
-        //                        }
-        //                        .textAlign(.center)
-        //                        .attribute(
-        //                            "href",
-        //                            login.signupHref
-        //                        )
-        //                        .display(.block)
-        //                    }
-        //                }
-        //            } else {
-        //                HTMLEmpty()
-        //            }
-        //        }
-    }
-    
-    public struct NavListItem: HTML {
-        let title: String
-        let href: Href
-        
-        public init(
-            _ title: String,
-            href: Href
-        ) {
-            self.title = title
-            self.href = href
-        }
-        public var body: some HTML {
-            
-            HTMLComponents.Link(
-                title,
-                href: href
-            )
-            .display(.block)
-        }
-    }
-}
 
 
 
