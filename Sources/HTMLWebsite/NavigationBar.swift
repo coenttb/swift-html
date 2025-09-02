@@ -50,12 +50,9 @@ public struct NavigationBar: HTML {
                 """
                 /* Hide mobile menu by default */
                 .mobile-menu {
-                    display: none !important;
-                    position: absolute;
-                    top: 51px;
-                    left: 0;
-                    right: 0;
-                    z-index: 1000;
+                    display: none;
+                    flex-basis: 100%;  /* Forces new line in flex container */
+                    width: 100%;
                 }
                 
                 /* Desktop styles (769px and up) */
@@ -91,18 +88,18 @@ public struct NavigationBar: HTML {
                 """
             }
             
-            // Checkbox at nav level for mobile menu toggle
-            input.checkbox
-                .id("menu-checkbox")
-                .display(Display.none)
-            
-            // Main navigation bar
+            // Main navigation container with everything inside
             div {
+                // Checkbox inside container for sibling selector to work
+                input.checkbox
+                    .id("menu-checkbox")
+                    .display(Display.none)
+                
                 // Logo
                 AnyHTML(logo)
                     .lineHeight(0)
                 
-                // Desktop navigation items rendered as direct children
+                // Desktop navigation items
                 HTMLForEach(items) { item in
                     AnyHTML(item)
                         .class("nav-item")
@@ -110,12 +107,33 @@ public struct NavigationBar: HTML {
                 
                 // Mobile menu button (label only)
                 MenuButtonLabel()
+                
+                // Mobile menu - inside same container, will wrap to new line
+                div {
+                    HTMLForEach(items) { item in
+                        // Skip NavSpacer in mobile menu
+                        if "\(type(of: item))".contains("NavSpacer") {
+                            HTMLEmpty()
+                        } else {
+                            div {
+                                AnyHTML(item)
+                            }
+                            .padding(.rem(1))
+                            .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
+                        }
+                    }
+                }
+                .class("mobile-menu")
+                .flexBasis(.percent(100))  // Forces full width = new line
+                .borderTop(width: .px(1), style: .solid, color: .border.secondary)
+                .backgroundColor(backgroundColor)
+                .marginTop(.rem(1))
             }
             .display(.flex)
             .flexDirection(.row)
+            .flexWrap(.wrap)  // Allow wrapping for mobile menu
             .alignItems(.center)
             .gap(.rem(1))  // Space between all flex items
-            .position(.relative)
             .padding(
                 top: .rem(1.5),
                 bottom: .rem(1.5),
@@ -125,26 +143,6 @@ public struct NavigationBar: HTML {
             .padding(.rem(1.5), media: .desktop)
             .maxWidth(.px(1280))
             .margin(vertical: .zero, horizontal: .auto)
-            
-            // Mobile navigation dropdown - simplified
-            div {
-                HTMLForEach(items) { item in
-                    // Skip NavSpacer in mobile menu
-                    if "\(type(of: item))".contains("NavSpacer") {
-                        HTMLEmpty()
-                    } else {
-                        div {
-                            AnyHTML(item)
-                        }
-                        .padding(.rem(1))
-                        .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
-                    }
-                    
-                }.backgroundColor(backgroundColor)
-            }
-            .class("mobile-menu")
-            .borderTop(width: .px(1), style: .solid, color: .border.secondary)
-            .backgroundColor(backgroundColor)
         }
         .width(.percent(100))
         .if(sticky) { nav in
