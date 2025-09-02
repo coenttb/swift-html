@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import PointFreeHTML
 
 extension String {
     public init(

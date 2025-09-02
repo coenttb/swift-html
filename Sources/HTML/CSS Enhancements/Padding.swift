@@ -12,8 +12,8 @@ import OrderedCollections
 extension HTML {
     @HTMLBuilder
     public func padding(
-        vertical: LengthPercentage?,
-        horizontal: LengthPercentage?,
+        vertical: LengthPercentage? = nil,
+        horizontal: LengthPercentage? = nil,
         media mediaQuery: CSSAtRuleTypes.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
@@ -32,6 +32,19 @@ extension HTML {
         case (.none, .none):
             self
         }
+    }
+}
+
+extension HTML {
+    @HTMLBuilder
+    public func padding(
+        _ vertical: LengthPercentage?,
+        _ horizontal: LengthPercentage?,
+        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        selector: PointFreeHTML.Selector? = nil,
+        pseudo: Pseudo? = nil
+    ) -> some HTML {
+        self.padding(vertical: vertical, horizontal: horizontal, media: mediaQuery, selector: selector, pseudo: pseudo)
     }
 }
 

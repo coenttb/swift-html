@@ -8,3 +8,4 @@
 @_exported import HTMLCSSPointFreeHTML
 @_exported import HTMLTypesFoundation
 @_exported import StringBuilder
+@_exported import HTMLAttributesPointFreeHTML

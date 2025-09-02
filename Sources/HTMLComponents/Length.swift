@@ -37,15 +37,17 @@ extension Length {
 
 extension LengthPercentage {
     public static let extraSmall: Self = .rem(0.5)
-    public static let small: Self = .rem(1)
-    public static let medium: Self = .rem(2)
-    public static let large: Self = .rem(4)
-    public static let extraLarge: Self = .rem(8)
+    public static let small: Self = .rem(0.75)
+    public static let medium: Self = .rem(1.5)
+    public static let large: Self = .rem(3)
+    public static let extraLarge: Self = .rem(6)
 
     public static let root: Self = .rem(1)
     public static let primary: Self = root
     public static let secondary: Self = .rem(0.875)
 }
+
+
 
 extension LengthPercentageConvertible {
     public static var extraSmall: Self {

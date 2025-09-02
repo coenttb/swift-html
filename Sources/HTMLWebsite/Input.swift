@@ -72,7 +72,7 @@ extension Input {
             case .filled:
                 html
                     .padding(vertical: .px(14), horizontal: .px(10))
-                    .border(.none)
+                    .border(.hidden)
                     .backgroundColor(.gray100.withDarkColor(.gray800))
                     .color(.text.primary)
                     .borderRadius(.px(5))
@@ -80,7 +80,7 @@ extension Input {
             case .minimal:
                 html
                     .padding(vertical: .px(8), horizontal: .px(4))
-                    .border(.none)
+                    .border(.hidden)
                     .backgroundColor(.transparent)
                     .color(.text.primary)
                     .borderBottom(.init(.px(5), .solid))

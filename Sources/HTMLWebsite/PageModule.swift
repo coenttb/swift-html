@@ -54,11 +54,12 @@ public struct PageModule<Title: HTML, Content: HTML>: HTML {
         .padding(
             top: theme.topMargin,
             horizontal: theme.leftRightMargin,
-            bottom: theme.bottomMargin
+            bottom: theme.bottomMargin,
+            media: .mobile
         )
         .padding(
             top: theme.topMarginDesktop,
-            horizontal: theme.leftRightMarginDesktop,
+            horizontal: .zero,
             bottom: theme.bottomMargin,
             media: .desktop
         )
@@ -124,7 +125,7 @@ extension PageModule {
             leftRightMargin: LengthPercentage,
             leftRightMarginDesktop: LengthPercentage,
             gridJustification: JustifyContent = .flexStart(),
-            itemAlignment: AlignItems = .baseline
+            itemAlignment: AlignItems = .inherit
         ) {
             self.topMargin = topMargin
             self.topMarginDesktop = topMarginDesktop ?? topMargin

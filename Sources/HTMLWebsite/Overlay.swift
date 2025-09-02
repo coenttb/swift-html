@@ -8,6 +8,7 @@
 import Dependencies
 import Foundation
 import HTMLComponents
+import HTMLAttributesPointFreeHTML
 
 public struct Overlay<Content: HTML>: HTML {
     

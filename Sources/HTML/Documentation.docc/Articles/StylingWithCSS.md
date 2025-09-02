@@ -142,7 +142,7 @@ main { "Main Content" }
     .alignSelf(.stretch)
 
 aside { "Sidebar" }
-    .flex(1)
+    .flex(.custom(grow: 1, shrink: 1, basis: .auto))
     .minWidth(.px(200))
 ```
 
@@ -404,7 +404,7 @@ struct Button: HTML {
             .padding(.vertical(.rem(0.5)), .horizontal(.rem(1)))
             .backgroundColor(style.backgroundColor)
             .color(.white)
-            .border(.none)
+            .border(.hidden)
             .borderRadius(.px(6))
             .cursor(.pointer)
             .transition(.backgroundColor, .ms(150))

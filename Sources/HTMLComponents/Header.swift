@@ -35,12 +35,12 @@ public struct Header<Content: HTML>: HTML {
 
     var fontSize: CSSPropertyTypes.FontSize {
         switch size {
-        case 1: .rem(4)
-        case 2: .rem(3)
-        case 3: .rem(2)
-        case 4: .rem(1.5)
-        case 5: .rem(1)
-        default: .rem(0.875)
+        case 1: .em(2)
+        case 2: .em(1.5)
+        case 3: .em(1.17)
+        case 4: .em(1)
+        case 5: .em(0.83)
+        default: .em(0.67)
         }
     }
     var lineHeight: LineHeight {
@@ -55,22 +55,22 @@ public struct Header<Content: HTML>: HTML {
     }
     var marginBottom: LengthPercentage {
         switch size {
-        case 1: .rem(1)
-        case 2: .rem(0.75)
-        case 3: .rem(0.5)
-        case 4: .rem(0.5)
-        case 5: .rem(0.5)
-        default: .rem(0.3)
+        case 1: .em(1)
+        case 2: .em(0.75)
+        case 3: .em(0.5)
+        case 4: .em(0.5)
+        case 5: .em(0.5)
+        default: .em(0.3)
         }
     }
     var marginTop: LengthPercentage {
         switch size {
-        case 1: .rem(2)
-        case 2: .rem(1.75)
-        case 3: .rem(1.5)
-        case 4: .rem(1.5)
-        case 5: .rem(0.5)
-        default: .rem(0.5)
+        case 1: .em(2)
+        case 2: .em(1.75)
+        case 3: .em(1.5)
+        case 4: .em(1.5)
+        case 5: .em(0.5)
+        default: .em(0.5)
         }
     }
 }

@@ -8,6 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
+import HTMLComponents
 
 // MARK: - Updated Button Struct
 public struct Button<Label: HTML, Icon: HTML>: HTML {
@@ -124,16 +125,16 @@ extension HTML {
         style: ButtonStyle = .default
     ) -> some HTML {
 
-        let borderColor: HTMLColor? = {
-            switch style {
-            case .primary, .secondary, .tertiary:
-                return background.darker(by: 0.15)
-            case .round:
-                return nil
-            default:
-                return nil
-            }
-        }()
+//        let borderColor: HTMLColor? = {
+//            switch style {
+//            case .primary, .secondary, .tertiary:
+//                return background.darker(by: 0.15)
+//            case .round:
+//                return nil
+//            default:
+//                return nil
+//            }
+//        }()
 
         let borderStyle: BorderStyle? = {
             switch style {
@@ -221,25 +222,25 @@ extension HTML {
     }
 }
 
-
-
-#if DEBUG && canImport(SwiftUI) && os(macOS)
-import Dependencies
-import SwiftUI
-
-#Preview {
-    HTMLDocument {
-        withDependencies {
-            $0.theme.text.button = .yellow
-            $0.theme.background.button = .red
-        } operation: {
-            Button(
-                button: .init(type: .submit)
-            ) {
-                "Hello"
-            }
-        }
-    }
-    .frame(height: 800)
-}
-#endif
+//
+//
+//#if DEBUG && canImport(SwiftUI) && os(macOS)
+//import Dependencies
+//import SwiftUI
+//
+//#Preview {
+//    HTMLDocument {
+//        withDependencies {
+//            $0.theme.text.button = .yellow
+//            $0.theme.background.button = .red
+//        } operation: {
+//            HTMLWebsite.Button(
+//                button: .init(type: .submit)
+//            ) {
+//                "Hello"
+//            }
+//        }
+//    }
+//    .frame(height: 800)
+//}
+//#endif

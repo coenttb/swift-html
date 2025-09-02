@@ -553,7 +553,7 @@ Each HTML component should have a single, clear responsibility:
 // Good: Focused component
 struct PriceDisplay: HTML {
     let price: Decimal
-    let currency: String
+    let currency: Stripe.Currency
     
     var body: some HTML {
         span {

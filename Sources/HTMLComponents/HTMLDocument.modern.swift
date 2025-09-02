@@ -15,7 +15,7 @@ extension HTMLDocument where Body: HTML, Head == _ModernHead<EmptyHTML> {
     ) -> HTMLDocument<Body, _ModernHead<EmptyHTML>> {
         HTMLDocument(
             body: body,
-            head: { _ModernHead(customHead: EmptyHTML.init) }
+            head: { _ModernHead(customHead: EmptyHTML()) }
         )
     }
 }
@@ -24,25 +24,25 @@ extension HTMLDocument where Body: HTML, Head == _ModernHead<EmptyHTML> {
 extension HTMLDocument where Body: HTML {
     public static func modern<CustomHead: HTML>(
         @HTMLBuilder body: () -> Body,
-        @HTMLBuilder head customHead: @escaping () -> CustomHead
+        @HTMLBuilder head customHead: () -> CustomHead
     ) -> HTMLDocument<Body, _ModernHead<CustomHead>> where Head == _ModernHead<CustomHead> {
         HTMLDocument(
             body: body,
-            head: { _ModernHead(customHead: customHead) }
+            head: { _ModernHead(customHead: customHead()) }
         )
     }
 }
 
 public struct _ModernHead<CustomHead: HTML>: HTML {
-    let customHead: () -> CustomHead
+    let customHead: CustomHead
     
-    public init(customHead: @escaping () -> CustomHead) {
+    public init(customHead: CustomHead) {
         self.customHead = customHead
     }
     
     public var body: some HTML {
         HTMLGroup {
-            customHead()
+            customHead
             meta(charset: .utf8)()
             BaseStyles()
             

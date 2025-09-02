@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HTML
 import Dependencies
 
 // MARK: - Text Color Definitions

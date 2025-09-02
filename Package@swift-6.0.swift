@@ -174,3 +174,14 @@ let package = Package(
 extension String {
     var tests: Self { "\(self) Tests" }
 }
+
+let swiftSettings: [SwiftSetting] = [
+    .enableUpcomingFeature("MemberImportVisibility"),
+    .enableUpcomingFeature("StrictUnsafe"),
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .unsafeFlags(["-warnings-as-errors"]),
+]
+
+for index in package.targets.indices {
+    package.targets[index].swiftSettings = (package.targets[index].swiftSettings ?? []) + swiftSettings
+}

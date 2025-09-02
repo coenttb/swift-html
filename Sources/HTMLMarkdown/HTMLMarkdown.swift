@@ -1,6 +1,7 @@
 import HTML
 import HTMLTheme
 import Markdown
+import HTMLAttributesPointFreeHTML
 
 public struct HTMLMarkdown: HTML {
     public struct Section {

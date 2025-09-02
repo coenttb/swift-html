@@ -25,6 +25,8 @@ extension HTMLColor.Theme {
             offBlack: .init(light: .hex("18181b"), dark: .hex("18181b")),
             white: .init(light: .hex("ffffff"), dark: .hex("ffffff")),
             offWhite: .init(light: .hex("fafafa"), dark: .hex("fafafa")),
+            neutral: .init(light: .hex("6b7280"), dark: .hex("9ca3af")),
+            info: .init(light: .hex("2563eb"), dark: .hex("3b82f6")),
             text: .documentation,
             background: .documentation,
             border: .documentation,
@@ -40,10 +42,13 @@ extension HTMLColor.Theme.Text {
             secondary: .init(light: .hex("4b5563"), dark: .hex("d1d5db")),
             tertiary: .init(light: .hex("9ca3af"), dark: .hex("6b7280")),
             link: .init(light: .hex("2563eb"), dark: .hex("3b82f6")),
+            linkHover: .init(light: .hex("2563eb").opacity(0.8), dark: .hex("3b82f6").opacity(0.8)),
             button: .init(light: .hex("ffffff"), dark: .hex("111827")),
             error: .init(light: .hex("b91c1c"), dark: .hex("f87171")),
             success: .init(light: .hex("047857"), dark: .hex("34d399")),
             warning: .init(light: .hex("a16207"), dark: .hex("fbbf24")),
+            info: .init(light: .hex("2563eb"), dark: .hex("3b82f6")),
+            neutral: .init(light: .hex("4b5563"), dark: .hex("d1d5db")),
             inverted: .init(light: .hex("f9fafb"), dark: .hex("111827")),
             disabled: .init(light: .hex("d1d5db"), dark: .hex("4b5563"))
         )
@@ -59,11 +64,18 @@ extension HTMLColor.Theme.Background {
             elevated: .init(light: .hex("ffffff"), dark: .hex("1e293b")),
             grouped: .init(light: .hex("f9fafb"), dark: .hex("0f172a")),
             selected: .init(light: .hex("eff6ff"), dark: .hex("1e3a8a")),
-            highlighted: .init(light: .hex("fef3c7"), dark: .hex("78350f")),
+            highlighted: .init(light: .hex("fef3c7").opacity(0.5), dark: .hex("78350f").opacity(0.5)),
             button: .init(light: .hex("2563eb"), dark: .hex("3b82f6")),
+            buttonHover: .init(light: .hex("1d4ed8"), dark: .hex("2563eb")),
             error: .init(light: .hex("fee2e2"), dark: .hex("450a0a")),
+            errorMuted: .init(light: .hex("fee2e2").opacity(0.5), dark: .hex("450a0a").opacity(0.5)),
             success: .init(light: .hex("d1fae5"), dark: .hex("064e3b")),
-            warning: .init(light: .hex("fef3c7"), dark: .hex("451a03"))
+            successMuted: .init(light: .hex("d1fae5").opacity(0.5), dark: .hex("064e3b").opacity(0.5)),
+            warning: .init(light: .hex("fef3c7"), dark: .hex("451a03")),
+            warningMuted: .init(light: .hex("fef3c7").opacity(0.5), dark: .hex("451a03").opacity(0.5)),
+            info: .init(light: .hex("dbeafe"), dark: .hex("1e3a8a")),
+            infoMuted: .init(light: .hex("dbeafe").opacity(0.5), dark: .hex("1e3a8a").opacity(0.5)),
+            neutral: .init(light: .hex("f9fafb"), dark: .hex("1e293b"))
         )
     }
 }
@@ -71,15 +83,19 @@ extension HTMLColor.Theme.Background {
 extension HTMLColor.Theme.Border {
     public static var documentation: Self {
         .init(
-            primary: .init(light: .hex("ffffff"), dark: .hex("0f172a")),
-            secondary: .init(light: .hex("f9fafb"), dark: .hex("1e293b")),
+            primary: .init(light: .hex("e5e7eb"), dark: .hex("374151")),
+            secondary: .init(light: .hex("d1d5db"), dark: .hex("4b5563")),
             tertiary: .init(light: .hex("f3f4f6"), dark: .hex("334155")),
             selected: .init(light: .hex("eff6ff"), dark: .hex("1e3a8a")),
-            highlighted: .init(light: .hex("fef3c7"), dark: .hex("78350f")),
+            highlighted: .init(light: .hex("fef3c7").opacity(0.5), dark: .hex("78350f").opacity(0.5)),
+            hover: .init(light: .hex("eff6ff").opacity(0.8), dark: .hex("1e3a8a").opacity(0.8)),
             button: .init(light: .hex("2563eb"), dark: .hex("3b82f6")),
             error: .init(light: .hex("fee2e2"), dark: .hex("450a0a")),
             success: .init(light: .hex("d1fae5"), dark: .hex("064e3b")),
-            warning: .init(light: .hex("fef3c7"), dark: .hex("451a03"))
+            warning: .init(light: .hex("fef3c7"), dark: .hex("451a03")),
+            info: .init(light: .hex("2563eb"), dark: .hex("3b82f6")),
+            infoMuted: .init(light: .hex("2563eb").opacity(0.5), dark: .hex("3b82f6").opacity(0.5)),
+            neutral: .init(light: .hex("f9fafb"), dark: .hex("1e293b"))
         )
     }
 }

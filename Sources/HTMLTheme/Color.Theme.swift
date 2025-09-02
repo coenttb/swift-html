@@ -26,6 +26,8 @@ extension HTMLColor {
         public var offBlack: HTMLColor
         public var white: HTMLColor
         public var offWhite: HTMLColor
+        public var neutral: HTMLColor
+        public var info: HTMLColor
         public var text: HTMLColor.Theme.Text
         public var background: HTMLColor.Theme.Background
         public var border: HTMLColor.Theme.Border
@@ -40,12 +42,16 @@ extension HTMLColor.Theme {
         public var tertiary: HTMLColor
 
         public var link: HTMLColor
+        public var linkHover: HTMLColor
         public var button: HTMLColor
 
         public var error: HTMLColor
         public var success: HTMLColor
         public var warning: HTMLColor
+        public var info: HTMLColor
+        public var neutral: HTMLColor
 
+        public var inverted: HTMLColor
         public var disabled: HTMLColor
 
         public init(
@@ -53,10 +59,13 @@ extension HTMLColor.Theme {
             secondary: HTMLColor,
             tertiary: HTMLColor,
             link: HTMLColor,
+            linkHover: HTMLColor? = nil,
             button: HTMLColor,
             error: HTMLColor,
             success: HTMLColor,
             warning: HTMLColor,
+            info: HTMLColor? = nil,
+            neutral: HTMLColor? = nil,
             inverted: HTMLColor,
             disabled: HTMLColor
         ) {
@@ -64,10 +73,14 @@ extension HTMLColor.Theme {
             self.secondary = secondary
             self.tertiary = tertiary
             self.link = link
+            self.linkHover = linkHover ?? link
             self.button = button
             self.error = error
             self.success = success
             self.warning = warning
+            self.info = info ?? link
+            self.neutral = neutral ?? secondary
+            self.inverted = inverted
             self.disabled = disabled
         }
     }
@@ -88,11 +101,17 @@ extension HTMLColor.Theme {
         public var highlighted: HTMLColor
 
         public var button: HTMLColor
+        public var buttonHover: HTMLColor
         
         public var error: HTMLColor
+        public var errorMuted: HTMLColor
         public var success: HTMLColor
+        public var successMuted: HTMLColor
         public var warning: HTMLColor
-        
+        public var warningMuted: HTMLColor
+        public var info: HTMLColor
+        public var infoMuted: HTMLColor
+        public var neutral: HTMLColor
 
         public init(
             primary: HTMLColor,
@@ -103,9 +122,16 @@ extension HTMLColor.Theme {
             selected: HTMLColor,
             highlighted: HTMLColor,
             button: HTMLColor,
+            buttonHover: HTMLColor? = nil,
             error: HTMLColor,
+            errorMuted: HTMLColor? = nil,
             success: HTMLColor,
-            warning: HTMLColor
+            successMuted: HTMLColor? = nil,
+            warning: HTMLColor,
+            warningMuted: HTMLColor? = nil,
+            info: HTMLColor? = nil,
+            infoMuted: HTMLColor? = nil,
+            neutral: HTMLColor? = nil
         ) {
             self.primary = primary
             self.secondary = secondary
@@ -115,9 +141,16 @@ extension HTMLColor.Theme {
             self.selected = selected
             self.highlighted = highlighted
             self.button = button
+            self.buttonHover = buttonHover ?? button
             self.error = error
+            self.errorMuted = errorMuted ?? error
             self.success = success
+            self.successMuted = successMuted ?? success
             self.warning = warning
+            self.warningMuted = warningMuted ?? warning
+            self.info = info ?? highlighted
+            self.infoMuted = infoMuted ?? highlighted
+            self.neutral = neutral ?? secondary
         }
     }
 }
@@ -130,12 +163,16 @@ extension HTMLColor.Theme {
 
         public var selected: HTMLColor
         public var highlighted: HTMLColor
+        public var hover: HTMLColor
 
         public var button: HTMLColor
         
         public var error: HTMLColor
         public var success: HTMLColor
         public var warning: HTMLColor
+        public var info: HTMLColor
+        public var infoMuted: HTMLColor
+        public var neutral: HTMLColor
         
 
         public init(
@@ -144,20 +181,28 @@ extension HTMLColor.Theme {
             tertiary: HTMLColor,
             selected: HTMLColor,
             highlighted: HTMLColor,
+            hover: HTMLColor? = nil,
             button: HTMLColor,
             error: HTMLColor,
             success: HTMLColor,
-            warning: HTMLColor
+            warning: HTMLColor,
+            info: HTMLColor? = nil,
+            infoMuted: HTMLColor? = nil,
+            neutral: HTMLColor? = nil
         ) {
             self.primary = primary
             self.secondary = secondary
             self.tertiary = tertiary
             self.selected = selected
             self.highlighted = highlighted
+            self.hover = hover ?? highlighted
             self.button = button
             self.error = error
             self.success = success
             self.warning = warning
+            self.info = info ?? highlighted
+            self.infoMuted = infoMuted ?? highlighted
+            self.neutral = neutral ?? secondary
         }
     }
 }
@@ -299,6 +344,14 @@ extension HTMLColor {
         @Dependency(\.theme.yellow) var yellow
         return yellow
     }
+    public static var neutral: Self {
+        @Dependency(\.theme.neutral) var neutral
+        return neutral
+    }
+    public static var info: Self {
+        @Dependency(\.theme.info) var info
+        return info
+    }
     
     public static let transparent: Self = .init(light: .transparent, dark: .transparent)
 }
@@ -310,3 +363,5 @@ extension HTMLColor {
 extension HTMLColor {
     public static let buttonBackground: Self = .cardBackground
 }
+
+

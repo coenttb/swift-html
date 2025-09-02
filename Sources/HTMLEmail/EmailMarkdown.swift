@@ -237,7 +237,7 @@ private struct Visitor: MarkupVisitor {
                 .attribute("colspan", cell.colspan == 1 ? nil : "\(cell.colspan)")
                 .attribute("rowspan", cell.rowspan == 1 ? nil : "\(cell.rowspan)")
 
-//                _ = column += Int(cell.colspan)
+                let _:Void = column += Int(cell.colspan)
             }
         }
     }
