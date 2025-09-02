@@ -1,4 +1,5 @@
 import HTML
+import HTMLComponents
 
 // MARK: - Alert Component
 public struct Alert<Content: HTML, Actions: HTML>: HTML {

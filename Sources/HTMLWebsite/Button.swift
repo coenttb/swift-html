@@ -8,6 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
+import HTMLComponents
 
 // MARK: - Updated Button Struct
 public struct Button<Label: HTML, Icon: HTML>: HTML {
@@ -221,25 +222,25 @@ extension HTML {
     }
 }
 
-
-
-#if DEBUG && canImport(SwiftUI) && os(macOS)
-import Dependencies
-import SwiftUI
-
-#Preview {
-    HTMLDocument {
-        withDependencies {
-            $0.theme.text.button = .yellow
-            $0.theme.background.button = .red
-        } operation: {
-            Button(
-                button: .init(type: .submit)
-            ) {
-                "Hello"
-            }
-        }
-    }
-    .frame(height: 800)
-}
-#endif
+//
+//
+//#if DEBUG && canImport(SwiftUI) && os(macOS)
+//import Dependencies
+//import SwiftUI
+//
+//#Preview {
+//    HTMLDocument {
+//        withDependencies {
+//            $0.theme.text.button = .yellow
+//            $0.theme.background.button = .red
+//        } operation: {
+//            HTMLWebsite.Button(
+//                button: .init(type: .submit)
+//            ) {
+//                "Hello"
+//            }
+//        }
+//    }
+//    .frame(height: 800)
+//}
+//#endif

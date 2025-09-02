@@ -7,6 +7,7 @@
 
 import Foundation
 import HTML
+import HTMLComponents
 
 /// A component for displaying empty states with optional icon, title, description, and action
 public struct EmptyState<Action: HTML>: HTML {
@@ -67,7 +68,7 @@ public struct EmptyState<Action: HTML>: HTML {
                 
                 // Description
                 if let description = description {
-                    Paragraph { description }
+                    HTMLComponents.Paragraph { description }
                         .color(.text.secondary)
                         .maxWidth(.rem(30))
                         .margin(horizontal: .auto)
@@ -135,32 +136,32 @@ extension EmptyState where Action == HTMLEmpty {
 //    }
 //}
 
-extension EmptyState where Action == Button<HTMLText, HTMLEmpty> {
-    /// Creates an empty state with a button action
-    public init(
-        icon: String? = nil,
-        title: String,
-        description: String? = nil,
-        actionText: String,
-        buttonStyle: ButtonStyle = .default,
-        textAlign: TextAlign = .center,
-        spacing: Length? = nil,
-        iconSize: LengthPercentage? = nil
-    ) {
-        self.init(
-            icon: icon,
-            title: title,
-            description: description,
-            textAlign: textAlign,
-            spacing: spacing,
-            iconSize: iconSize
-        ) {
-            Button(style: buttonStyle) {
-                HTMLText(actionText)
-            }
-        }
-    }
-}
+//extension EmptyState where Action == HTMLWebsite.Button<HTMLText, HTMLEmpty> {
+//    /// Creates an empty state with a button action
+//    public init(
+//        icon: String? = nil,
+//        title: String,
+//        description: String? = nil,
+//        actionText: String,
+//        buttonStyle: ButtonStyle = .default,
+//        textAlign: TextAlign = .center,
+//        spacing: Length? = nil,
+//        iconSize: LengthPercentage? = nil
+//    ) {
+//        self.init(
+//            icon: icon,
+//            title: title,
+//            description: description,
+//            textAlign: textAlign,
+//            spacing: spacing,
+//            iconSize: iconSize
+//        ) {
+//            HTMLWebsite.Button(style: buttonStyle) {
+//                HTMLText(actionText)
+//            }
+//        }
+//    }
+//}
 
 // MARK: - Common Empty States
 

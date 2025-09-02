@@ -9,7 +9,7 @@ import Foundation
 import HTMLCSSPointFreeHTML
 import HTMLElementTypes
 
-extension Button {
+extension HTMLElementTypes.Button {
     @HTMLBuilder
     public static func submit(
         disabled: HTMLAttributeTypes.Disabled? = nil,
