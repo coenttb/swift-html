@@ -124,7 +124,7 @@ extension PageModule {
             leftRightMargin: LengthPercentage,
             leftRightMarginDesktop: LengthPercentage,
             gridJustification: JustifyContent = .flexStart(),
-            itemAlignment: AlignItems = .baseline
+            itemAlignment: AlignItems = .inherit
         ) {
             self.topMargin = topMargin
             self.topMarginDesktop = topMarginDesktop ?? topMargin
