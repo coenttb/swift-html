@@ -14,12 +14,12 @@ public protocol NavItem: HTML {}
 
 // MARK: - NavLink
 public struct NavLink: NavItem {
-    let title: String
+    let title: any HTML
     let href: Href
     let isActive: Bool
     
     public init(
-        _ title: String,
+        _ title: any HTML,
         href: Href,
         isActive: Bool = false
     ) {
@@ -29,7 +29,7 @@ public struct NavLink: NavItem {
     }
     
     public var body: some HTML {
-        HTMLComponents.Link(title, href: href)
+        HTMLComponents.Link(href: href) { AnyHTML(title) }
             .if(isActive) { link in
                 link.fontWeight(.semiBold)
                     .color(.blue)
