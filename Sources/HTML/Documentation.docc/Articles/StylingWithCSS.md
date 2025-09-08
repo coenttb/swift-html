@@ -404,7 +404,7 @@ struct Button: HTML {
             .padding(.vertical(.rem(0.5)), .horizontal(.rem(1)))
             .backgroundColor(style.backgroundColor)
             .color(.white)
-            .border(.none)
+            .border(.hidden)
             .borderRadius(.px(6))
             .cursor(.pointer)
             .transition(.backgroundColor, .ms(150))

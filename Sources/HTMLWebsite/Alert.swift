@@ -115,7 +115,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
                     .padding(.rem(0.25))
                     .marginLeft(.rem(1))
                     .backgroundColor(.transparent)
-                    .border(.none)
+                    .border(.hidden)
                     .cursor(.pointer)
                     .color(severity.textColor)
                     .attribute("onclick", "this.closest('.alert').remove()")

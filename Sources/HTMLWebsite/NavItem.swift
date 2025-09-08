@@ -141,7 +141,7 @@ public struct NavDropdown<Items: HTML>: NavItem {
                     .fontSize(.rem(0.75))
             }
             .backgroundColor(.transparent)
-            .border(.none)
+            .border(.hidden)
             .color(.text.primary)
             .cursor(.pointer)
             .padding(.rem(0.5))
