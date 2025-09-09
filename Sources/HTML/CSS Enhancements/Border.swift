@@ -119,27 +119,36 @@ extension HTML {
         selector: PointFreeHTML.Selector?,
         pseudo: Pseudo?
     ) -> some HTML {
-        self
-            .if(border.sides?.contains(.top) == true) { element in
-                element
+        // Apply styles sequentially without nested conditionals to avoid deep generic nesting
+        var result: any HTML = self
+        
+        if let sides = border.sides {
+            if sides.contains(.top) {
+                result = AnyHTML(result)
                     .inlineStyle(BorderTop.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
                     .inlineStyle(BorderTop.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
-            .if(border.sides?.contains(.left) == true) { element in
-                element
+            
+            if sides.contains(.left) {
+                result = AnyHTML(result)
                     .inlineStyle(BorderLeft.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
                     .inlineStyle(BorderLeft.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
-            .if(border.sides?.contains(.bottom) == true) { element in
-                element
+            
+            if sides.contains(.bottom) {
+                result = AnyHTML(result)
                     .inlineStyle(BorderBottom.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
                     .inlineStyle(BorderBottom.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
-            .if(border.sides?.contains(.right) == true) { element in
-                element
+            
+            if sides.contains(.right) {
+                result = AnyHTML(result)
                     .inlineStyle(BorderRight.property, "\(borderStyle) \(lightColor)", media: mediaQuery, selector: selector, pseudo: pseudo)
                     .inlineStyle(BorderRight.property, "\(borderStyle) \(darkColor)", media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
             }
+        }
+        
+        return AnyHTML(result)
     }
 }
 
