@@ -12,12 +12,12 @@ public struct Circle: HTML {
 
     @HTMLBuilder let content: any HTML
 
-    public var width: LengthPercentage
-    public var height: LengthPercentage
+    public var width: CSSTypes.Width
+    public var height: CSSTypes.Height
 
     public init(
-        width: LengthPercentage = .rem(10),
-        height: LengthPercentage = .rem(10),
+        width: CSSTypes.Width = .rem(10),
+        height: CSSTypes.Height = .rem(10),
         @HTMLBuilder content: @escaping () -> any HTML
     ) {
         self.content = content()
@@ -30,8 +30,8 @@ public struct Circle: HTML {
         @HTMLBuilder content: @escaping () -> any HTML
     ) {
         self.content = content()
-        self.width = size
-        self.height = size
+        self.width = .lengthPercentage(size)
+        self.height = .lengthPercentage(size)
     }
 
     public var body: some HTML {
@@ -52,8 +52,8 @@ public struct Circle: HTML {
             }
             .clipPath(.circle(.percent(50)))
             .position(.relative)
-            .width(.lengthPercentage(width))
-            .height(.lengthPercentage(height))
+            .width(width)
+            .height(height)
         }
     }
 }

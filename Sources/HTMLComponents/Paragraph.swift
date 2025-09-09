@@ -26,18 +26,18 @@ public struct Paragraph<Content: HTML>: HTML {
         case big
         case regular
         case small
-        var fontSize: Length {
+        var fontSize: CSSTypes.Length {
             switch self {
-            case .big: (19 / 16).rem
-            case .regular: (16 / 16).rem
-            case .small: (14 / 16).rem
+            case .big: .length((19 / 16).rem)
+            case .regular: .length((16 / 16).rem)
+            case .small: .length((14 / 16).rem)
             }
         }
-        var lineHeight: Length {
+        var lineheight: CSSTypes.Height {
             switch self {
-            case .big: (28 / 16).rem
-            case .regular: (24 / 16).rem
-            case .small: (21 / 16).rem
+            case .big: .length((28 / 16).rem)
+            case .regular: .length((24 / 16).rem)
+            case .small: .length((21 / 16).rem)
             }
         }
     }
