@@ -74,12 +74,22 @@ extension HTMLColor.Theme {
             --branding-primary-subtle: \(branding.primarySubtle.light.description);
             --branding-secondary-subtle: \(branding.secondarySubtle.light.description);
             
-            /* Translucent variants for charts */
+            /* Translucent variants for charts and overlays */
+            --color-gray-translucent: \(gray.light.description)33;
             --color-blue-translucent: \(blue.light.description)33;
             --color-green-translucent: \(green.light.description)33;
             --color-purple-translucent: \(purple.light.description)33;
-            --color-orange-translucent: \(orange.light.description)33;
+            --color-red-translucent: \(red.light.description)33;
             --color-yellow-translucent: \(yellow.light.description)33;
+            --color-orange-translucent: \(orange.light.description)33;
+            --color-teal-translucent: \(teal.light.description)33;
+            --color-cyan-translucent: \(cyan.light.description)33;
+            --color-pink-translucent: \(pink.light.description)33;
+            --color-brown-translucent: \(brown.light.description)33;
+            --color-black-translucent: \(black.light.description)33;
+            --color-off-black-translucent: \(offBlack.light.description)33;
+            --color-white-translucent: \(white.light.description)33;
+            --color-off-white-translucent: \(offWhite.light.description)33;
         }
         
         @media (prefers-color-scheme: dark) {
@@ -145,12 +155,22 @@ extension HTMLColor.Theme {
                 --branding-primary-subtle: \(branding.primarySubtle.dark.description);
                 --branding-secondary-subtle: \(branding.secondarySubtle.dark.description);
                 
-                /* Translucent variants for charts */
+                /* Translucent variants for charts and overlays */
+                --color-gray-translucent: \(gray.dark.description)33;
                 --color-blue-translucent: \(blue.dark.description)33;
                 --color-green-translucent: \(green.dark.description)33;
                 --color-purple-translucent: \(purple.dark.description)33;
-                --color-orange-translucent: \(orange.dark.description)33;
+                --color-red-translucent: \(red.dark.description)33;
                 --color-yellow-translucent: \(yellow.dark.description)33;
+                --color-orange-translucent: \(orange.dark.description)33;
+                --color-teal-translucent: \(teal.dark.description)33;
+                --color-cyan-translucent: \(cyan.dark.description)33;
+                --color-pink-translucent: \(pink.dark.description)33;
+                --color-brown-translucent: \(brown.dark.description)33;
+                --color-black-translucent: \(black.dark.description)33;
+                --color-off-black-translucent: \(offBlack.dark.description)33;
+                --color-white-translucent: \(white.dark.description)33;
+                --color-off-white-translucent: \(offWhite.dark.description)33;
             }
         }
         
