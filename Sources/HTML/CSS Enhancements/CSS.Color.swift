@@ -8,6 +8,17 @@
 import Foundation
 import HTMLCSSPointFreeHTML
 
+extension CSSPropertyTypes.Color {
+    public func opacity(_ alpha: Double) -> CSSPropertyTypes.Color {
+        return switch self {
+        case .color(let color):
+                .color(color.opacity(alpha))
+        case .global(let global):
+            .global(global)
+        }
+    }
+}
+
 extension CSSTypeTypes.Color {
     public static let gray100 = Self.hex("1a1a1a")
     public static let gray150 = Self.hex("2a2a2a")

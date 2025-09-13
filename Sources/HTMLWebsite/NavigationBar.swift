@@ -13,9 +13,9 @@ import Builders
 
 public struct NavigationBar: HTML {
     let logo: any HTML
-    let items: [any NavItem]
-    let sticky: Bool
     let backgroundColor: HTMLColor?
+    let sticky: Bool
+    let items: [any NavItem]
     
     public init(
         sticky: Bool = false,
@@ -126,7 +126,7 @@ public struct NavigationBar: HTML {
                 .class("mobile-menu")
                 .flexBasis(.percent(100))  // Forces full width = new line
                 .borderTop(width: .px(1), style: .solid, color: .border.secondary)
-                .backgroundColor(backgroundColor)
+//                .backgroundColor(backgroundColor)
                 .marginTop(.rem(1))
             }
             .display(.flex)

@@ -14,7 +14,7 @@ extension HTML {
     @HTMLBuilder
     public func `if`<T: HTML>(
         _ condition: Bool,
-        then modification: (Self) -> T
+        @HTMLBuilder then modification: (Self) -> T
     ) -> some HTML {
         withEscapedDependencies { continuation in
             HTMLGroup {
@@ -35,7 +35,7 @@ extension HTML {
     @HTMLBuilder
     public func `if`<X>(
         `let` value: X?,
-        _ then: (Self, X) -> some HTML
+        @HTMLBuilder _ then:  (Self, X) -> some HTML
     ) -> some HTML {
         if let value = value {
             then(self, value)

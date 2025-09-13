@@ -21,7 +21,7 @@ public struct NavLink: NavItem {
     public init(
         _ title: any HTML,
         href: Href,
-        isActive: Bool = false
+        isActive: Bool
     ) {
         self.title = title
         self.href = href
@@ -29,13 +29,16 @@ public struct NavLink: NavItem {
     }
     
     public var body: some HTML {
-        HTMLComponents.Link(href: href) { AnyHTML(title) }
-            .if(isActive) { link in
-                link.fontWeight(.semiBold)
-                    .color(.blue)
-            }
+        HTMLComponents.Link(href: href) {
+            AnyHTML(title)
+        }
+        .if(isActive) { link in
+            link.fontWeight(.semiBold)
+        }
     }
 }
+
+
 
 // MARK: - NavButton
 public struct NavButton: NavItem {
@@ -94,14 +97,15 @@ public struct NavButton: NavItem {
         .textDecoration(TextDecoration.none)
         .fontWeight(.medium)
         .if(style.borderColor != nil) { button in
-            button.border(.init(
+            button.border(
                 width: .px(1),
                 style: .solid,
                 color: style.borderColor!
-            ))
+            )
         }
         .inlineStyle("transition", "all 0.2s")
-        .inlineStyle(":hover", "opacity: 0.9; transform: translateY(-1px)")
+        .opacity(0.9, pseudo: .hover)
+        .transform("translateY(-1px)", pseudo: .hover)
     }
 }
 
@@ -151,6 +155,7 @@ public struct NavDropdown<Items: HTML>: NavItem {
                 items
             }
             .class("dropdown-menu")
+            .display(.block, selector: ":hover .dropdown-menu")
             .display(Display.none)
             .position(.absolute)
             .top(.percent(100))
@@ -165,7 +170,6 @@ public struct NavDropdown<Items: HTML>: NavItem {
         }
         .class("dropdown")
         .position(.relative)
-        .inlineStyle(":hover .dropdown-menu", "display: block")
     }
 }
 

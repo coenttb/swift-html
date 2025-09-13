@@ -25,6 +25,8 @@ extension HTMLColor.Theme {
             offBlack: .init(light: .hex("1c1917"), dark: .hex("1c1917")),
             white: .init(light: .hex("ffffff"), dark: .hex("ffffff")),
             offWhite: .init(light: .hex("fafaf9"), dark: .hex("fafaf9")),
+            neutral: .init(light: .hex("78716c"), dark: .hex("a8a29e")),
+            info: .init(light: .hex("3b82f6"), dark: .hex("60a5fa")),
             text: .stone,
             background: .stone,
             border: .stone,
@@ -40,10 +42,13 @@ extension HTMLColor.Theme.Text {
             secondary: .init(light: .hex("57534e"), dark: .hex("d6d3d1")),
             tertiary: .init(light: .hex("a8a29e"), dark: .hex("78716c")),
             link: .init(light: .hex("2563eb"), dark: .hex("60a5fa")),
+            linkHover: .init(light: .hex("2563eb").opacity(0.8), dark: .hex("60a5fa").opacity(0.8)),
             button: .init(light: .hex("1c1917"), dark: .hex("e7e5e4")),
             error: .init(light: .hex("dc2626"), dark: .hex("ef4444")),
             success: .init(light: .hex("16a34a"), dark: .hex("22c55e")),
             warning: .init(light: .hex("ca8a04"), dark: .hex("eab308")),
+            info: .init(light: .hex("2563eb"), dark: .hex("60a5fa")),
+            neutral: .init(light: .hex("57534e"), dark: .hex("d6d3d1")),
             inverted: .init(light: .hex("fafaf9"), dark: .hex("0c0a09")),
             disabled: .init(light: .hex("d6d3d1"), dark: .hex("57534e"))
         )
@@ -61,9 +66,16 @@ extension HTMLColor.Theme.Background {
             selected: .init(light: .hex("d6d3d1"), dark: .hex("44403c")),
             highlighted: .init(light: .hex("e7e5e4").opacity(0.8), dark: .hex("57534e").opacity(0.5)),
             button: .init(light: .hex("f5f5f4"), dark: .hex("292524")),
+            buttonHover: .init(light: .hex("e7e5e4"), dark: .hex("44403c")),
             error: .init(light: .hex("fef2f2"), dark: .hex("450a0a")),
+            errorMuted: .init(light: .hex("fef2f2").opacity(0.5), dark: .hex("450a0a").opacity(0.5)),
             success: .init(light: .hex("f0fdf4"), dark: .hex("14532d")),
-            warning: .init(light: .hex("fffbeb"), dark: .hex("451a03"))
+            successMuted: .init(light: .hex("f0fdf4").opacity(0.5), dark: .hex("14532d").opacity(0.5)),
+            warning: .init(light: .hex("fffbeb"), dark: .hex("451a03")),
+            warningMuted: .init(light: .hex("fffbeb").opacity(0.5), dark: .hex("451a03").opacity(0.5)),
+            info: .init(light: .hex("dbeafe"), dark: .hex("1e3a8a")),
+            infoMuted: .init(light: .hex("dbeafe").opacity(0.5), dark: .hex("1e3a8a").opacity(0.5)),
+            neutral: .init(light: .hex("f5f5f4"), dark: .hex("1c1917"))
         )
     }
 }
@@ -76,10 +88,14 @@ extension HTMLColor.Theme.Border {
             tertiary: .init(light: .hex("e7e5e4"), dark: .hex("292524")),
             selected: .init(light: .hex("d6d3d1"), dark: .hex("44403c")),
             highlighted: .init(light: .hex("e7e5e4").opacity(0.8), dark: .hex("57534e").opacity(0.5)),
+            hover: .init(light: .hex("d6d3d1").opacity(0.8), dark: .hex("44403c").opacity(0.8)),
             button: .init(light: .hex("f5f5f4"), dark: .hex("292524")),
             error: .init(light: .hex("fef2f2"), dark: .hex("450a0a")),
             success: .init(light: .hex("f0fdf4"), dark: .hex("14532d")),
-            warning: .init(light: .hex("fffbeb"), dark: .hex("451a03"))
+            warning: .init(light: .hex("fffbeb"), dark: .hex("451a03")),
+            info: .init(light: .hex("3b82f6"), dark: .hex("60a5fa")),
+            infoMuted: .init(light: .hex("3b82f6").opacity(0.5), dark: .hex("60a5fa").opacity(0.5)),
+            neutral: .init(light: .hex("f5f5f4"), dark: .hex("1c1917"))
         )
     }
 }

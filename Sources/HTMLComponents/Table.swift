@@ -45,13 +45,13 @@ public struct Table<Headers: HTML, Rows: HTML>: HTML {
                     .inlineStyle("tbody tr:nth-child(even)", "background-color: rgba(255, 255, 255, 0.02)", media: .dark)
             }
             .if(hoverable) { table in
-                table.inlineStyle("tbody tr:hover", "background-color: rgba(59, 130, 246, 0.05)")
+                table.backgroundColor(.rgba(red: 59, green: 130, blue: 246, alpha: 0.05), selector: "tbody tr", pseudo: .hover)
             }
         }
         .overflowX(.auto)
         .if(bordered) { wrapper in
             wrapper
-                .border(.init(width: .px(1), style: .solid, color: .border.secondary))
+                .border(width: .px(1), style: .solid, color: .border.secondary)
                 .borderRadius(.px(8))
         }
     }
@@ -92,8 +92,8 @@ public struct TableHeader: HTML {
         .if(sortable) { header in
             header
                 .cursor(.pointer)
-                .attribute("onclick", onClick ?? "")
-                .inlineStyle(":hover", "background-color: rgba(59, 130, 246, 0.1)")
+                .onclick(onClick ?? "")
+                .backgroundColor(.rgba(59, 130, 246, 0.1), pseudo: .hover)
         }
     }
 }

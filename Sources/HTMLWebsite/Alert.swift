@@ -127,7 +127,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
         .class("alert")
         .padding(.rem(1))
         .backgroundColor(severity.backgroundColor)
-        .border(.init(width: .px(1), style: .solid, color: severity.borderColor))
+        .border(width: .px(1), style: .solid, color: severity.borderColor)
         .borderRadius(.px(8))
         .color(severity.textColor)
     }
