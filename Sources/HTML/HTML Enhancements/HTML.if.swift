@@ -16,17 +16,10 @@ extension HTML {
         _ condition: Bool,
         @HTMLBuilder then modification: (Self) -> T
     ) -> some HTML {
-        withEscapedDependencies { continuation in
-            HTMLGroup {
-                if condition {
-                    continuation.yield {
-                        modification(self)
-                    }
-                } else {
-                    // This requires that T can be initialized from Self
-                    self
-                }
-            }
+        if condition {
+            modification(self)
+        } else {
+            self
         }
     }
 }

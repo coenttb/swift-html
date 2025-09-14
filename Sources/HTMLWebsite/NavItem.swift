@@ -8,6 +8,7 @@
 import Foundation
 import HTML
 import HTMLComponents
+import HTMLTheme
 
 // MARK: - NavItem Protocol
 public protocol NavItem: HTML {}
@@ -29,12 +30,16 @@ public struct NavLink: NavItem {
     }
     
     public var body: some HTML {
-        HTMLComponents.Link(href: href) {
+        a(href: href) {
             AnyHTML(title)
         }
-        .if(isActive) { link in
-            link.fontWeight(.semiBold)
-        }
+        .fontWeight(isActive ? .semiBold : nil)
+        .color(isActive ? .text.link : .text.tertiary)
+        .color(HTMLColor.text.link, pseudo: .visited)
+        .color(HTMLColor.text.link, pseudo: .link)
+        .textDecoration(TextDecoration.none, pseudo: .visited)
+        .textDecoration(TextDecoration.none, pseudo: .link)
+        .textDecoration(TextDecoration.underline, pseudo: .hover)
     }
 }
 
