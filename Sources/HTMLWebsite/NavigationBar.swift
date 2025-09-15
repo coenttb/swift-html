@@ -135,12 +135,19 @@ public struct NavigationBar: HTML {
             .alignItems(.center)
             .gap(.rem(1))  // Space between all flex items
             .padding(
-                top: .rem(1.5),
-                bottom: .rem(1.5),
-                left: .rem(2),
-                right: .rem(2)
+                top: .zero,
+                bottom: .extraSmall,
+                left: .zero,
+                right: .zero,
+                media: .desktop
             )
-            .padding(.rem(1.5), media: .desktop)
+            .padding(
+                top: .small,
+                bottom: .small,
+                left: .medium,
+                right: .medium,
+                media: .mobile
+            )
             .maxWidth(.px(1280))
             .margin(vertical: .zero, horizontal: .auto)
         }
@@ -151,9 +158,7 @@ public struct NavigationBar: HTML {
                 .zIndex(9999)
         }
         .backgroundColor(backgroundColor)
-        
     }
-    
     
     struct MenuButtonLabel: HTML {
         var body: some HTML {
@@ -253,7 +258,7 @@ public struct NavigationBarCenteredNavItems: HTML {
                     item
                 }
             }
-            .padding(left: .rem(1.5), media: .desktop)
+            .padding(left: .small, media: .desktop)
         }
         
     }
