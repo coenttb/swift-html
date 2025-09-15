@@ -11,7 +11,7 @@ import HTMLComponents
 import HTMLTheme
 
 // MARK: - NavItem Protocol
-public protocol NavItem: HTML {}
+public typealias NavItem = HTML
 
 // MARK: - NavLink
 public struct NavLink: NavItem {
