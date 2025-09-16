@@ -135,8 +135,8 @@ public struct NavigationBar: HTML {
             .alignItems(.center)
             .gap(.rem(1))  // Space between all flex items
             .padding(
-                top: .zero,
-                bottom: .extraSmall,
+                top: .extraSmall,
+                bottom: .small,
                 left: .zero,
                 right: .zero,
                 media: .desktop
@@ -148,7 +148,7 @@ public struct NavigationBar: HTML {
                 right: .medium,
                 media: .mobile
             )
-            .maxWidth(.px(1280))
+            .maxWidth(.px(1080))
             .margin(vertical: .zero, horizontal: .auto)
         }
         .width(.percent(100))
