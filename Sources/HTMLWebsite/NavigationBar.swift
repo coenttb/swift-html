@@ -148,7 +148,7 @@ public struct NavigationBar: HTML {
                 right: .medium,
                 media: .mobile
             )
-            .maxWidth(.px(1080))
+            .maxWidth(.px(1230))
             .margin(vertical: .zero, horizontal: .auto)
         }
         .width(.percent(100))
