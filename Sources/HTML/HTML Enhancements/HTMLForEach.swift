@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HTMLCSSPointFreeHTML
 
 public struct HTMLForEach<Content: HTML>: HTML {
     /// The array of HTML content generated from the collection.

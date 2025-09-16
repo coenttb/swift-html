@@ -1,10 +1,5 @@
-import CSSPointFreeHTML
 import Foundation
-import HTMLAttributesPointFreeHTML
-import HTMLAttributeTypes
-import HTMLCSSPointFreeHTML
 import OrderedCollections
-import PointFreeHTML
 
 public struct HStack<Content: HTML>: HTML {
     let alignment: VerticalAlign

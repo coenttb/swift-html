@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import HTMLCSSPointFreeHTML
-import HTMLElementTypes
 
 extension HTMLElementTypes.Button {
     @HTMLBuilder

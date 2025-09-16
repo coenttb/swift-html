@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import PointFreeHTML
 
 extension HTML {
     public func onclick(_ content: String) -> some HTML {

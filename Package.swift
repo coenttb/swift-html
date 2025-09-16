@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -173,4 +173,21 @@ let package = Package(
 
 extension String {
     var tests: Self { "\(self) Tests" }
+}
+
+let swiftSettings: [SwiftSetting] = [
+    .enableUpcomingFeature("MemberImportVisibility"),
+    .enableUpcomingFeature("StrictUnsafe"),
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .unsafeFlags(["-warnings-as-errors"]),
+    // .unsafeFlags([
+    //   "-Xfrontend",
+    //   "-warn-long-function-bodies=50",
+    //   "-Xfrontend",
+    //   "-warn-long-expression-type-checking=50",
+    // ])
+]
+
+for index in package.targets.indices {
+    package.targets[index].swiftSettings = (package.targets[index].swiftSettings ?? []) + swiftSettings
 }

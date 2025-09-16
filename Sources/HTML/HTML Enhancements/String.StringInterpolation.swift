@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import PointFreeHTML
 
 public extension String.StringInterpolation {
     mutating func appendInterpolation(html value: some HTML) {

@@ -125,16 +125,16 @@ extension HTML {
         style: ButtonStyle = .default
     ) -> some HTML {
 
-        let borderColor: HTMLColor? = {
-            switch style {
-            case .primary, .secondary, .tertiary:
-                return background.darker(by: 0.15)
-            case .round:
-                return nil
-            default:
-                return nil
-            }
-        }()
+//        let borderColor: HTMLColor? = {
+//            switch style {
+//            case .primary, .secondary, .tertiary:
+//                return background.darker(by: 0.15)
+//            case .round:
+//                return nil
+//            default:
+//                return nil
+//            }
+//        }()
 
         let borderStyle: BorderStyle? = {
             switch style {

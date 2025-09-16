@@ -1,5 +1,7 @@
 import HTML
 import Dependencies
+import HTMLAttributesPointFreeHTML
+import HTMLAttributesPointFreeHTML
 
 public protocol EmailDocument: HTML {}
 

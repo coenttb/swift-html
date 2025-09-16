@@ -1,4 +1,5 @@
 import HTML
+import HTMLAttributesPointFreeHTML
 
 public struct DiagnosticLevel: Sendable {
     var icon: SVG

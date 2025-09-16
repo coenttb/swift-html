@@ -1,4 +1,5 @@
 import HTML
+import HTMLAttributesPointFreeHTML
 
 public struct Table<Headers: HTML, Rows: HTML>: HTML {
     let headers: Headers
