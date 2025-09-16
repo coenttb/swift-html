@@ -49,7 +49,7 @@ public struct PageModule<Title: HTML, Content: HTML>: HTML {
             justification: theme.gridJustification,
             itemAlignment: theme.itemAlignment
         )
-        .maxWidth(.px(880))
+        .maxWidth(.px(1280))
         .margin(vertical: 0, horizontal: .auto, media: .desktop)
         .padding(
             top: theme.topMargin,
