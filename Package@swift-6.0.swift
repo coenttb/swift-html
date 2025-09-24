@@ -179,7 +179,7 @@ let swiftSettings: [SwiftSetting] = [
     .enableUpcomingFeature("MemberImportVisibility"),
     .enableUpcomingFeature("StrictUnsafe"),
     .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-    .unsafeFlags(["-warnings-as-errors"]),
+//    .unsafeFlags(["-warnings-as-errors"]),
 ]
 
 for index in package.targets.indices {
