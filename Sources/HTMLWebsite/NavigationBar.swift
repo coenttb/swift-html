@@ -226,11 +226,11 @@ public struct Login {
 
 public struct NavigationBarSVGLogo: HTML {
     let href: Href
-    let svg: SVG
-    
+    let svg: LegacySVG
+
     public init(
         href: Href,
-        svg: () -> SVG
+        svg: () -> LegacySVG
     ) {
         self.svg = svg()
         self.href = href

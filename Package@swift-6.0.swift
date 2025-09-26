@@ -34,6 +34,7 @@ extension Target.Dependency {
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var htmlTranslating: Self { .product(name: "PointFreeHTMLTranslating", package: "pointfree-html-translating") }
     static var builders: Self { .product(name: "Builders", package: "swift-builders") }
+    static var svg: Self { .product(name: "SVG", package: "swift-svg") }
 }
 
 let package = Package(
@@ -60,6 +61,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-html-types", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
         .package(url: "https://github.com/coenttb/pointfree-html-translating", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
@@ -78,7 +80,8 @@ let package = Package(
                 .dependencies,
                 .orderedCollections,
                 .htmlTranslating,
-                .builders
+                .builders,
+                .svg
             ]
         ),
         .target(

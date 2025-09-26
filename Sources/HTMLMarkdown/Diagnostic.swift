@@ -2,7 +2,7 @@ import HTML
 import HTMLAttributesPointFreeHTML
 
 public struct DiagnosticLevel: Sendable {
-    var icon: SVG
+    var icon: LegacySVG
     var iconColor: HTMLColor
     var highlightColor: HTMLColor
     var underlineColor: HTMLColor?

@@ -39,8 +39,8 @@ extension Label {
         alignment: VerticalAlign = .middle,
         spacing: Length = 0.25.rem,
         _ title: String,
-        icon: SVG
-    ) where Title == HTMLText, Icon == SVG {
+        icon: LegacySVG
+    ) where Title == HTMLText, Icon == LegacySVG {
         self = .init(
             alignment: alignment,
             spacing: spacing,

@@ -9,3 +9,4 @@
 @_exported import HTMLTypesFoundation
 @_exported import StringBuilder
 @_exported import HTMLAttributesPointFreeHTML
+@_exported import SVG

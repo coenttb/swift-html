@@ -59,13 +59,14 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-html-types", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
         .package(url: "https://github.com/coenttb/pointfree-html-translating", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/swiftlang/swift-markdown", from: "0.4.0"),
-        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2")
+        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
     ],
     targets: [
         .target(
@@ -77,7 +78,8 @@ let package = Package(
                 .dependencies,
                 .orderedCollections,
                 .htmlTranslating,
-                .builders
+                .builders,
+                .product(name: "SVG", package: "swift-svg")
             ]
         ),
         .target(

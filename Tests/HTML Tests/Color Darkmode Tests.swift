@@ -9,6 +9,7 @@ import Dependencies
 import HTML
 import PointFreeHTMLTestSupport
 import Testing
+import Foundation
 
 @Suite(
     "Color Tests",
@@ -23,7 +24,7 @@ struct ColorTests {
                     H1 { "Type-safe HTML" }
                         .color(light: .named(.blue), dark: .named(.red))
                         .fontSize(.px(24))
-                    HTMLComponents.Paragraph { "With type-safe CSS!" }
+                    Paragraph { "With type-safe CSS!" }
                         .marginTop(.px(10))
 
                     Video(src: "/public/video/example.mp4", autoplay: true) {}
