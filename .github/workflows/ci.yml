@@ -1,0 +1,94 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos-swift59:
+    name: macOS (Swift 5.9)
+    runs-on: macos-26
+    strategy:
+      matrix:
+        xcode: ['26.0']
+        config: ['debug', 'release']
+    steps:
+      - uses: actions/checkout@v5
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+      - name: Print Swift version
+        run: swift --version
+      - name: Cache Swift packages
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: ${{ runner.os }}-spm-
+      - name: Build
+        run: swift build -c ${{ matrix.config }}
+      - name: Run tests
+        run: swift test -c ${{ matrix.config }}
+
+  macos-swift62:
+    name: macOS (Swift 6.2)
+    runs-on: macos-26
+    strategy:
+      matrix:
+        xcode: ['26.0']
+        config: ['debug', 'release']
+    steps:
+      - uses: actions/checkout@v5
+      - name: Select Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+      - name: Print Swift version
+        run: swift --version
+      - name: Cache Swift packages
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: ${{ runner.os }}-spm-
+      - name: Build
+        run: swift build -c ${{ matrix.config }}
+      - name: Run tests
+        run: swift test -c ${{ matrix.config }}
+
+  linux-swift62:
+    name: Ubuntu (Swift 6.2)
+    runs-on: ubuntu-latest
+    container: swift:6.2
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build
+        run: swift build
+      - name: Run tests
+        run: swift test
+
+  windows:
+    name: Windows (Swift 6.2)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: SwiftyLab/setup-swift@latest
+        with:
+          swift-version: "6.2"
+      - name: Build
+        run: swift build
+      - name: Run tests
+        run: swift test
+
+  readme-validation:
+    name: README Code Examples
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v5
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app
+      - name: Run README verification tests
+        run: swift test --filter ReadmeVerificationTests

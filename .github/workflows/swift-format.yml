@@ -1,0 +1,16 @@
+name: Swift Format
+on:
+  push:
+    branches: [main]
+
+jobs:
+  format:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v5
+      - name: Format code
+        run: swift-format format --recursive --in-place Sources Tests
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "Run swift-format"
