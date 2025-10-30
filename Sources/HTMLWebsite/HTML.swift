@@ -6,25 +6,27 @@
 //
 
 import Foundation
-import HTMLComponents
 import HTMLAttributesPointFreeHTML
+import HTMLComponents
 
 extension HTML {
-    @HTMLBuilder
-    public func focusOnPageLoad() -> some HTML {
-        let focusClass = "focus-on-load-\(UUID().uuidString)"
-        
-        HTMLGroup {
-            self.class(.init(focusClass))
-            
-            script {"""
-            document.addEventListener('DOMContentLoaded', function() {
-                const elements = document.getElementsByClassName('\(focusClass)');
-                if (elements.length > 0) {
-                    elements[0].focus();
-                }
-            });
-            """}
-        }
+  @HTMLBuilder
+  public func focusOnPageLoad() -> some HTML {
+    let focusClass = "focus-on-load-\(UUID().uuidString)"
+
+    HTMLGroup {
+      self.class(.init(focusClass))
+
+      script {
+        """
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.getElementsByClassName('\(focusClass)');
+            if (elements.length > 0) {
+                elements[0].focus();
+            }
+        });
+        """
+      }
     }
+  }
 }

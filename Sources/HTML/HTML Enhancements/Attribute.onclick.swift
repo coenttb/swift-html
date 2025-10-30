@@ -8,7 +8,7 @@
 import Foundation
 
 extension HTML {
-    public func onclick(_ content: String) -> some HTML {
-        self.attribute("onclick", content)
-    }
+  public func onclick(_ content: String) -> some HTML {
+    self.attribute("onclick", content)
+  }
 }

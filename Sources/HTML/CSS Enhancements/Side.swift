@@ -8,8 +8,8 @@
 import Foundation
 
 public enum Side: Sendable, Hashable {
-    case top(LengthPercentage)
-    case bottom(LengthPercentage)
-    case left(LengthPercentage)
-    case right(LengthPercentage)
+  case top(LengthPercentage)
+  case bottom(LengthPercentage)
+  case left(LengthPercentage)
+  case right(LengthPercentage)
 }

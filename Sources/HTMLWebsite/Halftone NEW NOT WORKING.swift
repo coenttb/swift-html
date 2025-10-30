@@ -63,7 +63,7 @@
 //            .inlineStyle("background", "radial-gradient(circle at center, \(lineColor.light.description), \(lineColor.dark.description))", pseudo: .before)
 //            .backgroundSize(.size(dotSize, dotSize), pseudo: .before)
 //            .transform(.rotate(rotation), pseudo: .before)
-//            
+//
 //        }
 //    }
 // }
@@ -133,7 +133,7 @@
 //    //            lineColor: .black
 //            )
 //        }
-//        
+//
 //        HTMLDocument {
 //            HTMLText(
 //                try! String(

@@ -2,38 +2,38 @@ import Foundation
 
 @available(*, deprecated, message: "Use InlineSVG from SVG Integration instead")
 public struct LegacySVG: HTML, Sendable {
-    private enum Storage {
-        case raw(String)
-        case base64(String)
-    }
+  private enum Storage {
+    case raw(String)
+    case base64(String)
+  }
 
-    let description: String
-    private let storage: Storage
+  let description: String
+  private let storage: Storage
 
-    public init(_ description: String, content: () -> String) {
-        self.storage = .raw(content())
-        self.description = description
-    }
+  public init(_ description: String, content: () -> String) {
+    self.storage = .raw(content())
+    self.description = description
+  }
 
-    public init(base64: String, description: String) {
-        self.storage = .base64(base64)
-        self.description = description
-    }
+  public init(base64: String, description: String) {
+    self.storage = .base64(base64)
+    self.description = description
+  }
 
-    public var body: some HTML {
-        HTMLGroup {
-            switch storage {
-            case let .raw(raw):
-                HTMLRaw(raw)
-            case let .base64(base64):
-                img(src: "data:image/svg+xml;base64,\(base64)", alt: "\(self.description)")
-            }
-        }
+  public var body: some HTML {
+    HTMLGroup {
+      switch storage {
+      case .raw(let raw):
+        HTMLRaw(raw)
+      case .base64(let base64):
+        img(src: "data:image/svg+xml;base64,\(base64)", alt: "\(self.description)")
+      }
     }
+  }
 }
 
 extension LegacySVG {
-    public static let error = Self("Error") {
+  public static let error = Self("Error") {
     """
     <?xml version="1.0" encoding="UTF-8"?>
     <!--Generator: Apple Native CoreSVG 326-->
@@ -47,9 +47,9 @@ extension LegacySVG {
      </g>
     </svg>
     """
-    }
+  }
 
-    public static let failure = Self("Failure") {
+  public static let failure = Self("Failure") {
     """
     <?xml version="1.0" encoding="UTF-8"?>
     <!--Generator: Apple Native CoreSVG 326-->
@@ -63,9 +63,9 @@ extension LegacySVG {
      </g>
     </svg>
     """
-    }
+  }
 
-    public static let warning = Self("Warning") {
+  public static let warning = Self("Warning") {
     """
     <?xml version="1.0" encoding="UTF-8"?>
     <!--Generator: Apple Native CoreSVG 326-->
@@ -79,18 +79,17 @@ extension LegacySVG {
     </g>
     </svg>
     """
-    }
+  }
 }
-
 
 infix operator <|
 
-private func <| <A, B> (f: (A) -> B, a: A) -> B {
-    return f(a)
+private func <| <A, B>(f: (A) -> B, a: A) -> B {
+  return f(a)
 }
 
 func base64EncodedString(_ string: String) -> String {
-    return Data(string.utf8).base64EncodedString()
+  return Data(string.utf8).base64EncodedString()
 }
 //
 //public let checkmarkSvgBase64 = base64EncodedString(
