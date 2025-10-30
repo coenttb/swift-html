@@ -109,7 +109,7 @@ struct CustomButton: HTML {
 CustomButton(title: "Learn More", href: "/docs")
 ```
 
-## Package Structure
+## Usage
 
 swift-html is composed of several focused packages:
 
@@ -137,10 +137,10 @@ import HTMLKit
 
 - [swift-html-types](https://github.com/coenttb/swift-html-types) - Type-safe HTML element definitions and attributes
 - [swift-css-types](https://github.com/coenttb/swift-css-types) - Type-safe CSS property definitions and values
-- [pointfree-html](https://github.com/coenttb/pointfree-html) - High-performance HTML rendering engine
-- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) - Integration layer between HTML, CSS, and rendering
+- [pointfree-html](https://github.com/coenttb/pointfree-html) - A fork of pointfreeco/swift-html with extended functionality.
+- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) - A Swift package integrating swift-html-types and swift-css-types with pointfree-html.
 - [swift-svg](https://github.com/coenttb/swift-svg) - SVG generation and integration
-- [swift-builders](https://github.com/coenttb/swift-builders) - Result builder utilities
+- [swift-builders](https://github.com/coenttb/swift-builders) - A Swift package with result builders for Array, Dictionary, Set, String, and Markdown.
 
 ## Requirements
 
@@ -158,4 +158,4 @@ Contributions are welcome. Please open an issue to discuss proposed changes befo
 
 ---
 
-Made with ❤️ by [coenttb](https://coenttb.com)
+Made by [coenttb](https://coenttb.com)
