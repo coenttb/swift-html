@@ -1,4 +1,5 @@
-// swift-tools-version:6.1
+// swift-tools-version:5.9
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -31,6 +32,7 @@ extension Target.Dependency {
     static var markdownBuilder: Self { .product(name: "MarkdownBuilder", package: "swift-builders") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
+    static var htmlTranslating: Self { .product(name: "PointFreeHTMLTranslating", package: "pointfree-html-translating") }
     static var builders: Self { .product(name: "Builders", package: "swift-builders") }
 }
 
@@ -54,17 +56,12 @@ let package = Package(
         // Convenience product with common features
         .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
     ],
-    traits: [
-        .trait(
-            name: "Translating",
-            description: "Include TranslatedString integration for internationalization support"
-        )
-    ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-html-types", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
+        .package(url: "https://github.com/coenttb/pointfree-html-translating", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
@@ -80,16 +77,9 @@ let package = Package(
                 .stringBuilder,
                 .dependencies,
                 .orderedCollections,
+                .htmlTranslating,
                 .builders,
-                .product(name: "SVG", package: "swift-svg"),
-                .product(
-                    name: "Translating",
-                    package: "swift-translating",
-                    condition: .when(traits: ["Translating"])
-                )
-            ],
-            swiftSettings: [
-                .define("TRANSLATING", .when(traits: ["Translating"]))
+                .product(name: "SVG", package: "swift-svg")
             ]
         ),
         .target(
@@ -107,14 +97,8 @@ let package = Package(
                 .htmlMarkdown,
                 .htmlTheme,
                 .dependencies,
-                .product(
-                    name: "Translating",
-                    package: "swift-translating",
-                    condition: .when(traits: ["Translating"])
-                )
-            ],
-            swiftSettings: [
-                .define("TRANSLATING", .when(traits: ["Translating"]))
+                .htmlTranslating,
+                .translating
             ]
         ),
         .target(
@@ -123,7 +107,8 @@ let package = Package(
                 .html,
                 .htmlTheme,
                 .dependencies,
-                .orderedCollections
+                .orderedCollections,
+                .htmlTranslating
             ]
         ),
         .target(
@@ -146,14 +131,7 @@ let package = Package(
                 .htmlMarkdown,
                 .dependencies,
                 .orderedCollections,
-                .product(
-                    name: "Translating",
-                    package: "swift-translating",
-                    condition: .when(traits: ["Translating"])
-                )
-            ],
-            swiftSettings: [
-                .define("TRANSLATING", .when(traits: ["Translating"]))
+                .translating
             ]
         ),
         .testTarget(
@@ -191,8 +169,7 @@ let package = Package(
                 .pointFreeHtmlTestSupport
             ]
         )
-    ],
-    swiftLanguageModes: [.v6]
+    ]
 )
 
 extension String {
