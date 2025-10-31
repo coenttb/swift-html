@@ -8,4 +8,7 @@
 @_exported import Dependencies
 @_exported import HTML
 @_exported import HTMLMarkdown
+
+#if TRANSLATING
 @_exported import Translating
+#endif
