@@ -352,7 +352,9 @@ extension HTMLColor {
 
 extension HTMLColor {
   public static let cardBackground: Self = .init(
-    light: .rgb(red: 245, green: 246, blue: 248), dark: .rgb(red: 25, green: 25, blue: 27))
+    light: .rgb(red: 245, green: 246, blue: 248),
+    dark: .rgb(red: 25, green: 25, blue: 27)
+  )
 }
 
 extension HTMLColor {

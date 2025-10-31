@@ -80,7 +80,8 @@ private struct HTMLConverter: MarkupVisitor {
       VStack(alignment: .center) {
         a(
           href: .init(
-            blockDirective.argumentText.segments.map(\.trimmedText).joined(separator: " "))
+            blockDirective.argumentText.segments.map(\.trimmedText).joined(separator: " ")
+          )
         ) {
           for child in blockDirective.children {
             visit(child)

@@ -21,8 +21,11 @@ extension HTML {
     switch (vertical, horizontal) {
     case (.some(let vertical), .some(let horizontal)):
       self.padding(
-        .verticalHorizontal(vertical, horizontal), media: mediaQuery, selector: selector,
-        pseudo: pseudo)
+        .verticalHorizontal(vertical, horizontal),
+        media: mediaQuery,
+        selector: selector,
+        pseudo: pseudo
+      )
     case (.none, .some(let horizontal)):
       self
         .paddingRight(.lengthPercentage(horizontal))
@@ -47,8 +50,12 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.padding(
-      vertical: vertical, horizontal: horizontal, media: mediaQuery, selector: selector,
-      pseudo: pseudo)
+      vertical: vertical,
+      horizontal: horizontal,
+      media: mediaQuery,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -158,8 +165,12 @@ extension HTML {
           })!
           if case .top(let value) = lengthPercentage {
             element.inlineStyle(
-              "padding-top", value.description, media: mediaQuery, selector: selector,
-              pseudo: pseudo)
+              "padding-top",
+              value.description,
+              media: mediaQuery,
+              selector: selector,
+              pseudo: pseudo
+            )
           } else {
             element
           }
@@ -173,8 +184,12 @@ extension HTML {
           })!
           if case .bottom(let value) = lengthPercentage {
             element.inlineStyle(
-              "padding-bottom", value.description, media: mediaQuery, selector: selector,
-              pseudo: pseudo)
+              "padding-bottom",
+              value.description,
+              media: mediaQuery,
+              selector: selector,
+              pseudo: pseudo
+            )
           } else {
             element
           }
@@ -188,8 +203,12 @@ extension HTML {
           })!
           if case .left(let value) = lengthPercentage {
             element.inlineStyle(
-              "padding-left", value.description, media: mediaQuery, selector: selector,
-              pseudo: pseudo)
+              "padding-left",
+              value.description,
+              media: mediaQuery,
+              selector: selector,
+              pseudo: pseudo
+            )
           } else {
             element
           }
@@ -203,8 +222,12 @@ extension HTML {
           })!
           if case .right(let value) = lengthPercentage {
             element.inlineStyle(
-              "padding-right", value.description, media: mediaQuery, selector: selector,
-              pseudo: pseudo)
+              "padding-right",
+              value.description,
+              media: mediaQuery,
+              selector: selector,
+              pseudo: pseudo
+            )
           } else {
             element
           }

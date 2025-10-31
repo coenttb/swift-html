@@ -456,7 +456,8 @@ public typealias noembed = HTMLElementTypes.EmbedFallback
 
 /// Lowercase typealias for creating FrameFallback elements with a more HTML-like syntax.
 @available(
-  *, deprecated,
+  *,
+  deprecated,
   message: "The noframes element is obsolete and shouldn't be used in modern web development"
 )
 public typealias noframes = HTMLElementTypes.FrameFallback
@@ -490,7 +491,9 @@ public typealias picture = HTMLElementTypes.Picture
 
 /// Lowercase typealias for creating PlainText elements with a more HTML-like syntax.
 @available(
-  *, deprecated, message: "The <plaintext> element is deprecated. Use <pre> or <code> instead."
+  *,
+  deprecated,
+  message: "The <plaintext> element is deprecated. Use <pre> or <code> instead."
 )
 public typealias plaintext = HTMLElementTypes.PlainText
 

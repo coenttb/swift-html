@@ -18,7 +18,10 @@ extension HTMLColor.Theme.StyleSheet {
   public func write(to directory: String, name: String = "theme") throws {
 
     try FileManager.default.createDirectory(
-      atPath: directory, withIntermediateDirectories: true, attributes: nil)
+      atPath: directory,
+      withIntermediateDirectories: true,
+      attributes: nil
+    )
 
     try self.description.write(toFile: directory + "\(name).css", atomically: true, encoding: .utf8)
   }

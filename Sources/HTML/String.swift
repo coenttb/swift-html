@@ -25,9 +25,15 @@ extension String {
 
     // Remove script and style content entirely
     text = text.replacingOccurrences(
-      of: "<script[^>]*>[\\s\\S]*?</script>", with: "", options: .regularExpression)
+      of: "<script[^>]*>[\\s\\S]*?</script>",
+      with: "",
+      options: .regularExpression
+    )
     text = text.replacingOccurrences(
-      of: "<style[^>]*>[\\s\\S]*?</style>", with: "", options: .regularExpression)
+      of: "<style[^>]*>[\\s\\S]*?</style>",
+      with: "",
+      options: .regularExpression
+    )
 
     // Convert common HTML entities
     let entities = [
@@ -49,7 +55,10 @@ extension String {
     let blockElements = ["div", "p", "br", "h[1-6]", "li", "tr", "td", "th"]
     for element in blockElements {
       text = text.replacingOccurrences(
-        of: "</?\(element)[^>]*>", with: "\n", options: .regularExpression)
+        of: "</?\(element)[^>]*>",
+        with: "\n",
+        options: .regularExpression
+      )
     }
 
     // Remove all remaining HTML tags

@@ -42,7 +42,8 @@ public struct Halftone<Image: HTML>: HTML {
                 brightness(\(photoBrightness)%)
                 contrast(\(photoContrast)%)
                 blur(\(photoBlur.description))
-            """)
+            """
+          )
       }
       .position(
         .absolute,
@@ -73,7 +74,9 @@ public struct Halftone<Image: HTML>: HTML {
         pseudo: .before
       )
       .inlineStyle(
-        "background-size", "\(dotSize.description) \(dotSize.description)", pseudo: .before
+        "background-size",
+        "\(dotSize.description) \(dotSize.description)",
+        pseudo: .before
       )
       .transform("rotate(\(rotationAngle)deg)", pseudo: .before)
 
@@ -131,8 +134,8 @@ extension DependencyValues {
       .width(.px(300))
       .height(.px(300))
       .inlineStyle("background", "linear-gradient(45deg, #ff6b6b, #4ecdc4)")
-      .halftone(//            dotSize: .px(4),
-      //            lineColor: .black
+      .halftone(  //            dotSize: .px(4),
+        //            lineColor: .black
         )
     }
   }

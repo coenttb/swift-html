@@ -108,7 +108,9 @@ extension HTMLColor.Theme.Branding {
       accent: .init(light: .hex("1976d2"), dark: .hex("42a5f5")),
       primarySubtle: .init(light: .hex("000000").opacity(0.05), dark: .hex("ffffff").opacity(0.05)),
       secondarySubtle: .init(
-        light: .hex("333333").opacity(0.05), dark: .hex("cccccc").opacity(0.05))
+        light: .hex("333333").opacity(0.05),
+        dark: .hex("cccccc").opacity(0.05)
+      )
     )
   }
 }

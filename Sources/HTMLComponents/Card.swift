@@ -26,7 +26,8 @@ public struct Card<Content: HTML, Header: HTML, Footer: HTML>: HTML {
       )
       .borderBottom(
         .init(width: .px(1), style: .solid, color: .hex("#3d3d3d")),
-        media: .prefersColorScheme(.dark))
+        media: .prefersColorScheme(.dark)
+      )
 
       VStack {
         VStack(spacing: 0.rem) { content }

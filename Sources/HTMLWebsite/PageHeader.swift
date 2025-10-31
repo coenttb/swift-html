@@ -72,12 +72,14 @@ extension PageHeaderGradient {
   public static var pf: Self {
     .init(
       bottom: .init(light: .hex("E0E0E0"), dark: .hex("121212")),
-      top: .init(light: .hex("B0B0B0"), dark: .hex("242424")))
+      top: .init(light: .hex("B0B0B0"), dark: .hex("242424"))
+    )
   }
 
   public static var coenttb: Self {
     .init(
       bottom: .init(light: .hex("D3D3D3"), dark: .hex("242424")),
-      top: .init(light: .hex("D6C4F2"), dark: .hex("6a5acd")))
+      top: .init(light: .hex("D6C4F2"), dark: .hex("6a5acd"))
+    )
   }
 }

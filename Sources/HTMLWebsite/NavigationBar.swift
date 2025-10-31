@@ -199,7 +199,9 @@ public struct NavigationBar: HTML {
             selector: "input:checked ~ #menu-icon"
           )
           .inlineStyle(
-            "transform", "rotate(\(index * 45)deg)", selector: "input:checked ~ #menu-icon"
+            "transform",
+            "rotate(\(index * 45)deg)",
+            selector: "input:checked ~ #menu-icon"
           )
           .inlineStyle(
             "background",

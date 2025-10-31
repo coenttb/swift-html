@@ -44,11 +44,17 @@ public struct Table<Headers: HTML, Rows: HTML>: HTML {
       .if(striped) { table in
         table.inlineStyle("tbody tr:nth-child(even)", "background-color: rgba(0, 0, 0, 0.02)")
           .inlineStyle(
-            "tbody tr:nth-child(even)", "background-color: rgba(255, 255, 255, 0.02)", media: .dark)
+            "tbody tr:nth-child(even)",
+            "background-color: rgba(255, 255, 255, 0.02)",
+            media: .dark
+          )
       }
       .if(hoverable) { table in
         table.backgroundColor(
-          .rgba(red: 59, green: 130, blue: 246, alpha: 0.05), selector: "tbody tr", pseudo: .hover)
+          .rgba(red: 59, green: 130, blue: 246, alpha: 0.05),
+          selector: "tbody tr",
+          pseudo: .hover
+        )
       }
     }
     .overflowX(.auto)

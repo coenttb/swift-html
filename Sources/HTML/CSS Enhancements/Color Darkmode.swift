@@ -155,8 +155,12 @@ extension HTML {
     self
       .inlineStyle(property, light.description, media: media, selector: selector, pseudo: pseudo)
       .inlineStyle(
-        property, dark?.description, media: .prefersColorScheme(.dark).and(media),
-        selector: selector, pseudo: pseudo)
+        property,
+        dark?.description,
+        media: .prefersColorScheme(.dark).and(media),
+        selector: selector,
+        pseudo: pseudo
+      )
   }
 }
 
@@ -173,8 +177,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.Color.property, light: light, dark: dark, media: media, selector: selector,
-      pseudo: pseudo)
+      CSSPropertyTypes.Color.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -189,7 +198,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.color(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -211,7 +225,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.color(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -231,8 +250,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.AccentColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.AccentColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -247,7 +271,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.accentColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -269,7 +298,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.accentColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -289,8 +323,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BackgroundColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BackgroundColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -305,7 +344,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.backgroundColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -325,8 +369,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderBlockColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderBlockColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -341,7 +390,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderBlockColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -363,7 +417,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderBlockColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -383,8 +442,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderBlockEndColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderBlockEndColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -399,7 +463,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderBlockEndColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -421,7 +490,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderBlockEndColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -441,8 +515,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderBlockStartColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderBlockStartColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -457,7 +536,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderBlockStartColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -479,7 +563,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderBlockStartColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -499,8 +588,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderBottomColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderBottomColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -515,7 +609,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderBottomColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -537,7 +636,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderBottomColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -557,8 +661,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -573,7 +682,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -595,7 +709,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -615,8 +734,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderInlineColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderInlineColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -631,7 +755,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderInlineColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -653,7 +782,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderInlineColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -673,8 +807,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderInlineEndColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderInlineEndColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -689,7 +828,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderInlineEndColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -711,7 +855,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderInlineEndColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -731,8 +880,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderInlineStartColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderInlineStartColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -747,7 +901,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderInlineStartColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -769,7 +928,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderInlineStartColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -789,8 +953,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderLeftColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderLeftColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -805,7 +974,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderLeftColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -827,7 +1001,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderLeftColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -847,8 +1026,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderRightColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderRightColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -863,7 +1047,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderRightColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -885,7 +1074,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderRightColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -905,8 +1099,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.BorderTopColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.BorderTopColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -921,7 +1120,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.borderTopColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -943,7 +1147,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.borderTopColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -963,8 +1172,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.CaretColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.CaretColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -979,7 +1193,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.caretColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1001,7 +1220,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.caretColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1021,8 +1245,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.ColumnRuleColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.ColumnRuleColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1037,7 +1266,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.columnRuleColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1059,7 +1293,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.columnRuleColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1079,8 +1318,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.FloodColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.FloodColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1095,7 +1339,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.floodColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1117,7 +1366,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.floodColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1136,8 +1390,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.Fill.property, light: light, dark: dark, media: media, selector: selector,
-      pseudo: pseudo)
+      CSSPropertyTypes.Fill.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1152,7 +1411,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.fill(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1174,7 +1438,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.fill(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1194,8 +1463,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.LightingColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.LightingColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1210,7 +1484,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.lightingColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1232,7 +1511,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.lightingColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1252,8 +1536,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.OutlineColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.OutlineColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1268,7 +1557,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.outlineColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1290,7 +1584,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.outlineColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1310,8 +1609,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.StopColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.StopColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1326,7 +1630,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.stopColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1348,7 +1657,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.stopColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1368,8 +1682,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.Stroke.property, light: light, dark: dark, media: media, selector: selector,
-      pseudo: pseudo)
+      CSSPropertyTypes.Stroke.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1384,7 +1703,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.stroke(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1406,7 +1730,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.stroke(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1426,8 +1755,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.TextDecorationColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.TextDecorationColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1442,7 +1776,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.textDecorationColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1464,7 +1803,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.textDecorationColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }
@@ -1484,8 +1828,13 @@ extension HTML {
     pseudo: Pseudo? = nil
   ) -> some HTML {
     self.lightAndDarkMode(
-      CSSPropertyTypes.TextEmphasisColor.property, light: light, dark: dark, media: media,
-      selector: selector, pseudo: pseudo)
+      CSSPropertyTypes.TextEmphasisColor.property,
+      light: light,
+      dark: dark,
+      media: media,
+      selector: selector,
+      pseudo: pseudo
+    )
   }
 }
 
@@ -1500,7 +1849,12 @@ extension HTML {
   ) -> some HTML {
     if let color {
       self.textEmphasisColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     } else {
       self
     }
@@ -1522,7 +1876,12 @@ extension HTML {
       self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
     case .darkMode(let color):
       self.textEmphasisColor(
-        light: color.light, dark: color.dark, media: media, selector: selector, pseudo: pseudo)
+        light: color.light,
+        dark: color.dark,
+        media: media,
+        selector: selector,
+        pseudo: pseudo
+      )
     case .none:
       self
     }

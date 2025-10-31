@@ -24,11 +24,14 @@ public struct Link<Label: HTML>: HTML {
       .color(HTMLColor.text.link, pseudo: .visited)
       .color(HTMLColor.text.link, pseudo: .link)
       .textDecoration(
-        linkStyle.underline == true ? .underline : TextDecoration.none, pseudo: .visited
+        linkStyle.underline == true ? .underline : TextDecoration.none,
+        pseudo: .visited
       )
       .textDecoration(linkStyle.underline == true ? .underline : TextDecoration.none, pseudo: .link)
       .textDecoration(
-        linkStyle.underline == true ? .none : TextDecoration.underline, pseudo: .hover)
+        linkStyle.underline == true ? .none : TextDecoration.underline,
+        pseudo: .hover
+      )
   }
 }
 

@@ -55,12 +55,19 @@ extension HTML {
       if border.sides == nil || border.sides?.count == Border.Side.allCases.count {
         self
           .inlineStyle(
-            CSSPropertyTypes.Border.property, "\(borderStyle) \(lightColor)", media: mediaQuery,
-            selector: selector, pseudo: pseudo
+            CSSPropertyTypes.Border.property,
+            "\(borderStyle) \(lightColor)",
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
           )
           .inlineStyle(
-            CSSPropertyTypes.Border.property, "\(borderStyle) \(darkColor)",
-            media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
+            CSSPropertyTypes.Border.property,
+            "\(borderStyle) \(darkColor)",
+            media: .prefersColorScheme(.dark) && mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+          )
       } else {
         borderSides(
           border: border,
@@ -131,45 +138,73 @@ extension HTML {
       if sides.contains(.top) {
         result = AnyHTML(result)
           .inlineStyle(
-            BorderTop.property, "\(borderStyle) \(lightColor)", media: mediaQuery,
-            selector: selector, pseudo: pseudo
+            BorderTop.property,
+            "\(borderStyle) \(lightColor)",
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
           )
           .inlineStyle(
-            BorderTop.property, "\(borderStyle) \(darkColor)",
-            media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
+            BorderTop.property,
+            "\(borderStyle) \(darkColor)",
+            media: .prefersColorScheme(.dark) && mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+          )
       }
 
       if sides.contains(.left) {
         result = AnyHTML(result)
           .inlineStyle(
-            BorderLeft.property, "\(borderStyle) \(lightColor)", media: mediaQuery,
-            selector: selector, pseudo: pseudo
+            BorderLeft.property,
+            "\(borderStyle) \(lightColor)",
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
           )
           .inlineStyle(
-            BorderLeft.property, "\(borderStyle) \(darkColor)",
-            media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
+            BorderLeft.property,
+            "\(borderStyle) \(darkColor)",
+            media: .prefersColorScheme(.dark) && mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+          )
       }
 
       if sides.contains(.bottom) {
         result = AnyHTML(result)
           .inlineStyle(
-            BorderBottom.property, "\(borderStyle) \(lightColor)", media: mediaQuery,
-            selector: selector, pseudo: pseudo
+            BorderBottom.property,
+            "\(borderStyle) \(lightColor)",
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
           )
           .inlineStyle(
-            BorderBottom.property, "\(borderStyle) \(darkColor)",
-            media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
+            BorderBottom.property,
+            "\(borderStyle) \(darkColor)",
+            media: .prefersColorScheme(.dark) && mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+          )
       }
 
       if sides.contains(.right) {
         result = AnyHTML(result)
           .inlineStyle(
-            BorderRight.property, "\(borderStyle) \(lightColor)", media: mediaQuery,
-            selector: selector, pseudo: pseudo
+            BorderRight.property,
+            "\(borderStyle) \(lightColor)",
+            media: mediaQuery,
+            selector: selector,
+            pseudo: pseudo
           )
           .inlineStyle(
-            BorderRight.property, "\(borderStyle) \(darkColor)",
-            media: .prefersColorScheme(.dark) && mediaQuery, selector: selector, pseudo: pseudo)
+            BorderRight.property,
+            "\(borderStyle) \(darkColor)",
+            media: .prefersColorScheme(.dark) && mediaQuery,
+            selector: selector,
+            pseudo: pseudo
+          )
       }
     }
 
