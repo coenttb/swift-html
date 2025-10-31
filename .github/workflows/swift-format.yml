@@ -1,16 +1,49 @@
 name: Swift Format
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+concurrency:
+  group: format-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  format:
+  swift_format:
+    name: swift-format
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
-      - name: Format code
-        run: swift-format format --recursive --in-place Sources Tests
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v7
+
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v2
         with:
-          commit_message: "Run swift-format"
+          swift-version: '6.0'
+
+      - name: Cache swift-format
+        id: cache-swift-format
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/swift-format
+          key: ${{ runner.os }}-swift-format-${{ hashFiles('.github/workflows/swift-format.yml') }}
+
+      - name: Install swift-format
+        if: steps.cache-swift-format.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 --branch main https://github.com/apple/swift-format.git
+          cd swift-format
+          swift build -c release
+          sudo cp .build/release/swift-format /usr/local/bin/
+          cd ..
+          rm -rf swift-format
+
+      - name: Format
+        run: swift-format format --recursive --in-place Sources Tests
+
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Run swift-format
+          branch: 'main'
