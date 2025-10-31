@@ -14,6 +14,7 @@ swift-html provides type-safe HTML elements and CSS properties with compile-time
 - Compile-time HTML and CSS validation
 - Type-safe element attributes and CSS properties
 - First-class dark mode support with light/dark color schemes
+- Optional internationalization support via Translating trait
 - SwiftUI-like syntax for familiar API patterns
 - Direct byte-level rendering for server applications
 - Modular architecture with focused packages
@@ -107,6 +108,40 @@ struct CustomButton: HTML {
 
 // Usage
 CustomButton(title: "Learn More", href: "/docs")
+```
+
+### Internationalization (Optional)
+
+Enable the Translating trait for internationalization support:
+
+```swift
+// In Package.swift
+dependencies: [
+    .package(url: "https://github.com/coenttb/swift-html", from: "0.11.0",
+             traits: ["Translating"])
+]
+```
+
+Then use TranslatedString in your HTML:
+
+```swift
+import HTML
+import Translating
+
+let greeting = TranslatedString(
+    dutch: "Welkom",
+    english: "Welcome"
+)
+
+let page = div {
+    h1 { greeting }
+    p {
+        TranslatedString(
+            dutch: "Dit is een voorbeeld",
+            english: "This is an example"
+        )
+    }
+}
 ```
 
 ## Usage
