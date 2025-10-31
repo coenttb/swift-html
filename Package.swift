@@ -27,6 +27,7 @@ extension Target.Dependency {
     static var htmlCssPointFreeHTML: Self { .product(name: "HTMLCSSPointFreeHTML", package: "swift-html-css-pointfree") }
     static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
+    static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
     static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
     static var markdownBuilder: Self { .product(name: "MarkdownBuilder", package: "swift-builders") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
@@ -160,7 +161,16 @@ let package = Package(
             name: .html.tests,
             dependencies: [
                 .html,
-                .pointFreeHtmlTestSupport
+                .pointFreeHtmlTestSupport,
+                .dependenciesTestSupport,
+                .product(
+                    name: "Translating",
+                    package: "swift-translating",
+                    condition: .when(traits: ["Translating"])
+                )
+            ],
+            swiftSettings: [
+                .define("TRANSLATING", .when(traits: ["Translating"]))
             ]
         ),
         .testTarget(
