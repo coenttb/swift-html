@@ -135,12 +135,37 @@ import HTMLKit
 
 ## Related Packages
 
-- [swift-html-types](https://github.com/coenttb/swift-html-types) - Type-safe HTML element definitions and attributes
-- [swift-css-types](https://github.com/coenttb/swift-css-types) - Type-safe CSS property definitions and values
-- [pointfree-html](https://github.com/coenttb/pointfree-html) - A fork of pointfreeco/swift-html with extended functionality.
-- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) - A Swift package integrating swift-html-types and swift-css-types with pointfree-html.
-- [swift-svg](https://github.com/coenttb/swift-svg) - SVG generation and integration
-- [swift-builders](https://github.com/coenttb/swift-builders) - A Swift package with result builders for Array, Dictionary, Set, String, and Markdown.
+### Dependencies
+
+- [pointfree-html](https://github.com/coenttb/pointfree-html): A fork of pointfreeco/swift-html with extended functionality.
+- [pointfree-html-translating](https://github.com/coenttb/pointfree-html-translating): A Swift package integrating pointfree-html with swift-translating.
+- [swift-builders](https://github.com/coenttb/swift-builders): A Swift package with result builders for Array, Dictionary, Set, String, and Markdown.
+- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree): A Swift package integrating swift-html-types and swift-css-types with pointfree-html.
+- [swift-html-types](https://github.com/coenttb/swift-html-types): A Swift package with foundational types for HTML.
+- [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
+- [swift-translating](https://github.com/coenttb/swift-translating): A Swift package for inline translations.
+
+### Used By
+
+This package is used by many packages across the ecosystem, including:
+
+- [coenttb-blog](https://github.com/coenttb/coenttb-blog): A Swift package for blog functionality with HTML generation.
+- [coenttb-com-blog-drafts](https://github.com/coenttb/coenttb-com-blog-drafts): Repository containing draft blog posts for coenttb.com.
+- [coenttb-com-server](https://github.com/coenttb/coenttb-com-server): Production server for coenttb.com built with Boiler.
+- [coenttb-google-analytics](https://github.com/coenttb/coenttb-google-analytics): A Swift package for Google Analytics integration.
+- [coenttb-hotjar](https://github.com/coenttb/coenttb-hotjar): A Swift package for Hotjar analytics integration.
+- [coenttb-newsletter](https://github.com/coenttb/coenttb-newsletter): A Swift package for newsletter subscription and email management.
+- [coenttb-syndication](https://github.com/coenttb/coenttb-syndication): A Swift package for RSS and Atom feed generation.
+- [coenttb-web](https://github.com/coenttb/coenttb-web): A Swift package with tools for web development building on swift-web.
+- [swift-document-templates](https://github.com/coenttb/swift-document-templates): A Swift package for data-driven business document creation.
+- [swift-favicon](https://github.com/coenttb/swift-favicon): A Swift package for type-safe favicons.
+
+*And 9 other packages in the ecosystem*
+
+### Third-Party Dependencies
+
+- [pointfreeco/swift-dependencies](https://github.com/pointfreeco/swift-dependencies): A dependency management library for controlling dependencies in Swift.
+- [apple/swift-collections](https://github.com/apple/swift-collections): Commonly used data structures for Swift.
 
 ## Requirements
 
