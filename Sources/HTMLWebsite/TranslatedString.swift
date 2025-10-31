@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+#if TRANSLATING
 import Translating
 
 extension String {
@@ -820,6 +822,7 @@ extension String {
     )
   }
 }
+#endif
 
 extension String {
   public static var lorem_impsum: Self {
