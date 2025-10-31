@@ -41,7 +41,7 @@ jobs:
           rm -rf swift-format
 
       - name: Format
-        run: swift-format format --recursive --in-place Sources Tests
+        run: swift-format format --ignore-unparsable-files --recursive --in-place Sources Tests
 
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
