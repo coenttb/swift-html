@@ -102,12 +102,15 @@ public struct Diagnostic<Message: HTML>: HTML {
       }
       .borderRadius(.uniform(.px(8)))
       .border(
-        width: .px(0.5), style: .solid,
+        width: .px(0.5),
+        style: .solid,
         color: .init(light: .hex("\(level.backgroundColor.light)44"))
       )
       .border(
-        width: .px(0.5), style: .solid,
-        color: .init(light: .hex("\(level.backgroundColor.dark)44")), media: .dark
+        width: .px(0.5),
+        style: .solid,
+        color: .init(light: .hex("\(level.backgroundColor.dark)44")),
+        media: .dark
       )
       .overflow(.hidden)
     }
