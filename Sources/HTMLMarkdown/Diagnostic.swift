@@ -172,7 +172,7 @@ public struct InlineDiagnostic: HTML {
           top: .px(3),
           bottom: .px(3),
           left: .px(8),
-          right: .px(30),
+          right: .px(30)
         )
         .inlineStyle("text-overflow", "ellipsis")
         .overflow(.hidden)
