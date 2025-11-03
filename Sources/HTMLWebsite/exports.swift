@@ -9,5 +9,5 @@
 @_exported import HTMLComponents
 
 #if TRANSLATING
-@_exported import Translating
+  @_exported import Translating
 #endif

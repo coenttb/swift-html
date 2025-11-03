@@ -10,30 +10,30 @@ import Foundation
 import PointFreeHTML
 
 extension HTML {
-    @discardableResult
-    @HTMLBuilder
-    public func `if`<T: HTML>(
-        _ condition: Bool,
-        @HTMLBuilder then modification: (Self) -> T
-    ) -> some HTML {
-        if condition {
-            modification(self)
-        } else {
-            self
-        }
+  @discardableResult
+  @HTMLBuilder
+  public func `if`<T: HTML>(
+    _ condition: Bool,
+    @HTMLBuilder then modification: (Self) -> T
+  ) -> some HTML {
+    if condition {
+      modification(self)
+    } else {
+      self
     }
+  }
 }
 
 extension HTML {
-    @HTMLBuilder
-    public func `if`<X>(
-        `let` value: X?,
-        @HTMLBuilder _ then: (Self, X) -> some HTML
-    ) -> some HTML {
-        if let value = value {
-            then(self, value)
-        } else {
-            self
-        }
+  @HTMLBuilder
+  public func `if`<X>(
+    `let` value: X?,
+    @HTMLBuilder _ then: (Self, X) -> some HTML
+  ) -> some HTML {
+    if let value = value {
+      then(self, value)
+    } else {
+      self
     }
+  }
 }

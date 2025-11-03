@@ -9,10 +9,10 @@ import Foundation
 import MarkdownBuilder
 
 extension HTMLMarkdown {
-    public init(
-        @MarkdownBuilder _ markdown: () -> String,
-        previewOnly: Bool = false
-    ) {
-        self = .init(markdown(), previewOnly: previewOnly)
-    }
+  public init(
+    @MarkdownBuilder _ markdown: () -> String,
+    previewOnly: Bool = false
+  ) {
+    self = .init(markdown(), previewOnly: previewOnly)
+  }
 }

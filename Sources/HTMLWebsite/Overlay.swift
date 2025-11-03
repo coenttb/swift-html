@@ -12,61 +12,61 @@ import HTMLComponents
 
 public struct Overlay<Content: HTML>: HTML {
 
-    let id: String
-    let content: Content
+  let id: String
+  let content: Content
 
-    public init(
-        id: String = "coenttb-shared-overlay-id",
-        @HTMLBuilder content: () -> Content
-    ) {
-        self.content = content()
-        self.id = String.sanitizeForJavaScript(id)
+  public init(
+    id: String = "coenttb-shared-overlay-id",
+    @HTMLBuilder content: () -> Content
+  ) {
+    self.content = content()
+    self.id = String.sanitizeForJavaScript(id)
+  }
+
+  private var backgroundOverlay: some HTML {
+    div {}
+      .id("background-overlay-\(id)")
+      .display(Display.none)
+      .position(.fixed)
+      .top(.zero)
+      .left(.zero)
+      .width(.percent(100))
+      .height(.percent(100))
+      .backgroundColor(HTMLColor.init(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
+      .transition("opacity 0.3s ease")
+      .opacity(0)
+      .zIndex(1000)
+  }
+
+  public var body: some HTML {
+    div {
+      backgroundOverlay
+
+      Card {
+        content
+      }
+      .id("popup-container-\(id)")
+      .textAlign(.center)
+      .display(Display.none)
+      .position(.fixed)
+      .top(.percent(50))
+      .left(.percent(50))
+      .transform("translate(-50%, -50%) scale(0.95)")
+      .transition("opacity 0.3s ease, transform 0.3s ease")
+      .opacity(0)
+      .zIndex(1001)
+      .maxWidth(.px(440))
+      .width(.percent(90))
+      .margin(
+        vertical: nil,
+        horizontal: .auto,
+      )
+      .backgroundColor(.background.primary)
     }
+    .class(.init(id))
 
-    private var backgroundOverlay: some HTML {
-        div {}
-            .id("background-overlay-\(id)")
-            .display(Display.none)
-            .position(.fixed)
-            .top(.zero)
-            .left(.zero)
-            .width(.percent(100))
-            .height(.percent(100))
-            .backgroundColor(HTMLColor.init(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
-            .transition("opacity 0.3s ease")
-            .opacity(0)
-            .zIndex(1000)
-    }
-
-    public var body: some HTML {
-        div {
-            backgroundOverlay
-
-            Card {
-                content
-            }
-            .id("popup-container-\(id)")
-            .textAlign(.center)
-            .display(Display.none)
-            .position(.fixed)
-            .top(.percent(50))
-            .left(.percent(50))
-            .transform("translate(-50%, -50%) scale(0.95)")
-            .transition("opacity 0.3s ease, transform 0.3s ease")
-            .opacity(0)
-            .zIndex(1001)
-            .maxWidth(.px(440))
-            .width(.percent(90))
-            .margin(
-                vertical: nil,
-                horizontal: .auto,
-                )
-            .backgroundColor(.background.primary)
-        }
-        .class(.init(id))
-
-        script {
-            """
+    script {
+      """
       // Initialize global variables
       window.overlayShown_\(id) = false;
 
@@ -153,6 +153,6 @@ public struct Overlay<Content: HTML>: HTML {
           };
       })();
       """
-        }
     }
+  }
 }

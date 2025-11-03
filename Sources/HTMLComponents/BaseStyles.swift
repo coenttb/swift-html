@@ -9,14 +9,14 @@ import Foundation
 import HTML
 
 public struct BaseStyles: HTML {
-    public init() {
+  public init() {
 
-    }
+  }
 
-    public var body: some HTML {
-        Style { "\(renderedNormalizeCss)" }
-        Style {
-            """
+  public var body: some HTML {
+    Style { "\(renderedNormalizeCss)" }
+    Style {
+      """
       html {
           font-family: ui-sans-serif, -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif;
           line-height: 1.5;
@@ -81,6 +81,6 @@ public struct BaseStyles: HTML {
           to { opacity: 1; }
       }
       """
-        }
     }
+  }
 }

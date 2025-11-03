@@ -34,28 +34,28 @@ import SVGTypes
 /// }
 /// ```
 public struct InlineSVG: HTML {
-    /// The SVG content to embed
-    private let content: any SVG
+  /// The SVG content to embed
+  private let content: any SVG
 
-    /// Creates a new inline SVG element from SVG content.
-    ///
-    /// - Parameter content: A closure that returns SVG content using the SVG DSL.
-    public init<Content: SVG>(@SVGBuilder _ content: () -> Content) {
-        self.content = content()
-    }
+  /// Creates a new inline SVG element from SVG content.
+  ///
+  /// - Parameter content: A closure that returns SVG content using the SVG DSL.
+  public init<Content: SVG>(@SVGBuilder _ content: () -> Content) {
+    self.content = content()
+  }
 
-    /// Creates a new inline SVG element from already created SVG content.
-    ///
-    /// - Parameter content: SVG content
-    public init<Content: SVG>(_ content: Content) {
-        self.content = content
-    }
+  /// Creates a new inline SVG element from already created SVG content.
+  ///
+  /// - Parameter content: SVG content
+  public init<Content: SVG>(_ content: Content) {
+    self.content = content
+  }
 
-    /// Renders the SVG content as HTML.
-    public var body: some HTML {
-        // Render the SVG to a string and embed as raw HTML
-        HTMLRaw(content.render())
-    }
+  /// Renders the SVG content as HTML.
+  public var body: some HTML {
+    // Render the SVG to a string and embed as raw HTML
+    HTMLRaw(content.render())
+  }
 }
 
 // MARK: - Convenience Functions
@@ -68,7 +68,7 @@ public struct InlineSVG: HTML {
 /// - Parameter svgString: A string containing valid SVG markup.
 /// - Returns: An HTML element containing the SVG.
 public func svg(_ svgString: String) -> some HTML {
-    HTMLRaw(svgString)
+  HTMLRaw(svgString)
 }
 
 // MARK: - Image Extensions for SVG
@@ -98,32 +98,32 @@ public func svg(_ svgString: String) -> some HTML {
 //
 
 extension HTMLElementTypes.Image {
-    public init<Content: SVG>(
-        svg: Content,
-        alt: Alt?,
-        base64: Bool = true,
-        loading: Loading? = .eager
-    ) {
-        let svgString = svg.render()
+  public init<Content: SVG>(
+    svg: Content,
+    alt: Alt?,
+    base64: Bool = true,
+    loading: Loading? = .eager
+  ) {
+    let svgString = svg.render()
 
-        var src: Src {
-            if base64 {
-                let data = Data(svgString.utf8)
-                let base64String = data.base64EncodedString()
-                return "data:image/svg+xml;base64,\(base64String)"
-            } else {
-                // URL encode the SVG for direct embedding
-                let encoded =
-                    svgString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-                    ?? svgString
-                return "data:image/svg+xml;charset=utf-8,\(encoded)"
-            }
-        }
-
-        self = .init(
-            src: src,
-            alt: alt,
-            loading: loading
-        )
+    var src: Src {
+      if base64 {
+        let data = Data(svgString.utf8)
+        let base64String = data.base64EncodedString()
+        return "data:image/svg+xml;base64,\(base64String)"
+      } else {
+        // URL encode the SVG for direct embedding
+        let encoded =
+          svgString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+          ?? svgString
+        return "data:image/svg+xml;charset=utf-8,\(encoded)"
+      }
     }
+
+    self = .init(
+      src: src,
+      alt: alt,
+      loading: loading
+    )
+  }
 }

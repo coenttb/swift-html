@@ -8,31 +8,31 @@
 import Foundation
 
 extension HTMLColor.Theme {
-    /// Generates a CSS stylesheet with all theme colors as CSS custom properties
-    public var stylesheet: StyleSheet {
-        HTMLColor.Theme.StyleSheet(theme: self)
-    }
+  /// Generates a CSS stylesheet with all theme colors as CSS custom properties
+  public var stylesheet: StyleSheet {
+    HTMLColor.Theme.StyleSheet(theme: self)
+  }
 }
 
 extension HTMLColor.Theme.StyleSheet {
-    public func write(to directory: String, name: String = "theme") throws {
+  public func write(to directory: String, name: String = "theme") throws {
 
-        try FileManager.default.createDirectory(
-            atPath: directory,
-            withIntermediateDirectories: true,
-            attributes: nil
-        )
+    try FileManager.default.createDirectory(
+      atPath: directory,
+      withIntermediateDirectories: true,
+      attributes: nil
+    )
 
-        try self.description.write(toFile: directory + "\(name).css", atomically: true, encoding: .utf8)
-    }
+    try self.description.write(toFile: directory + "\(name).css", atomically: true, encoding: .utf8)
+  }
 }
 
 extension HTMLColor.Theme {
-    public struct StyleSheet: CustomStringConvertible {
-        let theme: HTMLColor.Theme
+  public struct StyleSheet: CustomStringConvertible {
+    let theme: HTMLColor.Theme
 
-        public var description: String {
-            """
+    public var description: String {
+      """
       /* Generated Theme Stylesheet */
       :root {
           /* Base Colors */
@@ -221,6 +221,6 @@ extension HTMLColor.Theme {
       .border-warning { border-color: var(--border-warning); }
       """
 
-        }
     }
+  }
 }
