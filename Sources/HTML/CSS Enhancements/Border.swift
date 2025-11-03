@@ -24,7 +24,7 @@ public struct Border: Equatable, Sendable {
     sides: Set<Side>? = nil,
     width: BorderWidth? = nil,
     style: CSSTypeTypes.LineStyle? = .solid,
-    color: HTMLColor? = nil,
+    color: HTMLColor? = nil
   ) {
     self.width = width
     self.style = style
