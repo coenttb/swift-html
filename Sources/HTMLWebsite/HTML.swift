@@ -10,15 +10,15 @@ import HTMLAttributesPointFreeHTML
 import HTMLComponents
 
 extension HTML {
-  @HTMLBuilder
-  public func focusOnPageLoad() -> some HTML {
-    let focusClass = "focus-on-load-\(UUID().uuidString)"
+    @HTMLBuilder
+    public func focusOnPageLoad() -> some HTML {
+        let focusClass = "focus-on-load-\(UUID().uuidString)"
 
-    HTMLGroup {
-      self.class(.init(focusClass))
+        HTMLGroup {
+            self.class(.init(focusClass))
 
-      script {
-        """
+            script {
+                """
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.getElementsByClassName('\(focusClass)');
             if (elements.length > 0) {
@@ -26,7 +26,7 @@ extension HTML {
             }
         });
         """
-      }
+            }
+        }
     }
-  }
 }

@@ -8,31 +8,31 @@
 import Foundation
 
 extension HTMLColor.Theme {
-  /// Generates a CSS stylesheet with all theme colors as CSS custom properties
-  public var stylesheet: StyleSheet {
-    HTMLColor.Theme.StyleSheet(theme: self)
-  }
+    /// Generates a CSS stylesheet with all theme colors as CSS custom properties
+    public var stylesheet: StyleSheet {
+        HTMLColor.Theme.StyleSheet(theme: self)
+    }
 }
 
 extension HTMLColor.Theme.StyleSheet {
-  public func write(to directory: String, name: String = "theme") throws {
+    public func write(to directory: String, name: String = "theme") throws {
 
-    try FileManager.default.createDirectory(
-      atPath: directory,
-      withIntermediateDirectories: true,
-      attributes: nil
-    )
+        try FileManager.default.createDirectory(
+            atPath: directory,
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
 
-    try self.description.write(toFile: directory + "\(name).css", atomically: true, encoding: .utf8)
-  }
+        try self.description.write(toFile: directory + "\(name).css", atomically: true, encoding: .utf8)
+    }
 }
 
 extension HTMLColor.Theme {
-  public struct StyleSheet: CustomStringConvertible {
-    let theme: HTMLColor.Theme
+    public struct StyleSheet: CustomStringConvertible {
+        let theme: HTMLColor.Theme
 
-    public var description: String {
-      """
+        public var description: String {
+            """
       /* Generated Theme Stylesheet */
       :root {
           /* Base Colors */
@@ -51,7 +51,7 @@ extension HTMLColor.Theme {
           --color-off-black: \(theme.offBlack.light.description);
           --color-white: \(theme.white.light.description);
           --color-off-white: \(theme.offWhite.light.description);
-          
+
           /* Text Colors */
           --text-primary: \(theme.text.primary.light.description);
           --text-secondary: \(theme.text.secondary.light.description);
@@ -62,7 +62,7 @@ extension HTMLColor.Theme {
           --text-success: \(theme.text.success.light.description);
           --text-warning: \(theme.text.warning.light.description);
           --text-disabled: \(theme.text.disabled.light.description);
-          
+
           /* Background Colors */
           --background-primary: \(theme.background.primary.light.description);
           --background-secondary: \(theme.background.secondary.light.description);
@@ -76,7 +76,7 @@ extension HTMLColor.Theme {
           --background-success: \(theme.background.success.light.description);
           --background-warning: \(theme.background.warning.light.description);
           --background-info: \(theme.background.info.light.description);
-          
+
           /* Border Colors */
           --border-primary: \(theme.border.primary.light.description);
           --border-secondary: \(theme.border.secondary.light.description);
@@ -88,14 +88,14 @@ extension HTMLColor.Theme {
           --border-success: \(theme.border.success.light.description);
           --border-warning: \(theme.border.warning.light.description);
           --border-info: \(theme.border.info.light.description);
-          
+
           /* Branding Colors */
           --branding-primary: \(theme.branding.primary.light.description);
           --branding-secondary: \(theme.branding.secondary.light.description);
           --branding-accent: \(theme.branding.accent.light.description);
           --branding-primary-subtle: \(theme.branding.primarySubtle.light.description);
           --branding-secondary-subtle: \(theme.branding.secondarySubtle.light.description);
-          
+
           /* Translucent variants for charts and overlays */
           --color-gray-translucent: \(theme.gray.light.description)33;
           --color-blue-translucent: \(theme.blue.light.description)33;
@@ -132,7 +132,7 @@ extension HTMLColor.Theme {
               --color-off-black: \(theme.offBlack.dark.description);
               --color-white: \(theme.white.dark.description);
               --color-off-white: \(theme.offWhite.dark.description);
-              
+
               /* Text Colors */
               --text-primary: \(theme.text.primary.dark.description);
               --text-secondary: \(theme.text.secondary.dark.description);
@@ -143,7 +143,7 @@ extension HTMLColor.Theme {
               --text-success: \(theme.text.success.dark.description);
               --text-warning: \(theme.text.warning.dark.description);
               --text-disabled: \(theme.text.disabled.dark.description);
-              
+
               /* Background Colors */
               --background-primary: \(theme.background.primary.dark.description);
               --background-secondary: \(theme.background.secondary.dark.description);
@@ -157,7 +157,7 @@ extension HTMLColor.Theme {
               --background-success: \(theme.background.success.dark.description);
               --background-warning: \(theme.background.warning.dark.description);
               --background-info: \(theme.background.info.dark.description);
-              
+
               /* Border Colors */
               --border-primary: \(theme.border.primary.dark.description);
               --border-secondary: \(theme.border.secondary.dark.description);
@@ -169,14 +169,14 @@ extension HTMLColor.Theme {
               --border-success: \(theme.border.success.dark.description);
               --border-warning: \(theme.border.warning.dark.description);
               --border-info: \(theme.border.info.dark.description);
-              
+
               /* Branding Colors */
               --branding-primary: \(theme.branding.primary.dark.description);
               --branding-secondary: \(theme.branding.secondary.dark.description);
               --branding-accent: \(theme.branding.accent.dark.description);
               --branding-primary-subtle: \(theme.branding.primarySubtle.dark.description);
               --branding-secondary-subtle: \(theme.branding.secondarySubtle.dark.description);
-              
+
               /* Translucent variants for charts and overlays */
               --color-gray-translucent: \(theme.gray.dark.description)33;
               --color-blue-translucent: \(theme.blue.dark.description)33;
@@ -221,6 +221,6 @@ extension HTMLColor.Theme {
       .border-warning { border-color: var(--border-warning); }
       """
 
+        }
     }
-  }
 }

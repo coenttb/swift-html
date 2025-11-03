@@ -5,10 +5,10 @@
 ////  Created by Coen ten Thije Boonkkamp on 25/07/2024.
 ////
 //
-//import Foundation
-//import HTMLComponents
+// import Foundation
+// import HTMLComponents
 //
-//public struct Favicons: HTML, Sendable {
+// public struct Favicons: HTML, Sendable {
 //
 //    public struct SVG: Sendable {
 //        let lightMode: URL
@@ -67,4 +67,4 @@
 //            rel: "mask-icon"
 //        )()
 //    }
-//}
+// }

@@ -9,5 +9,5 @@ import Foundation
 import HTMLCSSPointFreeHTML
 
 extension VerticalAlign {
-  public static let center: Self = .middle
+    public static let center: Self = .middle
 }

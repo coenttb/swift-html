@@ -2,39 +2,39 @@ import Foundation
 
 @available(*, deprecated, message: "Use InlineSVG from SVG Integration instead")
 public struct LegacySVG: HTML, Sendable {
-  private enum Storage {
-    case raw(String)
-    case base64(String)
-  }
-
-  let description: String
-  private let storage: Storage
-
-  public init(_ description: String, content: () -> String) {
-    self.storage = .raw(content())
-    self.description = description
-  }
-
-  public init(base64: String, description: String) {
-    self.storage = .base64(base64)
-    self.description = description
-  }
-
-  public var body: some HTML {
-    HTMLGroup {
-      switch storage {
-      case .raw(let raw):
-        HTMLRaw(raw)
-      case .base64(let base64):
-        img(src: "data:image/svg+xml;base64,\(base64)", alt: "\(self.description)")
-      }
+    private enum Storage {
+        case raw(String)
+        case base64(String)
     }
-  }
+
+    let description: String
+    private let storage: Storage
+
+    public init(_ description: String, content: () -> String) {
+        self.storage = .raw(content())
+        self.description = description
+    }
+
+    public init(base64: String, description: String) {
+        self.storage = .base64(base64)
+        self.description = description
+    }
+
+    public var body: some HTML {
+        HTMLGroup {
+            switch storage {
+            case .raw(let raw):
+                HTMLRaw(raw)
+            case .base64(let base64):
+                img(src: "data:image/svg+xml;base64,\(base64)", alt: "\(self.description)")
+            }
+        }
+    }
 }
 
 extension LegacySVG {
-  public static let error = Self("Error") {
-    """
+    public static let error = Self("Error") {
+        """
     <?xml version="1.0" encoding="UTF-8"?>
     <!--Generator: Apple Native CoreSVG 326-->
     <!DOCTYPE svg
@@ -47,10 +47,10 @@ extension LegacySVG {
      </g>
     </svg>
     """
-  }
+    }
 
-  public static let failure = Self("Failure") {
-    """
+    public static let failure = Self("Failure") {
+        """
     <?xml version="1.0" encoding="UTF-8"?>
     <!--Generator: Apple Native CoreSVG 326-->
     <!DOCTYPE svg
@@ -63,10 +63,10 @@ extension LegacySVG {
      </g>
     </svg>
     """
-  }
+    }
 
-  public static let warning = Self("Warning") {
-    """
+    public static let warning = Self("Warning") {
+        """
     <?xml version="1.0" encoding="UTF-8"?>
     <!--Generator: Apple Native CoreSVG 326-->
     <!DOCTYPE svg
@@ -79,52 +79,52 @@ extension LegacySVG {
     </g>
     </svg>
     """
-  }
+    }
 }
 
 infix operator <|
 
 private func <| <A, B>(f: (A) -> B, a: A) -> B {
-  return f(a)
+    return f(a)
 }
 
 func base64EncodedString(_ string: String) -> String {
-  return Data(string.utf8).base64EncodedString()
+    return Data(string.utf8).base64EncodedString()
 }
 //
-//public let checkmarkSvgBase64 = base64EncodedString(
+// public let checkmarkSvgBase64 = base64EncodedString(
 //  #"""
 //  <svg height="17" viewBox="0 0 18 17" width="18" xmlns="http://www.w3.org/2000/svg"><path d="m2747.82514 923.69487c.73516 0 1.30748-.275483 1.69901-.867077l8.34707-12.788586c.27936-.419937.39488-.839159.39488-1.217309 0-1.042822-.79549-1.821898-1.8564-1.821898-.71796 0-1.17652.260056-1.61611.961902l-7.00525 11.174935-3.51272-4.269522c-.38651-.459578-.8269-.673443-1.43122-.673443-1.06139 0-1.8444.784817-1.8444 1.838933 0 .477534.13316.87095.53417 1.335158l4.65426 5.568605c.4429.52473.96574.758302 1.63671.758302z" fill="#fff" fill-rule="evenodd" transform="translate(-2741 -907)"/></svg>
 //  """#)
 //
-//public let collectionIconSvgBase64 = base64EncodedString(
+// public let collectionIconSvgBase64 = base64EncodedString(
 //  #"""
 //  <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M10 .017L19.983 10 10 19.983.017 10 10 .017zM8.336 11.664c.876.875 2.39.938 3.328 0 .95-.951.875-2.452 0-3.328-.876-.875-2.377-.95-3.328 0-.938.938-.875 2.452 0 3.328z" fill="#121212" fill-rule="evenodd"/></svg>
 //  """#)
 //
-//public let circleLockSvgBase64 = base64EncodedString(
+// public let circleLockSvgBase64 = base64EncodedString(
 //  """
 //  <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle cx="24" cy="24" fill="#121212" r="24"/><path d="m12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1v-2c0-2.76-2.24-5-5-5s-5 2.24-5 5h1.9c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2h-9.1c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2zm0 12h-12v-10h12z" fill="#fff" transform="translate(12 12)"/></g></svg>
 //  """)
 //
-//public let lockSvgBase64 = base64EncodedString(
+// public let lockSvgBase64 = base64EncodedString(
 //  """
 //  <svg height="15" viewBox="0 0 12 15" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.33333333h-.6666667v-1.33333333c0-1.84-1.4933333-3.33333333-3.3333333-3.33333333s-3.33333333 1.49333333-3.33333333 3.33333333v1.33333333h-.66666667c-.73333333 0-1.33333333.6-1.33333333 1.33333334v6.66666663c0 .7333334.6 1.3333334 1.33333333 1.3333334h8c.7333333 0 1.3333333-.6 1.3333333-1.3333334v-6.66666663c0-.73333334-.6-1.33333334-1.3333333-1.33333334zm-4 5.99999997c-.73333333 0-1.33333333-.6-1.33333333-1.3333333 0-.73333333.6-1.33333333 1.33333333-1.33333333s1.33333333.6 1.33333333 1.33333333c0 .7333333-.6 1.3333333-1.33333333 1.3333333zm2.0666667-5.99999997h-4.13333337v-1.33333333c0-1.14.92666667-2.06666667 2.06666667-2.06666667s2.0666667.92666667 2.0666667 2.06666667z" fill="#7d7d7d" fill-rule="evenodd" transform="translate(-2)"/></svg>
 //  """)
 //
-//public let unlockSvgBase64 = base64EncodedString(
+// public let unlockSvgBase64 = base64EncodedString(
 //  """
 //  <svg height="15" viewBox="0 0 12 15" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m8 11.3333333c.73333333 0 1.33333333-.6 1.33333333-1.3333333 0-.73333333-.6-1.33333333-1.33333333-1.33333333s-1.33333333.6-1.33333333 1.33333333c0 .7333333.6 1.3333333 1.33333333 1.3333333zm4-5.99999997h-.6666667v-1.33333333c0-1.84-1.4933333-3.33333333-3.3333333-3.33333333s-3.33333333 1.49333333-3.33333333 3.33333333h1.26666666c0-1.14.92666667-2.06666667 2.06666667-2.06666667s2.0666667.92666667 2.0666667 2.06666667v1.33333333h-6.0666667c-.73333333 0-1.33333333.6-1.33333333 1.33333334v6.66666663c0 .7333334.6 1.3333334 1.33333333 1.3333334h8c.7333333 0 1.3333333-.6 1.3333333-1.3333334v-6.66666663c0-.73333334-.6-1.33333334-1.3333333-1.33333334zm0 7.99999997h-8v-6.66666663h8z" fill="#7d7d7d" fill-rule="evenodd" transform="translate(-2)"/></svg>
 //  """)
 //
-//public func pointFreeTextDiamondLogoSvgBase64(fill: String = "#fff") -> String {
+// public func pointFreeTextDiamondLogoSvgBase64(fill: String = "#fff") -> String {
 //    base64EncodedString(
 //    """
 //    <svg height="16" viewBox="0 0 142 16" width="142" xmlns="http://www.w3.org/2000/svg"><path d="m43.3084787.05876394.0700608.05142528 9.7604979 7.89433005v-7.64763224h3.9087708v15.47468107c0 .1614749-.0555457.2321202-.2499556.0974905l-.0700607-.0526364-9.7604979-7.87190293v7.60277813h-3.9087709v-15.45225403c0-.1211062.0555457-.22404647.2499556-.09627943zm54.1243498.51266463v3.43134232h-6.4003265v3.5434777h5.6460023v3.43134231h-5.6460023v4.844248h-4.1602123v-15.25041033zm9.1792435 0c4.183071 0 6.537477 2.60154059 6.537477 5.98802876 0 2.19785325-.982908 3.94716507-2.811572 4.93395627l2.765855 4.3284253h-4.503087l-2.171539-3.4986236h-1.554365v3.4986236h-4.160212v-15.25041033zm20.608399 0v3.43134232h-6.743202v3.5434777h5.623144v3.25192571h-5.623144v1.5923223h7.063218v3.4313423h-11.22343v-15.25041033zm14.459513 0v3.43134232h-6.743201v3.5434777h5.623144v3.25192571h-5.623144v1.5923223h7.063217v3.4313423h-11.22343v-15.25041033zm-118.3971636-.39395813c4.4802286 0 8.3432828 3.20707158 8.3432828 7.80462176 0 4.5975502-3.8630542 7.8270488-8.3432828 7.8270488-4.4802285 0-8.3432828-3.2294986-8.3432828-7.8270488 0-4.59755018 3.8630543-7.80462176 8.3432828-7.80462176zm-17.38537669.17941659c4.18307059 0 6.53747639 2.60154059 6.53747639 5.98802876 0 3.38648818-2.3544058 5.96560171-6.53747639 5.96560171h-1.73723148v3.2967799h-4.16021223v-15.25041037zm33.14781349 0v15.25041037h-4.1602123v-15.25041037zm33.4906881 0v3.43134233h-4.1144956v11.81906804h-4.1602123v-11.81906804h-4.1144956v-3.43134233zm5.6956595 5.54249465 3.2544627 3.25446279-3.2324881 3.23248813-3.2544628-3.25446278zm-54.9487844-2.17843355c-2.6058472 0-4.0916373 1.86144715-4.0916373 4.26114407 0 2.3996969 1.4857901 4.2835711 4.0916373 4.2835711s4.0916373-1.8838742 4.0916373-4.2835711c0-2.39969692-1.4857901-4.26114407-4.0916373-4.26114407zm83.1235266.30424984h-1.531506v5.04609165h1.531506c1.874382 0 2.560131-1.0316454 2.560131-2.51183229 0-1.48018688-.685749-2.53425936-2.560131-2.53425936zm-100.71462807-.21454154h-1.5315067v5.04609165h1.5315067c1.87438134 0 2.5601306-1.0316454 2.5601306-2.51183229 0-1.48018688-.68574926-2.53425936-2.5601306-2.53425936z" fill="\(fill)" fill-rule="evenodd"/></svg>
 //    """)
-//}
+// }
 //
-//public func playIconSvgBase64(fill: String = "121212") -> String {
+// public func playIconSvgBase64(fill: String = "121212") -> String {
 //    base64EncodedString(
 //    """
 //    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
@@ -133,9 +133,9 @@ func base64EncodedString(_ string: String) -> String {
 //      </g>
 //    </svg>
 //    """)
-//}
+// }
 //
-//public let exercisesIconSvgBase64 = base64EncodedString(
+// public let exercisesIconSvgBase64 = base64EncodedString(
 //  """
 //  <svg width="16" height="18" xmlns="http://www.w3.org/2000/svg">
 //    <g fill="none" fill-rule="evenodd">
@@ -145,49 +145,49 @@ func base64EncodedString(_ string: String) -> String {
 //  </svg>
 //  """)
 //
-//public func hourGlassSvgBase64(fill: String = "000") -> String {
+// public func hourGlassSvgBase64(fill: String = "000") -> String {
 //    base64EncodedString(
 //    """
 //    <svg height="20" viewBox="0 0 45 68" width="20" xmlns="http://www.w3.org/2000/svg"><path fill="#\(fill)" d="m5.3555 67.4375h34.7656c2.9785 0 4.541-1.61133 4.5898-4.58984l.0489-2.2461c.1953-9.03316-11.084-19.28706-16.1621-23.33986-1.4161-1.123-1.9043-2.1972-1.9043-3.4668 0-1.2695.4394-2.1972 1.9043-3.4668 5.0293-4.3945 16.1132-14.1601 16.1132-23.2422v-2.2461c0-2.9785-1.6113-4.5898-4.5898-4.5898h-34.7656c-2.9785 0-4.58988 1.6113-4.58988 4.5898v2.2461c0 9.0821 11.08398 18.8965 16.16208 23.2422 1.4649 1.2696 1.9043 2.1973 1.9043 3.4668 0 1.2696-.4882 2.3438-1.9043 3.4668-5.0781 4.0528-16.16208 14.3067-16.16208 23.33986v2.2461c0 2.97851 1.61138 4.58984 4.58988 4.58984zm3.0273-3.07617c-1.3672 0-1.9043-1.26953-.6836-2.2461l12.793-10.54683c.3906-.3418.7324-.586.7324-1.1231v-17.9199c0-1.9531-.5859-2.8809-1.8066-3.9551-1.8067-1.709-6.0059-5.1269-7.8125-7.7148-.586-.7813-.4883-1.4649.2441-1.4649h21.7285c.7324 0 .8301.6836.2442 1.4649-1.8067 2.5879-5.9571 6.0547-7.8125 7.6172-1.3184 1.0742-1.8067 2.0996-1.8067 4.0527v17.9199c0 .5371.3907.7813.7813 1.1231l12.7929 10.54683c1.2696.97657.6836 2.2461-.6835 2.2461z" transform="translate(-.052)"/></svg>
 //    """)
-//}
+// }
 //
-//public let referencesIconSvgBase64 = base64EncodedString(
+// public let referencesIconSvgBase64 = base64EncodedString(
 //  """
 //  <svg width="16" height="10" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="#FFF" d="M-75-1370H949v3583H-75z"/><path d="M.5 5.8333h1.6667V4.1667H.5v1.6666zm0 3.3334h1.6667V7.5H.5v1.6667zM.5 2.5h1.6667V.8333H.5V2.5zm3.3333 3.3333H15.5V4.1667H3.8333v1.6666zm0 3.3334H15.5V7.5H3.8333v1.6667zm0-8.3334V2.5H15.5V.8333H3.8333z" fill="#000"/></g></svg>
 //  """)
 //
-//public let downloadIconSvgBase64 = base64EncodedString(
+// public let downloadIconSvgBase64 = base64EncodedString(
 //  """
 //  <svg width="12" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="#FFF" d="M-77-1403H947v3583H-77z"/><path d="M11.8333 5.5H8.5v-5h-5v5H.1667L6 11.3333 11.8333 5.5zM.1667 13v1.6667h11.6666V13H.1667z" fill="#000"/></g></svg>
 //  """)
 //
-//public let questionIconSvgBase64 = base64EncodedString(
+// public let questionIconSvgBase64 = base64EncodedString(
 //  """
 //  <svg height="16.2981" width="16.2977" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h16.2977v16.2981h-16.2977z" opacity="0"/><path d="m8.14762 16.2952c4.46868 0 8.15008-3.6842 8.15008-8.14758 0-4.46868-3.6867-8.14762-8.15541-8.14762-4.46087 0-8.14229 3.67894-8.14229 8.14762 0 4.46338 3.68675 8.14758 8.14762 8.14758zm0-1.7902c-3.52602 0-6.35208-2.8314-6.35208-6.35738 0-3.52602 2.82073-6.35741 6.34675-6.35741 3.52601 0 6.36521 2.83139 6.36521 6.35741 0 3.52598-2.8339 6.35738-6.35988 6.35738zm-.18642-4.84453c.45273 0 .75951-.25497.79429-.57953.00249-.02877.00497-.06783.00994-.09127.03727-.38036.32453-.6467.80681-.95888.78516-.50497 1.24966-.94815 1.24966-1.83845 0-1.29936-1.18108-2.07702-2.61354-2.07702-1.3363 0-2.26135.59591-2.52197 1.33702-.05149.13742-.07989.27484-.07989.42256 0 .39628.30573.66328.6654.66328.29792 0 .51203-.12003.67502-.33486l.10832-.14526c.25854-.40096.60019-.60448 1.03171-.60448.5743 0 .96568.3516.96568.83107 0 .47163-.32564.69963-.97055 1.14638-.55256.38565-.94959.77736-.94959 1.44361v.07424c0 .46835.2986.71159.82871.71159zm-.00817 2.43993c.53759 0 .96548-.3693.96548-.892 0-.5202-.42256-.892-.96548-.892s-.97294.3746-.97294.892c0 .5173.43535.892.97294.892z" fill-opacity=".85"/></svg>
 //  """)
 //
-//public let leftNavigationChevronSvgBase64 =
-//base64EncodedString <| """
+// public let leftNavigationChevronSvgBase64 =
+// base64EncodedString <| """
 //    <svg height="8" viewBox="0 0 6 8" width="6" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m-57-78h1024v1649h-1024z" fill="#fff"/><path d="m-57-22h1024v412h-1024z" fill="#121212"/><path d="m10.2733333 4.94-.93999997-.94-4 4 4 4 .93999997-.94-3.0533333-3.06z" fill="#a8a8a8" transform="translate(-5 -4)"/></g></svg>
 //    """
 //
-//public let leftChevronSvgBase64 =
-//base64EncodedString <| """
+// public let leftChevronSvgBase64 =
+// base64EncodedString <| """
 //    <svg height="12" viewBox="0 0 8 12" width="8" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m-215-1599h1024v1649h-1024z" fill="#fff"/><path d="m0 0h1024v381h-1024z" fill="#fafafa" transform="matrix(1 0 0 -1 -215 50)"/><path d="m15.41 7.41-1.41-1.41-6 6 6 6 1.41-1.41-4.58-4.59z" fill="#000" transform="translate(-8 -6)"/></g></svg>
 //    """
 //
-//public let rightChevronSvgBase64 =
-//base64EncodedString <| """
+// public let rightChevronSvgBase64 =
+// base64EncodedString <| """
 //    <svg height="12" width="8" xmlns="http://www.w3.org/2000/svg"><path d="m.59 1.41 4.58 4.59-4.58 4.59 1.41 1.41 6-6-6-6z" fill-rule="evenodd"/></svg>
 //    """
 //
-//public let collectionsIconSvgBase64 = base64EncodedString(
+// public let collectionsIconSvgBase64 = base64EncodedString(
 //  #"""
 //  <svg width="132" height="80" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M40 .07L79.93 40 40 79.93.07 40 40 .07z" opacity=".25"/><path d="M94.93 29H82v22h12.93L66 79.93 26.07 40 66 .07 94.93 29zm7.07 7.07l3.93 3.93-3.93 3.93v-7.86z" opacity=".5"/><path d="M92 .07L131.93 40 92 79.93 52.07 40 92 .07zm-6.655 46.585c3.503 3.503 9.557 3.753 13.31 0 3.803-3.803 3.503-9.807 0-13.31s-9.507-3.803-13.31 0c-3.753 3.753-3.503 9.807 0 13.31z"/></g></svg>
 //  """#)
 //
-//public func pointFreeTextLogoSvgBase64(color: String) -> String {
+// public func pointFreeTextLogoSvgBase64(color: String) -> String {
 //    return base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="238px" height="28px" viewBox="0 0 238 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -198,9 +198,9 @@ func base64EncodedString(_ string: String) -> String {
 //        </g>
 //    </svg>
 //    """
-//}
+// }
 //
-//public func pointFreeDiamondLogoSvgBase64(fill: String) -> String {
+// public func pointFreeDiamondLogoSvgBase64(fill: String) -> String {
 //    return base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -211,10 +211,10 @@ func base64EncodedString(_ string: String) -> String {
 //        </g>
 //    </svg>
 //    """
-//}
+// }
 //
-//public let thingiesSvgBase64 =
-//base64EncodedString <| """
+// public let thingiesSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="124px" height="112px" viewBox="0 0 124 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -223,8 +223,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let heroMountainSvgBase64 =
-//base64EncodedString <| """
+// public let heroMountainSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="615px" height="231px" viewBox="0 0 615 231" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <defs>
@@ -255,8 +255,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let pointFreeHeroSvgBase64 =
-//base64EncodedString <| """
+// public let pointFreeHeroSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="424px" height="112px" viewBox="0 0 424 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -271,7 +271,7 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public func rightArrowSvgBase64(fill: String) -> String {
+// public func rightArrowSvgBase64(fill: String) -> String {
 //    return base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -280,10 +280,10 @@ func base64EncodedString(_ string: String) -> String {
 //    </g>
 //    </svg>
 //    """
-//}
+// }
 //
-//public let logoSvgBase64 =
-//base64EncodedString <| """
+// public let logoSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="371px" height="269px" viewBox="0 0 371 269" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <defs>
@@ -318,8 +318,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let facebookIconSvgBase64 =
-//base64EncodedString <| """
+// public let facebookIconSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="17px" height="16px" viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Episodes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -334,8 +334,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let twitterIconSvgBase64 =
-//base64EncodedString <| """
+// public let twitterIconSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="17px" height="14px" viewBox="0 0 17 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Episodes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -350,8 +350,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let pointFreePointersLogoSvgBase64 =
-//base64EncodedString <| """
+// public let pointFreePointersLogoSvgBase64 =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="448px" height="138px" viewBox="0 0 448 138" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <defs>
@@ -375,8 +375,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let spotifyLogoSvg =
-//base64EncodedString <| """
+// public let spotifyLogoSvg =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="93px" height="28px" viewBox="0 0 93 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -400,8 +400,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let venmoLogoSvg =
-//base64EncodedString <| """
+// public let venmoLogoSvg =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="80px" height="16px" viewBox="0 0 80 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -418,8 +418,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let nytLogoSvg =
-//base64EncodedString <| """
+// public let nytLogoSvg =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="140px" height="19px" viewBox="0 0 140 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -435,8 +435,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let atlassianLogoSvg =
-//base64EncodedString <| """
+// public let atlassianLogoSvg =
+// base64EncodedString <| """
 //    <?xml version="1.0" encoding="UTF-8"?>
 //    <svg width="112px" height="14px" viewBox="0 0 112 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 //        <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -462,8 +462,8 @@ func base64EncodedString(_ string: String) -> String {
 //    </svg>
 //    """
 //
-//public let mailIconSvg =
-//base64EncodedString <| """
+// public let mailIconSvg =
+// base64EncodedString <| """
 //    <svg height="16" viewBox="0 0 20 16" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" transform="translate(-2 -4)"><path d="m0 0h24v24h-24z"/><path d="m20 4h-16c-1.1 0-1.99.9-1.99 2l-.01 12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-12c0-1.1-.9-2-2-2zm0 14h-16v-10l8 5 8-5zm-8-7-8-5h16z" fill="#121212" fill-rule="nonzero"/></g></svg>
 //    """
 //

@@ -8,10 +8,10 @@
 import Foundation
 import HTML
 
-//extension Array: @retroactive HTML where Element: HTML {
+// extension Array: @retroactive HTML where Element: HTML {
 //    public var body: some HTML {
 //        HTMLGroup {
 //            for element in self { element }
 //        }
 //    }
-//}
+// }

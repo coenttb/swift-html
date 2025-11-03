@@ -12,61 +12,61 @@ import HTMLComponents
 
 public struct Overlay<Content: HTML>: HTML {
 
-  let id: String
-  let content: Content
+    let id: String
+    let content: Content
 
-  public init(
-    id: String = "coenttb-shared-overlay-id",
-    @HTMLBuilder content: () -> Content
-  ) {
-    self.content = content()
-    self.id = String.sanitizeForJavaScript(id)
-  }
-
-  private var backgroundOverlay: some HTML {
-    div {}
-      .id("background-overlay-\(id)")
-      .display(Display.none)
-      .position(.fixed)
-      .top(.zero)
-      .left(.zero)
-      .width(.percent(100))
-      .height(.percent(100))
-      .backgroundColor(HTMLColor.init(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
-      .transition("opacity 0.3s ease")
-      .opacity(0)
-      .zIndex(1000)
-  }
-
-  public var body: some HTML {
-    div {
-      backgroundOverlay
-
-      Card {
-        content
-      }
-      .id("popup-container-\(id)")
-      .textAlign(.center)
-      .display(Display.none)
-      .position(.fixed)
-      .top(.percent(50))
-      .left(.percent(50))
-      .transform("translate(-50%, -50%) scale(0.95)")
-      .transition("opacity 0.3s ease, transform 0.3s ease")
-      .opacity(0)
-      .zIndex(1001)
-      .maxWidth(.px(440))
-      .width(.percent(90))
-      .margin(
-        vertical: nil,
-        horizontal: .auto,
-      )
-      .backgroundColor(.background.primary)
+    public init(
+        id: String = "coenttb-shared-overlay-id",
+        @HTMLBuilder content: () -> Content
+    ) {
+        self.content = content()
+        self.id = String.sanitizeForJavaScript(id)
     }
-    .class(.init(id))
 
-    script {
-      """
+    private var backgroundOverlay: some HTML {
+        div {}
+            .id("background-overlay-\(id)")
+            .display(Display.none)
+            .position(.fixed)
+            .top(.zero)
+            .left(.zero)
+            .width(.percent(100))
+            .height(.percent(100))
+            .backgroundColor(HTMLColor.init(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
+            .transition("opacity 0.3s ease")
+            .opacity(0)
+            .zIndex(1000)
+    }
+
+    public var body: some HTML {
+        div {
+            backgroundOverlay
+
+            Card {
+                content
+            }
+            .id("popup-container-\(id)")
+            .textAlign(.center)
+            .display(Display.none)
+            .position(.fixed)
+            .top(.percent(50))
+            .left(.percent(50))
+            .transform("translate(-50%, -50%) scale(0.95)")
+            .transition("opacity 0.3s ease, transform 0.3s ease")
+            .opacity(0)
+            .zIndex(1001)
+            .maxWidth(.px(440))
+            .width(.percent(90))
+            .margin(
+                vertical: nil,
+                horizontal: .auto,
+                )
+            .backgroundColor(.background.primary)
+        }
+        .class(.init(id))
+
+        script {
+            """
       // Initialize global variables
       window.overlayShown_\(id) = false;
 
@@ -74,16 +74,16 @@ public struct Overlay<Content: HTML>: HTML {
       window.hideOverlay_\(id) = function(saveToStorage = false) {
           let overlay = document.getElementById('popup-container-\(id)');
           let backgroundOverlay = document.getElementById('background-overlay-\(id)');
-          
+
           overlay.style.opacity = '0';
           overlay.style.transform = 'translate(-50%, -50%) scale(0.95)';
           backgroundOverlay.style.opacity = '0';
-          
+
           setTimeout(function() {
               overlay.style.display = 'none';
               backgroundOverlay.style.display = 'none';
           }, 300);
-          
+
           window.overlayShown_\(id) = false;
 
           if (saveToStorage) {
@@ -107,19 +107,19 @@ public struct Overlay<Content: HTML>: HTML {
 
           function showOverlay_\(id)() {
               if (window.overlayShown_\(id) || localStorage.getItem('\(id)_dismissed') === 'true') return;
-              
+
               let overlay = document.getElementById('popup-container-\(id)');
               let backgroundOverlay = document.getElementById('background-overlay-\(id)');
-              
+
               backgroundOverlay.style.display = 'block';
               overlay.style.display = 'block';
-              
+
               setTimeout(function() {
                   backgroundOverlay.style.opacity = '1';
                   overlay.style.opacity = '1';
                   overlay.style.transform = 'translate(-50%, -50%) scale(1)';
               }, 10);
-              
+
               window.overlayShown_\(id) = true;
           }
 
@@ -130,14 +130,14 @@ public struct Overlay<Content: HTML>: HTML {
               if (!subscribeOverlay) return;
 
               let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-              
+
               if (!window.overlayShown_\(id) && isElementInViewport(subscribeOverlay)) {
                   showOverlay_\(id)();
                   triggerPoint_\(id) = currentScrollTop;
               } else if (window.overlayShown_\(id) && currentScrollTop < triggerPoint_\(id) && currentScrollTop < lastScrollTop_\(id)) {
                   window.hideOverlay_\(id)(false);  // Don't save to storage when auto-hiding
               }
-              
+
               lastScrollTop_\(id) = currentScrollTop <= 0 ? 0 : currentScrollTop;
           }
 
@@ -153,6 +153,6 @@ public struct Overlay<Content: HTML>: HTML {
           };
       })();
       """
+        }
     }
-  }
 }

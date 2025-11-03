@@ -10,5 +10,5 @@
 @_exported import HTMLMarkdown
 
 #if TRANSLATING
-  @_exported import Translating
+@_exported import Translating
 #endif
