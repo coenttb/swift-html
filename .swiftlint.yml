@@ -2,6 +2,7 @@ disabled_rules:
   - line_length
   - identifier_name
   - nesting
+  - redundant_discardable_let  # Preserve 'let _ =' in result builder contexts (required for Swift 6.0+)
 
 opt_in_rules:
   - empty_count
