@@ -44,7 +44,7 @@ extension String {
       "&apos;": "'",
       "&nbsp;": " ",
       "&#39;": "'",
-      "&hellip;": "..."
+      "&hellip;": "...",
     ]
 
     for (entity, replacement) in entities {

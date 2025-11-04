@@ -29,7 +29,7 @@
               ("Teal", theme.teal),
               ("Cyan", theme.cyan),
               ("Pink", theme.pink),
-              ("Brown", theme.brown)
+              ("Brown", theme.brown),
             ],
             colorScheme: colorScheme
           )
@@ -43,7 +43,7 @@
               ("White", theme.white),
               ("Off White", theme.offWhite),
               ("Neutral", theme.neutral),
-              ("Info", theme.info)
+              ("Info", theme.info),
             ],
             colorScheme: colorScheme
           )
@@ -64,7 +64,7 @@
               ("Info", theme.text.info),
               ("Neutral", theme.text.neutral),
               ("Inverted", theme.text.inverted),
-              ("Disabled", theme.text.disabled)
+              ("Disabled", theme.text.disabled),
             ],
             colorScheme: colorScheme
           )
@@ -90,7 +90,7 @@
               ("Warning Muted", theme.background.warningMuted),
               ("Info", theme.background.info),
               ("Info Muted", theme.background.infoMuted),
-              ("Neutral", theme.background.neutral)
+              ("Neutral", theme.background.neutral),
             ],
             colorScheme: colorScheme
           )
@@ -111,7 +111,7 @@
               ("Warning", theme.border.warning),
               ("Info", theme.border.info),
               ("Info Muted", theme.border.infoMuted),
-              ("Neutral", theme.border.neutral)
+              ("Neutral", theme.border.neutral),
             ],
             colorScheme: colorScheme
           )
@@ -124,7 +124,7 @@
               ("Secondary", theme.branding.secondary),
               ("Accent", theme.branding.accent),
               ("Primary Subtle", theme.branding.primarySubtle),
-              ("Secondary Subtle", theme.branding.secondarySubtle)
+              ("Secondary Subtle", theme.branding.secondarySubtle),
             ],
             colorScheme: colorScheme
           )
