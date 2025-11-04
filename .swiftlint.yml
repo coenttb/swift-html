@@ -6,6 +6,7 @@ disabled_rules:
   - opening_brace  # Handled by swift-format
   - trailing_comma  # Handled by swift-format
   - trailing_whitespace  # Preserve whitespace in snapshot tests
+  - sorted_imports  # Handled by swift-format (conflicts with SwiftLint's sorting)
   - orphaned_doc_comment  # Allow module-level documentation
   - large_tuple  # HTML properties may require tuples with multiple components
   - mark  # Allow flexible MARK comment formatting
@@ -14,12 +15,12 @@ disabled_rules:
   - todo  # Allow TODO comments in development
   - force_try  # Force try is acceptable in HTML rendering contexts
   - closure_parameter_position  # Allow flexible closure formatting
+  - optional_data_string_conversion  # HTML/SVG rendering uses string-to-data conversions
   - non_optional_string_data_conversion  # HTML/SVG rendering uses string-to-data conversions
 
 opt_in_rules:
   - empty_count
   - explicit_init
-  - sorted_imports
   - force_cast
   - closure_spacing
   - operator_usage_whitespace
