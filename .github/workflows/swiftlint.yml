@@ -25,12 +25,12 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: /usr/local/bin/swiftlint
-          key: ${{ runner.os }}-swiftlint-v1
+          key: ${{ runner.os }}-swiftlint-0.62.2
 
       - name: Install swiftlint
         if: steps.cache-swiftlint-restore.outputs.cache-hit != 'true'
         run: |
-          git clone --depth 1 --branch main https://github.com/realm/SwiftLint.git
+          git clone --depth 1 --branch 0.62.2 https://github.com/realm/SwiftLint.git
           cd SwiftLint
           swift build -c release
           cp .build/release/swiftlint /usr/local/bin/
@@ -45,4 +45,4 @@ jobs:
         if: steps.cache-swiftlint-restore.outputs.cache-hit != 'true'
         with:
           path: /usr/local/bin/swiftlint
-          key: ${{ runner.os }}-swiftlint-v1
+          key: ${{ runner.os }}-swiftlint-0.62.2
