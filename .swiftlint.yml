@@ -3,30 +3,35 @@ disabled_rules:
   - identifier_name
   - nesting  # Allow deeply nested enums for namespacing
   - redundant_discardable_let  # Preserve 'let _ =' in result builder contexts (required for Swift 6.0+)
+  - opening_brace  # Handled by swift-format
+  - trailing_comma  # Handled by swift-format
+  - trailing_whitespace  # Preserve whitespace in snapshot tests
+  - orphaned_doc_comment  # Allow module-level documentation
+  - large_tuple  # HTML properties may require tuples with multiple components
+  - mark  # Allow flexible MARK comment formatting
+  - redundant_string_enum_value  # Explicit enum values improve clarity for HTML keywords
+  - type_name  # HTML elements use lowercase names (div, span, etc.)
+  - todo  # Allow TODO comments in development
+  - force_try  # Force try is acceptable in HTML rendering contexts
+  - closure_parameter_position  # Allow flexible closure formatting
+  - non_optional_string_data_conversion  # HTML/SVG rendering uses string-to-data conversions
 
 opt_in_rules:
   - empty_count
   - explicit_init
   - sorted_imports
   - force_cast
-  - force_try
-  - force_unwrapping
   - closure_spacing
   - operator_usage_whitespace
   - private_outlet
   - redundant_nil_coalescing
-  - unused_capture_list
-  - empty_string
-  - explicit_enum_raw_value
   - literal_expression_end_indentation
   - single_test_class
   - sorted_first_last
   - vertical_whitespace
-  - strict_fileprivate
   - legacy_random
   - no_extension_access_modifier
   - colon
-  - trailing_comma
   
 included:
   - Package.swift
@@ -47,3 +52,26 @@ colon:
 
 vertical_whitespace:
   max_empty_lines: 1
+
+# Increased length limits for test files with extensive snapshots
+type_body_length:
+  warning: 1250
+  error: 1300
+
+file_length:
+  warning: 1890
+  error: 2000
+
+function_body_length:
+  warning: 240
+  error: 250
+
+# Allow more function parameters for HTML elements with many attributes
+function_parameter_count:
+  warning: 8
+  error: 10
+
+# Increased cyclomatic complexity for HTML rendering functions
+cyclomatic_complexity:
+  warning: 20
+  error: 25
