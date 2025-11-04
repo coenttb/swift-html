@@ -42,7 +42,7 @@ jobs:
 
       - name: Save swiftlint cache
         uses: actions/cache/save@v4
-        if: steps.cache-swiftlint-restore.outputs.cache-hit != 'true'
+        if: always() && steps.cache-swiftlint-restore.outputs.cache-hit != 'true'
         with:
           path: /usr/local/bin/swiftlint
           key: ${{ runner.os }}-swiftlint-0.62.2
