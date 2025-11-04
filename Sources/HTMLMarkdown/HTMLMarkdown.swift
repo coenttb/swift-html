@@ -104,10 +104,10 @@ private struct HTMLConverter: MarkupVisitor {
           format: String(segment),
           speaker: segments.dropFirst().first.map { String($0) }
         )
-        _ = currentTimestamp = timestamp
+        let _ = currentTimestamp = timestamp
         timestamp
         if let currentSection {
-          _ = tableOfContents.append(
+          let _ = tableOfContents.append(
             HTMLMarkdown.Section(
               title: currentSection.title,
               id: currentSection.id,
@@ -115,7 +115,7 @@ private struct HTMLConverter: MarkupVisitor {
               timestamp: timestamp
             )
           )
-          _ = self.currentSection = nil
+          let _ = self.currentSection = nil
         }
       }
 
@@ -250,7 +250,7 @@ private struct HTMLConverter: MarkupVisitor {
     .padding(left: .rem(2.5), media: .desktop)
     .position(.relative)
 
-    _ = currentSection = (title: heading.plainText, id: id, level: heading.level)
+    let _ = currentSection = (title: heading.plainText, id: id, level: heading.level)
   }
 
   @HTMLBuilder
@@ -413,7 +413,7 @@ private struct HTMLConverter: MarkupVisitor {
         .attribute("colspan", cell.colspan == 1 ? nil : "\(cell.colspan)")
         .attribute("rowspan", cell.rowspan == 1 ? nil : "\(cell.rowspan)")
 
-        _ = column += Int(cell.colspan)
+        let _ = column += Int(cell.colspan)
       }
     }
   }
