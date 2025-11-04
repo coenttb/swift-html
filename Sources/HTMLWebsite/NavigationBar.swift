@@ -340,14 +340,14 @@ public struct NavigationBarTrailingNavItems: HTML {
       NavigationBarCenteredNavItems(
         items: [
           .init("hello", href: "#"),
-          .init("THERE", href: "#"),
+          .init("THERE", href: "#")
         ]
       )
     } trailingNavItems: {
       NavigationBarTrailingNavItems(
         items: [
           .init("TEST", href: ""),
-          .init("TEST2", href: ""),
+          .init("TEST2", href: "")
         ]
       )
     } mobileNavItems: {

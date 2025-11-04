@@ -233,8 +233,7 @@ import Foundation
 
     public static
       var when_you_change_your_password_we_keep_you_logged_in_to_this_device_but_may_log_you_out_from_your_other_devices:
-      TranslatedString
-    {
+      TranslatedString {
       .init(
         dutch:
           "wanneer u uw wachtwoord wijzigt, zorgen wij ervoor dat u ingelogd blijft op dit apparaat, maar mogelijk wordt u ook afgemeld vanaf uw andere apparaten",
@@ -343,8 +342,7 @@ import Foundation
 
     public static
       var please_check_your_inbox_and_click_the_link_in_the_email_to_reset_your_password:
-      TranslatedString
-    {
+      TranslatedString {
       .init(
         dutch:
           "controleer uw inbox en klik op de link in de e-mail om uw wachtwoord opnieuw in te stellen",
@@ -354,8 +352,7 @@ import Foundation
 
     public static
       var if_you_dont_receive_an_email_from_us_within_a_few_minutes_please_check_your_spam_folder:
-      TranslatedString
-    {
+      TranslatedString {
       .init(
         dutch:
           "als u binnen enkele minuten geen e-mail van ons ontvangt, controleer dan uw spammap",
@@ -365,8 +362,7 @@ import Foundation
     }
 
     public static var if_you_continue_to_experience_issues_please_contact_our_support_team:
-      TranslatedString
-    {
+      TranslatedString {
       .init(
         dutch: "als u problemen blijft ondervinden, neem dan contact op met ons ondersteuningsteam",
         english: "if you continue to experience issues, please contact our support team"
@@ -375,8 +371,7 @@ import Foundation
 
     public static
       var enter_your_email_address_and_we_will_send_you_instructions_to_reset_your_password:
-      TranslatedString
-    {
+      TranslatedString {
       .init(
         dutch:
           "vul uw e-mailadres in en wij sturen u instructies om uw wachtwoord opnieuw in te stellen",
@@ -386,8 +381,7 @@ import Foundation
 
     public static
       var to_reset_your_password_please_click_the_button_below_and_follow_the_instructions:
-      TranslatedString
-    {
+      TranslatedString {
       .init(
         dutch:
           "Om uw wachtwoord opnieuw in te stellen, klikt u op de onderstaande knop en volgt u de instructies",

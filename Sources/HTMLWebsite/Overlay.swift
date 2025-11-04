@@ -32,7 +32,7 @@ public struct Overlay<Content: HTML>: HTML {
       .left(.zero)
       .width(.percent(100))
       .height(.percent(100))
-      .backgroundColor(HTMLColor.init(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
+      .backgroundColor(HTMLColor(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
       .transition("opacity 0.3s ease")
       .opacity(0)
       .zIndex(1000)
@@ -59,7 +59,7 @@ public struct Overlay<Content: HTML>: HTML {
       .width(.percent(90))
       .margin(
         vertical: nil,
-        horizontal: .auto,
+        horizontal: .auto
       )
       .backgroundColor(.background.primary)
     }

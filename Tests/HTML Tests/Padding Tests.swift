@@ -118,7 +118,7 @@ extension SnapshotTests {
           .padding(
             [
               .top(.px(10)),
-              .bottom(.px(15)),
+              .bottom(.px(15))
             ],
             media: .screen && .minWidth(.px(768))
           )

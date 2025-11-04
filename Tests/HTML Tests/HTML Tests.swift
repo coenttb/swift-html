@@ -164,7 +164,7 @@ extension SnapshotTests {
     func lazyVGridWithMediaQueries() {
       let columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]> = [
         nil: [1],
-        .desktop: [1, 1],
+        .desktop: [1, 1]
       ]
 
       assertInlineSnapshot(

@@ -28,7 +28,7 @@ public struct Cards: HTML {
         .mobile: [1],
         .mobile && .landscape: [1],
         .tablet && .landscape: [1],
-        .desktop: columns(cards.count),
+        .desktop: columns(cards.count)
       ],
       horizontalSpacing: .rem(1),
       verticalSpacing: .rem(1)

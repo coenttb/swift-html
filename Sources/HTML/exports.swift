@@ -8,5 +8,5 @@
 @_exported import HTMLAttributesPointFreeHTML
 @_exported import HTMLCSSPointFreeHTML
 @_exported import HTMLTypesFoundation
-@_exported import SVG
 @_exported import StringBuilder
+@_exported import SVG

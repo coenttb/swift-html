@@ -70,7 +70,7 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/swiftlang/swift-markdown", from: "0.4.0"),
-        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
+        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2")
     ],
     targets: [
         .target(

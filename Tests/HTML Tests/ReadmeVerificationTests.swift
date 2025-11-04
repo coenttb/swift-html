@@ -26,7 +26,7 @@ struct ReadmeVerificationTests {
     let string: String = String(decoding: bytes, as: UTF8.self)
 
     // Verify it renders without crashing
-    #expect(string.count > 0)
+    #expect(!string.isEmpty)
     #expect(string.contains("Welcome to swift-html"))
     #expect(string.contains("Build type-safe web pages with Swift"))
   }
@@ -42,7 +42,7 @@ struct ReadmeVerificationTests {
     let bytes = header.render()
     let string = String(decoding: bytes, as: UTF8.self)
 
-    #expect(string.count > 0)
+    #expect(!string.isEmpty)
     #expect(string.contains("Logo"))
     #expect(string.contains("Menu"))
   }
@@ -57,7 +57,7 @@ struct ReadmeVerificationTests {
     let bytes = content.render()
     let string = String(decoding: bytes, as: UTF8.self)
 
-    #expect(string.count > 0)
+    #expect(!string.isEmpty)
     #expect(string.contains("Section 1"))
     #expect(string.contains("Section 2"))
   }
@@ -73,7 +73,7 @@ struct ReadmeVerificationTests {
     let bytes = grid.render()
     let string = String(decoding: bytes, as: UTF8.self)
 
-    #expect(string.count > 0)
+    #expect(!string.isEmpty)
     #expect(string.contains("Item 1"))
     #expect(string.contains("Item 2"))
     #expect(string.contains("Item 3"))
@@ -88,7 +88,7 @@ struct ReadmeVerificationTests {
     let bytes = adaptiveContent.render()
     let string = String(decoding: bytes, as: UTF8.self)
 
-    #expect(string.count > 0)
+    #expect(!string.isEmpty)
     #expect(string.contains("Adaptive text"))
   }
 
@@ -113,7 +113,7 @@ struct ReadmeVerificationTests {
     let bytes = button.render()
     let string = String(decoding: bytes, as: UTF8.self)
 
-    #expect(string.count > 0)
+    #expect(!string.isEmpty)
     #expect(string.contains("Learn More"))
     #expect(string.contains("/docs"))
   }
