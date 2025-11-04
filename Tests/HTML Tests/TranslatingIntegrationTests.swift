@@ -14,15 +14,15 @@
   import Testing
   import Translating
 
-  @Suite(
-    "Translating Integration Tests",
-    .snapshots(record: nil),
-    .dependencies {
-      $0.language = .english
-      $0.locale = .init(identifier: "en_US")
-    }
-  )
-  struct TranslatingIntegrationTests {
+  extension SnapshotTests {
+    @Suite(
+      "Translating Integration Tests",
+      .dependencies {
+        $0.language = .english
+        $0.locale = .init(identifier: "en_US")
+      }
+    )
+    struct TranslatingIntegrationTests {
 
     @Test("TranslatedString renders as HTML")
     func translatedStringRendersAsHTML() {
@@ -244,5 +244,6 @@
         """
       }
     }
+  }
   }
 #endif

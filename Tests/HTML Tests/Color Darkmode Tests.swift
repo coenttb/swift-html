@@ -11,11 +11,9 @@ import HTML
 import PointFreeHTMLTestSupport
 import Testing
 
-@Suite(
-  "Color Tests",
-  .snapshots(record: .missing)
-)
-struct ColorTests {
+extension SnapshotTests {
+  @Suite("Color Tests")
+  struct ColorTests {
   @Test("General")
   func general1() {
     assertInlineSnapshot(
@@ -1324,7 +1322,8 @@ struct ColorTests {
       }
     }
   }
-}
+} // end ColorTests
+} // end extension SnapshotTests
 
 // MARK: - Dark Mode Color Convenience Method Tests
 

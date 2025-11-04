@@ -12,11 +12,9 @@ import OrderedCollections
 import PointFreeHTMLTestSupport
 import Testing
 
-@Suite(
-  "Background Tests",
-  .snapshots(record: nil)
-)
-struct BackgroundTests {
+extension SnapshotTests {
+  @Suite("Background Tests")
+  struct BackgroundTests {
   @Test("Background")
   func background() {
     assertInlineSnapshot(
@@ -51,5 +49,6 @@ struct BackgroundTests {
       </html>
       """
     }
+  }
   }
 }

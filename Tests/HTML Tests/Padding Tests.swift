@@ -12,11 +12,9 @@ import OrderedCollections
 import PointFreeHTMLTestSupport
 import Testing
 
-@Suite(
-  "Tests",
-  .snapshots(record: nil)
-)
-struct PaddingTests {
+extension SnapshotTests {
+  @Suite("Tests")
+  struct PaddingTests {
   @Test("Border Test")
   func border() {
     assertInlineSnapshot(
@@ -183,5 +181,6 @@ struct PaddingTests {
       </html>
       """
     }
+  }
   }
 }

@@ -11,11 +11,9 @@ import HTML
 import PointFreeHTMLTestSupport
 import Testing
 
-@Suite(
-  "README Tests",
-  .snapshots(record: .missing)
-)
-struct READMETests {
+extension SnapshotTests {
+  @Suite("README Tests")
+  struct READMETests {
   @Test("Example 1")
   func testingExample1() {
 
@@ -103,5 +101,6 @@ struct READMETests {
       <button type="submit">Submit Form</button>
       """
     }
+  }
   }
 }

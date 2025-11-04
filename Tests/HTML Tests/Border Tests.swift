@@ -12,11 +12,9 @@ import OrderedCollections
 import PointFreeHTMLTestSupport
 import Testing
 
-@Suite(
-  "Border Tests",
-  .snapshots(record: nil)
-)
-struct BorderTests {
+extension SnapshotTests {
+  @Suite("Border Tests")
+  struct BorderTests {
   @Test("Border with light- and darkmode color for all sides")
   func borderAllSides() {
     assertInlineSnapshot(
@@ -145,5 +143,6 @@ struct BorderTests {
       </html>
       """
     }
+  }
   }
 }
