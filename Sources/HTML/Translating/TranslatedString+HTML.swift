@@ -9,17 +9,17 @@ import Foundation
 import PointFreeHTML
 
 #if TRANSLATING
-  import Translating
+    import Translating
 
-  extension TranslatedString: @retroactive HTML {
-    public var body: some HTML {
-      HTMLText("\(self)")
+    extension TranslatedString: @retroactive HTML {
+        public var body: some HTML {
+            HTMLText("\(self)")
+        }
     }
-  }
 
-  extension HTMLText {
-    public init(_ translatedString: TranslatedString) {
-      self = .init("\(translatedString)")
+    extension HTMLText {
+        public init(_ translatedString: TranslatedString) {
+            self = .init("\(translatedString)")
+        }
     }
-  }
 #endif
