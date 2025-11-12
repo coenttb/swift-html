@@ -7,7 +7,6 @@ extension String {
     static let htmlTheme: Self = "HTMLTheme"
     static let htmlComponents: Self = "HTMLComponents"
     static let htmlMarkdown: Self = "HTMLMarkdown"
-    static let htmlEmail: Self = "HTMLEmail"
     static let htmlWebsite: Self = "HTMLWebsite"
     static let htmlKit: Self = "HTMLKit"
 }
@@ -17,7 +16,6 @@ extension Target.Dependency {
     static var htmlTheme: Self { .target(name: .htmlTheme) }
     static var htmlComponents: Self { .target(name: .htmlComponents) }
     static var htmlMarkdown: Self { .target(name: .htmlMarkdown) }
-    static var htmlEmail: Self { .target(name: .htmlEmail) }
     static var htmlWebsite: Self { .target(name: .htmlWebsite) }
 }
 
@@ -50,7 +48,6 @@ let package = Package(
         .library(name: .htmlTheme, targets: [.htmlTheme]),
         .library(name: .htmlComponents, targets: [.htmlComponents]),
         .library(name: .htmlMarkdown, targets: [.htmlMarkdown]),
-        .library(name: .htmlEmail, targets: [.htmlEmail]),
         .library(name: .htmlWebsite, targets: [.htmlWebsite]),
         // Convenience product with common features
         .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
@@ -138,25 +135,6 @@ let package = Package(
                 .orderedCollections
             ]
         ),
-        .target(
-            name: .htmlEmail,
-            dependencies: [
-                .html,
-                .htmlTheme,
-                .htmlComponents,
-                .htmlMarkdown,
-                .dependencies,
-                .orderedCollections,
-                .product(
-                    name: "Translating",
-                    package: "swift-translating",
-                    condition: .when(traits: ["Translating"])
-                )
-            ],
-            swiftSettings: [
-                .define("TRANSLATING", .when(traits: ["Translating"]))
-            ]
-        ),
         .testTarget(
             name: .html.tests,
             dependencies: [
@@ -191,13 +169,6 @@ let package = Package(
             name: .htmlMarkdown.tests,
             dependencies: [
                 .htmlMarkdown,
-                .pointFreeHtmlTestSupport
-            ]
-        ),
-        .testTarget(
-            name: .htmlEmail.tests,
-            dependencies: [
-                .htmlEmail,
                 .pointFreeHtmlTestSupport
             ]
         )
