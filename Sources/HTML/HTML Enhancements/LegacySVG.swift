@@ -1,4 +1,6 @@
 import Foundation
+import WHATWG_HTML_Elements
+import WHATWG_HTML_MediaAttributes
 
 @available(*, deprecated, message: "Use InlineSVG from SVG Integration instead")
 public struct LegacySVG: HTML, Sendable {
@@ -21,12 +23,15 @@ public struct LegacySVG: HTML, Sendable {
     }
 
     public var body: some HTML {
-        HTMLGroup {
-            switch storage {
-            case .raw(let raw):
-                HTMLRaw(raw)
-            case .base64(let base64):
-                img(src: "data:image/svg+xml;base64,\(base64)", alt: "\(self.description)")
+        switch storage {
+        case .raw(let raw):
+            AnyHTML { HTMLRaw(raw) }
+        case .base64(let base64):
+            AnyHTML {
+                Image(
+                    src: "data:image/svg+xml;base64,\(base64)",
+                    alt: Alt(self.description)
+                )
             }
         }
     }

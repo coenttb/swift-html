@@ -15,7 +15,7 @@ extension HTML {
         itemAlignment: AlignItems? = nil,
         rowGap: RowGap? = nil,
         columnGap: ColumnGap? = nil,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -33,7 +33,7 @@ extension HTML {
         grow: FlexGrow? = nil,
         shrink: FlexShrink? = nil,
         basis: FlexBasis? = nil,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {

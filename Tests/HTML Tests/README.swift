@@ -8,6 +8,7 @@
 import Dependencies
 import Foundation
 import HTML
+import HTMLCSSPointFreeHTML
 import PointFreeHTMLTestSupport
 import Testing
 
@@ -94,7 +95,7 @@ extension SnapshotTests {
         @Test("Testing Example 1")
         func testingTestingExample1() {
             assertInlineSnapshot(
-                of: HTMLElementTypes.Button.submit { "Submit Form" },
+                of: HTML_Standard.Button.submit { "Submit Form" },
                 as: .html
             ) {
                 """

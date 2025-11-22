@@ -1,4 +1,4 @@
-// swift-tools-version:6.1
+// swift-tools-version:6.2
 
 import PackageDescription
 
@@ -20,7 +20,7 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var htmlTypesFoundation: Self { .product(name: "HTMLTypesFoundation", package: "swift-html-types") }
+    static var htmlTypesFoundation: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var pointFreeHtmlTestSupport: Self { .product(name: "PointFreeHTMLTestSupport", package: "pointfree-html") }
     static var htmlCssPointFreeHTML: Self { .product(name: "HTMLCSSPointFreeHTML", package: "swift-html-css-pointfree") }
     static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
@@ -36,11 +36,11 @@ extension Target.Dependency {
 let package = Package(
     name: "swift-html",
     platforms: [
-        .iOS(.v17),
-        .macOS(.v14),
-        .tvOS(.v17),
-        .watchOS(.v10),
-        .macCatalyst(.v17)
+        .iOS(.v18),
+        .macOS(.v15),
+        .tvOS(.v18),
+        .watchOS(.v11),
+        .macCatalyst(.v18)
     ],
     products: [
         // Individual targets
@@ -60,7 +60,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-html-types", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-html-standard", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),

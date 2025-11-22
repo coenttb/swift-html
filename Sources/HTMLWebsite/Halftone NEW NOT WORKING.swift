@@ -72,12 +72,12 @@
 // extension HTML {
 //    @discardableResult
 //    public func position(
-//        _ value: CSSPropertyTypes.Position?,
+//        _ value: W3C_CSS_Positioning.Position?,
 //        top: Top?,
 //        right: Right?,
 //        bottom: Bottom?,
 //        left: Left?,
-//        media : CSSAtRuleTypes.Media? = nil,
+//        media : W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
 //        pseudo: Pseudo? = nil
 //    ) -> some HTML {

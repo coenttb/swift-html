@@ -7,6 +7,7 @@
 
 import Foundation
 import HTMLCSSPointFreeHTML
+import CSS_Standard
 
 extension HTML {
     @discardableResult
@@ -14,7 +15,7 @@ extension HTML {
     @HTMLBuilder
     public func listStyle(
         _ listStyle: ListStyle,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -31,25 +32,25 @@ extension HTML {
 
 public enum ListStyle {
     case reset
-    case cssPropertyTypesListStyle(CSSPropertyTypes.ListStyle)
+    case cssPropertyTypesListStyle(CSS_Standard.ListStyle)
 }
 
-#if DEBUG && canImport(SwiftUI)
-    import SwiftUI
-    #Preview {
-        HTMLDocument {
-            ul {
-                li {
-                    "1"
-                }
-                li {
-                    "2"
-                }
-                li {
-                    "3"
-                }
-            }
-            .listStyle(.reset)
-        }
-    }
-#endif
+// #if DEBUG && canImport(SwiftUI)
+//     import SwiftUI
+//     #Preview {
+//         HTMLDocument {
+//             ul {
+//                 li {
+//                     "1"
+//                 }
+//                 li {
+//                     "2"
+//                 }
+//                 li {
+//                     "3"
+//                 }
+//             }
+//             .listStyle(.reset)
+//         }
+//     }
+// #endif

@@ -12,14 +12,14 @@ public struct Input<CodingKey: RawRepresentable>: HTML where CodingKey.RawValue 
     public let codingKey: CodingKey
     public let disabled: Disabled?
     public let form: HTMLAttributeTypes.Form.ID?
-    public let type: HTMLElementTypes.Input.Variant
+    public let type: HTML_Standard_Elements.Input.Variant
     public var style: Input.Style = .default
 
     public init(
         codingKey: CodingKey,
         disabled: Disabled? = nil,
         form: HTMLAttributeTypes.Form.ID? = nil,
-        type: HTMLElementTypes.Input.Variant
+        type: HTML_Standard_Elements.Input.Variant
     ) {
         self.codingKey = codingKey
         self.disabled = disabled

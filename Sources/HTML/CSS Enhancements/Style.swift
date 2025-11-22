@@ -7,11 +7,12 @@
 
 import Foundation
 import StringBuilder
+import HTML_Standard
+import WHATWG_HTML
 
-extension style {
-    public func callAsFunction(@StringBuilder _ content: () -> String) -> some HTML {
-        style(media: media, blocking: blocking, nonce: nonce, title: title) {
-            HTMLText(content())
-        }
-    }
-}
+// TODO: This extension needs to be reimplemented to work with new WHATWG HTML types
+// extension WHATWG_HTML.Style {
+//     public func callAsFunction(@StringBuilder _ content: () -> String) -> some HTML {
+//         WHATWG_HTML.Style(media: media, blocking: blocking, nonce: nonce, title: title)
+//     }
+// }

@@ -163,7 +163,7 @@ private struct HTMLConverter: MarkupVisitor {
                     }
                 }
             }
-            .color(CSSTypeTypes.Color.offBlack.withDarkColor(.offWhite))
+            .color(CSS_Standard.Color.offBlack.withDarkColor(.offWhite))
             .backgroundColor(style.backgroundColor)
             .border(width: .px(2), style: .solid, color: style.borderColor)
             .borderRadius(.uniform(.px(6)))

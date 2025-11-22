@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import HTMLElementTypes
+import WHATWG_HTML_Elements
+import WHATWG_HTML_MediaAttributes
 // Import SVG module but we need to be careful about naming
 import SVG
 import SVGPrinter
@@ -93,20 +94,20 @@ public func svg(_ svgString: String) -> some HTML {
 //        src = "data:image/svg+xml;charset=utf-8,\(encoded)"
 //    }
 //
-//    return HTMLElementTypes.Image(src: Src(src), alt: Alt(alt))
+//    return HTML_Standard_Elements.Image(src: Src(src), alt: Alt(alt))
 // }
 //
 
-extension HTMLElementTypes.Image {
+extension WHATWG_HTML_Elements.Image {
     public init<Content: SVG>(
         svg: Content,
-        alt: Alt?,
+        alt: WHATWG_HTML_MediaAttributes.Alt?,
         base64: Bool = true,
-        loading: Loading? = .eager
+        loading: WHATWG_HTML_MediaAttributes.Loading? = .eager
     ) {
         let svgString = svg.render()
 
-        var src: Src {
+        let src: WHATWG_HTML_MediaAttributes.Src = {
             if base64 {
                 let data = Data(svgString.utf8)
                 let base64String = data.base64EncodedString()
@@ -120,7 +121,7 @@ extension HTMLElementTypes.Image {
                     ?? svgString
                 return "data:image/svg+xml;charset=utf-8,\(encoded)"
             }
-        }
+        }()
 
         self = .init(
             src: src,

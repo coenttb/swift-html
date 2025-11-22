@@ -8,7 +8,7 @@ public struct HStack<Content: HTML>: HTML {
 
     public init(
         alignment: VerticalAlign = .middle,
-        spacing: CSSPropertyTypes.Length? = nil,
+        spacing: CSS_Standard.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.alignment = alignment
@@ -30,12 +30,12 @@ public struct HStack<Content: HTML>: HTML {
 
 public struct VStack<Content: HTML>: HTML {
     let alignment: AlignItems
-    let spacing: CSSPropertyTypes.Length?
+    let spacing: CSS_Standard.Length?
     let content: Content
 
     public init(
         alignment: AlignItems = .stretch,
-        spacing: CSSPropertyTypes.Length? = nil,
+        spacing: CSS_Standard.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.alignment = alignment
@@ -63,16 +63,16 @@ public struct Spacer: HTML {
 }
 
 public struct LazyVGrid<Content: HTML>: HTML {
-    let columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]>
+    let columns: OrderedDictionary<W3C_CSS_MediaQueries.Media?, [Int]>
     let content: Content
-    let horizontalSpacing: CSSPropertyTypes.Length?
-    let verticalSpacing: CSSPropertyTypes.Length?
+    let horizontalSpacing: CSS_Standard.Length?
+    let verticalSpacing: CSS_Standard.Length?
 
     public init(
-        columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]>,
+        columns: OrderedDictionary<W3C_CSS_MediaQueries.Media?, [Int]>,
         // TODO: alignment: HorizontalAlignment = .center,
-        horizontalSpacing: CSSPropertyTypes.Length? = nil,
-        verticalSpacing: CSSPropertyTypes.Length? = nil,
+        horizontalSpacing: CSS_Standard.Length? = nil,
+        verticalSpacing: CSS_Standard.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.columns = columns
@@ -84,8 +84,8 @@ public struct LazyVGrid<Content: HTML>: HTML {
     public init(
         columns: [Int],
         // TODO: alignment: HorizontalAlignment = .center,
-        horizontalSpacing: CSSPropertyTypes.Length? = nil,
-        verticalSpacing: CSSPropertyTypes.Length? = nil,
+        horizontalSpacing: CSS_Standard.Length? = nil,
+        verticalSpacing: CSS_Standard.Length? = nil,
         @HTMLBuilder content: () -> Content
     ) {
         self.columns = [nil: columns]

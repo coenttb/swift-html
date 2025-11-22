@@ -241,7 +241,7 @@ extension HTMLColor {
 //    @HTMLBuilder
 //    func color(
 //        _ color: HTMLColor?,
-//        media: CSSAtRuleTypes.Media? = nil,
+//        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
 //        pseudo: Pseudo? = nil
 //    ) -> some HTML {
@@ -260,7 +260,7 @@ extension HTMLColor {
 //    @_disfavoredOverload
 //    func backgroundColor(
 //        _ color: HTMLColor?,
-//        media: CSSAtRuleTypes.Media? = nil,
+//        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
 //        pseudo: Pseudo? = nil
 //    ) -> some HTML {
@@ -278,11 +278,11 @@ extension HTMLColor {
 //    @HTMLBuilder
 //    @_disfavoredOverload
 //    public func color2(
-//        _ color: CSSPropertyTypes.Color.WithDarkMode.Color?,
-//        media: CSSAtRuleTypes.Media? = nil,
+//        _ color: W3C_CSS_Color.Color.WithDarkMode.Color?,
+//        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
 //        pseudo: Pseudo? = nil
 //    ) -> some HTML {
-//        self.color(color.map(CSSPropertyTypes.Color.WithDarkMode.color))
+//        self.color(color.map(W3C_CSS_Color.Color.WithDarkMode.color))
 //    }
 // }

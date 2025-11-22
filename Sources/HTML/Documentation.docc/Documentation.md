@@ -20,7 +20,7 @@ A type-safe, SwiftUI-inspired approach to generating HTML and CSS in Swift.
 
 ```
 swift-html (You are here!)
-    ├── swift-html-types      (Type-safe HTML elements & attributes)
+    ├── swift-html-standard      (Type-safe HTML elements & attributes)
     ├── swift-css-types       (Type-safe CSS properties & values)
     └── pointfree-html        (High-performance rendering engine)
          └── swift-html-css-pointfree (Integration layer)

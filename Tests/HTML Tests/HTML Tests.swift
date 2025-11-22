@@ -162,7 +162,7 @@ extension SnapshotTests {
 
         @Test("LazyVGrid with media queries")
         func lazyVGridWithMediaQueries() {
-            let columns: OrderedDictionary<CSSAtRuleTypes.Media?, [Int]> = [
+            let columns: OrderedDictionary<W3C_CSS_MediaQueries.Media?, [Int]> = [
                 nil: [1],
                 .desktop: [1, 1],
             ]

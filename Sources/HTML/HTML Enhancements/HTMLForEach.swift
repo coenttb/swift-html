@@ -29,34 +29,34 @@ public struct HTMLForEach<Content: HTML>: HTML {
     }
 }
 
-#if DEBUG && canImport(SwiftUI)
-    import SwiftUI
-    #Preview {
-        HTMLDocument {
-            ul {
-                HTMLForEach(11...20) { element in
-                    AnyHTML {
-                        li {
-                            "\(element)"
-                        }
-                    }
-                }
-
-                for element in 1...10 {
-                    AnyHTML {
-                        li {
-                            "\(element)"
-                        }
-                    }
-                }
-
-                // TO-DO: currently doesn't compile.
-                //            for element in 1...10 {
-                //                li {
-                //                    "\(element)"
+// #if DEBUG && canImport(SwiftUI)
+//     import SwiftUI
+//     #Preview {
+//         HTMLDocument {
+//             ul {
+//                 HTMLForEach(11...20) { element in
+//                     AnyHTML {
+//                         li {
+//                             "\(element)"
+//                         }
+//                     }
+//                 }
+// 
+//                 for element in 1...10 {
+//                     AnyHTML {
+//                         li {
+//                             "\(element)"
+//                         }
+//                     }
+//                 }
+// 
+//                 // TO-DO: currently doesn't compile.
+//                 //            for element in 1...10 {
+//                 //                li {
+//                 //                    "\(element)"
                 //                }
                 //            }
-            }
-        }
-    }
-#endif
+//             }
+//         }
+//     }
+// #endif

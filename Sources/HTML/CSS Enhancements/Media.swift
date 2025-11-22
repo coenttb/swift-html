@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension CSSAtRuleTypes.Media {
+extension W3C_CSS_MediaQueries.Media {
     /// Targets devices in dark mode.
     public static let dark = Self(rawValue: "@media (prefers-color-scheme: dark)")
     /// Targets print media (when the page is being printed).

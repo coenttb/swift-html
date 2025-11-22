@@ -14,7 +14,7 @@ extension HTML {
     public func padding(
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
-        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -45,7 +45,7 @@ extension HTML {
     public func padding(
         _ vertical: LengthPercentage?,
         _ horizontal: LengthPercentage?,
-        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -67,7 +67,7 @@ extension HTML {
     @HTMLBuilder
     public func padding(
         _ padding: Padding.Variant...,
-        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -77,7 +77,7 @@ extension HTML {
     @HTMLBuilder
     public func padding(
         _ padding: OrderedSet<Padding.Variant>,
-        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -130,7 +130,7 @@ extension HTML {
             }
 
             self.padding(
-                CSSPropertyTypes.Padding.sides(
+                .sides(
                     top: top,
                     right: right,
                     bottom: bottom,
@@ -152,7 +152,7 @@ extension HTML {
 
     private func paddingSides(
         padding: OrderedSet<Padding.Variant>,
-        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector?,
         pseudo: Pseudo?
     ) -> some HTML {
@@ -256,7 +256,7 @@ extension HTML {
         top: LengthPercentage,
         horizontal: LengthPercentage,
         bottom: LengthPercentage,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -279,7 +279,7 @@ extension HTML {
         bottom: LengthPercentage? = nil,
         left: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {

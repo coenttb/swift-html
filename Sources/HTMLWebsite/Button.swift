@@ -12,13 +12,13 @@ import HTMLComponents
 
 // MARK: - Updated Button Struct
 public struct Button<Label: HTML, Icon: HTML>: HTML {
-    let button: HTMLElementTypes.Button
+    let button: HTML_Standard_Elements.Button
     let label: Label
     let icon: Icon?
     let style: ButtonStyle
 
     public init(
-        button: HTMLElementTypes.Button = .init(),
+        button: HTML_Standard_Elements.Button = .init(),
         style: ButtonStyle = .default,
         @HTMLBuilder label: () -> Label,
         @HTMLBuilder icon: () -> Icon
@@ -30,7 +30,7 @@ public struct Button<Label: HTML, Icon: HTML>: HTML {
     }
 
     public init(
-        button: HTMLElementTypes.Button = .init(),
+        button: HTML_Standard_Elements.Button = .init(),
         style: ButtonStyle = .default,
         @HTMLBuilder label: () -> Label
     ) where Icon == HTMLEmpty {
@@ -44,7 +44,7 @@ public struct Button<Label: HTML, Icon: HTML>: HTML {
     @Dependency(\.theme.background.button) var background
 
     public var body: some HTML {
-        return HTMLElementTypes.Button {
+        return HTML_Standard_Elements.Button {
             HTMLGroup {
                 if let icon = icon {
                     LabelTypealias {

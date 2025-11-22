@@ -8,17 +8,17 @@
 import Foundation
 import HTMLCSSPointFreeHTML
 
-public typealias Color = CSSPropertyTypes.Color.WithDarkMode.Color
+public typealias Color = W3C_CSS_Color.Color.WithDarkMode.Color
 public typealias HTMLColor = Color
 
-extension CSSTypeTypes.Color {
-    public func withDarkColor(_ color: CSSTypeTypes.Color) -> HTMLColor {
+extension W3C_CSS_Values.Color {
+    public func withDarkColor(_ color: W3C_CSS_Values.Color) -> HTMLColor {
         .init(light: self, dark: color)
     }
 }
 
 extension HTMLColor {
-    public func withDarkColor(_ color: CSSTypeTypes.Color) -> HTMLColor {
+    public func withDarkColor(_ color: W3C_CSS_Values.Color) -> HTMLColor {
         .init(light: self.light, dark: color)
     }
 }
@@ -29,17 +29,17 @@ extension HTMLColor {
     }
 }
 
-extension CSSPropertyTypes.Color {
+extension W3C_CSS_Color.Color {
     public enum WithDarkMode: Sendable, Hashable, GlobalConvertible, ColorConvertible {
 
-        case darkMode(CSSPropertyTypes.Color.WithDarkMode.Color)
-        case global(CSSTypeTypes.Global)
+        case darkMode(W3C_CSS_Color.Color.WithDarkMode.Color)
+        case global(CSS_Standard.Global)
 
         public struct Color: Sendable, Hashable {
-            public let light: CSSTypeTypes.Color
-            public let dark: CSSTypeTypes.Color
+            public let light: W3C_CSS_Values.Color
+            public let dark: W3C_CSS_Values.Color
 
-            public init(light: CSSTypeTypes.Color, dark: CSSTypeTypes.Color? = nil) {
+            public init(light: W3C_CSS_Values.Color, dark: W3C_CSS_Values.Color? = nil) {
                 self.light = light
                 if let dark = dark {
                     self.dark = dark
@@ -49,23 +49,23 @@ extension CSSPropertyTypes.Color {
             }
         }
 
-        public static func color(_ color: CSSTypeTypes.Color) -> CSSPropertyTypes.Color.WithDarkMode
+        public static func color(_ color: W3C_CSS_Values.Color) -> W3C_CSS_Color.Color.WithDarkMode
         {
             return .init(color)
         }
 
-        public static func color(_ color: CSSPropertyTypes.Color.WithDarkMode.Color) -> Self {
+        public static func color(_ color: W3C_CSS_Color.Color.WithDarkMode.Color) -> Self {
             return .darkMode(color)
         }
     }
 }
 
-extension CSSPropertyTypes.Color.WithDarkMode: CSSPropertyTypes.Property {
-    public static var property: String { CSSPropertyTypes.Color.property }
+extension W3C_CSS_Color.Color.WithDarkMode: W3C_CSS_Shared.Property {
+    public static var property: String { W3C_CSS_Color.Color.property }
 }
 
-extension CSSPropertyTypes.Color.WithDarkMode {
-    public init(_ color: CSSPropertyTypes.Color) {
+extension W3C_CSS_Color.Color.WithDarkMode {
+    public init(_ color: W3C_CSS_Color.Color) {
         switch color {
         case .global(let global): self = .global(global)
         case .color(let color): self = .init(color)
@@ -73,21 +73,21 @@ extension CSSPropertyTypes.Color.WithDarkMode {
     }
 }
 
-extension CSSPropertyTypes.Color.WithDarkMode {
-    public init(_ color: CSSTypeTypes.Color) {
+extension W3C_CSS_Color.Color.WithDarkMode {
+    public init(_ color: W3C_CSS_Values.Color) {
         self = .darkMode(.init(light: color))
     }
 }
 
-extension CSSPropertyTypes.Color.WithDarkMode.Color: CustomStringConvertible {
+extension W3C_CSS_Color.Color.WithDarkMode.Color: CustomStringConvertible {
     public var description: String {
-        let attribute = CSSPropertyTypes.Color.property
+        let attribute = W3C_CSS_Color.Color.property
         return
             "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
     }
 }
 
-extension CSSPropertyTypes.Color.WithDarkMode: CustomStringConvertible {
+extension W3C_CSS_Color.Color.WithDarkMode: CustomStringConvertible {
     public var description: String {
         switch self {
         case .darkMode(let color): return color.description
@@ -96,8 +96,8 @@ extension CSSPropertyTypes.Color.WithDarkMode: CustomStringConvertible {
     }
 }
 
-extension CSSPropertyTypes.Color.WithDarkMode.Color {
-    public func map(_ transform: (CSSTypeTypes.Color) -> CSSTypeTypes.Color) -> Self {
+extension W3C_CSS_Color.Color.WithDarkMode.Color {
+    public func map(_ transform: (W3C_CSS_Values.Color) -> W3C_CSS_Values.Color) -> Self {
         .init(
             light: transform(light),
             dark: transform(dark)
@@ -105,7 +105,7 @@ extension CSSPropertyTypes.Color.WithDarkMode.Color {
     }
 
     public func flatMap(
-        _ transform: (CSSTypeTypes.Color) -> CSSPropertyTypes.Color.WithDarkMode.Color
+        _ transform: (W3C_CSS_Values.Color) -> W3C_CSS_Color.Color.WithDarkMode.Color
     ) -> Self {
         let lightTransformed = transform(light)
         let darkTransformed = transform(dark)
@@ -117,16 +117,16 @@ extension CSSPropertyTypes.Color.WithDarkMode.Color {
     }
 }
 
-extension CSSPropertyTypes.Color {
-    public func adjustBrightness(by percentage: Double) -> Self {
-        switch self {
-        case .color(let color): .color(color.adjustBrightness(by: percentage))
-        case .global(let global): .global(global)
-        }
-    }
-}
+//extension W3C_CSS_Color.Color {
+//    public func adjustBrightness(by percentage: Double) -> Self {
+//        switch self {
+//        case .color(let color): .color(color.adjustBrightness(by: percentage))
+//        case .global(let global): .global(global)
+//        }
+//    }
+//}
 
-extension CSSPropertyTypes.Color.WithDarkMode.Color {
+extension W3C_CSS_Color.Color.WithDarkMode.Color {
     public func adjustBrightness(by percentage: Double) -> Self {
         self.map { $0.adjustBrightness(by: percentage) }
     }
@@ -147,9 +147,9 @@ extension HTML {
     @_disfavoredOverload
     func lightAndDarkMode(
         _ property: String,
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -177,14 +177,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func color(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.Color.property,
+            W3C_CSS_Color.Color.property,
             light: light,
             dark: dark,
             media: media,
@@ -199,7 +199,7 @@ extension HTML {
     @HTMLBuilder
     public func color(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -222,8 +222,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func color(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -250,14 +250,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func accentColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.AccentColor.property,
+            CSS_Standard.AccentColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -272,7 +272,7 @@ extension HTML {
     @HTMLBuilder
     public func accentColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -295,8 +295,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func accentColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -323,14 +323,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func backgroundColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BackgroundColor.property,
+            CSS_Standard.BackgroundColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -345,7 +345,7 @@ extension HTML {
     @HTMLBuilder
     public func backgroundColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -369,14 +369,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderBlockColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderBlockColor.property,
+            W3C_CSS_Backgrounds.BorderBlockColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -391,7 +391,7 @@ extension HTML {
     @HTMLBuilder
     public func borderBlockColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -414,8 +414,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderBlockColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -442,14 +442,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderBlockEndColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderBlockEndColor.property,
+            W3C_CSS_Backgrounds.BorderBlockEndColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -464,7 +464,7 @@ extension HTML {
     @HTMLBuilder
     public func borderBlockEndColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -487,8 +487,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderBlockEndColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -515,14 +515,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderBlockStartColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderBlockStartColor.property,
+            W3C_CSS_Backgrounds.BorderBlockStartColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -537,7 +537,7 @@ extension HTML {
     @HTMLBuilder
     public func borderBlockStartColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -560,8 +560,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderBlockStartColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -588,14 +588,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderBottomColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderBottomColor.property,
+            W3C_CSS_Backgrounds.BorderBottomColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -610,7 +610,7 @@ extension HTML {
     @HTMLBuilder
     public func borderBottomColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -633,8 +633,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderBottomColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -661,14 +661,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderColor.property,
+            W3C_CSS_Backgrounds.BorderColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -683,7 +683,7 @@ extension HTML {
     @HTMLBuilder
     public func borderColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -706,8 +706,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -734,14 +734,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderInlineColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderInlineColor.property,
+            W3C_CSS_Backgrounds.BorderInlineColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -756,7 +756,7 @@ extension HTML {
     @HTMLBuilder
     public func borderInlineColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -779,8 +779,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderInlineColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -807,14 +807,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderInlineEndColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderInlineEndColor.property,
+            W3C_CSS_Backgrounds.BorderInlineEndColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -829,7 +829,7 @@ extension HTML {
     @HTMLBuilder
     public func borderInlineEndColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -852,8 +852,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderInlineEndColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -880,14 +880,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderInlineStartColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderInlineStartColor.property,
+            W3C_CSS_Backgrounds.BorderInlineStartColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -902,7 +902,7 @@ extension HTML {
     @HTMLBuilder
     public func borderInlineStartColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -925,8 +925,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderInlineStartColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -953,14 +953,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderLeftColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderLeftColor.property,
+            W3C_CSS_Backgrounds.BorderLeftColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -975,7 +975,7 @@ extension HTML {
     @HTMLBuilder
     public func borderLeftColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -998,8 +998,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderLeftColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1026,14 +1026,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderRightColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderRightColor.property,
+            W3C_CSS_Backgrounds.BorderRightColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1048,7 +1048,7 @@ extension HTML {
     @HTMLBuilder
     public func borderRightColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1071,8 +1071,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderRightColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1099,14 +1099,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func borderTopColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.BorderTopColor.property,
+            W3C_CSS_Backgrounds.BorderTopColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1121,7 +1121,7 @@ extension HTML {
     @HTMLBuilder
     public func borderTopColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1144,8 +1144,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func borderTopColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1172,14 +1172,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func caretColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.CaretColor.property,
+            CSS_Standard.CaretColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1194,7 +1194,7 @@ extension HTML {
     @HTMLBuilder
     public func caretColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1217,8 +1217,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func caretColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1245,14 +1245,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func columnRuleColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.ColumnRuleColor.property,
+            CSS_Standard.ColumnRuleColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1267,7 +1267,7 @@ extension HTML {
     @HTMLBuilder
     public func columnRuleColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1290,8 +1290,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func columnRuleColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1318,14 +1318,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func floodColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.FloodColor.property,
+            CSS_Standard.FloodColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1340,7 +1340,7 @@ extension HTML {
     @HTMLBuilder
     public func floodColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1363,8 +1363,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func floodColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1390,14 +1390,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func fill(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.Fill.property,
+            CSS_Standard.Fill.property,
             light: light,
             dark: dark,
             media: media,
@@ -1412,7 +1412,7 @@ extension HTML {
     @HTMLBuilder
     public func fill(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1435,8 +1435,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func fill(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1463,14 +1463,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func lightingColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.LightingColor.property,
+            CSS_Standard.LightingColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1485,7 +1485,7 @@ extension HTML {
     @HTMLBuilder
     public func lightingColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1508,8 +1508,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func lightingColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1536,14 +1536,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func outlineColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.OutlineColor.property,
+            CSS_Standard.OutlineColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1558,7 +1558,7 @@ extension HTML {
     @HTMLBuilder
     public func outlineColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1581,8 +1581,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func outlineColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1609,14 +1609,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func stopColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.StopColor.property,
+            CSS_Standard.StopColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1631,7 +1631,7 @@ extension HTML {
     @HTMLBuilder
     public func stopColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1654,8 +1654,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func stopColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1682,14 +1682,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func stroke(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.Stroke.property,
+            CSS_Standard.Stroke.property,
             light: light,
             dark: dark,
             media: media,
@@ -1704,7 +1704,7 @@ extension HTML {
     @HTMLBuilder
     public func stroke(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1727,8 +1727,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func stroke(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1755,14 +1755,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func textDecorationColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.TextDecorationColor.property,
+            CSS_Standard.TextDecorationColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1777,7 +1777,7 @@ extension HTML {
     @HTMLBuilder
     public func textDecorationColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1800,8 +1800,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func textDecorationColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1828,14 +1828,14 @@ extension HTML {
     @discardableResult
     @_disfavoredOverload
     public func textEmphasisColor(
-        light: CSSTypeTypes.Color,
-        dark: CSSTypeTypes.Color?,
-        media: CSSAtRuleTypes.Media? = nil,
+        light: W3C_CSS_Values.Color,
+        dark: W3C_CSS_Values.Color?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
         self.lightAndDarkMode(
-            CSSPropertyTypes.TextEmphasisColor.property,
+            CSS_Standard.TextEmphasisColor.property,
             light: light,
             dark: dark,
             media: media,
@@ -1850,7 +1850,7 @@ extension HTML {
     @HTMLBuilder
     public func textEmphasisColor(
         _ color: HTMLColor?,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -1873,8 +1873,8 @@ extension HTML {
     @_disfavoredOverload
     @HTMLBuilder
     func textEmphasisColor(
-        _ color: CSSPropertyTypes.Color.WithDarkMode?,
-        media: CSSAtRuleTypes.Media? = nil,
+        _ color: W3C_CSS_Color.Color.WithDarkMode?,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {

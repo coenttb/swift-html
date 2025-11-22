@@ -14,7 +14,7 @@ extension HTML {
     public func margin(
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
-        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {
@@ -68,7 +68,7 @@ extension HTML {
     //    @HTMLBuilder
     //    public func margin(
     //        _ margin: Margin.Variant...,
-    //        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+    //        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
     //        selector: PointFreeHTML.Selector? = nil,
     //        pseudo: Pseudo? = nil
     //    )-> some HTML {
@@ -78,7 +78,7 @@ extension HTML {
     //    @HTMLBuilder
     //    public func margin(
     //        _ margin: OrderedSet<Margin.Variant>,
-    //        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+    //        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
     //        selector: PointFreeHTML.Selector? = nil,
     //        pseudo: Pseudo? = nil
     //    )-> some HTML {
@@ -123,7 +123,7 @@ extension HTML {
     //            }
     //
     //            self.margin(
-    //                CSSPropertyTypes.Margin.sides(
+    //                CSS_Standard.Margin.sides(
     //                    top: top,
     //                    right: right,
     //                    bottom: bottom,
@@ -145,7 +145,7 @@ extension HTML {
 
     //    private func marginSides(
     //        margin: OrderedSet<Margin.Variant>,
-    //        media mediaQuery: CSSAtRuleTypes.Media? = nil,
+    //        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
     //        pre: String?,
     //        pseudo: Pseudo?
     //    ) -> some HTML {
@@ -193,7 +193,7 @@ extension HTML {
         right: LengthPercentage? = nil,
         bottom: LengthPercentage? = nil,
         left: LengthPercentage? = nil,
-        media: CSSAtRuleTypes.Media? = nil,
+        media: W3C_CSS_MediaQueries.Media? = nil,
         selector: PointFreeHTML.Selector? = nil,
         pseudo: Pseudo? = nil
     ) -> some HTML {

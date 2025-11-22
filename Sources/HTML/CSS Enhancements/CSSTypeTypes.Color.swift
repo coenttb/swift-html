@@ -5,15 +5,85 @@
 //  Created by Coen ten Thije Boonkkamp on 25/06/2025.
 //
 
-import CSSTypeTypes
+import CSS_Standard
 import Foundation
 
-extension CSSTypeTypes.Color {
+// MARK: - ColorConvertible Extension for HexColor Support
+
+extension ColorConvertible {
+    /// Creates a color from a HexColor value
+    ///
+    /// - Parameter hexColor: The HexColor instance
+    /// - Returns: A color in hex format
+    public static func hex(_ hexColor: HexColor) -> Self {
+        return .color(.hex(hexColor))
+    }
+}
+
+// MARK: - Extensions for W3C_CSS_Color.Color (Property Type)
+
+extension W3C_CSS_Color.Color {
+    /// Returns an opacity-modified version of this color
+    ///
+    /// - Parameter alpha: The opacity value (0.0-1.0)
+    /// - Returns: A new color with the specified opacity
+    public func opacity(_ alpha: Double) -> W3C_CSS_Color.Color {
+        switch self {
+        case .color(let color):
+            return .color(color.opacity(alpha))
+        case .global:
+            return self
+        }
+    }
+
     /// Creates a darker version of this color
     ///
     /// - Parameter percent: The amount to darken (0.0-1.0)
     /// - Returns: A darker color
-    public func darker(by percent: Double = 0.2) -> CSSTypeTypes.Color {
+    public func darker(by percent: Double = 0.2) -> W3C_CSS_Color.Color {
+        switch self {
+        case .color(let color):
+            return .color(color.darker(by: percent))
+        case .global:
+            return self
+        }
+    }
+
+    /// Creates a lighter version of this color
+    ///
+    /// - Parameter percent: The amount to lighten (0.0-1.0)
+    /// - Returns: A lighter color
+    public func lighter(by percent: Double = 0.2) -> W3C_CSS_Color.Color {
+        switch self {
+        case .color(let color):
+            return .color(color.lighter(by: percent))
+        case .global:
+            return self
+        }
+    }
+
+    /// Adjusts the brightness of a color by a percentage
+    ///
+    /// - Parameter percent: The brightness adjustment (-1.0 to 1.0)
+    /// - Returns: A new color with adjusted brightness
+    public func adjustBrightness(by percent: Double) -> W3C_CSS_Color.Color {
+        switch self {
+        case .color(let color):
+            return .color(color.adjustBrightness(by: percent))
+        case .global:
+            return self
+        }
+    }
+}
+
+// MARK: - Extensions for W3C_CSS_Values.Color (Value Type)
+
+extension W3C_CSS_Values.Color {
+    /// Creates a darker version of this color
+    ///
+    /// - Parameter percent: The amount to darken (0.0-1.0)
+    /// - Returns: A darker color
+    public func darker(by percent: Double = 0.2) -> W3C_CSS_Values.Color {
         return adjustBrightness(by: -percent)
     }
 
@@ -21,7 +91,7 @@ extension CSSTypeTypes.Color {
     ///
     /// - Parameter percent: The amount to lighten (0.0-1.0)
     /// - Returns: A lighter color
-    public func lighter(by percent: Double = 0.2) -> CSSTypeTypes.Color {
+    public func lighter(by percent: Double = 0.2) -> W3C_CSS_Values.Color {
         return adjustBrightness(by: percent)
     }
 
@@ -29,7 +99,7 @@ extension CSSTypeTypes.Color {
     ///
     /// - Parameter alpha: The opacity value (0.0-1.0)
     /// - Returns: A new color with the specified opacity
-    public func opacity(_ alpha: Double) -> CSSTypeTypes.Color {
+    public func opacity(_ alpha: Double) -> W3C_CSS_Values.Color {
         let clampedAlpha = min(1.0, max(0.0, alpha))
 
         switch self {
@@ -119,7 +189,7 @@ extension CSSTypeTypes.Color {
     ///
     /// - Parameter percent: The brightness adjustment (-1.0 to 1.0, where -1.0 is completely darkened and 1.0 is completely lightened)
     /// - Returns: A new color with adjusted brightness
-    public func adjustBrightness(by percent: Double) -> CSSTypeTypes.Color {
+    public func adjustBrightness(by percent: Double) -> W3C_CSS_Values.Color {
         guard percent >= -1, percent <= 1 else { return self }
 
         func adjustComponent(_ value: Int) -> Int {

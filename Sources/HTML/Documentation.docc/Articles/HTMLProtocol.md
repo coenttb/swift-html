@@ -87,7 +87,7 @@ struct UserInfo: HTML {
 
 ### Built-in HTML Conformances
 
-All HTML elements from swift-html-types automatically conform to the HTML protocol:
+All HTML elements from swift-html-standard automatically conform to the HTML protocol:
 
 ```swift
 // These all conform to HTML

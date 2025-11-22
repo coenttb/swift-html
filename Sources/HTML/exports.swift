@@ -7,6 +7,6 @@
 
 @_exported import HTMLAttributesPointFreeHTML
 @_exported import HTMLCSSPointFreeHTML
-@_exported import HTMLTypesFoundation
+@_exported import HTML_Standard
 @_exported import SVG
 @_exported import StringBuilder

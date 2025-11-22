@@ -29,7 +29,7 @@ The swift-html ecosystem consists of four carefully designed packages that work 
 └────────┬──────────────────────────────┬─────────────────┘
          │                              │
 ┌────────┴────────────┐       ┌─────────┴────────────────┐
-│  swift-html-types   │       │    swift-css-types       │
+│  swift-html-standard   │       │    swift-css-types       │
 │  (HTML Model)       │       │    (CSS Model)           │
 │                     │       │                          │
 │ • Element types     │       │ • Property types         │
@@ -50,7 +50,7 @@ The swift-html ecosystem consists of four carefully designed packages that work 
 
 ## Package Responsibilities
 
-### swift-html-types
+### swift-html-standard
 
 The foundation for type-safe HTML elements and attributes.
 
@@ -190,7 +190,7 @@ div { "Dark mode support" }
 HTML and CSS types are defined in their respective packages:
 
 ```swift
-// In swift-html-types
+// In swift-html-standard
 public struct Div: HTMLElement {
     public let attributes: [AttributeKey: AttributeValue]
     public let content: HTMLContent
@@ -208,7 +208,7 @@ The integration layer makes HTML types conform to the rendering protocol:
 
 ```swift
 // In swift-html-css-pointfree
-extension HTMLElementTypes.ContentDivision {
+extension HTML_Standard_Elements.ContentDivision {
     public func callAsFunction(
         @HTMLBuilder _ content: () -> some PointFreeHTML.HTML
     ) -> some PointFreeHTML.HTML {
@@ -290,7 +290,7 @@ The modular design enables optimizations:
 ### Extensibility
 
 New features can be added at the appropriate layer:
-- New HTML elements in swift-html-types
+- New HTML elements in swift-html-standard
 - New CSS properties in swift-css-types
 - Rendering optimizations in pointfree-html
 - Developer conveniences in swift-html
@@ -305,7 +305,7 @@ struct ArticleCard: HTML {
     let article: Article
     
     var body: some HTML {
-        article {                              // `Article` from swift-html-types, `article` typealias from swift-html
+        article {                              // `Article` from swift-html-standard, `article` typealias from swift-html
             header {
                 h2 { article.title }
                     .fontSize(.rem(1.5))       // FontSize is defined in swift-css-types

@@ -12,7 +12,7 @@ import HTMLCSSPointFreeHTML
 //    @HTMLBuilder
 //    public func backgroundColor(
 //        _ color: HTMLColor?,
-//        media: CSSAtRuleTypes.Media? = nil,
+//        media: W3C_CSS_MediaQueries.Media? = nil,
 //        selector: PointFreeHTML.Selector? = nil,
 //        pseudo: Pseudo? = nil
 //    ) -> some HTML {
@@ -28,7 +28,7 @@ import HTMLCSSPointFreeHTML
 //            lightStyle.inlineStyle(
 //                Background.property,
 //                darkColor.description,
-//                media: PointFreeHTML.AtRule.Media(rawValue: CSSAtRuleTypes.Media.dark.rawValue),
+//                media: PointFreeHTML.AtRule.Media(rawValue: W3C_CSS_MediaQueries.Media.dark.rawValue),
 //                selector: selector,
 //                pseudo: pseudo
 //            )

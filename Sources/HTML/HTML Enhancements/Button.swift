@@ -6,25 +6,27 @@
 //
 
 import Foundation
+import HTML_Standard_Attributes
+import WHATWG_HTML_Elements
 
-extension HTMLElementTypes.Button {
+extension WHATWG_HTML_Elements.Button {
     @HTMLBuilder
     public static func submit(
-        disabled: HTMLAttributeTypes.Disabled? = nil,
-        form: HTMLAttributeTypes.Form.ID? = nil,
-        name: HTMLAttributeTypes.Name? = nil,
-        value: HTMLAttributeTypes.Value<String>? = nil,
-        autofocus: HTMLAttributeTypes.Autofocus? = nil,
-        formaction: HTMLAttributeTypes.FormAction? = nil,
-        formenctype: HTMLAttributeTypes.FormEncType? = nil,
-        formmethod: HTMLAttributeTypes.FormMethod? = nil,
-        formnovalidate: HTMLAttributeTypes.FormNovalidate? = nil,
-        formtarget: HTMLAttributeTypes.FormTarget? = nil,
-        popovertarget: HTMLAttributeTypes.PopoverTarget? = nil,
-        popovertargetaction: HTMLAttributeTypes.PopoverTargetAction? = nil,
+        disabled: HTML_Standard_Attributes.Disabled? = nil,
+        form: HTML_Standard_Attributes.Form.ID? = nil,
+        name: HTML_Standard_Attributes.Name? = nil,
+        value: HTML_Standard_Attributes.Value<String>? = nil,
+        autofocus: HTML_Standard_Attributes.Autofocus? = nil,
+        formaction: HTML_Standard_Attributes.FormAction? = nil,
+        formenctype: HTML_Standard_Attributes.FormEncType? = nil,
+        formmethod: HTML_Standard_Attributes.FormMethod? = nil,
+        formnovalidate: HTML_Standard_Attributes.FormNovalidate? = nil,
+        formtarget: HTML_Standard_Attributes.FormTarget? = nil,
+        popovertarget: HTML_Standard_Attributes.PopoverTarget? = nil,
+        popovertargetaction: HTML_Standard_Attributes.PopoverTargetAction? = nil,
         @HTMLBuilder content: () -> some HTML
     ) -> some HTML {
-        HTMLElementTypes.Button(
+        WHATWG_HTML_Elements.Button(
             type: .submit,
             disabled: disabled,
             form: form,

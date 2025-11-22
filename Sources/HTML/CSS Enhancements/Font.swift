@@ -10,22 +10,22 @@ import Foundation
 import HTMLCSSPointFreeHTML
 
 public struct Font: Hashable, Sendable {
-    public let family: CSSPropertyTypes.FontFamily
-    public let size: CSSPropertyTypes.FontSize
-    public let stretch: CSSPropertyTypes.FontStretch
-    public let style: CSSPropertyTypes.FontStyle
-    public let variant: CSSPropertyTypes.FontVariant
-    public let weight: CSSPropertyTypes.FontWeight
-    public let lineHeight: CSSPropertyTypes.LineHeight
+    public let family: CSS_Standard.FontFamily
+    public let size: CSS_Standard.FontSize
+    public let stretch: CSS_Standard.FontStretch
+    public let style: CSS_Standard.FontStyle
+    public let variant: CSS_Standard.FontVariant
+    public let weight: CSS_Standard.FontWeight
+    public let lineHeight: CSS_Standard.LineHeight
 
     public init(
-        family: CSSPropertyTypes.FontFamily,
-        size: CSSPropertyTypes.FontSize,
-        stretch: CSSPropertyTypes.FontStretch,
-        style: CSSPropertyTypes.FontStyle,
-        variant: CSSPropertyTypes.FontVariant,
-        weight: CSSPropertyTypes.FontWeight,
-        lineHeight: CSSPropertyTypes.LineHeight
+        family: CSS_Standard.FontFamily,
+        size: CSS_Standard.FontSize,
+        stretch: CSS_Standard.FontStretch,
+        style: CSS_Standard.FontStyle,
+        variant: CSS_Standard.FontVariant,
+        weight: CSS_Standard.FontWeight,
+        lineHeight: CSS_Standard.LineHeight
     ) {
         self.family = family
         self.size = size

@@ -175,8 +175,8 @@ import HTMLKit
 - [pointfree-html](https://github.com/coenttb/pointfree-html): A fork of pointfreeco/swift-html with extended functionality.
 - [pointfree-html-translating](https://github.com/coenttb/pointfree-html-translating): A Swift package integrating pointfree-html with swift-translating.
 - [swift-builders](https://github.com/coenttb/swift-builders): A Swift package with result builders for Array, Dictionary, Set, String, and Markdown.
-- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree): A Swift package integrating swift-html-types and swift-css-types with pointfree-html.
-- [swift-html-types](https://github.com/coenttb/swift-html-types): A Swift package with foundational types for HTML.
+- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree): A Swift package integrating swift-html-standard and swift-css-types with pointfree-html.
+- [swift-html-standard](https://github.com/coenttb/swift-html-standard): A Swift package with foundational types for HTML.
 - [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
 - [swift-translating](https://github.com/coenttb/swift-translating): A Swift package for inline translations.
 
