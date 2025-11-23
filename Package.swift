@@ -31,6 +31,9 @@ extension Target.Dependency {
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var builders: Self { .product(name: "Builders", package: "swift-builders") }
+    static var standards: Self { .product(name: "Standards", package: "swift-standards") }
+    static var incits4_1986: Self { .product(name: "INCITS 4 1986", package: "swift-incits-4-1986") }
+    static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
 }
 
 let package = Package(
@@ -67,7 +70,10 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/swiftlang/swift-markdown", from: "0.4.0"),
-        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2")
+        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
+        .package(url: "https://github.com/coenttb/swift-standards", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-incits-4-1986", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-rfc-4648", from: "0.0.1")
     ],
     targets: [
         .target(
@@ -79,6 +85,9 @@ let package = Package(
                 .dependencies,
                 .orderedCollections,
                 .builders,
+                .standards,
+                .incits4_1986,
+                .rfc4648,
                 .product(name: "SVG", package: "swift-svg"),
                 .product(
                     name: "Translating",
@@ -94,7 +103,9 @@ let package = Package(
             name: .htmlTheme,
             dependencies: [
                 .html,
-                .dependencies
+                .dependencies,
+                .standards,
+                .incits4_1986
             ]
         ),
         .target(
@@ -105,6 +116,8 @@ let package = Package(
                 .htmlMarkdown,
                 .htmlTheme,
                 .dependencies,
+                .standards,
+                .incits4_1986,
                 .product(
                     name: "Translating",
                     package: "swift-translating",
