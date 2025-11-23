@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 21/07/2025.
 //
 
-import Foundation
+import INCITS_4_1986
 
 extension String {
     public init(
@@ -23,17 +23,9 @@ extension String {
         }
         var text = htmlString
 
-        // Remove script and style content entirely
-        text = text.replacingOccurrences(
-            of: "<script[^>]*>[\\s\\S]*?</script>",
-            with: "",
-            options: .regularExpression
-        )
-        text = text.replacingOccurrences(
-            of: "<style[^>]*>[\\s\\S]*?</style>",
-            with: "",
-            options: .regularExpression
-        )
+        // Remove script and style content entirely using native Swift Regex
+        text = text.replacing(/<script[^>]*>[\s\S]*?<\/script>/, with: "")
+        text = text.replacing(/<style[^>]*>[\s\S]*?<\/style>/, with: "")
 
         // Convert common HTML entities
         let entities = [
@@ -54,25 +46,20 @@ extension String {
         // Convert block-level elements to newlines
         let blockElements = ["div", "p", "br", "h[1-6]", "li", "tr", "td", "th"]
         for element in blockElements {
-            text = text.replacingOccurrences(
-                of: "</?\(element)[^>]*>",
-                with: "\n",
-                options: .regularExpression
-            )
+            let pattern = "</?\\(element)[^>]*>"
+            text = text.replacing(try! Regex(pattern), with: "\n")
         }
 
         // Remove all remaining HTML tags
-        text = text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+        text = text.replacing(/<[^>]+>/, with: "")
 
         // Clean up whitespace
-        text = text.replacingOccurrences(of: "[ \t]+", with: " ", options: .regularExpression)
-        text = text.replacingOccurrences(
-            of: "\n[ \t]*\n",
-            with: "\n\n",
-            options: .regularExpression
-        )
-        text = text.replacingOccurrences(of: "\n{3,}", with: "\n\n", options: .regularExpression)
+        text = text.replacing(/[ \t]+/, with: " ")
+        text = text.replacing(/\n[ \t]*\n/, with: "\n\n")
+        text = text.replacing(/\n{3,}/, with: "\n\n")
 
-        self = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        // Trim whitespace using INCITS_4_1986
+        let whitespaceChars = Set<Character>([" ", "\t", "\n", "\r"])
+        self = String(INCITS_4_1986.trimming(text, of: whitespaceChars))
     }
 }
