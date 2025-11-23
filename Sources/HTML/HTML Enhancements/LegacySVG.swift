@@ -1,6 +1,7 @@
-import Foundation
+import RFC_4648
 import WHATWG_HTML_Elements
 import WHATWG_HTML_MediaAttributes
+
 
 @available(*, deprecated, message: "Use InlineSVG from SVG Integration instead")
 public struct LegacySVG: HTML, Sendable {
@@ -94,7 +95,7 @@ private func <| <A, B>(f: (A) -> B, a: A) -> B {
 }
 
 func base64EncodedString(_ string: String) -> String {
-    return Data(string.utf8).base64EncodedString()
+    return String(base64Encoding: Array(string.utf8))
 }
 //
 // public let checkmarkSvgBase64 = base64EncodedString(

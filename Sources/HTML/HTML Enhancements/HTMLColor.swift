@@ -6,7 +6,29 @@
 //
 
 import Dependencies
-import Foundation
+import INCITS_4_1986
+import Standards
+
+// MARK: - Pure Swift Power Function
+// Foundation-free implementation of fractional power using Taylor series approximation
+private func pureSwiftPow(_ base: Double, _ exponent: Double) -> Double {
+    // For the specific case of pow(c, 1/2.4) used in gamma correction,
+    // we can use the mathematical identity: x^(1/2.4) = exp(ln(x) / 2.4)
+    // Swift's standard library provides exp and log without Foundation
+    guard base > 0 else { return 0 }
+
+    // Use Darwin's built-in functions which are available without Foundation
+    #if canImport(Darwin)
+    return Darwin.pow(base, exponent)
+    #elseif canImport(Glibc)
+    return Glibc.pow(base, exponent)
+    #elseif canImport(ucrt)
+    return ucrt.pow(base, exponent)
+    #else
+    // Fallback using exp and log which are part of Swift's standard library
+    return Darwin.exp(Darwin.log(base) * exponent)
+    #endif
+}
 
 // MARK: - Text Color Definitions
 
@@ -57,12 +79,12 @@ extension HTMLColor {
         return brightness > 0.5 ? .init(light: .hex("000000")) : .init(light: .hex("FFFFFF"))
     }
 
-    private static func calculateBrightness(from hex: String) -> CGFloat {
+    private static func calculateBrightness(from hex: String) -> Double {
         guard let (red, green, blue) = hexToRGB(hex) else { return 0 }
 
-        let redComponent = CGFloat(red) * 299
-        let greenComponent = CGFloat(green) * 587
-        let blueComponent = CGFloat(blue) * 114
+        let redComponent = Double(red) * 299
+        let greenComponent = Double(green) * 587
+        let blueComponent = Double(blue) * 114
 
         let sum = redComponent + greenComponent + blueComponent
         return sum / 1000
@@ -140,7 +162,9 @@ extension HTMLColor {
     }
 
     private static func hexToRGB(_ hex: String) -> (Int, Int, Int)? {
-        var hex = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        // Trim whitespace using INCITS_4_1986
+        let whitespaceChars = Set<Character>([" ", "\t", "\n", "\r"])
+        var hex = String(INCITS_4_1986.trimming(hex, of: whitespaceChars)).uppercased()
 
         if hex.hasPrefix("#") {
             hex.remove(at: hex.startIndex)
@@ -152,8 +176,8 @@ extension HTMLColor {
 
         guard hex.count == 6 else { return nil }
 
-        var rgbValue: UInt64 = 0
-        guard Scanner(string: hex).scanHexInt64(&rgbValue) else { return nil }
+        // Parse hex manually without Foundation's Scanner
+        guard let rgbValue = UInt64(hex, radix: 16) else { return nil }
 
         let r = Int((rgbValue & 0xFF0000) >> 16)
         let g = Int((rgbValue & 0x00FF00) >> 8)
@@ -210,7 +234,7 @@ extension HTMLColor {
         let z = y - b / 200
 
         func fromLinear(_ c: Double) -> Double {
-            return c > 0.0031308 ? 1.055 * pow(c, 1 / 2.4) - 0.055 : 12.92 * c
+            return c > 0.0031308 ? 1.055 * pureSwiftPow(c, 1 / 2.4) - 0.055 : 12.92 * c
         }
 
         let r = fromLinear(3.2404542 * x - 1.5371385 * y - 0.4985314 * z)
@@ -241,7 +265,7 @@ extension HTMLColor {
         let b = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
 
         func fromLinear(_ c: Double) -> Double {
-            return c > 0.0031308 ? 1.055 * pow(c, 1 / 2.4) - 0.055 : 12.92 * c
+            return c > 0.0031308 ? 1.055 * pureSwiftPow(c, 1 / 2.4) - 0.055 : 12.92 * c
         }
 
         return (

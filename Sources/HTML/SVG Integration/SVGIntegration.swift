@@ -5,13 +5,35 @@
 //  Bridge to integrate swift-svg with swift-html
 //
 
-import Foundation
+import RFC_4648
 import WHATWG_HTML_Elements
 import WHATWG_HTML_MediaAttributes
 // Import SVG module but we need to be careful about naming
 import SVG
 import SVGPrinter
 import SVGTypes
+
+// MARK: - Foundation-free percent encoding for SVG data URLs
+private func percentEncodeSVG(_ string: String) -> String {
+    var result = ""
+    for byte in string.utf8 {
+        // Keep alphanumeric and SVG-safe characters
+        if (byte >= 48 && byte <= 57) ||  // 0-9
+           (byte >= 65 && byte <= 90) ||   // A-Z
+           (byte >= 97 && byte <= 122) ||  // a-z
+           byte == 45 || byte == 46 || byte == 95 || byte == 126 ||  // - . _ ~
+           byte == 33 || byte == 39 || byte == 40 || byte == 41 || byte == 42 ||  // ! ' ( ) *
+           byte == 60 || byte == 62 || byte == 61 || byte == 47 || byte == 58 {  // < > = / :
+            result.append(Character(UnicodeScalar(byte)))
+        } else {
+            result.append("%")
+            let hex = String(byte, radix: 16, uppercase: true)
+            if hex.count == 1 { result.append("0") }
+            result.append(contentsOf: hex)
+        }
+    }
+    return result
+}
 
 /// Bridge to embed type-safe SVG content in HTML documents.
 ///
@@ -85,12 +107,12 @@ public func svg(_ svgString: String) -> some HTML {
 //
 //    let src: String
 //    if base64 {
-//        let data = Data(svgString.utf8)
-//        let base64String = data.base64EncodedString()
+//        // let data = Data(svgString.utf8)
+//        let base64String = String(base64Encoding: Array(svgString.utf8))
 //        src = "data:image/svg+xml;base64,\(base64String)"
 //    } else {
 //        // URL encode the SVG for direct embedding
-//        let encoded = svgString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? svgString
+//        let encoded = percentEncodeSVG()
 //        src = "data:image/svg+xml;charset=utf-8,\(encoded)"
 //    }
 //
@@ -109,16 +131,12 @@ extension WHATWG_HTML_Elements.Image {
 
         let src: WHATWG_HTML_MediaAttributes.Src = {
             if base64 {
-                let data = Data(svgString.utf8)
-                let base64String = data.base64EncodedString()
+                // let data = Data(svgString.utf8)
+                let base64String = String(base64Encoding: Array(svgString.utf8))
                 return "data:image/svg+xml;base64,\(base64String)"
             } else {
                 // URL encode the SVG for direct embedding
-                let encoded =
-                    svgString.addingPercentEncoding(
-                        withAllowedCharacters: CharacterSet.urlQueryAllowed
-                    )
-                    ?? svgString
+                let encoded = percentEncodeSVG(svgString)
                 return "data:image/svg+xml;charset=utf-8,\(encoded)"
             }
         }()

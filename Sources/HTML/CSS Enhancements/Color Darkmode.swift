@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 25/06/2025.
 //
 
-import Foundation
 import HTMLCSSPointFreeHTML
 
 public typealias Color = W3C_CSS_Color.Color.WithDarkMode.Color

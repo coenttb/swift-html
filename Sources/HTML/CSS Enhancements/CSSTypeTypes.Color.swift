@@ -6,7 +6,7 @@
 //
 
 import CSS_Standard
-import Foundation
+import INCITS_4_1986
 
 // MARK: - ColorConvertible Extension for HexColor Support
 
@@ -138,7 +138,7 @@ extension W3C_CSS_Values.Color {
 
     /// Helper function to convert HEX to RGB
     private func hexToRgb(_ hex: String) -> (r: Int, g: Int, b: Int)? {
-        var cleaned = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+        var cleaned = String(INCITS_4_1986.trimming(hex, of: Set("#")))
 
         // Handle shorthand hex (#RGB)
         if cleaned.count == 3 {

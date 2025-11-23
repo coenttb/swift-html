@@ -1,5 +1,3 @@
-import Foundation
-
 internal let base62Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 internal let base62Length = base62Characters.count
 
