@@ -5,7 +5,6 @@
 //  TranslatedString integration for HTML (requires Translating trait)
 //
 
-import Foundation
 import PointFreeHTML
 
 #if TRANSLATING

@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import Foundation
 import HTMLCSSPointFreeHTML
 
 public struct Font: Hashable, Sendable {

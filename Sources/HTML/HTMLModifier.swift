@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 12/08/2025.
 //
 
-import Foundation
 import HTMLCSSPointFreeHTML
 
 public struct HTMLModifier {

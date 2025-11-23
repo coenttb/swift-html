@@ -5,8 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 18/09/2024.
 //
 
-import Foundation
-
 extension HTMLColor {
     public func reverse() -> Self {
         .init(

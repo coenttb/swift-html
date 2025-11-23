@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 09/07/2025.
 //
 
-import Foundation
 import HTMLCSSPointFreeHTML
 
 extension HTML {

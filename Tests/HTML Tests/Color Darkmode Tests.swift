@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import Foundation
 import HTML
 import PointFreeHTMLTestSupport
 import Testing

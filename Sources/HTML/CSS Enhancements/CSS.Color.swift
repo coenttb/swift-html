@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 13/09/2024.
 //
 
-import Foundation
 import HTMLCSSPointFreeHTML
 import W3C_CSS_Values
 
