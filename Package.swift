@@ -34,6 +34,8 @@ extension Target.Dependency {
     static var standards: Self { .product(name: "Standards", package: "swift-standards") }
     static var incits4_1986: Self { .product(name: "INCITS 4 1986", package: "swift-incits-4-1986") }
     static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
+    static var iso9899: Self { .product(name: "ISO 9899", package: "swift-iso-9899") }
+    static var whatwgFormURLEncoded: Self { .product(name: "WHATWG Form URL Encoded", package: "swift-whatwg-url") }
 }
 
 let package = Package(
@@ -73,7 +75,9 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
         .package(url: "https://github.com/coenttb/swift-standards", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-incits-4-1986", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-rfc-4648", from: "0.0.1")
+        .package(url: "https://github.com/coenttb/swift-rfc-4648", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-iso-9899", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-whatwg-url", from: "0.0.1")
     ],
     targets: [
         .target(
@@ -88,6 +92,8 @@ let package = Package(
                 .standards,
                 .incits4_1986,
                 .rfc4648,
+                .iso9899,
+                .whatwgFormURLEncoded,
                 .product(name: "SVG", package: "swift-svg"),
                 .product(
                     name: "Translating",

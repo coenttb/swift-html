@@ -14,7 +14,7 @@ import Testing
 struct SVGIntegrationTests {
 
     @Test("InlineSVG renders correctly in HTML")
-    func inlineSVGRendering() {
+    func inlineSVGRendering() throws {
         let html = div {
             h1 { "SVG Test" }
 
@@ -28,8 +28,7 @@ struct SVGIntegrationTests {
             }
         }
 
-        let rendered = html.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String.init(html)
 
         #expect(renderedString.contains("<div>"))
         #expect(renderedString.contains("<h1>SVG Test</h1>"))
@@ -48,8 +47,8 @@ struct SVGIntegrationTests {
     }
 
     @Test("Mixed HTML and SVG content")
-    func mixedContent() {
-        let content = div {
+    func mixedContent() throws {
+        let html = div {
             p { "Before SVG" }
 
             InlineSVG {
@@ -63,8 +62,7 @@ struct SVGIntegrationTests {
             p { "After SVG" }
         }
 
-        let rendered = content.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains("<p>Before SVG</p>"))
         #expect(renderedString.contains("<svg"))
@@ -74,7 +72,7 @@ struct SVGIntegrationTests {
     }
 
     @Test("svgRaw function works")
-    func svgRawFunction() {
+    func svgRawFunction() throws {
         let html = div {
             p { "Using raw SVG" }
             svg(
@@ -86,8 +84,7 @@ struct SVGIntegrationTests {
             )
         }
 
-        let rendered = html.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains("<p>Using raw SVG</p>"))
         #expect(renderedString.contains("<svg width=\"50\" height=\"50\">"))
@@ -95,7 +92,7 @@ struct SVGIntegrationTests {
     }
 
     @Test("img with SVG content as data URI")
-    func imgWithSVGDataURI() {
+    func imgWithSVGDataURI() throws {
         let svgContent = svg(width: 20, height: 20) {
             circle(cx: 10, cy: 10, r: 8) {
                 fill("orange")
@@ -106,8 +103,7 @@ struct SVGIntegrationTests {
             img(svg: svgContent, alt: "Orange circle", base64: false)
         }
 
-        let rendered = html.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Orange circle\""))
@@ -117,7 +113,7 @@ struct SVGIntegrationTests {
     }
 
     @Test("img with SVG content as base64")
-    func imgWithSVGBase64() {
+    func imgWithSVGBase64() throws {
         let svgContent = svg(width: 20, height: 20) {
             circle(cx: 10, cy: 10, r: 8) {
                 fill("purple")
@@ -128,8 +124,7 @@ struct SVGIntegrationTests {
             img(svg: svgContent, alt: "Purple circle", base64: true)
         }
 
-        let rendered = html.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Purple circle\""))
@@ -140,7 +135,7 @@ struct SVGIntegrationTests {
     }
 
     @Test("img with raw SVG string as data URI")
-    func imgWithSVGStringDataURI() {
+    func imgWithSVGStringDataURI() throws {
         let svgString = """
             <svg width="30" height="30">
                 <rect x="5" y="5" width="20" height="20" fill="green"/>
@@ -151,8 +146,7 @@ struct SVGIntegrationTests {
             img(svg: SVGRaw(svgString), alt: "Green square", base64: false)
         }
 
-        let rendered = html.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Green square\""))
@@ -162,7 +156,7 @@ struct SVGIntegrationTests {
     }
 
     @Test("img with raw SVG string as base64")
-    func imgWithSVGStringBase64() {
+    func imgWithSVGStringBase64() throws {
         let svgString = """
             <svg width="30" height="30">
                 <rect x="5" y="5" width="20" height="20" fill="blue"/>
@@ -173,8 +167,7 @@ struct SVGIntegrationTests {
             img(svg: SVGRaw(svgString), alt: "Blue square", base64: true)
         }
 
-        let rendered = html.render()
-        let renderedString = String(decoding: rendered, as: UTF8.self)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Blue square\""))

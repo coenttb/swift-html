@@ -8,13 +8,13 @@
 import INCITS_4_1986
 
 extension String {
-    public init(
+    public init<Encoding>(
         _ html: some HTML,
-        encoding: String.Encoding = .utf8,
+        as encoding: Encoding.Type = UTF8.self,
         stripHTML: Bool = false
-    ) throws {
+    ) throws where Encoding: _UnicodeEncoding, Encoding.CodeUnit == UInt8 {
 
-        let htmlString: String = try .init(html, encoding: encoding)
+        let htmlString: String = try .init(html, as: encoding)
 
         guard stripHTML == true
         else {

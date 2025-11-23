@@ -7,28 +7,7 @@
 
 import Dependencies
 import INCITS_4_1986
-import Standards
-
-// MARK: - Pure Swift Power Function
-// Foundation-free implementation of fractional power using Taylor series approximation
-private func pureSwiftPow(_ base: Double, _ exponent: Double) -> Double {
-    // For the specific case of pow(c, 1/2.4) used in gamma correction,
-    // we can use the mathematical identity: x^(1/2.4) = exp(ln(x) / 2.4)
-    // Swift's standard library provides exp and log without Foundation
-    guard base > 0 else { return 0 }
-
-    // Use Darwin's built-in functions which are available without Foundation
-    #if canImport(Darwin)
-    return Darwin.pow(base, exponent)
-    #elseif canImport(Glibc)
-    return Glibc.pow(base, exponent)
-    #elseif canImport(ucrt)
-    return ucrt.pow(base, exponent)
-    #else
-    // Fallback using exp and log which are part of Swift's standard library
-    return Darwin.exp(Darwin.log(base) * exponent)
-    #endif
-}
+import ISO_9899
 
 // MARK: - Text Color Definitions
 
@@ -234,7 +213,7 @@ extension HTMLColor {
         let z = y - b / 200
 
         func fromLinear(_ c: Double) -> Double {
-            return c > 0.0031308 ? 1.055 * pureSwiftPow(c, 1 / 2.4) - 0.055 : 12.92 * c
+            return c > 0.0031308 ? 1.055 * ISO_9899.Math.pow(c, 1 / 2.4) - 0.055 : 12.92 * c
         }
 
         let r = fromLinear(3.2404542 * x - 1.5371385 * y - 0.4985314 * z)
@@ -245,8 +224,8 @@ extension HTMLColor {
     }
 
     private static func lchToRGB(l: Double, c: Double, h: Double) -> (Int, Int, Int) {
-        let a = c * cos(h * .pi / 180)
-        let b = c * sin(h * .pi / 180)
+        let a = c * ISO_9899.Math.cos(h * .pi / 180)
+        let b = c * ISO_9899.Math.sin(h * .pi / 180)
         return labToRGB(l: l, a: a, b: b)
     }
 
@@ -265,7 +244,7 @@ extension HTMLColor {
         let b = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
 
         func fromLinear(_ c: Double) -> Double {
-            return c > 0.0031308 ? 1.055 * pureSwiftPow(c, 1 / 2.4) - 0.055 : 12.92 * c
+            return c > 0.0031308 ? 1.055 * ISO_9899.Math.pow(c, 1 / 2.4) - 0.055 : 12.92 * c
         }
 
         return (
@@ -275,8 +254,8 @@ extension HTMLColor {
     }
 
     private static func oklchToRGB(l: Double, c: Double, h: Double) -> (Int, Int, Int) {
-        let a = c * cos(h * .pi / 180)
-        let b = c * sin(h * .pi / 180)
+        let a = c * ISO_9899.Math.cos(h * .pi / 180)
+        let b = c * ISO_9899.Math.sin(h * .pi / 180)
         return oklabToRGB(l: l, a: a, b: b)
     }
 
