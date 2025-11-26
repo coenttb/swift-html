@@ -34,7 +34,7 @@ Add `swift-html` to your Swift package dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/coenttb/swift-html.git", branch: "main")
+    .package(url: "https://github.com/coenttb/swift-html.git", from: "0.1.0")
 ]
 ```
 
