@@ -8,7 +8,7 @@
 import Dependencies
 import HTML
 import HTMLTheme
-import CSS_Rendering
+import CSS
 import CSS_Standard
 import HTML_Renderable_TestSupport
 import Testing
