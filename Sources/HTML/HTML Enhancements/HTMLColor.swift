@@ -49,13 +49,14 @@ extension HTMLColor {
         let lightMid = midpoint(color1.light, color2.light)
         let darkMid = midpoint(color1.dark, color2.dark)
 
-        guard let light = lightMid else { return nil }
-        return HTMLColor(light: light, dark: darkMid)
+        guard let light = lightMid, let dark = darkMid else { return nil }
+        return HTMLColor(light: light, dark: dark)
     }
 
     public static func readablePrimaryColor(on backgroundColor: HTMLColor) -> Self {
         let brightness = calculateBrightness(from: backgroundColor.light.description)
-        return brightness > 0.5 ? .init(light: .hex("000000")) : .init(light: .hex("FFFFFF"))
+        let color: CSS_Standard.Color.Value = brightness > 0.5 ? .hex("000000") : .hex("FFFFFF")
+        return .init(color)
     }
 
     private static func calculateBrightness(from hex: String) -> Double {

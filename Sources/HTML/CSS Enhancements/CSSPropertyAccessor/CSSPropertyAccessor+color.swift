@@ -11,55 +11,52 @@ import CSS_Standard
 extension CSSPropertyAccessor {
     /// Sets the text color with explicit light and dark mode values.
     ///
-    /// This is the ONLY overload that auto-darkens: when `dark` is nil,
-    /// the light color is automatically darkened for dark mode.
+    /// This overload auto-darkens when `dark` is nil: the light color is
+    /// automatically darkened for dark mode using `DarkModeColor.autoAdaptive`.
+    ///
+    /// - Parameters:
+    ///   - light: The color to use in light mode
+    ///   - dark: The color to use in dark mode, or nil to auto-derive
+    ///   - media: Optional media query
+    ///   - selector: Optional CSS selector
+    ///   - pseudo: Optional pseudo-class/element
+    /// - Returns: A new CSSPropertyAccessor with the style applied
     @inlinable
     @discardableResult
     @_disfavoredOverload
     public func color(
         light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value?,
+        dark: CSS_Standard.Color.Value? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
-        let effectiveDark = dark ?? light.darker()
+        let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
+            ?? DarkModeColor.autoAdaptive(light: light)
         return applyColorProperty(
             CSS_Standard.Color.self,
-            .withDarkMode(light: light, dark: effectiveDark),
+            .value(darkModeColor),
             media: media,
             selector: selector,
             pseudo: pseudo
         )
     }
 
-    /// Sets the text color using an HTMLColor value.
+    /// Sets the text color using a DarkModeColor (HTMLColor) value.
     ///
-    /// HTMLColor already contains both light and dark values.
-    /// No auto-darkening occurs (HTMLColor.init handles it).
+    /// DarkModeColor already contains both light and dark values.
+    /// No auto-darkening occurs - the values are used as-is.
+    ///
+    /// - Parameters:
+    ///   - color: The dark mode color pair to apply
+    ///   - media: Optional media query
+    ///   - selector: Optional CSS selector
+    ///   - pseudo: Optional pseudo-class/element
+    /// - Returns: A new CSSPropertyAccessor with the style applied
     @inlinable
     @discardableResult
     public func color(
-        _ color: HTMLColor?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
-    ) -> CSSPropertyAccessor<HTML.AnyView> {
-        applyColorProperty(
-            CSS_Standard.Color.self,
-            color,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
-        )
-    }
-
-    /// Sets the text color using a Color.WithDarkMode value.
-    @usableFromInline
-    @discardableResult
-    @_disfavoredOverload
-    func color(
-        _ color: CSS_Standard.Color.WithDarkMode?,
+        _ color: DarkModeColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
@@ -76,7 +73,15 @@ extension CSSPropertyAccessor {
     /// Sets the text color using a raw CSS_Standard.Color.Value (no dark mode).
     ///
     /// This overload applies a single color value without any dark mode variant.
-    /// Use `HTMLColor` if you need dark mode support.
+    /// The color is normalized to `(c, c)` via `DarkModeColor.init(_:)`.
+    /// Use `DarkModeColor` directly if you need separate light/dark values.
+    ///
+    /// - Parameters:
+    ///   - value: The color value to apply
+    ///   - media: Optional media query
+    ///   - selector: Optional CSS selector
+    ///   - pseudo: Optional pseudo-class/element
+    /// - Returns: A new CSSPropertyAccessor with the style applied
     @inlinable
     @discardableResult
     @_disfavoredOverload
@@ -96,6 +101,13 @@ extension CSSPropertyAccessor {
     }
 
     /// Sets the text color using a global CSS value (inherit, initial, unset, revert).
+    ///
+    /// - Parameters:
+    ///   - global: The global CSS value to apply
+    ///   - media: Optional media query
+    ///   - selector: Optional CSS selector
+    ///   - pseudo: Optional pseudo-class/element
+    /// - Returns: A new CSSPropertyAccessor with the style applied
     @inlinable
     @discardableResult
     public func color(

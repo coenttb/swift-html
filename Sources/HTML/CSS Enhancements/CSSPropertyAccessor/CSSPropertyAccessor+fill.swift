@@ -9,30 +9,33 @@ import CSS_Rendering
 import CSS_Standard
 
 extension CSSPropertyAccessor {
+    /// Sets the fill color with explicit light and dark mode values.
     @inlinable
     @discardableResult
     @_disfavoredOverload
     public func fill(
         light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value?,
+        dark: CSS_Standard.Color.Value? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
-        let effectiveDark = dark ?? light.darker()
+        let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
+            ?? DarkModeColor.autoAdaptive(light: light)
         return applyColorProperty(
             CSS_Standard.Fill.self,
-            .withDarkMode(light: light, dark: effectiveDark),
+            .value(darkModeColor),
             media: media,
             selector: selector,
             pseudo: pseudo
         )
     }
 
+    /// Sets the fill color using a DarkModeColor value.
     @inlinable
     @discardableResult
     public func fill(
-        _ color: HTMLColor?,
+        _ color: DarkModeColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
@@ -46,24 +49,7 @@ extension CSSPropertyAccessor {
         )
     }
 
-    @usableFromInline
-    @discardableResult
-    @_disfavoredOverload
-    func fill(
-        _ color: CSS_Standard.Color.WithDarkMode?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
-    ) -> CSSPropertyAccessor<HTML.AnyView> {
-        applyColorProperty(
-            CSS_Standard.Fill.self,
-            color,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
-        )
-    }
-
+    /// Sets the fill color using a raw CSS_Standard.Color.Value (no dark mode).
     @inlinable
     @discardableResult
     @_disfavoredOverload
@@ -82,6 +68,7 @@ extension CSSPropertyAccessor {
         )
     }
 
+    /// Sets the fill color using a global CSS value.
     @inlinable
     @discardableResult
     public func fill(

@@ -2,39 +2,31 @@
 //  Color.WithDarkMode.swift
 //  swift-html
 //
-//  Core type definitions for dark mode color support.
+//  Legacy dark mode color support - deprecated in favor of DarkModeColor and ColorProperty.
+//
+//  This file is kept for backward compatibility during migration.
+//  New code should use DarkModeColor and ColorProperty instead.
 //
 
 import CSS_Rendering
 import CSS_Standard
 
-public typealias Color = CSS_Standard.Color.WithDarkMode.Color
-public typealias HTMLColor = Color
-
-extension CSS_Standard.Color.Value {
-    public func withDarkColor(_ color: CSS_Standard.Color.Value) -> HTMLColor {
-        .init(light: self, dark: color)
-    }
-}
-
-extension HTMLColor {
-    public func withDarkColor(_ color: CSS_Standard.Color.Value) -> HTMLColor {
-        .init(light: self.light, dark: color)
-    }
-}
-
-extension HTMLColor {
-    public func opacity(_ alpha: Double) -> HTMLColor {
-        self.map { $0.opacity(alpha) }
-    }
-}
+// MARK: - Legacy CSS_Standard.Color.WithDarkMode Type
 
 extension CSS_Standard.Color {
+    /// Legacy dark mode color type.
+    ///
+    /// - Important: This type is deprecated. Use `DarkModeColor` and `ColorProperty` instead.
+    @available(*, deprecated, message: "Use DarkModeColor and ColorProperty instead")
     public enum WithDarkMode: Sendable, Hashable, GlobalConvertible, ColorConvertible {
 
         case darkMode(CSS_Standard.Color.WithDarkMode.Color)
         case global(CSS_Standard.Global)
 
+        /// Legacy nested Color struct.
+        ///
+        /// - Important: This type is deprecated. Use `DarkModeColor` instead.
+        @available(*, deprecated, message: "Use DarkModeColor instead")
         public struct Color: Sendable, Hashable {
             public let light: CSS_Standard.Color.Value
             public let dark: CSS_Standard.Color.Value
@@ -49,8 +41,7 @@ extension CSS_Standard.Color {
             }
         }
 
-        public static func color(_ color: CSS_Standard.Color.Value) -> CSS_Standard.Color.WithDarkMode
-        {
+        public static func color(_ color: CSS_Standard.Color.Value) -> CSS_Standard.Color.WithDarkMode {
             return .init(color)
         }
 
@@ -60,10 +51,12 @@ extension CSS_Standard.Color {
     }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor and ColorProperty instead")
 extension CSS_Standard.Color.WithDarkMode: W3C_CSS_Shared.Property {
     public static var property: String { CSS_Standard.Color.property }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor and ColorProperty instead")
 extension CSS_Standard.Color.WithDarkMode {
     public init(_ color: CSS_Standard.Color) {
         switch color {
@@ -73,20 +66,22 @@ extension CSS_Standard.Color.WithDarkMode {
     }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor and ColorProperty instead")
 extension CSS_Standard.Color.WithDarkMode {
     public init(_ color: CSS_Standard.Color.Value) {
         self = .darkMode(.init(light: color))
     }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor instead")
 extension CSS_Standard.Color.WithDarkMode.Color: CustomStringConvertible {
     public var description: String {
         let attribute = CSS_Standard.Color.property
-        return
-            "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
+        return "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
     }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor and ColorProperty instead")
 extension CSS_Standard.Color.WithDarkMode: CustomStringConvertible {
     public var description: String {
         switch self {
@@ -96,6 +91,7 @@ extension CSS_Standard.Color.WithDarkMode: CustomStringConvertible {
     }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor instead")
 extension CSS_Standard.Color.WithDarkMode.Color {
     public func map(_ transform: (CSS_Standard.Color.Value) -> CSS_Standard.Color.Value) -> Self {
         .init(
@@ -117,6 +113,7 @@ extension CSS_Standard.Color.WithDarkMode.Color {
     }
 }
 
+@available(*, deprecated, message: "Use DarkModeColor instead")
 extension CSS_Standard.Color.WithDarkMode.Color {
     public func adjustBrightness(by percentage: Double) -> Self {
         self.map { $0.adjustBrightness(by: percentage) }
@@ -128,5 +125,28 @@ extension CSS_Standard.Color.WithDarkMode.Color {
 
     public func lighter(by percentage: Double = 0.2) -> Self {
         self.map { $0.lighter(by: percentage) }
+    }
+}
+
+// MARK: - Conversion to New Types
+
+@available(*, deprecated, message: "Use DarkModeColor and ColorProperty instead")
+extension CSS_Standard.Color.WithDarkMode {
+    /// Converts to the new ColorProperty type.
+    public var asColorProperty: ColorProperty {
+        switch self {
+        case .darkMode(let color):
+            return .value(DarkModeColor(light: color.light, dark: color.dark))
+        case .global(let global):
+            return .global(global)
+        }
+    }
+}
+
+@available(*, deprecated, message: "Use DarkModeColor instead")
+extension CSS_Standard.Color.WithDarkMode.Color {
+    /// Converts to the new DarkModeColor type.
+    public var asDarkModeColor: DarkModeColor {
+        DarkModeColor(light: light, dark: dark)
     }
 }

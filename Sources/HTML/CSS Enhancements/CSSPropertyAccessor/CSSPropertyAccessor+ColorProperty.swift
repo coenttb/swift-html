@@ -3,120 +3,21 @@
 //  swift-html
 //
 //  Unified color property implementation using categorical coproduct pattern.
-//  Reduces 21 × 5 = 105 overloads to a single generic implementation.
+//
+//  ColorProperty represents the coproduct (sum type):
+//      ColorProperty = WithGlobal<DarkModeColor>
+//                    = DarkModeColor + Global
+//                    ≅ (Color.Value × Color.Value) + Global
+//
+//  Each external type has an injection morphism defined via ColorPropertyConvertible.
+//  The universal property is realized by pattern-matching (case analysis) in
+//  applyColorProperty, which provides the unique factoring morphism.
+//
+//  This reduces 21 × 5 = 105 potential overloads to a single generic implementation.
 //
 
 import CSS_Rendering
 import CSS_Standard
-
-// MARK: - ColorInput (Internal Canonical Representation)
-
-/// Internal canonical representation for color inputs.
-///
-/// This sum type represents the coproduct of all possible color inputs,
-/// providing a single target for the universal morphism from each input type.
-/// All public API methods convert to this before applying styles.
-@usableFromInline
-enum ColorInput: Sendable, Hashable {
-    /// Light/dark pair - emits both styles with @media query
-    case withDarkMode(light: CSS_Standard.Color.Value, dark: CSS_Standard.Color.Value)
-
-    /// Single value - emits one style, no dark mode
-    case single(CSS_Standard.Color.Value)
-
-    /// Global value - inherit, initial, unset, revert
-    case global(CSS_Standard.Global)
-}
-
-// MARK: - ColorInputConvertible Protocol
-
-/// Protocol for types that can be converted to a ColorInput.
-///
-/// This protocol defines the universal morphism from each color input type
-/// to the canonical `ColorInput` representation, enabling a single generic
-/// implementation for all color properties.
-@usableFromInline
-protocol ColorInputConvertible {
-    /// Static transform function from Self to ColorInput.
-    static var transform: @Sendable (Self) -> ColorInput { get }
-}
-
-// MARK: - ColorInputConvertible Conformances
-
-extension HTMLColor: ColorInputConvertible {
-    @usableFromInline
-    static let transform: @Sendable (HTMLColor) -> ColorInput = ColorInput.init
-}
-
-extension CSS_Standard.Color.Value: ColorInputConvertible {
-    @usableFromInline
-    static let transform: @Sendable (CSS_Standard.Color.Value) -> ColorInput = ColorInput.init
-}
-
-extension ColorInput {
-    @usableFromInline
-    init(
-        _ color: CSS_Standard.Color.Value
-    ){
-        self = .single(color)
-    }
-}
-
-extension ColorInput {
-    @usableFromInline
-    init(
-        _ color: CSS_Standard.Color
-    ){
-        switch color {
-        case .global(let global):
-            self = .global(global)
-        case .color(let color):
-            self = .init(color)
-        }
-    }
-}
-
-extension ColorInput {
-    @usableFromInline
-    init(
-        _ color: CSS_Standard.Color.WithDarkMode
-    ){
-        switch color {
-        case .darkMode(let color):
-            self = .withDarkMode(light: color.light, dark: color.dark)
-        case .global(let global):
-            self = .global(global)
-        }
-    }
-}
-
-extension ColorInput {
-    @usableFromInline
-    init(
-        _ color: HTMLColor
-    ){
-        self = .withDarkMode(light: color.light, dark: color.dark)
-    }
-}
-
-extension ColorInput {
-    @usableFromInline
-    init(
-        _ global: CSS_Standard.Global
-    ){
-        self = .global(global)
-    }
-}
-
-extension CSS_Standard.Global: ColorInputConvertible {
-    @usableFromInline
-    static let transform: @Sendable (CSS_Standard.Global) -> ColorInput = ColorInput.init
-}
-
-extension CSS_Standard.Color.WithDarkMode: ColorInputConvertible {
-    @usableFromInline
-    static let transform: @Sendable (CSS_Standard.Color.WithDarkMode) -> ColorInput = ColorInput.init
-}
 
 // MARK: - CSSColorProperty Protocol
 
@@ -156,14 +57,18 @@ extension CSS_Standard.TextEmphasisColor: CSSColorProperty {}
 // MARK: - Generic Color Property Implementation
 
 extension CSSPropertyAccessor {
-    /// Core implementation: applies any ColorInput to any CSS color property.
+    /// Core implementation: applies any ColorProperty to any CSS color property.
     ///
     /// This single generic method replaces 21 separate implementations,
     /// providing a unified approach to color property styling.
     ///
+    /// The pattern-match on `ColorProperty` realizes the universal property
+    /// of the coproduct: it is the unique morphism that factors through
+    /// the injection morphisms from each summand.
+    ///
     /// - Parameters:
     ///   - propertyType: The CSS property type (e.g., `CSS_Standard.Color.self`)
-    ///   - input: The canonical color input to apply
+    ///   - input: The canonical color property to apply
     ///   - media: Optional media query
     ///   - selector: Optional CSS selector
     ///   - pseudo: Optional pseudo-class/element
@@ -172,7 +77,7 @@ extension CSSPropertyAccessor {
     @discardableResult
     func applyColorProperty<P: CSSColorProperty>(
         _ propertyType: P.Type,
-        _ input: ColorInput?,
+        _ input: ColorProperty?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
@@ -182,41 +87,42 @@ extension CSSPropertyAccessor {
         }
 
         switch input {
-        case .withDarkMode(let light, let dark):
-            // Optimization: skip dark block if light == dark (no redundant CSS)
-            let effectiveDark: CSS_Standard.Color.Value? = light == dark ? nil : dark
-            return CSSPropertyAccessor<HTML.AnyView>(
-                base: HTML.AnyView(
-                    base
-                        .inlineStyle(
+        case .value(let darkModeColor):
+            if darkModeColor.isSingleColor {
+                // Single color: emit one style (no dark mode variant needed)
+                return CSSPropertyAccessor<HTML.AnyView>(
+                    base: HTML.AnyView(
+                        base.inlineStyle(
                             P.property,
-                            light.description,
+                            darkModeColor.light.description,
                             media: media,
                             selector: selector,
                             pseudo: pseudo
                         )
-                        .inlineStyle(
-                            P.property,
-                            effectiveDark?.description,
-                            media: .prefersColorScheme(.dark).and(media),
-                            selector: selector,
-                            pseudo: pseudo
-                        )
-                )
-            )
-
-        case .single(let value):
-            return CSSPropertyAccessor<HTML.AnyView>(
-                base: HTML.AnyView(
-                    base.inlineStyle(
-                        P.property,
-                        value.description,
-                        media: media,
-                        selector: selector,
-                        pseudo: pseudo
                     )
                 )
-            )
+            } else {
+                // Different light/dark: emit both with media query
+                return CSSPropertyAccessor<HTML.AnyView>(
+                    base: HTML.AnyView(
+                        base
+                            .inlineStyle(
+                                P.property,
+                                darkModeColor.light.description,
+                                media: media,
+                                selector: selector,
+                                pseudo: pseudo
+                            )
+                            .inlineStyle(
+                                P.property,
+                                darkModeColor.dark.description,
+                                media: .prefersColorScheme(.dark).and(media),
+                                selector: selector,
+                                pseudo: pseudo
+                            )
+                    )
+                )
+            }
 
         case .global(let global):
             return CSSPropertyAccessor<HTML.AnyView>(
@@ -234,13 +140,16 @@ extension CSSPropertyAccessor {
     }
 }
 
-// MARK: - Generic ColorInputConvertible Overload
+// MARK: - Generic ColorPropertyConvertible Overload
 
 extension CSSPropertyAccessor {
-    /// Convenience overload that accepts any optional ColorInputConvertible type.
+    /// Convenience overload that accepts any optional ColorPropertyConvertible type.
+    ///
+    /// This method uses the injection morphism from the conforming type
+    /// to convert to ColorProperty before applying.
     @usableFromInline
     @discardableResult
-    func applyColorProperty<P: CSSColorProperty, T: ColorInputConvertible>(
+    func applyColorProperty<P: CSSColorProperty, T: ColorPropertyConvertible>(
         _ propertyType: P.Type,
         _ value: T?,
         media: W3C_CSS_MediaQueries.Media? = nil,
@@ -249,7 +158,7 @@ extension CSSPropertyAccessor {
     ) -> CSSPropertyAccessor<HTML.AnyView> {
         applyColorProperty(
             propertyType,
-            value.map(T.transform),
+            value.map(T.injection),
             media: media,
             selector: selector,
             pseudo: pseudo

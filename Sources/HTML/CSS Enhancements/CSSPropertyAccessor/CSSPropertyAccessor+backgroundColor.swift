@@ -10,36 +10,32 @@ import CSS_Standard
 
 extension CSSPropertyAccessor {
     /// Sets the background color with explicit light and dark mode values.
-    ///
-    /// This is the ONLY overload that auto-darkens: when `dark` is nil,
-    /// the light color is automatically darkened for dark mode.
     @inlinable
     @discardableResult
     @_disfavoredOverload
     public func backgroundColor(
         light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value?,
+        dark: CSS_Standard.Color.Value? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
+        let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
+            ?? DarkModeColor.autoAdaptive(light: light)
         return applyColorProperty(
             CSS_Standard.BackgroundColor.self,
-            .withDarkMode(
-                light: light,
-                dark: dark ?? light.darker()
-            ),
+            .value(darkModeColor),
             media: media,
             selector: selector,
             pseudo: pseudo
         )
     }
 
-    /// Sets the background color using an HTMLColor value.
+    /// Sets the background color using a DarkModeColor value.
     @inlinable
     @discardableResult
     public func backgroundColor(
-        _ value: HTMLColor?,
+        _ value: DarkModeColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
@@ -72,7 +68,7 @@ extension CSSPropertyAccessor {
         )
     }
 
-    /// Sets the background color using a global CSS value (inherit, initial, unset, revert).
+    /// Sets the background color using a global CSS value.
     @inlinable
     @discardableResult
     public func backgroundColor(
