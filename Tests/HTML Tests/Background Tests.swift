@@ -20,6 +20,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .border(
                             .init(
                                 width: .length(1.px),

@@ -23,6 +23,7 @@ public struct HStack<Content: HTML.View>: HTML.View {
 
     public var body: some HTML.View {
         tag("swift-html-hstack") { content }
+            .css
             // necessary?
             .alignItems(.stretch)
             .verticalAlign(alignment)

@@ -20,6 +20,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .border(
                             .init(
                                 width: .length(1.px),
@@ -52,6 +53,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .padding(vertical: .px(10), horizontal: .px(20))
                 },
                 as: .html
@@ -78,6 +80,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .padding(
                             .top(.px(10)),
                             .right(.px(20)),
@@ -109,6 +112,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .padding(
                             [
                                 .top(.px(10)),
@@ -144,6 +148,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .padding(
                             top: .px(10),
                             bottom: .px(10),

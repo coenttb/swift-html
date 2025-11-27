@@ -22,22 +22,26 @@ extension SnapshotTests {
             let page = HTML.Document {
                 div {
                     h1 { "Welcome to swift-html" }
-                        .css.color(HTMLColor(light: .red, dark: .red))
+                        .css
+                        .color(HTMLColor(light: .red, dark: .red))
                         .fontSize(.rem(2.5))
 
                     p { "Build beautiful, type-safe web pages with Swift" }
-                        .css.color(.gray800)
+                        .css
+                        .color(.gray800)
                         .lineHeight(1.6)
 
                     a(href: "https://github.com/coenttb/swift-html") {
                         "Get Started →"
                     }
+                    .css
                     .padding(.rem(1))
                     .css.backgroundColor(HTMLColor(light: .yellow, dark: .yellow))
                     .color(.white)
                     .borderRadius(.px(8))
                     .textDecoration(TextDecoration.none)
                 }
+                .css
                 .padding(.rem(2))
                 .maxWidth(.px(800))
                 .margin(.auto)

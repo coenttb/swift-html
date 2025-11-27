@@ -18,7 +18,7 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var htmlTypesFoundation: Self { .product(name: "HTMLTypes", package: "swift-html-types") }
+    static var htmlStandard: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
     static var htmlRenderableTestSupport: Self { .product(name: "HTML Renderable TestSupport", package: "swift-html-rendering") }
     static var css: Self { .product(name: "CSS", package: "swift-css") }
@@ -59,14 +59,14 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../swift-html-rendering"),
-        .package(path: "../swift-css"),
-        .package(path: "../swift-html-types"),
-        .package(path: "../swift-svg"),
+        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
+        .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.0"),
         .package(url: "https://github.com/swift-standards/swift-standards", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.0.1"),
@@ -78,7 +78,7 @@ let package = Package(
             dependencies: [
                 .htmlRendering,
                 .css,
-                .htmlTypesFoundation,
+                .htmlStandard,
                 .stringBuilder,
                 .dependencies,
                 .orderedCollections,

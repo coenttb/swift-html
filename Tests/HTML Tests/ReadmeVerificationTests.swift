@@ -15,11 +15,13 @@ struct ReadmeVerificationTests {
     func basicHtmlGeneration() throws {
         let page = div {
             h1 { "Welcome to swift-html" }
+                .css
                 .color(.red)
                 .fontSize(.rem(2.5))
 
             p { "Build type-safe web pages with Swift" }
-                .css.color(.gray800)
+                .css
+                .color(.gray800)
                 .lineHeight(1.6)
         }
 
@@ -97,8 +99,10 @@ struct ReadmeVerificationTests {
 
             var body: some HTML.View {
                 a(href: .init(rawValue: href)) { title }
+                    .css
                     .display(.inlineBlock)
                     .padding(vertical: .rem(0.5), horizontal: .rem(1))
+                    .css
                     .backgroundColor(.blue)
                     .color(.white)
                     .borderRadius(.px(6))

@@ -64,21 +64,4 @@ extension CSS {
             pseudo: pseudo
         )
     }
-
-    @inlinable
-    @discardableResult
-    public func stopColor(
-        _ global: CSS_Standard.Global?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
-        applyColorProperty(
-            CSS_Standard.StopColor.self,
-            global,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
-        )
-    }
 }

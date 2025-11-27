@@ -67,22 +67,4 @@ extension CSS {
             pseudo: pseudo
         )
     }
-
-    /// Sets the background color using a global CSS value.
-    @inlinable
-    @discardableResult
-    public func backgroundColor(
-        _ global: CSS_Standard.Global?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
-        applyColorProperty(
-            CSS_Standard.BackgroundColor.self,
-            global,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
-        )
-    }
 }

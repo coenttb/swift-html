@@ -5,6 +5,7 @@
 
 import Foundation
 import HTML_Rendering
+import CSS
 
 public struct VStack<Content: HTML.View>: HTML.View {
     let alignment: AlignItems
@@ -25,6 +26,7 @@ public struct VStack<Content: HTML.View>: HTML.View {
         tag("swift-html-vstack") {
             content
         }
+        .css
         .alignItems(alignment)
         .display(.flex)
         .flexDirection(.column)
