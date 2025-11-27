@@ -1,67 +1,11 @@
+//
+//  LazyVGrid.swift
+//  swift-html
+//
+
 import Foundation
 import HTML_Rendering
 import OrderedCollections
-
-public struct HStack<Content: HTML.View>: HTML.View {
-    let alignment: VerticalAlign
-    let spacing: Length?
-    let content: Content
-
-    public init(
-        alignment: VerticalAlign = .middle,
-        spacing: CSS_Standard.Length? = nil,
-        @HTML.Builder content: () -> Content
-    ) {
-        self.alignment = alignment
-        self.spacing = spacing
-        self.content = content()
-    }
-
-    public var body: some HTML.View {
-        tag("swift-html-hstack") { content }
-            // necessary?
-            .alignItems(.stretch)
-            .verticalAlign(alignment)
-            .display(.flex)
-            .flexDirection(.row)
-            .maxHeight(.percentage(100))
-            .columnGap(.length(spacing == 0 ? .zero : spacing ?? 1.rem))
-    }
-}
-
-public struct VStack<Content: HTML.View>: HTML.View {
-    let alignment: AlignItems
-    let spacing: CSS_Standard.Length?
-    let content: Content
-
-    public init(
-        alignment: AlignItems = .stretch,
-        spacing: CSS_Standard.Length? = nil,
-        @HTML.Builder content: () -> Content
-    ) {
-        self.alignment = alignment
-        self.spacing = spacing
-        self.content = content()
-    }
-
-    public var body: some HTML.View {
-        tag("swift-html-vstack") {
-            content
-        }
-        .alignItems(alignment)
-        .display(.flex)
-        .flexDirection(.column)
-        .maxWidth(.percentage(100))
-        .rowGap(.length(spacing == .zero ? .zero : (spacing ?? 1.rem)))
-    }
-}
-
-public struct Spacer: HTML.View {
-    public init() {}
-    public var body: some HTML.View {
-        tag("swift-html-spacer").flexGrow(1)
-    }
-}
 
 public struct LazyVGrid<Content: HTML.View>: HTML.View {
     let columns: OrderedDictionary<CSS_Standard.Media?, [Int]>

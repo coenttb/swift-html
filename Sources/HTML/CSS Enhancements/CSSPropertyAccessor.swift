@@ -1,13 +1,13 @@
 //
-//  CSS.Namespace.swift
+//  CSSPropertyAccessor.swift
 //  swift-html
 //
 //  Provides namespaced access to CSS properties for better discoverability.
-//  Usage: `div.css.color(.red).css.padding(.px(16))`
+//  Usage: `div.css.color(.red).padding(.px(16)).display(.flex)`
 //
 //  The `.css` accessor provides an alternative way to access CSS properties,
-//  grouping them for easier autocomplete discovery. The original flat methods
-//  (e.g., `.color(.red)`) continue to work.
+//  grouping them for easier autocomplete discovery. Once in the CSS namespace,
+//  you can chain methods fluently without repeating `.css`.
 //
 
 import CSS_Rendering
@@ -15,25 +15,26 @@ import CSS_Standard
 
 /// Provides namespaced access to CSS properties for better discoverability.
 ///
-/// Access CSS properties through the `.css` accessor on any `HTML.View`:
+/// Access CSS properties through the `.css` accessor on any `HTML.View`,
+/// then chain methods fluently within the namespace:
 /// ```swift
-/// div
-///     .css.color(.red)
-///     .css.padding(.px(16))
-///     .css.display(.flex)
-/// ```
-///
-/// This is equivalent to the flat API:
-/// ```swift
-/// div
+/// div.css
 ///     .color(.red)
 ///     .padding(.px(16))
 ///     .display(.flex)
 /// ```
 ///
-/// The namespace helps with autocomplete discoverability, especially for
-/// less commonly used CSS properties.
-public struct CSSPropertyAccessor<Base: HTML.View> {
+/// `CSSPropertyAccessor` conforms to `HTML.View`, so it can be used directly
+/// anywhere an `HTML.View` is expected - no explicit unwrapping required:
+/// ```swift
+/// var body: some HTML.View {
+///     div.css.color(.red).padding(.px(16))
+/// }
+/// ```
+///
+/// The namespace helps with autocomplete discoverability and provides
+/// disambiguation when types conform to both `HTML.View` and `SwiftUI.View`.
+public struct CSSPropertyAccessor<Base: HTML.View>: HTML.View {
     @usableFromInline
     let base: Base
 
@@ -42,18 +43,26 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         self.base = base
     }
 
+    // MARK: - HTML.View Conformance
+
+    @inlinable
+    public var body: Base {
+        base
+    }
+
     // MARK: - Color Properties
 
     @inlinable
     @discardableResult
-    @HTML.Builder
     public func color(
         _ color: Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> some HTML.View {
-        base.color(color, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTML.AnyView> {
+        CSSPropertyAccessor<HTML.AnyView>(
+            base: HTML.AnyView(base.color(color, media: media, selector: selector, pseudo: pseudo))
+        )
     }
 
     @inlinable
@@ -63,8 +72,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.backgroundColor(color, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTML.AnyView> {
+        CSSPropertyAccessor<HTML.AnyView>(
+            base: HTML.AnyView(base.backgroundColor(color, media: media, selector: selector, pseudo: pseudo))
+        )
     }
 
     // MARK: - Layout Properties
@@ -76,8 +87,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.display(display, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.display(display, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -87,8 +100,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.position(position, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.position(position, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Sizing Properties
@@ -100,8 +115,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.width(width, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.width(width, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -111,8 +128,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.height(height, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.height(height, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -122,8 +141,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.maxWidth(maxWidth, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.maxWidth(maxWidth, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -133,8 +154,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.maxHeight(maxHeight, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.maxHeight(maxHeight, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -144,8 +167,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.minWidth(minWidth, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.minWidth(minWidth, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -155,8 +180,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.minHeight(minHeight, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.minHeight(minHeight, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Spacing Properties
@@ -168,8 +195,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.padding(padding, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.padding(padding, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -179,8 +208,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.margin(margin, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.margin(margin, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Flexbox Properties
@@ -192,8 +223,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.flexDirection(direction, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.flexDirection(direction, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -203,8 +236,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.flexWrap(wrap, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.flexWrap(wrap, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -214,8 +249,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.justifyContent(justifyContent, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.justifyContent(justifyContent, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -225,8 +262,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.alignItems(alignItems, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.alignItems(alignItems, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -236,8 +275,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.gap(gap, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.gap(gap, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Typography Properties
@@ -249,8 +290,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.fontSize(fontSize, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.fontSize(fontSize, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -260,8 +303,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.fontWeight(fontWeight, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.fontWeight(fontWeight, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -271,8 +316,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.fontFamily(fontFamily, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.fontFamily(fontFamily, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -282,8 +329,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.lineHeight(lineHeight, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.lineHeight(lineHeight, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -293,8 +342,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.textAlign(textAlign, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.textAlign(textAlign, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -304,8 +355,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.textDecoration(textDecoration, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.textDecoration(textDecoration, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Border Properties
@@ -317,8 +370,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.borderRadius(borderRadius, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.borderRadius(borderRadius, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -328,8 +383,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.borderWidth(borderWidth, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.borderWidth(borderWidth, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -339,8 +396,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.borderStyle(borderStyle, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.borderStyle(borderStyle, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -350,8 +409,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.borderColor(borderColor, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.borderColor(borderColor, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Effects Properties
@@ -363,8 +424,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.opacity(opacity, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.opacity(opacity, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -374,8 +437,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.boxShadow(boxShadow, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.boxShadow(boxShadow, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -385,8 +450,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.overflow(overflow, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.overflow(overflow, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -396,8 +463,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.cursor(cursor, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.cursor(cursor, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Transform & Animation Properties
@@ -409,8 +478,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.transform(transform, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.transform(transform, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -420,8 +491,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.transition(transition, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.transition(transition, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     // MARK: - Position Offsets
@@ -433,8 +506,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.top(top, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.top(top, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -444,8 +519,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.right(right, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.right(right, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -455,8 +532,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.bottom(bottom, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.bottom(bottom, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -466,8 +545,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.left(left, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.left(left, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 
     @inlinable
@@ -477,8 +558,10 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> HTMLInlineStyle<Base> {
-        base.zIndex(zIndex, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSSPropertyAccessor<HTMLInlineStyle<Base>> {
+        CSSPropertyAccessor<HTMLInlineStyle<Base>>(
+            base: base.zIndex(zIndex, media: media, selector: selector, pseudo: pseudo)
+        )
     }
 }
 
@@ -487,23 +570,16 @@ public struct CSSPropertyAccessor<Base: HTML.View> {
 extension HTML.View {
     /// Access CSS properties through a namespaced accessor for better discoverability.
     ///
-    /// The `.css` accessor provides an alternative way to access CSS properties:
+    /// The `.css` accessor provides fluent chaining within the namespace:
     /// ```swift
-    /// div
-    ///     .css.color(.red)
-    ///     .css.padding(.px(16))
-    ///     .css.display(.flex)
+    /// div.css
+    ///     .color(.red)
+    ///     .padding(.px(16))
+    ///     .display(.flex)
     /// ```
-    @inlinable
-    public var css: CSSPropertyAccessor<Self> {
-        CSSPropertyAccessor(base: self)
-    }
-}
-
-// MARK: - Chaining Support for CSSPropertyAccessor results
-
-extension HTMLInlineStyle {
-    /// Continue accessing CSS properties through the namespace after applying a style.
+    ///
+    /// `CSSPropertyAccessor` conforms to `HTML.View`, so no explicit unwrapping
+    /// is needed - use it directly in result builders and `some HTML.View` returns.
     @inlinable
     public var css: CSSPropertyAccessor<Self> {
         CSSPropertyAccessor(base: self)

@@ -1,8 +1,8 @@
 //
-//  File.swift
-//  swift-html-standard
+//  HTML.ElementTypealiases.swift
+//  swift-html
 //
-//  Created by Coen ten Thije Boonkkamp on 12/07/2025.
+//  Lowercase typealiases for HTML elements providing a more HTML-like syntax.
 //
 
 import CSS_Rendering

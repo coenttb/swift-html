@@ -276,11 +276,11 @@ extension HTMLColor {
 //    @HTML.Builder
 //    @_disfavoredOverload
 //    public func color2(
-//        _ color: W3C_CSS_Color.Color.WithDarkMode.Color?,
+//        _ color: CSS_Standard.Color.WithDarkMode.Color?,
 //        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
 //        pseudo: HTML.Pseudo? = nil
 //    ) -> some HTML.View {
-//        self.color(color.map(W3C_CSS_Color.Color.WithDarkMode.color))
+//        self.color(color.map(CSS_Standard.Color.WithDarkMode.color))
 //    }
 // }

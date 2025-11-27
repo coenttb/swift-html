@@ -88,13 +88,13 @@ extension SnapshotTests {
 
         @Test("Color initializes with standard color")
         func colorInitializesWithStandardColor() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(light: .hex("FF0000"))
+            let color = CSS_Standard.Color.WithDarkMode.Color(light: .hex("FF0000"))
             #expect(color.light.description == "#FF0000")
         }
 
         @Test("Color initializes with light and dark colors")
         func colorInitializesWithLightAndDarkColors() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -104,13 +104,13 @@ extension SnapshotTests {
 
         @Test("Color falls back to darker version when dark is omitted")
         func colorFallsBackToDarker() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(light: .hex("FF0000"))
+            let color = CSS_Standard.Color.WithDarkMode.Color(light: .hex("FF0000"))
             #expect(color.dark != color.light)
         }
 
         @Test("Color description includes media queries")
         func colorDescriptionIncludesMediaQueries() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -123,7 +123,7 @@ extension SnapshotTests {
 
         @Test("Color description includes dark mode even when not explicitly provided")
         func colorDescriptionIncludesDarkModeWhenNotExplicit() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(light: .hex("FF0000"), dark: nil)
+            let color = CSS_Standard.Color.WithDarkMode.Color(light: .hex("FF0000"), dark: nil)
             let description = color.description
             #expect(description.contains("@media (prefers-color-scheme: light)"))
             #expect(description.contains("#FF0000"))
@@ -134,7 +134,7 @@ extension SnapshotTests {
 
         @Test("Map transforms both light and dark colors")
         func mapTransformsBothColors() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -145,12 +145,12 @@ extension SnapshotTests {
 
         @Test("FlatMap transforms colors more complexly")
         func flatMapTransformsColorsComplexly() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
             let transformed = color.flatMap { _ in
-                W3C_CSS_Color.Color.WithDarkMode.Color(
+                CSS_Standard.Color.WithDarkMode.Color(
                     light: .hex("0000FF"),
                     dark: .hex("FF00FF")
                 )
@@ -161,7 +161,7 @@ extension SnapshotTests {
 
         @Test("AdjustBrightness changes color brightness")
         func adjustBrightnessChangesColorBrightness() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -172,7 +172,7 @@ extension SnapshotTests {
 
         @Test("Darker makes colors darker")
         func darkerMakesColorsDarker() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -183,7 +183,7 @@ extension SnapshotTests {
 
         @Test("Lighter makes colors lighter")
         func lighterMakesColorsLighter() {
-            let color = W3C_CSS_Color.Color.WithDarkMode.Color(
+            let color = CSS_Standard.Color.WithDarkMode.Color(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -194,16 +194,16 @@ extension SnapshotTests {
 
         @Test("WithDarkMode global type works correctly")
         func withDarkModeGlobalTypeWorksCorrectly() {
-            let global = W3C_CSS_Color.Color.WithDarkMode.initial
+            let global = CSS_Standard.Color.WithDarkMode.initial
             #expect(global.description == "initial")
         }
 
         @Test("WithDarkMode enum description passes through correct values")
         func withDarkModeEnumDescriptionPassesValues() {
-            let colorCase = W3C_CSS_Color.Color.WithDarkMode.color(
+            let colorCase = CSS_Standard.Color.WithDarkMode.color(
                 .init(light: .hex("FF0000"), dark: .hex("00FF00"))
             )
-            let globalCase = W3C_CSS_Color.Color.WithDarkMode.inherit
+            let globalCase = CSS_Standard.Color.WithDarkMode.inherit
 
             #expect(colorCase.description.contains("@media"))
             #expect(colorCase.description.contains("#FF0000"))
@@ -226,7 +226,7 @@ extension SnapshotTests {
 
         @Test("Color adjustBrightness method works for color case")
         func ColorAdjustBrightnessForColorCase() {
-            let color = W3C_CSS_Color.Color.color(.hex("FF0000"))
+            let color = CSS_Standard.Color.color(.hex("FF0000"))
             let brightened = color.adjustBrightness(by: 0.2)
 
             #expect(brightened.description != color.description)
@@ -234,7 +234,7 @@ extension SnapshotTests {
 
         @Test("Color adjustBrightness method preserves global case")
         func ColorAdjustBrightnessPreservesGlobalCase() {
-            let global = W3C_CSS_Color.Color.inherit
+            let global = CSS_Standard.Color.inherit
             let adjusted = global.adjustBrightness(by: 0.2)
 
             #expect(adjusted.description == global.description)
@@ -274,7 +274,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .color(W3C_CSS_Color.Color.color(.hex("FF0000")))
+                        .color(CSS_Standard.Color.color(.hex("FF0000")))
                 },
                 as: .html
             ) {

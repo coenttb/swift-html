@@ -33,7 +33,7 @@ extension HTMLColor {
     /// Calculates the midpoint color between two HTMLColors for gradients
     public static func gradientMidpoint(from color1: HTMLColor, to color2: HTMLColor) -> HTMLColor?
     {
-        func midpoint(_ c1: W3C_CSS_Values.Color, _ c2: W3C_CSS_Values.Color) -> W3C_CSS_Values.Color? {
+        func midpoint(_ c1: CSS_Standard.Color.Value, _ c2: CSS_Standard.Color.Value) -> CSS_Standard.Color.Value? {
             let rgb1 = toRGB(c1)
             let rgb2 = toRGB(c2)
 
@@ -111,7 +111,7 @@ extension HTML.View {
 // MARK: - Private Helper Functions
 
 extension HTMLColor {
-    private static func toRGB(_ color: W3C_CSS_Values.Color) -> (Int, Int, Int)? {
+    private static func toRGB(_ color: CSS_Standard.Color.Value) -> (Int, Int, Int)? {
         switch color {
         case .named(let namedColor):
             return namedColorToRGB(namedColor)

@@ -8,9 +8,9 @@
 import CSS_Rendering
 import CSS_Standard
 
-// Note: W3C_CSS_Values.Color already has an opacity method, so we don't need to redefine it
+// Note: CSS_Standard.Color.Value already has an opacity method, so we don't need to redefine it
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let gray100 = Self.hex("1a1a1a")
     public static let gray150 = Self.hex("2a2a2a")
     public static let gray200 = Self.hex("3a3a3a")
@@ -30,7 +30,7 @@ extension W3C_CSS_Values.Color {
     public static let gray900 = Self.hex("f5f5f5")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let blue100 = Self.hex("001a33")
     public static let blue150 = Self.hex("001f3f")
     public static let blue200 = Self.hex("003366")
@@ -50,7 +50,7 @@ extension W3C_CSS_Values.Color {
     public static let blue900 = Self.hex("f0f8ff")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let green100 = Self.hex("002600")
     public static let green150 = Self.hex("003300")
     public static let green200 = Self.hex("004400")
@@ -70,7 +70,7 @@ extension W3C_CSS_Values.Color {
     public static let green900 = Self.hex("f0fff0")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let purple100 = Self.hex("1a0026")
     public static let purple150 = Self.hex("2a0033")
     public static let purple200 = Self.hex("3b0044")
@@ -90,7 +90,7 @@ extension W3C_CSS_Values.Color {
     public static let purple900 = Self.hex("f9f0ff")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let red100 = Self.hex("260000")
     public static let red150 = Self.hex("330000")
     public static let red200 = Self.hex("440000")
@@ -110,7 +110,7 @@ extension W3C_CSS_Values.Color {
     public static let red900 = Self.hex("fff0f0")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let yellow100 = Self.hex("262600")
     public static let yellow150 = Self.hex("333300")
     public static let yellow200 = Self.hex("444400")
@@ -130,7 +130,7 @@ extension W3C_CSS_Values.Color {
     public static let yellow900 = Self.hex("fffff0")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let orange100 = Self.hex("261300")
     public static let orange150 = Self.hex("331a00")
     public static let orange200 = Self.hex("442200")
@@ -150,7 +150,7 @@ extension W3C_CSS_Values.Color {
     public static let orange900 = Self.hex("fff4e6")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let teal100 = Self.hex("001a1a")
     public static let teal150 = Self.hex("003333")
     public static let teal200 = Self.hex("004444")
@@ -170,7 +170,7 @@ extension W3C_CSS_Values.Color {
     public static let teal900 = Self.hex("f0f8f8")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let cyan100 = Self.teal100
     public static let cyan150 = Self.teal150
     public static let cyan200 = Self.teal200
@@ -190,7 +190,7 @@ extension W3C_CSS_Values.Color {
     public static let cyan900 = Self.teal900
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let pink100 = Self.hex("260013")
     public static let pink150 = Self.hex("33001a")
     public static let pink200 = Self.hex("440022")
@@ -210,7 +210,7 @@ extension W3C_CSS_Values.Color {
     public static let pink900 = Self.hex("fceff5")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let brown100 = Self.hex("261300")
     public static let brown150 = Self.hex("331a00")
     public static let brown200 = Self.hex("442200")
@@ -230,7 +230,7 @@ extension W3C_CSS_Values.Color {
     public static let brown900 = Self.hex("fef5f0")
 }
 
-extension W3C_CSS_Values.Color {
+extension CSS_Standard.Color.Value {
     public static let black = Self.hex("121212")
     public static let offBlack = Self.hex("171717")
     public static let white = Self.hex("FFFFFF")
@@ -247,4 +247,173 @@ extension W3C_CSS_Values.Color {
     public static let blue = Self.blue500
     public static let red = Self.red500
     public static let yellow = Self.yellow500
+}
+
+// MARK: - Extensions for CSS_Standard.Color.Value (Value Type)
+
+extension CSS_Standard.Color.Value {
+    /// Creates a darker version of this color
+    ///
+    /// - Parameter percent: The amount to darken (0.0-1.0)
+    /// - Returns: A darker color
+    public func darker(by percent: Double = 0.2) -> CSS_Standard.Color.Value {
+        return adjustBrightness(by: -percent)
+    }
+
+    /// Creates a lighter version of this color
+    ///
+    /// - Parameter percent: The amount to lighten (0.0-1.0)
+    /// - Returns: A lighter color
+    public func lighter(by percent: Double = 0.2) -> CSS_Standard.Color.Value {
+        return adjustBrightness(by: percent)
+    }
+
+    /// Returns an opacity-modified version of this color
+    ///
+    /// - Parameter alpha: The opacity value (0.0-1.0)
+    /// - Returns: A new color with the specified opacity
+    public func opacity(_ alpha: Double) -> CSS_Standard.Color.Value {
+        let clampedAlpha = min(1.0, max(0.0, alpha))
+
+        switch self {
+        case .rgb(let r, let g, let b):
+            return .rgba(r, g, b, clampedAlpha)
+
+        case .rgba(let r, let g, let b, _):
+            return .rgba(r, g, b, clampedAlpha)
+
+        case .hsl(let h, let s, let l):
+            return .hsla(h, s, l, clampedAlpha)
+
+        case .hsla(let h, let s, let l, _):
+            return .hsla(h, s, l, clampedAlpha)
+
+        case .named(let name):
+            // For named colors, we need to convert to RGB values first
+            if let rgb = namedColorToRgb(name) {
+                return .rgba(rgb.r, rgb.g, rgb.b, clampedAlpha)
+            }
+            return self
+
+        case .hex(let hex):
+            // For hex colors, we can parse the RGB values
+            if let rgb = hexToRgb(hex.value) {
+                return .rgba(rgb.r, rgb.g, rgb.b, clampedAlpha)
+            }
+            return self
+
+        default:
+            // For other color types, simply return this color as we don't have
+            // a straightforward way to apply opacity
+            return self
+        }
+    }
+
+    /// Helper function to convert HEX to RGB
+    private func hexToRgb(_ hex: String) -> (r: Int, g: Int, b: Int)? {
+        var cleaned = String(hex.trimmingPrefix("#"))
+
+        // Handle shorthand hex (#RGB)
+        if cleaned.count == 3 {
+            cleaned = cleaned.map { "\($0)\($0)" }.joined()
+        }
+
+        guard cleaned.count == 6 else { return nil }
+
+        var rgb: [Int] = []
+
+        for i in stride(from: 0, to: 6, by: 2) {
+            let start = cleaned.index(cleaned.startIndex, offsetBy: i)
+            let end = cleaned.index(start, offsetBy: 2)
+            let hexPair = String(cleaned[start..<end])
+
+            guard let value = Int(hexPair, radix: 16) else { return nil }
+            rgb.append(value)
+        }
+
+        return (r: rgb[0], g: rgb[1], b: rgb[2])
+    }
+
+    /// Helper function to convert named colors to RGB
+    private func namedColorToRgb(_ name: NamedColor) -> (r: Int, g: Int, b: Int)? {
+        // A simple lookup table for basic named colors
+        switch name {
+        case .black: return (0, 0, 0)
+        case .silver: return (192, 192, 192)
+        case .gray: return (128, 128, 128)
+        case .white: return (255, 255, 255)
+        case .maroon: return (128, 0, 0)
+        case .red: return (255, 0, 0)
+        case .purple: return (128, 0, 128)
+        case .fuchsia: return (255, 0, 255)
+        case .green: return (0, 128, 0)
+        case .lime: return (0, 255, 0)
+        case .olive: return (128, 128, 0)
+        case .yellow: return (255, 255, 0)
+        case .navy: return (0, 0, 128)
+        case .blue: return (0, 0, 255)
+        case .teal: return (0, 128, 128)
+        case .aqua: return (0, 255, 255)
+        default: return nil
+        }
+    }
+
+    /// Adjusts the brightness of a color by a percentage
+    ///
+    /// - Parameter percent: The brightness adjustment (-1.0 to 1.0, where -1.0 is completely darkened and 1.0 is completely lightened)
+    /// - Returns: A new color with adjusted brightness
+    public func adjustBrightness(by percent: Double) -> CSS_Standard.Color.Value {
+        guard percent >= -1, percent <= 1 else { return self }
+
+        func adjustComponent(_ value: Int) -> Int {
+            if percent > 0 {
+                return min(255, max(0, Int(Double(value) + (255 - Double(value)) * percent)))
+            } else {
+                return max(0, min(255, Int(Double(value) * (1 + percent))))
+            }
+        }
+
+        func adjustLightness(_ l: Double) -> Double {
+            if percent > 0 {
+                return min(100, max(0, l + (100 - l) * percent))
+            } else {
+                return max(0, min(100, l * (1 + percent)))
+            }
+        }
+
+        switch self {
+        case .rgb(let r, let g, let b):
+            return .rgb(adjustComponent(r), adjustComponent(g), adjustComponent(b))
+
+        case .rgba(let r, let g, let b, let a):
+            return .rgba(adjustComponent(r), adjustComponent(g), adjustComponent(b), a)
+
+        case .hsl(let h, let s, let l):
+            return .hsl(h, s, adjustLightness(l))
+
+        case .hsla(let h, let s, let l, let a):
+            return .hsla(h, s, adjustLightness(l), a)
+
+        case .hex(let hex):
+            if let rgb = hexToRgb(hex.value) {
+                let adjustedR = adjustComponent(rgb.r)
+                let adjustedG = adjustComponent(rgb.g)
+                let adjustedB = adjustComponent(rgb.b)
+                return .rgb(adjustedR, adjustedG, adjustedB)
+            }
+            return self
+
+        case .named(let name):
+            if let rgb = namedColorToRgb(name) {
+                let adjustedR = adjustComponent(rgb.r)
+                let adjustedG = adjustComponent(rgb.g)
+                let adjustedB = adjustComponent(rgb.b)
+                return .rgb(adjustedR, adjustedG, adjustedB)
+            }
+            return self
+
+        default:
+            return self
+        }
+    }
 }
