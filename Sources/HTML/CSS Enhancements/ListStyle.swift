@@ -20,11 +20,11 @@ extension HTML.View {
     ) -> some HTML.View {
         switch listStyle {
         case .reset:
-            self
+            self.css
                 .listStyleType(ListStyleType.none)
                 .paddingLeft(.zero)
         case .cssPropertyTypesListStyle(let listStyle):
-            self.listStyle(listStyle)
+            self.css.listStyle(listStyle)
         }
     }
 }

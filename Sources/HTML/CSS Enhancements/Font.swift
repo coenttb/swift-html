@@ -40,7 +40,7 @@ public struct Font: Hashable, Sendable {
 extension HTML.View {
     @HTML.Builder
     public func font(_ font: Font) -> some HTML.View {
-        self
+        self.css
             .fontFamily(font.family)
             .fontSize(font.size)
             .fontStretch(font.stretch)

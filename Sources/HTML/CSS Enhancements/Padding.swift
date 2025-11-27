@@ -20,18 +20,18 @@ extension HTML.View {
     ) -> some HTML.View {
         switch (vertical, horizontal) {
         case (.some(let vertical), .some(let horizontal)):
-            self.padding(
+            self.css.padding(
                 .verticalHorizontal(vertical, horizontal),
                 media: mediaQuery,
                 selector: selector,
                 pseudo: pseudo
             )
         case (.none, .some(let horizontal)):
-            self
+            self.css
                 .paddingRight(.lengthPercentage(horizontal))
                 .paddingLeft(.lengthPercentage(horizontal))
         case (.some(let vertical), .none):
-            self
+            self.css
                 .paddingTop(.lengthPercentage(vertical))
                 .paddingBottom(.lengthPercentage(vertical))
         case (.none, .none):
@@ -129,7 +129,7 @@ extension HTML.View {
                 }
             }
 
-            self.padding(
+            self.css.padding(
                 .sides(
                     top: top,
                     right: right,

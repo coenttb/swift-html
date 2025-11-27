@@ -18,7 +18,7 @@ extension HTML.View {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> some HTML.View {
-        self
+        self.css
             .display(.flex, media: media, selector: selector, pseudo: pseudo)
             .flexDirection(direction, media: media, selector: selector, pseudo: pseudo)
             .flexWrap(wrap, media: media, selector: selector, pseudo: pseudo)
@@ -36,7 +36,7 @@ extension HTML.View {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> some HTML.View {
-        self
+        self.css
             .flexGrow(grow, media: media, selector: selector, pseudo: pseudo)
             .flexShrink(shrink, media: media, selector: selector, pseudo: pseudo)
             .flexBasis(basis, media: media, selector: selector, pseudo: pseudo)

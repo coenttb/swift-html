@@ -21,7 +21,7 @@ extension HTML.View {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> some HTML.View {
-        self
+        self.css
             .position(value, media: media, selector: selector, pseudo: pseudo)
             .top(top, media: media, selector: selector, pseudo: pseudo)
             .left(left, media: media, selector: selector, pseudo: pseudo)

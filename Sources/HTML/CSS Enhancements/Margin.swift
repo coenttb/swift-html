@@ -21,14 +21,14 @@ extension HTML.View {
     ) -> some HTML.View {
         switch (vertical, horizontal) {
         case (.some(let vertical), .some(let horizontal)):
-            self.margin(
+            self.css.margin(
                 .verticalHorizontal(vertical, horizontal),
                 media: mediaQuery,
                 selector: selector,
                 pseudo: pseudo
             )
         case (.none, .some(let horizontal)):
-            self
+            self.css
                 .marginRight(
                     .lengthPercentage(horizontal),
                     media: mediaQuery,
@@ -42,7 +42,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.some(let vertical), .none):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(vertical),
                     media: mediaQuery,
@@ -204,7 +204,7 @@ extension HTML.View {
             // Check for optimization opportunities
             if top == right && right == bottom && bottom == left {
                 // All equal: margin: x
-                self.margin(
+                self.css.margin(
                     .all(top),
                     media: media,
                     selector: selector,
@@ -212,14 +212,14 @@ extension HTML.View {
                 )
             } else if top == bottom && left == right {
                 // Vertical and horizontal: margin: top/bottom left/right
-                self.margin(
+                self.css.margin(
                     .verticalHorizontal(top, left),
                     media: media,
                     selector: selector,
                     pseudo: pseudo
                 )
             } else {
-                self.margin(
+                self.css.margin(
                     .sides(
                         top: .lengthPercentage(top),
                         right: .lengthPercentage(right),
@@ -234,7 +234,7 @@ extension HTML.View {
 
         // Three values provided
         case (.some(let top), .some(let right), .some(let bottom), .none):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
@@ -254,7 +254,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.some(let top), .some(let right), .none, .some(let left)):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
@@ -274,7 +274,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.some(let top), .none, .some(let bottom), .some(let left)):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
@@ -294,7 +294,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.none, .some(let right), .some(let bottom), .some(let left)):
-            self
+            self.css
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
@@ -316,7 +316,7 @@ extension HTML.View {
 
         // Two values provided
         case (.some(let top), .some(let right), .none, .none):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
@@ -330,7 +330,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.some(let top), .none, .some(let bottom), .none):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
@@ -344,7 +344,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.some(let top), .none, .none, .some(let left)):
-            self
+            self.css
                 .marginTop(
                     .lengthPercentage(top),
                     media: media,
@@ -358,7 +358,7 @@ extension HTML.View {
                     pseudo: pseudo
                 )
         case (.none, .some(let right), .some(let bottom), .none):
-            self
+            self.css
                 .marginRight(
                     .lengthPercentage(right),
                     media: media,
@@ -374,14 +374,14 @@ extension HTML.View {
         case (.none, .some(let right), .none, .some(let left)):
             // Check if both are equal for optimization
             if right == left {
-                self.margin(
+                self.css.margin(
                     .verticalHorizontal(.zero, right),
                     media: media,
                     selector: selector,
                     pseudo: pseudo
                 )
             } else {
-                self
+                self.css
                     .marginRight(
                         .lengthPercentage(right),
                         media: media,
@@ -396,7 +396,7 @@ extension HTML.View {
                     )
             }
         case (.none, .none, .some(let bottom), .some(let left)):
-            self
+            self.css
                 .marginBottom(
                     .lengthPercentage(bottom),
                     media: media,
@@ -412,28 +412,28 @@ extension HTML.View {
 
         // Single value provided
         case (.some(let top), .none, .none, .none):
-            self.marginTop(
+            self.css.marginTop(
                 .lengthPercentage(top),
                 media: media,
                 selector: selector,
                 pseudo: pseudo
             )
         case (.none, .some(let right), .none, .none):
-            self.marginRight(
+            self.css.marginRight(
                 .lengthPercentage(right),
                 media: media,
                 selector: selector,
                 pseudo: pseudo
             )
         case (.none, .none, .some(let bottom), .none):
-            self.marginBottom(
+            self.css.marginBottom(
                 .lengthPercentage(bottom),
                 media: media,
                 selector: selector,
                 pseudo: pseudo
             )
         case (.none, .none, .none, .some(let left)):
-            self.marginLeft(
+            self.css.marginLeft(
                 .lengthPercentage(left),
                 media: media,
                 selector: selector,
