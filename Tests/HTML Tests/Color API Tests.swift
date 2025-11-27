@@ -144,7 +144,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Auto-darkened" }
-                        .css.color(HTMLColor(light: .hex("ff0000")))
+                        .css.color(DarkModeColor.autoAdaptive(light: .hex("ff0000")))
                 },
                 as: .html
             ) {
