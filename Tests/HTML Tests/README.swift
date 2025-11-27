@@ -64,29 +64,29 @@ extension SnapshotTests {
                     <meta charset="utf-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <style>
-                      .padding-0{padding:2rem}
+                      .margin-0{margin:auto}
                       .max-width-1{max-width:800px}
-                      .margin-2{margin:auto}
+                      .padding-2{padding:2rem}
                       .font-size-3{font-size:2.5rem}
                       .color-4{color:#cc3333}
                       .line-height-5{line-height:1.6}
                       .color-6{color:#d0d0d0}
-                      .border-radius-8{border-radius:8px}
-                      .text-decoration-9{text-decoration:none}
+                      .text-decoration-8{text-decoration:none}
+                      .border-radius-9{border-radius:8px}
                       .color-10{color:#fff}
-                      .padding-11{padding:1rem}
-                      .background-color-12{background-color:#cccc33}
+                      .background-color-11{background-color:#cccc33}
+                      .padding-12{padding:1rem}
                       @media (prefers-color-scheme: dark){
                         .color-7{color:#303030}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="padding-0 max-width-1 margin-2">
+                    <div class="margin-0 max-width-1 padding-2">
                       <h1 class="font-size-3 color-4">Welcome to swift-html
                       </h1>
                       <p class="line-height-5 color-6 color-7">Build beautiful, type-safe web pages with Swift
-                      </p><a class="border-radius-8 text-decoration-9 color-10 padding-11 background-color-12" href="https://github.com/coenttb/swift-html">Get Started →</a>
+                      </p><a class="text-decoration-8 border-radius-9 color-10 background-color-11 padding-12" href="https://github.com/coenttb/swift-html">Get Started →</a>
                     </div>
                   </body>
                 </html>

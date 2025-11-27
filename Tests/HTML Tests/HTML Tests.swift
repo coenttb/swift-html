@@ -39,7 +39,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="align-items-0 vertical-align-1 display-2 flex-direction-3 size-4 column-gap-5">
+                <swift-html-hstack class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
                   <div>First item
                   </div>
                   <div>Second item
@@ -60,7 +60,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="align-items-0 vertical-align-1 display-2 flex-direction-3 size-4 column-gap-5">
+                <swift-html-hstack class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
                   <div>First item
                   </div>
                   <div>Second item
@@ -81,7 +81,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vstack class="align-items-0 display-1 flex-direction-2 max-width-3 row-gap-4">
+                <swift-html-vstack class="row-gap-0 max-width-1 flex-direction-2 display-3 align-items-4">
                   <div>First item
                   </div>
                   <div>Second item
@@ -102,7 +102,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vstack class="align-items-0 display-1 flex-direction-2 max-width-3 row-gap-4">
+                <swift-html-vstack class="row-gap-0 max-width-1 flex-direction-2 display-3 align-items-4">
                   <div>First item
                   </div>
                   <div>Second item
@@ -124,7 +124,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="align-items-0 vertical-align-1 display-2 flex-direction-3 size-4 column-gap-5">
+                <swift-html-hstack class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
                   <div>Left
                   </div>
                   <swift-html-spacer class="flex-grow-6">

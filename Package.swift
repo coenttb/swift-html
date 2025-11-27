@@ -32,6 +32,7 @@ extension Target.Dependency {
     static var incits4_1986: Self { .product(name: "INCITS 4 1986", package: "swift-incits-4-1986") }
     static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
     static var iso9899: Self { .product(name: "ISO 9899", package: "swift-iso-9899") }
+    static var whatwgFormURLEncoded: Self { .product(name: "WHATWG Form URL Encoded", package: "swift-whatwg-url") }
 }
 
 let package = Package(
@@ -70,7 +71,8 @@ let package = Package(
         .package(url: "https://github.com/swift-standards/swift-standards", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.0.1"),
-        .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.0.1")
+        .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.0.1"),
+        .package(url: "https://github.com/swift-standards/swift-whatwg-url", from: "0.0.1")
     ],
     targets: [
         .target(
@@ -87,6 +89,7 @@ let package = Package(
                 .incits4_1986,
                 .rfc4648,
                 .iso9899,
+                .whatwgFormURLEncoded,
                 .product(name: "SVG", package: "swift-svg"),
                 .product(
                     name: "Translating",
@@ -172,4 +175,14 @@ let package = Package(
 
 extension String {
     var tests: Self { "\(self) Tests" }
+    var foundation: Self { self + " Foundation" }
+}
+
+for target in package.targets where ![.system, .binary, .plugin].contains(target.type) {
+    let existing = target.swiftSettings ?? []
+    target.swiftSettings = existing + [
+        .enableUpcomingFeature("ExistentialAny"),
+        .enableUpcomingFeature("InternalImportsByDefault"),
+        .enableUpcomingFeature("MemberImportVisibility")
+    ]
 }

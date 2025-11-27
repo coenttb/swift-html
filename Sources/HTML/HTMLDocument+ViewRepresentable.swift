@@ -3,8 +3,8 @@
 import AppKit
 #endif
 import HTML_Rendering
-@preconcurrency import SwiftUI
-import WebKit
+@preconcurrency public import SwiftUI
+public import WebKit
 
 // MARK: - Shared Implementation
 

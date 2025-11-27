@@ -1,5 +1,5 @@
-import Dependencies
-import HTML_Rendering
+public import Dependencies
+public import HTML_Rendering
 
 extension HTML.View {
     public func dependency<Value>(

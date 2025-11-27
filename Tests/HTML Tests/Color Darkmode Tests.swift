@@ -22,7 +22,7 @@ extension SnapshotTests {
                             .css.color(light: .named(.blue), dark: .named(.red))
                             .fontSize(.px(24))
                         Paragraph { "With type-safe CSS!" }
-                            .marginTop(.px(10))
+                            .css.marginTop(.px(10))
 
                         Video(src: "/public/video/example.mp4", autoplay: true) {}
                     }
@@ -62,7 +62,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     p { "Hello World" }
-                        .color(.red)
+                        .css.color(.red)
                 },
                 as: .html
             ) {
@@ -71,7 +71,7 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:red}
+                      .color-0{color:#cc3333}
                     </style>
                   </head>
                   <body>
@@ -85,13 +85,13 @@ extension SnapshotTests {
 
         @Test("Color initializes with standard color")
         func colorInitializesWithStandardColor() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(light: .hex("FF0000"))
+            let color = DarkModeColor(light: .hex("FF0000"))
             #expect(color.light.description == "#FF0000")
         }
 
         @Test("Color initializes with light and dark colors")
         func colorInitializesWithLightAndDarkColors() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -101,13 +101,13 @@ extension SnapshotTests {
 
         @Test("Color falls back to darker version when dark is omitted")
         func colorFallsBackToDarker() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(light: .hex("FF0000"))
+            let color = DarkModeColor(light: .hex("FF0000"))
             #expect(color.dark != color.light)
         }
 
         @Test("Color description includes media queries")
         func colorDescriptionIncludesMediaQueries() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -120,7 +120,7 @@ extension SnapshotTests {
 
         @Test("Color description includes dark mode even when not explicitly provided")
         func colorDescriptionIncludesDarkModeWhenNotExplicit() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(light: .hex("FF0000"), dark: nil)
+            let color = DarkModeColor(light: .hex("FF0000"), dark: nil)
             let description = color.description
             #expect(description.contains("@media (prefers-color-scheme: light)"))
             #expect(description.contains("#FF0000"))
@@ -131,7 +131,7 @@ extension SnapshotTests {
 
         @Test("Map transforms both light and dark colors")
         func mapTransformsBothColors() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -142,12 +142,12 @@ extension SnapshotTests {
 
         @Test("FlatMap transforms colors more complexly")
         func flatMapTransformsColorsComplexly() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
             let transformed = color.flatMap { _ in
-                CSS_Standard.Color.WithDarkMode.Color(
+                DarkModeColor(
                     light: .hex("0000FF"),
                     dark: .hex("FF00FF")
                 )
@@ -158,7 +158,7 @@ extension SnapshotTests {
 
         @Test("AdjustBrightness changes color brightness")
         func adjustBrightnessChangesColorBrightness() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -169,7 +169,7 @@ extension SnapshotTests {
 
         @Test("Darker makes colors darker")
         func darkerMakesColorsDarker() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -180,7 +180,7 @@ extension SnapshotTests {
 
         @Test("Lighter makes colors lighter")
         func lighterMakesColorsLighter() {
-            let color = CSS_Standard.Color.WithDarkMode.Color(
+            let color = DarkModeColor(
                 light: .hex("FF0000"),
                 dark: .hex("00FF00")
             )
@@ -212,10 +212,10 @@ extension SnapshotTests {
 
             let test = HTML.Document {
                 div {}
-                    .color(.hex("FF0000"), pseudo: .hover)
+                    .css.color(.hex("FF0000"), pseudo: .hover)
             }
 
-            let html = String(bytes: test.render(), encoding: .utf8)!
+            let html = String(decoding: test.render(), as: UTF8.self)
             #expect(html.contains(":hover"))
             #expect(html.contains("color:#FF0000"))
 
@@ -242,7 +242,7 @@ extension SnapshotTests {
         func htmlElementWithNamedColorRendersCorrectly() {
             assertInlineSnapshot(
                 of: HTML.Document {
-                    div {}.color(.red)
+                    div {}.css.color(.red)
                 },
                 as: .html
             ) {
@@ -251,7 +251,7 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:red}
+                      .color-0{color:#cc3333}
                     </style>
                   </head>
                   <body>
@@ -268,7 +268,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .color(CSS_Standard.Color.color(.hex("FF0000")))
+                        .css.color(CSS_Standard.Color.color(.hex("FF0000")))
                 },
                 as: .html
             ) {
@@ -323,7 +323,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .color(.blue, media: .print)
+                        .css.color(.blue, media: .print)
                 },
                 as: .html
             ) {
@@ -333,7 +333,7 @@ extension SnapshotTests {
                   <head>
                     <style>
                       @media print{
-                        .color-0{color:blue}
+                        .color-0{color:#3399ff}
                       }
                     </style>
                   </head>
@@ -351,7 +351,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .backgroundColor(.blue, media: Media.screen && .maxWidth(.px(768)))
+                        .css.backgroundColor(.blue, media: Media.screen && .maxWidth(.px(768)))
                         .color(.yellow, media: Media.screen && .maxWidth(.px(768)))
                         .padding(.px(20), media: Media.screen && .maxWidth(.px(768)))
                 },
@@ -363,14 +363,14 @@ extension SnapshotTests {
                   <head>
                     <style>
                       @media screen and (max-width: 768px){
-                        .background-color-0{background-color:blue}
-                        .color-1{color:yellow}
-                        .padding-2{padding:20px}
+                        .padding-0{padding:20px}
+                        .color-1{color:#cccc33}
+                        .background-color-2{background-color:blue}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="background-color-0 color-1 padding-2">
+                    <div class="padding-0 color-1 background-color-2">
                     </div>
                   </body>
                 </html>
@@ -414,7 +414,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .accentColor(.red)
+                            .css.accentColor(.red)
                     },
                     as: .html
                 ) {
@@ -469,7 +469,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .backgroundColor(.yellow)
+                            .css.backgroundColor(.yellow)
                     },
                     as: .html
                 ) {
@@ -930,7 +930,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .fill(.red)
+                            .css.fill(.red)
                     },
                     as: .html
                 ) {
@@ -1231,7 +1231,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .fill(nil)
+                            .css.fill(W3C_CSS_Images.Fill?.none)
                     },
                     as: .html
                 ) {
@@ -1254,7 +1254,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .textDecorationColor(nil)
+                            .css.textDecorationColor(W3C_CSS_TextDecoration.TextDecorationColor?.none)
                     },
                     as: .html
                 ) {

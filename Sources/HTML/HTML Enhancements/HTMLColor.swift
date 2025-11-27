@@ -8,6 +8,7 @@
 import Dependencies
 import INCITS_4_1986
 import ISO_9899
+import RFC_4648
 
 // MARK: - Text Color Definitions
 
@@ -285,6 +286,7 @@ extension HTMLColor {
     }
 
     private static func rgbToHex(red: Int, green: Int, blue: Int) -> String {
-        return String(format: "#%02X%02X%02X", red, green, blue)
+        let bytes: [UInt8] = [UInt8(clamping: red), UInt8(clamping: green), UInt8(clamping: blue)]
+        return "#" + String(hexEncoding: bytes, uppercase: true)
     }
 }

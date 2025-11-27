@@ -56,12 +56,12 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .margin-top-0{margin-top:15px}
-                      .margin-bottom-1{margin-bottom:15px}
+                      .margin-bottom-0{margin-bottom:15px}
+                      .margin-top-1{margin-top:15px}
                     </style>
                   </head>
                   <body>
-                    <div class="margin-top-0 margin-bottom-1">
+                    <div class="margin-bottom-0 margin-top-1">
                     </div>
                   </body>
                 </html>
@@ -83,12 +83,12 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .margin-right-0{margin-right:25px}
-                      .margin-left-1{margin-left:25px}
+                      .margin-left-0{margin-left:25px}
+                      .margin-right-1{margin-right:25px}
                     </style>
                   </head>
                   <body>
-                    <div class="margin-right-0 margin-left-1">
+                    <div class="margin-left-0 margin-right-1">
                     </div>
                   </body>
                 </html>
@@ -146,13 +146,13 @@ extension SnapshotTests {
                   <head>
                     <style>
                       @media screen and (min-width: 768px){
-                        .margin-top-0{margin-top:10px}
-                        .margin-bottom-1{margin-bottom:15px}
+                        .margin-bottom-0{margin-bottom:15px}
+                        .margin-top-1{margin-top:10px}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="margin-top-0 margin-bottom-1">
+                    <div class="margin-bottom-0 margin-top-1">
                     </div>
                   </body>
                 </html>
@@ -182,13 +182,13 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .margin-top-0{margin-top:10px}
+                      .margin-left-0{margin-left:10px}
                       .margin-bottom-1{margin-bottom:10px}
-                      .margin-left-2{margin-left:10px}
+                      .margin-top-2{margin-top:10px}
                     </style>
                   </head>
                   <body>
-                    <div class="margin-top-0 margin-bottom-1 margin-left-2">
+                    <div class="margin-left-0 margin-bottom-1 margin-top-2">
                     </div>
                   </body>
                 </html>
