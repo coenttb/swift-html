@@ -138,7 +138,7 @@ extension W3C_CSS_Values.Color {
 
     /// Helper function to convert HEX to RGB
     private func hexToRgb(_ hex: String) -> (r: Int, g: Int, b: Int)? {
-        var cleaned = String(INCITS_4_1986.trimming(hex, of: Set("#")))
+        var cleaned = String(hex.trimmingPrefix("#"))
 
         // Handle shorthand hex (#RGB)
         if cleaned.count == 3 {

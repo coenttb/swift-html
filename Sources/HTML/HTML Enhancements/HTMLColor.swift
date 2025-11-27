@@ -141,12 +141,11 @@ extension HTMLColor {
     }
 
     private static func hexToRGB(_ hex: String) -> (Int, Int, Int)? {
-        // Trim whitespace using INCITS_4_1986
-        let whitespaceChars = Set<Character>([" ", "\t", "\n", "\r"])
-        var hex = String(INCITS_4_1986.trimming(hex, of: whitespaceChars)).uppercased()
+        // Trim whitespace
+        var hex = hex.trimming(.ascii.whitespaces).uppercased()
 
         if hex.hasPrefix("#") {
-            hex.remove(at: hex.startIndex)
+            hex.removeFirst()
         }
 
         if hex.count == 3 {

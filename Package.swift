@@ -21,8 +21,9 @@ extension Target.Dependency {
 
 extension Target.Dependency {
     static var htmlTypesFoundation: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
-    static var pointFreeHtmlTestSupport: Self { .product(name: "PointFreeHTMLTestSupport", package: "pointfree-html") }
-    static var htmlCssPointFreeHTML: Self { .product(name: "HTMLCSSPointFreeHTML", package: "swift-html-css-pointfree") }
+    static var htmlRenderable: Self { .product(name: "HTML Renderable", package: "swift-html-renderable") }
+    static var htmlRenderableTestSupport: Self { .product(name: "HTML Renderable TestSupport", package: "swift-html-renderable") }
+    static var cssRenderable: Self { .product(name: "CSS Renderable", package: "swift-css-renderable") }
     static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
@@ -64,10 +65,10 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/swift-html-css-pointfree", from: "0.0.1"),
+        .package(url: "https://github.com/coenttb/swift-html-renderable.git", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-css-renderable.git", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-html-standard", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
-        .package(url: "https://github.com/coenttb/pointfree-html", from: "2.0.0"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
@@ -83,7 +84,8 @@ let package = Package(
         .target(
             name: .html,
             dependencies: [
-                .htmlCssPointFreeHTML,
+                .htmlRenderable,
+                .cssRenderable,
                 .htmlTypesFoundation,
                 .stringBuilder,
                 .dependencies,
@@ -158,7 +160,7 @@ let package = Package(
             name: .html.tests,
             dependencies: [
                 .html,
-                .pointFreeHtmlTestSupport,
+                .htmlRenderableTestSupport,
                 .dependenciesTestSupport,
                 .product(
                     name: "Translating",
@@ -174,21 +176,21 @@ let package = Package(
             name: .htmlTheme.tests,
             dependencies: [
                 .htmlTheme,
-                .pointFreeHtmlTestSupport
+                .htmlRenderableTestSupport
             ]
         ),
         .testTarget(
             name: .htmlComponents.tests,
             dependencies: [
                 .htmlComponents,
-                .pointFreeHtmlTestSupport
+                .htmlRenderableTestSupport
             ]
         ),
         .testTarget(
             name: .htmlMarkdown.tests,
             dependencies: [
                 .htmlMarkdown,
-                .pointFreeHtmlTestSupport
+                .htmlRenderableTestSupport
             ]
         )
     ],

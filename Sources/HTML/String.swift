@@ -58,8 +58,7 @@ extension String {
         text = text.replacing(/\n[ \t]*\n/, with: "\n\n")
         text = text.replacing(/\n{3,}/, with: "\n\n")
 
-        // Trim whitespace using INCITS_4_1986
-        let whitespaceChars = Set<Character>([" ", "\t", "\n", "\r"])
-        self = String(INCITS_4_1986.trimming(text, of: whitespaceChars))
+        // Trim whitespace
+        self = String(text.trimming(where: \.isWhitespace))
     }
 }
