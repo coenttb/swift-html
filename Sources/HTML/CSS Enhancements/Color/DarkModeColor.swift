@@ -37,7 +37,7 @@ import CSS_Standard
 /// let adaptive = DarkModeColor(light: .white, dark: .black)
 ///
 /// // Auto-adaptive (derives dark variant automatically)
-/// let auto = DarkModeColor.autoAdaptive(light: .white)
+/// let auto = DarkModeColor(light: .white)
 /// ```
 public struct DarkModeColor: Sendable, Hashable {
     /// The color value for light mode
@@ -46,15 +46,20 @@ public struct DarkModeColor: Sendable, Hashable {
     /// The color value for dark mode
     public let dark: CSS_Standard.Color.Value
 
-    /// Creates a dark mode color with explicit light and dark values.
+    /// Creates a dark mode color with light and optional dark values.
+    ///
+    /// When `dark` is nil, derives a darker variant of the light color automatically.
     ///
     /// - Parameters:
     ///   - light: The color to use in light mode
-    ///   - dark: The color to use in dark mode
+    ///   - dark: The color to use in dark mode, or nil to auto-derive
     @inlinable
-    public init(light: CSS_Standard.Color.Value, dark: CSS_Standard.Color.Value) {
+    public init(
+        light: CSS_Standard.Color.Value,
+        dark: CSS_Standard.Color.Value? = nil
+    ) {
         self.light = light
-        self.dark = dark
+        self.dark = dark ?? light.darker()
     }
 
     /// Creates a dark mode color from a single color value.
@@ -67,23 +72,6 @@ public struct DarkModeColor: Sendable, Hashable {
     public init(_ color: CSS_Standard.Color.Value) {
         self.light = color
         self.dark = color
-    }
-
-    /// Creates an auto-adaptive dark mode color.
-    ///
-    /// When `dark` is nil, derives a darker variant of the light color automatically.
-    /// Use this when you want the system to generate appropriate dark mode colors.
-    ///
-    /// - Parameters:
-    ///   - light: The color to use in light mode
-    ///   - dark: The color to use in dark mode, or nil to auto-derive
-    /// - Returns: A new DarkModeColor with the specified or derived dark value
-    @inlinable
-    public static func autoAdaptive(
-        light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value? = nil
-    ) -> DarkModeColor {
-        DarkModeColor(light: light, dark: dark ?? light.darker())
     }
 
     /// Whether this represents a single color (light equals dark).

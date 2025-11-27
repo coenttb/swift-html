@@ -1278,6 +1278,6 @@ extension SnapshotTests {
 // MARK: - Dark Mode Color Convenience Method Tests
 
 extension HTMLColor {
-    static let red = HTMLColor(light: .red, dark: .red.darker(by: 0.2))
-    static let yellow = HTMLColor(light: .yellow, dark: .yellow.darker(by: 0.2))
+    static let test_red = HTMLColor(light: .red, dark: .red.darker(by: 0.2))
+    static let test_yellow = HTMLColor(light: .yellow, dark: .yellow.darker(by: 0.2))
 }

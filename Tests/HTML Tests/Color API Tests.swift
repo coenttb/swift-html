@@ -26,7 +26,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Raw color value" }
-                        .css.color(.red)
+                        .css.color(.test_red)
                 },
                 as: .html
             ) {
@@ -144,7 +144,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Auto-darkened" }
-                        .css.color(DarkModeColor.autoAdaptive(light: .hex("ff0000")))
+                        .css.color(DarkModeColor(light: .hex("ff0000")))
                 },
                 as: .html
             ) {
@@ -467,7 +467,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Mixed colors" }
-                        .css.color(.red)  // Color.Value - no dark
+                        .css.color(.test_red)  // Color.Value - no dark
                         .css.backgroundColor(HTMLColor.gray800)  // HTMLColor - with dark
                         .css.borderColor(.inherit)  // Global - no dark
                 },

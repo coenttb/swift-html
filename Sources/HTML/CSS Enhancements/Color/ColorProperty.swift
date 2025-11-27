@@ -78,7 +78,7 @@ extension ColorProperty {
         light: CSS_Standard.Color.Value,
         dark: CSS_Standard.Color.Value? = nil
     ) -> ColorProperty {
-        .value(DarkModeColor.autoAdaptive(light: light, dark: dark))
+        .value(DarkModeColor(light: light, dark: dark))
     }
 }
 

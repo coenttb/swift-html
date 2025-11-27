@@ -20,7 +20,7 @@ extension CSSPropertyAccessor {
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
         let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
-            ?? DarkModeColor.autoAdaptive(light: light)
+            ?? DarkModeColor(light: light)
         return applyColorProperty(
             CSS_Standard.CaretColor.self,
             .value(darkModeColor),

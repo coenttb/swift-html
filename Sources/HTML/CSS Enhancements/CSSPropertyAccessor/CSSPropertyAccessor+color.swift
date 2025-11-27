@@ -12,7 +12,7 @@ extension CSSPropertyAccessor {
     /// Sets the text color with explicit light and dark mode values.
     ///
     /// This overload auto-darkens when `dark` is nil: the light color is
-    /// automatically darkened for dark mode using `DarkModeColor.autoAdaptive`.
+    /// automatically darkened for dark mode using `DarkModeColor(light:)`.
     ///
     /// - Parameters:
     ///   - light: The color to use in light mode
@@ -32,7 +32,7 @@ extension CSSPropertyAccessor {
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
         let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
-            ?? DarkModeColor.autoAdaptive(light: light)
+            ?? DarkModeColor(light: light)
         return applyColorProperty(
             CSS_Standard.Color.self,
             .value(darkModeColor),
