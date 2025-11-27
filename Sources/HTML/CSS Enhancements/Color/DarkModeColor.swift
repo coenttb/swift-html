@@ -5,7 +5,7 @@
 //  A normalized color type with explicit light and dark mode values.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 /// A color with explicit light and dark mode values.

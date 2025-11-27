@@ -21,7 +21,7 @@ extension Target.Dependency {
     static var htmlTypesFoundation: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
     static var htmlRenderableTestSupport: Self { .product(name: "HTML Renderable TestSupport", package: "swift-html-rendering") }
-    static var cssRendering: Self { .product(name: "CSS Rendering", package: "swift-css-rendering") }
+    static var css: Self { .product(name: "CSS", package: "swift-css") }
     static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
@@ -61,7 +61,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-rendering.git", from: "0.1.0"),
-        .package(url: "https://github.com/coenttb/swift-css-rendering.git", from: "0.1.0"),
+        .package(path: "../swift-css"),
         .package(url: "https://github.com/coenttb/swift-html-standard", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
@@ -79,7 +79,7 @@ let package = Package(
             name: .html,
             dependencies: [
                 .htmlRendering,
-                .cssRendering,
+                .css,
                 .htmlTypesFoundation,
                 .stringBuilder,
                 .dependencies,

@@ -5,7 +5,7 @@
 //  CSS border-right-color property with dark mode support.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 extension CSSPropertyAccessor {

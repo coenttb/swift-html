@@ -5,7 +5,7 @@
 //  Lowercase typealiases for HTML elements providing a more HTML-like syntax.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 /// Lowercase typealias for creating Anchor elements with a more HTML-like syntax.

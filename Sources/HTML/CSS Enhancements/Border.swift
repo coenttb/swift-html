@@ -5,7 +5,7 @@
 //  Border type definition with side configuration.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 public struct Border: Equatable, Sendable {

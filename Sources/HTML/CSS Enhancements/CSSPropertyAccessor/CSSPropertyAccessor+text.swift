@@ -5,7 +5,7 @@
 //  Convenience method for common text styling properties.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 extension CSSPropertyAccessor {

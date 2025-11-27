@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 12/08/2025.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 public struct HTMLModifier {

@@ -16,7 +16,7 @@
 //  This reduces 21 × 5 = 105 potential overloads to a single generic implementation.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 // MARK: - CSSColorProperty Protocol

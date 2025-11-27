@@ -6,7 +6,7 @@
 //
 
 import Dependencies
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 public struct Font: Hashable, Sendable {

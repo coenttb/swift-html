@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CSS_Rendering
+import CSS
 import CSS_Standard
 import OrderedCollections
 

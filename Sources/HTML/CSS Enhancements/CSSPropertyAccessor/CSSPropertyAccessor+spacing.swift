@@ -5,7 +5,7 @@
 //  Convenience method for spacing properties (padding and margin together).
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 extension CSSPropertyAccessor {

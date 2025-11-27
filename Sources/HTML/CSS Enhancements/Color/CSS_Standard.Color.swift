@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 27/11/2025.
 //
 
-import CSS_Rendering
+import CSS
 
 extension CSS_Standard.Color {
     /// Returns an opacity-modified version of this color

@@ -8,7 +8,7 @@
 //  New code should use DarkModeColor and ColorProperty instead.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 // MARK: - Legacy CSS_Standard.Color.WithDarkMode Type

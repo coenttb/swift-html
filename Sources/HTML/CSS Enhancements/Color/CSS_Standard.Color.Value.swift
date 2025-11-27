@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 13/09/2024.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 // Note: CSS_Standard.Color.Value already has an opacity method, so we don't need to redefine it

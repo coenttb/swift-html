@@ -5,7 +5,7 @@
 //  Convenience method for sizing properties (width, height, min/max).
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 extension CSSPropertyAccessor {

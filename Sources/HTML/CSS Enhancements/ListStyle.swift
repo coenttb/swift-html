@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 25/06/2025.
 //
 
-import CSS_Rendering
+import CSS
 import CSS_Standard
 
 extension HTML.View {

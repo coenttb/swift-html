@@ -6,7 +6,7 @@
 //
 
 import HTML_Rendering
-import CSS_Rendering
+import CSS
 
 extension HTML.View {
     public func onclick(_ content: String) -> some HTML.View {
