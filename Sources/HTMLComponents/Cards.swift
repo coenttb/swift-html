@@ -10,7 +10,7 @@ import Foundation
 import HTML
 import OrderedCollections
 
-public struct Cards: HTML {
+public struct Cards: HTML.View {
     let columns: Cards.Columns
     let cards: [any HTML]
 
@@ -22,7 +22,7 @@ public struct Cards: HTML {
         self.columns = columns
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         LazyVGrid(
             columns: [
                 .mobile: [1],
@@ -34,7 +34,7 @@ public struct Cards: HTML {
             verticalSpacing: .rem(1)
         ) {
             HTMLForEach(cards) { card in
-                AnyHTML(card)
+                HTML.AnyView(card)
                     .margin(
                         top: .rem(1),
                         right: .zero,

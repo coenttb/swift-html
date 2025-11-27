@@ -2,23 +2,23 @@ import Dependencies
 import Foundation
 import HTML
 
-public struct Link<Label: HTML>: HTML {
+public struct Link<Label: HTML.View>: HTML.View {
     @Dependency(\.linkStyle) var linkStyle
     let label: Label
     let href: Href?
 
-    public init(href: Href?, @HTMLBuilder label: () -> Label) {
+    public init(href: Href?, @HTML.Builder label: () -> Label) {
         self.href = href
         self.label = label()
     }
 
-    public init(_ title: String, href: Href?) where Label == HTMLText {
+    public init(_ title: String, href: Href?) where Label == HTML.Text {
         self.init(href: href) {
-            HTMLText(title)
+            HTML.Text(title)
         }
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         a(href: href) { label }
             .color(.text.link)
             .color(HTMLColor.text.link, pseudo: .visited)
@@ -38,15 +38,15 @@ public struct Link<Label: HTML>: HTML {
     }
 }
 
-extension HTML {
-    public func linkColor(_ linkColor: HTMLColor?) -> some HTML {
+extension HTML.View {
+    public func linkColor(_ linkColor: HTMLColor?) -> some HTML.View {
         @Dependency(\.theme.text.link) var color
         return self.dependency(\.theme.text.link, linkColor ?? color)
     }
-    public func linkUnderline(_ linkUnderline: Bool?) -> some HTML {
+    public func linkUnderline(_ linkUnderline: Bool?) -> some HTML.View {
         self.dependency(\.linkStyle.underline, linkUnderline)
     }
-    public func linkStyle(_ linkStyle: LinkStyle) -> some HTML {
+    public func linkStyle(_ linkStyle: LinkStyle) -> some HTML.View {
         self.dependency(\.linkStyle, linkStyle)
     }
 }

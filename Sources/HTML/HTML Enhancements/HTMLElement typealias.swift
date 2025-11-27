@@ -1,11 +1,12 @@
-import HTMLCSSPointFreeHTML
-
 //
 //  File.swift
 //  swift-html-standard
 //
 //  Created by Coen ten Thije Boonkkamp on 12/07/2025.
 //
+
+import CSS_Rendering
+import CSS_Standard
 
 /// Lowercase typealias for creating Anchor elements with a more HTML-like syntax.
 ///

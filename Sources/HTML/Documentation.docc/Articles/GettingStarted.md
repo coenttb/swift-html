@@ -120,7 +120,7 @@ For full HTML documents, use the `HTMLDocumentProtocol` protocol:
 struct WelcomePage: HTMLDocumentProtocol {
     let userName: String
     
-    var head: some HTML {
+    var head: some HTML.View {
         title { "Welcome \(userName)" }
         meta(charset: .utf8)
         meta(name: .viewport, content: "width=device-width, initial-scale=1")
@@ -137,7 +137,7 @@ struct WelcomePage: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             nav {
                 a(href: "/") { "Home" }
@@ -236,10 +236,10 @@ ul {
 Create reusable components by conforming to the `HTML` protocol:
 
 ```swift
-struct ProductCard: HTML {
+struct ProductCard: HTML.View {
     let product: Product
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             img(src: product.imageURL, alt: product.name)
             h3 { product.name }

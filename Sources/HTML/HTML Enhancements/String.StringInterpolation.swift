@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import HTML_Rendering
 
 extension String.StringInterpolation {
-    public mutating func appendInterpolation(html value: some HTML) {
-        let bytes: ContiguousArray<UInt8> = value.render()
+    public mutating func appendInterpolation(html value: some HTML.View) {
+        let bytes = ContiguousArray(value)
         let htmlString: String = String(decoding: bytes, as: UTF8.self)
 
         // Escape characters that would break template literals

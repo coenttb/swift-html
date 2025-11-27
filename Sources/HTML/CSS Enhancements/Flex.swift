@@ -6,7 +6,7 @@
 //
 
 
-extension HTML {
+extension HTML.View {
     public func flexContainer(
         direction: FlexDirection? = nil,
         wrap: FlexWrap? = nil,
@@ -15,9 +15,9 @@ extension HTML {
         rowGap: RowGap? = nil,
         columnGap: ColumnGap? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self
             .display(.flex, media: media, selector: selector, pseudo: pseudo)
             .flexDirection(direction, media: media, selector: selector, pseudo: pseudo)
@@ -33,9 +33,9 @@ extension HTML {
         shrink: FlexShrink? = nil,
         basis: FlexBasis? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self
             .flexGrow(grow, media: media, selector: selector, pseudo: pseudo)
             .flexShrink(shrink, media: media, selector: selector, pseudo: pseudo)

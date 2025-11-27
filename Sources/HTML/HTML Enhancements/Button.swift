@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import HTML_Standard_Attributes
+import HTML_Standard
 import WHATWG_HTML_Elements
 
 extension WHATWG_HTML_Elements.Button {
-    @HTMLBuilder
+    @HTML.Builder
     public static func submit(
         disabled: HTML_Standard_Attributes.Disabled? = nil,
         form: HTML_Standard_Attributes.Form.ID? = nil,
@@ -24,8 +24,8 @@ extension WHATWG_HTML_Elements.Button {
         formtarget: HTML_Standard_Attributes.FormTarget? = nil,
         popovertarget: HTML_Standard_Attributes.PopoverTarget? = nil,
         popovertargetaction: HTML_Standard_Attributes.PopoverTargetAction? = nil,
-        @HTMLBuilder content: () -> some HTML
-    ) -> some HTML {
+        @HTML.Builder content: () -> some HTML.View
+    ) -> some HTML.View {
         WHATWG_HTML_Elements.Button(
             type: .submit,
             disabled: disabled,

@@ -91,11 +91,11 @@ let adaptiveContent = p { "Adaptive text" }
 ```swift
 import HTML
 
-struct CustomButton: HTML {
+struct CustomButton: HTML.View {
     let title: String
     let href: String
 
-    var body: some HTML {
+    var body: some HTML.View {
         a(href: .init(rawValue: href)) { title }
             .display(.inlineBlock)
             .padding(vertical: .rem(0.5), horizontal: .rem(1))

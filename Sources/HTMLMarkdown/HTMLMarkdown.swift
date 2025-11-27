@@ -1,9 +1,8 @@
 import HTML
-import HTMLAttributesPointFreeHTML
 import HTMLTheme
 import Markdown
 
-public struct HTMLMarkdown: HTML {
+public struct HTMLMarkdown: HTML.View {
     public struct Section {
         public let title: String
         public let id: String
@@ -25,7 +24,7 @@ public struct HTMLMarkdown: HTML {
     public let markdown: String
     public let previewOnly: Bool
     public let tableOfContents: [Section]
-    public let content: AnyHTML
+    public let content: HTML.AnyView
 
     public init(_ markdown: String, previewOnly: Bool = false) {
         self.markdown = markdown
@@ -35,7 +34,7 @@ public struct HTMLMarkdown: HTML {
         self.tableOfContents = converter.tableOfContents
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         tag("swift-html-markdown") {
             VStack(spacing: .rem(0.5)) {
                 content
@@ -50,7 +49,7 @@ public struct HTMLMarkdown: HTML {
 }
 
 private struct HTMLConverter: MarkupVisitor {
-    typealias Result = AnyHTML
+    typealias Result = HTML.AnyView
 
     let previewOnly: Bool
 
@@ -63,8 +62,8 @@ private struct HTMLConverter: MarkupVisitor {
     private var ids: Set<Slug> = []
     var tableOfContents: [HTMLMarkdown.Section] = []
 
-    @HTMLBuilder
-    mutating func defaultVisit(_ markup: any Markup) -> AnyHTML {
+    @HTML.Builder
+    mutating func defaultVisit(_ markup: any Markup) -> HTML.AnyView {
         for child in markup.children {
             let html = visit(child)
             if previewOnly ? tableOfContents.count <= 1 : true {
@@ -73,8 +72,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitBlockDirective(_ blockDirective: Markdown.BlockDirective) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitBlockDirective(_ blockDirective: Markdown.BlockDirective) -> HTML.AnyView {
         switch blockDirective.name {
         case "Button":
             VStack(alignment: .center) {
@@ -93,7 +92,7 @@ private struct HTMLConverter: MarkupVisitor {
             }
 
         case "Comment":
-            HTMLEmpty()
+            HTML.Empty()
 
         case "T":
             let segments = blockDirective.argumentText.segments
@@ -139,8 +138,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitBlockQuote(_ blockQuote: Markdown.BlockQuote) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitBlockQuote(_ blockQuote: Markdown.BlockQuote) -> HTML.AnyView {
         let aside = Markdown.Aside(blockQuote)
         if let level = DiagnosticLevel(aside: aside) {
             Diagnostic(level: level) {
@@ -154,7 +153,7 @@ private struct HTMLConverter: MarkupVisitor {
             blockquote {
                 VStack(spacing: .rem(0.5)) {
                     strong {
-                        HTMLText(aside.kind.displayName)
+                        HTML.Text(aside.kind.displayName)
                     }
                     .color(style.borderColor)
 
@@ -172,8 +171,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitCodeBlock(_ codeBlock: Markdown.CodeBlock) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitCodeBlock(_ codeBlock: Markdown.CodeBlock) -> HTML.AnyView {
         let language: (class: String, dataLine: String?)? = codeBlock.language.map {
             let languageInfo = $0.split(separator: ":", maxSplits: 2)
             let language = languageInfo[0]
@@ -186,7 +185,7 @@ private struct HTMLConverter: MarkupVisitor {
         }
         pre {
             code {
-                HTMLText(codeBlock.code)
+                HTML.Text(codeBlock.code)
             }
             .attribute("class", language?.class)
             //            .linkUnderline(true)
@@ -201,8 +200,8 @@ private struct HTMLConverter: MarkupVisitor {
         .borderRadius(.px(6))
     }
 
-    @HTMLBuilder
-    mutating func visitEmphasis(_ emphasis: Markdown.Emphasis) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitEmphasis(_ emphasis: Markdown.Emphasis) -> HTML.AnyView {
         em {
             for child in emphasis.children {
                 visit(child)
@@ -210,8 +209,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitHeading(_ heading: Markdown.Heading) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitHeading(_ heading: Markdown.Heading) -> HTML.AnyView {
         let id = ids.slug(for: heading.plainText)
 
         a {}
@@ -255,13 +254,13 @@ private struct HTMLConverter: MarkupVisitor {
         let _ = currentSection = (title: heading.plainText, id: id, level: heading.level)
     }
 
-    @HTMLBuilder
-    mutating func visitHTMLBlock(_ html: Markdown.HTMLBlock) -> AnyHTML {
-        HTMLRaw(html.rawHTML)
+    @HTML.Builder
+    mutating func visitHTMLBlock(_ html: Markdown.HTMLBlock) -> HTML.AnyView {
+        HTML.Raw(html.rawHTML)
     }
 
-    @HTMLBuilder
-    mutating func visitImage(_ image: Markdown.Image) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitImage(_ image: Markdown.Image) -> HTML.AnyView {
         if let source = image.source {
             VStack(alignment: .center) {
                 a(href: .init(value: source)) {
@@ -280,25 +279,25 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitInlineCode(_ inlineCode: Markdown.InlineCode) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitInlineCode(_ inlineCode: Markdown.InlineCode) -> HTML.AnyView {
         code {
-            HTMLText(inlineCode.code)
+            HTML.Text(inlineCode.code)
         }
     }
 
-    @HTMLBuilder
-    mutating func visitInlineHTML(_ inlineHTML: Markdown.InlineHTML) -> AnyHTML {
-        HTMLRaw(inlineHTML.rawHTML)
+    @HTML.Builder
+    mutating func visitInlineHTML(_ inlineHTML: Markdown.InlineHTML) -> HTML.AnyView {
+        HTML.Raw(inlineHTML.rawHTML)
     }
 
-    @HTMLBuilder
-    mutating func visitLineBreak(_ lineBreak: Markdown.LineBreak) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitLineBreak(_ lineBreak: Markdown.LineBreak) -> HTML.AnyView {
         br()
     }
 
-    @HTMLBuilder
-    mutating func visitLink(_ link: Markdown.Link) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitLink(_ link: Markdown.Link) -> HTML.AnyView {
         a(href: .init(link.destination ?? "#")) {
             for child in link.children {
                 visit(child)
@@ -307,8 +306,8 @@ private struct HTMLConverter: MarkupVisitor {
         .attribute(Title.tag, link.title)
     }
 
-    @HTMLBuilder
-    mutating func visitListItem(_ listItem: Markdown.ListItem) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitListItem(_ listItem: Markdown.ListItem) -> HTML.AnyView {
         li {
             VStack(spacing: .rem(0.5)) {
                 for child in listItem.children {
@@ -318,8 +317,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitOrderedList(_ orderedList: Markdown.OrderedList) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitOrderedList(_ orderedList: Markdown.OrderedList) -> HTML.AnyView {
         ol {
             for child in orderedList.children {
                 visit(child)
@@ -331,8 +330,8 @@ private struct HTMLConverter: MarkupVisitor {
         )
     }
 
-    @HTMLBuilder
-    mutating func visitParagraph(_ paragraph: Markdown.Paragraph) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitParagraph(_ paragraph: Markdown.Paragraph) -> HTML.AnyView {
         p {
             for child in paragraph.children {
                 visit(child)
@@ -343,13 +342,13 @@ private struct HTMLConverter: MarkupVisitor {
         .margin(0)
     }
 
-    @HTMLBuilder
-    mutating func visitSoftBreak(_ softBreak: Markdown.SoftBreak) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitSoftBreak(_ softBreak: Markdown.SoftBreak) -> HTML.AnyView {
         " "
     }
 
-    @HTMLBuilder
-    mutating func visitStrikethrough(_ strikethrough: Markdown.Strikethrough) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitStrikethrough(_ strikethrough: Markdown.Strikethrough) -> HTML.AnyView {
         s {
             for child in strikethrough.children {
                 visit(child)
@@ -357,8 +356,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitStrong(_ strong: Markdown.Strong) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitStrong(_ strong: Markdown.Strong) -> HTML.AnyView {
         tag("strong") {
             for child in strong.children {
                 visit(child)
@@ -366,8 +365,8 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitTable(_ table: Markdown.Table) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitTable(_ table: Markdown.Table) -> HTML.AnyView {
         tag("table") {
             if !table.head.isEmpty {
                 thead {
@@ -401,12 +400,12 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
+    @HTML.Builder
     private mutating func render(
-        tag: PointFreeHTML.HTMLTag,
+        tag: HTML_Renderable.HTMLTag,
         cells: some Sequence<Markdown.Table.Cell>,
         columnAlignments: [Markdown.Table.ColumnAlignment?]
-    ) -> AnyHTML {
+    ) -> HTML.AnyView {
         var column = 0
         for cell in cells {
             if cell.colspan > 0 && cell.rowspan > 0 {
@@ -424,13 +423,13 @@ private struct HTMLConverter: MarkupVisitor {
         }
     }
 
-    @HTMLBuilder
-    mutating func visitText(_ text: Markdown.Text) -> AnyHTML {
-        HTMLText(text.string)
+    @HTML.Builder
+    mutating func visitText(_ text: Markdown.Text) -> HTML.AnyView {
+        HTML.Text(text.string)
     }
 
-    @HTMLBuilder
-    mutating func visitThematicBreak(_ thematicBreak: Markdown.ThematicBreak) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitThematicBreak(_ thematicBreak: Markdown.ThematicBreak) -> HTML.AnyView {
         div {
             hr()()
                 .borderRight(BorderRight.none)
@@ -445,8 +444,8 @@ private struct HTMLConverter: MarkupVisitor {
         )
     }
 
-    @HTMLBuilder
-    mutating func visitUnorderedList(_ unorderedList: Markdown.UnorderedList) -> AnyHTML {
+    @HTML.Builder
+    mutating func visitUnorderedList(_ unorderedList: Markdown.UnorderedList) -> HTML.AnyView {
         ul {
             for child in unorderedList.children {
                 visit(child)
@@ -473,15 +472,15 @@ extension Markdown.Table.ColumnAlignment {
     }
 }
 
-extension HTMLBuilder {
+extension HTML.Builder {
     @_disfavoredOverload
-    fileprivate static func buildExpression(_ expression: any HTML) -> AnyHTML {
-        AnyHTML(expression)
+    fileprivate static func buildExpression(_ expression: any HTML) -> HTML.AnyView {
+        HTML.AnyView(expression)
     }
 
     @_disfavoredOverload
-    fileprivate static func buildFinalResult(_ component: some HTML) -> AnyHTML {
-        AnyHTML(component)
+    fileprivate static func buildFinalResult(_ component: some HTML) -> HTML.AnyView {
+        HTML.AnyView(component)
     }
 }
 
@@ -535,7 +534,7 @@ extension DiagnosticLevel {
     }
 }
 
-public struct Timestamp: HTML {
+public struct Timestamp: HTML.View {
     public var hour: Int
     public var minute: Int
     public var second: Int
@@ -569,11 +568,11 @@ public struct Timestamp: HTML {
         return formatted
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             if let speaker {
                 strong {
-                    HTMLText(speaker)
+                    HTML.Text(speaker)
                 }
                 .color(.gray500)
                 .fontSize(.rem(0.875))
@@ -587,7 +586,7 @@ public struct Timestamp: HTML {
             div {
                 div {
                     a(href: .init(value: anchor)) {
-                        HTMLText(formatted())
+                        HTML.Text(formatted())
                     }
                     .attribute("data-timestamp", "\(duration)")
                 }

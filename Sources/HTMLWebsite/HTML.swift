@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import HTMLAttributesPointFreeHTML
 import HTMLComponents
 
-extension HTML {
-    @HTMLBuilder
-    public func focusOnPageLoad() -> some HTML {
+extension HTML.View {
+    @HTML.Builder
+    public func focusOnPageLoad() -> some HTML.View {
         let focusClass = "focus-on-load-\(UUID().uuidString)"
 
-        HTMLGroup {
+        HTML.Group {
             self.class(.init(focusClass))
 
             script {

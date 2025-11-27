@@ -7,8 +7,9 @@
 
 import Dependencies
 import HTML
-import HTMLCSSPointFreeHTML
-import PointFreeHTMLTestSupport
+import CSS_Rendering
+import CSS_Standard
+import HTML_Renderable_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -17,7 +18,7 @@ extension SnapshotTests {
         @Test("Example 1")
         func testingExample1() {
 
-            let page = HTMLDocument {
+            let page = HTML.Document {
                 div {
                     h1 { "Welcome to swift-html" }
                         .color(.red)
@@ -58,33 +59,32 @@ extension SnapshotTests {
                     <meta charset="utf-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <style>
-                .margin-u7yQf2{margin:auto}
-                .max-width-GQwWN3{max-width:800px}
-                .padding-hS6a7{padding:2rem}
-                .font-size-Wr637{font-size:2.5rem}
-                .color-ILzRW1{color:#cc3333}
-                .line-height-0Yl5l{line-height:1.6}
-                .color-Qt8ai2{color:#d0d0d0}
-                .text-decoration-Wl0y44{text-decoration:none}
-                .border-radius-GcgQe4{border-radius:8px}
-                .color-rWVh14{color:white}
-                .background-color-mIOKK3{background-color:#cccc33}
-                .padding-dnNPN1{padding:1rem}
-                @media (prefers-color-scheme: dark){
-                  .color-CA97y2{color:rgb(163, 40, 40)}
-                  .color-VPSOa4{color:#3a3a3a}
-                  .background-color-P2tkR3{background-color:rgb(163, 163, 40)}
-                }
-
+                      .padding-0{padding:2rem}
+                      .max-width-1{max-width:800px}
+                      .margin-2{margin:auto}
+                      .font-size-3{font-size:2.5rem}
+                      .color-4{color:#cc3333}
+                      .color-6{color:#d0d0d0}
+                      .line-height-8{line-height:1.6}
+                      .color-9{color:white}
+                      .border-radius-10{border-radius:8px}
+                      .text-decoration-11{text-decoration:none}
+                      .padding-12{padding:1rem}
+                      .background-color-13{background-color:#cccc33}
+                      @media (prefers-color-scheme: dark){
+                        .color-5{color:rgb(163, 40, 40)}
+                        .color-7{color:#3a3a3a}
+                        .background-color-14{background-color:rgb(163, 163, 40)}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="margin-u7yQf2 max-width-GQwWN3 padding-hS6a7">
-                  <h1 class="font-size-Wr637 color-ILzRW1 color-CA97y2">Welcome to swift-html
-                  </h1>
-                  <p class="line-height-0Yl5l color-Qt8ai2 color-VPSOa4">Build beautiful, type-safe web pages with Swift
-                  </p><a class="text-decoration-Wl0y44 border-radius-GcgQe4 color-rWVh14 background-color-mIOKK3 background-color-P2tkR3 padding-dnNPN1" href="https://github.com/coenttb/swift-html">Get Started →</a>
-                </div>
+                    <div class="padding-0 max-width-1 margin-2">
+                      <h1 class="font-size-3 color-4 color-5">Welcome to swift-html
+                      </h1>
+                      <p class="color-6 color-7 line-height-8">Build beautiful, type-safe web pages with Swift
+                      </p><a class="color-9 border-radius-10 text-decoration-11 padding-12 background-color-13 background-color-14" href="https://github.com/coenttb/swift-html">Get Started →</a>
+                    </div>
                   </body>
                 </html>
                 """

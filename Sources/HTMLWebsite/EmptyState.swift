@@ -10,7 +10,7 @@ import HTML
 import HTMLComponents
 
 /// A component for displaying empty states with optional icon, title, description, and action
-public struct EmptyState<Action: HTML>: HTML {
+public struct EmptyState<Action: HTML>: HTML.View {
     /// Optional icon or emoji to display
     let icon: String?
 
@@ -39,7 +39,7 @@ public struct EmptyState<Action: HTML>: HTML {
         textAlign: TextAlign = .center,
         spacing: Length? = nil,
         iconSize: LengthPercentage? = nil,
-        @HTMLBuilder action: () -> Action
+        @HTML.Builder action: () -> Action
     ) {
         self.icon = icon
         self.title = title
@@ -50,7 +50,7 @@ public struct EmptyState<Action: HTML>: HTML {
         self.action = action()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             VStack(spacing: spacing ?? .rem(1)) {
                 // Icon
@@ -89,7 +89,7 @@ public struct EmptyState<Action: HTML>: HTML {
 
 // MARK: - Convenience Initializers
 
-extension EmptyState where Action == HTMLEmpty {
+extension EmptyState where Action == HTML.Empty {
     /// Creates an empty state without an action
     public init(
         icon: String? = nil,
@@ -109,7 +109,7 @@ extension EmptyState where Action == HTMLEmpty {
     }
 }
 
-// extension EmptyState where Action == Link<HTMLText> {
+// extension EmptyState where Action == Link<HTML.Text> {
 //    /// Creates an empty state with a simple link action
 //    public init(
 //        icon: String? = nil,
@@ -136,7 +136,7 @@ extension EmptyState where Action == HTMLEmpty {
 //    }
 // }
 
-// extension EmptyState where Action == HTMLWebsite.Button<HTMLText, HTMLEmpty> {
+// extension EmptyState where Action == HTMLWebsite.Button<HTML.Text, HTML.Empty> {
 //    /// Creates an empty state with a button action
 //    public init(
 //        icon: String? = nil,
@@ -157,7 +157,7 @@ extension EmptyState where Action == HTMLEmpty {
 //            iconSize: iconSize
 //        ) {
 //            HTMLWebsite.Button(style: buttonStyle) {
-//                HTMLText(actionText)
+//                HTML.Text(actionText)
 //            }
 //        }
 //    }
@@ -170,7 +170,7 @@ extension EmptyState {
     public static func noData<A: HTML>(
         title: String = "No Data Yet",
         description: String? = "Start by adding some data to see it here.",
-        @HTMLBuilder action: () -> A = { HTMLEmpty() }
+        @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {
         EmptyState<A>(
             icon: "📊",
@@ -183,7 +183,7 @@ extension EmptyState {
     /// Creates a "No Results" empty state for search
     public static func noResults<A: HTML>(
         searchTerm: String? = nil,
-        @HTMLBuilder action: () -> A = { HTMLEmpty() }
+        @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {
         let description = searchTerm.map { "No results found for \"\($0)\"" } ?? "No results found"
         return EmptyState<A>(
@@ -197,7 +197,7 @@ extension EmptyState {
     /// Creates a "Coming Soon" empty state
     public static func comingSoon<A: HTML>(
         feature: String? = nil,
-        @HTMLBuilder action: () -> A = { HTMLEmpty() }
+        @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {
         let title = feature.map { "\($0) Coming Soon" } ?? "Coming Soon"
         return EmptyState<A>(
@@ -211,7 +211,7 @@ extension EmptyState {
     /// Creates an error empty state
     public static func error<A: HTML>(
         message: String? = "Something went wrong. Please try again.",
-        @HTMLBuilder action: () -> A = { HTMLEmpty() }
+        @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {
         EmptyState<A>(
             icon: "⚠️",

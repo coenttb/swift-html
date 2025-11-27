@@ -7,23 +7,22 @@
 
 import Dependencies
 import Foundation
-import HTMLAttributesPointFreeHTML
 import HTMLComponents
 
-public struct Overlay<Content: HTML>: HTML {
+public struct Overlay<Content: HTML.View>: HTML.View {
 
     let id: String
     let content: Content
 
     public init(
         id: String = "coenttb-shared-overlay-id",
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.content = content()
         self.id = String.sanitizeForJavaScript(id)
     }
 
-    private var backgroundOverlay: some HTML {
+    private var backgroundOverlay: some HTML.View {
         div {}
             .id("background-overlay-\(id)")
             .display(Display.none)
@@ -38,7 +37,7 @@ public struct Overlay<Content: HTML>: HTML {
             .zIndex(1000)
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             backgroundOverlay
 

@@ -246,8 +246,8 @@ div {
     Card { "Responsive Card" }
 }
 
-struct Card: HTML {
-    var body: some HTML {
+struct Card: HTML.View {
+    var body: some HTML.View {
         div { "Card Content" }
             .padding(.rem(1))
     }
@@ -261,8 +261,8 @@ struct Card: HTML {
 Define and use CSS custom properties:
 
 ```swift
-struct ThemedComponent: HTML {
-    var body: some HTML {
+struct ThemedComponent: HTML.View {
+    var body: some HTML.View {
         div {
             h1 { "Themed Title" }
             p { "This uses CSS variables" }
@@ -372,7 +372,7 @@ button { "Hover Me" }
 Create reusable styled components:
 
 ```swift
-struct Button: HTML {
+struct Button: HTML.View {
     enum Style {
         case primary, secondary, danger
         
@@ -397,7 +397,7 @@ struct Button: HTML {
     let style: Style
     let action: JavaScript?
     
-    var body: some HTML {
+    var body: some HTML.View {
         button(onclick: action) { title }
             .fontSize(.rem(1))
             .fontWeight(.medium)
@@ -424,7 +424,7 @@ Combine modifiers with utility classes:
 
 ```swift
 extension HTML {
-    func card() -> some HTML {
+    func card() -> some HTML.View {
         self
             .backgroundColor(.white)
             .borderRadius(.px(8))
@@ -432,14 +432,14 @@ extension HTML {
             .padding(.rem(1.5))
     }
     
-    func container() -> some HTML {
+    func container() -> some HTML.View {
         self
             .maxWidth(.px(1200))
             .margin(.auto)
             .padding(.horizontal(.rem(1)))
     }
     
-    func stack(spacing: Length = .rem(1)) -> some HTML {
+    func stack(spacing: Length = .rem(1)) -> some HTML.View {
         self
             .display(.flex)
             .flexDirection(.column)
@@ -460,8 +460,8 @@ div {
 Define complete stylesheets in Swift:
 
 ```swift
-struct Stylesheet: HTML {
-    var body: some HTML {
+struct Stylesheet: HTML.View {
+    var body: some HTML.View {
         style {
             CSS("""
             /* Reset */
@@ -508,10 +508,10 @@ struct Stylesheet: HTML {
 Create component-scoped styles:
 
 ```swift
-struct ScopedComponent: HTML {
+struct ScopedComponent: HTML.View {
     let id = "component-\(UUID().uuidString.prefix(8))"
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             style {
                 """
@@ -567,10 +567,10 @@ struct ComponentStyles {
     }
 }
 
-struct StyledComponent: HTML {
+struct StyledComponent: HTML.View {
     let styles = ComponentStyles()
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             style { styles.css }
             
@@ -593,7 +593,7 @@ Inline critical CSS for faster rendering:
 
 ```swift
 struct OptimizedPage: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         // Critical CSS inlined
         style {
             """
@@ -613,7 +613,7 @@ struct OptimizedPage: HTMLDocumentProtocol {
         )
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Page content
     }
 }
@@ -676,7 +676,7 @@ HTMLTestSupport makes it easy to test that your styles are rendered correctly:
 
 ```swift
 import Testing
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 @testable import MyApp
 
 @Suite("Style Snapshot Tests")
@@ -744,7 +744,7 @@ Build complex styles from simple pieces:
 
 ```swift
 extension HTML {
-    func baseButton() -> some HTML {
+    func baseButton() -> some HTML.View {
         self
             .padding(.vertical(.spacing3), .horizontal(.spacing4))
             .borderRadius(.px(6))
@@ -753,7 +753,7 @@ extension HTML {
             .cursor(.pointer)
     }
     
-    func primaryButton() -> some HTML {
+    func primaryButton() -> some HTML.View {
         self
             .baseButton()
             .backgroundColor(.brand)

@@ -5,10 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 26/08/2025.
 //
 
-import Foundation
+import HTML_Rendering
+import CSS_Rendering
 
-extension HTML {
-    public func onclick(_ content: String) -> some HTML {
+extension HTML.View {
+    public func onclick(_ content: String) -> some HTML.View {
         self.attribute("onclick", content)
     }
 }

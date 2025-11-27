@@ -8,9 +8,9 @@
 import Foundation
 import HTML
 
-public struct Circle: HTML {
+public struct Circle: HTML.View {
 
-    @HTMLBuilder let content: any HTML
+    @HTML.Builder let content: any HTML.View
 
     public var width: CSSTypes.Width
     public var height: CSSTypes.Height
@@ -18,7 +18,7 @@ public struct Circle: HTML {
     public init(
         width: CSSTypes.Width = .rem(10),
         height: CSSTypes.Height = .rem(10),
-        @HTMLBuilder content: @escaping () -> any HTML
+        @HTML.Builder content: @escaping () -> any HTML
     ) {
         self.content = content()
         self.width = width
@@ -27,18 +27,18 @@ public struct Circle: HTML {
 
     public init(
         size: LengthPercentage,
-        @HTMLBuilder content: @escaping () -> any HTML
+        @HTML.Builder content: @escaping () -> any HTML
     ) {
         self.content = content()
         self.width = .lengthPercentage(size)
         self.height = .lengthPercentage(size)
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             div {
                 div {
-                    AnyHTML(content)
+                    HTML.AnyView(content)
                         .objectFit(.cover)
                         .height(.percent(100))
                         .width(.percent(100))

@@ -22,7 +22,7 @@ struct ReadmeVerificationTests {
                 .lineHeight(1.6)
         }
 
-        let bytes: ContiguousArray<UInt8> = page.render()
+        let bytes: ContiguousArray<UInt8> = .init(page)
         let string: String = String(decoding: bytes, as: UTF8.self)
 
         // Verify it renders without crashing
@@ -38,9 +38,8 @@ struct ReadmeVerificationTests {
             Spacer()
             div { "Menu" }
         }
-
-        let bytes = header.render()
-        let string = String(decoding: bytes, as: UTF8.self)
+        
+        let string = try String(header)
 
         #expect(!string.isEmpty)
         #expect(string.contains("Logo"))
@@ -54,8 +53,7 @@ struct ReadmeVerificationTests {
             div { "Section 2" }
         }
 
-        let bytes = content.render()
-        let string = String(decoding: bytes, as: UTF8.self)
+        let string = try String(content)
 
         #expect(!string.isEmpty)
         #expect(string.contains("Section 1"))
@@ -70,8 +68,7 @@ struct ReadmeVerificationTests {
             div { "Item 3" }
         }
 
-        let bytes = grid.render()
-        let string = String(decoding: bytes, as: UTF8.self)
+        let string = try String(grid)
 
         #expect(!string.isEmpty)
         #expect(string.contains("Item 1"))
@@ -85,8 +82,7 @@ struct ReadmeVerificationTests {
             .color(light: .gray900, dark: .gray100)
             .backgroundColor(light: .white, dark: .gray900)
 
-        let bytes = adaptiveContent.render()
-        let string = String(decoding: bytes, as: UTF8.self)
+        let string = try String(adaptiveContent)
 
         #expect(!string.isEmpty)
         #expect(string.contains("Adaptive text"))
@@ -94,11 +90,11 @@ struct ReadmeVerificationTests {
 
     @Test("Example from README: Reusable Components")
     func reusableComponents() throws {
-        struct CustomButton: HTML {
+        struct CustomButton: HTML.View {
             let title: String
             let href: String
 
-            var body: some HTML {
+            var body: some HTML.View {
                 a(href: .init(rawValue: href)) { title }
                     .display(.inlineBlock)
                     .padding(vertical: .rem(0.5), horizontal: .rem(1))
@@ -110,8 +106,7 @@ struct ReadmeVerificationTests {
         }
 
         let button = CustomButton(title: "Learn More", href: "/docs")
-        let bytes = button.render()
-        let string = String(decoding: bytes, as: UTF8.self)
+        let string = try String(button)
 
         #expect(!string.isEmpty)
         #expect(string.contains("Learn More"))

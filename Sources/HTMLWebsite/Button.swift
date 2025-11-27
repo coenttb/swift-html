@@ -11,7 +11,7 @@ import HTML
 import HTMLComponents
 
 // MARK: - Updated Button Struct
-public struct Button<Label: HTML, Icon: HTML>: HTML {
+public struct Button<Label: HTML, Icon: HTML>: HTML.View {
     let button: HTML_Standard_Elements.Button
     let label: Label
     let icon: Icon?
@@ -20,8 +20,8 @@ public struct Button<Label: HTML, Icon: HTML>: HTML {
     public init(
         button: HTML_Standard_Elements.Button = .init(),
         style: ButtonStyle = .default,
-        @HTMLBuilder label: () -> Label,
-        @HTMLBuilder icon: () -> Icon
+        @HTML.Builder label: () -> Label,
+        @HTML.Builder icon: () -> Icon
     ) {
         self.button = button
         self.icon = icon()
@@ -32,10 +32,10 @@ public struct Button<Label: HTML, Icon: HTML>: HTML {
     public init(
         button: HTML_Standard_Elements.Button = .init(),
         style: ButtonStyle = .default,
-        @HTMLBuilder label: () -> Label
-    ) where Icon == HTMLEmpty {
+        @HTML.Builder label: () -> Label
+    ) where Icon == HTML.Empty {
         self.button = button
-        self.icon = HTMLEmpty()
+        self.icon = HTML.Empty()
         self.label = label()
         self.style = style
     }
@@ -43,9 +43,9 @@ public struct Button<Label: HTML, Icon: HTML>: HTML {
     @Dependency(\.theme.text.button) var textColor
     @Dependency(\.theme.background.button) var background
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         return HTML_Standard_Elements.Button {
-            HTMLGroup {
+            HTML.Group {
                 if let icon = icon {
                     LabelTypealias {
                         span { icon }
@@ -119,11 +119,11 @@ public struct ButtonStyle: Equatable {
 }
 
 // MARK: - HTML Protocol Extension
-extension HTML {
+extension HTML.View {
     public func buttonStyle(
         background: HTMLColor,
         style: ButtonStyle = .default
-    ) -> some HTML {
+    ) -> some HTML.View {
 
         //        let borderColor: HTMLColor? = {
         //            switch style {
@@ -235,7 +235,7 @@ extension HTML {
 // import SwiftUI
 //
 // #Preview {
-//    HTMLDocument {
+//    HTML.Document {
 //        withDependencies {
 //            $0.theme.text.button = .yellow
 //            $0.theme.background.button = .red

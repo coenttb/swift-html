@@ -13,7 +13,7 @@ At its core, the HTML protocol is elegantly simple:
 ```swift
 public protocol HTML {
     associatedtype Body: HTML
-    @HTMLBuilder var body: Body { get }
+    @HTML.Builder var body: Body { get }
 }
 ```
 
@@ -26,10 +26,10 @@ This design mirrors SwiftUI's View protocol, providing a familiar and intuitive 
 Any type can conform to HTML by implementing the `body` property:
 
 ```swift
-struct Greeting: HTML {
+struct Greeting: HTML.View {
     let name: String
     
-    var body: some HTML {
+    var body: some HTML.View {
         p {
             "Hello, "
             strong { name }
@@ -49,10 +49,10 @@ let html = try String(greeting)
 HTML conforming types can be composed together:
 
 ```swift
-struct UserCard: HTML {
+struct UserCard: HTML.View {
     let user: User
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             Avatar(imageURL: user.avatarURL)  // Another HTML type
             UserInfo(user: user)              // Another HTML type
@@ -61,10 +61,10 @@ struct UserCard: HTML {
     }
 }
 
-struct Avatar: HTML {
+struct Avatar: HTML.View {
     let imageURL: URL
     
-    var body: some HTML {
+    var body: some HTML.View {
         img(src: imageURL, alt: "User avatar")
             .class("avatar")
             .width(.px(48))
@@ -72,10 +72,10 @@ struct Avatar: HTML {
     }
 }
 
-struct UserInfo: HTML {
+struct UserInfo: HTML.View {
     let user: User
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             h3 { user.name }
             p { user.title }
@@ -104,11 +104,11 @@ img(src: "/photo.jpg", alt: "Photo")
 Use Swift's control flow within your HTML:
 
 ```swift
-struct NavigationBar: HTML {
+struct NavigationBar: HTML.View {
     let isLoggedIn: Bool
     let userName: String?
     
-    var body: some HTML {
+    var body: some HTML.View {
         nav {
             a(href: "/") { "Home" }
             a(href: "/about") { "About" }
@@ -133,10 +133,10 @@ struct NavigationBar: HTML {
 Render collections efficiently:
 
 ```swift
-struct ProductList: HTML {
+struct ProductList: HTML.View {
     let products: [Product]
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             h2 { "Our Products" }
             
@@ -165,7 +165,7 @@ struct List<Item: Identifiable>: HTML where Item.ID: LosslessStringConvertible {
     let items: [Item]
     let content: (Item) -> any HTML
     
-    var body: some HTML {
+    var body: some HTML.View {
         ul {
             HTMLForEach(items) { item in
                 li {
@@ -190,7 +190,7 @@ Extend HTML to add functionality to all conforming types:
 ```swift
 extension HTML {
     /// Wraps any HTML in a container div with a class
-    func container() -> some HTML {
+    func container() -> some HTML.View {
         div { self }
             .class("container")
             .maxWidth(.px(1200))
@@ -202,7 +202,7 @@ extension HTML {
     func `if`<Modified: HTML>(
         _ condition: Bool,
         transform: (Self) -> Modified
-    ) -> some HTML {
+    ) -> some HTML.View {
         if condition {
             transform(self)
         } else {
@@ -220,18 +220,18 @@ Greeting(name: "World")
 Sometimes you need to render nothing:
 
 ```swift
-struct ConditionalBanner: HTML {
+struct ConditionalBanner: HTML.View {
     let showBanner: Bool
     let message: String
     
-    var body: some HTML {
+    var body: some HTML.View {
         if showBanner {
             div {
                 p { message }
             }
             .class("banner")
         } else {
-            HTMLEmpty()  // Renders nothing
+            HTML.Empty()  // Renders nothing
         }
     }
 }
@@ -245,8 +245,8 @@ While composition is powerful, deeply nested components can impact performance:
 
 ```swift
 // Less efficient - many layers
-struct DeepNesting: HTML {
-    var body: some HTML {
+struct DeepNesting: HTML.View {
+    var body: some HTML.View {
         Wrapper1 {
             Wrapper2 {
                 Wrapper3 {
@@ -258,8 +258,8 @@ struct DeepNesting: HTML {
 }
 
 // More efficient - flatter structure
-struct FlatStructure: HTML {
-    var body: some HTML {
+struct FlatStructure: HTML.View {
+    var body: some HTML.View {
         div {
             ActualContent()
         }
@@ -273,11 +273,11 @@ struct FlatStructure: HTML {
 For static content, consider computing once:
 
 ```swift
-struct Footer: HTML {
+struct Footer: HTML.View {
     // Computed once per instance
     private let currentYear = Calendar.current.component(.year, from: Date())
     
-    var body: some HTML {
+    var body: some HTML.View {
         footer {
             p { "© \(currentYear) My Company" }
             nav {
@@ -331,7 +331,7 @@ For more comprehensive testing, use HTMLTestSupport's inline snapshot testing:
 
 ```swift
 import Testing
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 @testable import MyApp
 
 @Suite("HTML Snapshot Tests")
@@ -411,7 +411,7 @@ HTMLTestSupport also provides pretty-printed output for better readability:
 @Test("Test HTML")
 func testHTML() throws {
     assertInlineSnapshot(
-        of: HTMLDocument {
+        of: HTML.Document {
             a(href: "/home") {
                 "Click here!"
             }
@@ -443,19 +443,19 @@ func testHTML() throws {
 Create components that wrap other HTML:
 
 ```swift
-struct Card: HTML {
+struct Card: HTML.View {
     let title: String
     let content: any HTML
 
     public init(
         title: String,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.title = title
         self.content = content()
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             if !title.isEmpty {
                 h3 { title }
@@ -485,12 +485,12 @@ Card(title: "Features") {
 Build reusable layout structures:
 
 ```swift
-struct TwoColumnLayout: HTML {
+struct TwoColumnLayout: HTML.View {
     let left: any HTML
     let right: any HTML
     let ratio: (left: Int, right: Int) = (1, 1)
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             div { left }
                 .class("left-column")
@@ -511,7 +511,7 @@ struct TwoColumnLayout: HTML {
 Create components that render based on data:
 
 ```swift
-struct DataTable<Row: Identifiable>: HTML {
+struct DataTable<Row: Identifiable>: HTML.View {
     let columns: [Column<Row>]
     let rows: [Row]
     
@@ -520,7 +520,7 @@ struct DataTable<Row: Identifiable>: HTML {
         let value: (Row) -> String
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         table {
             thead {
                 tr {
@@ -551,11 +551,11 @@ Each HTML component should have a single, clear responsibility:
 
 ```swift
 // Good: Focused component
-struct PriceDisplay: HTML {
+struct PriceDisplay: HTML.View {
     let price: Decimal
     let currency: Stripe.Currency
     
-    var body: some HTML {
+    var body: some HTML.View {
         span {
             span { currency }.class("currency")
             span { price.formatted() }.class("amount")
@@ -565,7 +565,7 @@ struct PriceDisplay: HTML {
 }
 
 // Avoid: Doing too much
-struct ProductAndPriceAndReviews: HTML {
+struct ProductAndPriceAndReviews: HTML.View {
     // Too many responsibilities
 }
 ```
@@ -576,14 +576,14 @@ Choose descriptive names that reflect the component's purpose:
 
 ```swift
 // Good naming
-struct ArticleHeader: HTML { }
-struct NavigationMenu: HTML { }
-struct UserProfile: HTML { }
+struct ArticleHeader: HTML.View { }
+struct NavigationMenu: HTML.View { }
+struct UserProfile: HTML.View { }
 
 // Poor naming
-struct Div1: HTML { }
-struct Component: HTML { }
-struct Thing: HTML { }
+struct Div1: HTML.View { }
+struct Component: HTML.View { }
+struct Thing: HTML.View { }
 ```
 
 ### 3. Leverage Type Parameters
@@ -591,11 +591,11 @@ struct Thing: HTML { }
 Use generics to make components more flexible:
 
 ```swift
-struct Badge<Content: HTML>: HTML {
+struct Badge<Content: HTML>: HTML.View {
     let content: Content
     let style: BadgeStyle
     
-    var body: some HTML {
+    var body: some HTML.View {
         span {
             content
         }
@@ -634,7 +634,7 @@ The HTML protocol is the foundation that makes swift-html powerful yet simple. B
 
 ## Next Steps
 
-- Learn about <doc:HTMLBuilder> to understand the `@HTMLBuilder` attribute
+- Learn about <doc:HTMLBuilder> to understand the `@HTML.Builder` attribute
 - Explore <doc:CustomComponents> for component design patterns
 - Read <doc:RenderingHTML> to understand how HTML becomes strings/bytes
 - Check out <doc:StylingWithCSS> to style your HTML components

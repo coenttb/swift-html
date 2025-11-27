@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -18,8 +18,8 @@ extension SnapshotTests {
         @Test("Border Test")
         func border() {
             assertInlineSnapshot(
-                of: HTMLDocument {
-                    div { HTMLEmpty() }
+                of: HTML.Document {
+                    div { HTML.Empty() }
                         .border(
                             .init(
                                 width: .length(1.px),
@@ -35,16 +35,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .border-3JxMp{border:1px solid #cc3333}
-                @media (prefers-color-scheme: dark){
-                  .border-CRwQB2{border:1px solid rgb(163, 40, 40)}
-                }
-
+                      .border-0{border:1px solid #cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .border-1{border:1px solid rgb(163, 40, 40)}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="border-3JxMp border-CRwQB2">
-                </div>
+                    <div class="border-0 border-1">
+                    </div>
                   </body>
                 </html>
                 """
@@ -54,8 +53,8 @@ extension SnapshotTests {
         @Test("Padding Vertical Horizontal Test")
         func paddingVerticalHorizontal() {
             assertInlineSnapshot(
-                of: HTMLDocument {
-                    div { HTMLEmpty() }
+                of: HTML.Document {
+                    div { HTML.Empty() }
                         .padding(vertical: .px(10), horizontal: .px(20))
                 },
                 as: .html
@@ -65,13 +64,12 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .padding-UnnKO3{padding:10px 20px}
-
+                      .padding-0{padding:10px 20px}
                     </style>
                   </head>
                   <body>
-                <div class="padding-UnnKO3">
-                </div>
+                    <div class="padding-0">
+                    </div>
                   </body>
                 </html>
                 """
@@ -81,8 +79,8 @@ extension SnapshotTests {
         @Test("Padding Set Variant Test")
         func paddingVariants() {
             assertInlineSnapshot(
-                of: HTMLDocument {
-                    div { HTMLEmpty() }
+                of: HTML.Document {
+                    div { HTML.Empty() }
                         .padding(
                             .top(.px(10)),
                             .right(.px(20)),
@@ -97,13 +95,12 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .padding-3kdGx2{padding:10px 20px 15px 25px}
-
+                      .padding-0{padding:10px 20px 15px 25px}
                     </style>
                   </head>
                   <body>
-                <div class="padding-3kdGx2">
-                </div>
+                    <div class="padding-0">
+                    </div>
                   </body>
                 </html>
                 """
@@ -113,8 +110,8 @@ extension SnapshotTests {
         @Test("Padding with Media Query")
         func paddingWithMediaQuery() {
             assertInlineSnapshot(
-                of: HTMLDocument {
-                    div { HTMLEmpty() }
+                of: HTML.Document {
+                    div { HTML.Empty() }
                         .padding(
                             [
                                 .top(.px(10)),
@@ -130,16 +127,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                @media screen and (min-width: 768px){
-                  .padding-bottom-3cc9g1{padding-bottom:15px}
-                  .padding-top-7AQLU3{padding-top:10px}
-                }
-
+                      @media screen and (min-width: 768px){
+                        .padding-bottom-0{padding-bottom:15px}
+                        .padding-top-1{padding-top:10px}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="padding-bottom-3cc9g1 padding-top-7AQLU3">
-                </div>
+                    <div class="padding-bottom-0 padding-top-1">
+                    </div>
                   </body>
                 </html>
                 """
@@ -149,8 +145,8 @@ extension SnapshotTests {
         @Test("Padding with optional inputs")
         func paddingWithOptionalInputs() {
             assertInlineSnapshot(
-                of: HTMLDocument {
-                    div { HTMLEmpty() }
+                of: HTML.Document {
+                    div { HTML.Empty() }
                         .padding(
                             top: .px(10),
                             bottom: .px(10),
@@ -168,15 +164,14 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .padding-left-Fqw6a1{padding-left:10px}
-                .padding-bottom-Fqw6a1{padding-bottom:10px}
-                .padding-top-Fqw6a1{padding-top:10px}
-
+                      .padding-left-0{padding-left:10px}
+                      .padding-bottom-1{padding-bottom:10px}
+                      .padding-top-2{padding-top:10px}
                     </style>
                   </head>
                   <body>
-                <div class="padding-left-Fqw6a1 padding-bottom-Fqw6a1 padding-top-Fqw6a1">
-                </div>
+                    <div class="padding-left-0 padding-bottom-1 padding-top-2">
+                    </div>
                   </body>
                 </html>
                 """

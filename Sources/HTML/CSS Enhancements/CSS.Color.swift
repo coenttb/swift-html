@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 13/09/2024.
 //
 
-import HTMLCSSPointFreeHTML
-import W3C_CSS_Values
+import CSS_Rendering
+import CSS_Standard
 
 // Note: W3C_CSS_Values.Color already has an opacity method, so we don't need to redefine it
 

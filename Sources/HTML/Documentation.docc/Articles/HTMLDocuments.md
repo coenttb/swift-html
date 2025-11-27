@@ -11,12 +11,12 @@ While individual HTML components are useful, most web applications need complete
 The `HTMLDocumentProtocol` provides a structured way to define complete HTML documents:
 
 ```swift
-public protocol HTMLDocumentProtocol: HTML {
+public protocol HTMLDocumentProtocol: HTML.View {
     associatedtype Head: HTML
     associatedtype Body: HTML
     
-    @HTMLBuilder var head: Head { get }
-    @HTMLBuilder var body: Body { get }
+    @HTML.Builder var head: Head { get }
+    @HTML.Builder var body: Body { get }
 }
 ```
 
@@ -24,13 +24,13 @@ public protocol HTMLDocumentProtocol: HTML {
 
 ```swift
 struct HomePage: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         title { "Welcome to My Site" }
         meta(charset: .utf8)
         meta(name: .viewport, content: "width=device-width, initial-scale=1")
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         h1 { "Welcome!" }
         p { "This is my website built with swift-html." }
     }
@@ -50,7 +50,7 @@ The most common approach is creating types that conform to `HTMLDocumentProtocol
 struct BlogPost: HTMLDocumentProtocol {
     let post: Post
     
-    var head: some HTML {
+    var head: some HTML.View {
         title { post.title }
         meta(charset: .utf8)
         meta(name: .description, content: post.summary)
@@ -66,7 +66,7 @@ struct BlogPost: HTMLDocumentProtocol {
         link(rel: .stylesheet, href: "/css/blog.css")
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         article {
             header {
                 h1 { post.title }
@@ -101,7 +101,7 @@ struct BlogPost: HTMLDocumentProtocol {
 For simpler cases, use the `HTMLDocument` initializer:
 
 ```swift
-let document = HTMLDocument {
+let document = HTML.Document {
     // Body content
     div {
         h1 { "Quick Page" }
@@ -127,7 +127,7 @@ struct BaseDocument: HTMLDocumentProtocol {
     let pageTitle: String
     let description: String
     
-    var head: some HTML {
+    var head: some HTML.View {
         // Essential meta tags
         meta(charset: .utf8)
         meta(name: .viewport, content: "width=device-width, initial-scale=1")
@@ -142,9 +142,9 @@ struct BaseDocument: HTMLDocumentProtocol {
              content: "default-src 'self'")
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Override in subclasses
-        HTMLEmpty()
+        HTML.Empty()
     }
 }
 ```
@@ -155,7 +155,7 @@ Organize CSS, JavaScript, and other resources:
 
 ```swift
 struct ResourcefulDocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         title { "My App" }
         
         // CSS Resources
@@ -175,7 +175,7 @@ struct ResourcefulDocument: HTMLDocumentProtocol {
         script(src: "/js/app.js", defer: true)
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             Header()
             MainContent()
@@ -192,7 +192,7 @@ Build mobile-friendly documents:
 
 ```swift
 struct ResponsiveDocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         title { "Responsive Site" }
         meta(charset: .utf8)
         meta(name: .viewport, content: "width=device-width, initial-scale=1, maximum-scale=5")
@@ -219,7 +219,7 @@ struct ResponsiveDocument: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Content adapts to screen size
         div {
             nav {
@@ -252,7 +252,7 @@ struct SmartDocument: HTMLDocumentProtocol {
     let includeComments: Bool
     let colorScheme: ColorScheme
     
-    var head: some HTML {
+    var head: some HTML.View {
         title { "Smart Page" }
         meta(charset: .utf8)
         
@@ -286,7 +286,7 @@ struct SmartDocument: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Body adjusts based on features
         MainContent()
         
@@ -309,7 +309,7 @@ Create SEO-friendly documents:
 struct SEOOptimizedDocument: HTMLDocumentProtocol {
     let page: SEOPage
     
-    var head: some HTML {
+    var head: some HTML.View {
         // Basic SEO
         title { page.title }
         meta(name: .description, content: page.description)
@@ -337,7 +337,7 @@ struct SEOOptimizedDocument: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Semantic HTML for better SEO
         header {
             nav {
@@ -374,7 +374,7 @@ Create PWA-ready documents:
 
 ```swift
 struct PWADocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         title { "My PWA" }
         meta(charset: .utf8)
         meta(name: .viewport, content: "width=device-width, initial-scale=1")
@@ -400,7 +400,7 @@ struct PWADocument: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             AppShell()
         }
@@ -427,11 +427,11 @@ protocol SiteDocument: HTMLDocumentProtocol {
 }
 
 extension SiteDocument {
-    var head: some HTML {
+    var head: some HTML.View {
         BaseHead(title: pageTitle)
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             SiteHeader()
             main {
@@ -447,7 +447,7 @@ extension SiteDocument {
 struct AboutPage: SiteDocument {
     let pageTitle = "About Us"
     
-    var pageContent: some HTML {
+    var pageContent: some HTML.View {
         div {
             h1 { "About Our Company" }
             p { "We are..." }
@@ -472,13 +472,13 @@ struct LayoutTemplate: HTMLDocumentProtocol {
         case threeColumn
     }
     
-    var head: some HTML {
+    var head: some HTML.View {
         title { self.title }
         meta(charset: .utf8)
         link(rel: .stylesheet, href: "/css/layouts.css")
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         switch layout {
         case .single:
             SingleColumnLayout { content }
@@ -506,7 +506,7 @@ Inline critical CSS for faster rendering:
 
 ```swift
 struct OptimizedDocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         title { "Fast Page" }
         
         // Inline critical CSS
@@ -528,7 +528,7 @@ struct OptimizedDocument: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Content renders immediately with critical CSS
         MainContent()
     }
@@ -541,7 +541,7 @@ Use resource hints for better performance:
 
 ```swift
 struct PerformantDocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         // DNS prefetch for external domains
         link(rel: .dnsPrefetch, href: "//cdn.example.com")
         link(rel: .dnsPrefetch, href: "//api.example.com")
@@ -559,7 +559,7 @@ struct PerformantDocument: HTMLDocumentProtocol {
         link(rel: .preload, href: "/css/critical.css", as: .style)
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         // Page content
     }
 }
@@ -573,7 +573,7 @@ Test your documents thoroughly using HTMLTestSupport's inline snapshot testing:
 
 ```swift
 import Testing
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 @testable import MyApp
 
 @Suite("Document Tests")
@@ -613,7 +613,7 @@ HTMLTestSupport makes it easy to test complete documents with inline snapshots:
 struct DocumentSnapshotTests {
     @Test("Simple document renders correctly")
     func simpleDocument() throws {
-        let doc = HTMLDocument {
+        let doc = HTML.Document {
             div {
                 h1 { "Hello, World!" }
                 p { "Welcome to swift-html" }
@@ -730,13 +730,13 @@ Structure your documents logically:
 ```swift
 // ✅ Good: Clear separation of concerns
 struct WellOrganizedDocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         MetaTags()
         Resources()
         Analytics()
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         SkipToContent()
         Header()
         MainContent()
@@ -747,7 +747,7 @@ struct WellOrganizedDocument: HTMLDocumentProtocol {
 
 // ❌ Avoid: Everything mixed together
 struct PoorlyOrganizedDocument: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         // 100 lines of mixed content...
     }
 }
@@ -758,7 +758,7 @@ struct PoorlyOrganizedDocument: HTMLDocumentProtocol {
 Use semantic elements for better accessibility:
 
 ```swift
-var body: some HTML {
+var body: some HTML.View {
     header {
         nav { /* navigation */ }
     }
@@ -784,7 +784,7 @@ var body: some HTML {
 Build documents that work without JavaScript:
 
 ```swift
-var body: some HTML {
+var body: some HTML.View {
     // Core content works without JS
     form(action: "/search", method: .get) {
         input(type: .search, name: "q", placeholder: "Search...")

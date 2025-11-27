@@ -128,12 +128,12 @@ struct StreamingResponse {
 Cache static content to avoid re-rendering:
 
 ```swift
-struct CachedFooter: HTML {
+struct CachedFooter: HTML.View {
     private static let cachedBytes: ContiguousArray<UInt8> = {
         Footer().render()
     }()
     
-    var body: some HTML {
+    var body: some HTML.View {
         HTMLRaw(Self.cachedBytes)
     }
 }
@@ -146,10 +146,10 @@ struct CachedFooter: HTML {
 Sometimes you need to include pre-rendered HTML:
 
 ```swift
-struct LegacyContent: HTML {
+struct LegacyContent: HTML.View {
     let rawHTML: String
     
-    var body: some HTML {
+    var body: some HTML.View {
         HTMLRaw(rawHTML)  // Renders exactly as provided
     }
 }
@@ -247,11 +247,11 @@ for (filename, page) in pages {
 Render HTML for emails with inline styles:
 
 ```swift
-struct EmailTemplate: HTML {
+struct EmailTemplate: HTML.View {
     let recipient: String
     let subject: String
     
-    var body: some HTML {
+    var body: some HTML.View {
         html {
             head {
                 style {
@@ -320,7 +320,7 @@ HTMLTestSupport provides powerful inline snapshot testing capabilities:
 
 ```swift
 import Testing
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 @testable import MyApp
 
 @Suite("Rendering Tests")
@@ -604,14 +604,14 @@ struct StreamingRenderer {
 
 ```swift
 // Inefficient: Many small renders
-var body: some HTML {
+var body: some HTML.View {
     for item in items {
         ItemComponent(item: item)  // Each renders separately
     }
 }
 
 // Efficient: Batch rendering
-var body: some HTML {
+var body: some HTML.View {
     HTMLForEach(items) { item in
         // Rendered as a batch
         li { item.title }

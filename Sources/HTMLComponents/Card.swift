@@ -1,21 +1,21 @@
 import HTML
 
-public struct Card<Content: HTML, Header: HTML, Footer: HTML>: HTML {
+public struct Card<Content: HTML, Header: HTML, Footer: HTML>: HTML.View {
     let content: Content
     let header: Header
     let footer: Footer
 
     public init(
-        @HTMLBuilder content: () -> Content,
-        @HTMLBuilder header: () -> Header = { HTMLEmpty() },
-        @HTMLBuilder footer: () -> Footer = { HTMLEmpty() }
+        @HTML.Builder content: () -> Content,
+        @HTML.Builder header: () -> Header = { HTML.Empty() },
+        @HTML.Builder footer: () -> Footer = { HTML.Empty() }
     ) {
         self.content = content()
         self.header = header()
         self.footer = footer()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         VStack(spacing: .rem(0)) {
             div {
                 header

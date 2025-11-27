@@ -8,12 +8,12 @@
 import Foundation
 import HTML
 
-public struct BaseStyles: HTML {
+public struct BaseStyles: HTML.View {
     public init() {
 
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         Style { "\(renderedNormalizeCss)" }
         Style {
             """

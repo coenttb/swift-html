@@ -11,8 +11,8 @@ import Foundation
 import HTML
 import HTMLComponents
 
-public struct NavigationBar: HTML {
-    let logo: any HTML
+public struct NavigationBar: HTML.View {
+    let logo: any HTML.View
     let backgroundColor: HTMLColor?
     let sticky: Bool
     let items: [any NavItem]
@@ -20,7 +20,7 @@ public struct NavigationBar: HTML {
     public init(
         sticky: Bool = false,
         backgroundColor: HTMLColor? = nil,
-        @HTMLBuilder logo: () -> any HTML,
+        @HTML.Builder logo: () -> any HTML,
         @ArrayBuilder<NavItem> items: () -> [any NavItem]
     ) {
         self.logo = logo()
@@ -31,10 +31,10 @@ public struct NavigationBar: HTML {
 
     // Legacy init for backward compatibility
     public init(
-        @HTMLBuilder logo: () -> any HTML,
-        @HTMLBuilder centeredNavItems: () -> any HTML,
-        @HTMLBuilder trailingNavItems: () -> any HTML,
-        @HTMLBuilder mobileNavItems: () -> any HTML
+        @HTML.Builder logo: () -> any HTML,
+        @HTML.Builder centeredNavItems: () -> any HTML,
+        @HTML.Builder trailingNavItems: () -> any HTML,
+        @HTML.Builder mobileNavItems: () -> any HTML
     ) {
         self.logo = logo()
         self.items = []
@@ -43,7 +43,7 @@ public struct NavigationBar: HTML {
         // Note: This init is deprecated and will be removed in future versions
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         nav {
             // CSS for proper mobile menu behavior
             Style {
@@ -96,12 +96,12 @@ public struct NavigationBar: HTML {
                     .display(Display.none)
 
                 // Logo
-                AnyHTML(logo)
+                HTML.AnyView(logo)
                     .lineHeight(0)
 
                 // Desktop navigation items
                 HTMLForEach(items) { item in
-                    AnyHTML(item)
+                    HTML.AnyView(item)
                         .class("nav-item")
                 }
 
@@ -113,10 +113,10 @@ public struct NavigationBar: HTML {
                     HTMLForEach(items) { item in
                         // Skip NavSpacer in mobile menu
                         if "\(type(of: item))".contains("NavSpacer") {
-                            HTMLEmpty()
+                            HTML.Empty()
                         } else {
                             div {
-                                AnyHTML(item)
+                                HTML.AnyView(item)
                             }
                             .padding(.rem(1))
                             .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
@@ -160,8 +160,8 @@ public struct NavigationBar: HTML {
         .backgroundColor(backgroundColor)
     }
 
-    struct MenuButtonLabel: HTML {
-        var body: some HTML {
+    struct MenuButtonLabel: HTML.View {
+        var body: some HTML.View {
             Bars()
                 .id("menu-icon")
                 .attribute("for", "menu-checkbox")
@@ -171,8 +171,8 @@ public struct NavigationBar: HTML {
                 .userSelect(UserSelect.none)
         }
 
-        struct Bars: HTML {
-            var body: some HTML {
+        struct Bars: HTML.View {
+            var body: some HTML.View {
                 label {
                     HTMLForEach(-1...1) { index in
                         Bar(index: index)
@@ -188,9 +188,9 @@ public struct NavigationBar: HTML {
             }
         }
 
-        struct Bar: HTML {
+        struct Bar: HTML.View {
             let index: Int
-            var body: some HTML {
+            var body: some HTML.View {
                 span {}
                     .inlineStyle("top", index == 0 ? nil : "\(index * 5)px")
                     .inlineStyle(
@@ -227,7 +227,7 @@ public struct Login {
     }
 }
 
-public struct NavigationBarSVGLogo: HTML {
+public struct NavigationBarSVGLogo: HTML.View {
     let href: Href
     let svg: LegacySVG
 
@@ -239,14 +239,14 @@ public struct NavigationBarSVGLogo: HTML {
         self.href = href
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         HTMLComponents.Link(href: href) {
             svg
         }
     }
 }
 
-public struct NavigationBarCenteredNavItems: HTML {
+public struct NavigationBarCenteredNavItems: HTML.View {
 
     let items: [NavListItem]
 
@@ -254,9 +254,9 @@ public struct NavigationBarCenteredNavItems: HTML {
         self.items = items
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         ul {
-            HTMLGroup {
+            HTML.Group {
                 HTMLForEach(self.items) { item in
                     item
                 }
@@ -266,7 +266,7 @@ public struct NavigationBarCenteredNavItems: HTML {
 
     }
 
-    public struct NavListItem: HTML {
+    public struct NavListItem: HTML.View {
         let title: String
         let href: Href
 
@@ -274,7 +274,7 @@ public struct NavigationBarCenteredNavItems: HTML {
             self.title = title
             self.href = href
         }
-        public var body: some HTML {
+        public var body: some HTML.View {
             li {
                 HTMLComponents.Link(
                     title,
@@ -287,7 +287,7 @@ public struct NavigationBarCenteredNavItems: HTML {
     }
 }
 
-public struct NavigationBarTrailingNavItems: HTML {
+public struct NavigationBarTrailingNavItems: HTML.View {
 
     let items: [NavListItem]
 
@@ -297,7 +297,7 @@ public struct NavigationBarTrailingNavItems: HTML {
         self.items = items
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         ul {
             HTMLForEach(self.items) { item in
                 item
@@ -310,7 +310,7 @@ public struct NavigationBarTrailingNavItems: HTML {
         }
     }
 
-    public struct NavListItem: HTML {
+    public struct NavListItem: HTML.View {
         let title: String
         let href: Href
 
@@ -318,7 +318,7 @@ public struct NavigationBarTrailingNavItems: HTML {
             self.title = title
             self.href = href
         }
-        public var body: some HTML {
+        public var body: some HTML.View {
             li {
                 HTMLComponents.Link(
                     title,
@@ -333,7 +333,7 @@ public struct NavigationBarTrailingNavItems: HTML {
 #if DEBUG && canImport(SwiftUI)
     import SwiftUI
 
-    var content: some HTML {
+    var content: some HTML.View {
         NavigationBar {
             div {}
         } centeredNavItems: {
@@ -359,7 +359,7 @@ public struct NavigationBarTrailingNavItems: HTML {
     }
 
     #Preview {
-        HTMLDocument {
+        HTML.Document {
             content
 
             HTMLSourceText(html: content)
@@ -369,13 +369,13 @@ public struct NavigationBarTrailingNavItems: HTML {
     }
 #endif
 
-struct HTMLSourceText: HTML {
-    let html: any HTML
-    var body: some HTML {
-        HTMLText(
+struct HTMLSourceText: HTML.View {
+    let html: any HTML.View
+    var body: some HTML.View {
+        HTML.Text(
             try! String(
-                HTMLDocument {
-                    AnyHTML(html)
+                HTML.Document {
+                    HTML.AnyView(html)
                 }
             )
         )

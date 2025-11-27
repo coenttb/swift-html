@@ -143,7 +143,7 @@ struct SVGIntegrationTests {
             """
 
         let html = div {
-            img(svg: SVGRaw(svgString), alt: "Green square", base64: false)
+            img(svg: SVG.Raw(svgString), alt: "Green square", base64: false)
         }
 
         let renderedString = try String(html)
@@ -164,7 +164,7 @@ struct SVGIntegrationTests {
             """
 
         let html = div {
-            img(svg: SVGRaw(svgString), alt: "Blue square", base64: true)
+            img(svg: SVG.Raw(svgString), alt: "Blue square", base64: true)
         }
 
         let renderedString = try String(html)

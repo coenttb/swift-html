@@ -1,9 +1,9 @@
 import Foundation
 import HTML
 
-public struct Divider: HTML {
+public struct Divider: HTML.View {
     public init() {}
-    public var body: some HTML {
+    public var body: some HTML.View {
         hr()()
             .borderRight(BorderRight.none)
             .borderBottom(BorderBottom.none)

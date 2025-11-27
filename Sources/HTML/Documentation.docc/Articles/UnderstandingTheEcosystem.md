@@ -42,7 +42,7 @@ The swift-html ecosystem consists of four carefully designed packages that work 
 │                 (Rendering Engine)                      │
 │                                                         │
 │  • HTML protocol                                        │
-│  • @HTMLBuilder                                         │
+│  • @HTML.Builder                                         │
 │  • String/byte rendering                                │
 │  • Performance optimizations                            │
 └─────────────────────────────────────────────────────────┘
@@ -109,17 +109,17 @@ The high-performance rendering engine.
 
 **Key Features**:
 - Universal `HTML` protocol
-- `@HTMLBuilder` for declarative syntax
+- `@HTML.Builder` for declarative syntax
 - Efficient byte-level rendering
 - Minimal overhead and dependencies
 
 **Example**:
 ```swift
 // Any type can be HTML
-struct UserProfile: HTML {
+struct UserProfile: HTML.View {
     let user: User
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             h2 { user.name }
             p { user.bio }
@@ -172,7 +172,7 @@ import HTML // Just one import gives you everything
 // Preview integration
 #if canImport(SwiftUI)
 #Preview {
-    HTMLDocument {
+    HTML.Document {
         h1 { "Preview your HTML in your IDE." }
     }
 }
@@ -210,8 +210,8 @@ The integration layer makes HTML types conform to the rendering protocol:
 // In swift-html-css-pointfree
 extension HTML_Standard_Elements.ContentDivision {
     public func callAsFunction(
-        @HTMLBuilder _ content: () -> some PointFreeHTML.HTML
-    ) -> some PointFreeHTML.HTML {
+        @HTML.Builder _ content: () -> some HTML_Renderable.HTML
+    ) -> some HTML_Renderable.HTML {
         HTMLElement(tag: Self.tag) { content() }
     }
 }
@@ -226,7 +226,7 @@ CSS modifiers are added to HTML elements:
 ```swift
 // In swift-html-css-pointfree
 extension HTML {
-    public func padding(_ value: LengthPercentage) -> some HTML {
+    public func padding(_ value: LengthPercentage) -> some HTML.View {
         // Apply padding
     }
 }
@@ -301,10 +301,10 @@ Here's how a real-world component flows through the ecosystem:
 
 ```swift
 // Your component uses swift-html's convenient API
-struct ArticleCard: HTML {
+struct ArticleCard: HTML.View {
     let article: Article
     
-    var body: some HTML {
+    var body: some HTML.View {
         article {                              // `Article` from swift-html-standard, `article` typealias from swift-html
             header {
                 h2 { article.title }

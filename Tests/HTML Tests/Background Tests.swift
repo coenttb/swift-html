@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -18,8 +18,8 @@ extension SnapshotTests {
         @Test("Background")
         func background() {
             assertInlineSnapshot(
-                of: HTMLDocument {
-                    div { HTMLEmpty() }
+                of: HTML.Document {
+                    div { HTML.Empty() }
                         .border(
                             .init(
                                 width: .length(1.px),
@@ -35,16 +35,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .border-3JxMp{border:1px solid #cc3333}
-                @media (prefers-color-scheme: dark){
-                  .border-CRwQB2{border:1px solid rgb(163, 40, 40)}
-                }
-
+                      .border-0{border:1px solid #cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .border-1{border:1px solid rgb(163, 40, 40)}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="border-3JxMp border-CRwQB2">
-                </div>
+                    <div class="border-0 border-1">
+                    </div>
                   </body>
                 </html>
                 """

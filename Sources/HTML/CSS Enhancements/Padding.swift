@@ -5,18 +5,19 @@
 //  Created by Coen ten Thije Boonkkamp on 15/04/2025.
 //
 
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
+import CSS_Standard
 import OrderedCollections
 
-extension HTML {
-    @HTMLBuilder
+extension HTML.View {
+    @HTML.Builder
     public func padding(
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch (vertical, horizontal) {
         case (.some(let vertical), .some(let horizontal)):
             self.padding(
@@ -39,15 +40,15 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @HTMLBuilder
+extension HTML.View {
+    @HTML.Builder
     public func padding(
         _ vertical: LengthPercentage?,
         _ horizontal: LengthPercentage?,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.padding(
             vertical: vertical,
             horizontal: horizontal,
@@ -62,24 +63,24 @@ extension Padding {
     public typealias Variant = Side
 }
 
-extension HTML {
-    @HTMLBuilder
+extension HTML.View {
+    @HTML.Builder
     public func padding(
         _ padding: Padding.Variant...,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.padding(.init(padding), media: mediaQuery, selector: selector, pseudo: pseudo)
     }
 
-    @HTMLBuilder
+    @HTML.Builder
     public func padding(
         _ padding: OrderedSet<Padding.Variant>,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if padding.count == 4 {
             // Extract values for each side from the ordered set
             let topValue = padding.first(where: {
@@ -152,15 +153,15 @@ extension HTML {
     private func paddingSides(
         padding: OrderedSet<Padding.Variant>,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector?,
-        pseudo: Pseudo?
-    ) -> some HTML {
+        selector: HTML.Selector?,
+        pseudo: HTML.Pseudo?
+    ) -> some HTML.View {
         self
             .if(
                 padding.contains(where: { if case .top = $0 { return true } else { return false } })
             ) {
                 element in
-                HTMLGroup {
+                HTML.Group {
                     let lengthPercentage = padding.first(where: {
                         if case .top = $0 { return true } else { return false }
                     })!
@@ -183,7 +184,7 @@ extension HTML {
                 })
             ) {
                 element in
-                HTMLGroup {
+                HTML.Group {
                     let lengthPercentage = padding.first(where: {
                         if case .bottom = $0 { return true } else { return false }
                     })!
@@ -205,7 +206,7 @@ extension HTML {
                 )
             ) {
                 element in
-                HTMLGroup {
+                HTML.Group {
                     let lengthPercentage = padding.first(where: {
                         if case .left = $0 { return true } else { return false }
                     })!
@@ -228,7 +229,7 @@ extension HTML {
                 })
             ) {
                 element in
-                HTMLGroup {
+                HTML.Group {
                     let lengthPercentage = padding.first(where: {
                         if case .right = $0 { return true } else { return false }
                     })!
@@ -248,17 +249,17 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func padding(
         top: LengthPercentage,
         horizontal: LengthPercentage,
         bottom: LengthPercentage,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.padding(
             .top(top),
             .bottom(bottom),
@@ -271,7 +272,7 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     public func padding(
         top: LengthPercentage? = nil,
@@ -279,9 +280,9 @@ extension HTML {
         left: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
 
         var x: OrderedSet<Padding.Variant> = []
 

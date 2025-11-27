@@ -72,12 +72,12 @@ extension HTMLColor {
 
 // MARK: - HTML Extensions
 
-extension HTML {
+extension HTML.View {
     /// Applies a gradient background to the HTML element
     public func gradient(
         bottom: HTMLColor,
         top: HTMLColor
-    ) -> some HTML {
+    ) -> some HTML.View {
         self
             .inlineStyle(
                 "background",
@@ -94,7 +94,7 @@ extension HTML {
         bottom: HTMLColor,
         middle: HTMLColor,
         top: HTMLColor
-    ) -> some HTML {
+    ) -> some HTML.View {
         self
             .inlineStyle(
                 "background",

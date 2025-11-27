@@ -2,7 +2,7 @@ import HTML
 import HTMLComponents
 
 // MARK: - Alert Component
-public struct Alert<Content: HTML, Actions: HTML>: HTML {
+public struct Alert<Content: HTML, Actions: HTML>: HTML.View {
     public enum Severity {
         case info
         case success
@@ -58,8 +58,8 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
         title: String? = nil,
         icon: String? = nil,
         dismissible: Bool = false,
-        @HTMLBuilder content: () -> Content,
-        @HTMLBuilder actions: () -> Actions = { HTMLEmpty() }
+        @HTML.Builder content: () -> Content,
+        @HTML.Builder actions: () -> Actions = { HTML.Empty() }
     ) {
         self.severity = severity
         self.title = title
@@ -69,7 +69,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
         self.actions = actions()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             div {
                 // Icon
@@ -86,7 +86,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
                 // Content
                 div {
                     if let title = title {
-                        div { HTMLText(title) }
+                        div { HTML.Text(title) }
                             .fontWeight(.semiBold)
                             .marginBottom(.rem(0.25))
                     }
@@ -96,7 +96,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
                 .flexGrow()
 
                 // Actions
-                if !(actions is HTMLEmpty) {
+                if !(actions is HTML.Empty) {
                     div {
                         actions
                     }
@@ -134,7 +134,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML {
 }
 
 // MARK: - Banner Component
-public struct Banner<Content: HTML, Actions: HTML>: HTML {
+public struct Banner<Content: HTML, Actions: HTML>: HTML.View {
     public enum Style {
         case standard
         case slim
@@ -161,8 +161,8 @@ public struct Banner<Content: HTML, Actions: HTML>: HTML {
         backgroundColor: HTMLColor = .blue,
         textColor: HTMLColor = .white,
         sticky: Bool = false,
-        @HTMLBuilder content: () -> Content,
-        @HTMLBuilder actions: () -> Actions = { HTMLEmpty() }
+        @HTML.Builder content: () -> Content,
+        @HTML.Builder actions: () -> Actions = { HTML.Empty() }
     ) {
         self.style = style
         self.backgroundColor = backgroundColor
@@ -172,12 +172,12 @@ public struct Banner<Content: HTML, Actions: HTML>: HTML {
         self.actions = actions()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             div {
                 content
 
-                if !(actions is HTMLEmpty) {
+                if !(actions is HTML.Empty) {
                     div {
                         actions
                     }
@@ -206,13 +206,13 @@ public struct Banner<Content: HTML, Actions: HTML>: HTML {
 }
 
 // MARK: - Convenience Initializers
-extension Alert where Actions == HTMLEmpty {
+extension Alert where Actions == HTML.Empty {
     public init(
         severity: Severity = .info,
         title: String? = nil,
         icon: String? = nil,
         dismissible: Bool = false,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.init(
             severity: severity,
@@ -220,18 +220,18 @@ extension Alert where Actions == HTMLEmpty {
             icon: icon,
             dismissible: dismissible,
             content: content,
-            actions: { HTMLEmpty() }
+            actions: { HTML.Empty() }
         )
     }
 }
 
-extension Banner where Actions == HTMLEmpty {
+extension Banner where Actions == HTML.Empty {
     public init(
         style: Style = .standard,
         backgroundColor: HTMLColor = .blue,
         textColor: HTMLColor = .white,
         sticky: Bool = false,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.init(
             style: style,
@@ -239,7 +239,7 @@ extension Banner where Actions == HTMLEmpty {
             textColor: textColor,
             sticky: sticky,
             content: content,
-            actions: { HTMLEmpty() }
+            actions: { HTML.Empty() }
         )
     }
 }

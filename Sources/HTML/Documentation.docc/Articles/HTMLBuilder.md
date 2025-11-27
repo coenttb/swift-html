@@ -1,10 +1,10 @@
-# Understanding @HTMLBuilder
+# Understanding @HTML.Builder
 
-Explore how the @HTMLBuilder attribute enables SwiftUI-like declarative syntax for HTML composition.
+Explore how the @HTML.Builder attribute enables SwiftUI-like declarative syntax for HTML composition.
 
 ## Overview
 
-The `@HTMLBuilder` attribute is a result builder that transforms Swift's declarative syntax into HTML structures. It's what allows you to write HTML in a natural, SwiftUI-like way without explicit array construction or concatenation. This article explains how HTMLBuilder works, its capabilities, and how to use it effectively.
+The `@HTML.Builder` attribute is a result builder that transforms Swift's declarative syntax into HTML structures. It's what allows you to write HTML in a natural, SwiftUI-like way without explicit array construction or concatenation. This article explains how HTMLBuilder works, its capabilities, and how to use it effectively.
 
 ## What is a Result Builder?
 
@@ -18,7 +18,7 @@ let content = [
     div { "Content" }
 ]
 
-// With @HTMLBuilder - clean and declarative
+// With @HTML.Builder - clean and declarative
 let content = HTMLBuilder.buildBlock(
     h1 { "Title" },
     p { "Paragraph" },
@@ -33,22 +33,22 @@ div {
 }
 ```
 
-## How @HTMLBuilder Works
+## How @HTML.Builder Works
 
 ### Basic Building Blocks
 
 The HTMLBuilder transforms a series of statements into HTML:
 
 ```swift
-@HTMLBuilder
-func createContent() -> some HTML {
+@HTML.Builder
+func createContent() -> some HTML.View {
     h1 { "Welcome" }
     p { "This is a paragraph" }
     a(href: "/more") { "Read more" }
 }
 
 // Equivalent to manually building:
-func createContentManual() -> some HTML {
+func createContentManual() -> some HTML.View {
     HTMLBuilder.buildBlock(
         h1 { "Welcome" },
         p { "This is a paragraph" },
@@ -59,18 +59,18 @@ func createContentManual() -> some HTML {
 
 ### Implicit Builder Contexts
 
-Many swift-html APIs automatically apply @HTMLBuilder:
+Many swift-html APIs automatically apply @HTML.Builder:
 
 ```swift
-// The div's content closure has an implicit @HTMLBuilder
+// The div's content closure has an implicit @HTML.Builder
 div {
     h1 { "Title" }      // ✅ Multiple elements work
-    p { "Paragraph" }   // ✅ Because of @HTMLBuilder
+    p { "Paragraph" }   // ✅ Because of @HTML.Builder
 }
 
-// The HTML protocol's body property uses @HTMLBuilder
-struct MyComponent: HTML {
-    var body: some HTML {
+// The HTML protocol's body property uses @HTML.Builder
+struct MyComponent: HTML.View {
+    var body: some HTML.View {
         h1 { "Title" }      // ✅ Multiple elements work here too
         p { "Content" }
     }
@@ -109,11 +109,11 @@ p {
 Use Swift variables and expressions:
 
 ```swift
-struct UserGreeting: HTML {
+struct UserGreeting: HTML.View {
     let name: String
     let visitCount: Int
     
-    var body: some HTML {
+    var body: some HTML.View {
         h1 { "Hello, \(name)!" }
         p { "You've visited \(visitCount) times" }
         
@@ -128,10 +128,10 @@ struct UserGreeting: HTML {
 Use Swift's control flow:
 
 ```swift
-struct StatusMessage: HTML {
+struct StatusMessage: HTML.View {
     let isOnline: Bool
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             if isOnline {
                 span { "●" }
@@ -147,10 +147,10 @@ struct StatusMessage: HTML {
 }
 
 // With optional binding
-struct UserDisplay: HTML {
+struct UserDisplay: HTML.View {
     let user: User?
     
-    var body: some HTML {
+    var body: some HTML.View {
         if let user = user {
             div {
                 h2 { user.name }
@@ -169,7 +169,7 @@ struct UserDisplay: HTML {
 Pattern match to build different HTML:
 
 ```swift
-struct AlertBox: HTML {
+struct AlertBox: HTML.View {
     enum Level {
         case info, warning, error, success
     }
@@ -177,7 +177,7 @@ struct AlertBox: HTML {
     let level: Level
     let message: String
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             switch level {
             case .info:
@@ -206,10 +206,10 @@ struct AlertBox: HTML {
 Iterate over collections:
 
 ```swift
-struct TodoList: HTML {
+struct TodoList: HTML.View {
     let todos: [Todo]
     
-    var body: some HTML {
+    var body: some HTML.View {
         ul {
             for todo in todos {
                 li {
@@ -226,10 +226,10 @@ struct TodoList: HTML {
 }
 
 // With enumerated
-struct NumberedList: HTML {
+struct NumberedList: HTML.View {
     let items: [String]
     
-    var body: some HTML {
+    var body: some HTML.View {
         ol {
             for (index, item) in items.enumerated() {
                 li {
@@ -247,11 +247,11 @@ struct NumberedList: HTML {
 Compute values within the builder:
 
 ```swift
-struct PricingCard: HTML {
+struct PricingCard: HTML.View {
     let price: Decimal
     let period: String
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             let formattedPrice = price.formatted(.currency(code: "USD"))
             let monthly = price / 12
@@ -267,11 +267,11 @@ struct PricingCard: HTML {
 }
 
 // With local functions
-struct Navigation: HTML {
+struct Navigation: HTML.View {
     let links: [(title: String, url: String)]
     
-    var body: some HTML {
-        func renderLink(_ link: (title: String, url: String)) -> some HTML {
+    var body: some HTML.View {
+        func renderLink(_ link: (title: String, url: String)) -> some HTML.View {
             a(href: link.url) { link.title }
                 .class("nav-link")
         }
@@ -314,11 +314,11 @@ ul {
 Build different content based on conditions:
 
 ```swift
-struct Gallery: HTML {
+struct Gallery: HTML.View {
     let images: [ImageData]
     let showCaptions: Bool
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             if images.isEmpty {
                 p { "No images to display" }
@@ -344,10 +344,10 @@ struct Gallery: HTML {
 Builders can be nested naturally:
 
 ```swift
-struct Dashboard: HTML {
+struct Dashboard: HTML.View {
     let stats: [Stat]
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             h1 { "Dashboard" }
             
@@ -384,19 +384,19 @@ Create your own builder helpers:
 extension HTML {
     static func when<Content: HTML>(
         _ condition: Bool,
-        @HTMLBuilder content: () -> Content
-    ) -> some HTML {
+        @HTML.Builder content: () -> Content
+    ) -> some HTML.View {
         if condition {
             content()
         } else {
-            HTMLEmpty()
+            HTML.Empty()
         }
     }
     
     static func forEach<T, Content: HTML>(
         _ items: [T],
-        @HTMLBuilder content: (T) -> Content
-    ) -> some HTML {
+        @HTML.Builder content: (T) -> Content
+    ) -> some HTML.View {
         HTMLForEach(items, content: content)
     }
 }
@@ -450,10 +450,10 @@ div {
 For complex logic, extract to methods:
 
 ```swift
-struct ComplexComponent: HTML {
+struct ComplexComponent: HTML.View {
     let data: ComplexData
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             renderHeader()
             renderContent()
@@ -461,18 +461,18 @@ struct ComplexComponent: HTML {
         }
     }
     
-    @HTMLBuilder
-    private func renderHeader() -> some HTML {
+    @HTML.Builder
+    private func renderHeader() -> some HTML.View {
         // Complex header logic
     }
     
-    @HTMLBuilder
-    private func renderContent() -> some HTML {
+    @HTML.Builder
+    private func renderContent() -> some HTML.View {
         // Complex content logic
     }
     
-    @HTMLBuilder
-    private func renderFooter() -> some HTML {
+    @HTML.Builder
+    private func renderFooter() -> some HTML.View {
         // Complex footer logic
     }
 }
@@ -491,7 +491,7 @@ let content: some HTML = if condition {
 }
 
 // Or use explicit return
-var body: some HTML {
+var body: some HTML.View {
     if condition {
         return div { "Yes" }
     } else {
@@ -527,13 +527,13 @@ div {
 For static content, compute once:
 
 ```swift
-struct Footer: HTML {
+struct Footer: HTML.View {
     // Computed once
     private static let copyrightNotice = p {
         "© 2024 My Company. All rights reserved."
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         footer {
             Self.copyrightNotice  // Reuse static content
             // Dynamic content
@@ -576,10 +576,10 @@ struct HTMLBuilderTests {
     }
 }
 
-struct TestComponent: HTML {
+struct TestComponent: HTML.View {
     let isLoggedIn: Bool
     
-    var body: some HTML {
+    var body: some HTML.View {
         if isLoggedIn {
             p { "Welcome back" }
         } else {
@@ -595,18 +595,18 @@ HTMLTestSupport makes it easy to test complex HTMLBuilder compositions:
 
 ```swift
 import Testing
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 @testable import MyApp
 
 @Suite("HTMLBuilder Snapshot Tests")
 struct HTMLBuilderSnapshotTests {
     @Test("Complex builder with conditionals and loops")
     func complexBuilder() throws {
-        struct Dashboard: HTML {
+        struct Dashboard: HTML.View {
             let user: User?
             let notifications: [Notification]
             
-            var body: some HTML {
+            var body: some HTML.View {
                 div {
                     if let user = user {
                         header {
@@ -678,14 +678,14 @@ struct HTMLBuilderSnapshotTests {
     
     @Test("HTMLBuilder with switch statements")
     func switchStatementBuilder() throws {
-        struct StatusBadge: HTML {
+        struct StatusBadge: HTML.View {
             enum Status {
                 case active, pending, inactive, error
             }
             
             let status: Status
             
-            var body: some HTML {
+            var body: some HTML.View {
                 span {
                     switch status {
                     case .active:
@@ -735,7 +735,7 @@ Break complex builders into smaller pieces:
 
 ```swift
 // Good: Focused builders
-var body: some HTML {
+var body: some HTML.View {
     renderHeader()
     renderMainContent()
     renderSidebar()
@@ -743,7 +743,7 @@ var body: some HTML {
 }
 
 // Avoid: Everything in one builder
-var body: some HTML {
+var body: some HTML.View {
     // 100 lines of mixed content...
 }
 ```
@@ -774,12 +774,12 @@ form {
 Create builder functions for repeated patterns:
 
 ```swift
-@HTMLBuilder
+@HTML.Builder
 func labeledInput(
     _ label: String,
     name: String,
     type: InputType = .text
-) -> some HTML {
+) -> some HTML.View {
     label {
         span { label }
         input(type: type, name: name)
@@ -790,7 +790,7 @@ func labeledInput(
 
 ## Conclusion
 
-The @HTMLBuilder attribute is what makes swift-html feel natural and SwiftUI-like. It enables:
+The @HTML.Builder attribute is what makes swift-html feel natural and SwiftUI-like. It enables:
 
 - Clean, declarative syntax
 - Seamless integration of Swift control flow

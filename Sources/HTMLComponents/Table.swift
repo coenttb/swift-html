@@ -1,7 +1,6 @@
 import HTML
-import HTMLAttributesPointFreeHTML
 
-public struct Table<Headers: HTML, Rows: HTML>: HTML {
+public struct Table<Headers: HTML, Rows: HTML>: HTML.View {
     let headers: Headers
     let rows: Rows
     let id: String?
@@ -14,8 +13,8 @@ public struct Table<Headers: HTML, Rows: HTML>: HTML {
         striped: Bool = false,
         hoverable: Bool = true,
         bordered: Bool = true,
-        @HTMLBuilder headers: () -> Headers,
-        @HTMLBuilder rows: () -> Rows
+        @HTML.Builder headers: () -> Headers,
+        @HTML.Builder rows: () -> Rows
     ) {
         self.id = id
         self.striped = striped
@@ -25,7 +24,7 @@ public struct Table<Headers: HTML, Rows: HTML>: HTML {
         self.rows = rows()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             table {
                 thead {
@@ -70,7 +69,7 @@ public struct Table<Headers: HTML, Rows: HTML>: HTML {
 }
 
 // Table header helpers
-public struct TableHeader: HTML {
+public struct TableHeader: HTML.View {
     let content: String
     let sortable: Bool
     let alignment: TextAlign
@@ -88,9 +87,9 @@ public struct TableHeader: HTML {
         self.onClick = onClick
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         th {
-            HTMLText(content)
+            HTML.Text(content)
             if sortable {
                 span { "" }
                     .class("sort-indicator")
@@ -111,19 +110,19 @@ public struct TableHeader: HTML {
 }
 
 // Table row helper
-public struct TableRow<Content: HTML>: HTML {
+public struct TableRow<Content: HTML.View>: HTML.View {
     let content: Content
     let onClick: String?
 
     public init(
         onClick: String? = nil,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.onClick = onClick
         self.content = content()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         tr {
             content
         }
@@ -136,7 +135,7 @@ public struct TableRow<Content: HTML>: HTML {
 }
 
 // Table cell helper
-public struct TableCell<Content: HTML>: HTML {
+public struct TableCell<Content: HTML.View>: HTML.View {
     let content: Content
     let alignment: TextAlign
     let colspan: Int?
@@ -146,7 +145,7 @@ public struct TableCell<Content: HTML>: HTML {
         alignment: TextAlign = .left,
         colspan: Int? = nil,
         rowspan: Int? = nil,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.alignment = alignment
         self.colspan = colspan
@@ -154,7 +153,7 @@ public struct TableCell<Content: HTML>: HTML {
         self.content = content()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         td {
             content
         }

@@ -1,6 +1,6 @@
 import HTMLComponents
 
-public struct CallToActionModule<Content: HTML>: HTML {
+public struct CallToActionModule<Content: HTML.View>: HTML.View {
 
     let title: (content: String, color: HTMLColor)
     let blurb: (content: String, color: HTMLColor)?
@@ -9,25 +9,25 @@ public struct CallToActionModule<Content: HTML>: HTML {
     public init(
         title: (content: String, color: HTMLColor),
         blurb: (content: String, color: HTMLColor)?,
-        @HTMLBuilder content: () -> Content = { HTMLEmpty() }
+        @HTML.Builder content: () -> Content = { HTML.Empty() }
     ) {
         self.title = title
         self.blurb = blurb
         self.content = content()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             div {
-                HTMLGroup {
+                HTML.Group {
                     div {
-                        Header(2) { HTMLRaw(title.content) }
+                        Header(2) { HTML.Raw(title.content) }
                             .color(title.color)
                     }
 
                     if let blurb {
                         div {
-                            Paragraph(.big) { HTMLRaw(blurb.content) }
+                            Paragraph(.big) { HTML.Raw(blurb.content) }
                                 .font(.body(.regular))
                                 .color(blurb.color)
                                 .margin(
@@ -65,7 +65,7 @@ public struct CallToActionModule<Content: HTML>: HTML {
 #if DEBUG && canImport(SwiftUI)
     import SwiftUI
     #Preview {
-        HTMLDocument {
+        HTML.Document {
             CallToActionModule(
                 title: (content: "HELLO THERE", color: .black),
                 blurb: (content: "HELLO", color: .blue)

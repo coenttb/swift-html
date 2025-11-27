@@ -27,7 +27,7 @@ public struct Input<CodingKey: RawRepresentable>: HTML where CodingKey.RawValue 
         self.type = type
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         style.transform(
             input.init(
                 name: .init(codingKey.rawValue),
@@ -50,8 +50,8 @@ extension Input {
         case error
         case success
 
-        @HTMLBuilder
-        public func transform(_ html: some HTML) -> some HTML {
+        @HTML.Builder
+        public func transform(_ html: some HTML) -> some HTML.View {
             switch self {
             case .default:
                 html

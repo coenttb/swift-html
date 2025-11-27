@@ -1,32 +1,32 @@
 import Foundation
 import HTMLComponents
 
-public struct PageHeader<Title: HTML, Blurb: HTML, CallToAction: HTML>: HTML {
+public struct PageHeader<Title: HTML, Blurb: HTML, CallToAction: HTML>: HTML.View {
     var title: Title
     var blurb: Blurb
     var callToAction: CallToAction?
 
     public init(
         title: String,
-        @HTMLBuilder blurb: () -> Blurb,
-        @HTMLBuilder callToAction: () -> CallToAction? = { Never?.none }
-    ) where Title == HTMLText {
-        self.title = HTMLText(title)
+        @HTML.Builder blurb: () -> Blurb,
+        @HTML.Builder callToAction: () -> CallToAction? = { Never?.none }
+    ) where Title == HTML.Text {
+        self.title = HTML.Text(title)
         self.blurb = blurb()
         self.callToAction = callToAction()
     }
 
     public init(
-        @HTMLBuilder title: () -> Title,
-        @HTMLBuilder blurb: () -> Blurb,
-        @HTMLBuilder callToAction: () -> CallToAction? = { Never?.none }
+        @HTML.Builder title: () -> Title,
+        @HTML.Builder blurb: () -> Blurb,
+        @HTML.Builder callToAction: () -> CallToAction? = { Never?.none }
     ) {
         self.title = title()
         self.blurb = blurb()
         self.callToAction = callToAction()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         VStack {
             HStack(
                 alignment: .middle

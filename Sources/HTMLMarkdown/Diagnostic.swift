@@ -1,5 +1,4 @@
 import HTML
-import HTMLAttributesPointFreeHTML
 
 public struct DiagnosticLevel: Sendable {
     var icon: LegacySVG
@@ -58,16 +57,16 @@ public struct DiagnosticLevel: Sendable {
     )
 }
 
-public struct Diagnostic<Message: HTML>: HTML {
+public struct Diagnostic<Message: HTML.View>: HTML.View {
     let level: DiagnosticLevel
     let message: Message
 
-    public init(level: DiagnosticLevel, @HTMLBuilder message: () -> Message) {
+    public init(level: DiagnosticLevel, @HTML.Builder message: () -> Message) {
         self.level = level
         self.message = message()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             HStack(spacing: 0) {
                 div {
@@ -124,11 +123,11 @@ public struct Diagnostic<Message: HTML>: HTML {
     }
 }
 
-public struct InlineDiagnostic: HTML {
+public struct InlineDiagnostic: HTML.View {
     let level: DiagnosticLevel
     let message: String
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         VStack(alignment: .normal) {
             HStack(spacing: 0.05.rem) {
                 div {
@@ -156,7 +155,7 @@ public struct InlineDiagnostic: HTML {
                 )
 
                 div {
-                    HTMLText(message)
+                    HTML.Text(message)
                 }
                 .backgroundColor(level.backgroundColor)
                 //                .color(.black.withDarkColor(.white))
@@ -189,7 +188,7 @@ public struct InlineDiagnostic: HTML {
 
     #Preview {
         ForEach(ColorScheme.allCases, id: \.hashValue) { colorScheme in
-            HTMLDocument {
+            HTML.Document {
                 div {
                     style {
                         """

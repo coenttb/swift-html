@@ -8,7 +8,7 @@
 import Foundation
 import HTML
 
-public struct Label<Title: HTML, Icon: HTML>: HTML {
+public struct Label<Title: HTML, Icon: HTML>: HTML.View {
     let alignment: VerticalAlign
     let spacing: Length
     let title: Title
@@ -17,8 +17,8 @@ public struct Label<Title: HTML, Icon: HTML>: HTML {
     public init(
         alignment: VerticalAlign = .middle,
         spacing: Length = 0.25.rem,
-        @HTMLBuilder icon: () -> Icon,
-        @HTMLBuilder title: () -> Title
+        @HTML.Builder icon: () -> Icon,
+        @HTML.Builder title: () -> Title
     ) {
         self.alignment = alignment
         self.spacing = spacing
@@ -26,7 +26,7 @@ public struct Label<Title: HTML, Icon: HTML>: HTML {
         self.title = title()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         HStack(alignment: alignment, spacing: spacing) {
             icon
             title
@@ -40,12 +40,12 @@ extension Label {
         spacing: Length = 0.25.rem,
         _ title: String,
         icon: LegacySVG
-    ) where Title == HTMLText, Icon == LegacySVG {
+    ) where Title == HTML.Text, Icon == LegacySVG {
         self = .init(
             alignment: alignment,
             spacing: spacing,
             icon: { icon },
-            title: { HTMLText(title) }
+            title: { HTML.Text(title) }
         )
     }
 }

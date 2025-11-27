@@ -5,8 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 01/09/2025.
 //
 
-import Foundation
-import HTMLCSSPointFreeHTML
+import CSS_Standard
 
 extension AlignItems {
     public static let leading: Self = .start

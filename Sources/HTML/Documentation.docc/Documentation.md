@@ -64,7 +64,7 @@ Build complete HTML documents using the `HTMLDocument` protocol:
 
 ```swift
 struct LandingPage: HTMLDocumentProtocol {
-    var head: some HTML {
+    var head: some HTML.View {
         title { "My Swift Website" }
         meta(charset: .utf8)
         meta(name: .viewport, content: "width=device-width, initial-scale=1")
@@ -80,7 +80,7 @@ struct LandingPage: HTMLDocumentProtocol {
         }
     }
     
-    var body: some HTML {
+    var body: some HTML.View {
         div {
             h1 { "Hello, Swift!" }
                 .color(light: .black, dark: .white)
@@ -100,7 +100,7 @@ let webpage = try String(LandingPage())
 Or use the `HTMLDocument` type for a simpler inline approach:
 
 ```swift
-let quickPage = HTMLDocument {
+let quickPage = HTML.Document {
     // Body content
     div {
         h1 { "Quick Start" }

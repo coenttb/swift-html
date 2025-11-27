@@ -11,7 +11,7 @@ import WHATWG_HTML_Elements
 import WHATWG_HTML_MediaAttributes
 // Import SVG module but we need to be careful about naming
 import SVG
-import SVGPrinter
+import SVG_Renderable
 import SVG_Standard
 
 /// Bridge to embed type-safe SVG content in HTML documents.
@@ -35,28 +35,29 @@ import SVG_Standard
 ///     }
 /// }
 /// ```
-public struct InlineSVG: HTML {
+public struct InlineSVG: HTML.View {
     /// The SVG content to embed
-    private let content: any SVG
+    private let content: any SVG.View
 
     /// Creates a new inline SVG element from SVG content.
     ///
     /// - Parameter content: A closure that returns SVG content using the SVG DSL.
-    public init<Content: SVG>(@SVGBuilder _ content: () -> Content) {
+    public init<Content: SVG.View>(@SVG.Builder _ content: () -> Content) {
         self.content = content()
     }
 
     /// Creates a new inline SVG element from already created SVG content.
     ///
     /// - Parameter content: SVG content
-    public init<Content: SVG>(_ content: Content) {
+    public init<Content: SVG.View>(_ content: Content) {
         self.content = content
     }
 
     /// Renders the SVG content as HTML.
-    public var body: some HTML {
+    public var body: some HTML.View {
         // Render the SVG to a string and embed as raw HTML
-        HTMLRaw(content.render())
+        let svgString: String = content.render()
+        HTML.Raw(svgString)
     }
 }
 
@@ -69,8 +70,8 @@ public struct InlineSVG: HTML {
 ///
 /// - Parameter svgString: A string containing valid SVG markup.
 /// - Returns: An HTML element containing the SVG.
-public func svg(_ svgString: String) -> some HTML {
-    HTMLRaw(svgString)
+public func svg(_ svgString: String) -> some HTML.View {
+    HTML.Raw(svgString)
 }
 
 // MARK: - Image Extensions for SVG
@@ -81,7 +82,7 @@ public func svg(_ svgString: String) -> some HTML {
 //    svg content: Content,
 //    alt: String,
 //    base64: Bool = false
-// ) -> some HTML {
+// ) -> some HTML.View {
 //    let svgString = content.render()
 //
 //    let src: String
@@ -100,13 +101,13 @@ public func svg(_ svgString: String) -> some HTML {
 //
 
 extension WHATWG_HTML_Elements.Image {
-    public init<Content: SVG>(
+    public init<Content: SVG.View>(
         svg: Content,
         alt: WHATWG_HTML_MediaAttributes.Alt?,
         base64: Bool = true,
         loading: WHATWG_HTML_MediaAttributes.Loading? = .eager
     ) {
-        let svgString = svg.render()
+        let svgString: String = svg.render()
 
         let src: WHATWG_HTML_MediaAttributes.Src = {
             if base64 {

@@ -6,18 +6,19 @@
 //
 
 import Foundation
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
+import CSS_Standard
 import OrderedCollections
 
-extension HTML {
-    @HTMLBuilder
+extension HTML.View {
+    @HTML.Builder
     public func margin(
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch (vertical, horizontal) {
         case (.some(let vertical), .some(let horizontal)):
             self.margin(
@@ -64,24 +65,24 @@ extension Margin {
     public typealias Variant = Side
 }
 
-extension HTML {
-    //    @HTMLBuilder
+extension HTML.View {
+    //    @HTML.Builder
     //    public func margin(
     //        _ margin: Margin.Variant...,
     //        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-    //        selector: PointFreeHTML.Selector? = nil,
-    //        pseudo: Pseudo? = nil
-    //    )-> some HTML {
+    //        selector: HTML.Selector? = nil,
+    //        pseudo: HTML.Pseudo? = nil
+    //    )-> some HTML.View {
     //        self.margin(.init(margin), media: mediaQuery, selector: selector, pseudo: pseudo)
     //    }
 
-    //    @HTMLBuilder
+    //    @HTML.Builder
     //    public func margin(
     //        _ margin: OrderedSet<Margin.Variant>,
     //        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-    //        selector: PointFreeHTML.Selector? = nil,
-    //        pseudo: Pseudo? = nil
-    //    )-> some HTML {
+    //        selector: HTML.Selector? = nil,
+    //        pseudo: HTML.Pseudo? = nil
+    //    )-> some HTML.View {
     //        if margin.count == 4 {
     //            // Extract values for each side from the ordered set
     //            let topValue = margin.first(where: { if case .top = $0 { return true } else { return false } })
@@ -147,8 +148,8 @@ extension HTML {
     //        margin: OrderedSet<Margin.Variant>,
     //        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
     //        pre: String?,
-    //        pseudo: Pseudo?
-    //    ) -> some HTML {
+    //        pseudo: HTML.Pseudo?
+    //    ) -> some HTML.View {
     //        return self
     //            .if(margin.contains(where: { if case .top = $0 { return true } else { return false } })) { element in
     //                let lengthPercentage = margin.first(where: { if case .top = $0 { return true } else { return false } })!
@@ -185,18 +186,18 @@ extension HTML {
     //    }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func margin(
         top: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
         bottom: LengthPercentage? = nil,
         left: LengthPercentage? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch (top, right, bottom, left) {
         // All four values provided
         case (.some(let top), .some(let right), .some(let bottom), .some(let left)):

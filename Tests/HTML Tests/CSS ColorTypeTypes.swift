@@ -7,7 +7,7 @@
 
 import Dependencies
 import HTML
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 import Testing
 
 @Suite(

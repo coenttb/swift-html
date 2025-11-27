@@ -5,9 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 09/07/2025.
 //
 
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
+import CSS_Standard
+import HTML_Rendering
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     public func position(
         _ value: W3C_CSS_Positioning.Position?,
@@ -16,9 +18,9 @@ extension HTML {
         bottom: Bottom?,
         left: Left?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self
             .position(value, media: media, selector: selector, pseudo: pseudo)
             .top(top, media: media, selector: selector, pseudo: pseudo)

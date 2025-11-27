@@ -37,7 +37,7 @@
 //        self.maskIcon = maskIcon
 //    }
 //
-//    public var body: some HTML {
+//    public var body: some HTML.View {
 //        link(
 //            href: "apple-touch-icon",
 //            sizes: "180x180"

@@ -7,7 +7,7 @@
 
 import Dependencies
 import HTML
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -16,7 +16,7 @@ extension SnapshotTests {
         @Test("General")
         func general1() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     ContentDivision {
                         H1 { "Type-safe HTML" }
                             .color(light: .named(.blue), dark: .named(.red))
@@ -34,24 +34,23 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .font-size-t6pNK3{font-size:24px}
-                .color-jiDhg4{color:blue}
-                .margin-top-Fqw6a1{margin-top:10px}
-                @media (prefers-color-scheme: dark){
-                  .color-hhm4d1{color:red}
-                }
-
+                      .color-0{color:blue}
+                      .font-size-2{font-size:24px}
+                      .margin-top-3{margin-top:10px}
+                      @media (prefers-color-scheme: dark){
+                        .color-1{color:red}
+                      }
                     </style>
                   </head>
                   <body>
-                <div>
-                  <h1 class="font-size-t6pNK3 color-jiDhg4 color-hhm4d1">Type-safe HTML
-                  </h1>
-                  <p class="margin-top-Fqw6a1">With type-safe CSS!
-                  </p>
-                  <video autoplay src="/public/video/example.mp4">
-                  </video>
-                </div>
+                    <div>
+                      <h1 class="color-0 color-1 font-size-2">Type-safe HTML
+                      </h1>
+                      <p class="margin-top-3">With type-safe CSS!
+                      </p>
+                      <video autoplay src="/public/video/example.mp4">
+                      </video>
+                    </div>
                   </body>
                 </html>
                 """
@@ -61,7 +60,7 @@ extension SnapshotTests {
         @Test("General2")
         func general2() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     p { "Hello World" }
                         .color(.red)
                 },
@@ -72,16 +71,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .color-ILzRW1{color:#cc3333}
-                @media (prefers-color-scheme: dark){
-                  .color-CA97y2{color:rgb(163, 40, 40)}
-                }
-
+                      .color-0{color:#cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .color-1{color:rgb(163, 40, 40)}
+                      }
                     </style>
                   </head>
                   <body>
-                <p class="color-ILzRW1 color-CA97y2">Hello World
-                </p>
+                    <p class="color-0 color-1">Hello World
+                    </p>
                   </body>
                 </html>
                 """
@@ -215,7 +213,7 @@ extension SnapshotTests {
         @Test("HTML color method with pseudo-class parameter")
         func htmlColorMethodWithPseudoClassParameter() {
 
-            let test = HTMLDocument {
+            let test = HTML.Document {
                 div {}
                     .color(.hex("FF0000"), pseudo: .hover)
             }
@@ -246,7 +244,7 @@ extension SnapshotTests {
         @Test("HTML element renders with named color properly")
         func htmlElementWithNamedColorRendersCorrectly() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {}.color(.red)
                 },
                 as: .html
@@ -256,16 +254,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .color-ILzRW1{color:#cc3333}
-                @media (prefers-color-scheme: dark){
-                  .color-CA97y2{color:rgb(163, 40, 40)}
-                }
-
+                      .color-0{color:#cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .color-1{color:rgb(163, 40, 40)}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="color-ILzRW1 color-CA97y2">
-                </div>
+                    <div class="color-0 color-1">
+                    </div>
                   </body>
                 </html>
                 """
@@ -275,7 +272,7 @@ extension SnapshotTests {
         @Test("HTML color with Color renders properly")
         func htmlColorMethodWithColorWorks() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {}
                         .color(W3C_CSS_Color.Color.color(.hex("FF0000")))
                 },
@@ -286,13 +283,12 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .color-bQ3ZC1{color:#FF0000}
-
+                      .color-0{color:#FF0000}
                     </style>
                   </head>
                   <body>
-                <div class="color-bQ3ZC1">
-                </div>
+                    <div class="color-0">
+                    </div>
                   </body>
                 </html>
                 """
@@ -302,7 +298,7 @@ extension SnapshotTests {
         @Test("HTML element with light/dark colors renders properly")
         func htmlElementWithLightDarkColorsAppliesBoth() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {}
                         .color(light: .hex("FF0000"), dark: .hex("00FF00"))
                 },
@@ -313,16 +309,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .color-bQ3ZC1{color:#FF0000}
-                @media (prefers-color-scheme: dark){
-                  .color-mvQv5{color:#00FF00}
-                }
-
+                      .color-0{color:#FF0000}
+                      @media (prefers-color-scheme: dark){
+                        .color-1{color:#00FF00}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="color-bQ3ZC1 color-mvQv5">
-                </div>
+                    <div class="color-0 color-1">
+                    </div>
                   </body>
                 </html>
                 """
@@ -332,7 +327,7 @@ extension SnapshotTests {
         @Test("HTML color with media query renders properly")
         func htmlColorMethodWithMediaQueryParameter() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {}
                         .color(.blue, media: .print)
                 },
@@ -343,15 +338,14 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                @media print{
-                  .color-oD7XM1{color:blue}
-                }
-
+                      @media print{
+                        .color-0{color:blue}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="color-oD7XM1">
-                </div>
+                    <div class="color-0">
+                    </div>
                   </body>
                 </html>
                 """
@@ -361,7 +355,7 @@ extension SnapshotTests {
         @Test("HTML element rendering with multiple properties in media query")
         func htmlElementRenderingWithMultiplePropertiesInMediaQuery() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {}
                         .backgroundColor(.blue, media: Media.screen && .maxWidth(.px(768)))
                         .color(.yellow, media: Media.screen && .maxWidth(.px(768)))
@@ -374,20 +368,19 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                @media screen and (max-width: 768px){
-                  .padding-JBzfL{padding:20px}
-                  .color-KNOs04{color:#cccc33}
-                  .background-color-eGELe4{background-color:blue}
-                }
-                @media (prefers-color-scheme: dark) and screen and (max-width: 768px){
-                  .color-Ih6hb3{color:rgb(163, 163, 40)}
-                }
-
+                      @media screen and (max-width: 768px){
+                        .padding-0{padding:20px}
+                        .background-color-1{background-color:blue}
+                        .color-2{color:#cccc33}
+                      }
+                      @media (prefers-color-scheme: dark) and screen and (max-width: 768px){
+                        .color-3{color:rgb(163, 163, 40)}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="padding-JBzfL color-KNOs04 color-Ih6hb3 background-color-eGELe4">
-                </div>
+                    <div class="padding-0 background-color-1 color-2 color-3">
+                    </div>
                   </body>
                 </html>
                 """
@@ -399,7 +392,7 @@ extension SnapshotTests {
             @Test("AccentColor with light/dark renders properly")
             func accentColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .accentColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -410,16 +403,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .accent-color-bQ3ZC1{accent-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .accent-color-mvQv5{accent-color:#00FF00}
-                    }
-
+                          .accent-color-0{accent-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .accent-color-1{accent-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="accent-color-bQ3ZC1 accent-color-mvQv5">
-                    </div>
+                        <div class="accent-color-0 accent-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -429,7 +421,7 @@ extension SnapshotTests {
             @Test("AccentColor with HTMLColor renders properly")
             func accentColorHTMLColorRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .accentColor(.red)
                     },
@@ -440,16 +432,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .accent-color-ILzRW1{accent-color:#cc3333}
-                    @media (prefers-color-scheme: dark){
-                      .accent-color-CA97y2{accent-color:rgb(163, 40, 40)}
-                    }
-
+                          .accent-color-0{accent-color:#cc3333}
+                          @media (prefers-color-scheme: dark){
+                            .accent-color-1{accent-color:rgb(163, 40, 40)}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="accent-color-ILzRW1 accent-color-CA97y2">
-                    </div>
+                        <div class="accent-color-0 accent-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -459,7 +450,7 @@ extension SnapshotTests {
             @Test("BackgroundColor with light/dark renders properly")
             func backgroundColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .backgroundColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -470,16 +461,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .background-color-bQ3ZC1{background-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .background-color-mvQv5{background-color:#00FF00}
-                    }
-
+                          .background-color-0{background-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .background-color-1{background-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="background-color-bQ3ZC1 background-color-mvQv5">
-                    </div>
+                        <div class="background-color-0 background-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -489,7 +479,7 @@ extension SnapshotTests {
             @Test("BackgroundColor with HTMLColor renders properly")
             func backgroundColorHTMLColorRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .backgroundColor(.yellow)
                     },
@@ -500,16 +490,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .background-color-mIOKK3{background-color:#cccc33}
-                    @media (prefers-color-scheme: dark){
-                      .background-color-P2tkR3{background-color:rgb(163, 163, 40)}
-                    }
-
+                          .background-color-0{background-color:#cccc33}
+                          @media (prefers-color-scheme: dark){
+                            .background-color-1{background-color:rgb(163, 163, 40)}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="background-color-mIOKK3 background-color-P2tkR3">
-                    </div>
+                        <div class="background-color-0 background-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -519,7 +508,7 @@ extension SnapshotTests {
             @Test("BorderBlockColor with light/dark renders properly")
             func borderBlockColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderBlockColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -530,16 +519,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-block-color-bQ3ZC1{border-block-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-block-color-mvQv5{border-block-color:#00FF00}
-                    }
-
+                          .border-block-color-0{border-block-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-block-color-1{border-block-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-block-color-bQ3ZC1 border-block-color-mvQv5">
-                    </div>
+                        <div class="border-block-color-0 border-block-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -549,7 +537,7 @@ extension SnapshotTests {
             @Test("BorderBlockEndColor with light/dark renders properly")
             func borderBlockEndColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderBlockEndColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -560,16 +548,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-block-end-color-bQ3ZC1{border-block-end-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-block-end-color-mvQv5{border-block-end-color:#00FF00}
-                    }
-
+                          .border-block-end-color-0{border-block-end-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-block-end-color-1{border-block-end-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-block-end-color-bQ3ZC1 border-block-end-color-mvQv5">
-                    </div>
+                        <div class="border-block-end-color-0 border-block-end-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -579,7 +566,7 @@ extension SnapshotTests {
             @Test("BorderBlockStartColor with light/dark renders properly")
             func borderBlockStartColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderBlockStartColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -590,16 +577,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-block-start-color-bQ3ZC1{border-block-start-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-block-start-color-mvQv5{border-block-start-color:#00FF00}
-                    }
-
+                          .border-block-start-color-0{border-block-start-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-block-start-color-1{border-block-start-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-block-start-color-bQ3ZC1 border-block-start-color-mvQv5">
-                    </div>
+                        <div class="border-block-start-color-0 border-block-start-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -609,7 +595,7 @@ extension SnapshotTests {
             @Test("BorderBottomColor with light/dark renders properly")
             func borderBottomColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderBottomColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -620,16 +606,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-bottom-color-bQ3ZC1{border-bottom-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-bottom-color-mvQv5{border-bottom-color:#00FF00}
-                    }
-
+                          .border-bottom-color-0{border-bottom-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-bottom-color-1{border-bottom-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-bottom-color-bQ3ZC1 border-bottom-color-mvQv5">
-                    </div>
+                        <div class="border-bottom-color-0 border-bottom-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -639,7 +624,7 @@ extension SnapshotTests {
             @Test("BorderColor with light/dark renders properly")
             func borderColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -650,16 +635,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-color-bQ3ZC1{border-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-color-mvQv5{border-color:#00FF00}
-                    }
-
+                          .border-color-0{border-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-color-1{border-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-color-bQ3ZC1 border-color-mvQv5">
-                    </div>
+                        <div class="border-color-0 border-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -669,7 +653,7 @@ extension SnapshotTests {
             @Test("BorderInlineColor with light/dark renders properly")
             func borderInlineColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderInlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -680,16 +664,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-inline-color-bQ3ZC1{border-inline-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-inline-color-mvQv5{border-inline-color:#00FF00}
-                    }
-
+                          .border-inline-color-0{border-inline-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-inline-color-1{border-inline-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-inline-color-bQ3ZC1 border-inline-color-mvQv5">
-                    </div>
+                        <div class="border-inline-color-0 border-inline-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -699,7 +682,7 @@ extension SnapshotTests {
             @Test("BorderInlineEndColor with light/dark renders properly")
             func borderInlineEndColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderInlineEndColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -710,16 +693,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-inline-end-color-bQ3ZC1{border-inline-end-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-inline-end-color-mvQv5{border-inline-end-color:#00FF00}
-                    }
-
+                          .border-inline-end-color-0{border-inline-end-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-inline-end-color-1{border-inline-end-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-inline-end-color-bQ3ZC1 border-inline-end-color-mvQv5">
-                    </div>
+                        <div class="border-inline-end-color-0 border-inline-end-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -729,7 +711,7 @@ extension SnapshotTests {
             @Test("BorderInlineStartColor with light/dark renders properly")
             func borderInlineStartColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderInlineStartColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -740,16 +722,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-inline-start-color-bQ3ZC1{border-inline-start-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-inline-start-color-mvQv5{border-inline-start-color:#00FF00}
-                    }
-
+                          .border-inline-start-color-0{border-inline-start-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-inline-start-color-1{border-inline-start-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-inline-start-color-bQ3ZC1 border-inline-start-color-mvQv5">
-                    </div>
+                        <div class="border-inline-start-color-0 border-inline-start-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -759,7 +740,7 @@ extension SnapshotTests {
             @Test("BorderLeftColor with light/dark renders properly")
             func borderLeftColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderLeftColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -770,16 +751,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-left-color-bQ3ZC1{border-left-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-left-color-mvQv5{border-left-color:#00FF00}
-                    }
-
+                          .border-left-color-0{border-left-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-left-color-1{border-left-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-left-color-bQ3ZC1 border-left-color-mvQv5">
-                    </div>
+                        <div class="border-left-color-0 border-left-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -789,7 +769,7 @@ extension SnapshotTests {
             @Test("BorderRightColor with light/dark renders properly")
             func borderRightColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderRightColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -800,16 +780,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-right-color-bQ3ZC1{border-right-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-right-color-mvQv5{border-right-color:#00FF00}
-                    }
-
+                          .border-right-color-0{border-right-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-right-color-1{border-right-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-right-color-bQ3ZC1 border-right-color-mvQv5">
-                    </div>
+                        <div class="border-right-color-0 border-right-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -819,7 +798,7 @@ extension SnapshotTests {
             @Test("BorderTopColor with light/dark renders properly")
             func borderTopColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .borderTopColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -830,16 +809,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .border-top-color-bQ3ZC1{border-top-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .border-top-color-mvQv5{border-top-color:#00FF00}
-                    }
-
+                          .border-top-color-0{border-top-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .border-top-color-1{border-top-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="border-top-color-bQ3ZC1 border-top-color-mvQv5">
-                    </div>
+                        <div class="border-top-color-0 border-top-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -849,7 +827,7 @@ extension SnapshotTests {
             @Test("CaretColor with light/dark renders properly")
             func caretColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .caretColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -860,16 +838,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .caret-color-bQ3ZC1{caret-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .caret-color-mvQv5{caret-color:#00FF00}
-                    }
-
+                          .caret-color-0{caret-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .caret-color-1{caret-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="caret-color-bQ3ZC1 caret-color-mvQv5">
-                    </div>
+                        <div class="caret-color-0 caret-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -879,7 +856,7 @@ extension SnapshotTests {
             @Test("ColumnRuleColor with light/dark renders properly")
             func columnRuleColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .columnRuleColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -890,16 +867,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .column-rule-color-bQ3ZC1{column-rule-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .column-rule-color-mvQv5{column-rule-color:#00FF00}
-                    }
-
+                          .column-rule-color-0{column-rule-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .column-rule-color-1{column-rule-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="column-rule-color-bQ3ZC1 column-rule-color-mvQv5">
-                    </div>
+                        <div class="column-rule-color-0 column-rule-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -909,7 +885,7 @@ extension SnapshotTests {
             @Test("FloodColor with light/dark renders properly")
             func floodColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .floodColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -920,16 +896,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .flood-color-bQ3ZC1{flood-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .flood-color-mvQv5{flood-color:#00FF00}
-                    }
-
+                          .flood-color-0{flood-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .flood-color-1{flood-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="flood-color-bQ3ZC1 flood-color-mvQv5">
-                    </div>
+                        <div class="flood-color-0 flood-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -939,7 +914,7 @@ extension SnapshotTests {
             @Test("Fill with light/dark renders properly")
             func fillLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .fill(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -950,16 +925,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .fill-bQ3ZC1{fill:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .fill-mvQv5{fill:#00FF00}
-                    }
-
+                          .fill-0{fill:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .fill-1{fill:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="fill-bQ3ZC1 fill-mvQv5">
-                    </div>
+                        <div class="fill-0 fill-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -969,7 +943,7 @@ extension SnapshotTests {
             @Test("Fill with HTMLColor renders properly")
             func fillHTMLColorRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .fill(.red)
                     },
@@ -980,16 +954,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .fill-ILzRW1{fill:#cc3333}
-                    @media (prefers-color-scheme: dark){
-                      .fill-CA97y2{fill:rgb(163, 40, 40)}
-                    }
-
+                          .fill-0{fill:#cc3333}
+                          @media (prefers-color-scheme: dark){
+                            .fill-1{fill:rgb(163, 40, 40)}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="fill-ILzRW1 fill-CA97y2">
-                    </div>
+                        <div class="fill-0 fill-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -999,7 +972,7 @@ extension SnapshotTests {
             @Test("LightingColor with light/dark renders properly")
             func lightingColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .lightingColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -1010,16 +983,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .lighting-color-bQ3ZC1{lighting-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .lighting-color-mvQv5{lighting-color:#00FF00}
-                    }
-
+                          .lighting-color-0{lighting-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .lighting-color-1{lighting-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="lighting-color-bQ3ZC1 lighting-color-mvQv5">
-                    </div>
+                        <div class="lighting-color-0 lighting-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1029,7 +1001,7 @@ extension SnapshotTests {
             @Test("OutlineColor with light/dark renders properly")
             func outlineColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .outlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -1040,16 +1012,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .outline-color-bQ3ZC1{outline-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .outline-color-mvQv5{outline-color:#00FF00}
-                    }
-
+                          .outline-color-0{outline-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .outline-color-1{outline-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="outline-color-bQ3ZC1 outline-color-mvQv5">
-                    </div>
+                        <div class="outline-color-0 outline-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1059,7 +1030,7 @@ extension SnapshotTests {
             @Test("StopColor with light/dark renders properly")
             func stopColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .stopColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -1070,16 +1041,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .stop-color-bQ3ZC1{stop-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .stop-color-mvQv5{stop-color:#00FF00}
-                    }
-
+                          .stop-color-0{stop-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .stop-color-1{stop-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="stop-color-bQ3ZC1 stop-color-mvQv5">
-                    </div>
+                        <div class="stop-color-0 stop-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1089,7 +1059,7 @@ extension SnapshotTests {
             @Test("Stroke with light/dark renders properly")
             func strokeLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .stroke(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -1100,16 +1070,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .stroke-bQ3ZC1{stroke:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .stroke-mvQv5{stroke:#00FF00}
-                    }
-
+                          .stroke-0{stroke:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .stroke-1{stroke:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="stroke-bQ3ZC1 stroke-mvQv5">
-                    </div>
+                        <div class="stroke-0 stroke-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1119,7 +1088,7 @@ extension SnapshotTests {
             @Test("TextDecorationColor with light/dark renders properly")
             func textDecorationColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .textDecorationColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -1130,16 +1099,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .text-decoration-color-bQ3ZC1{text-decoration-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .text-decoration-color-mvQv5{text-decoration-color:#00FF00}
-                    }
-
+                          .text-decoration-color-0{text-decoration-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .text-decoration-color-1{text-decoration-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="text-decoration-color-bQ3ZC1 text-decoration-color-mvQv5">
-                    </div>
+                        <div class="text-decoration-color-0 text-decoration-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1149,7 +1117,7 @@ extension SnapshotTests {
             @Test("TextEmphasisColor with light/dark renders properly")
             func textEmphasisColorLightDarkRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .textEmphasisColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
@@ -1160,16 +1128,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .text-emphasis-color-bQ3ZC1{text-emphasis-color:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .text-emphasis-color-mvQv5{text-emphasis-color:#00FF00}
-                    }
-
+                          .text-emphasis-color-0{text-emphasis-color:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .text-emphasis-color-1{text-emphasis-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="text-emphasis-color-bQ3ZC1 text-emphasis-color-mvQv5">
-                    </div>
+                        <div class="text-emphasis-color-0 text-emphasis-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1181,7 +1148,7 @@ extension SnapshotTests {
             @Test("Fill with pseudo class renders properly")
             func fillWithPseudoClassRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .fill(light: .hex("FF0000"), dark: .hex("00FF00"), pseudo: .hover)
                     },
@@ -1192,16 +1159,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    .fill-egMjx3:hover{fill:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      .fill-NiFSX3:hover{fill:#00FF00}
-                    }
-
+                          .fill-0:hover{fill:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            .fill-1:hover{fill:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="fill-egMjx3 fill-NiFSX3">
-                    </div>
+                        <div class="fill-0 fill-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1211,7 +1177,7 @@ extension SnapshotTests {
             @Test("Stroke with selector renders properly")
             func strokeWithSelectorRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .stroke(
                                 light: .hex("FF0000"),
@@ -1226,16 +1192,15 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    child:span .stroke-EfSja1{stroke:#FF0000}
-                    @media (prefers-color-scheme: dark){
-                      child:span .stroke-OTUZ23{stroke:#00FF00}
-                    }
-
+                          child:span .stroke-0{stroke:#FF0000}
+                          @media (prefers-color-scheme: dark){
+                            child:span .stroke-1{stroke:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="stroke-EfSja1 stroke-OTUZ23">
-                    </div>
+                        <div class="stroke-0 stroke-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1245,7 +1210,7 @@ extension SnapshotTests {
             @Test("OutlineColor with media query renders properly")
             func outlineColorWithMediaQueryRendersCorrectly() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .outlineColor(
                                 light: .hex("FF0000"),
@@ -1260,18 +1225,17 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                    @media print{
-                      .outline-color-SXYRf2{outline-color:#FF0000}
-                    }
-                    @media (prefers-color-scheme: dark) and print{
-                      .outline-color-5vbC71{outline-color:#00FF00}
-                    }
-
+                          @media print{
+                            .outline-color-0{outline-color:#FF0000}
+                          }
+                          @media (prefers-color-scheme: dark) and print{
+                            .outline-color-1{outline-color:#00FF00}
+                          }
                         </style>
                       </head>
                       <body>
-                    <div class="outline-color-SXYRf2 outline-color-5vbC71">
-                    </div>
+                        <div class="outline-color-0 outline-color-1">
+                        </div>
                       </body>
                     </html>
                     """
@@ -1283,7 +1247,7 @@ extension SnapshotTests {
             @Test("Fill with nil HTMLColor renders nothing")
             func fillWithNilHTMLColorRendersNothing() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .fill(nil)
                     },
@@ -1293,13 +1257,10 @@ extension SnapshotTests {
                     <!doctype html>
                     <html>
                       <head>
-                        <style>
-
-                        </style>
                       </head>
                       <body>
-                    <div>
-                    </div>
+                        <div>
+                        </div>
                       </body>
                     </html>
                     """
@@ -1309,7 +1270,7 @@ extension SnapshotTests {
             @Test("TextDecorationColor with nil HTMLColor renders nothing")
             func textDecorationColorWithNilHTMLColorRendersNothing() {
                 assertInlineSnapshot(
-                    of: HTMLDocument {
+                    of: HTML.Document {
                         div {}
                             .textDecorationColor(nil)
                     },
@@ -1319,13 +1280,10 @@ extension SnapshotTests {
                     <!doctype html>
                     <html>
                       <head>
-                        <style>
-
-                        </style>
                       </head>
                       <body>
-                    <div>
-                    </div>
+                        <div>
+                        </div>
                       </body>
                     </html>
                     """

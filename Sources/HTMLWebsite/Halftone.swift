@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 
-public struct Halftone<Image: HTML>: HTML {
+public struct Halftone<Image: HTML>: HTML.View {
     let grayscale: String
     let dotSize: Length
     let lineColor: HTMLColor
@@ -23,7 +23,7 @@ public struct Halftone<Image: HTML>: HTML {
 
     @Dependency(\.objectStyle.position) var objectPosition
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             div {
                 image
@@ -84,7 +84,7 @@ public struct Halftone<Image: HTML>: HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     public func halftone(
         grayscale: String = "0",
         dotSize: Length = .em(0.3),
@@ -95,7 +95,7 @@ extension HTML {
         photoBlur: Length = .px(1),
         blendMode: MixBlendMode = .hardLight,
         rotationAngle: Int = 20
-    ) -> some HTML {
+    ) -> some HTML.View {
         Halftone(
             grayscale: grayscale,
             dotSize: dotSize,
@@ -127,7 +127,7 @@ extension DependencyValues {
 #if DEBUG && canImport(SwiftUI)
     import SwiftUI
     #Preview {
-        HTMLDocument {
+        HTML.Document {
             div {
                 // Empty div with background styling
             }
@@ -141,10 +141,10 @@ extension DependencyValues {
     }
 
     #Preview {
-        HTMLDocument {
-            HTMLText(
+        HTML.Document {
+            HTML.Text(
                 try! String(
-                    HTMLDocument {
+                    HTML.Document {
                         div {
                             // Empty div with background styling
                         }

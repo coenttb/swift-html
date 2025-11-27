@@ -5,8 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 01/09/2024.
 //
 
-@_exported import HTMLAttributesPointFreeHTML
-@_exported import HTMLCSSPointFreeHTML
+@_exported import CSS_Rendering
+@_exported import CSS_Standard
 @_exported import HTML_Standard
+@_exported import HTML_Rendering
 @_exported import SVG
 @_exported import StringBuilder

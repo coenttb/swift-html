@@ -236,13 +236,13 @@ extension HTMLColor {
 
 // extension HTML {
 //    @discardableResult
-//    @HTMLBuilder
+//    @HTML.Builder
 //    func color(
 //        _ color: HTMLColor?,
 //        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
-//        pseudo: Pseudo? = nil
-//    ) -> some HTML {
+//        pseudo: HTML.Pseudo? = nil
+//    ) -> some HTML.View {
 //        if let color {
 //            self.color(light: color.light, dark: color.dark, media: media, pre: pre, pseudo: pseudo)
 //        } else {
@@ -254,14 +254,14 @@ extension HTMLColor {
 //
 // extension HTML {
 //    @discardableResult
-//    @HTMLBuilder
+//    @HTML.Builder
 //    @_disfavoredOverload
 //    func backgroundColor(
 //        _ color: HTMLColor?,
 //        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
-//        pseudo: Pseudo? = nil
-//    ) -> some HTML {
+//        pseudo: HTML.Pseudo? = nil
+//    ) -> some HTML.View {
 //        fatalError()
 ////        if let color {
 ////            self.color(light: color.light, dark: color.dark, media: media, pre: pre, pseudo: pseudo)
@@ -273,14 +273,14 @@ extension HTMLColor {
 
 // extension HTML {
 //    @discardableResult
-//    @HTMLBuilder
+//    @HTML.Builder
 //    @_disfavoredOverload
 //    public func color2(
 //        _ color: W3C_CSS_Color.Color.WithDarkMode.Color?,
 //        media: W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
-//        pseudo: Pseudo? = nil
-//    ) -> some HTML {
+//        pseudo: HTML.Pseudo? = nil
+//    ) -> some HTML.View {
 //        self.color(color.map(W3C_CSS_Color.Color.WithDarkMode.color))
 //    }
 // }

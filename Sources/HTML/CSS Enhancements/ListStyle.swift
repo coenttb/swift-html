@@ -5,19 +5,19 @@
 //  Created by Coen ten Thije Boonkkamp on 25/06/2025.
 //
 
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
 import CSS_Standard
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     public func listStyle(
         _ listStyle: ListStyle,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch listStyle {
         case .reset:
             self
@@ -37,7 +37,7 @@ public enum ListStyle {
 // #if DEBUG && canImport(SwiftUI)
 //     import SwiftUI
 //     #Preview {
-//         HTMLDocument {
+//         HTML.Document {
 //             ul {
 //                 li {
 //                     "1"

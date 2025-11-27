@@ -8,9 +8,9 @@
 import Foundation
 import HTML
 
-// extension Array: @retroactive HTML where Element: HTML {
-//    public var body: some HTML {
-//        HTMLGroup {
+// extension Array: @retroactive HTML where Element: HTML.View {
+//    public var body: some HTML.View {
+//        HTML.Group {
 //            for element in self { element }
 //        }
 //    }

@@ -5,18 +5,18 @@
 //  TranslatedString integration for HTML (requires Translating trait)
 //
 
-import PointFreeHTML
+import HTML_Rendering
 
 #if TRANSLATING
     import Translating
 
     extension TranslatedString: @retroactive HTML {
-        public var body: some HTML {
-            HTMLText("\(self)")
+        public var body: some HTML.View {
+            HTML.Text("\(self)")
         }
     }
 
-    extension HTMLText {
+    extension HTML.Text {
         public init(_ translatedString: TranslatedString) {
             self = .init("\(translatedString)")
         }

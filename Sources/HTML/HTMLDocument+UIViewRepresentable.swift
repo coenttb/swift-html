@@ -1,10 +1,10 @@
 #if canImport(UIKit) && os(iOS)
-    import PointFreeHTML
+    import HTML_Rendering
     import SwiftUI
     import WebKit
 
-    extension HTMLDocument: @retroactive SwiftUI.View {}
-    extension HTMLDocument: SwiftUI.UIViewRepresentable {
+    extension HTML.Document: @retroactive SwiftUI.View {}
+    extension HTML.Document: SwiftUI.UIViewRepresentable {
         public func makeUIView(context: Context) -> WKWebView {
             let webView = WKWebView()
             webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")

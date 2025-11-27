@@ -19,7 +19,7 @@
 //        height: Double? = nil,
 //        viewBox: String? = nil,
 //        preserveAspectRatio: String? = nil
-//    ) -> some HTML {
+//    ) -> some HTML.View {
 //        var element = self
 //
 //        if let width = width {

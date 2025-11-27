@@ -10,7 +10,7 @@
     import DependenciesTestSupport
     import Foundation
     import HTML
-    import PointFreeHTMLTestSupport
+    import HTML_Renderable_TestSupport
     import Testing
     import Translating
 

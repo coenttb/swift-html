@@ -7,15 +7,15 @@
 
 import Dependencies
 import Foundation
-import PointFreeHTML
+import HTML_Rendering
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
-    public func `if`<T: HTML>(
+    @HTML.Builder
+    public func `if`<T: HTML.View>(
         _ condition: Bool,
-        @HTMLBuilder then modification: (Self) -> T
-    ) -> some HTML {
+        @HTML.Builder then modification: (Self) -> T
+    ) -> some HTML.View {
         if condition {
             modification(self)
         } else {
@@ -24,12 +24,12 @@ extension HTML {
     }
 }
 
-extension HTML {
-    @HTMLBuilder
+extension HTML.View {
+    @HTML.Builder
     public func `if`<X>(
         `let` value: X?,
-        @HTMLBuilder _ then: (Self, X) -> some HTML
-    ) -> some HTML {
+        @HTML.Builder _ then: (Self, X) -> some HTML.View
+    ) -> some HTML.View {
         if let value = value {
             then(self, value)
         } else {

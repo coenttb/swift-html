@@ -9,7 +9,7 @@
 // import HTML
 // import Dependencies
 //
-// public struct Halftone3<Image: HTML>: HTML {
+// public struct Halftone3<Image: HTML>: HTML.View {
 //    let grayscale: String
 //    let dotSize: LengthPercentage
 //    let lineColor: HTMLColor
@@ -24,10 +24,10 @@
 //
 //    @Dependency(\.objectStyle.position) var objectPosition
 //
-//    public var body: some HTML {
+//    public var body: some HTML.View {
 //        div {
 //            div {
-//                AnyHTML(imageConfig(image))
+//                HTML.AnyView(imageConfig(image))
 //                    .position(.absolute)
 //                    .top(0)
 //                    .left(0)
@@ -79,8 +79,8 @@
 //        left: Left?,
 //        media : W3C_CSS_MediaQueries.Media? = nil,
 //        pre: String? = nil,
-//        pseudo: Pseudo? = nil
-//    ) -> some HTML {
+//        pseudo: HTML.Pseudo? = nil
+//    ) -> some HTML.View {
 //        self
 //            .position(value, media: media, pre: pre, pseudo: pseudo)
 //            .top(top, media: media, pre: pre, pseudo: pseudo)
@@ -101,7 +101,7 @@
 //        photoBlur: CSSPropertyTypes.Length = .px(1),
 //        blendMode: CSSPropertyTypes.MixBlendMode = .hardLight,
 //        rotation: CSSPropertyTypes.Angle = 20
-//    ) -> some HTML {
+//    ) -> some HTML.View {
 //        Halftone3(
 //            grayscale: grayscale,
 //            dotSize: dotSize,
@@ -121,7 +121,7 @@
 // import SwiftUI
 // #Preview {
 //    VStack {
-//        HTMLDocument {
+//        HTML.Document {
 //            div {
 //                // Empty div with background styling
 //            }
@@ -134,10 +134,10 @@
 //            )
 //        }
 //
-//        HTMLDocument {
-//            HTMLText(
+//        HTML.Document {
+//            HTML.Text(
 //                try! String(
-//                    HTMLDocument {
+//                    HTML.Document {
 //                        div {
 //                            // Empty div with background styling
 //                        }

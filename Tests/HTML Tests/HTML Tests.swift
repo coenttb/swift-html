@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -23,7 +23,7 @@ extension SnapshotTests {
                 as: .html
             ) {
                 """
-                <label class="color-ILzRW1 color-Hx6Lg1"><input type="text"></label>
+                <label class="color-0 color-1"><input type="text"></label>
                 """
             }
         }
@@ -39,7 +39,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="column-gap-dnNPN1 size-C8uWv flex-direction-jlten2 display-BvS8W3 vertical-align-cvXVf align-items-msN8p3">
+                <swift-html-hstack class="align-items-0 vertical-align-1 display-2 flex-direction-3 size-4 column-gap-5">
                   <div>First item
                   </div>
                   <div>Second item
@@ -60,7 +60,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="column-gap-6PqSI size-C8uWv flex-direction-jlten2 display-BvS8W3 vertical-align-Xai2x align-items-msN8p3">
+                <swift-html-hstack class="align-items-0 vertical-align-1 display-2 flex-direction-3 size-4 column-gap-5">
                   <div>First item
                   </div>
                   <div>Second item
@@ -81,7 +81,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vstack class="row-gap-dnNPN1 max-width-C8uWv flex-direction-7gclL display-BvS8W3 align-items-msN8p3">
+                <swift-html-vstack class="align-items-0 display-1 flex-direction-2 max-width-3 row-gap-4">
                   <div>First item
                   </div>
                   <div>Second item
@@ -102,7 +102,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vstack class="row-gap-8DJ5t4 max-width-C8uWv flex-direction-7gclL display-BvS8W3 align-items-cQlZY2">
+                <swift-html-vstack class="align-items-0 display-1 flex-direction-2 max-width-3 row-gap-4">
                   <div>First item
                   </div>
                   <div>Second item
@@ -124,10 +124,10 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="column-gap-dnNPN1 size-C8uWv flex-direction-jlten2 display-BvS8W3 vertical-align-cvXVf align-items-msN8p3">
+                <swift-html-hstack class="align-items-0 vertical-align-1 display-2 flex-direction-3 size-4 column-gap-5">
                   <div>Left
                   </div>
-                  <swift-html-spacer class="flex-grow-tzL8I2">
+                  <swift-html-spacer class="flex-grow-6">
                   </swift-html-spacer>
                   <div>Right
                   </div>
@@ -148,7 +148,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vgrid class="width-C8uWv column-gap-dnNPN1 display-mqllb2 grid-template-columns-hE9y01 row-gap-dnNPN1">
+                <swift-html-vgrid class="width-0 display-1 grid-template-columns-2 column-gap-3 row-gap-4">
                   <div>Item 1
                   </div>
                   <div>Item 2
@@ -162,7 +162,7 @@ extension SnapshotTests {
 
         @Test("LazyVGrid with media queries")
         func lazyVGridWithMediaQueries() {
-            let columns: OrderedDictionary<W3C_CSS_MediaQueries.Media?, [Int]> = [
+            let columns: OrderedDictionary<HTML.AtRule.Media?, [Int]> = [
                 nil: [1],
                 .desktop: [1, 1],
             ]
@@ -180,7 +180,7 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vgrid class="width-C8uWv column-gap-Fqw6a1 display-mqllb2 grid-template-columns-DrUWy row-gap-6PqSI column-gap-mELsu1 display-dKpjI2 grid-template-columns-ofQqx2 row-gap-WT66U">
+                <swift-html-vgrid class="width-0 display-1 grid-template-columns-2 column-gap-3 row-gap-4">
                   <div>Item 1
                   </div>
                   <div>Item 2

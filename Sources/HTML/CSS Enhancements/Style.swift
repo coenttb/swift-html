@@ -12,7 +12,7 @@ import WHATWG_HTML
 
 // TODO: This extension needs to be reimplemented to work with new WHATWG HTML types
 // extension WHATWG_HTML.Style {
-//     public func callAsFunction(@StringBuilder _ content: () -> String) -> some HTML {
+//     public func callAsFunction(@StringBuilder _ content: () -> String) -> some HTML.View {
 //         WHATWG_HTML.Style(media: media, blocking: blocking, nonce: nonce, title: title)
 //     }
 // }

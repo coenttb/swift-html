@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import PointFreeHTMLTestSupport
+import HTML_Renderable_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -18,9 +18,9 @@ extension SnapshotTests {
         @Test("Border with light- and darkmode color for all sides")
         func borderAllSides() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {
-                        HTMLEmpty()
+                        HTML.Empty()
                     }
                     .border(
                         Border.Side.all,
@@ -39,16 +39,15 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .border-3JxMp{border:1px solid #cc3333}
-                @media (prefers-color-scheme: dark){
-                  .border-Slrts3{border:1px solid #3399ff}
-                }
-
+                      .border-0{border:1px solid #cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .border-1{border:1px solid #3399ff}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="border-3JxMp border-Slrts3">
-                </div>
+                    <div class="border-0 border-1">
+                    </div>
                   </body>
                 </html>
                 """
@@ -58,9 +57,9 @@ extension SnapshotTests {
         @Test("Border with light- and darkmode color for some sides")
         func borderSomeSides() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {
-                        HTMLEmpty()
+                        HTML.Empty()
                     }
                     .border(
                         [.right, .left, .bottom],
@@ -79,20 +78,19 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .border-right-3JxMp{border-right:1px solid #cc3333}
-                .border-bottom-3JxMp{border-bottom:1px solid #cc3333}
-                .border-left-3JxMp{border-left:1px solid #cc3333}
-                @media (prefers-color-scheme: dark){
-                  .border-right-Slrts3{border-right:1px solid #3399ff}
-                  .border-bottom-Slrts3{border-bottom:1px solid #3399ff}
-                  .border-left-Slrts3{border-left:1px solid #3399ff}
-                }
-
+                      .border-right-0{border-right:1px solid #cc3333}
+                      .border-bottom-2{border-bottom:1px solid #cc3333}
+                      .border-left-4{border-left:1px solid #cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .border-right-1{border-right:1px solid #3399ff}
+                        .border-bottom-3{border-bottom:1px solid #3399ff}
+                        .border-left-5{border-left:1px solid #3399ff}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="border-right-3JxMp border-right-Slrts3 border-bottom-3JxMp border-bottom-Slrts3 border-left-3JxMp border-left-Slrts3">
-                </div>
+                    <div class="border-right-0 border-right-1 border-bottom-2 border-bottom-3 border-left-4 border-left-5">
+                    </div>
                   </body>
                 </html>
                 """
@@ -102,9 +100,9 @@ extension SnapshotTests {
         @Test("Border with light- and darkmode color for some sides using variadic")
         func borderSomeSidesVariadic() {
             assertInlineSnapshot(
-                of: HTMLDocument {
+                of: HTML.Document {
                     div {
-                        HTMLEmpty()
+                        HTML.Empty()
                     }
                     .border(
                         .right,
@@ -125,20 +123,19 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                .border-right-3JxMp{border-right:1px solid #cc3333}
-                .border-bottom-3JxMp{border-bottom:1px solid #cc3333}
-                .border-left-3JxMp{border-left:1px solid #cc3333}
-                @media (prefers-color-scheme: dark){
-                  .border-right-Slrts3{border-right:1px solid #3399ff}
-                  .border-bottom-Slrts3{border-bottom:1px solid #3399ff}
-                  .border-left-Slrts3{border-left:1px solid #3399ff}
-                }
-
+                      .border-right-0{border-right:1px solid #cc3333}
+                      .border-bottom-2{border-bottom:1px solid #cc3333}
+                      .border-left-4{border-left:1px solid #cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .border-right-1{border-right:1px solid #3399ff}
+                        .border-bottom-3{border-bottom:1px solid #3399ff}
+                        .border-left-5{border-left:1px solid #3399ff}
+                      }
                     </style>
                   </head>
                   <body>
-                <div class="border-right-3JxMp border-right-Slrts3 border-bottom-3JxMp border-bottom-Slrts3 border-left-3JxMp border-left-Slrts3">
-                </div>
+                    <div class="border-right-0 border-right-1 border-bottom-2 border-bottom-3 border-left-4 border-left-5">
+                    </div>
                   </body>
                 </html>
                 """

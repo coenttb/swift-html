@@ -15,7 +15,7 @@ public typealias NavItem = HTML
 
 // MARK: - NavLink
 public struct NavLink: NavItem {
-    let title: any HTML
+    let title: any HTML.View
     let href: Href
     let isActive: Bool
 
@@ -29,9 +29,9 @@ public struct NavLink: NavItem {
         self.isActive = isActive
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         a(href: href) {
-            AnyHTML(title)
+            HTML.AnyView(title)
         }
         .fontWeight(isActive ? .semiBold : nil)
         .color(isActive ? .text.link : .text.tertiary)
@@ -89,7 +89,7 @@ public struct NavButton: NavItem {
         self.style = style
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         a(href: href) {
             title
         }
@@ -116,7 +116,7 @@ public struct NavButton: NavItem {
 public struct NavDivider: NavItem {
     public init() {}
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         span {}
             .width(.px(1))
             .height(.rem(1.5))
@@ -133,13 +133,13 @@ public struct NavDropdown<Items: HTML>: NavItem {
 
     public init(
         _ title: String,
-        @HTMLBuilder items: () -> Items
+        @HTML.Builder items: () -> Items
     ) {
         self.title = title
         self.items = items()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             button {
                 title
@@ -180,7 +180,7 @@ public struct NavDropdown<Items: HTML>: NavItem {
 public struct NavSpacer: NavItem {
     public init() {}
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {}
             .flexGrow(1)  // Takes up all available space between items
             .display(.block, media: .desktop)
@@ -195,13 +195,13 @@ public struct NavGroup<Items: HTML>: NavItem {
 
     public init(
         spacing: Length = .rem(1),
-        @HTMLBuilder items: () -> Items
+        @HTML.Builder items: () -> Items
     ) {
         self.items = items()
         self.spacing = spacing
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             items
         }

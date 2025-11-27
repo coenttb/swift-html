@@ -40,7 +40,7 @@ Every HTML element is a distinct Swift type:
 
 ```swift
 // swift-html approach - compile-time safety
-func renderUser(_ user: User) -> some HTML {
+func renderUser(_ user: User) -> some HTML.View {
     div {
         h2 { user.name }
         img(src: user.avatar, alt: user.name)  // ✅ Correct element
@@ -144,19 +144,19 @@ When you rename or change components, the compiler ensures all usages are update
 
 ```swift
 // Before: Using a custom component
-struct UserCard: HTML {
+struct UserCard: HTML.View {
     let userName: String  // Property name
     
-    var body: some HTML {
+    var body: some HTML.View {
         div { userName }
     }
 }
 
 // After refactoring: Compiler ensures all usages update
-struct UserCard: HTML {
+struct UserCard: HTML.View {
     let displayName: String  // Renamed property
     
-    var body: some HTML {
+    var body: some HTML.View {
         div { displayName }
     }
 }
@@ -191,7 +191,7 @@ func createButton(
     title: String,
     style: ButtonStyle,
     onClick: JavaScript
-) -> some HTML {
+) -> some HTML.View {
     button(onclick: onClick) { title }
         .apply(style)
 }
@@ -213,7 +213,7 @@ func createButton(
 Attributes can be conditionally included with type safety:
 
 ```swift
-func link(to url: URL, external: Bool = false) -> some HTML {
+func link(to url: URL, external: Bool = false) -> some HTML.View {
     a(
         href: url,
         target: external ? .blank : nil,  // ✅ Optional attribute
@@ -330,7 +330,7 @@ div {
 Leverage types in your custom components:
 
 ```swift
-struct Badge: HTML {
+struct Badge: HTML.View {
     enum Style {
         case primary, secondary, success, warning, danger
 
@@ -340,7 +340,7 @@ struct Badge: HTML {
     let text: String
     let style: Style
     
-    var body: some HTML {
+    var body: some HTML.View {
         span { text }
             .class("badge", "badge-\(style)")
             .backgroundColor(style.backgroundColor)
@@ -364,7 +364,7 @@ enum Theme {
     }
 }
 
-func applyTheme(_ theme: Theme) -> some HTML {
+func applyTheme(_ theme: Theme) -> some HTML.View {
     div { "Content" }
         .class(theme.className)
 }
@@ -388,7 +388,7 @@ func render() -> String {
 
 ### After (Type-Safe)
 ```swift
-func render() -> some HTML {
+func render() -> some HTML.View {
     div {
         h1 { "Title" }
             .color(.blue)

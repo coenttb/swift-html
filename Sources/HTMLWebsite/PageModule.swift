@@ -1,15 +1,15 @@
 import Foundation
 import HTMLComponents
 
-public struct PageModule<Title: HTML, Content: HTML>: HTML {
+public struct PageModule<Title: HTML, Content: HTML>: HTML.View {
     let title: Title?
     var theme: PageModule.Theme
     let content: Content
 
     public init(
         theme: PageModule.Theme,
-        @HTMLBuilder content: () -> Content,
-        @HTMLBuilder title: () -> Title
+        @HTML.Builder content: () -> Content,
+        @HTML.Builder title: () -> Title
     ) {
         self.title = title()
         self.theme = theme
@@ -20,23 +20,23 @@ public struct PageModule<Title: HTML, Content: HTML>: HTML {
     //        title: String,
     //        seeAllURL: String? = nil,
     //        theme: PageModule.Theme,
-    //        @HTMLBuilder content: () -> Content
-    //    ) where Title == Header<HTMLText> {
-    //        self.title = Header(3) { HTMLText(title) }
+    //        @HTML.Builder content: () -> Content
+    //    ) where Title == Header<HTML.Text> {
+    //        self.title = Header(3) { HTML.Text(title) }
     //        self.theme = theme
     //        self.content = content()
     //    }
 
     public init(
         theme: PageModule.Theme,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) where Title == Never {
         self.title = nil
         self.theme = theme
         self.content = content()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             if let title {
                 title
@@ -66,14 +66,14 @@ public struct PageModule<Title: HTML, Content: HTML>: HTML {
     }
 }
 
-public struct PageModuleSeeAllTitle<Title: HTML>: HTML {
+public struct PageModuleSeeAllTitle<Title: HTML.View>: HTML.View {
 
     let seeAllURL: String
     let title: Title
 
     public init(
         seeAllURL: String,
-        @HTMLBuilder title: () -> Title
+        @HTML.Builder title: () -> Title
     ) {
         self.seeAllURL = seeAllURL
         self.title = title()
@@ -82,12 +82,12 @@ public struct PageModuleSeeAllTitle<Title: HTML>: HTML {
     public init(
         title: String,
         seeAllURL: String
-    ) where Title == HTMLComponents.Header<HTMLText> {
-        self.title = Header(3) { HTMLText(title) }
+    ) where Title == HTMLComponents.Header<HTML.Text> {
+        self.title = Header(3) { HTML.Text(title) }
         self.seeAllURL = seeAllURL
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         div {
             title
             Link(

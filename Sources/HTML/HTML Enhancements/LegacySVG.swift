@@ -4,7 +4,7 @@ import WHATWG_HTML_MediaAttributes
 
 
 @available(*, deprecated, message: "Use InlineSVG from SVG Integration instead")
-public struct LegacySVG: HTML, Sendable {
+public struct LegacySVG: HTML.View, Sendable {
     private enum Storage {
         case raw(String)
         case base64(String)
@@ -23,12 +23,12 @@ public struct LegacySVG: HTML, Sendable {
         self.description = description
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         switch storage {
         case .raw(let raw):
-            AnyHTML { HTMLRaw(raw) }
+            HTML.AnyView { HTML.Raw(raw) }
         case .base64(let base64):
-            AnyHTML {
+            HTML.AnyView {
                 Image(
                     src: "data:image/svg+xml;base64,\(base64)",
                     alt: Alt(self.description)

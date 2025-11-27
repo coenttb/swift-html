@@ -1,23 +1,23 @@
 import Foundation
 import HTML
 
-public struct Header<Content: HTML>: HTML {
+public struct Header<Content: HTML.View>: HTML.View {
     let size: Int
     let disableMargins: Bool
 
-    @HTMLBuilder let content: Content
+    @HTML.Builder let content: Content
 
     public init(
         _ size: Int = 3,
         disableMargins: Bool = false,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.size = size
         self.disableMargins = disableMargins
         self.content = content()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         tag("h\(size)") { content }
             .margin(disableMargins != true ? .zero : nil)
             .marginTop(

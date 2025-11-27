@@ -1,18 +1,18 @@
 import Foundation
 import HTML
 
-public struct Paragraph<Content: HTML>: HTML {
+public struct Paragraph<Content: HTML.View>: HTML.View {
     let size: Size
-    @HTMLBuilder let content: Content
+    @HTML.Builder let content: Content
     public init(
         _ size: Size = .regular,
-        @HTMLBuilder content: () -> Content
+        @HTML.Builder content: () -> Content
     ) {
         self.size = size
         self.content = content()
     }
 
-    public var body: some HTML {
+    public var body: some HTML.View {
         tag("p") {
             content
         }

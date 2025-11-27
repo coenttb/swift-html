@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 25/06/2025.
 //
 
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
+import CSS_Standard
 
 public typealias Color = W3C_CSS_Color.Color.WithDarkMode.Color
 public typealias HTMLColor = Color
@@ -141,7 +142,7 @@ extension W3C_CSS_Color.Color.WithDarkMode.Color {
 
 // MARK: HTML extensions
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     func lightAndDarkMode(
@@ -149,9 +150,9 @@ extension HTML {
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self
             .inlineStyle(
                 property,
@@ -172,16 +173,16 @@ extension HTML {
 
 // MARK: HTML extension - Color
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func color(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Color.Color.property,
             light: light,
@@ -193,15 +194,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func color(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.color(
                 light: color.light,
@@ -216,16 +217,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func color(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -245,16 +246,16 @@ extension HTML {
 
 // MARK: HTML extension - AccentColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func accentColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.AccentColor.property,
             light: light,
@@ -266,15 +267,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func accentColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.accentColor(
                 light: color.light,
@@ -289,16 +290,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func accentColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -318,16 +319,16 @@ extension HTML {
 
 // MARK: HTML extension - BackgroundColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func backgroundColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.BackgroundColor.property,
             light: light,
@@ -339,15 +340,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func backgroundColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.backgroundColor(
                 light: color.light,
@@ -364,16 +365,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderBlockColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderBlockColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderBlockColor.property,
             light: light,
@@ -385,15 +386,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderBlockColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderBlockColor(
                 light: color.light,
@@ -408,16 +409,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderBlockColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -437,16 +438,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderBlockEndColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderBlockEndColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderBlockEndColor.property,
             light: light,
@@ -458,15 +459,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderBlockEndColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderBlockEndColor(
                 light: color.light,
@@ -481,16 +482,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderBlockEndColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -510,16 +511,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderBlockStartColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderBlockStartColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderBlockStartColor.property,
             light: light,
@@ -531,15 +532,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderBlockStartColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderBlockStartColor(
                 light: color.light,
@@ -554,16 +555,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderBlockStartColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -583,16 +584,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderBottomColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderBottomColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderBottomColor.property,
             light: light,
@@ -604,15 +605,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderBottomColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderBottomColor(
                 light: color.light,
@@ -627,16 +628,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderBottomColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -656,16 +657,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderColor.property,
             light: light,
@@ -677,15 +678,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderColor(
                 light: color.light,
@@ -700,16 +701,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -729,16 +730,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderInlineColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderInlineColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderInlineColor.property,
             light: light,
@@ -750,15 +751,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderInlineColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderInlineColor(
                 light: color.light,
@@ -773,16 +774,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderInlineColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -802,16 +803,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderInlineEndColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderInlineEndColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderInlineEndColor.property,
             light: light,
@@ -823,15 +824,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderInlineEndColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderInlineEndColor(
                 light: color.light,
@@ -846,16 +847,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderInlineEndColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -875,16 +876,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderInlineStartColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderInlineStartColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderInlineStartColor.property,
             light: light,
@@ -896,15 +897,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderInlineStartColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderInlineStartColor(
                 light: color.light,
@@ -919,16 +920,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderInlineStartColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -948,16 +949,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderLeftColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderLeftColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderLeftColor.property,
             light: light,
@@ -969,15 +970,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderLeftColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderLeftColor(
                 light: color.light,
@@ -992,16 +993,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderLeftColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1021,16 +1022,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderRightColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderRightColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderRightColor.property,
             light: light,
@@ -1042,15 +1043,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderRightColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderRightColor(
                 light: color.light,
@@ -1065,16 +1066,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderRightColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1094,16 +1095,16 @@ extension HTML {
 
 // MARK: HTML extension - BorderTopColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func borderTopColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             W3C_CSS_Backgrounds.BorderTopColor.property,
             light: light,
@@ -1115,15 +1116,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderTopColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.borderTopColor(
                 light: color.light,
@@ -1138,16 +1139,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func borderTopColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1167,16 +1168,16 @@ extension HTML {
 
 // MARK: HTML extension - CaretColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func caretColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.CaretColor.property,
             light: light,
@@ -1188,15 +1189,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func caretColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.caretColor(
                 light: color.light,
@@ -1211,16 +1212,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func caretColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1240,16 +1241,16 @@ extension HTML {
 
 // MARK: HTML extension - ColumnRuleColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func columnRuleColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.ColumnRuleColor.property,
             light: light,
@@ -1261,15 +1262,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func columnRuleColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.columnRuleColor(
                 light: color.light,
@@ -1284,16 +1285,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func columnRuleColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1313,16 +1314,16 @@ extension HTML {
 
 // MARK: HTML extension - FloodColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func floodColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.FloodColor.property,
             light: light,
@@ -1334,15 +1335,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func floodColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.floodColor(
                 light: color.light,
@@ -1357,16 +1358,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func floodColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1385,16 +1386,16 @@ extension HTML {
 }
 // MARK: HTML extension - Fill
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func fill(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.Fill.property,
             light: light,
@@ -1406,15 +1407,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func fill(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.fill(
                 light: color.light,
@@ -1429,16 +1430,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func fill(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1458,16 +1459,16 @@ extension HTML {
 
 // MARK: HTML extension - LightingColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func lightingColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.LightingColor.property,
             light: light,
@@ -1479,15 +1480,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func lightingColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.lightingColor(
                 light: color.light,
@@ -1502,16 +1503,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func lightingColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1531,16 +1532,16 @@ extension HTML {
 
 // MARK: HTML extension - OutlineColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func outlineColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.OutlineColor.property,
             light: light,
@@ -1552,15 +1553,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func outlineColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.outlineColor(
                 light: color.light,
@@ -1575,16 +1576,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func outlineColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1604,16 +1605,16 @@ extension HTML {
 
 // MARK: HTML extension - StopColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func stopColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.StopColor.property,
             light: light,
@@ -1625,15 +1626,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func stopColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.stopColor(
                 light: color.light,
@@ -1648,16 +1649,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func stopColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1677,16 +1678,16 @@ extension HTML {
 
 // MARK: HTML extension - Stroke
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func stroke(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.Stroke.property,
             light: light,
@@ -1698,15 +1699,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func stroke(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.stroke(
                 light: color.light,
@@ -1721,16 +1722,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func stroke(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1750,16 +1751,16 @@ extension HTML {
 
 // MARK: HTML extension - TextDecorationColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func textDecorationColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.TextDecorationColor.property,
             light: light,
@@ -1771,15 +1772,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func textDecorationColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.textDecorationColor(
                 light: color.light,
@@ -1794,16 +1795,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func textDecorationColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)
@@ -1823,16 +1824,16 @@ extension HTML {
 
 // MARK: HTML extension - TextEmphasisColor
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
     public func textEmphasisColor(
         light: W3C_CSS_Values.Color,
         dark: W3C_CSS_Values.Color?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.lightAndDarkMode(
             CSS_Standard.TextEmphasisColor.property,
             light: light,
@@ -1844,15 +1845,15 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func textEmphasisColor(
         _ color: HTMLColor?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         if let color {
             self.textEmphasisColor(
                 light: color.light,
@@ -1867,16 +1868,16 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     func textEmphasisColor(
         _ color: W3C_CSS_Color.Color.WithDarkMode?,
         media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch color {
         case .global:
             self.inlineStyle(color, media: media, selector: selector, pseudo: pseudo)

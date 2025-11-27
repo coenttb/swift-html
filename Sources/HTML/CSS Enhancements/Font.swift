@@ -6,7 +6,8 @@
 //
 
 import Dependencies
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
+import CSS_Standard
 
 public struct Font: Hashable, Sendable {
     public let family: CSS_Standard.FontFamily
@@ -36,9 +37,9 @@ public struct Font: Hashable, Sendable {
     }
 }
 
-extension HTML {
-    @HTMLBuilder
-    public func font(_ font: Font) -> some HTML {
+extension HTML.View {
+    @HTML.Builder
+    public func font(_ font: Font) -> some HTML.View {
         self
             .fontFamily(font.family)
             .fontSize(font.size)

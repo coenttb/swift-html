@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 15/04/2025.
 //
 
-import HTMLCSSPointFreeHTML
+import CSS_Rendering
+import CSS_Standard
 
 public struct Border: Equatable, Sendable {
     public var sides: Set<Side>?
@@ -32,15 +33,15 @@ public struct Border: Equatable, Sendable {
     }
 }
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func border(
         _ border: Border?,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         switch border {
         case .none:
             self
@@ -82,16 +83,16 @@ extension HTML {
     }
 
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func border(
         _ sides: [Border.Side] = Border.Side.allCases,
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.border(
             Border(sides: .init(sides), width: width, style: style, color: color),
             media: mediaQuery,
@@ -102,16 +103,16 @@ extension HTML {
 
     @discardableResult
     @_disfavoredOverload
-    @HTMLBuilder
+    @HTML.Builder
     public func border(
         _ sides: Border.Side...,
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.border(
             Border(sides: .init(sides), width: width, style: style, color: color),
             media: mediaQuery,
@@ -121,22 +122,22 @@ extension HTML {
     }
 }
 
-extension HTML {
+extension HTML.View {
     private func borderSides(
         border: Border,
         borderStyle: String,
         lightColor: String,
         darkColor: String,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector?,
-        pseudo: Pseudo?
-    ) -> some HTML {
+        selector: HTML.Selector?,
+        pseudo: HTML.Pseudo?
+    ) -> some HTML.View {
         // Apply styles sequentially without nested conditionals to avoid deep generic nesting
-        var result: any HTML = self
+        var result: any HTML.View = self
 
         if let sides = border.sides {
             if sides.contains(.top) {
-                result = AnyHTML(result)
+                result = HTML.AnyView(result)
                     .inlineStyle(
                         BorderTop.property,
                         "\(borderStyle) \(lightColor)",
@@ -154,7 +155,7 @@ extension HTML {
             }
 
             if sides.contains(.left) {
-                result = AnyHTML(result)
+                result = HTML.AnyView(result)
                     .inlineStyle(
                         BorderLeft.property,
                         "\(borderStyle) \(lightColor)",
@@ -172,7 +173,7 @@ extension HTML {
             }
 
             if sides.contains(.bottom) {
-                result = AnyHTML(result)
+                result = HTML.AnyView(result)
                     .inlineStyle(
                         BorderBottom.property,
                         "\(borderStyle) \(lightColor)",
@@ -190,7 +191,7 @@ extension HTML {
             }
 
             if sides.contains(.right) {
-                result = AnyHTML(result)
+                result = HTML.AnyView(result)
                     .inlineStyle(
                         BorderRight.property,
                         "\(borderStyle) \(lightColor)",
@@ -208,23 +209,23 @@ extension HTML {
             }
         }
 
-        return AnyHTML(result)
+        return HTML.AnyView(result)
     }
 }
 
 // MARK: - Individual Border Side Functions
 
-extension HTML {
+extension HTML.View {
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderTop(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.border(
             [.top],
             width: width,
@@ -237,15 +238,15 @@ extension HTML {
     }
 
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderBottom(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.border(
             [.bottom],
             width: width,
@@ -258,15 +259,15 @@ extension HTML {
     }
 
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderLeft(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.border(
             [.left],
             width: width,
@@ -279,15 +280,15 @@ extension HTML {
     }
 
     @discardableResult
-    @HTMLBuilder
+    @HTML.Builder
     public func borderRight(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
         color: HTMLColor? = nil,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: PointFreeHTML.Selector? = nil,
-        pseudo: Pseudo? = nil
-    ) -> some HTML {
+        selector: HTML.Selector? = nil,
+        pseudo: HTML.Pseudo? = nil
+    ) -> some HTML.View {
         self.border(
             [.right],
             width: width,
