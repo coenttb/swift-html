@@ -10,6 +10,9 @@ import CSS_Standard
 
 extension CSSPropertyAccessor {
     /// Sets the text color with explicit light and dark mode values.
+    ///
+    /// This is the ONLY overload that auto-darkens: when `dark` is nil,
+    /// the light color is automatically darkened for dark mode.
     @inlinable
     @discardableResult
     @_disfavoredOverload
@@ -20,17 +23,20 @@ extension CSSPropertyAccessor {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
-        lightAndDarkMode(
-            CSS_Standard.Color.property,
-            light: light,
-            dark: dark,
+        let effectiveDark = dark ?? light.darker()
+        return applyColorProperty(
+            CSS_Standard.Color.self,
+            .withDarkMode(light: light, dark: effectiveDark),
             media: media,
             selector: selector,
             pseudo: pseudo
         )
     }
-    
+
     /// Sets the text color using an HTMLColor value.
+    ///
+    /// HTMLColor already contains both light and dark values.
+    /// No auto-darkening occurs (HTMLColor.init handles it).
     @inlinable
     @discardableResult
     public func color(
@@ -39,18 +45,15 @@ extension CSSPropertyAccessor {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
-        guard let color else {
-            return CSSPropertyAccessor<HTML.AnyView>(base: HTML.AnyView(base))
-        }
-        return self.color(
-            light: color.light,
-            dark: color.dark,
+        applyColorProperty(
+            CSS_Standard.Color.self,
+            color,
             media: media,
             selector: selector,
             pseudo: pseudo
         )
     }
-    
+
     /// Sets the text color using a Color.WithDarkMode value.
     @usableFromInline
     @discardableResult
@@ -61,22 +64,13 @@ extension CSSPropertyAccessor {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
-        switch color {
-        case .global(let global):
-            return CSSPropertyAccessor<HTML.AnyView>(
-                base: HTML.AnyView(base.inlineStyle(CSS_Standard.Color.self, global, media: media, selector: selector, pseudo: pseudo))
-            )
-        case .darkMode(let color):
-            return self.color(
-                light: color.light,
-                dark: color.dark,
-                media: media,
-                selector: selector,
-                pseudo: pseudo
-            )
-        case .none:
-            return CSSPropertyAccessor<HTML.AnyView>(base: HTML.AnyView(base))
-        }
+        applyColorProperty(
+            CSS_Standard.Color.self,
+            color,
+            media: media,
+            selector: selector,
+            pseudo: pseudo
+        )
     }
 
     /// Sets the text color using a raw CSS_Standard.Color.Value (no dark mode).
@@ -92,45 +86,30 @@ extension CSSPropertyAccessor {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSSPropertyAccessor<HTML.AnyView> {
-        guard let value else {
-            return CSSPropertyAccessor<HTML.AnyView>(base: HTML.AnyView(base))
-        }
-        return CSSPropertyAccessor<HTML.AnyView>(
-            base: HTML.AnyView(
-                base.inlineStyle(
-                    CSS_Standard.Color.property,
-                    value.description,
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
-                )
-            )
+        applyColorProperty(
+            CSS_Standard.Color.self,
+            value,
+            media: media,
+            selector: selector,
+            pseudo: pseudo
         )
     }
-}
 
-
-// TODO: SHOULD INVESTIGATE IF THIS CAN REDUCE THE AMOUNT OF OVERLOADS
-extension CSSPropertyAccessor {
     /// Sets the text color using a global CSS value (inherit, initial, unset, revert).
     @inlinable
     @discardableResult
-    public func color<T: GlobalConvertible & W3C_CSS_Shared.Property>(
-        _ global: T,
+    public func color(
+        _ global: CSS_Standard.Global?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSSPropertyAccessor<HTML.AnyView>  {
-        CSSPropertyAccessor<HTML.AnyView>(
-            base: HTML.AnyView(
-                base.inlineStyle(
-                    T.property,
-                    global.declaration.description,
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
-                )
-            )
+    ) -> CSSPropertyAccessor<HTML.AnyView> {
+        applyColorProperty(
+            CSS_Standard.Color.self,
+            global,
+            media: media,
+            selector: selector,
+            pseudo: pseudo
         )
     }
 }

@@ -68,11 +68,11 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
-        .package(url: "https://github.com/coenttb/swift-standards", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-incits-4-1986", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-rfc-4648", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-iso-9899", from: "0.0.1"),
-        .package(url: "https://github.com/coenttb/swift-whatwg-url", from: "0.0.1")
+        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.0.1"),
+        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.0.1"),
+        .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.0.1"),
+        .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.0.1"),
+        .package(url: "https://github.com/swift-standards/swift-whatwg-url", from: "0.0.1")
     ],
     targets: [
         .target(
