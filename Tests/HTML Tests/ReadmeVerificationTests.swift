@@ -6,6 +6,7 @@
 //
 
 import HTML
+import HTMLTheme
 import Testing
 
 @Suite("README Verification")
@@ -18,7 +19,7 @@ struct ReadmeVerificationTests {
                 .fontSize(.rem(2.5))
 
             p { "Build type-safe web pages with Swift" }
-                .color(light: .gray800, dark: .gray200)
+                .css.color(.gray800)
                 .lineHeight(1.6)
         }
 
@@ -79,8 +80,8 @@ struct ReadmeVerificationTests {
     @Test("Example from README: Dark Mode Support")
     func darkModeSupport() throws {
         let adaptiveContent = p { "Adaptive text" }
-            .color(light: .gray900, dark: .gray100)
-            .backgroundColor(light: .white, dark: .gray900)
+            .css.color(.gray900)
+            .css.backgroundColor(HTMLColor(light: .white, dark: .gray900))
 
         let string = try String(adaptiveContent)
 

@@ -19,7 +19,7 @@ extension SnapshotTests {
                 of: HTML.Document {
                     ContentDivision {
                         H1 { "Type-safe HTML" }
-                            .color(light: .named(.blue), dark: .named(.red))
+                            .css.color(light: .named(.blue), dark: .named(.red))
                             .fontSize(.px(24))
                         Paragraph { "With type-safe CSS!" }
                             .marginTop(.px(10))
@@ -34,17 +34,17 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:blue}
-                      .font-size-2{font-size:24px}
+                      .font-size-0{font-size:24px}
+                      .color-1{color:blue}
                       .margin-top-3{margin-top:10px}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:red}
+                        .color-2{color:red}
                       }
                     </style>
                   </head>
                   <body>
                     <div>
-                      <h1 class="color-0 color-1 font-size-2">Type-safe HTML
+                      <h1 class="font-size-0 color-1 color-2">Type-safe HTML
                       </h1>
                       <p class="margin-top-3">With type-safe CSS!
                       </p>
@@ -71,14 +71,11 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
-                      @media (prefers-color-scheme: dark){
-                        .color-1{color:rgb(163, 40, 40)}
-                      }
+                      .color-0{color:red}
                     </style>
                   </head>
                   <body>
-                    <p class="color-0 color-1">Hello World
+                    <p class="color-0">Hello World
                     </p>
                   </body>
                 </html>
@@ -254,14 +251,11 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
-                      @media (prefers-color-scheme: dark){
-                        .color-1{color:rgb(163, 40, 40)}
-                      }
+                      .color-0{color:red}
                     </style>
                   </head>
                   <body>
-                    <div class="color-0 color-1">
+                    <div class="color-0">
                     </div>
                   </body>
                 </html>
@@ -300,7 +294,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .color(light: .hex("FF0000"), dark: .hex("00FF00"))
+                        .css.color(light: .hex("FF0000"), dark: .hex("00FF00"))
                 },
                 as: .html
             ) {
@@ -369,17 +363,14 @@ extension SnapshotTests {
                   <head>
                     <style>
                       @media screen and (max-width: 768px){
-                        .padding-0{padding:20px}
-                        .background-color-1{background-color:blue}
-                        .color-2{color:#cccc33}
-                      }
-                      @media (prefers-color-scheme: dark) and screen and (max-width: 768px){
-                        .color-3{color:rgb(163, 163, 40)}
+                        .background-color-0{background-color:blue}
+                        .color-1{color:yellow}
+                        .padding-2{padding:20px}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="padding-0 background-color-1 color-2 color-3">
+                    <div class="background-color-0 color-1 padding-2">
                     </div>
                   </body>
                 </html>
@@ -394,7 +385,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .accentColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.accentColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -432,14 +423,11 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .accent-color-0{accent-color:#cc3333}
-                          @media (prefers-color-scheme: dark){
-                            .accent-color-1{accent-color:rgb(163, 40, 40)}
-                          }
+                          .accent-color-0{accent-color:red}
                         </style>
                       </head>
                       <body>
-                        <div class="accent-color-0 accent-color-1">
+                        <div class="accent-color-0">
                         </div>
                       </body>
                     </html>
@@ -452,7 +440,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .backgroundColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.backgroundColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -490,14 +478,11 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .background-color-0{background-color:#cccc33}
-                          @media (prefers-color-scheme: dark){
-                            .background-color-1{background-color:rgb(163, 163, 40)}
-                          }
+                          .background-color-0{background-color:yellow}
                         </style>
                       </head>
                       <body>
-                        <div class="background-color-0 background-color-1">
+                        <div class="background-color-0">
                         </div>
                       </body>
                     </html>
@@ -510,7 +495,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderBlockColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderBlockColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -539,7 +524,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderBlockEndColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderBlockEndColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -568,7 +553,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderBlockStartColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderBlockStartColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -597,7 +582,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderBottomColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderBottomColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -626,7 +611,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -655,7 +640,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderInlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderInlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -684,7 +669,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderInlineEndColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderInlineEndColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -713,7 +698,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderInlineStartColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderInlineStartColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -742,7 +727,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderLeftColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderLeftColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -771,7 +756,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderRightColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderRightColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -800,7 +785,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .borderTopColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.borderTopColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -829,7 +814,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .caretColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.caretColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -858,7 +843,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .columnRuleColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.columnRuleColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -887,7 +872,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .floodColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.floodColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -916,7 +901,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .fill(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.fill(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -954,14 +939,11 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .fill-0{fill:#cc3333}
-                          @media (prefers-color-scheme: dark){
-                            .fill-1{fill:rgb(163, 40, 40)}
-                          }
+                          .fill-0{fill:red}
                         </style>
                       </head>
                       <body>
-                        <div class="fill-0 fill-1">
+                        <div class="fill-0">
                         </div>
                       </body>
                     </html>
@@ -974,7 +956,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .lightingColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.lightingColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -1003,7 +985,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .outlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.outlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -1032,7 +1014,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .stopColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.stopColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -1061,7 +1043,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .stroke(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.stroke(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -1090,7 +1072,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .textDecorationColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.textDecorationColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -1119,7 +1101,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .textEmphasisColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css.textEmphasisColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -1150,7 +1132,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .fill(light: .hex("FF0000"), dark: .hex("00FF00"), pseudo: .hover)
+                            .css.fill(light: .hex("FF0000"), dark: .hex("00FF00"), pseudo: .hover)
                     },
                     as: .html
                 ) {
@@ -1179,7 +1161,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .stroke(
+                            .css.stroke(
                                 light: .hex("FF0000"),
                                 dark: .hex("00FF00"),
                                 selector: "child:span"
@@ -1212,7 +1194,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .outlineColor(
+                            .css.outlineColor(
                                 light: .hex("FF0000"),
                                 dark: .hex("00FF00"),
                                 media: .print

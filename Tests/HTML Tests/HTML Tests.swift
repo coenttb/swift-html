@@ -19,7 +19,7 @@ extension SnapshotTests {
         func labelAndInputWithLightAndDarkmodeColor() {
             assertInlineSnapshot(
                 of: label { input.text }
-                    .color(light: .red, dark: .blue),
+                    .css.color(HTMLColor(light: .red, dark: .blue)),
                 as: .html
             ) {
                 """

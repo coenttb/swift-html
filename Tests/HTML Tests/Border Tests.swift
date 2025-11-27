@@ -22,14 +22,11 @@ extension SnapshotTests {
                     div {
                         HTML.Empty()
                     }
-                    .border(
+                    .css.border(
                         Border.Side.all,
                         width: .px(1),
                         style: .solid,
-                        color: .init(light: .red, dark: .blue),
-                        media: nil,
-                        selector: nil,
-                        pseudo: nil
+                        color: .init(light: .red, dark: .blue)
                     )
                 },
                 as: .html
@@ -61,7 +58,7 @@ extension SnapshotTests {
                     div {
                         HTML.Empty()
                     }
-                    .border(
+                    .css.border(
                         [.right, .left, .bottom],
                         width: .px(1),
                         style: .solid,
@@ -104,7 +101,7 @@ extension SnapshotTests {
                     div {
                         HTML.Empty()
                     }
-                    .border(
+                    .css.border(
                         .right,
                         .left,
                         .bottom,

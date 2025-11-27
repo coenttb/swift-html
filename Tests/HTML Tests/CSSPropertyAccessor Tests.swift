@@ -41,7 +41,8 @@ extension SnapshotTests {
                     </style>
                   </head>
                   <body>
-                    <div class="display-0 padding-1 margin-2">Styled content</div>
+                    <div class="display-0 padding-1 margin-2">Styled content
+                    </div>
                   </body>
                 </html>
                 """
@@ -72,15 +73,16 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
-                      .font-size-2{font-size:14px}
+                      .font-size-0{font-size:14px}
+                      .color-1{color:#cc3333}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:#3399ff}
+                        .color-2{color:#3399ff}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="color-0 color-1 font-size-2">Test</div>
+                    <div class="font-size-0 color-1 color-2">Test
+                    </div>
                   </body>
                 </html>
                 """
@@ -101,7 +103,7 @@ extension SnapshotTests {
                     .justifyContent(.center)
                     .padding(.px(24))
                     .borderRadius(.px(8))
-                    .backgroundColor(.init(light: .white, dark: .init(hex: 0x1a1a1a)))
+                    .css.backgroundColor(HTMLColor(light: .white, dark: .hex("1a1a1a")))
                 },
                 as: .html
             ) {
@@ -116,14 +118,15 @@ extension SnapshotTests {
                       .justify-content-3{justify-content:center}
                       .padding-4{padding:24px}
                       .border-radius-5{border-radius:8px}
-                      .background-color-6{background-color:#ffffff}
+                      .background-color-6{background-color:#FFFFFF}
                       @media (prefers-color-scheme: dark){
                         .background-color-7{background-color:#1a1a1a}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="display-0 flex-direction-1 align-items-2 justify-content-3 padding-4 border-radius-5 background-color-6 background-color-7">Card</div>
+                    <div class="display-0 flex-direction-1 align-items-2 justify-content-3 padding-4 border-radius-5 background-color-6 background-color-7">Card
+                    </div>
                   </body>
                 </html>
                 """
@@ -159,7 +162,8 @@ extension SnapshotTests {
                     </style>
                   </head>
                   <body>
-                    <div class="display-0 display-1 padding-2 padding-3">Responsive</div>
+                    <div class="display-0 display-1 padding-2 padding-3">Responsive
+                    </div>
                   </body>
                 </html>
                 """
@@ -173,11 +177,10 @@ extension SnapshotTests {
                     div {
                         "Mixed"
                     }
+                    .attribute("data-testid", "mixed-element")
                     .css
                     .display(.flex)
                     .padding(.px(16))
-                    .body  // Exit CSS namespace, get underlying view
-                    .attribute("data-testid", "mixed-element")
                 },
                 as: .html
             ) {
@@ -191,7 +194,8 @@ extension SnapshotTests {
                     </style>
                   </head>
                   <body>
-                    <div data-testid="mixed-element" class="display-0 padding-1">Mixed</div>
+                    <div class="display-0 padding-1" data-testid="mixed-element">Mixed
+                    </div>
                   </body>
                 </html>
                 """
@@ -229,7 +233,8 @@ extension SnapshotTests {
                     </style>
                   </head>
                   <body>
-                    <div class="position-0 top-1 right-2 bottom-3 left-4 z-index-5">Positioned</div>
+                    <div class="position-0 top-1 right-2 bottom-3 left-4 z-index-5">Positioned
+                    </div>
                   </body>
                 </html>
                 """
@@ -258,14 +263,15 @@ extension SnapshotTests {
                   <head>
                     <style>
                       .font-size-0{font-size:16px}
-                      .font-weight-1{font-weight:700}
+                      .font-weight-1{font-weight:bold}
                       .line-height-2{line-height:1.5}
                       .text-align-3{text-align:center}
                       .text-decoration-4{text-decoration:underline}
                     </style>
                   </head>
                   <body>
-                    <p class="font-size-0 font-weight-1 line-height-2 text-align-3 text-decoration-4">Styled text</p>
+                    <p class="font-size-0 font-weight-1 line-height-2 text-align-3 text-decoration-4">Styled text
+                    </p>
                   </body>
                 </html>
                 """
