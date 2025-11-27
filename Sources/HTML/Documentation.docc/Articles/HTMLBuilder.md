@@ -382,7 +382,7 @@ Create your own builder helpers:
 
 ```swift
 extension HTML {
-    static func when<Content: HTML>(
+    static func when<Content: HTML.View>(
         _ condition: Bool,
         @HTML.Builder content: () -> Content
     ) -> some HTML.View {
@@ -393,7 +393,7 @@ extension HTML {
         }
     }
     
-    static func forEach<T, Content: HTML>(
+    static func forEach<T, Content: HTML.View>(
         _ items: [T],
         @HTML.Builder content: (T) -> Content
     ) -> some HTML.View {

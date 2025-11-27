@@ -7,19 +7,18 @@
 
 import HTML
 
-public struct Input<CodingKey: RawRepresentable>: HTML where CodingKey.RawValue == String {
-
+public struct Input<CodingKey: RawRepresentable>: HTML.View where CodingKey.RawValue == String {
     public let codingKey: CodingKey
-    public let disabled: Disabled?
-    public let form: HTMLAttributeTypes.Form.ID?
-    public let type: HTML_Standard_Elements.Input.Variant
+    public let disabled: HTML_Standard_Attributes.Disabled?
+    public let form: HTML_Standard_Attributes.Form.ID?
+    public let type: HTML_Standard.Input.Variant
     public var style: Input.Style = .default
 
     public init(
         codingKey: CodingKey,
-        disabled: Disabled? = nil,
-        form: HTMLAttributeTypes.Form.ID? = nil,
-        type: HTML_Standard_Elements.Input.Variant
+        disabled: HTML_Standard_Attributes.Disabled? = nil,
+        form: HTML_Standard_Attributes.Form.ID? = nil,
+        type: HTML_Standard.Input.Variant
     ) {
         self.codingKey = codingKey
         self.disabled = disabled
@@ -35,7 +34,6 @@ public struct Input<CodingKey: RawRepresentable>: HTML where CodingKey.RawValue 
                 form: form,
                 type: type
             )
-
             .id(codingKey.rawValue)
         )
     }
@@ -51,7 +49,7 @@ extension Input {
         case success
 
         @HTML.Builder
-        public func transform(_ html: some HTML) -> some HTML.View {
+        public func transform(_ html: some HTML.View) -> some HTML.View {
             switch self {
             case .default:
                 html

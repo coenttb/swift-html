@@ -64,13 +64,13 @@ public struct Spacer: HTML.View {
 }
 
 public struct LazyVGrid<Content: HTML.View>: HTML.View {
-    let columns: OrderedDictionary<HTML.AtRule.Media?, [Int]>
+    let columns: OrderedDictionary<CSS_Standard.Media?, [Int]>
     let content: Content
     let horizontalSpacing: CSS_Standard.Length?
     let verticalSpacing: CSS_Standard.Length?
 
     public init(
-        columns: OrderedDictionary<HTML.AtRule.Media?, [Int]>,
+        columns: OrderedDictionary<CSS_Standard.Media?, [Int]>,
         // TODO: alignment: HorizontalAlignment = .center,
         horizontalSpacing: CSS_Standard.Length? = nil,
         verticalSpacing: CSS_Standard.Length? = nil,

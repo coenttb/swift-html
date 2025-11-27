@@ -6,7 +6,6 @@ extension String {
     static let html: Self = "HTML"
     static let htmlTheme: Self = "HTMLTheme"
     static let htmlComponents: Self = "HTMLComponents"
-    static let htmlMarkdown: Self = "HTMLMarkdown"
     static let htmlWebsite: Self = "HTMLWebsite"
     static let htmlKit: Self = "HTMLKit"
 }
@@ -15,7 +14,6 @@ extension Target.Dependency {
     static var html: Self { .target(name: .html) }
     static var htmlTheme: Self { .target(name: .htmlTheme) }
     static var htmlComponents: Self { .target(name: .htmlComponents) }
-    static var htmlMarkdown: Self { .target(name: .htmlMarkdown) }
     static var htmlWebsite: Self { .target(name: .htmlWebsite) }
 }
 
@@ -23,12 +21,10 @@ extension Target.Dependency {
     static var htmlTypesFoundation: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
     static var htmlRenderableTestSupport: Self { .product(name: "HTML Renderable TestSupport", package: "swift-html-rendering") }
-    static var cssRenderable: Self { .product(name: "CSS Rendering", package: "swift-css-rendering") }
+    static var cssRendering: Self { .product(name: "CSS Rendering", package: "swift-css-rendering") }
     static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
-    static var swiftMarkdown: Self { .product(name: "Markdown", package: "swift-markdown") }
-    static var markdownBuilder: Self { .product(name: "MarkdownBuilder", package: "swift-builders") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var builders: Self { .product(name: "Builders", package: "swift-builders") }
@@ -53,7 +49,6 @@ let package = Package(
         .library(name: .html, targets: [.html]),
         .library(name: .htmlTheme, targets: [.htmlTheme]),
         .library(name: .htmlComponents, targets: [.htmlComponents]),
-        .library(name: .htmlMarkdown, targets: [.htmlMarkdown]),
         .library(name: .htmlWebsite, targets: [.htmlWebsite]),
         // Convenience product with common features
         .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
@@ -72,7 +67,6 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
-        .package(url: "https://github.com/swiftlang/swift-markdown", from: "0.4.0"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
         .package(url: "https://github.com/coenttb/swift-standards", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-incits-4-1986", from: "0.0.1"),
@@ -85,7 +79,7 @@ let package = Package(
             name: .html,
             dependencies: [
                 .htmlRendering,
-                .cssRenderable,
+                .cssRendering,
                 .htmlTypesFoundation,
                 .stringBuilder,
                 .dependencies,
@@ -121,7 +115,6 @@ let package = Package(
             dependencies: [
                 .html,
                 .htmlComponents,
-                .htmlMarkdown,
                 .htmlTheme,
                 .dependencies,
                 .standards,
@@ -141,17 +134,6 @@ let package = Package(
             dependencies: [
                 .html,
                 .htmlTheme,
-                .dependencies,
-                .orderedCollections
-            ]
-        ),
-        .target(
-            name: .htmlMarkdown,
-            dependencies: [
-                .html,
-                .htmlTheme,
-                .swiftMarkdown,
-                .markdownBuilder,
                 .dependencies,
                 .orderedCollections
             ]
@@ -183,13 +165,6 @@ let package = Package(
             name: .htmlComponents.tests,
             dependencies: [
                 .htmlComponents,
-                .htmlRenderableTestSupport
-            ]
-        ),
-        .testTarget(
-            name: .htmlMarkdown.tests,
-            dependencies: [
-                .htmlMarkdown,
                 .htmlRenderableTestSupport
             ]
         )

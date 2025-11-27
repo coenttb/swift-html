@@ -2,7 +2,7 @@ import HTML
 import HTMLComponents
 
 // MARK: - Alert Component
-public struct Alert<Content: HTML, Actions: HTML>: HTML.View {
+public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
     public enum Severity {
         case info
         case success
@@ -134,7 +134,7 @@ public struct Alert<Content: HTML, Actions: HTML>: HTML.View {
 }
 
 // MARK: - Banner Component
-public struct Banner<Content: HTML, Actions: HTML>: HTML.View {
+public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
     public enum Style {
         case standard
         case slim

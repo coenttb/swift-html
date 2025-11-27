@@ -12,11 +12,11 @@ import OrderedCollections
 
 public struct Cards: HTML.View {
     let columns: Cards.Columns
-    let cards: [any HTML]
+    let cards: [any HTML.View]
 
     public init(
         columns: Columns = .three,
-        @ArrayBuilder<any HTML> cards: () -> [any HTML]
+        @ArrayBuilder<any HTML.View> cards: () -> [any HTML.View]
     ) {
         self.cards = cards()
         self.columns = columns

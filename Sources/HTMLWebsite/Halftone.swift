@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 
-public struct Halftone<Image: HTML>: HTML.View {
+public struct Halftone<Image: HTML.View>: HTML.View {
     let grayscale: String
     let dotSize: Length
     let lineColor: HTMLColor

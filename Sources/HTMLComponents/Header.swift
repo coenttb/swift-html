@@ -33,7 +33,7 @@ public struct Header<Content: HTML.View>: HTML.View {
             .lineHeight(lineHeight)
     }
 
-    var fontSize: CSSPropertyTypes.FontSize {
+    var fontSize: CSS_Standard.FontSize {
         switch size {
         case 1: .em(2)
         case 2: .em(1.5)

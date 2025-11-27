@@ -9,7 +9,7 @@
 // import HTML
 // import Dependencies
 //
-// public struct Halftone3<Image: HTML>: HTML.View {
+// public struct Halftone3<Image: HTML.View>: HTML.View {
 //    let grayscale: String
 //    let dotSize: LengthPercentage
 //    let lineColor: HTMLColor

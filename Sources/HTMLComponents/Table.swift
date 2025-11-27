@@ -1,6 +1,6 @@
 import HTML
 
-public struct Table<Headers: HTML, Rows: HTML>: HTML.View {
+public struct Table<Headers: HTML.View, Rows: HTML.View>: HTML.View {
     let headers: Headers
     let rows: Rows
     let id: String?

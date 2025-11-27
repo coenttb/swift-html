@@ -12,13 +12,13 @@ public struct Circle: HTML.View {
 
     @HTML.Builder let content: any HTML.View
 
-    public var width: CSSTypes.Width
-    public var height: CSSTypes.Height
+    public var width: CSS_Standard.Width
+    public var height: CSS_Standard.Height
 
     public init(
-        width: CSSTypes.Width = .rem(10),
-        height: CSSTypes.Height = .rem(10),
-        @HTML.Builder content: @escaping () -> any HTML
+        width: CSS_Standard.Width = .rem(10),
+        height: CSS_Standard.Height = .rem(10),
+        @HTML.Builder content: @escaping () -> any HTML.View
     ) {
         self.content = content()
         self.width = width
@@ -27,7 +27,7 @@ public struct Circle: HTML.View {
 
     public init(
         size: LengthPercentage,
-        @HTML.Builder content: @escaping () -> any HTML
+        @HTML.Builder content: @escaping () -> any HTML.View
     ) {
         self.content = content()
         self.width = .lengthPercentage(size)
@@ -38,7 +38,7 @@ public struct Circle: HTML.View {
         div {
             div {
                 div {
-                    HTML.AnyView(content)
+                    AnyHTML(content)
                         .objectFit(.cover)
                         .height(.percent(100))
                         .width(.percent(100))

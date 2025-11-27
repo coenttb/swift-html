@@ -533,11 +533,11 @@ Create specialized renderers for different formats:
 
 ```swift
 protocol HTMLRenderer {
-    func render(_ html: any HTML) -> Data
+    func render(_ html: any HTML.View) -> Data
 }
 
 struct MinifiedHTMLRenderer: HTMLRenderer {
-    func render(_ html: any HTML) -> Data {
+    func render(_ html: any HTML.View) -> Data {
         let bytes = html.render()
         // Remove unnecessary whitespace
         return minify(bytes)
@@ -545,7 +545,7 @@ struct MinifiedHTMLRenderer: HTMLRenderer {
 }
 
 struct PrettyHTMLRenderer: HTMLRenderer {
-    func render(_ html: any HTML) -> Data {
+    func render(_ html: any HTML.View) -> Data {
         let bytes = html.render()
         // Add indentation for readability
         return prettify(bytes)
@@ -559,12 +559,12 @@ Render only parts of a page:
 
 ```swift
 struct PartialRenderer {
-    static func renderFragment(_ html: any HTML) -> String {
+    static func renderFragment(_ html: any HTML.View) -> String {
         // Render without doctype or html wrapper
         return try! String(html)
     }
     
-    static func renderForHTMX(_ html: any HTML) -> String {
+    static func renderForHTMX(_ html: any HTML.View) -> String {
         // Special handling for HTMX responses
         return renderFragment(html)
     }
@@ -579,7 +579,7 @@ For very large documents, stream the output:
 struct StreamingRenderer {
     let output: FileHandle
     
-    func render(_ component: any HTML) throws {
+    func render(_ component: any HTML.View) throws {
         let bytes = component.render()
         
         // Write in chunks to avoid memory issues
@@ -653,7 +653,7 @@ Render for native web views:
 import WebKit
 
 extension WKWebView {
-    func load(_ html: any HTML) {
+    func load(_ html: any HTML.View) {
         let htmlString = try! String(html)
         loadHTMLString(htmlString, baseURL: nil)
     }

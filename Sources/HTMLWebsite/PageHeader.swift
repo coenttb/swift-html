@@ -1,7 +1,7 @@
 import Foundation
 import HTMLComponents
 
-public struct PageHeader<Title: HTML, Blurb: HTML, CallToAction: HTML>: HTML.View {
+public struct PageHeader<Title: HTML.View, Blurb: HTML.View, CallToAction: HTML.View>: HTML.View {
     var title: Title
     var blurb: Blurb
     var callToAction: CallToAction?

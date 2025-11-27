@@ -161,9 +161,9 @@ struct ProductList: HTML.View {
 Create reusable, generic components:
 
 ```swift
-struct List<Item: Identifiable>: HTML where Item.ID: LosslessStringConvertible {
+struct List<Item: Identifiable>: HTML.View where Item.ID: LosslessStringConvertible {
     let items: [Item]
-    let content: (Item) -> any HTML
+    let content: (Item) -> any HTML.View
     
     var body: some HTML.View {
         ul {
@@ -199,7 +199,7 @@ extension HTML {
     }
     
     /// Conditionally applies a modifier
-    func `if`<Modified: HTML>(
+    func `if`<Modified: HTML.View>(
         _ condition: Bool,
         transform: (Self) -> Modified
     ) -> some HTML.View {
@@ -591,7 +591,7 @@ struct Thing: HTML.View { }
 Use generics to make components more flexible:
 
 ```swift
-struct Badge<Content: HTML>: HTML.View {
+struct Badge<Content: HTML.View>: HTML.View {
     let content: Content
     let style: BadgeStyle
     

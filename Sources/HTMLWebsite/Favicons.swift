@@ -8,7 +8,7 @@
 // import Foundation
 // import HTMLComponents
 //
-// public struct Favicons: HTML, Sendable {
+// public struct Favicons: HTML.View, Sendable {
 //
 //    public struct SVG: Sendable {
 //        let lightMode: URL

@@ -9,20 +9,20 @@ import Foundation
 import HTML
 
 // Version without custom head content
-extension HTML.Document where Body: HTML, Head == _ModernHead<EmptyHTML> {
+extension HTML.Document where Body: HTML.View, Head == _ModernHead<Empty> {
     public static func modern(
         @HTML.Builder body: () -> Body
-    ) -> HTML.Document<Body, _ModernHead<EmptyHTML>> {
+    ) -> HTML.Document<Body, _ModernHead<Empty>> {
         HTML.Document(
             body: body,
-            head: { _ModernHead(customHead: EmptyHTML()) }
+            head: { _ModernHead(customHead: Empty()) }
         )
     }
 }
 
 // Version with custom head content
 extension HTML.Document where Body: HTML.View {
-    public static func modern<CustomHead: HTML>(
+    public static func modern<CustomHead: HTML.View>(
         @HTML.Builder body: () -> Body,
         @HTML.Builder head customHead: () -> CustomHead
     ) -> HTML.Document<Body, _ModernHead<CustomHead>> where Head == _ModernHead<CustomHead> {
@@ -33,7 +33,7 @@ extension HTML.Document where Body: HTML.View {
     }
 }
 
-public struct _ModernHead<CustomHead: HTML>: HTML.View {
+public struct _ModernHead<CustomHead: HTML.View>: HTML.View {
     let customHead: CustomHead
 
     public init(customHead: CustomHead) {
@@ -65,8 +65,8 @@ public struct _ModernHead<CustomHead: HTML>: HTML.View {
     }
 }
 
-// EmptyHTML for when no custom head is provided
-public struct EmptyHTML: HTML.View {
+// Empty for when no custom head is provided
+public struct Empty: HTML.View {
     public init() {}
     public var body: some HTML.View {
         HTML.Text("")

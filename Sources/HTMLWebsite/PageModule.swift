@@ -1,7 +1,7 @@
 import Foundation
 import HTMLComponents
 
-public struct PageModule<Title: HTML, Content: HTML>: HTML.View {
+public struct PageModule<Title: HTML.View, Content: HTML.View>: HTML.View {
     let title: Title?
     var theme: PageModule.Theme
     let content: Content

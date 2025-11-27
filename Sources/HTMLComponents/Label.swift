@@ -8,7 +8,7 @@
 import Foundation
 import HTML
 
-public struct Label<Title: HTML, Icon: HTML>: HTML.View {
+public struct Label<Title: HTML.View, Icon: HTML.View>: HTML.View {
     let alignment: VerticalAlign
     let spacing: Length
     let title: Title

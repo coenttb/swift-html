@@ -20,7 +20,7 @@ public struct NavigationBar: HTML.View {
     public init(
         sticky: Bool = false,
         backgroundColor: HTMLColor? = nil,
-        @HTML.Builder logo: () -> any HTML,
+        @HTML.Builder logo: () -> any HTML.View,
         @ArrayBuilder<NavItem> items: () -> [any NavItem]
     ) {
         self.logo = logo()
@@ -31,10 +31,10 @@ public struct NavigationBar: HTML.View {
 
     // Legacy init for backward compatibility
     public init(
-        @HTML.Builder logo: () -> any HTML,
-        @HTML.Builder centeredNavItems: () -> any HTML,
-        @HTML.Builder trailingNavItems: () -> any HTML,
-        @HTML.Builder mobileNavItems: () -> any HTML
+        @HTML.Builder logo: () -> any HTML.View,
+        @HTML.Builder centeredNavItems: () -> any HTML.View,
+        @HTML.Builder trailingNavItems: () -> any HTML.View,
+        @HTML.Builder mobileNavItems: () -> any HTML.View
     ) {
         self.logo = logo()
         self.items = []

@@ -1,6 +1,6 @@
 import HTML
 
-public struct Card<Content: HTML, Header: HTML, Footer: HTML>: HTML.View {
+public struct Card<Content: HTML.View, Header: HTML.View, Footer: HTML.View>: HTML.View {
     let content: Content
     let header: Header
     let footer: Footer

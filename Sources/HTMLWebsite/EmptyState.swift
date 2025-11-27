@@ -10,7 +10,7 @@ import HTML
 import HTMLComponents
 
 /// A component for displaying empty states with optional icon, title, description, and action
-public struct EmptyState<Action: HTML>: HTML.View {
+public struct EmptyState<Action: HTML.View>: HTML.View {
     /// Optional icon or emoji to display
     let icon: String?
 
@@ -167,7 +167,7 @@ extension EmptyState where Action == HTML.Empty {
 
 extension EmptyState {
     /// Creates a "No Data" empty state
-    public static func noData<A: HTML>(
+    public static func noData<A: HTML.View>(
         title: String = "No Data Yet",
         description: String? = "Start by adding some data to see it here.",
         @HTML.Builder action: () -> A = { HTML.Empty() }
@@ -181,7 +181,7 @@ extension EmptyState {
     }
 
     /// Creates a "No Results" empty state for search
-    public static func noResults<A: HTML>(
+    public static func noResults<A: HTML.View>(
         searchTerm: String? = nil,
         @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {
@@ -195,7 +195,7 @@ extension EmptyState {
     }
 
     /// Creates a "Coming Soon" empty state
-    public static func comingSoon<A: HTML>(
+    public static func comingSoon<A: HTML.View>(
         feature: String? = nil,
         @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {
@@ -209,7 +209,7 @@ extension EmptyState {
     }
 
     /// Creates an error empty state
-    public static func error<A: HTML>(
+    public static func error<A: HTML.View>(
         message: String? = "Something went wrong. Please try again.",
         @HTML.Builder action: () -> A = { HTML.Empty() }
     ) -> EmptyState<A> {

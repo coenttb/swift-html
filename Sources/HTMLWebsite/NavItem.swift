@@ -11,16 +11,16 @@ import HTMLComponents
 import HTMLTheme
 
 // MARK: - NavItem Protocol
-public typealias NavItem = HTML
+public typealias NavItem = HTML.View
 
 // MARK: - NavLink
-public struct NavLink: NavItem {
+public struct NavLink: HTML.View {
     let title: any HTML.View
     let href: Href
     let isActive: Bool
 
     public init(
-        _ title: any HTML,
+        _ title: any HTML.View,
         href: Href,
         isActive: Bool
     ) {
@@ -44,7 +44,7 @@ public struct NavLink: NavItem {
 }
 
 // MARK: - NavButton
-public struct NavButton: NavItem {
+public struct NavButton: HTML.View {
     public enum Style {
         case primary
         case secondary
@@ -113,7 +113,7 @@ public struct NavButton: NavItem {
 }
 
 // MARK: - NavDivider
-public struct NavDivider: NavItem {
+public struct NavDivider: HTML.View {
     public init() {}
 
     public var body: some HTML.View {
@@ -127,7 +127,7 @@ public struct NavDivider: NavItem {
 }
 
 // MARK: - NavDropdown
-public struct NavDropdown<Items: HTML>: NavItem {
+public struct NavDropdown<Items: HTML.View>: HTML.View {
     let title: String
     let items: Items
 
@@ -177,7 +177,7 @@ public struct NavDropdown<Items: HTML>: NavItem {
 }
 
 // MARK: - NavSpacer
-public struct NavSpacer: NavItem {
+public struct NavSpacer: HTML.View {
     public init() {}
 
     public var body: some HTML.View {
@@ -189,7 +189,7 @@ public struct NavSpacer: NavItem {
 }
 
 // MARK: - NavGroup
-public struct NavGroup<Items: HTML>: NavItem {
+public struct NavGroup<Items: HTML.View>: HTML.View {
     let items: Items
     let spacing: Length
 
