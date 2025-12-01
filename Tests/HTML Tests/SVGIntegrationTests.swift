@@ -8,6 +8,7 @@
 import Foundation
 import HTML
 import SVG
+import SVG_Standard
 import Testing
 
 @Suite("SVG Integration Tests")
@@ -20,10 +21,10 @@ struct SVGIntegrationTests {
 
             InlineSVG {
                 svg(width: 100, height: 100) {
-                    circle(cx: 50, cy: 50, r: 40) {
-                        fill("red")
-                        stroke("black", width: 3)
-                    }
+                    circle(cx: 50, cy: 50, r: 40)
+                        .fill("red")
+                        .stroke("black")
+                        .strokeWidth(3)
                 }
             }
         }
@@ -52,10 +53,9 @@ struct SVGIntegrationTests {
             p { "Before SVG" }
 
             InlineSVG {
-                svg(viewBox: "0 0 100 100") {
-                    rect(x: 10, y: 10, width: 80, height: 80) {
-                        fill("green")
-                    }
+                svg(viewBox: .init(minX: 0, minY: 0, width: 100, height: 100)) {
+                    rect(x: 10, y: 10, width: 80, height: 80)
+                        .fill("green")
                 }
             }
 
@@ -94,9 +94,8 @@ struct SVGIntegrationTests {
     @Test("img with SVG content as data URI")
     func imgWithSVGDataURI() throws {
         let svgContent = svg(width: 20, height: 20) {
-            circle(cx: 10, cy: 10, r: 8) {
-                fill("orange")
-            }
+            circle(cx: 10, cy: 10, r: 8)
+                .fill("orange")
         }
 
         let html = div {
@@ -115,9 +114,8 @@ struct SVGIntegrationTests {
     @Test("img with SVG content as base64")
     func imgWithSVGBase64() throws {
         let svgContent = svg(width: 20, height: 20) {
-            circle(cx: 10, cy: 10, r: 8) {
-                fill("purple")
-            }
+            circle(cx: 10, cy: 10, r: 8)
+                .fill("purple")
         }
 
         let html = div {

@@ -11,7 +11,7 @@ import WHATWG_HTML_Elements
 import WHATWG_HTML_MediaAttributes
 // Import SVG module but we need to be careful about naming
 import SVG
-import SVG_Renderable
+import SVG_Rendering
 import SVG_Standard
 
 /// Bridge to embed type-safe SVG content in HTML documents.
