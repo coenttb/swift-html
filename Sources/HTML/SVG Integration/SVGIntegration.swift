@@ -55,9 +55,7 @@ public struct InlineSVG: HTML.View {
 
     /// Renders the SVG content as HTML.
     public var body: some HTML.View {
-        // Render the SVG to a string and embed as raw HTML
-        let svgString: String = content.render()
-        HTML.Raw(svgString)
+        HTML.Raw([UInt8](content))
     }
 }
 
@@ -107,18 +105,17 @@ extension WHATWG_HTML_Elements.Image {
         base64: Bool = true,
         loading: WHATWG_HTML_MediaAttributes.Loading? = .eager
     ) {
-        let svgString: String = svg.render()
-
-        let src: WHATWG_HTML_MediaAttributes.Src = {
+        var src: WHATWG_HTML_MediaAttributes.Src {
             if base64 {
-                return "data:image/svg+xml;base64,\(String.base64(Array(svgString.utf8)))"
+                return "data:image/svg+xml;base64,\([UInt8](svg).base64.encoded())"
             } else {
                 // Percent-encode for data URI using WHATWG standard
                 // This properly encodes < > and other special characters
-                let encoded = WHATWG_Form_URL_Encoded.PercentEncoding.encode(svgString, spaceAsPlus: false)
-                return "data:image/svg+xml;charset=utf-8,\(encoded)"
+//                let encoded = WHATWG_Form_URL_Encoded.PercentEncoding.encode(String.init([UInt8](svg)), spaceAsPlus: false)
+                
+                return "data:image/svg+xml;charset=utf-8,\(String(svg).formURL.encoded(spaceAsPlus: false))"
             }
-        }()
+        }
 
         self = .init(
             src: src,
