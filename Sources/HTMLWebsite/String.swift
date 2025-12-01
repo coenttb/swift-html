@@ -11,10 +11,9 @@ extension String {
     public static func sanitizeForJavaScript(_ input: String, preserveCase: Bool = true) -> String {
         // Filter to alphanumeric and underscore characters only
         let sanitized = input.unicodeScalars.filter { scalar in
-            scalar.value < 128 && (
-                INCITS_4_1986.CharacterClassification.isAlphanumeric(UInt8(scalar.value)) ||
-                scalar == "_"
-            )
+            scalar.value < 128
+                && (INCITS_4_1986.CharacterClassification.isAlphanumeric(UInt8(scalar.value))
+                    || scalar == "_")
         }
         var sanitizedString = String(String.UnicodeScalarView(sanitized))
 

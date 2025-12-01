@@ -1,70 +1,79 @@
 #if canImport(SwiftUI)
-#if os(macOS)
-import AppKit
-#endif
-import HTML_Rendering
-@preconcurrency public import SwiftUI
-public import WebKit
+    #if os(macOS)
+        import AppKit
+    #endif
+    import HTML_Rendering
+    @preconcurrency public import SwiftUI
+    public import WebKit
 
-// MARK: - Shared Implementation
+    // MARK: - Shared Implementation
 
-private extension HTML.Document where Body: HTML.View, Head: HTML.View {
-    @MainActor
-    func makeWebView() -> WKWebView {
-        let configuration = WKWebViewConfiguration()
-        configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+    extension HTML.Document where Body: HTML.View, Head: HTML.View {
+        @MainActor
+        fileprivate func makeWebView() -> WKWebView {
+            let configuration = WKWebViewConfiguration()
+            configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
 
-        let webView = WKWebView(frame: .zero, configuration: configuration)
-        loadHTML(into: webView)
-        return webView
+            let webView = WKWebView(frame: .zero, configuration: configuration)
+            loadHTML(into: webView)
+            return webView
+        }
+
+        @MainActor
+        fileprivate func loadHTML(into webView: WKWebView) {
+            let html =
+                (try? String(self)) ?? """
+                    <!doctype html>
+                    <html>
+                    <body style="font-family: system-ui; color: #c00; padding: 20px;">
+                    <p>Failed to render HTML document</p>
+                    </body>
+                    </html>
+                    """
+            webView.loadHTMLString(html, baseURL: nil)
+        }
     }
 
-    @MainActor
-    func loadHTML(into webView: WKWebView) {
-        let html = (try? String(self)) ?? """
-            <!doctype html>
-            <html>
-            <body style="font-family: system-ui; color: #c00; padding: 20px;">
-            <p>Failed to render HTML document</p>
-            </body>
-            </html>
-            """
-        webView.loadHTMLString(html, baseURL: nil)
-    }
-}
+    // MARK: - macOS
 
-// MARK: - macOS
+    #if os(macOS)
+        extension HTML.Document: @retroactive SwiftUI.View where Body: HTML.View, Head: HTML.View {}
 
-#if os(macOS)
-extension HTML.Document: @retroactive SwiftUI.View where Body: HTML.View, Head: HTML.View {}
+        extension HTML.Document: SwiftUI.NSViewRepresentable
+        where Body: HTML.View, Head: HTML.View {
+            public typealias NSViewType = WKWebView
 
-extension HTML.Document: SwiftUI.NSViewRepresentable where Body: HTML.View, Head: HTML.View {
-    public typealias NSViewType = WKWebView
+            public func makeNSView(context: NSViewRepresentableContext<Self>) -> WKWebView {
+                makeWebView()
+            }
 
-    public func makeNSView(context: NSViewRepresentableContext<Self>) -> WKWebView {
-        makeWebView()
-    }
+            public func updateNSView(
+                _ webView: WKWebView,
+                context: NSViewRepresentableContext<Self>
+            ) {
+                loadHTML(into: webView)
+            }
+        }
 
-    public func updateNSView(_ webView: WKWebView, context: NSViewRepresentableContext<Self>) {
-        loadHTML(into: webView)
-    }
-}
+    // MARK: - iOS
 
-// MARK: - iOS
+    #elseif os(iOS)
+        extension HTML.Document: @retroactive SwiftUI.View where Body: HTML.View, Head: HTML.View {}
 
-#elseif os(iOS)
-extension HTML.Document: @retroactive SwiftUI.View where Body: HTML.View, Head: HTML.View {}
+        extension HTML.Document: SwiftUI.UIViewRepresentable
+        where Body: HTML.View, Head: HTML.View {
+            public typealias UIViewType = WKWebView
 
-extension HTML.Document: SwiftUI.UIViewRepresentable where Body: HTML.View, Head: HTML.View {
-    public typealias UIViewType = WKWebView
+            public func makeUIView(context: UIViewRepresentableContext<Self>) -> WKWebView {
+                makeWebView()
+            }
 
-    public func makeUIView(context: UIViewRepresentableContext<Self>) -> WKWebView {
-        makeWebView()
-    }
-
-    public func updateUIView(_ webView: WKWebView, context: UIViewRepresentableContext<Self>) {
-        loadHTML(into: webView)
-    }
-}
-#endif
+            public func updateUIView(
+                _ webView: WKWebView,
+                context: UIViewRepresentableContext<Self>
+            ) {
+                loadHTML(into: webView)
+            }
+        }
+    #endif
 #endif

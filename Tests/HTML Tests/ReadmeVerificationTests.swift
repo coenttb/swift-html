@@ -41,7 +41,7 @@ struct ReadmeVerificationTests {
             Spacer()
             div { "Menu" }
         }
-        
+
         let string = try String(header)
 
         #expect(!string.isEmpty)

@@ -36,35 +36,83 @@ extension CSS {
 
         if let column = column {
             result = HTML.AnyView(result)
-                .inlineStyle(GridColumn.property, column.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridColumn.property,
+                    column.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let row = row {
             result = HTML.AnyView(result)
-                .inlineStyle(GridRow.property, row.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridRow.property,
+                    row.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let columnStart = columnStart {
             result = HTML.AnyView(result)
-                .inlineStyle(GridColumnStart.property, columnStart.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridColumnStart.property,
+                    columnStart.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let columnEnd = columnEnd {
             result = HTML.AnyView(result)
-                .inlineStyle(GridColumnEnd.property, columnEnd.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridColumnEnd.property,
+                    columnEnd.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let rowStart = rowStart {
             result = HTML.AnyView(result)
-                .inlineStyle(GridRowStart.property, rowStart.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridRowStart.property,
+                    rowStart.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let rowEnd = rowEnd {
             result = HTML.AnyView(result)
-                .inlineStyle(GridRowEnd.property, rowEnd.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridRowEnd.property,
+                    rowEnd.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let justifySelf = justifySelf {
             result = HTML.AnyView(result)
-                .inlineStyle(JustifySelf.property, justifySelf.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    JustifySelf.property,
+                    justifySelf.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let alignSelf = alignSelf {
             result = HTML.AnyView(result)
-                .inlineStyle(AlignSelf.property, alignSelf.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    AlignSelf.property,
+                    alignSelf.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

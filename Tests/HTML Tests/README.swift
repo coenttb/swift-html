@@ -5,11 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 29/07/2025.
 //
 
+import CSS
+import CSS_Standard
 import Dependencies
 import HTML
 import HTMLTheme
-import CSS
-import CSS_Standard
 import HTML_Renderable_TestSupport
 import Testing
 

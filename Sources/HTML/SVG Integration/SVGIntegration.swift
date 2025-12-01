@@ -6,13 +6,13 @@
 //
 
 import RFC_4648
-import WHATWG_Form_URL_Encoded
-import WHATWG_HTML_Elements
-import WHATWG_HTML_MediaAttributes
 // Import SVG module but we need to be careful about naming
 import SVG
 import SVG_Rendering
 import SVG_Standard
+import WHATWG_Form_URL_Encoded
+import WHATWG_HTML_Elements
+import WHATWG_HTML_MediaAttributes
 
 /// Bridge to embed type-safe SVG content in HTML documents.
 ///
@@ -111,9 +111,10 @@ extension WHATWG_HTML_Elements.Image {
             } else {
                 // Percent-encode for data URI using WHATWG standard
                 // This properly encodes < > and other special characters
-//                let encoded = WHATWG_Form_URL_Encoded.PercentEncoding.encode(String.init([UInt8](svg)), spaceAsPlus: false)
-                
-                return "data:image/svg+xml;charset=utf-8,\(String(svg).formURL.encoded(spaceAsPlus: false))"
+                //                let encoded = WHATWG_Form_URL_Encoded.PercentEncoding.encode(String.init([UInt8](svg)), spaceAsPlus: false)
+
+                return
+                    "data:image/svg+xml;charset=utf-8,\(String(svg).formURL.encoded(spaceAsPlus: false))"
             }
         }
 

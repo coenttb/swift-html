@@ -30,11 +30,23 @@ extension CSS {
 
         if let padding = padding {
             result = HTML.AnyView(result)
-                .inlineStyle(Padding.property, padding.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    Padding.property,
+                    padding.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let margin = margin {
             result = HTML.AnyView(result)
-                .inlineStyle(Margin.property, margin.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    Margin.property,
+                    margin.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

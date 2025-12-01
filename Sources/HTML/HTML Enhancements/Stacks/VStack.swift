@@ -3,9 +3,9 @@
 //  swift-html
 //
 
+import CSS
 import Foundation
 import HTML_Rendering
-import CSS
 
 public struct VStack<Content: HTML.View>: HTML.View {
     let alignment: AlignItems

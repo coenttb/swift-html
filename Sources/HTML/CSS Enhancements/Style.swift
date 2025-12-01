@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import StringBuilder
 import HTML_Standard
+import StringBuilder
 import WHATWG_HTML
 
 // TODO: This extension needs to be reimplemented to work with new WHATWG HTML types

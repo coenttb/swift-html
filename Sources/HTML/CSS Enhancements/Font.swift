@@ -5,9 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 26/06/2025.
 //
 
-import Dependencies
 import CSS
 import CSS_Standard
+import Dependencies
 
 public struct Font: Hashable, Sendable {
     public let family: CSS_Standard.FontFamily

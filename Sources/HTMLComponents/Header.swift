@@ -20,8 +20,16 @@ public struct Header<Content: HTML.View>: HTML.View {
     public var body: some HTML.View {
         tag("h\(size)") { content }
             .inlineStyle("margin", disableMargins != true ? "0" : nil)
-            .inlineStyle("margin-top", disableMargins != true ? marginTopValue : nil, selector: ":not(:first-child)")
-            .inlineStyle("margin-bottom", disableMargins != true ? marginBottomValue : nil, selector: ":not(:last-child)")
+            .inlineStyle(
+                "margin-top",
+                disableMargins != true ? marginTopValue : nil,
+                selector: ":not(:first-child)"
+            )
+            .inlineStyle(
+                "margin-bottom",
+                disableMargins != true ? marginBottomValue : nil,
+                selector: ":not(:last-child)"
+            )
             .inlineStyle("font-size", fontSizeValue)
             .inlineStyle("font-weight", "700")
             .inlineStyle("line-height", lineHeightValue)

@@ -41,7 +41,9 @@ extension CSS_Standard.Color {
             }
         }
 
-        public static func color(_ color: CSS_Standard.Color.Value) -> CSS_Standard.Color.WithDarkMode {
+        public static func color(
+            _ color: CSS_Standard.Color.Value
+        ) -> CSS_Standard.Color.WithDarkMode {
             return .init(color)
         }
 
@@ -77,7 +79,8 @@ extension CSS_Standard.Color.WithDarkMode {
 extension CSS_Standard.Color.WithDarkMode.Color: CustomStringConvertible {
     public var description: String {
         let attribute = CSS_Standard.Color.property
-        return "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
+        return
+            "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
     }
 }
 

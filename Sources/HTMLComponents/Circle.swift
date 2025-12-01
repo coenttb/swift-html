@@ -36,7 +36,8 @@ public struct Circle: HTML.View {
 
     public var body: some HTML.View {
         let anyContent: HTML.AnyView = .init(content)
-        let innerContent = anyContent
+        let innerContent =
+            anyContent
             .inlineStyle("object-fit", "cover")
             .inlineStyle("height", "100%")
             .inlineStyle("width", "100%")

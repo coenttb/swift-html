@@ -60,4 +60,3 @@ extension CSS_Standard.Color {
         }
     }
 }
-

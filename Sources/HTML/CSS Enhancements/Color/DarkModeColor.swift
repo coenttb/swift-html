@@ -91,7 +91,9 @@ extension DarkModeColor {
     /// - Parameter transform: A function to apply to both light and dark colors
     /// - Returns: A new DarkModeColor with transformed values
     @inlinable
-    public func map(_ transform: (CSS_Standard.Color.Value) -> CSS_Standard.Color.Value) -> DarkModeColor {
+    public func map(
+        _ transform: (CSS_Standard.Color.Value) -> CSS_Standard.Color.Value
+    ) -> DarkModeColor {
         DarkModeColor(
             light: transform(light),
             dark: transform(dark)
@@ -189,7 +191,8 @@ extension DarkModeColor: CustomStringConvertible {
             return light.description
         } else {
             let attribute = CSS_Standard.Color.property
-            return "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
+            return
+                "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
         }
     }
 }

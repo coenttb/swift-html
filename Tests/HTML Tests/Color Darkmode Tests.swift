@@ -1254,7 +1254,9 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .css.textDecorationColor(W3C_CSS_TextDecoration.TextDecorationColor?.none)
+                            .css.textDecorationColor(
+                                W3C_CSS_TextDecoration.TextDecorationColor?.none
+                            )
                     },
                     as: .html
                 ) {

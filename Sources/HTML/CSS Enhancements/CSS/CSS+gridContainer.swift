@@ -32,36 +32,85 @@ extension CSS {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSS<HTML.AnyView> {
-        var result: any HTML.View = base
-            .inlineStyle(Display.property, Display.grid.description, media: media, selector: selector, pseudo: pseudo)
+        var result: any HTML.View =
+            base
+            .inlineStyle(
+                Display.property,
+                Display.grid.description,
+                media: media,
+                selector: selector,
+                pseudo: pseudo
+            )
 
         if let columns = columns {
             result = HTML.AnyView(result)
-                .inlineStyle(GridTemplateColumns.property, columns.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridTemplateColumns.property,
+                    columns.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let rows = rows {
             result = HTML.AnyView(result)
-                .inlineStyle(GridTemplateRows.property, rows.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    GridTemplateRows.property,
+                    rows.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let gap = gap {
             result = HTML.AnyView(result)
-                .inlineStyle(Gap.property, gap.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    Gap.property,
+                    gap.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let rowGap = rowGap {
             result = HTML.AnyView(result)
-                .inlineStyle(RowGap.property, rowGap.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    RowGap.property,
+                    rowGap.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let columnGap = columnGap {
             result = HTML.AnyView(result)
-                .inlineStyle(ColumnGap.property, columnGap.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    ColumnGap.property,
+                    columnGap.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let justifyItems = justifyItems {
             result = HTML.AnyView(result)
-                .inlineStyle(JustifyItems.property, justifyItems.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    JustifyItems.property,
+                    justifyItems.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
         if let alignItems = alignItems {
             result = HTML.AnyView(result)
-                .inlineStyle(AlignItems.property, alignItems.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(
+                    AlignItems.property,
+                    alignItems.description,
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

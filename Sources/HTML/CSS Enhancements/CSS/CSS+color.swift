@@ -31,7 +31,8 @@ extension CSS {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSS<HTML.AnyView> {
-        let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
+        let darkModeColor =
+            dark.map { DarkModeColor(light: light, dark: $0) }
             ?? DarkModeColor(light: light)
         return applyColorProperty(
             CSS_Standard.Color.self,
