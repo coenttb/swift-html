@@ -287,6 +287,7 @@ extension HTMLColor {
 
     private static func rgbToHex(red: Int, green: Int, blue: Int) -> String {
         let bytes: [UInt8] = [UInt8(clamping: red), UInt8(clamping: green), UInt8(clamping: blue)]
-        return "#" + String(hexEncoding: bytes, uppercase: true)
+        let hexBytes: [UInt8] = RFC_4648.Base16.encode(bytes, uppercase: true)
+        return "#" + String(decoding: hexBytes, as: UTF8.self)
     }
 }

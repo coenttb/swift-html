@@ -19,58 +19,44 @@ public struct Header<Content: HTML.View>: HTML.View {
 
     public var body: some HTML.View {
         tag("h\(size)") { content }
-            .margin(disableMargins != true ? .zero : nil)
-            .marginTop(
-                disableMargins != true ? .lengthPercentage(marginTop) : nil,
-                pseudo: .not(.firstChild)
-            )
-            .marginBottom(
-                disableMargins != true ? .lengthPercentage(marginBottom) : nil,
-                pseudo: .not(.lastChild)
-            )
-            .fontSize(fontSize)
-            .fontWeight(700)
-            .lineHeight(lineHeight)
+            .inlineStyle("margin", disableMargins != true ? "0" : nil)
+            .inlineStyle("margin-top", disableMargins != true ? marginTopValue : nil, selector: ":not(:first-child)")
+            .inlineStyle("margin-bottom", disableMargins != true ? marginBottomValue : nil, selector: ":not(:last-child)")
+            .inlineStyle("font-size", fontSizeValue)
+            .inlineStyle("font-weight", "700")
+            .inlineStyle("line-height", lineHeightValue)
     }
 
-    var fontSize: CSS_Standard.FontSize {
+    var fontSizeValue: String {
         switch size {
-        case 1: .em(2)
-        case 2: .em(1.5)
-        case 3: .em(1.17)
-        case 4: .em(1)
-        case 5: .em(0.83)
-        default: .em(0.67)
+        case 1: "2em"
+        case 2: "1.5em"
+        case 3: "1.17em"
+        case 4: "1em"
+        case 5: "0.83em"
+        default: "0.67em"
         }
     }
-    var lineHeight: LineHeight {
+    var lineHeightValue: String {
         switch size {
-        case 1: 1.2
-        case 2: 1.2
-        case 3: 1.2
-        case 4: 1.2
-        case 5: 1.15
-        default: 1.15
+        case 1, 2, 3, 4: "1.2"
+        default: "1.15"
         }
     }
-    var marginBottom: LengthPercentage {
+    var marginBottomValue: String {
         switch size {
-        case 1: .em(1)
-        case 2: .em(0.75)
-        case 3: .em(0.5)
-        case 4: .em(0.5)
-        case 5: .em(0.5)
-        default: .em(0.3)
+        case 1: "1em"
+        case 2: "0.75em"
+        case 3, 4, 5: "0.5em"
+        default: "0.3em"
         }
     }
-    var marginTop: LengthPercentage {
+    var marginTopValue: String {
         switch size {
-        case 1: .em(2)
-        case 2: .em(1.75)
-        case 3: .em(1.5)
-        case 4: .em(1.5)
-        case 5: .em(0.5)
-        default: .em(0.5)
+        case 1: "2em"
+        case 2: "1.75em"
+        case 3, 4: "1.5em"
+        default: "0.5em"
         }
     }
 }

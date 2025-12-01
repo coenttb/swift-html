@@ -16,28 +16,30 @@ public struct Paragraph<Content: HTML.View>: HTML.View {
         tag("p") {
             content
         }
-        .padding(.bottom(.rem(0.5)), pseudo: .not(.lastChild))
-        .padding(.top(0), .right(0), .left(0))
-        .margin(0)
-        .lineHeight(1.5)
+        .inlineStyle("padding-bottom", "0.5rem", selector: ":not(:last-child)")
+        .inlineStyle("padding-top", "0")
+        .inlineStyle("padding-right", "0")
+        .inlineStyle("padding-left", "0")
+        .inlineStyle("margin", "0")
+        .inlineStyle("line-height", "1.5")
     }
 
     public enum Size {
         case big
         case regular
         case small
-        var fontSize: CSS_Standard.Length {
+        var fontSizeValue: String {
             switch self {
-            case .big: .length((19 / 16).rem)
-            case .regular: .length((16 / 16).rem)
-            case .small: .length((14 / 16).rem)
+            case .big: "\(19.0 / 16.0)rem"
+            case .regular: "1rem"
+            case .small: "\(14.0 / 16.0)rem"
             }
         }
-        var lineheight: CSS_Standard.Height {
+        var lineHeightValue: String {
             switch self {
-            case .big: .length((28 / 16).rem)
-            case .regular: .length((24 / 16).rem)
-            case .small: .length((21 / 16).rem)
+            case .big: "\(28.0 / 16.0)rem"
+            case .regular: "1.5rem"
+            case .small: "\(21.0 / 16.0)rem"
             }
         }
     }

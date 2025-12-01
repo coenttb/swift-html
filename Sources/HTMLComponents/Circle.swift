@@ -10,14 +10,14 @@ import HTML
 
 public struct Circle: HTML.View {
 
-    @HTML.Builder let content: any HTML.View
+    let content: any HTML.View
 
-    public var width: CSS_Standard.Width
-    public var height: CSS_Standard.Height
+    public var width: String
+    public var height: String
 
     public init(
-        width: CSS_Standard.Width = .rem(10),
-        height: CSS_Standard.Height = .rem(10),
+        width: String = "10rem",
+        height: String = "10rem",
         @HTML.Builder content: @escaping () -> any HTML.View
     ) {
         self.content = content()
@@ -26,34 +26,35 @@ public struct Circle: HTML.View {
     }
 
     public init(
-        size: LengthPercentage,
+        size: String,
         @HTML.Builder content: @escaping () -> any HTML.View
     ) {
         self.content = content()
-        self.width = .lengthPercentage(size)
-        self.height = .lengthPercentage(size)
+        self.width = size
+        self.height = size
     }
 
     public var body: some HTML.View {
-        div {
-            div {
-                div {
-                    AnyHTML(content)
-                        .objectFit(.cover)
-                        .height(.percent(100))
-                        .width(.percent(100))
-                        .maxWidth(.percent(100))
-                        .borderStyle(BorderStyle.none)
-                }
-                .position(.absolute)
-                .width(.percent(100))
-                .height(.percent(100))
-                .display(.block)
-            }
-            .clipPath(.circle(.percent(50)))
-            .position(.relative)
-            .width(width)
-            .height(height)
-        }
+        let anyContent: HTML.AnyView = .init(content)
+        let innerContent = anyContent
+            .inlineStyle("object-fit", "cover")
+            .inlineStyle("height", "100%")
+            .inlineStyle("width", "100%")
+            .inlineStyle("max-width", "100%")
+            .inlineStyle("border-style", "none")
+
+        let innerDiv = div { innerContent }
+            .inlineStyle("position", "absolute")
+            .inlineStyle("width", "100%")
+            .inlineStyle("height", "100%")
+            .inlineStyle("display", "block")
+
+        let clipDiv = div { innerDiv }
+            .inlineStyle("clip-path", "circle(50%)")
+            .inlineStyle("position", "relative")
+            .inlineStyle("width", width)
+            .inlineStyle("height", height)
+
+        return div { clipDiv }
     }
 }

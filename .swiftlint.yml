@@ -1,78 +1,42 @@
 disabled_rules:
   - line_length
-  - identifier_name
-  - nesting  # Allow deeply nested enums for namespacing
-  - redundant_discardable_let  # Preserve 'let _ =' in result builder contexts (required for Swift 6.0+)
-  - opening_brace  # Handled by swift-format
-  - trailing_comma  # Handled by swift-format
-  - trailing_whitespace  # Preserve whitespace in snapshot tests
-  - sorted_imports  # Handled by swift-format (conflicts with SwiftLint's sorting)
-  - orphaned_doc_comment  # Allow module-level documentation
-  - large_tuple  # HTML properties may require tuples with multiple components
-  - mark  # Allow flexible MARK comment formatting
-  - redundant_string_enum_value  # Explicit enum values improve clarity for HTML keywords
-  - type_name  # HTML elements use lowercase names (div, span, etc.)
-  - todo  # Allow TODO comments in development
-  - force_try  # Force try is acceptable in HTML rendering contexts
-  - closure_parameter_position  # Allow flexible closure formatting
-  - optional_data_string_conversion  # HTML/SVG rendering uses string-to-data conversions
-  - non_optional_string_data_conversion  # HTML/SVG rendering uses string-to-data conversions
+  - trailing_comma
+  - redundant_discardable_let
+  - identifier_name  # Allow short variable names (i, x, y, etc.)
+  - large_tuple  # Allow tuples with more than 2 members
+  - optional_data_string_conversion  # False positive with String(decoding:as:)
+  - for_where  # False positives when for loops have complex logic, not just filtering
+  - todo  # Allow TODO comments for tracking future work
+  - type_body_length  # Don't enforce maximum type body length
+  - nesting  # Allow nested types for hierarchical APIs
+  - type_name  # Allow flexible test suite naming (lowercase, special chars, etc.)
+  - cyclomatic_complexity  # Allow complex inline logic over helper extraction
+  - implicit_optional_initialization  # Allow explicit = nil initialization
+  - function_body_length  # Allow longer inline functions
+  - file_length  # Allow longer files
 
 opt_in_rules:
-  - empty_count
   - explicit_init
-  - force_cast
   - closure_spacing
+  - empty_count
+  - empty_string
+  - fatal_error_message
+  - first_where
+  - joined_default_parameter
   - operator_usage_whitespace
-  - private_outlet
-  - redundant_nil_coalescing
-  - literal_expression_end_indentation
-  - single_test_class
-  - sorted_first_last
-  - vertical_whitespace
-  - legacy_random
-  - no_extension_access_modifier
-  - colon
-  
+  - overridden_super_call
+
 included:
-  - Package.swift
   - Sources
   - Tests
 
 excluded:
+  - .build
   - Carthage
   - Pods
   - fastlane
-  - build
 
-analyzer_rules:
-  - unused_import
-
-colon:
-  apply_to_dictionaries: true
-
-vertical_whitespace:
-  max_empty_lines: 1
-
-# Increased length limits for test files with extensive snapshots
-type_body_length:
-  warning: 1250
-  error: 1300
-
-file_length:
-  warning: 1890
-  error: 2000
-
-function_body_length:
-  warning: 240
-  error: 250
-
-# Allow more function parameters for HTML elements with many attributes
+# Function parameter count (kept as a reasonable limit)
 function_parameter_count:
-  warning: 8
-  error: 10
-
-# Increased cyclomatic complexity for HTML rendering functions
-cyclomatic_complexity:
-  warning: 20
-  error: 25
+  warning: 6
+  error: 8

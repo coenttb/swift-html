@@ -16,41 +16,31 @@ public struct Card<Content: HTML.View, Header: HTML.View, Footer: HTML.View>: HT
     }
 
     public var body: some HTML.View {
-        VStack(spacing: .rem(0)) {
-            div {
-                header
-            }
-            .borderBottom(
-                .init(width: .px(1), style: .solid, color: .hex("#e8e8e8")),
-                media: .prefersColorScheme(.light)
-            )
-            .borderBottom(
-                .init(width: .px(1), style: .solid, color: .hex("#3d3d3d")),
-                media: .prefersColorScheme(.dark)
-            )
+        let headerDiv = div { header }
+            .inlineStyle("border-bottom", "1px solid #e8e8e8", media: .prefersColorScheme(.light))
+            .inlineStyle("border-bottom", "1px solid #3d3d3d", media: .prefersColorScheme(.dark))
 
-            VStack {
-                VStack(spacing: 0.rem) { content }
-                    .flexGrow()
+        let innerVStack = VStack(spacing: 0.rem) { content }
+            .inlineStyle("flex-grow", "1")
 
-                footer
-            }
-            .flexGrow()
-            .padding(top: .rem(0.5), horizontal: .rem(1.5), bottom: .rem(1.5))
+        let contentVStack = VStack {
+            innerVStack
+            footer
         }
-        .display(.flex)
-        .flexDirection(.column)
-        .borderBottom(
-            .init(
-                width: .px(1),
-                style: .solid,
-                color: .hex("#353535")
-            ),
-            media: .prefersColorScheme(.dark)
-        )
-        .inlineStyle("border", "1px #353535 solid", media: .dark)
+        .inlineStyle("flex-grow", "1")
+        .inlineStyle("padding", "0.5rem 1.5rem 1.5rem 1.5rem")
+
+        let outerVStack = VStack(spacing: .rem(0)) {
+            headerDiv
+            contentVStack
+        }
+        .inlineStyle("display", "flex")
+        .inlineStyle("flex-direction", "column")
+        .inlineStyle("border", "1px #353535 solid", media: .prefersColorScheme(.dark))
         .inlineStyle("box-shadow", "0 4px 12px rgba(0, 0, 0, 0.1)")
-        .borderRadius(.length(7.5.px))
-        .overflow(.hidden)
+        .inlineStyle("border-radius", "7.5px")
+        .inlineStyle("overflow", "hidden")
+
+        return outerVStack
     }
 }

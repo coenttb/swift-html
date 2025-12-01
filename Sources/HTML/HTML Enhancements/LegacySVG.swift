@@ -95,7 +95,7 @@ private func <| <A, B>(f: (A) -> B, a: A) -> B {
 }
 
 func base64EncodedString(_ string: String) -> String {
-    return String(base64Encoding: Array(string.utf8))
+    return String.base64(Array(string.utf8))
 }
 //
 // public let checkmarkSvgBase64 = base64EncodedString(

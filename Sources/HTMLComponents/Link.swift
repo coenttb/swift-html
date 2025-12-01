@@ -20,20 +20,23 @@ public struct Link<Label: HTML.View>: HTML.View {
 
     public var body: some HTML.View {
         a(href: href) { label }
-            .color(.text.link)
-            .color(HTMLColor.text.link, pseudo: .visited)
-            .color(HTMLColor.text.link, pseudo: .link)
-            .textDecoration(
-                linkStyle.underline == true ? .underline : TextDecoration.none,
-                pseudo: .visited
+            .inlineStyle("color", "var(--link-color, #0066cc)")
+            .inlineStyle("color", "var(--link-color, #0066cc)", selector: ":visited")
+            .inlineStyle("color", "var(--link-color, #0066cc)", selector: ":link")
+            .inlineStyle(
+                "text-decoration",
+                linkStyle.underline == true ? "underline" : "none",
+                selector: ":visited"
             )
-            .textDecoration(
-                linkStyle.underline == true ? .underline : TextDecoration.none,
-                pseudo: .link
+            .inlineStyle(
+                "text-decoration",
+                linkStyle.underline == true ? "underline" : "none",
+                selector: ":link"
             )
-            .textDecoration(
-                linkStyle.underline == true ? .none : TextDecoration.underline,
-                pseudo: .hover
+            .inlineStyle(
+                "text-decoration",
+                linkStyle.underline == true ? "none" : "underline",
+                selector: ":hover"
             )
     }
 }

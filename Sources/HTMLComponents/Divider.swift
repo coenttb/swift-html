@@ -5,10 +5,10 @@ public struct Divider: HTML.View {
     public init() {}
     public var body: some HTML.View {
         hr()()
-            .borderRight(BorderRight.none)
-            .borderBottom(BorderBottom.none)
-            .borderLeft(BorderLeft.none)
-            .borderTop(.init(width: .px(1), style: .solid, color: .gray500))
-            .margin(vertical: 0, horizontal: .percent(30))
+            .inlineStyle("border-right", "none")
+            .inlineStyle("border-bottom", "none")
+            .inlineStyle("border-left", "none")
+            .inlineStyle("border-top", "1px solid #6b7280")
+            .inlineStyle("margin", "0 30%")
     }
 }

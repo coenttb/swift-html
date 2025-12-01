@@ -27,44 +27,17 @@ public struct Table<Headers: HTML.View, Rows: HTML.View>: HTML.View {
     public var body: some HTML.View {
         div {
             table {
-                thead {
-                    headers
-                }
-                tbody {
-                    rows
-                }
+                thead { headers }
+                tbody { rows }
             }
-            .if(let: id) {
-                $0.id($1)
-            }
-            .width(.percent(100))
-            .borderCollapse(.collapse)
-            .backgroundColor(.background.primary)
-            .if(striped) { table in
-                table.inlineStyle(
-                    "tbody tr:nth-child(even)",
-                    "background-color: rgba(0, 0, 0, 0.02)"
-                )
-                .inlineStyle(
-                    "tbody tr:nth-child(even)",
-                    "background-color: rgba(255, 255, 255, 0.02)",
-                    media: .dark
-                )
-            }
-            .if(hoverable) { table in
-                table.backgroundColor(
-                    .rgba(red: 59, green: 130, blue: 246, alpha: 0.05),
-                    selector: "tbody tr",
-                    pseudo: .hover
-                )
-            }
+            .if(let: id) { $0.id($1) }
+            .inlineStyle("width", "100%")
+            .inlineStyle("border-collapse", "collapse")
+            .inlineStyle("background-color", "var(--background-primary, white)")
         }
-        .overflowX(.auto)
-        .if(bordered) { wrapper in
-            wrapper
-                .border(width: .px(1), style: .solid, color: .border.secondary)
-                .borderRadius(.px(8))
-        }
+        .inlineStyle("overflow-x", "auto")
+        .inlineStyle("border", bordered ? "1px solid var(--border-secondary, #e5e7eb)" : nil)
+        .inlineStyle("border-radius", bordered ? "8px" : nil)
     }
 }
 
@@ -72,13 +45,13 @@ public struct Table<Headers: HTML.View, Rows: HTML.View>: HTML.View {
 public struct TableHeader: HTML.View {
     let content: String
     let sortable: Bool
-    let alignment: TextAlign
+    let alignment: String
     let onClick: String?
 
     public init(
         _ content: String,
         sortable: Bool = false,
-        alignment: TextAlign = .left,
+        alignment: String = "left",
         onClick: String? = nil
     ) {
         self.content = content
@@ -93,19 +66,15 @@ public struct TableHeader: HTML.View {
             if sortable {
                 span { "" }
                     .class("sort-indicator")
-                    .marginLeft(.px(4))
-                    .fontSize(.em(0.8))
+                    .inlineStyle("margin-left", "4px")
+                    .inlineStyle("font-size", "0.8em")
             }
         }
-        .padding(.rem(0.75))
-        .textAlign(alignment)
-        .borderBottom(width: .px(2), style: .solid, color: .border.primary)
-        .if(sortable) { header in
-            header
-                .cursor(.pointer)
-                .onclick(onClick ?? "")
-                .backgroundColor(.rgba(59, 130, 246, 0.1), pseudo: .hover)
-        }
+        .inlineStyle("padding", "0.75rem")
+        .inlineStyle("text-align", alignment)
+        .inlineStyle("border-bottom", "2px solid var(--border-primary, #d1d5db)")
+        .inlineStyle("cursor", sortable ? "pointer" : nil)
+        .if(sortable) { $0.onclick(onClick ?? "") }
     }
 }
 
@@ -123,26 +92,21 @@ public struct TableRow<Content: HTML.View>: HTML.View {
     }
 
     public var body: some HTML.View {
-        tr {
-            content
-        }
-        .if(onClick != nil) { row in
-            row
-                .cursor(.pointer)
-                .attribute("onclick", onClick!)
-        }
+        tr { content }
+            .inlineStyle("cursor", onClick != nil ? "pointer" : nil)
+            .attribute("onclick", onClick)
     }
 }
 
 // Table cell helper
 public struct TableCell<Content: HTML.View>: HTML.View {
     let content: Content
-    let alignment: TextAlign
+    let alignment: String
     let colspan: Int?
     let rowspan: Int?
 
     public init(
-        alignment: TextAlign = .left,
+        alignment: String = "left",
         colspan: Int? = nil,
         rowspan: Int? = nil,
         @HTML.Builder content: () -> Content
@@ -154,17 +118,11 @@ public struct TableCell<Content: HTML.View>: HTML.View {
     }
 
     public var body: some HTML.View {
-        td {
-            content
-        }
-        .padding(.rem(0.75))
-        .textAlign(alignment)
-        .borderBottom(width: .px(1), style: .solid, color: .border.secondary)
-        .if(colspan != nil) { cell in
-            cell.attribute("colspan", "\(colspan!)")
-        }
-        .if(rowspan != nil) { cell in
-            cell.attribute("rowspan", "\(rowspan!)")
-        }
+        td { content }
+            .inlineStyle("padding", "0.75rem")
+            .inlineStyle("text-align", alignment)
+            .inlineStyle("border-bottom", "1px solid var(--border-secondary, #e5e7eb)")
+            .attribute("colspan", colspan.map { "\($0)" })
+            .attribute("rowspan", rowspan.map { "\($0)" })
     }
 }

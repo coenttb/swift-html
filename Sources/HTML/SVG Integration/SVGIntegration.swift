@@ -111,9 +111,7 @@ extension WHATWG_HTML_Elements.Image {
 
         let src: WHATWG_HTML_MediaAttributes.Src = {
             if base64 {
-                // Base64 encoding for maximum compatibility
-                let base64String = String(base64Encoding: Array(svgString.utf8))
-                return "data:image/svg+xml;base64,\(base64String)"
+                return "data:image/svg+xml;base64,\(String.base64(Array(svgString.utf8)))"
             } else {
                 // Percent-encode for data URI using WHATWG standard
                 // This properly encodes < > and other special characters
