@@ -93,8 +93,7 @@ extension CSS {
                 return CSS<HTML.AnyView>(
                     base: HTML.AnyView(
                         base.inlineStyle(
-                            P.property,
-                            darkModeColor.light.description,
+                            RawProperty<P>(darkModeColor.light.description),
                             media: media,
                             selector: selector,
                             pseudo: pseudo
@@ -107,15 +106,13 @@ extension CSS {
                     base: HTML.AnyView(
                         base
                             .inlineStyle(
-                                P.property,
-                                darkModeColor.light.description,
+                                RawProperty<P>(darkModeColor.light.description),
                                 media: media,
                                 selector: selector,
                                 pseudo: pseudo
                             )
                             .inlineStyle(
-                                P.property,
-                                darkModeColor.dark.description,
+                                RawProperty<P>(darkModeColor.dark.description),
                                 media: .prefersColorScheme(.dark).and(media),
                                 selector: selector,
                                 pseudo: pseudo
@@ -128,8 +125,7 @@ extension CSS {
             return CSS<HTML.AnyView>(
                 base: HTML.AnyView(
                     base.inlineStyle(
-                        P.property,
-                        global.description,
+                        RawProperty<P>(global.description),
                         media: media,
                         selector: selector,
                         pseudo: pseudo

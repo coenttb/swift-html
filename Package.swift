@@ -6,7 +6,6 @@ extension String {
     static let html: Self = "HTML"
     static let htmlTheme: Self = "HTMLTheme"
     static let htmlComponents: Self = "HTMLComponents"
-    static let htmlWebsite: Self = "HTMLWebsite"
     static let htmlKit: Self = "HTMLKit"
 }
 
@@ -14,7 +13,6 @@ extension Target.Dependency {
     static var html: Self { .target(name: .html) }
     static var htmlTheme: Self { .target(name: .htmlTheme) }
     static var htmlComponents: Self { .target(name: .htmlComponents) }
-    static var htmlWebsite: Self { .target(name: .htmlWebsite) }
 }
 
 extension Target.Dependency {
@@ -22,12 +20,10 @@ extension Target.Dependency {
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
     static var htmlRenderableTestSupport: Self { .product(name: "HTML Renderable TestSupport", package: "swift-html-rendering") }
     static var css: Self { .product(name: "CSS", package: "swift-css") }
-    static var stringBuilder: Self { .product(name: "StringBuilder", package: "swift-builders") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
-    static var builders: Self { .product(name: "Builders", package: "swift-builders") }
     static var standards: Self { .product(name: "Standards", package: "swift-standards") }
     static var incits4_1986: Self { .product(name: "INCITS 4 1986", package: "swift-incits-4-1986") }
     static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
@@ -38,10 +34,10 @@ extension Target.Dependency {
 let package = Package(
     name: "swift-html",
     platforms: [
-        .iOS(.v18),
-        .macOS(.v15),
-        .tvOS(.v18),
-        .watchOS(.v11),
+        .iOS(.v26),
+        .macOS(.v26),
+        .tvOS(.v26),
+        .watchOS(.v26),
         .macCatalyst(.v18)
     ],
     products: [
@@ -49,7 +45,6 @@ let package = Package(
         .library(name: .html, targets: [.html]),
         .library(name: .htmlTheme, targets: [.htmlTheme]),
         .library(name: .htmlComponents, targets: [.htmlComponents]),
-        .library(name: .htmlWebsite, targets: [.htmlWebsite]),
         // Convenience product with common features
         .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
     ],
@@ -63,7 +58,6 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-css", from: "0.1.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
-        .package(url: "https://github.com/coenttb/swift-builders", from: "0.0.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
@@ -81,10 +75,8 @@ let package = Package(
                 .htmlRendering,
                 .css,
                 .htmlStandard,
-                .stringBuilder,
                 .dependencies,
                 .orderedCollections,
-                .builders,
                 .standards,
                 .incits4_1986,
                 .rfc4648,
@@ -108,25 +100,6 @@ let package = Package(
                 .dependencies,
                 .standards,
                 .incits4_1986
-            ]
-        ),
-        .target(
-            name: .htmlWebsite,
-            dependencies: [
-                .html,
-                .htmlComponents,
-                .htmlTheme,
-                .dependencies,
-                .standards,
-                .incits4_1986,
-                .product(
-                    name: "Translating",
-                    package: "swift-translating",
-                    condition: .when(traits: ["Translating"])
-                )
-            ],
-            swiftSettings: [
-                .define("TRANSLATING", .when(traits: ["Translating"]))
             ]
         ),
         .target(

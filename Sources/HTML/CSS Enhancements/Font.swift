@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Font.swift
 //  swift-html
 //
 //  Created by Coen ten Thije Boonkkamp on 26/06/2025.
@@ -37,10 +37,31 @@ public struct Font: Hashable, Sendable {
     }
 }
 
-extension HTML.View {
-    @HTML.Builder
-    public func font(_ font: Font) -> some HTML.View {
-        self.css
+extension CSS {
+    @discardableResult
+    @inlinable
+    public func font(
+        _ font: Font
+    ) -> CSS<HTML.Styled<
+        HTML.Styled<
+            HTML.Styled<
+                HTML.Styled<
+                    HTML.Styled<
+                        HTML.Styled<
+                            HTML.Styled<Base, FontFamily>,
+                            CSS_Standard.FontSize
+                        >,
+                        FontStretch
+                    >,
+                    FontStyle
+                >,
+                FontVariant
+            >,
+            FontWeight
+        >,
+        LineHeight
+    >> {
+        self
             .fontFamily(font.family)
             .fontSize(font.size)
             .fontStretch(font.stretch)

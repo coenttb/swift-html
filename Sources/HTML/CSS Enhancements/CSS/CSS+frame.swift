@@ -35,27 +35,27 @@ extension CSS {
 
         if let width = width {
             result = HTML.AnyView(result)
-                .inlineStyle(CSS_Standard.Width.property, width.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(width, media: media, selector: selector, pseudo: pseudo)
         }
         if let height = height {
             result = HTML.AnyView(result)
-                .inlineStyle(CSS_Standard.Height.property, height.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(height, media: media, selector: selector, pseudo: pseudo)
         }
         if let minWidth = minWidth {
             result = HTML.AnyView(result)
-                .inlineStyle(MinWidth.property, minWidth.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(minWidth, media: media, selector: selector, pseudo: pseudo)
         }
         if let minHeight = minHeight {
             result = HTML.AnyView(result)
-                .inlineStyle(MinHeight.property, minHeight.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(minHeight, media: media, selector: selector, pseudo: pseudo)
         }
         if let maxWidth = maxWidth {
             result = HTML.AnyView(result)
-                .inlineStyle(MaxWidth.property, maxWidth.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(maxWidth, media: media, selector: selector, pseudo: pseudo)
         }
         if let maxHeight = maxHeight {
             result = HTML.AnyView(result)
-                .inlineStyle(MaxHeight.property, maxHeight.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(maxHeight, media: media, selector: selector, pseudo: pseudo)
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

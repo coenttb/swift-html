@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import StringBuilder
 import HTML_Standard
 import WHATWG_HTML
 

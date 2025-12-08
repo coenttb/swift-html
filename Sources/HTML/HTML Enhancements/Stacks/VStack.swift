@@ -23,14 +23,14 @@ public struct VStack<Content: HTML.View>: HTML.View {
     }
 
     public var body: some HTML.View {
-        tag("swift-html-vstack") {
+        div {
             content
         }
         .css
         .alignItems(alignment)
-        .display(.flex)
-        .flexDirection(.column)
-        .maxWidth(.percentage(100))
-        .rowGap(.length(spacing == .zero ? .zero : (spacing ?? 1.rem)))
+        .display(Display.flex)
+        .flexDirection(FlexDirection.column)
+        .maxWidth(MaxWidth.percentage(100))
+        .rowGap(RowGap.length(spacing == .zero ? .zero : (spacing ?? 1.rem)))
     }
 }

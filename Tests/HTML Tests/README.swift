@@ -47,8 +47,8 @@ extension SnapshotTests {
                 .margin(.auto)
             } head: {
                 title { "swift-html - Type-safe HTML in Swift" }
-                meta(charset: .utf8)()
-                meta(name: .viewport, content: "width=device-width, initial-scale=1")()
+                meta(charset: .utf8)
+                meta(name: .viewport, content: "width=device-width, initial-scale=1")
             }
 
             assertInlineSnapshot(

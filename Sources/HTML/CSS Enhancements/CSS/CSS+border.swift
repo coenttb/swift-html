@@ -32,15 +32,13 @@ extension CSS {
                 base: HTML.AnyView(
                     base
                         .inlineStyle(
-                            W3C_CSS_Backgrounds.Border.property,
-                            "\(borderStyle) \(lightColor)",
+                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"),
                             media: mediaQuery,
                             selector: selector,
                             pseudo: pseudo
                         )
                         .inlineStyle(
-                            W3C_CSS_Backgrounds.Border.property,
-                            "\(borderStyle) \(darkColor)",
+                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(darkColor)"),
                             media: .prefersColorScheme(.dark) && mediaQuery,
                             selector: selector,
                             pseudo: pseudo
@@ -118,15 +116,13 @@ extension CSS {
             if sides.contains(.top) {
                 result = HTML.AnyView(result)
                     .inlineStyle(
-                        BorderTop.property,
-                        "\(borderStyle) \(lightColor)",
+                        RawProperty<BorderTop>("\(borderStyle) \(lightColor)"),
                         media: mediaQuery,
                         selector: selector,
                         pseudo: pseudo
                     )
                     .inlineStyle(
-                        BorderTop.property,
-                        "\(borderStyle) \(darkColor)",
+                        RawProperty<BorderTop>("\(borderStyle) \(darkColor)"),
                         media: .prefersColorScheme(.dark) && mediaQuery,
                         selector: selector,
                         pseudo: pseudo
@@ -136,15 +132,13 @@ extension CSS {
             if sides.contains(.left) {
                 result = HTML.AnyView(result)
                     .inlineStyle(
-                        BorderLeft.property,
-                        "\(borderStyle) \(lightColor)",
+                        RawProperty<BorderLeft>("\(borderStyle) \(lightColor)"),
                         media: mediaQuery,
                         selector: selector,
                         pseudo: pseudo
                     )
                     .inlineStyle(
-                        BorderLeft.property,
-                        "\(borderStyle) \(darkColor)",
+                        RawProperty<BorderLeft>("\(borderStyle) \(darkColor)"),
                         media: .prefersColorScheme(.dark) && mediaQuery,
                         selector: selector,
                         pseudo: pseudo
@@ -154,15 +148,13 @@ extension CSS {
             if sides.contains(.bottom) {
                 result = HTML.AnyView(result)
                     .inlineStyle(
-                        BorderBottom.property,
-                        "\(borderStyle) \(lightColor)",
+                        RawProperty<BorderBottom>("\(borderStyle) \(lightColor)"),
                         media: mediaQuery,
                         selector: selector,
                         pseudo: pseudo
                     )
                     .inlineStyle(
-                        BorderBottom.property,
-                        "\(borderStyle) \(darkColor)",
+                        RawProperty<BorderBottom>("\(borderStyle) \(darkColor)"),
                         media: .prefersColorScheme(.dark) && mediaQuery,
                         selector: selector,
                         pseudo: pseudo
@@ -172,15 +164,13 @@ extension CSS {
             if sides.contains(.right) {
                 result = HTML.AnyView(result)
                     .inlineStyle(
-                        BorderRight.property,
-                        "\(borderStyle) \(lightColor)",
+                        RawProperty<BorderRight>("\(borderStyle) \(lightColor)"),
                         media: mediaQuery,
                         selector: selector,
                         pseudo: pseudo
                     )
                     .inlineStyle(
-                        BorderRight.property,
-                        "\(borderStyle) \(darkColor)",
+                        RawProperty<BorderRight>("\(borderStyle) \(darkColor)"),
                         media: .prefersColorScheme(.dark) && mediaQuery,
                         selector: selector,
                         pseudo: pseudo

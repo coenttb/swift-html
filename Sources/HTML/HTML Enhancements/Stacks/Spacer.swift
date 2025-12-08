@@ -4,11 +4,12 @@
 //
 
 import HTML_Rendering
+import CSS
 
 public struct Spacer: HTML.View {
     public init() {}
     public var body: some HTML.View {
-        tag("swift-html-spacer")
+        div {}
             .css
             .flexGrow(1)
     }

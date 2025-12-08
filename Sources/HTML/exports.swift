@@ -10,4 +10,4 @@
 @_exported import HTML_Standard
 @_exported import HTML_Rendering
 @_exported import SVG
-@_exported import StringBuilder
+@_exported import Standards

@@ -54,7 +54,10 @@ extension SnapshotTests {
                 of: HTML.Document {
                     div { HTML.Empty() }
                         .css
-                        .padding(vertical: .px(10), horizontal: .px(20))
+                        .padding(
+                            vertical: .px(10),
+                            horizontal: .px(20)
+                        )
                 },
                 as: .html
             ) {

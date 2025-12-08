@@ -5,6 +5,7 @@
 
 import Foundation
 import HTML_Rendering
+import CSS
 
 public struct HStack<Content: HTML.View>: HTML.View {
     let alignment: VerticalAlign
@@ -22,14 +23,13 @@ public struct HStack<Content: HTML.View>: HTML.View {
     }
 
     public var body: some HTML.View {
-        tag("swift-html-hstack") { content }
+        div { content }
             .css
-            // necessary?
-            .alignItems(.stretch)
+            .alignItems(AlignItems.stretch)
             .verticalAlign(alignment)
-            .display(.flex)
-            .flexDirection(.row)
-            .maxHeight(.percentage(100))
-            .columnGap(.length(spacing == 0 ? .zero : spacing ?? 1.rem))
+            .display(Display.flex)
+            .flexDirection(FlexDirection.row)
+            .maxHeight(MaxHeight.percentage(100))
+            .columnGap(ColumnGap.length(spacing == 0 ? .zero : spacing ?? 1.rem))
     }
 }

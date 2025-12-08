@@ -33,27 +33,27 @@ extension CSS {
         pseudo: HTML.Pseudo? = nil
     ) -> CSS<HTML.AnyView> {
         var result: any HTML.View = base
-            .inlineStyle(W3C_CSS_Positioning.Position.property, position.description, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(position, media: media, selector: selector, pseudo: pseudo)
 
         if let top = top {
             result = HTML.AnyView(result)
-                .inlineStyle(Top.property, top.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(top, media: media, selector: selector, pseudo: pseudo)
         }
         if let right = right {
             result = HTML.AnyView(result)
-                .inlineStyle(Right.property, right.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(right, media: media, selector: selector, pseudo: pseudo)
         }
         if let bottom = bottom {
             result = HTML.AnyView(result)
-                .inlineStyle(Bottom.property, bottom.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(bottom, media: media, selector: selector, pseudo: pseudo)
         }
         if let left = left {
             result = HTML.AnyView(result)
-                .inlineStyle(Left.property, left.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(left, media: media, selector: selector, pseudo: pseudo)
         }
         if let zIndex = zIndex {
             result = HTML.AnyView(result)
-                .inlineStyle(ZIndex.property, zIndex.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(zIndex, media: media, selector: selector, pseudo: pseudo)
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

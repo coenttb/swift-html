@@ -33,19 +33,19 @@ extension CSS {
 
         if let align = align {
             result = HTML.AnyView(result)
-                .inlineStyle(TextAlign.property, align.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(align, media: media, selector: selector, pseudo: pseudo)
         }
         if let decoration = decoration {
             result = HTML.AnyView(result)
-                .inlineStyle(TextDecoration.property, decoration.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(decoration, media: media, selector: selector, pseudo: pseudo)
         }
         if let transform = transform {
             result = HTML.AnyView(result)
-                .inlineStyle(TextTransform.property, transform.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(transform, media: media, selector: selector, pseudo: pseudo)
         }
         if let overflow = overflow {
             result = HTML.AnyView(result)
-                .inlineStyle(TextOverflow.property, overflow.description, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(overflow, media: media, selector: selector, pseudo: pseudo)
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

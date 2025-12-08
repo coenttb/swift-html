@@ -81,6 +81,7 @@ extension HTML.View {
         top: HTMLColor
     ) -> some HTML.View {
         self
+            .css
             .inlineStyle(
                 "background",
                 "linear-gradient(0deg, \(bottom.light.description) 0%, \(top.light.description) 100%);"
@@ -98,6 +99,7 @@ extension HTML.View {
         top: HTMLColor
     ) -> some HTML.View {
         self
+            .css
             .inlineStyle(
                 "background",
                 "linear-gradient(0deg, \(bottom.light.description) 0%, \(middle.light.description) 50%, \(top.light.description) 100%);"
@@ -166,7 +168,7 @@ extension HTMLColor {
         return (r, g, b)
     }
 
-    private static func hslToRGB(h: Hue, s: Double, l: Double) -> (Int, Int, Int) {
+    private static func hslToRGB(h: W3C_CSS_Values.Hue, s: Double, l: Double) -> (Int, Int, Int) {
         let h = h.normalizedDegrees() / 360
         let s = s / 100
         let l = l / 100
@@ -194,7 +196,7 @@ extension HTMLColor {
         }
     }
 
-    private static func hwbToRGB(h: Hue, w: Double, b: Double) -> (Int, Int, Int) {
+    private static func hwbToRGB(h: W3C_CSS_Values.Hue, w: Double, b: Double) -> (Int, Int, Int) {
         let rgb = hslToRGB(h: h, s: 100, l: 50)
         let white = w / 100
         let black = b / 100
