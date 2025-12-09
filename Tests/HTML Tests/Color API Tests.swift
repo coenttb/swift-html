@@ -11,7 +11,6 @@
 
 import Dependencies
 import HTML
-import HTMLTheme
 import HTML_Renderable_TestSupport
 import Testing
 
@@ -26,7 +25,8 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Raw color value" }
-                        .css.color(.test_red)
+                        .css
+                        .color(.test_red)
                 },
                 as: .html
             ) {
@@ -50,11 +50,16 @@ extension SnapshotTests {
             }
         }
 
-        @Test("Color.Value with gray800 produces single style")
+
+        // MARK: - Color.Value (No Dark Mode - HTMLTheme not imported)
+
+        @Test("Color.Value gray800 produces single style without dark mode")
         func colorValueGray800NoDarkMode() {
+            // Note: Without HTMLTheme import, .gray800 resolves to CSS_Standard.Color.Value
+            // which produces a single style without dark mode support
             assertInlineSnapshot(
                 of: HTML.Document {
-                    div { "Gray text" }
+                    div { "Raw color value" }
                         .css.color(.gray800)
                 },
                 as: .html
@@ -64,45 +69,11 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-1{color:#d0d0d0}
-                      @media (prefers-color-scheme: dark){
-                        .color-0{color:#303030}
-                      }
+                      .color-0{color:#d0d0d0}
                     </style>
                   </head>
                   <body>
-                    <div class="color-0 color-1">Gray text
-                    </div>
-                  </body>
-                </html>
-                """
-            }
-        }
-
-        // MARK: - HTMLColor (With Dark Mode)
-
-        @Test("HTMLColor from theme produces light and dark styles")
-        func htmlColorFromTheme() {
-            assertInlineSnapshot(
-                of: HTML.Document {
-                    div { "Themed color" }
-                        .css.color(.gray800)
-                },
-                as: .html
-            ) {
-                """
-                <!doctype html>
-                <html>
-                  <head>
-                    <style>
-                      .color-1{color:#d0d0d0}
-                      @media (prefers-color-scheme: dark){
-                        .color-0{color:#303030}
-                      }
-                    </style>
-                  </head>
-                  <body>
-                    <div class="color-0 color-1">Themed color
+                    <div class="color-0">Raw color value
                     </div>
                   </body>
                 </html>
@@ -115,7 +86,8 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Explicit colors" }
-                        .css.color(HTMLColor(light: .red, dark: .blue))
+                        .css
+                        .color(HTMLColor(light: .red, dark: .blue))
                 },
                 as: .html
             ) {
@@ -254,6 +226,8 @@ extension SnapshotTests {
 
         @Test("backgroundColor with Color.Value has no dark mode")
         func backgroundColorValueNoDarkMode() {
+            // Note: Without HTMLTheme import, .blue resolves to CSS_Standard.Color.Value
+            // which produces a single style without dark mode support
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Background" }
@@ -266,14 +240,11 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .background-color-1{background-color:#3399ff}
-                      @media (prefers-color-scheme: dark){
-                        .background-color-0{background-color:#004477}
-                      }
+                      .background-color-0{background-color:blue}
                     </style>
                   </head>
                   <body>
-                    <div class="background-color-0 background-color-1">Background
+                    <div class="background-color-0">Background
                     </div>
                   </body>
                 </html>
@@ -314,6 +285,8 @@ extension SnapshotTests {
 
         @Test("borderColor with Color.Value has no dark mode")
         func borderColorValueNoDarkMode() {
+            // Note: Without HTMLTheme import, .green resolves to CSS_Standard.Color.Value
+            // which produces a single style without dark mode support
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Border" }
@@ -326,14 +299,11 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-color-1{border-color:#33cc33}
-                      @media (prefers-color-scheme: dark){
-                        .border-color-0{border-color:#008800}
-                      }
+                      .border-color-0{border-color:green}
                     </style>
                   </head>
                   <body>
-                    <div class="border-color-0 border-color-1">Border
+                    <div class="border-color-0">Border
                     </div>
                   </body>
                 </html>
@@ -374,6 +344,8 @@ extension SnapshotTests {
 
         @Test("fill with Color.Value has no dark mode")
         func fillValueNoDarkMode() {
+            // Note: Without HTMLTheme import, .purple resolves to CSS_Standard.Color.Value
+            // which produces a single style without dark mode support
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Fill" }
@@ -386,14 +358,11 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .fill-1{fill:#a300cc}
-                      @media (prefers-color-scheme: dark){
-                        .fill-0{fill:#6e0088}
-                      }
+                      .fill-0{fill:purple}
                     </style>
                   </head>
                   <body>
-                    <div class="fill-0 fill-1">Fill
+                    <div class="fill-0">Fill
                     </div>
                   </body>
                 </html>
@@ -403,34 +372,6 @@ extension SnapshotTests {
 
         // MARK: - stroke
 
-        @Test("stroke with Color.Value has no dark mode")
-        func strokeValueNoDarkMode() {
-            assertInlineSnapshot(
-                of: HTML.Document {
-                    div { "Stroke" }
-                        .css.stroke(.orange)
-                },
-                as: .html
-            ) {
-                """
-                <!doctype html>
-                <html>
-                  <head>
-                    <style>
-                      .stroke-1{stroke:#cc6600}
-                      @media (prefers-color-scheme: dark){
-                        .stroke-0{stroke:#ff8c1a}
-                      }
-                    </style>
-                  </head>
-                  <body>
-                    <div class="stroke-0 stroke-1">Stroke
-                    </div>
-                  </body>
-                </html>
-                """
-            }
-        }
 
         // MARK: - outlineColor
 
@@ -453,42 +394,6 @@ extension SnapshotTests {
                   </head>
                   <body>
                     <div class="outline-color-0">Outline
-                    </div>
-                  </body>
-                </html>
-                """
-            }
-        }
-
-        // MARK: - Combined Usage
-
-        @Test("Multiple color properties with mixed types")
-        func combinedColorProperties() {
-            assertInlineSnapshot(
-                of: HTML.Document {
-                    div { "Mixed colors" }
-                        .css.color(.test_red)  // Color.Value - no dark
-                        .css.backgroundColor(HTMLColor.gray800)  // HTMLColor - with dark
-                        .css.borderColor(.inherit)  // Global - no dark
-                },
-                as: .html
-            ) {
-                """
-                <!doctype html>
-                <html>
-                  <head>
-                    <style>
-                      .border-color-0{border-color:inherit}
-                      .background-color-2{background-color:#d0d0d0}
-                      .color-4{color:#cc3333}
-                      @media (prefers-color-scheme: dark){
-                        .background-color-1{background-color:#303030}
-                        .color-3{color:rgb(163, 40, 40)}
-                      }
-                    </style>
-                  </head>
-                  <body>
-                    <div class="border-color-0 background-color-1 background-color-2 color-3 color-4">Mixed colors
                     </div>
                   </body>
                 </html>

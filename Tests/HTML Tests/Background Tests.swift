@@ -36,7 +36,7 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-0{border:1px solid #cc3333}
+                      .border-0{border:1px solid red}
                     </style>
                   </head>
                   <body>

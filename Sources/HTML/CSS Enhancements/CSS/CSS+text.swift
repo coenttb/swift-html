@@ -20,6 +20,7 @@ extension CSS {
     /// ```
     @inlinable
     @discardableResult
+    @CSS.Builder
     public func text(
         align: TextAlign? = nil,
         decoration: TextDecoration? = nil,
@@ -29,25 +30,10 @@ extension CSS {
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
     ) -> CSS<some HTML.View> {
-        var result: any HTML.View = base
-
-        if let align = align {
-            result = HTML.AnyView(result)
-                .inlineStyle(align, media: media, selector: selector, pseudo: pseudo)
-        }
-        if let decoration = decoration {
-            result = HTML.AnyView(result)
-                .inlineStyle(decoration, media: media, selector: selector, pseudo: pseudo)
-        }
-        if let transform = transform {
-            result = HTML.AnyView(result)
-                .inlineStyle(transform, media: media, selector: selector, pseudo: pseudo)
-        }
-        if let overflow = overflow {
-            result = HTML.AnyView(result)
-                .inlineStyle(overflow, media: media, selector: selector, pseudo: pseudo)
-        }
-
-        return CSS<HTML.AnyView>(base: HTML.AnyView(result))
+        base
+            .inlineStyle(align, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(decoration, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(transform, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(overflow, media: media, selector: selector, pseudo: pseudo)
     }
 }

@@ -39,7 +39,12 @@ import CSS_Standard
 /// // Auto-adaptive (derives dark variant automatically)
 /// let auto = DarkModeColor(light: .white)
 /// ```
-public struct DarkModeColor: Sendable, Hashable {
+public struct DarkModeColor: Sendable, Hashable, ColorConvertible {
+    /// Creates a DarkModeColor from a CSS Color value, using the same color for both modes.
+    public static func color(_ color: W3C_CSS_Values.Color) -> DarkModeColor {
+        .init(light: color, dark: color)
+    }
+
     /// The color value for light mode
     public let light: CSS_Standard.Color.Value
 

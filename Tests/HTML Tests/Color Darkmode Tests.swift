@@ -60,7 +60,8 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     p { "Hello World" }
-                        .css.color(.red)
+                        .css
+                        .color(.red)
                 },
                 as: .html
             ) {
@@ -69,7 +70,7 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
+                      .color-0{color:red}
                     </style>
                   </head>
                   <body>
@@ -249,7 +250,7 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
+                      .color-0{color:red}
                     </style>
                   </head>
                   <body>
@@ -331,7 +332,7 @@ extension SnapshotTests {
                   <head>
                     <style>
                       @media print{
-                        .color-0{color:#3399ff}
+                        .color-0{color:blue}
                       }
                     </style>
                   </head>

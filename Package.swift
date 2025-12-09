@@ -115,7 +115,6 @@ let package = Package(
             name: .html.tests,
             dependencies: [
                 .html,
-                .htmlTheme,
                 .htmlRenderableTestSupport,
                 .dependenciesTestSupport,
                 .product(

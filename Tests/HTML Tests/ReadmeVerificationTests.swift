@@ -6,7 +6,6 @@
 //
 
 import HTML
-import HTMLTheme
 import Testing
 
 @Suite("README Verification")
