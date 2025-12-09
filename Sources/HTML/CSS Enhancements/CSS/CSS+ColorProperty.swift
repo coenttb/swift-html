@@ -19,40 +19,15 @@
 import CSS
 import CSS_Standard
 
-// MARK: - CSSColorProperty Protocol
+// MARK: - CSSColorProperty Typealias
 
-/// Marker protocol for CSS color property types.
+/// A CSS color property type that can be constructed from color values.
 ///
-/// CSS_Standard.Color, CSS_Standard.BackgroundColor, etc. conform to this.
-/// The protocol provides the property name via `W3C_CSS_Shared.Property`.
-public protocol CSSColorProperty: W3C_CSS_Shared.Property {}
-
-// MARK: - CSSColorProperty Conformances
-
-extension CSS_Standard.Color: CSSColorProperty {}
-extension CSS_Standard.BackgroundColor: CSSColorProperty {}
-extension CSS_Standard.BorderColor: CSSColorProperty {}
-extension CSS_Standard.BorderBlockColor: CSSColorProperty {}
-extension CSS_Standard.BorderBlockEndColor: CSSColorProperty {}
-extension CSS_Standard.BorderBlockStartColor: CSSColorProperty {}
-extension CSS_Standard.BorderBottomColor: CSSColorProperty {}
-extension CSS_Standard.BorderInlineColor: CSSColorProperty {}
-extension CSS_Standard.BorderInlineEndColor: CSSColorProperty {}
-extension CSS_Standard.BorderInlineStartColor: CSSColorProperty {}
-extension CSS_Standard.BorderLeftColor: CSSColorProperty {}
-extension CSS_Standard.BorderRightColor: CSSColorProperty {}
-extension CSS_Standard.BorderTopColor: CSSColorProperty {}
-extension CSS_Standard.AccentColor: CSSColorProperty {}
-extension CSS_Standard.CaretColor: CSSColorProperty {}
-extension CSS_Standard.ColumnRuleColor: CSSColorProperty {}
-extension CSS_Standard.Fill: CSSColorProperty {}
-extension CSS_Standard.Stroke: CSSColorProperty {}
-extension CSS_Standard.OutlineColor: CSSColorProperty {}
-extension CSS_Standard.FloodColor: CSSColorProperty {}
-extension CSS_Standard.LightingColor: CSSColorProperty {}
-extension CSS_Standard.StopColor: CSSColorProperty {}
-extension CSS_Standard.TextDecorationColor: CSSColorProperty {}
-extension CSS_Standard.TextEmphasisColor: CSSColorProperty {}
+/// CSS_Standard.Color, CSS_Standard.BackgroundColor, etc. conform to this
+/// via their existing conformances to Property and ColorConvertible.
+/// Property provides the property name and GlobalConvertible conformance,
+/// while ColorConvertible provides the `color(_:)` factory method.
+public typealias CSSColorProperty = W3C_CSS_Shared.Property & W3C_CSS_Color.ColorConvertible
 
 // MARK: - Generic Color Property Implementation
 
@@ -93,7 +68,7 @@ extension CSS {
                 return CSS<HTML.AnyView>(
                     base: HTML.AnyView(
                         base.inlineStyle(
-                            RawProperty<P>(darkModeColor.light.description),
+                            P.color(darkModeColor.light),
                             media: media,
                             selector: selector,
                             pseudo: pseudo
@@ -106,13 +81,13 @@ extension CSS {
                     base: HTML.AnyView(
                         base
                             .inlineStyle(
-                                RawProperty<P>(darkModeColor.light.description),
+                                P.color(darkModeColor.light),
                                 media: media,
                                 selector: selector,
                                 pseudo: pseudo
                             )
                             .inlineStyle(
-                                RawProperty<P>(darkModeColor.dark.description),
+                                P.color(darkModeColor.dark),
                                 media: .prefersColorScheme(.dark).and(media),
                                 selector: selector,
                                 pseudo: pseudo
@@ -125,7 +100,7 @@ extension CSS {
             return CSS<HTML.AnyView>(
                 base: HTML.AnyView(
                     base.inlineStyle(
-                        RawProperty<P>(global.description),
+                        P.global(global),
                         media: media,
                         selector: selector,
                         pseudo: pseudo
