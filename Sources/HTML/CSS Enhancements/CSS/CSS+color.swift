@@ -30,7 +30,7 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
             ?? DarkModeColor(light: light)
         return applyColorProperty(
@@ -60,7 +60,7 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         applyColorProperty(
             CSS_Standard.Color.self,
             color,
@@ -90,7 +90,7 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         applyColorProperty(
             CSS_Standard.Color.self,
             value,

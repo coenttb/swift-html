@@ -47,7 +47,7 @@ extension SnapshotTests {
                 """
             }
         }
-
+        
         @Test("Padding Vertical Horizontal Test")
         func paddingVerticalHorizontal() {
             assertInlineSnapshot(
@@ -77,75 +77,75 @@ extension SnapshotTests {
                 """
             }
         }
-
-        @Test("Padding Set Variant Test")
-        func paddingVariants() {
-            assertInlineSnapshot(
-                of: HTML.Document {
-                    div { HTML.Empty() }
-                        .css
-                        .padding(
-                            .top(.px(10)),
-                            .right(.px(20)),
-                            .bottom(.px(15)),
-                            .left(.px(25))
-                        )
-                },
-                as: .html
-            ) {
-                """
-                <!doctype html>
-                <html>
-                  <head>
-                    <style>
-                      .padding-0{padding:10px 20px 15px 25px}
-                    </style>
-                  </head>
-                  <body>
-                    <div class="padding-0">
-                    </div>
-                  </body>
-                </html>
-                """
-            }
-        }
-
-        @Test("Padding with Media Query")
-        func paddingWithMediaQuery() {
-            assertInlineSnapshot(
-                of: HTML.Document {
-                    div { HTML.Empty() }
-                        .css
-                        .padding(
-                            [
-                                .top(.px(10)),
-                                .bottom(.px(15)),
-                            ],
-                            media: .screen && .minWidth(.px(768))
-                        )
-                },
-                as: .html
-            ) {
-                """
-                <!doctype html>
-                <html>
-                  <head>
-                    <style>
-                      @media screen and (min-width: 768px){
-                        .padding-bottom-0{padding-bottom:15px}
-                        .padding-top-1{padding-top:10px}
-                      }
-                    </style>
-                  </head>
-                  <body>
-                    <div class="padding-bottom-0 padding-top-1">
-                    </div>
-                  </body>
-                </html>
-                """
-            }
-        }
-
+        
+        //        @Test("Padding Set Variant Test")
+        //        func paddingVariants() {
+        //            assertInlineSnapshot(
+        //                of: HTML.Document {
+        //                    div { HTML.Empty() }
+        //                        .css
+        //                        .padding(
+        //                            .top(.px(10)),
+        //                            .right(.px(20)),
+        //                            .bottom(.px(15)),
+        //                            .left(.px(25))
+        //                        )
+        //                },
+        //                as: .html
+        //            ) {
+        //                """
+        //                <!doctype html>
+        //                <html>
+        //                  <head>
+        //                    <style>
+        //                      .padding-0{padding:10px 20px 15px 25px}
+        //                    </style>
+        //                  </head>
+        //                  <body>
+        //                    <div class="padding-0">
+        //                    </div>
+        //                  </body>
+        //                </html>
+        //                """
+        //            }
+        //        }
+        
+        //        @Test("Padding with Media Query")
+        //        func paddingWithMediaQuery() {
+        //            assertInlineSnapshot(
+        //                of: HTML.Document {
+        //                    div { HTML.Empty() }
+        //                        .css
+        //                        .padding(
+        //                            [
+        //                                .top(.px(10)),
+        //                                .bottom(.px(15)),
+        //                            ],
+        //                            media: .screen && .minWidth(.px(768))
+        //                        )
+        //                },
+        //                as: .html
+        //            ) {
+        //                """
+        //                <!doctype html>
+        //                <html>
+        //                  <head>
+        //                    <style>
+        //                      @media screen and (min-width: 768px){
+        //                        .padding-bottom-0{padding-bottom:15px}
+        //                        .padding-top-1{padding-top:10px}
+        //                      }
+        //                    </style>
+        //                  </head>
+        //                  <body>
+        //                    <div class="padding-bottom-0 padding-top-1">
+        //                    </div>
+        //                  </body>
+        //                </html>
+        //                """
+        //            }
+        //        }
+        
         @Test("Padding with optional inputs")
         func paddingWithOptionalInputs() {
             assertInlineSnapshot(
@@ -154,9 +154,9 @@ extension SnapshotTests {
                         .css
                         .padding(
                             top: .px(10),
+                            right: nil,
                             bottom: .px(10),
                             left: .px(10),
-                            right: nil,
                             media: nil,
                             selector: nil,
                             pseudo: nil

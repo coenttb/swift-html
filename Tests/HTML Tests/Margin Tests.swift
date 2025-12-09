@@ -21,6 +21,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(vertical: .px(10), horizontal: .px(20))
                 },
                 as: .html
@@ -47,6 +48,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(vertical: .px(15))
                 },
                 as: .html
@@ -74,6 +76,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(horizontal: .px(25))
                 },
                 as: .html
@@ -101,6 +104,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(
                             top: .px(10),
                             right: .px(20),
@@ -132,6 +136,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(
                             top: .px(10),
                             bottom: .px(15),
@@ -165,6 +170,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(
                             top: .px(10),
                             right: nil,
@@ -201,6 +207,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(
                             top: .px(15),
                             right: .px(15),
@@ -232,6 +239,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(
                             top: .px(10),
                             right: .px(20),
@@ -263,6 +271,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(
                             right: .px(12),
                             left: .px(12)
@@ -292,6 +301,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(top: .px(8))
                 },
                 as: .html
@@ -318,6 +328,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { HTML.Empty() }
+                        .css
                         .margin(vertical: nil, horizontal: nil)
                 },
                 as: .html

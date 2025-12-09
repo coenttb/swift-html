@@ -11,51 +11,53 @@ import CSS_Standard
 extension CSS {
     @inlinable
     @discardableResult
+    @CSS.Builder
     public func border(
         _ border: Border?,
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
-        guard let border = border else {
-            return CSS<HTML.AnyView>(base: HTML.AnyView(base))
-        }
-
-        // Extract common border properties
-        let borderStyle =
-            "\(border.width?.description ?? "") \(border.style?.description ?? "")"
-        let lightColor = border.color?.light.description ?? ""
-        let darkColor = border.color?.dark.description ?? ""
-
-        if border.sides == nil || border.sides?.count == Border.Side.allCases.count {
-            return CSS<HTML.AnyView>(
-                base: HTML.AnyView(
-                    base
-                        .inlineStyle(
-                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"),
-                            media: mediaQuery,
-                            selector: selector,
-                            pseudo: pseudo
-                        )
-                        .inlineStyle(
-                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(darkColor)"),
-                            media: .prefersColorScheme(.dark) && mediaQuery,
-                            selector: selector,
-                            pseudo: pseudo
-                        )
-                )
-            )
-        } else {
-            return borderSides(
-                border: border,
-                borderStyle: borderStyle,
-                lightColor: lightColor,
-                darkColor: darkColor,
-                media: mediaQuery,
-                selector: selector,
-                pseudo: pseudo
-            )
-        }
+    ) -> CSS<some HTML.View> {
+        fatalError()
+//        guard let border = border else {
+//            return CSS<HTML.AnyView>(base: HTML.AnyView(base))
+//        }
+//
+//        // Extract common border properties
+//        let borderStyle =
+//            "\(border.width?.description ?? "") \(border.style?.description ?? "")"
+//        let lightColor = border.color?.light.description ?? ""
+//        let darkColor = border.color?.dark.description ?? ""
+//
+//        if border.sides == nil || border.sides?.count == Border.Side.allCases.count {
+//            return CSS<HTML.AnyView>(
+//                base: HTML.AnyView(
+//                    base
+//                        .inlineStyle(
+//                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"),
+//                            media: mediaQuery,
+//                            selector: selector,
+//                            pseudo: pseudo
+//                        )
+//                        .inlineStyle(
+//                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(darkColor)"),
+//                            media: .prefersColorScheme(.dark) && mediaQuery,
+//                            selector: selector,
+//                            pseudo: pseudo
+//                        )
+//                )
+//            )
+//        } else {
+//            return borderSides(
+//                border: border,
+//                borderStyle: borderStyle,
+//                lightColor: lightColor,
+//                darkColor: darkColor,
+//                media: mediaQuery,
+//                selector: selector,
+//                pseudo: pseudo
+//            )
+//        }
     }
 
     @inlinable
@@ -68,7 +70,7 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         self.border(
             Border(sides: .init(sides), width: width, style: style, color: color),
             media: mediaQuery,
@@ -88,7 +90,7 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         self.border(
             Border(sides: .init(sides), width: width, style: style, color: color),
             media: mediaQuery,
@@ -100,6 +102,7 @@ extension CSS {
 
 extension CSS {
     @usableFromInline
+    @CSS.Builder
     func borderSides(
         border: Border,
         borderStyle: String,
@@ -108,77 +111,76 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector?,
         pseudo: HTML.Pseudo?
-    ) -> CSS<HTML.AnyView> {
-        // Apply styles sequentially without nested conditionals to avoid deep generic nesting
-        var result: any HTML.View = base
-
-        if let sides = border.sides {
-            if sides.contains(.top) {
-                result = HTML.AnyView(result)
-                    .inlineStyle(
-                        RawProperty<BorderTop>("\(borderStyle) \(lightColor)"),
-                        media: mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-                    .inlineStyle(
-                        RawProperty<BorderTop>("\(borderStyle) \(darkColor)"),
-                        media: .prefersColorScheme(.dark) && mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-            }
-
-            if sides.contains(.left) {
-                result = HTML.AnyView(result)
-                    .inlineStyle(
-                        RawProperty<BorderLeft>("\(borderStyle) \(lightColor)"),
-                        media: mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-                    .inlineStyle(
-                        RawProperty<BorderLeft>("\(borderStyle) \(darkColor)"),
-                        media: .prefersColorScheme(.dark) && mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-            }
-
-            if sides.contains(.bottom) {
-                result = HTML.AnyView(result)
-                    .inlineStyle(
-                        RawProperty<BorderBottom>("\(borderStyle) \(lightColor)"),
-                        media: mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-                    .inlineStyle(
-                        RawProperty<BorderBottom>("\(borderStyle) \(darkColor)"),
-                        media: .prefersColorScheme(.dark) && mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-            }
-
-            if sides.contains(.right) {
-                result = HTML.AnyView(result)
-                    .inlineStyle(
-                        RawProperty<BorderRight>("\(borderStyle) \(lightColor)"),
-                        media: mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-                    .inlineStyle(
-                        RawProperty<BorderRight>("\(borderStyle) \(darkColor)"),
-                        media: .prefersColorScheme(.dark) && mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-            }
-        }
-
-        return CSS<HTML.AnyView>(base: HTML.AnyView(result))
+    ) -> CSS<some HTML.View> {
+        fatalError()
+//        // Apply styles sequentially without nested conditionals to avoid deep generic nesting
+//        var result: any HTML.View = base
+//
+//        if let sides = border.sides {
+//            if sides.contains(.top) {
+//                result = HTML.AnyView(result)
+//                    .inlineStyle(
+//                        RawProperty<BorderTop>("\(borderStyle) \(lightColor)"),
+//                        media: mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//                    .inlineStyle(
+//                        RawProperty<BorderTop>("\(borderStyle) \(darkColor)"),
+//                        media: .prefersColorScheme(.dark) && mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//            }
+//
+//            if sides.contains(.left) {
+//                result = HTML.AnyView(result)
+//                    .inlineStyle(
+//                        RawProperty<BorderLeft>("\(borderStyle) \(lightColor)"),
+//                        media: mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//                    .inlineStyle(
+//                        RawProperty<BorderLeft>("\(borderStyle) \(darkColor)"),
+//                        media: .prefersColorScheme(.dark) && mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//            }
+//
+//            if sides.contains(.bottom) {
+//                result = HTML.AnyView(result)
+//                    .inlineStyle(
+//                        RawProperty<BorderBottom>("\(borderStyle) \(lightColor)"),
+//                        media: mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//                    .inlineStyle(
+//                        RawProperty<BorderBottom>("\(borderStyle) \(darkColor)"),
+//                        media: .prefersColorScheme(.dark) && mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//            }
+//
+//            if sides.contains(.right) {
+//                result = HTML.AnyView(result)
+//                    .inlineStyle(
+//                        RawProperty<BorderRight>("\(borderStyle) \(lightColor)"),
+//                        media: mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//                    .inlineStyle(
+//                        RawProperty<BorderRight>("\(borderStyle) \(darkColor)"),
+//                        media: .prefersColorScheme(.dark) && mediaQuery,
+//                        selector: selector,
+//                        pseudo: pseudo
+//                    )
+//            }
+//        }
     }
 }
 
@@ -194,7 +196,7 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         self.border(
             [.top],
             width: width,
@@ -215,7 +217,7 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         self.border(
             [.bottom],
             width: width,
@@ -236,7 +238,7 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         self.border(
             [.left],
             width: width,
@@ -257,7 +259,7 @@ extension CSS {
         media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         self.border(
             [.right],
             width: width,

@@ -28,7 +28,7 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         var result: any HTML.View = base
 
         if let align = align {

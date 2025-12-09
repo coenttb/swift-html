@@ -50,64 +50,54 @@ extension CSS {
     /// - Returns: A new CSS with the style applied
     @usableFromInline
     @discardableResult
+    @CSS.Builder
     func applyColorProperty<P: CSSColorProperty>(
         _ propertyType: P.Type,
         _ input: ColorProperty?,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
-        guard let input else {
-            return CSS<HTML.AnyView>(base: HTML.AnyView(base))
-        }
-
-        switch input {
-        case .value(let darkModeColor):
-            if darkModeColor.isSingleColor {
-                // Single color: emit one style (no dark mode variant needed)
-                return CSS<HTML.AnyView>(
-                    base: HTML.AnyView(
-                        base.inlineStyle(
+    ) -> CSS<some HTML.View> {
+        if let input {
+            switch input {
+            case .value(let darkModeColor):
+                if darkModeColor.isSingleColor {
+                    // Single color: emit one style (no dark mode variant needed)
+                    base.inlineStyle(
+                        P.color(darkModeColor.light),
+                        media: media,
+                        selector: selector,
+                        pseudo: pseudo
+                    )
+                } else {
+                    // Different light/dark: emit both with media query
+                    base
+                        .inlineStyle(
                             P.color(darkModeColor.light),
                             media: media,
                             selector: selector,
                             pseudo: pseudo
                         )
-                    )
-                )
-            } else {
-                // Different light/dark: emit both with media query
-                return CSS<HTML.AnyView>(
-                    base: HTML.AnyView(
-                        base
-                            .inlineStyle(
-                                P.color(darkModeColor.light),
-                                media: media,
-                                selector: selector,
-                                pseudo: pseudo
-                            )
-                            .inlineStyle(
-                                P.color(darkModeColor.dark),
-                                media: .prefersColorScheme(.dark).and(media),
-                                selector: selector,
-                                pseudo: pseudo
-                            )
-                    )
+                        .inlineStyle(
+                            P.color(darkModeColor.dark),
+                            media: .prefersColorScheme(.dark).and(media),
+                            selector: selector,
+                            pseudo: pseudo
+                        )
+                }
+                
+            case .global(let global):
+                base.inlineStyle(
+                    P.global(global),
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
                 )
             }
-
-        case .global(let global):
-            return CSS<HTML.AnyView>(
-                base: HTML.AnyView(
-                    base.inlineStyle(
-                        P.global(global),
-                        media: media,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-                )
-            )
+        } else {
+            base
         }
+        
     }
 }
 
@@ -126,7 +116,7 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.AnyView> {
+    ) -> CSS<some HTML.View> {
         applyColorProperty(
             propertyType,
             value.map(T.injection),
