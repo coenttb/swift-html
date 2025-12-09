@@ -21,6 +21,7 @@ extension CSS {
     ///
     /// This method allows setting margin on individual sides while maintaining CSS chaining.
     /// Only the sides with non-nil values will have margin applied.
+    /// When all four values are provided, uses CSS shorthand optimization.
     ///
     /// ```swift
     /// div.css
@@ -29,6 +30,7 @@ extension CSS {
     /// ```
     @discardableResult
     @inlinable
+    @CSS.Builder
     public func margin(
         top: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
@@ -37,39 +39,97 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.Styled<HTML.Styled<HTML.Styled<HTML.Styled<Base, MarginTop>, MarginRight>, MarginBottom>, MarginLeft>> {
-        self
-            .marginTop(top.map { .lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-            .marginRight(right.map { .lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-            .marginBottom(bottom.map { .lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-            .marginLeft(left.map { .lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+    ) -> CSS<some HTML.View> {
+        // Optimize to shorthand when all four values are provided
+        if let top, let right, let bottom, let left {
+            // All four equal: margin: value
+            if top == right && right == bottom && bottom == left {
+                base.inlineStyle(
+                    Margin.all(top),
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
+            }
+            // Vertical equal, horizontal equal: margin: vertical horizontal
+            else if top == bottom && right == left {
+                base.inlineStyle(
+                    Margin.verticalHorizontal(top, right),
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
+            }
+            // All four different: margin: top right bottom left
+            else {
+                base.inlineStyle(
+                    Margin.sides(.lengthPercentage(top), .lengthPercentage(right), .lengthPercentage(bottom), .lengthPercentage(left)),
+                    media: media,
+                    selector: selector,
+                    pseudo: pseudo
+                )
+            }
+        }
+        // Only horizontal provided and equal: margin: 0 horizontal
+        else if top == nil && bottom == nil, let right, let left, right == left {
+            base.inlineStyle(
+                Margin.verticalHorizontal(.px(0), right),
+                media: media,
+                selector: selector,
+                pseudo: pseudo
+            )
+        }
+        // Fall back to individual properties
+        else {
+            base
+                .inlineStyle(top.map { MarginTop.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(right.map { MarginRight.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(bottom.map { MarginBottom.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(left.map { MarginLeft.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+        }
     }
 
-    /// Applies margin using vertical and horizontal values.
+    /// Applies margin using vertical and horizontal values (uses CSS shorthand).
+    ///
+    /// When both values are provided, this uses the CSS shorthand `margin: vertical horizontal`.
+    /// When only one is provided, applies individual side properties.
     ///
     /// ```swift
     /// div.css
-    ///     .margin(vertical: .rem(1), horizontal: .rem(2))
+    ///     .margin(vertical: .rem(1), horizontal: .rem(2))  // margin: 1rem 2rem
     ///     .padding(.px(16))
     /// ```
     @discardableResult
     @inlinable
+    @CSS.Builder
     public func margin(
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.Styled<HTML.Styled<HTML.Styled<HTML.Styled<Base, MarginTop>, MarginRight>, MarginBottom>, MarginLeft>> {
-        self.margin(
-            top: vertical,
-            right: horizontal,
-            bottom: vertical,
-            left: horizontal,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
-        )
+    ) -> CSS<some HTML.View> {
+        // Use shorthand when both values are provided
+        if let vertical, let horizontal {
+            base.inlineStyle(
+                Margin.verticalHorizontal(vertical, horizontal),
+                media: media,
+                selector: selector,
+                pseudo: pseudo
+            )
+        } else if let vertical {
+            // Only vertical: apply top and bottom
+            base
+                .inlineStyle(MarginTop.lengthPercentage(vertical), media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(MarginBottom.lengthPercentage(vertical), media: media, selector: selector, pseudo: pseudo)
+        } else if let horizontal {
+            // Only horizontal: apply right and left (TRBL order)
+            base
+                .inlineStyle(MarginRight.lengthPercentage(horizontal), media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(MarginLeft.lengthPercentage(horizontal), media: media, selector: selector, pseudo: pseudo)
+        } else {
+            base
+        }
     }
 
     /// Applies margin with top, horizontal (right & left), and bottom values.
@@ -80,6 +140,7 @@ extension CSS {
     /// ```
     @discardableResult
     @inlinable
+    @CSS.Builder
     public func margin(
         top: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
@@ -87,16 +148,23 @@ extension CSS {
         media: W3C_CSS_MediaQueries.Media? = nil,
         selector: HTML.Selector? = nil,
         pseudo: HTML.Pseudo? = nil
-    ) -> CSS<HTML.Styled<HTML.Styled<HTML.Styled<HTML.Styled<Base, MarginTop>, MarginRight>, MarginBottom>, MarginLeft>> {
-        self.margin(
-            top: top,
-            right: horizontal,
-            bottom: bottom,
-            left: horizontal,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
-        )
+    ) -> CSS<some HTML.View> {
+        // Use shorthand when all three are provided
+        if let top, let horizontal, let bottom {
+            base.inlineStyle(
+                Margin.topHorizontalBottom(.lengthPercentage(top), horizontal, .lengthPercentage(bottom)),
+                media: media,
+                selector: selector,
+                pseudo: pseudo
+            )
+        } else {
+            // Fall back to individual properties
+            base
+                .inlineStyle(top.map { MarginTop.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(horizontal.map { MarginRight.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(bottom.map { MarginBottom.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(horizontal.map { MarginLeft.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+        }
     }
 }
 

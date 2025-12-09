@@ -39,12 +39,12 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
+                <div class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
                   <div>First item
                   </div>
                   <div>Second item
                   </div>
-                </swift-html-hstack>
+                </div>
                 """
             }
         }
@@ -60,12 +60,12 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
+                <div class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
                   <div>First item
                   </div>
                   <div>Second item
                   </div>
-                </swift-html-hstack>
+                </div>
                 """
             }
         }
@@ -81,12 +81,12 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vstack class="row-gap-0 max-width-1 flex-direction-2 display-3 align-items-4">
+                <div class="row-gap-0 max-width-1 flex-direction-2 display-3 align-items-4">
                   <div>First item
                   </div>
                   <div>Second item
                   </div>
-                </swift-html-vstack>
+                </div>
                 """
             }
         }
@@ -102,12 +102,12 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vstack class="row-gap-0 max-width-1 flex-direction-2 display-3 align-items-4">
+                <div class="row-gap-0 max-width-1 flex-direction-2 display-3 align-items-4">
                   <div>First item
                   </div>
                   <div>Second item
                   </div>
-                </swift-html-vstack>
+                </div>
                 """
             }
         }
@@ -124,14 +124,14 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-hstack class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
+                <div class="column-gap-0 size-1 flex-direction-2 display-3 vertical-align-4 align-items-5">
                   <div>Left
                   </div>
-                  <swift-html-spacer class="flex-grow-6">
-                  </swift-html-spacer>
+                  <div class="flex-grow-6">
+                  </div>
                   <div>Right
                   </div>
-                </swift-html-hstack>
+                </div>
                 """
             }
         }
@@ -148,14 +148,14 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vgrid class="width-0 display-1 grid-template-columns-2 column-gap-3 row-gap-4">
+                <div class="grid-template-columns-0 display-1 width-2">
                   <div>Item 1
                   </div>
                   <div>Item 2
                   </div>
                   <div>Item 3
                   </div>
-                </swift-html-vgrid>
+                </div>
                 """
             }
         }
@@ -180,12 +180,12 @@ extension SnapshotTests {
             ) {
                 """
 
-                <swift-html-vgrid class="width-0 display-1 grid-template-columns-2 column-gap-3 row-gap-4">
+                <div class="row-gap-0 column-gap-1 grid-template-columns-2 display-3 width-4">
                   <div>Item 1
                   </div>
                   <div>Item 2
                   </div>
-                </swift-html-vgrid>
+                </div>
                 """
             }
         }

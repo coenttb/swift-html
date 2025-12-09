@@ -70,14 +70,14 @@ extension SnapshotTests {
                       .font-size-3{font-size:2.5rem}
                       .color-4{color:#cc3333}
                       .line-height-5{line-height:1.6}
-                      .color-6{color:#d0d0d0}
+                      .color-7{color:#d0d0d0}
                       .text-decoration-8{text-decoration:none}
                       .border-radius-9{border-radius:8px}
                       .color-10{color:#fff}
                       .background-color-11{background-color:#cccc33}
                       .padding-12{padding:1rem}
                       @media (prefers-color-scheme: dark){
-                        .color-7{color:#303030}
+                        .color-6{color:#303030}
                       }
                     </style>
                   </head>

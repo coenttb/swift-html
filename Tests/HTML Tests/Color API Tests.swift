@@ -35,9 +35,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
+                      .color-1{color:#cc3333}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:rgb(163, 40, 40)}
+                        .color-0{color:rgb(163, 40, 40)}
                       }
                     </style>
                   </head>
@@ -64,9 +64,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#d0d0d0}
+                      .color-1{color:#d0d0d0}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:#303030}
+                        .color-0{color:#303030}
                       }
                     </style>
                   </head>
@@ -95,9 +95,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#d0d0d0}
+                      .color-1{color:#d0d0d0}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:#303030}
+                        .color-0{color:#303030}
                       }
                     </style>
                   </head>
@@ -124,9 +124,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#cc3333}
+                      .color-1{color:#cc3333}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:#3399ff}
+                        .color-0{color:#3399ff}
                       }
                     </style>
                   </head>
@@ -153,9 +153,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#ff0000}
+                      .color-1{color:#ff0000}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:rgb(204, 0, 0)}
+                        .color-0{color:rgb(204, 0, 0)}
                       }
                     </style>
                   </head>
@@ -266,9 +266,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .background-color-0{background-color:#3399ff}
+                      .background-color-1{background-color:#3399ff}
                       @media (prefers-color-scheme: dark){
-                        .background-color-1{background-color:#004477}
+                        .background-color-0{background-color:#004477}
                       }
                     </style>
                   </head>
@@ -295,9 +295,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .background-color-0{background-color:#FFFFFF}
+                      .background-color-1{background-color:#FFFFFF}
                       @media (prefers-color-scheme: dark){
-                        .background-color-1{background-color:#121212}
+                        .background-color-0{background-color:#121212}
                       }
                     </style>
                   </head>
@@ -326,9 +326,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-color-0{border-color:#33cc33}
+                      .border-color-1{border-color:#33cc33}
                       @media (prefers-color-scheme: dark){
-                        .border-color-1{border-color:#008800}
+                        .border-color-0{border-color:#008800}
                       }
                     </style>
                   </head>
@@ -355,9 +355,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-color-0{border-color:#d0d0d0}
+                      .border-color-1{border-color:#d0d0d0}
                       @media (prefers-color-scheme: dark){
-                        .border-color-1{border-color:#3a3a3a}
+                        .border-color-0{border-color:#3a3a3a}
                       }
                     </style>
                   </head>
@@ -386,9 +386,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .fill-0{fill:#a300cc}
+                      .fill-1{fill:#a300cc}
                       @media (prefers-color-scheme: dark){
-                        .fill-1{fill:#6e0088}
+                        .fill-0{fill:#6e0088}
                       }
                     </style>
                   </head>
@@ -417,9 +417,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .stroke-0{stroke:#cc6600}
+                      .stroke-1{stroke:#cc6600}
                       @media (prefers-color-scheme: dark){
-                        .stroke-1{stroke:#ff8c1a}
+                        .stroke-0{stroke:#ff8c1a}
                       }
                     </style>
                   </head>
@@ -479,11 +479,11 @@ extension SnapshotTests {
                   <head>
                     <style>
                       .border-color-0{border-color:inherit}
-                      .background-color-1{background-color:#d0d0d0}
-                      .color-3{color:#cc3333}
+                      .background-color-2{background-color:#d0d0d0}
+                      .color-4{color:#cc3333}
                       @media (prefers-color-scheme: dark){
-                        .background-color-2{background-color:#303030}
-                        .color-4{color:rgb(163, 40, 40)}
+                        .background-color-1{background-color:#303030}
+                        .color-3{color:rgb(163, 40, 40)}
                       }
                     </style>
                   </head>

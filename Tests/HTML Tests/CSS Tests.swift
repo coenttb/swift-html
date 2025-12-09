@@ -74,9 +74,9 @@ extension SnapshotTests {
                   <head>
                     <style>
                       .font-size-0{font-size:14px}
-                      .color-1{color:#cc3333}
+                      .color-2{color:#cc3333}
                       @media (prefers-color-scheme: dark){
-                        .color-2{color:#3399ff}
+                        .color-1{color:#3399ff}
                       }
                     </style>
                   </head>
@@ -112,7 +112,7 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .background-color-0{background-color:#FFFFFF}
+                      .background-color-1{background-color:#FFFFFF}
                       .border-radius-2{border-radius:8px}
                       .padding-3{padding:24px}
                       .justify-content-4{justify-content:center}
@@ -120,7 +120,7 @@ extension SnapshotTests {
                       .flex-direction-6{flex-direction:column}
                       .display-7{display:flex}
                       @media (prefers-color-scheme: dark){
-                        .background-color-1{background-color:#1a1a1a}
+                        .background-color-0{background-color:#1a1a1a}
                       }
                     </style>
                   </head>

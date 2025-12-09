@@ -36,9 +36,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-0{border:1px solid #cc3333}
+                      .border-1{border:1px solid #cc3333}
                       @media (prefers-color-scheme: dark){
-                        .border-1{border:1px solid #3399ff}
+                        .border-0{border:1px solid #3399ff}
                       }
                     </style>
                   </head>
@@ -75,18 +75,18 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-right-0{border-right:1px solid #cc3333}
-                      .border-bottom-2{border-bottom:1px solid #cc3333}
-                      .border-left-4{border-left:1px solid #cc3333}
+                      .border-left-1{border-left:1px solid #cc3333}
+                      .border-bottom-3{border-bottom:1px solid #cc3333}
+                      .border-right-5{border-right:1px solid #cc3333}
                       @media (prefers-color-scheme: dark){
-                        .border-right-1{border-right:1px solid #3399ff}
-                        .border-bottom-3{border-bottom:1px solid #3399ff}
-                        .border-left-5{border-left:1px solid #3399ff}
+                        .border-left-0{border-left:1px solid #3399ff}
+                        .border-bottom-2{border-bottom:1px solid #3399ff}
+                        .border-right-4{border-right:1px solid #3399ff}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="border-right-0 border-right-1 border-bottom-2 border-bottom-3 border-left-4 border-left-5">
+                    <div class="border-left-0 border-left-1 border-bottom-2 border-bottom-3 border-right-4 border-right-5">
                     </div>
                   </body>
                 </html>
@@ -120,18 +120,18 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-right-0{border-right:1px solid #cc3333}
-                      .border-bottom-2{border-bottom:1px solid #cc3333}
-                      .border-left-4{border-left:1px solid #cc3333}
+                      .border-left-1{border-left:1px solid #cc3333}
+                      .border-bottom-3{border-bottom:1px solid #cc3333}
+                      .border-right-5{border-right:1px solid #cc3333}
                       @media (prefers-color-scheme: dark){
-                        .border-right-1{border-right:1px solid #3399ff}
-                        .border-bottom-3{border-bottom:1px solid #3399ff}
-                        .border-left-5{border-left:1px solid #3399ff}
+                        .border-left-0{border-left:1px solid #3399ff}
+                        .border-bottom-2{border-bottom:1px solid #3399ff}
+                        .border-right-4{border-right:1px solid #3399ff}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="border-right-0 border-right-1 border-bottom-2 border-bottom-3 border-left-4 border-left-5">
+                    <div class="border-left-0 border-left-1 border-bottom-2 border-bottom-3 border-right-4 border-right-5">
                     </div>
                   </body>
                 </html>

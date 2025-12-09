@@ -35,10 +35,10 @@ extension SnapshotTests {
                   <head>
                     <style>
                       .font-size-0{font-size:24px}
-                      .color-1{color:blue}
+                      .color-2{color:blue}
                       .margin-top-3{margin-top:10px}
                       @media (prefers-color-scheme: dark){
-                        .color-2{color:red}
+                        .color-1{color:red}
                       }
                     </style>
                   </head>
@@ -47,9 +47,7 @@ extension SnapshotTests {
                       <h1 class="font-size-0 color-1 color-2">Type-safe HTML
                       </h1>
                       <p class="margin-top-3">With type-safe CSS!
-                      </p>
-                      <video autoplay src="/public/video/example.mp4">
-                      </video>
+                      </p><video autoplay src="/public/video/example.mp4"></video>
                     </div>
                   </body>
                 </html>
@@ -303,9 +301,9 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#FF0000}
+                      .color-1{color:#FF0000}
                       @media (prefers-color-scheme: dark){
-                        .color-1{color:#00FF00}
+                        .color-0{color:#00FF00}
                       }
                     </style>
                   </head>
@@ -351,8 +349,9 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .css.backgroundColor(.blue, media: Media.screen && .maxWidth(.px(768)))
-                        .color(.yellow, media: Media.screen && .maxWidth(.px(768)))
+                        .css
+                        .backgroundColor(.blue, media: Media.screen && .maxWidth(.px(768)))
+                        .color(.test_yellow, media: Media.screen && .maxWidth(.px(768)))
                         .padding(.px(20), media: Media.screen && .maxWidth(.px(768)))
                 },
                 as: .html
@@ -364,13 +363,16 @@ extension SnapshotTests {
                     <style>
                       @media screen and (max-width: 768px){
                         .padding-0{padding:20px}
-                        .color-1{color:#cccc33}
-                        .background-color-2{background-color:blue}
+                        .color-2{color:#cccc33}
+                        .background-color-3{background-color:blue}
+                      }
+                      @media (prefers-color-scheme: dark) and screen and (max-width: 768px){
+                        .color-1{color:rgb(163, 163, 40)}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="padding-0 color-1 background-color-2">
+                    <div class="padding-0 color-1 color-2 background-color-3">
                     </div>
                   </body>
                 </html>
@@ -394,9 +396,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .accent-color-0{accent-color:#FF0000}
+                          .accent-color-1{accent-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .accent-color-1{accent-color:#00FF00}
+                            .accent-color-0{accent-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -440,7 +442,8 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .css.backgroundColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            .css
+                            .backgroundColor(light: .hex("FF0000"), dark: .hex("00FF00"))
                     },
                     as: .html
                 ) {
@@ -449,9 +452,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .background-color-0{background-color:#FF0000}
+                          .background-color-1{background-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .background-color-1{background-color:#00FF00}
+                            .background-color-0{background-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -504,9 +507,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-block-color-0{border-block-color:#FF0000}
+                          .border-block-color-1{border-block-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-block-color-1{border-block-color:#00FF00}
+                            .border-block-color-0{border-block-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -533,9 +536,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-block-end-color-0{border-block-end-color:#FF0000}
+                          .border-block-end-color-1{border-block-end-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-block-end-color-1{border-block-end-color:#00FF00}
+                            .border-block-end-color-0{border-block-end-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -562,9 +565,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-block-start-color-0{border-block-start-color:#FF0000}
+                          .border-block-start-color-1{border-block-start-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-block-start-color-1{border-block-start-color:#00FF00}
+                            .border-block-start-color-0{border-block-start-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -591,9 +594,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-bottom-color-0{border-bottom-color:#FF0000}
+                          .border-bottom-color-1{border-bottom-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-bottom-color-1{border-bottom-color:#00FF00}
+                            .border-bottom-color-0{border-bottom-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -620,9 +623,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-color-0{border-color:#FF0000}
+                          .border-color-1{border-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-color-1{border-color:#00FF00}
+                            .border-color-0{border-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -649,9 +652,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-inline-color-0{border-inline-color:#FF0000}
+                          .border-inline-color-1{border-inline-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-inline-color-1{border-inline-color:#00FF00}
+                            .border-inline-color-0{border-inline-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -678,9 +681,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-inline-end-color-0{border-inline-end-color:#FF0000}
+                          .border-inline-end-color-1{border-inline-end-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-inline-end-color-1{border-inline-end-color:#00FF00}
+                            .border-inline-end-color-0{border-inline-end-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -707,9 +710,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-inline-start-color-0{border-inline-start-color:#FF0000}
+                          .border-inline-start-color-1{border-inline-start-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-inline-start-color-1{border-inline-start-color:#00FF00}
+                            .border-inline-start-color-0{border-inline-start-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -736,9 +739,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-left-color-0{border-left-color:#FF0000}
+                          .border-left-color-1{border-left-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-left-color-1{border-left-color:#00FF00}
+                            .border-left-color-0{border-left-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -765,9 +768,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-right-color-0{border-right-color:#FF0000}
+                          .border-right-color-1{border-right-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-right-color-1{border-right-color:#00FF00}
+                            .border-right-color-0{border-right-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -794,9 +797,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .border-top-color-0{border-top-color:#FF0000}
+                          .border-top-color-1{border-top-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .border-top-color-1{border-top-color:#00FF00}
+                            .border-top-color-0{border-top-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -823,9 +826,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .caret-color-0{caret-color:#FF0000}
+                          .caret-color-1{caret-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .caret-color-1{caret-color:#00FF00}
+                            .caret-color-0{caret-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -852,9 +855,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .column-rule-color-0{column-rule-color:#FF0000}
+                          .column-rule-color-1{column-rule-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .column-rule-color-1{column-rule-color:#00FF00}
+                            .column-rule-color-0{column-rule-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -881,9 +884,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .flood-color-0{flood-color:#FF0000}
+                          .flood-color-1{flood-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .flood-color-1{flood-color:#00FF00}
+                            .flood-color-0{flood-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -910,9 +913,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .fill-0{fill:#FF0000}
+                          .fill-1{fill:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .fill-1{fill:#00FF00}
+                            .fill-0{fill:#00FF00}
                           }
                         </style>
                       </head>
@@ -965,9 +968,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .lighting-color-0{lighting-color:#FF0000}
+                          .lighting-color-1{lighting-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .lighting-color-1{lighting-color:#00FF00}
+                            .lighting-color-0{lighting-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -994,9 +997,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .outline-color-0{outline-color:#FF0000}
+                          .outline-color-1{outline-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .outline-color-1{outline-color:#00FF00}
+                            .outline-color-0{outline-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -1023,9 +1026,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .stop-color-0{stop-color:#FF0000}
+                          .stop-color-1{stop-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .stop-color-1{stop-color:#00FF00}
+                            .stop-color-0{stop-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -1052,9 +1055,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .stroke-0{stroke:#FF0000}
+                          .stroke-1{stroke:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .stroke-1{stroke:#00FF00}
+                            .stroke-0{stroke:#00FF00}
                           }
                         </style>
                       </head>
@@ -1081,9 +1084,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .text-decoration-color-0{text-decoration-color:#FF0000}
+                          .text-decoration-color-1{text-decoration-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .text-decoration-color-1{text-decoration-color:#00FF00}
+                            .text-decoration-color-0{text-decoration-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -1110,9 +1113,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .text-emphasis-color-0{text-emphasis-color:#FF0000}
+                          .text-emphasis-color-1{text-emphasis-color:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .text-emphasis-color-1{text-emphasis-color:#00FF00}
+                            .text-emphasis-color-0{text-emphasis-color:#00FF00}
                           }
                         </style>
                       </head>
@@ -1141,9 +1144,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          .fill-0:hover{fill:#FF0000}
+                          .fill-1:hover{fill:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            .fill-1:hover{fill:#00FF00}
+                            .fill-0:hover{fill:#00FF00}
                           }
                         </style>
                       </head>
@@ -1174,9 +1177,9 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          child:span .stroke-0{stroke:#FF0000}
+                          child:span .stroke-1{stroke:#FF0000}
                           @media (prefers-color-scheme: dark){
-                            child:span .stroke-1{stroke:#00FF00}
+                            child:span .stroke-0{stroke:#00FF00}
                           }
                         </style>
                       </head>
@@ -1207,11 +1210,11 @@ extension SnapshotTests {
                     <html>
                       <head>
                         <style>
-                          @media print{
-                            .outline-color-0{outline-color:#FF0000}
-                          }
                           @media (prefers-color-scheme: dark) and print{
-                            .outline-color-1{outline-color:#00FF00}
+                            .outline-color-0{outline-color:#00FF00}
+                          }
+                          @media print{
+                            .outline-color-1{outline-color:#FF0000}
                           }
                         </style>
                       </head>
