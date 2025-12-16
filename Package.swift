@@ -56,7 +56,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.4"),
         .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.0"),
-        .package(path: "../swift-css"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.2.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
