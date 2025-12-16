@@ -1,52 +1,52 @@
+////
+////  File.swift
+////  coenttb-web
+////
+////  Created by Coen ten Thije Boonkkamp on 14/09/2024.
+////
 //
-//  File.swift
-//  coenttb-web
+//import Foundation
+//import HTML
 //
-//  Created by Coen ten Thije Boonkkamp on 14/09/2024.
+//public struct Label<Title: HTML.View, Icon: HTML.View>: HTML.View {
+//    let alignment: VerticalAlign
+//    let spacing: Length
+//    let title: Title
+//    let icon: Icon
 //
-
-import Foundation
-import HTML
-
-public struct Label<Title: HTML.View, Icon: HTML.View>: HTML.View {
-    let alignment: VerticalAlign
-    let spacing: Length
-    let title: Title
-    let icon: Icon
-
-    public init(
-        alignment: VerticalAlign = .middle,
-        spacing: Length = 0.25.rem,
-        @HTML.Builder icon: () -> Icon,
-        @HTML.Builder title: () -> Title
-    ) {
-        self.alignment = alignment
-        self.spacing = spacing
-        self.icon = icon()
-        self.title = title()
-    }
-
-    public var body: some HTML.View {
-        HStack(alignment: alignment, spacing: spacing) {
-            icon
-            title
-        }
-    }
-}
-
-extension Label {
-    public init(
-        alignment: VerticalAlign = .middle,
-        spacing: Length = 0.25.rem,
-        _ title: String,
-        icon: LegacySVG
-    ) where Title == HTML.Text, Icon == LegacySVG {
-        self = .init(
-            alignment: alignment,
-            spacing: spacing,
-            icon: { icon },
-            title: { HTML.Text(title) }
-        )
-    }
-}
-public typealias LabelTypealias = Label
+//    public init(
+//        alignment: VerticalAlign = .middle,
+//        spacing: Length = 0.25.rem,
+//        @HTML.Builder icon: () -> Icon,
+//        @HTML.Builder title: () -> Title
+//    ) {
+//        self.alignment = alignment
+//        self.spacing = spacing
+//        self.icon = icon()
+//        self.title = title()
+//    }
+//
+//    public var body: some HTML.View {
+//        HStack(alignment: alignment, spacing: spacing) {
+//            icon
+//            title
+//        }
+//    }
+//}
+//
+//extension Label {
+//    public init(
+//        alignment: VerticalAlign = .middle,
+//        spacing: Length = 0.25.rem,
+//        _ title: String,
+//        icon: LegacySVG
+//    ) where Title == HTML.Text, Icon == LegacySVG {
+//        self = .init(
+//            alignment: alignment,
+//            spacing: spacing,
+//            icon: { icon },
+//            title: { HTML.Text(title) }
+//        )
+//    }
+//}
+//public typealias LabelTypealias = Label

@@ -14,36 +14,24 @@ extension CSS {
     @_disfavoredOverload
     public func outlineColor(
         light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        dark: CSS_Standard.Color.Value? = nil
     ) -> CSS<some HTML.View> {
         let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
             ?? DarkModeColor(light: light)
         return applyColorProperty(
             CSS_Standard.OutlineColor.self,
-            .value(darkModeColor),
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            .value(darkModeColor)
         )
     }
 
     @inlinable
     @discardableResult
     public func outlineColor(
-        _ color: DarkModeColor?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        _ color: DarkModeColor?
     ) -> CSS<some HTML.View> {
         applyColorProperty(
             CSS_Standard.OutlineColor.self,
-            color,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            color
         )
     }
 
@@ -51,17 +39,11 @@ extension CSS {
     @discardableResult
     @_disfavoredOverload
     public func outlineColor(
-        _ value: CSS_Standard.Color.Value?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        _ value: CSS_Standard.Color.Value?
     ) -> CSS<some HTML.View> {
         applyColorProperty(
             CSS_Standard.OutlineColor.self,
-            value,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            value
         )
     }
 }

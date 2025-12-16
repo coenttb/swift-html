@@ -6,7 +6,7 @@
 //
 
 import HTML
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 @Suite("CSS+text Tests")

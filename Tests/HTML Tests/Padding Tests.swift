@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -156,10 +156,7 @@ extension SnapshotTests {
                             top: .px(10),
                             right: nil,
                             bottom: .px(10),
-                            left: .px(10),
-                            media: nil,
-                            selector: nil,
-                            pseudo: nil
+                            left: .px(10)
                         )
                 },
                 as: .html

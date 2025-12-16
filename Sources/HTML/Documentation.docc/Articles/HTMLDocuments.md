@@ -573,7 +573,7 @@ Test your documents thoroughly using HTMLTestSupport's inline snapshot testing:
 
 ```swift
 import Testing
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 @testable import MyApp
 
 @Suite("Document Tests")

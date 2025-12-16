@@ -43,7 +43,7 @@ public struct _ModernHead<CustomHead: HTML.View>: HTML.View {
     public var body: some HTML.View {
         HTML.Group {
             customHead
-            meta(charset: .utf8)()
+            meta(charset: .utf8)
             BaseStyles()
 
             Style {

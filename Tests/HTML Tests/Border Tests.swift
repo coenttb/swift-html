@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 extension SnapshotTests {

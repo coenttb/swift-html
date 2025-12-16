@@ -25,15 +25,12 @@ extension CSS {
         align: TextAlign? = nil,
         decoration: TextDecoration? = nil,
         transform: TextTransform? = nil,
-        overflow: TextOverflow? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        overflow: TextOverflow? = nil
     ) -> CSS<some HTML.View> {
         base
-            .inlineStyle(align, media: media, selector: selector, pseudo: pseudo)
-            .inlineStyle(decoration, media: media, selector: selector, pseudo: pseudo)
-            .inlineStyle(transform, media: media, selector: selector, pseudo: pseudo)
-            .inlineStyle(overflow, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(align)
+            .inlineStyle(decoration)
+            .inlineStyle(transform)
+            .inlineStyle(overflow)
     }
 }

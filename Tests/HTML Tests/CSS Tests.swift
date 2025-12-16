@@ -9,7 +9,7 @@ import Dependencies
 import Foundation
 import HTML
 import OrderedCollections
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -142,9 +142,11 @@ extension SnapshotTests {
                     }
                     .css
                     .display(.block)
-                    .display(.flex, media: .minWidth(.px(768)))
                     .padding(.px(8))
-                    .padding(.px(16), media: .minWidth(.px(768)))
+                    .media(.minWidth(.px(768))) {
+                        $0.display(.flex)
+                          .padding(.px(16))
+                    }
                 },
                 as: .html
             ) {
@@ -153,16 +155,16 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .padding-1{padding:8px}
+                      .padding-2{padding:8px}
                       .display-3{display:block}
                       @media (min-width: 768px){
                         .padding-0{padding:16px}
-                        .display-2{display:flex}
+                        .display-1{display:flex}
                       }
                     </style>
                   </head>
                   <body>
-                    <div class="padding-0 padding-1 display-2 display-3">Responsive
+                    <div class="padding-0 display-1 padding-2 display-3">Responsive
                     </div>
                   </body>
                 </html>

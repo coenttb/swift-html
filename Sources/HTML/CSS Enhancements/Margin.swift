@@ -35,57 +35,42 @@ extension CSS {
         top: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
         bottom: LengthPercentage? = nil,
-        left: LengthPercentage? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        left: LengthPercentage? = nil
     ) -> CSS<some HTML.View> {
         // Optimize to shorthand when all four values are provided
         if let top, let right, let bottom, let left {
             // All four equal: margin: value
             if top == right && right == bottom && bottom == left {
                 base.inlineStyle(
-                    Margin.all(top),
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
+                    Margin.all(top)
                 )
             }
             // Vertical equal, horizontal equal: margin: vertical horizontal
             else if top == bottom && right == left {
                 base.inlineStyle(
-                    Margin.verticalHorizontal(top, right),
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
+                    Margin.verticalHorizontal(top, right)
                 )
             }
             // All four different: margin: top right bottom left
             else {
                 base.inlineStyle(
-                    Margin.sides(.lengthPercentage(top), .lengthPercentage(right), .lengthPercentage(bottom), .lengthPercentage(left)),
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
+                    Margin.sides(.lengthPercentage(top), .lengthPercentage(right), .lengthPercentage(bottom), .lengthPercentage(left))
                 )
             }
         }
         // Only horizontal provided and equal: margin: 0 horizontal
         else if top == nil && bottom == nil, let right, let left, right == left {
             base.inlineStyle(
-                Margin.verticalHorizontal(.px(0), right),
-                media: media,
-                selector: selector,
-                pseudo: pseudo
+                Margin.verticalHorizontal(.px(0), right)
             )
         }
         // Fall back to individual properties
         else {
             base
-                .inlineStyle(top.map { MarginTop.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(right.map { MarginRight.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(bottom.map { MarginBottom.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(left.map { MarginLeft.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(top.map { MarginTop.lengthPercentage($0) })
+                .inlineStyle(right.map { MarginRight.lengthPercentage($0) })
+                .inlineStyle(bottom.map { MarginBottom.lengthPercentage($0) })
+                .inlineStyle(left.map { MarginLeft.lengthPercentage($0) })
         }
     }
 
@@ -104,29 +89,23 @@ extension CSS {
     @CSS.Builder
     public func margin(
         vertical: LengthPercentage? = nil,
-        horizontal: LengthPercentage? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        horizontal: LengthPercentage? = nil
     ) -> CSS<some HTML.View> {
         // Use shorthand when both values are provided
         if let vertical, let horizontal {
             base.inlineStyle(
-                Margin.verticalHorizontal(vertical, horizontal),
-                media: media,
-                selector: selector,
-                pseudo: pseudo
+                Margin.verticalHorizontal(vertical, horizontal)
             )
         } else if let vertical {
             // Only vertical: apply top and bottom
             base
-                .inlineStyle(MarginTop.lengthPercentage(vertical), media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(MarginBottom.lengthPercentage(vertical), media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(MarginTop.lengthPercentage(vertical))
+                .inlineStyle(MarginBottom.lengthPercentage(vertical))
         } else if let horizontal {
             // Only horizontal: apply right and left (TRBL order)
             base
-                .inlineStyle(MarginRight.lengthPercentage(horizontal), media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(MarginLeft.lengthPercentage(horizontal), media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(MarginRight.lengthPercentage(horizontal))
+                .inlineStyle(MarginLeft.lengthPercentage(horizontal))
         } else {
             base
         }
@@ -144,26 +123,20 @@ extension CSS {
     public func margin(
         top: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
-        bottom: LengthPercentage? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        bottom: LengthPercentage? = nil
     ) -> CSS<some HTML.View> {
         // Use shorthand when all three are provided
         if let top, let horizontal, let bottom {
             base.inlineStyle(
-                Margin.topHorizontalBottom(.lengthPercentage(top), horizontal, .lengthPercentage(bottom)),
-                media: media,
-                selector: selector,
-                pseudo: pseudo
+                Margin.topHorizontalBottom(.lengthPercentage(top), horizontal, .lengthPercentage(bottom))
             )
         } else {
             // Fall back to individual properties
             base
-                .inlineStyle(top.map { MarginTop.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(horizontal.map { MarginRight.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(bottom.map { MarginBottom.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(horizontal.map { MarginLeft.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(top.map { MarginTop.lengthPercentage($0) })
+                .inlineStyle(horizontal.map { MarginRight.lengthPercentage($0) })
+                .inlineStyle(bottom.map { MarginBottom.lengthPercentage($0) })
+                .inlineStyle(horizontal.map { MarginLeft.lengthPercentage($0) })
         }
     }
 }

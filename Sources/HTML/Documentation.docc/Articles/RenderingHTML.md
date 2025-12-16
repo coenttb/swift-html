@@ -320,7 +320,7 @@ HTMLTestSupport provides powerful inline snapshot testing capabilities:
 
 ```swift
 import Testing
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 @testable import MyApp
 
 @Suite("Rendering Tests")

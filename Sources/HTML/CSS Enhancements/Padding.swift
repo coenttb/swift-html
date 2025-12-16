@@ -34,48 +34,36 @@ extension CSS {
         top: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
         bottom: LengthPercentage? = nil,
-        left: LengthPercentage? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        left: LengthPercentage? = nil
     ) -> CSS<some HTML.View> {
         // Optimize to shorthand when all four values are provided
         if let top, let right, let bottom, let left {
             // All four equal: padding: value
             if top == right && right == bottom && bottom == left {
                 base.inlineStyle(
-                    Padding.all(top),
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
+                    Padding.all(top)
                 )
             }
             // Vertical equal, horizontal equal: padding: vertical horizontal
             else if top == bottom && right == left {
                 base.inlineStyle(
-                    Padding.verticalHorizontal(top, right),
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
+                    Padding.verticalHorizontal(top, right)
                 )
             }
             // All four different: padding: top right bottom left
             else {
                 base.inlineStyle(
-                    Padding.sides(top, right, bottom, left),
-                    media: media,
-                    selector: selector,
-                    pseudo: pseudo
+                    Padding.sides(top, right, bottom, left)
                 )
             }
         }
         // Fall back to individual properties
         else {
             base
-                .inlineStyle(top.map { PaddingTop.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(right.map { PaddingRight.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(bottom.map { PaddingBottom.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(left.map { PaddingLeft.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(top.map { PaddingTop.lengthPercentage($0) })
+                .inlineStyle(right.map { PaddingRight.lengthPercentage($0) })
+                .inlineStyle(bottom.map { PaddingBottom.lengthPercentage($0) })
+                .inlineStyle(left.map { PaddingLeft.lengthPercentage($0) })
         }
     }
 
@@ -94,29 +82,23 @@ extension CSS {
     @CSS.Builder
     public func padding(
         vertical: LengthPercentage? = nil,
-        horizontal: LengthPercentage? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        horizontal: LengthPercentage? = nil
     ) -> CSS<some HTML.View> {
         // Use shorthand when both values are provided
         if let vertical, let horizontal {
             base.inlineStyle(
-                Padding.verticalHorizontal(vertical, horizontal),
-                media: media,
-                selector: selector,
-                pseudo: pseudo
+                Padding.verticalHorizontal(vertical, horizontal)
             )
         } else if let vertical {
             // Only vertical: apply top and bottom
             base
-                .inlineStyle(PaddingTop.lengthPercentage(vertical), media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(PaddingBottom.lengthPercentage(vertical), media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(PaddingTop.lengthPercentage(vertical))
+                .inlineStyle(PaddingBottom.lengthPercentage(vertical))
         } else if let horizontal {
             // Only horizontal: apply right and left (TRBL order)
             base
-                .inlineStyle(PaddingRight.lengthPercentage(horizontal), media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(PaddingLeft.lengthPercentage(horizontal), media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(PaddingRight.lengthPercentage(horizontal))
+                .inlineStyle(PaddingLeft.lengthPercentage(horizontal))
         } else {
             base
         }
@@ -134,26 +116,20 @@ extension CSS {
     public func padding(
         top: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,
-        bottom: LengthPercentage? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        bottom: LengthPercentage? = nil
     ) -> CSS<some HTML.View> {
         // Use shorthand when all three are provided
         if let top, let horizontal, let bottom {
             base.inlineStyle(
-                Padding.topHorizontalBottom(top, horizontal, bottom),
-                media: media,
-                selector: selector,
-                pseudo: pseudo
+                Padding.topHorizontalBottom(top, horizontal, bottom)
             )
         } else {
             // Fall back to individual properties
             base
-                .inlineStyle(top.map { PaddingTop.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(horizontal.map { PaddingRight.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(bottom.map { PaddingBottom.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
-                .inlineStyle(horizontal.map { PaddingLeft.lengthPercentage($0) }, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(top.map { PaddingTop.lengthPercentage($0) })
+                .inlineStyle(horizontal.map { PaddingRight.lengthPercentage($0) })
+                .inlineStyle(bottom.map { PaddingBottom.lengthPercentage($0) })
+                .inlineStyle(horizontal.map { PaddingLeft.lengthPercentage($0) })
         }
     }
 }

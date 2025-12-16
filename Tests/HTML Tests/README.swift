@@ -9,7 +9,7 @@ import Dependencies
 import HTML
 import CSS
 import CSS_Standard
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 extension SnapshotTests {

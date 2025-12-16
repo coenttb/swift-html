@@ -7,7 +7,7 @@
 
 import Dependencies
 import HTML
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -211,7 +211,7 @@ extension SnapshotTests {
 
             let test = HTML.Document {
                 div {}
-                    .css.color(.hex("FF0000"), pseudo: .hover)
+                    .css.hover { $0.color(.hex("FF0000")) }
             }
 
             let html = String(decoding: test.render(), as: UTF8.self)
@@ -322,7 +322,7 @@ extension SnapshotTests {
             assertInlineSnapshot(
                 of: HTML.Document {
                     div {}
-                        .css.color(.blue, media: .print)
+                        .css.print { $0.color(.blue) }
                 },
                 as: .html
             ) {
@@ -351,9 +351,11 @@ extension SnapshotTests {
                 of: HTML.Document {
                     div {}
                         .css
-                        .backgroundColor(.blue, media: Media.screen && .maxWidth(.px(768)))
-                        .color(.test_yellow, media: Media.screen && .maxWidth(.px(768)))
-                        .padding(.px(20), media: Media.screen && .maxWidth(.px(768)))
+                        .media(Media.screen && .maxWidth(.px(768))) {
+                            $0.backgroundColor(.blue)
+                              .color(.test_yellow)
+                              .padding(.px(20))
+                        }
                 },
                 as: .html
             ) {
@@ -1136,7 +1138,7 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .css.fill(light: .hex("FF0000"), dark: .hex("00FF00"), pseudo: .hover)
+                            .css.hover { $0.fill(light: .hex("FF0000"), dark: .hex("00FF00")) }
                     },
                     as: .html
                 ) {
@@ -1165,11 +1167,9 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .css.stroke(
-                                light: .hex("FF0000"),
-                                dark: .hex("00FF00"),
-                                selector: "child:span"
-                            )
+                            .css.selector("child:span") {
+                                $0.stroke(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            }
                     },
                     as: .html
                 ) {
@@ -1198,11 +1198,9 @@ extension SnapshotTests {
                 assertInlineSnapshot(
                     of: HTML.Document {
                         div {}
-                            .css.outlineColor(
-                                light: .hex("FF0000"),
-                                dark: .hex("00FF00"),
-                                media: .print
-                            )
+                            .css.print {
+                                $0.outlineColor(light: .hex("FF0000"), dark: .hex("00FF00"))
+                            }
                     },
                     as: .html
                 ) {

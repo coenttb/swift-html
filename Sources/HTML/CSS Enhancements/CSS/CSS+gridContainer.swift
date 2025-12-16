@@ -27,41 +27,38 @@ extension CSS {
         rowGap: RowGap? = nil,
         columnGap: ColumnGap? = nil,
         justifyItems: JustifyItems? = nil,
-        alignItems: AlignItems? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        alignItems: AlignItems? = nil
     ) -> CSS<some HTML.View> {
         var result: any HTML.View = base
-            .inlineStyle(Display.grid, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(Display.grid)
 
         if let columns = columns {
             result = HTML.AnyView(result)
-                .inlineStyle(columns, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(columns)
         }
         if let rows = rows {
             result = HTML.AnyView(result)
-                .inlineStyle(rows, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(rows)
         }
         if let gap = gap {
             result = HTML.AnyView(result)
-                .inlineStyle(gap, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(gap)
         }
         if let rowGap = rowGap {
             result = HTML.AnyView(result)
-                .inlineStyle(rowGap, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(rowGap)
         }
         if let columnGap = columnGap {
             result = HTML.AnyView(result)
-                .inlineStyle(columnGap, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(columnGap)
         }
         if let justifyItems = justifyItems {
             result = HTML.AnyView(result)
-                .inlineStyle(justifyItems, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(justifyItems)
         }
         if let alignItems = alignItems {
             result = HTML.AnyView(result)
-                .inlineStyle(alignItems, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(alignItems)
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

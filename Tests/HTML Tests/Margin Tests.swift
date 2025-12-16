@@ -8,7 +8,7 @@
 import Dependencies
 import HTML
 import OrderedCollections
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 import Testing
 
 extension SnapshotTests {
@@ -137,11 +137,12 @@ extension SnapshotTests {
                 of: HTML.Document {
                     div { HTML.Empty() }
                         .css
-                        .margin(
-                            top: .px(10),
-                            bottom: .px(15),
-                            media: .screen && .minWidth(.px(768))
-                        )
+                        .media(.screen && .minWidth(.px(768))) {
+                            $0.margin(
+                                top: .px(10),
+                                bottom: .px(15)
+                            )
+                        }
                 },
                 as: .html
             ) {
@@ -175,10 +176,7 @@ extension SnapshotTests {
                             top: .px(10),
                             right: nil,
                             bottom: .px(10),
-                            left: .px(10),
-                            media: nil,
-                            selector: nil,
-                            pseudo: nil
+                            left: .px(10)
                         )
                 },
                 as: .html

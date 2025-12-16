@@ -9,7 +9,7 @@ import CSS
 
 public struct HStack<Content: HTML.View>: HTML.View {
     let alignment: VerticalAlign
-    let spacing: Length?
+    let spacing: CSS_Standard.Length?
     let content: Content
 
     public init(

@@ -86,11 +86,12 @@ extension HTML.View {
                 "background",
                 "linear-gradient(0deg, \(bottom.light.description) 0%, \(top.light.description) 100%);"
             )
-            .inlineStyle(
-                "background",
-                "linear-gradient(0deg, \(bottom.dark.description) 0%, \(top.dark.description) 100%);",
-                media: .dark
-            )
+            .dark {
+                $0.inlineStyle(
+                    "background",
+                    "linear-gradient(0deg, \(bottom.dark.description) 0%, \(top.dark.description) 100%);"
+                )
+            }
     }
 
     public func gradient(
@@ -104,11 +105,12 @@ extension HTML.View {
                 "background",
                 "linear-gradient(0deg, \(bottom.light.description) 0%, \(middle.light.description) 50%, \(top.light.description) 100%);"
             )
-            .inlineStyle(
-                "background",
-                "linear-gradient(0deg, \(bottom.dark.description) 0%, \(middle.dark.description) 50%, \(top.dark.description) 100%);",
-                media: .dark
-            )
+            .dark {
+                $0.inlineStyle(
+                    "background",
+                    "linear-gradient(0deg, \(bottom.dark.description) 0%, \(middle.dark.description) 50%, \(top.dark.description) 100%);"
+                )
+            }
     }
 }
 

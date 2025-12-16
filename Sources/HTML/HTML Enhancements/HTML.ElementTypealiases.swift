@@ -7,6 +7,7 @@
 
 import CSS
 import CSS_Standard
+import HTML_Standard
 
 /// Lowercase typealias for creating Anchor elements with a more HTML-like syntax.
 ///
@@ -60,7 +61,7 @@ public typealias address = HTML_Standard.Address
 ///   alt: "Go to section"
 /// )
 /// ```
-public typealias area = HTML_Standard.Area
+public typealias area = WHATWG_HTML_Embedded.Area
 
 /// Lowercase typealias for creating Article elements with a more HTML-like syntax.
 ///

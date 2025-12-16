@@ -18,7 +18,7 @@ extension Target.Dependency {
 extension Target.Dependency {
     static var htmlStandard: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
-    static var htmlRenderableTestSupport: Self { .product(name: "HTML Renderable TestSupport", package: "swift-html-rendering") }
+    static var htmlRenderableTestSupport: Self { .product(name: "HTML Rendering TestSupport", package: "swift-html-rendering") }
     static var css: Self { .product(name: "CSS", package: "swift-css") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
@@ -38,7 +38,7 @@ let package = Package(
         .macOS(.v26),
         .tvOS(.v26),
         .watchOS(.v26),
-        .macCatalyst(.v18)
+        .macCatalyst(.v26)
     ],
     products: [
         // Individual targets
@@ -62,7 +62,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
         .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.0"),
-        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.0.1"),
+        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.14.1"),
         .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.0.1"),
         .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.0.1"),

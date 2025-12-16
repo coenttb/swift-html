@@ -676,7 +676,7 @@ HTMLTestSupport makes it easy to test that your styles are rendered correctly:
 
 ```swift
 import Testing
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 @testable import MyApp
 
 @Suite("Style Snapshot Tests")

@@ -13,10 +13,7 @@ extension CSS {
     @discardableResult
     @CSS.Builder
     public func border(
-        _ border: Border?,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        _ border: Border?
     ) -> CSS<some HTML.View> {
         if let border {
             // Extract common border properties
@@ -30,26 +27,28 @@ extension CSS {
             if isAllSides {
                 // All sides - use shorthand property
                 if isSingleColor {
-                    base.inlineStyle(
-                        RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"),
-                        media: mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
+                    base.inlineStyle(RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"))
                 } else {
-                    base
-                        .inlineStyle(
-                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"),
-                            media: mediaQuery,
-                            selector: selector,
-                            pseudo: pseudo
-                        )
-                        .inlineStyle(
-                            RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(darkColor)"),
-                            media: .prefersColorScheme(.dark) && mediaQuery,
-                            selector: selector,
-                            pseudo: pseudo
-                        )
+                    // Different light/dark: emit both with dark mode media query
+                    let ctx = HTML.Style.Context.current
+                    let darkMedia = W3C_CSS_MediaQueries.Media.prefersColorScheme(.dark)
+                    let darkAtRule: HTML.AtRule = {
+                        if let existingAtRule = ctx.atRule {
+                            // Combine with existing media query using Media's and() method
+                            let combined = darkMedia.and(W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue))
+                            return HTML.AtRule(rawValue: combined.rawValue)
+                        } else {
+                            return HTML.AtRule.Media(darkMedia)
+                        }
+                    }()
+
+                    HTML.Styled(
+                        HTML.Styled(base, RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(lightColor)"), atRule: ctx.atRule, selector: ctx.selector, pseudo: ctx.pseudo),
+                        RawProperty<W3C_CSS_Backgrounds.Border>("\(borderStyle) \(darkColor)"),
+                        atRule: darkAtRule,
+                        selector: ctx.selector,
+                        pseudo: ctx.pseudo
+                    )
                 }
             } else {
                 // Individual sides - use nested _Conditional via result builder
@@ -58,10 +57,7 @@ extension CSS {
                     borderStyle: borderStyle,
                     lightColor: lightColor,
                     darkColor: darkColor,
-                    isSingleColor: isSingleColor,
-                    media: mediaQuery,
-                    selector: selector,
-                    pseudo: pseudo
+                    isSingleColor: isSingleColor
                 )
             }
         } else {
@@ -75,17 +71,9 @@ extension CSS {
         _ sides: [Border.Side] = Border.Side.allCases,
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
-        color: HTMLColor? = nil,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        color: HTMLColor? = nil
     ) -> CSS<some HTML.View> {
-        self.border(
-            Border(sides: .init(sides), width: width, style: style, color: color),
-            media: mediaQuery,
-            selector: selector,
-            pseudo: pseudo
-        )
+        self.border(Border(sides: .init(sides), width: width, style: style, color: color))
     }
 
     @inlinable
@@ -95,17 +83,9 @@ extension CSS {
         _ sides: Border.Side...,
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
-        color: HTMLColor? = nil,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        color: HTMLColor? = nil
     ) -> CSS<some HTML.View> {
-        self.border(
-            Border(sides: .init(sides), width: width, style: style, color: color),
-            media: mediaQuery,
-            selector: selector,
-            pseudo: pseudo
-        )
+        self.border(Border(sides: .init(sides), width: width, style: style, color: color))
     }
 }
 
@@ -123,10 +103,7 @@ extension CSS {
         borderStyle: String,
         lightColor: String,
         darkColor: String,
-        isSingleColor: Bool,
-        media mediaQuery: W3C_CSS_MediaQueries.Media?,
-        selector: HTML.Selector?,
-        pseudo: HTML.Pseudo?
+        isSingleColor: Bool
     ) -> CSS<some HTML.View> {
         base
             .applyBorderSide(
@@ -135,10 +112,7 @@ extension CSS {
                 borderStyle: borderStyle,
                 lightColor: lightColor,
                 darkColor: darkColor,
-                isSingleColor: isSingleColor,
-                media: mediaQuery,
-                selector: selector,
-                pseudo: pseudo
+                isSingleColor: isSingleColor
             )
             .applyBorderSide(
                 shouldApply: sides.contains(.right),
@@ -146,10 +120,7 @@ extension CSS {
                 borderStyle: borderStyle,
                 lightColor: lightColor,
                 darkColor: darkColor,
-                isSingleColor: isSingleColor,
-                media: mediaQuery,
-                selector: selector,
-                pseudo: pseudo
+                isSingleColor: isSingleColor
             )
             .applyBorderSide(
                 shouldApply: sides.contains(.bottom),
@@ -157,10 +128,7 @@ extension CSS {
                 borderStyle: borderStyle,
                 lightColor: lightColor,
                 darkColor: darkColor,
-                isSingleColor: isSingleColor,
-                media: mediaQuery,
-                selector: selector,
-                pseudo: pseudo
+                isSingleColor: isSingleColor
             )
             .applyBorderSide(
                 shouldApply: sides.contains(.left),
@@ -168,10 +136,7 @@ extension CSS {
                 borderStyle: borderStyle,
                 lightColor: lightColor,
                 darkColor: darkColor,
-                isSingleColor: isSingleColor,
-                media: mediaQuery,
-                selector: selector,
-                pseudo: pseudo
+                isSingleColor: isSingleColor
             )
     }
 }
@@ -193,33 +158,32 @@ extension HTML.View {
         borderStyle: String,
         lightColor: String,
         darkColor: String,
-        isSingleColor: Bool,
-        media mediaQuery: W3C_CSS_MediaQueries.Media?,
-        selector: HTML.Selector?,
-        pseudo: HTML.Pseudo?
+        isSingleColor: Bool
     ) -> some HTML.View {
         if shouldApply {
             if isSingleColor {
-                self.inlineStyle(
-                    RawProperty<P>("\(borderStyle) \(lightColor)"),
-                    media: mediaQuery,
-                    selector: selector,
-                    pseudo: pseudo
-                )
+                self.inlineStyle(RawProperty<P>("\(borderStyle) \(lightColor)"))
             } else {
-                self
-                    .inlineStyle(
-                        RawProperty<P>("\(borderStyle) \(lightColor)"),
-                        media: mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
-                    .inlineStyle(
-                        RawProperty<P>("\(borderStyle) \(darkColor)"),
-                        media: .prefersColorScheme(.dark) && mediaQuery,
-                        selector: selector,
-                        pseudo: pseudo
-                    )
+                // Different light/dark: emit both with dark mode media query
+                let ctx = HTML.Style.Context.current
+                let darkMedia = W3C_CSS_MediaQueries.Media.prefersColorScheme(.dark)
+                let darkAtRule: HTML.AtRule = {
+                    if let existingAtRule = ctx.atRule {
+                        // Combine with existing media query using Media's and() method
+                        let combined = darkMedia.and(W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue))
+                        return HTML.AtRule(rawValue: combined.rawValue)
+                    } else {
+                        return HTML.AtRule.Media(darkMedia)
+                    }
+                }()
+
+                HTML.Styled(
+                    HTML.Styled(self, RawProperty<P>("\(borderStyle) \(lightColor)"), atRule: ctx.atRule, selector: ctx.selector, pseudo: ctx.pseudo),
+                    RawProperty<P>("\(borderStyle) \(darkColor)"),
+                    atRule: darkAtRule,
+                    selector: ctx.selector,
+                    pseudo: ctx.pseudo
+                )
             }
         } else {
             self
@@ -235,20 +199,9 @@ extension CSS {
     public func borderTop(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
-        color: HTMLColor? = nil,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        color: HTMLColor? = nil
     ) -> CSS<some HTML.View> {
-        self.border(
-            [.top],
-            width: width,
-            style: style,
-            color: color,
-            media: mediaQuery,
-            selector: selector,
-            pseudo: pseudo
-        )
+        self.border([.top], width: width, style: style, color: color)
     }
 
     @inlinable
@@ -256,20 +209,9 @@ extension CSS {
     public func borderBottom(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
-        color: HTMLColor? = nil,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        color: HTMLColor? = nil
     ) -> CSS<some HTML.View> {
-        self.border(
-            [.bottom],
-            width: width,
-            style: style,
-            color: color,
-            media: mediaQuery,
-            selector: selector,
-            pseudo: pseudo
-        )
+        self.border([.bottom], width: width, style: style, color: color)
     }
 
     @inlinable
@@ -277,20 +219,9 @@ extension CSS {
     public func borderLeft(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
-        color: HTMLColor? = nil,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        color: HTMLColor? = nil
     ) -> CSS<some HTML.View> {
-        self.border(
-            [.left],
-            width: width,
-            style: style,
-            color: color,
-            media: mediaQuery,
-            selector: selector,
-            pseudo: pseudo
-        )
+        self.border([.left], width: width, style: style, color: color)
     }
 
     @inlinable
@@ -298,19 +229,8 @@ extension CSS {
     public func borderRight(
         width: BorderWidth? = nil,
         style: CSS_Standard.LineStyle? = .solid,
-        color: HTMLColor? = nil,
-        media mediaQuery: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        color: HTMLColor? = nil
     ) -> CSS<some HTML.View> {
-        self.border(
-            [.right],
-            width: width,
-            style: style,
-            color: color,
-            media: mediaQuery,
-            selector: selector,
-            pseudo: pseudo
-        )
+        self.border([.right], width: width, style: style, color: color)
     }
 }

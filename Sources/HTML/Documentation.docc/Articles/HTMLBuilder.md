@@ -595,7 +595,7 @@ HTMLTestSupport makes it easy to test complex HTMLBuilder compositions:
 
 ```swift
 import Testing
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 @testable import MyApp
 
 @Suite("HTMLBuilder Snapshot Tests")

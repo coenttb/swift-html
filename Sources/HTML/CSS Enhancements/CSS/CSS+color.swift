@@ -26,19 +26,13 @@ extension CSS {
     @_disfavoredOverload
     public func color(
         light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        dark: CSS_Standard.Color.Value? = nil
     ) -> CSS<some HTML.View> {
         let darkModeColor = dark.map { DarkModeColor(light: light, dark: $0) }
             ?? DarkModeColor(light: light)
         return applyColorProperty(
             CSS_Standard.Color.self,
-            .value(darkModeColor),
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            .value(darkModeColor)
         )
     }
 
@@ -56,17 +50,11 @@ extension CSS {
     @inlinable
     @discardableResult
     public func color(
-        _ color: DarkModeColor?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        _ color: DarkModeColor?
     ) -> CSS<some HTML.View> {
         applyColorProperty(
             CSS_Standard.Color.self,
-            color,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            color
         )
     }
 
@@ -86,17 +74,11 @@ extension CSS {
     @discardableResult
     @_disfavoredOverload
     public func color(
-        _ value: CSS_Standard.Color.Value?,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        _ value: CSS_Standard.Color.Value?
     ) -> CSS<some HTML.View> {
         applyColorProperty(
             CSS_Standard.Color.self,
-            value,
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            value
         )
     }
 }

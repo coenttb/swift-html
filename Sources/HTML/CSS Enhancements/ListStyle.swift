@@ -17,20 +17,17 @@ extension CSS {
     @discardableResult
     @inlinable
     public func listStyle(
-        _ listStyle: ListStyle,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        _ listStyle: ListStyle
     ) -> CSS<HTML.Styled<HTML.Styled<Base, CSS_Standard.ListStyle>, PaddingLeft>> {
         switch listStyle {
         case .reset:
             self
-                .listStyle(CSS_Standard.ListStyle.none, media: media, selector: selector, pseudo: pseudo)
-                .paddingLeft(.zero, media: media, selector: selector, pseudo: pseudo)
+                .listStyle(CSS_Standard.ListStyle.none)
+                .paddingLeft(.zero)
         case .cssPropertyTypesListStyle(let cssListStyle):
             self
-                .listStyle(cssListStyle, media: media, selector: selector, pseudo: pseudo)
-                .paddingLeft(nil, media: media, selector: selector, pseudo: pseudo)
+                .listStyle(cssListStyle)
+                .paddingLeft(nil)
         }
     }
 }

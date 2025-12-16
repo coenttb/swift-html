@@ -21,20 +21,17 @@ extension CSS {
     @discardableResult
     public func spacing(
         padding: Padding? = nil,
-        margin: Margin? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        margin: Margin? = nil
     ) -> CSS<some HTML.View> {
         var result: any HTML.View = base
 
         if let padding = padding {
             result = HTML.AnyView(result)
-                .inlineStyle(padding, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(padding)
         }
         if let margin = margin {
             result = HTML.AnyView(result)
-                .inlineStyle(margin, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(margin)
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))

@@ -331,7 +331,7 @@ For more comprehensive testing, use HTMLTestSupport's inline snapshot testing:
 
 ```swift
 import Testing
-import HTML_Renderable_TestSupport
+import HTML_Rendering_TestSupport
 @testable import MyApp
 
 @Suite("HTML Snapshot Tests")

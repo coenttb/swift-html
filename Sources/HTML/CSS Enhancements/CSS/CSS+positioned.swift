@@ -27,33 +27,30 @@ extension CSS {
         right: Right? = nil,
         bottom: Bottom? = nil,
         left: Left? = nil,
-        zIndex: ZIndex? = nil,
-        media: W3C_CSS_MediaQueries.Media? = nil,
-        selector: HTML.Selector? = nil,
-        pseudo: HTML.Pseudo? = nil
+        zIndex: ZIndex? = nil
     ) -> CSS<some HTML.View> {
         var result: any HTML.View = base
-            .inlineStyle(position, media: media, selector: selector, pseudo: pseudo)
+            .inlineStyle(position)
 
         if let top = top {
             result = HTML.AnyView(result)
-                .inlineStyle(top, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(top)
         }
         if let right = right {
             result = HTML.AnyView(result)
-                .inlineStyle(right, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(right)
         }
         if let bottom = bottom {
             result = HTML.AnyView(result)
-                .inlineStyle(bottom, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(bottom)
         }
         if let left = left {
             result = HTML.AnyView(result)
-                .inlineStyle(left, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(left)
         }
         if let zIndex = zIndex {
             result = HTML.AnyView(result)
-                .inlineStyle(zIndex, media: media, selector: selector, pseudo: pseudo)
+                .inlineStyle(zIndex)
         }
 
         return CSS<HTML.AnyView>(base: HTML.AnyView(result))
@@ -77,10 +74,7 @@ extension CSS {
             top: .px(0),
             right: .px(0),
             bottom: .px(0),
-            left: .px(0),
-            media: media,
-            selector: selector,
-            pseudo: pseudo
+            left: .px(0)
         )
     }
 }
