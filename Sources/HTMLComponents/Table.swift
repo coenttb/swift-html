@@ -1,6 +1,6 @@
-//import HTML
+// import HTML
 //
-//public struct Table<Headers: HTML.View, Rows: HTML.View>: HTML.View {
+// public struct Table<Headers: HTML.View, Rows: HTML.View>: HTML.View {
 //    let headers: Headers
 //    let rows: Rows
 //    let id: String?
@@ -39,10 +39,10 @@
 //        .inlineStyle("border", bordered ? "1px solid var(--border-secondary, #e5e7eb)" : nil)
 //        .inlineStyle("border-radius", bordered ? "8px" : nil)
 //    }
-//}
+// }
 //
 //// Table header helpers
-//public struct TableHeader: HTML.View {
+// public struct TableHeader: HTML.View {
 //    let content: String
 //    let sortable: Bool
 //    let alignment: String
@@ -76,10 +76,10 @@
 //        .inlineStyle("cursor", sortable ? "pointer" : nil)
 //        .if(sortable) { $0.onclick(onClick ?? "") }
 //    }
-//}
+// }
 //
 //// Table row helper
-//public struct TableRow<Content: HTML.View>: HTML.View {
+// public struct TableRow<Content: HTML.View>: HTML.View {
 //    let content: Content
 //    let onClick: String?
 //
@@ -96,10 +96,10 @@
 //            .inlineStyle("cursor", onClick != nil ? "pointer" : nil)
 //            .attribute("onclick", onClick)
 //    }
-//}
+// }
 //
 //// Table cell helper
-//public struct TableCell<Content: HTML.View>: HTML.View {
+// public struct TableCell<Content: HTML.View>: HTML.View {
 //    let content: Content
 //    let alignment: String
 //    let colspan: Int?
@@ -125,4 +125,4 @@
 //            .attribute("colspan", colspan.map { "\($0)" })
 //            .attribute("rowspan", rowspan.map { "\($0)" })
 //    }
-//}
+// }

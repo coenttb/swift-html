@@ -8,8 +8,8 @@
 import Dependencies
 import Foundation
 import HTML
-import OrderedCollections
 import HTML_Rendering_TestSupport
+import OrderedCollections
 import Testing
 
 extension SnapshotTests {
@@ -36,11 +36,14 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-0{border:1px solid red}
+                      .border-1{border:1px solid #cc3333}
+                      @media (prefers-color-scheme: dark){
+                        .border-0{border:1px solid #ff1a1a}
+                      }
                     </style>
                   </head>
                   <body>
-                    <div class="border-0">
+                    <div class="border-0 border-1">
                     </div>
                   </body>
                 </html>

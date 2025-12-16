@@ -5,10 +5,10 @@
 ////  Created by Coen ten Thije Boonkkamp on 14/09/2024.
 ////
 //
-//import Foundation
-//import HTML
+// import Foundation
+// import HTML
 //
-//public struct Label<Title: HTML.View, Icon: HTML.View>: HTML.View {
+// public struct Label<Title: HTML.View, Icon: HTML.View>: HTML.View {
 //    let alignment: VerticalAlign
 //    let spacing: Length
 //    let title: Title
@@ -32,9 +32,9 @@
 //            title
 //        }
 //    }
-//}
+// }
 //
-//extension Label {
+// extension Label {
 //    public init(
 //        alignment: VerticalAlign = .middle,
 //        spacing: Length = 0.25.rem,
@@ -48,5 +48,5 @@
 //            title: { HTML.Text(title) }
 //        )
 //    }
-//}
-//public typealias LabelTypealias = Label
+// }
+// public typealias LabelTypealias = Label

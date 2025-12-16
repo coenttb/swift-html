@@ -1,8 +1,8 @@
-//import Dependencies
-//import Foundation
-//import HTML
+// import Dependencies
+// import Foundation
+// import HTML
 //
-//public struct Link<Label: HTML.View>: HTML.View {
+// public struct Link<Label: HTML.View>: HTML.View {
 //    @Dependency(\.linkStyle) var linkStyle
 //    let label: Label
 //    let href: Href?
@@ -39,9 +39,9 @@
 //                selector: ":hover"
 //            )
 //    }
-//}
+// }
 //
-//extension HTML.View {
+// extension HTML.View {
 //    public func linkColor(_ linkColor: HTMLColor?) -> some HTML.View {
 //        @Dependency(\.theme.text.link) var color
 //        return self.dependency(\.theme.text.link, linkColor ?? color)
@@ -52,9 +52,9 @@
 //    public func linkStyle(_ linkStyle: LinkStyle) -> some HTML.View {
 //        self.dependency(\.linkStyle, linkStyle)
 //    }
-//}
+// }
 //
-//public struct LinkStyle: Sendable {
+// public struct LinkStyle: Sendable {
 //    //    public var color: HTMLColor?
 //    public var underline: Bool?
 //
@@ -65,16 +65,16 @@
 //        //        self.color = color
 //        self.underline = underline
 //    }
-//}
+// }
 //
-//private enum LinkStyleKey: DependencyKey {
+// private enum LinkStyleKey: DependencyKey {
 //    static let liveValue = LinkStyle()
 //    static let testValue = LinkStyle()
-//}
+// }
 //
-//extension DependencyValues {
+// extension DependencyValues {
 //    public var linkStyle: LinkStyle {
 //        get { self[LinkStyleKey.self] }
 //        set { self[LinkStyleKey.self] = newValue }
 //    }
-//}
+// }

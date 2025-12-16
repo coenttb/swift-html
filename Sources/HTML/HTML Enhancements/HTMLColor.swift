@@ -34,7 +34,10 @@ extension HTMLColor {
     /// Calculates the midpoint color between two HTMLColors for gradients
     public static func gradientMidpoint(from color1: HTMLColor, to color2: HTMLColor) -> HTMLColor?
     {
-        func midpoint(_ c1: CSS_Standard.Color.Value, _ c2: CSS_Standard.Color.Value) -> CSS_Standard.Color.Value? {
+        func midpoint(
+            _ c1: CSS_Standard.Color.Value,
+            _ c2: CSS_Standard.Color.Value
+        ) -> CSS_Standard.Color.Value? {
             let rgb1 = toRGB(c1)
             let rgb2 = toRGB(c2)
 

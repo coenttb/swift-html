@@ -5,9 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 26/06/2025.
 //
 
-import Dependencies
 import CSS
 import CSS_Standard
+import Dependencies
 
 public struct Font: Hashable, Sendable {
     public let family: CSS_Standard.FontFamily
@@ -42,25 +42,27 @@ extension CSS {
     @inlinable
     public func font(
         _ font: Font
-    ) -> CSS<HTML.Styled<
+    ) -> CSS<
         HTML.Styled<
             HTML.Styled<
                 HTML.Styled<
                     HTML.Styled<
                         HTML.Styled<
-                            HTML.Styled<Base, FontFamily>,
-                            CSS_Standard.FontSize
+                            HTML.Styled<
+                                HTML.Styled<Base, FontFamily>,
+                                CSS_Standard.FontSize
+                            >,
+                            FontStretch
                         >,
-                        FontStretch
+                        FontStyle
                     >,
-                    FontStyle
+                    FontVariant
                 >,
-                FontVariant
+                FontWeight
             >,
-            FontWeight
-        >,
-        LineHeight
-    >> {
+            LineHeight
+        >
+    > {
         self
             .fontFamily(font.family)
             .fontSize(font.size)

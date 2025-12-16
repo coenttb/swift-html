@@ -7,8 +7,8 @@
 
 import Dependencies
 import HTML
-import OrderedCollections
 import HTML_Rendering_TestSupport
+import OrderedCollections
 import Testing
 
 extension SnapshotTests {

@@ -1,7 +1,7 @@
-//import Foundation
-//import HTML
+// import Foundation
+// import HTML
 //
-//public struct Paragraph<Content: HTML.View>: HTML.View {
+// public struct Paragraph<Content: HTML.View>: HTML.View {
 //    let size: Size
 //    @HTML.Builder let content: Content
 //    public init(
@@ -43,4 +43,4 @@
 //            }
 //        }
 //    }
-//}
+// }

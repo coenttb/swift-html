@@ -39,7 +39,7 @@ public struct HTMLForEach<Content: HTML.View>: HTML.View {
 //                         }
 //                     }
 //                 }
-// 
+//
 //                 for element in 1...10 {
 //                     HTML.AnyView {
 //                         li {
@@ -47,13 +47,13 @@ public struct HTMLForEach<Content: HTML.View>: HTML.View {
 //                         }
 //                     }
 //                 }
-// 
+//
 //                 // TO-DO: currently doesn't compile.
 //                 //            for element in 1...10 {
 //                 //                li {
 //                 //                    "\(element)"
-                //                }
-                //            }
+//                }
+//            }
 //             }
 //         }
 //     }

@@ -5,10 +5,10 @@
 ////  Created by Coen ten Thije Boonkkamp on 03/07/2025.
 ////
 //
-//import Foundation
-//import HTML
+// import Foundation
+// import HTML
 //
-//public struct Circle: HTML.View {
+// public struct Circle: HTML.View {
 //
 //    let content: any HTML.View
 //
@@ -57,4 +57,4 @@
 //
 //        return div { clipDiv }
 //    }
-//}
+// }

@@ -2,7 +2,6 @@ import RFC_4648
 import WHATWG_HTML_Elements
 import WHATWG_HTML_MediaAttributes
 
-
 @available(*, deprecated, message: "Use InlineSVG from SVG Integration instead")
 public struct LegacySVG: HTML.View, Sendable {
     private enum Storage {

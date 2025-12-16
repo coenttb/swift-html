@@ -1,7 +1,7 @@
-//import Foundation
-//import HTML
+// import Foundation
+// import HTML
 //
-//public struct Divider: HTML.View {
+// public struct Divider: HTML.View {
 //    public init() {}
 //    public var body: some HTML.View {
 //        hr()()
@@ -11,4 +11,4 @@
 //            .inlineStyle("border-top", "1px solid #6b7280")
 //            .inlineStyle("margin", "0 30%")
 //    }
-//}
+// }

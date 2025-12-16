@@ -5,11 +5,11 @@
 ////  Created by Coen ten Thije Boonkkamp on 09/08/2025.
 ////
 //
-//import Foundation
-//import HTML
-//import OrderedCollections
+// import Foundation
+// import HTML
+// import OrderedCollections
 //
-//public struct Cards: HTML.View {
+// public struct Cards: HTML.View {
 //    let columns: Cards.Columns
 //    let cards: [any HTML.View]
 //
@@ -43,9 +43,9 @@
 //            }
 //        }
 //    }
-//}
+// }
 //
-//extension Cards {
+// extension Cards {
 //    public struct Columns: Sendable {
 //        internal let closure: @Sendable (_ count: Int) -> [Int]
 //
@@ -72,4 +72,4 @@
 //        public static let four: Self = columns(4)
 //        public static let five: Self = columns(5)
 //    }
-//}
+// }

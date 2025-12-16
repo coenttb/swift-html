@@ -1,7 +1,7 @@
-//import Foundation
-//import HTML
+// import Foundation
+// import HTML
 //
-//public struct Header<Content: HTML.View>: HTML.View {
+// public struct Header<Content: HTML.View>: HTML.View {
 //    let size: Int
 //    let disableMargins: Bool
 //
@@ -59,4 +59,4 @@
 //        default: "0.5em"
 //        }
 //    }
-//}
+// }

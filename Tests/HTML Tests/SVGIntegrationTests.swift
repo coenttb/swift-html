@@ -29,7 +29,7 @@ struct SVGIntegrationTests {
             }
         }
 
-        let renderedString = try String.init(html)
+        let renderedString = try String(html)
 
         #expect(renderedString.contains(#"<div>"#))
         #expect(renderedString.contains(#"<h1>SVG Test</h1>"#))

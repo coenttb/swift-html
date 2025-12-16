@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 29/07/2025.
 //
 
-import Dependencies
-import HTML
 import CSS
 import CSS_Standard
+import Dependencies
+import HTML
 import HTML_Rendering_TestSupport
 import Testing
 
@@ -69,20 +69,23 @@ extension SnapshotTests {
                       .font-size-3{font-size:2.5rem}
                       .color-4{color:#cc3333}
                       .line-height-5{line-height:1.6}
-                      .color-6{color:#d0d0d0}
-                      .text-decoration-7{text-decoration:none}
-                      .border-radius-8{border-radius:8px}
-                      .color-9{color:white}
-                      .background-color-10{background-color:#cccc33}
-                      .padding-11{padding:1rem}
+                      .color-7{color:#d0d0d0}
+                      .text-decoration-8{text-decoration:none}
+                      .border-radius-9{border-radius:8px}
+                      .color-10{color:#fff}
+                      .background-color-11{background-color:#cccc33}
+                      .padding-12{padding:1rem}
+                      @media (prefers-color-scheme: dark){
+                        .color-6{color:#303030}
+                      }
                     </style>
                   </head>
                   <body>
                     <div class="margin-0 max-width-1 padding-2">
                       <h1 class="font-size-3 color-4">Welcome to swift-html
                       </h1>
-                      <p class="line-height-5 color-6">Build beautiful, type-safe web pages with Swift
-                      </p><a class="text-decoration-7 border-radius-8 color-9 background-color-10 padding-11" href="https://github.com/coenttb/swift-html">Get Started →</a>
+                      <p class="line-height-5 color-6 color-7">Build beautiful, type-safe web pages with Swift
+                      </p><a class="text-decoration-8 border-radius-9 color-10 background-color-11 padding-12" href="https://github.com/coenttb/swift-html">Get Started →</a>
                     </div>
                   </body>
                 </html>

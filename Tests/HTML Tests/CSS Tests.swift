@@ -8,8 +8,8 @@
 import Dependencies
 import Foundation
 import HTML
-import OrderedCollections
 import HTML_Rendering_TestSupport
+import OrderedCollections
 import Testing
 
 extension SnapshotTests {
@@ -145,7 +145,7 @@ extension SnapshotTests {
                     .padding(.px(8))
                     .media(.minWidth(.px(768))) {
                         $0.display(.flex)
-                          .padding(.px(16))
+                            .padding(.px(16))
                     }
                 },
                 as: .html

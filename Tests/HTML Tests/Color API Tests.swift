@@ -3,8 +3,8 @@
 //  swift-html
 //
 //  Tests demonstrating the color API design patterns:
-//  - CSS_Standard.Color.Value: No dark mode output
-//  - HTMLColor: With dark mode support (auto-darkened or explicit)
+//  - CSS_Standard.Color.Value: No dark mode output (explicit type needed)
+//  - HTMLColor/DarkModeColor: With dark mode support (auto-darkened or explicit)
 //  - CSS_Standard.Global: No dark mode output
 //  - light == dark optimization: No redundant @media block
 //
@@ -18,13 +18,15 @@ extension SnapshotTests {
     @Suite("Color API Tests")
     struct ColorAPITests {
 
-        // MARK: - CSS_Standard.Color.Value (No Dark Mode)
+        // MARK: - Themed Colors (With Dark Mode)
+        // Note: .red, .blue, .green, .gray800 etc. resolve to themed DarkModeColor values
+        // which automatically have dark mode variants
 
-        @Test("Color.Value produces single style without dark mode")
-        func colorValueNoDarkMode() {
+        @Test("Themed color (test_red) produces dark mode styles")
+        func themedColorWithDarkMode() {
             assertInlineSnapshot(
                 of: HTML.Document {
-                    div { "Raw color value" }
+                    div { "Themed color" }
                         .css
                         .color(.test_red)
                 },
@@ -42,7 +44,7 @@ extension SnapshotTests {
                     </style>
                   </head>
                   <body>
-                    <div class="color-0 color-1">Raw color value
+                    <div class="color-0 color-1">Themed color
                     </div>
                   </body>
                 </html>
@@ -50,16 +52,14 @@ extension SnapshotTests {
             }
         }
 
+        // MARK: - Themed gray800 (With Dark Mode)
 
-        // MARK: - Color.Value (No Dark Mode - HTMLTheme not imported)
-
-        @Test("Color.Value gray800 produces single style without dark mode")
-        func colorValueGray800NoDarkMode() {
-            // Note: Without HTMLTheme import, .gray800 resolves to CSS_Standard.Color.Value
-            // which produces a single style without dark mode support
+        @Test("gray800 produces dark mode styles (themed color)")
+        func gray800WithDarkMode() {
+            // .gray800 resolves to DarkModeColor.gray800 which has explicit dark variant
             assertInlineSnapshot(
                 of: HTML.Document {
-                    div { "Raw color value" }
+                    div { "Gray 800" }
                         .css.color(.gray800)
                 },
                 as: .html
@@ -69,11 +69,14 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .color-0{color:#d0d0d0}
+                      .color-1{color:#d0d0d0}
+                      @media (prefers-color-scheme: dark){
+                        .color-0{color:#303030}
+                      }
                     </style>
                   </head>
                   <body>
-                    <div class="color-0">Raw color value
+                    <div class="color-0 color-1">Gray 800
                     </div>
                   </body>
                 </html>
@@ -222,12 +225,11 @@ extension SnapshotTests {
             }
         }
 
-        // MARK: - backgroundColor
+        // MARK: - backgroundColor with themed colors (With Dark Mode)
 
-        @Test("backgroundColor with Color.Value has no dark mode")
-        func backgroundColorValueNoDarkMode() {
-            // Note: Without HTMLTheme import, .blue resolves to CSS_Standard.Color.Value
-            // which produces a single style without dark mode support
+        @Test("backgroundColor with themed blue has dark mode")
+        func backgroundColorThemedBlue() {
+            // .blue resolves to DarkModeColor.blue which has dark mode variant
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Background" }
@@ -240,11 +242,14 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .background-color-0{background-color:blue}
+                      .background-color-1{background-color:#3399ff}
+                      @media (prefers-color-scheme: dark){
+                        .background-color-0{background-color:#004477}
+                      }
                     </style>
                   </head>
                   <body>
-                    <div class="background-color-0">Background
+                    <div class="background-color-0 background-color-1">Background
                     </div>
                   </body>
                 </html>
@@ -281,12 +286,11 @@ extension SnapshotTests {
             }
         }
 
-        // MARK: - borderColor
+        // MARK: - borderColor with themed colors (With Dark Mode)
 
-        @Test("borderColor with Color.Value has no dark mode")
-        func borderColorValueNoDarkMode() {
-            // Note: Without HTMLTheme import, .green resolves to CSS_Standard.Color.Value
-            // which produces a single style without dark mode support
+        @Test("borderColor with themed green has dark mode")
+        func borderColorThemedGreen() {
+            // .green resolves to DarkModeColor.green which has dark mode variant
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Border" }
@@ -299,11 +303,14 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .border-color-0{border-color:green}
+                      .border-color-1{border-color:#33cc33}
+                      @media (prefers-color-scheme: dark){
+                        .border-color-0{border-color:#008800}
+                      }
                     </style>
                   </head>
                   <body>
-                    <div class="border-color-0">Border
+                    <div class="border-color-0 border-color-1">Border
                     </div>
                   </body>
                 </html>
@@ -340,12 +347,11 @@ extension SnapshotTests {
             }
         }
 
-        // MARK: - fill
+        // MARK: - fill with themed colors (With Dark Mode)
 
-        @Test("fill with Color.Value has no dark mode")
-        func fillValueNoDarkMode() {
-            // Note: Without HTMLTheme import, .purple resolves to CSS_Standard.Color.Value
-            // which produces a single style without dark mode support
+        @Test("fill with themed purple has dark mode")
+        func fillThemedPurple() {
+            // .purple resolves to DarkModeColor.purple which has dark mode variant
             assertInlineSnapshot(
                 of: HTML.Document {
                     div { "Fill" }
@@ -358,20 +364,20 @@ extension SnapshotTests {
                 <html>
                   <head>
                     <style>
-                      .fill-0{fill:purple}
+                      .fill-1{fill:#a300cc}
+                      @media (prefers-color-scheme: dark){
+                        .fill-0{fill:#6e0088}
+                      }
                     </style>
                   </head>
                   <body>
-                    <div class="fill-0">Fill
+                    <div class="fill-0 fill-1">Fill
                     </div>
                   </body>
                 </html>
                 """
             }
         }
-
-        // MARK: - stroke
-
 
         // MARK: - outlineColor
 
