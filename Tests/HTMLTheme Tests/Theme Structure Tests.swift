@@ -7,7 +7,7 @@
 
 import Dependencies
 import HTML
-import HTMLTheme
+import CSS_Theming
 import Testing
 
 @Suite("Theme Structure")

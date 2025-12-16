@@ -4,14 +4,12 @@ import PackageDescription
 
 extension String {
     static let html: Self = "HTML"
-    static let htmlTheme: Self = "HTMLTheme"
     static let htmlComponents: Self = "HTMLComponents"
     static let htmlKit: Self = "HTMLKit"
 }
 
 extension Target.Dependency {
     static var html: Self { .target(name: .html) }
-    static var htmlTheme: Self { .target(name: .htmlTheme) }
     static var htmlComponents: Self { .target(name: .htmlComponents) }
 }
 
@@ -19,7 +17,9 @@ extension Target.Dependency {
     static var htmlStandard: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
     static var htmlRenderableTestSupport: Self { .product(name: "HTML Rendering TestSupport", package: "swift-html-rendering") }
+    static var markdownHtmlRendering: Self { .product(name: "Markdown HTML Rendering", package: "swift-markdown-html-rendering") }
     static var css: Self { .product(name: "CSS", package: "swift-css") }
+    static var cssTheming: Self { .product(name: "CSS Theming", package: "swift-css") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
@@ -43,10 +43,9 @@ let package = Package(
     products: [
         // Individual targets
         .library(name: .html, targets: [.html]),
-        .library(name: .htmlTheme, targets: [.htmlTheme]),
         .library(name: .htmlComponents, targets: [.htmlComponents]),
         // Convenience product with common features
-        .library(name: .htmlKit, targets: [.html, .htmlTheme, .htmlComponents])
+        .library(name: .htmlKit, targets: [.html, .htmlComponents])
     ],
     traits: [
         .trait(
@@ -55,9 +54,10 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.0"),
-        .package(url: "https://github.com/coenttb/swift-css", from: "0.1.0"),
-        .package(url: "https://github.com/coenttb/swift-svg", from: "0.1.0"),
+        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.4"),
+        .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.0"),
+        .package(path: "../swift-css"),
+        .package(url: "https://github.com/coenttb/swift-svg", from: "0.2.1"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
@@ -74,6 +74,7 @@ let package = Package(
             dependencies: [
                 .htmlRendering,
                 .css,
+                .markdownHtmlRendering,
                 .htmlStandard,
                 .dependencies,
                 .orderedCollections,
@@ -94,19 +95,11 @@ let package = Package(
             ]
         ),
         .target(
-            name: .htmlTheme,
-            dependencies: [
-                .html,
-                .dependencies,
-                .standards,
-                .incits4_1986
-            ]
-        ),
-        .target(
             name: .htmlComponents,
             dependencies: [
                 .html,
-                .htmlTheme,
+                .markdownHtmlRendering,
+                .cssTheming,
                 .dependencies,
                 .orderedCollections
             ]
@@ -125,13 +118,6 @@ let package = Package(
             ],
             swiftSettings: [
                 .define("TRANSLATING", .when(traits: ["Translating"]))
-            ]
-        ),
-        .testTarget(
-            name: .htmlTheme.tests,
-            dependencies: [
-                .htmlTheme,
-                .htmlRenderableTestSupport
             ]
         ),
         .testTarget(

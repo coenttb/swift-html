@@ -149,7 +149,6 @@ let page = div {
 swift-html is composed of several focused packages:
 
 - **HTML** - Core HTML elements and rendering
-- **HTMLTheme** - Theming and color schemes
 - **HTMLComponents** - Reusable UI components
 - **HTMLMarkdown** - Markdown to HTML conversion
 - **HTMLEmail** - Email template generation
@@ -161,7 +160,7 @@ Import only what you need:
 ```swift
 // Individual modules
 import HTML
-import HTMLTheme
+import CSS_Theming
 import HTMLComponents
 
 // Or use the kit
