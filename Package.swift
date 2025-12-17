@@ -54,14 +54,14 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.4"),
+        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
+        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.12"),
         .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.1"),
-        .package(url: "https://github.com/coenttb/swift-css", from: "0.3.0"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.3.1"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
-        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
-        .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.4"),
+        .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.6"),
         .package(url: "https://github.com/swift-standards/swift-standards", from: "0.16.1"),
         .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.6.5"),
         .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.5.4"),
