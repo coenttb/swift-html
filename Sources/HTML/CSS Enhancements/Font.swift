@@ -37,12 +37,12 @@ public struct Font: Hashable, Sendable {
     }
 }
 
-extension CSS {
+extension HTML.CSS {
     @discardableResult
     @inlinable
     public func font(
         _ font: Font
-    ) -> CSS<
+    ) -> HTML.CSS<
         HTML.Styled<
             HTML.Styled<
                 HTML.Styled<
