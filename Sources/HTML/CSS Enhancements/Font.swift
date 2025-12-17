@@ -42,27 +42,29 @@ extension HTML.CSS {
     @inlinable
     public func font(
         _ font: Font
-    ) -> HTML.CSS<
-        HTML.Styled<
+    )
+        -> HTML.CSS<
             HTML.Styled<
                 HTML.Styled<
                     HTML.Styled<
                         HTML.Styled<
                             HTML.Styled<
-                                HTML.Styled<Base, FontFamily>,
-                                CSS_Standard.FontSize
+                                HTML.Styled<
+                                    HTML.Styled<Base, FontFamily>,
+                                    CSS_Standard.FontSize
+                                >,
+                                FontStretch
                             >,
-                            FontStretch
+                            FontStyle
                         >,
-                        FontStyle
+                        FontVariant
                     >,
-                    FontVariant
+                    FontWeight
                 >,
-                FontWeight
-            >,
-            LineHeight
+                LineHeight
+            >
         >
-    > {
+    {
         self
             .fontFamily(font.family)
             .fontSize(font.size)
