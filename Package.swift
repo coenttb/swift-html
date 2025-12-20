@@ -20,8 +20,6 @@ extension Target.Dependency {
     static var markdownHtmlRendering: Self { .product(name: "Markdown HTML Rendering", package: "swift-markdown-html-rendering") }
     static var css: Self { .product(name: "CSS", package: "swift-css") }
     static var cssTheming: Self { .product(name: "CSS Theming", package: "swift-css") }
-    static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
-    static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var standards: Self { .product(name: "Standards", package: "swift-standards") }
@@ -54,18 +52,17 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-collections", from: "1.1.2"),
-        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.12"),
-        .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.1"),
-        .package(url: "https://github.com/coenttb/swift-css", from: "0.3.1"),
+        .package(url: "https://github.com/apple/swift-collections", from: "1.3.0"),
+        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.14"),
+        .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.2"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.4.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.3.0"),
-        .package(url: "https://github.com/coenttb/swift-translating", from: "0.0.1"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
+        .package(url: "https://github.com/coenttb/swift-translating", from: "0.3.0"),
         .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.6"),
-        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.16.1"),
-        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.6.5"),
-        .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.5.4"),
-        .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.2.2"),
+        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.20.0"),
+        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.7.1"),
+        .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.6.0"),
+        .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.2.3"),
         .package(url: "https://github.com/swift-standards/swift-whatwg-url", from: "0.2.5")
     ],
     targets: [
@@ -76,7 +73,6 @@ let package = Package(
                 .css,
                 .markdownHtmlRendering,
                 .htmlStandard,
-                .dependencies,
                 .orderedCollections,
                 .standards,
                 .incits4_1986,
@@ -100,7 +96,6 @@ let package = Package(
                 .html,
                 .markdownHtmlRendering,
                 .cssTheming,
-                .dependencies,
                 .orderedCollections
             ]
         ),
@@ -109,7 +104,6 @@ let package = Package(
             dependencies: [
                 .html,
                 .htmlRenderableTestSupport,
-                .dependenciesTestSupport,
                 .product(
                     name: "Translating",
                     package: "swift-translating",

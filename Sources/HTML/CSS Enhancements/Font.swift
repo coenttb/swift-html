@@ -7,7 +7,6 @@
 
 import CSS
 import CSS_Standard
-import Dependencies
 
 public struct Font: Hashable, Sendable {
     public let family: CSS_Standard.FontFamily

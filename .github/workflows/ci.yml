@@ -9,6 +9,9 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -20,6 +23,9 @@ jobs:
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v5
+
+      - name: Configure private repo access
+        run: git config --global url."https://${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
       - name: Select Xcode 26.0
         run: sudo xcode-select -s /Applications/Xcode_26.0.app
@@ -59,6 +65,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Configure private repo access
+        run: git config --global url."https://${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
       - name: Cache Swift packages
         uses: actions/cache@v4
         with:
@@ -79,6 +88,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Configure private repo access
+        run: git config --global url."https://${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
       - name: Cache Swift packages
         uses: actions/cache@v4
         with:
@@ -96,6 +108,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
+
+      - name: Configure private repo access
+        run: git config --global url."https://${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
       - name: Install Swift
         uses: SwiftyLab/setup-swift@latest

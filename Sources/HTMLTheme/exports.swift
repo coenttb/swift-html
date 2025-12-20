@@ -6,5 +6,4 @@
 //
 
 @_exported import CSS_Theming
-@_exported import Dependencies
 @_exported import HTML
