@@ -79,12 +79,11 @@ jobs:
       - name: Test (release)
         run: swift test -c release
 
-  # Compatibility check: Minimum supported Swift version (6.0)
-  # Note: Swift Testing framework requires Swift 6.0+
+  # Compatibility check: Minimum supported Swift version (6.2)
   linux-compat:
-    name: Ubuntu (Swift 6.0, compatibility)
+    name: Ubuntu (Swift 6.2, compatibility)
     runs-on: ubuntu-latest
-    container: swift:6.0
+    container: swift:6.2
     steps:
       - uses: actions/checkout@v5
 
@@ -95,37 +94,38 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .build
-          key: ${{ runner.os }}-swift60-spm-${{ hashFiles('Package.swift') }}
-          restore-keys: ${{ runner.os }}-swift60-spm-
+          key: ${{ runner.os }}-swift62-compat-spm-${{ hashFiles('Package.swift') }}
+          restore-keys: ${{ runner.os }}-swift62-compat-spm-
 
       # Note: swift test builds automatically
-      - name: Test (Swift 6.0)
+      - name: Test (Swift 6.2)
         run: swift test -c release
 
-  # Windows validation (no container - use setup-swift action)
-  windows-latest:
-    name: Windows (Swift 6.2)
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Configure private repo access
-        run: git config --global url."https://${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
-
-      - name: Install Swift
-        uses: SwiftyLab/setup-swift@latest
-        with:
-          swift-version: "6.2"
-
-      - name: Print Swift version
-        run: swift --version
-
-      - name: Cache Swift packages
-        uses: actions/cache@v5
-        with:
-          path: .build
-          key: windows-swift62-spm-v2-${{ hashFiles('Package.swift', 'Package@*.swift') }}
-          restore-keys: windows-swift62-spm-
-
-      - name: Build
-        run: swift build -c release -Xswiftc -gnone
+  # Windows validation - DISABLED until swift-svg-rendering fixes angle brackets in filenames
+  # See: RangeReplaceableCollection<UInt8>+SVG.swift is not valid on Windows
+  # windows-latest:
+  #   name: Windows (Swift 6.2)
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #
+  #     - name: Configure private repo access
+  #       run: git config --global url."https://${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
+  #
+  #     - name: Install Swift
+  #       uses: SwiftyLab/setup-swift@latest
+  #       with:
+  #         swift-version: "6.2"
+  #
+  #     - name: Print Swift version
+  #       run: swift --version
+  #
+  #     - name: Cache Swift packages
+  #       uses: actions/cache@v5
+  #       with:
+  #         path: .build
+  #         key: windows-swift62-spm-v2-${{ hashFiles('Package.swift', 'Package@*.swift') }}
+  #         restore-keys: windows-swift62-spm-
+  #
+  #     - name: Build
+  #       run: swift build -c release -Xswiftc -gnone
