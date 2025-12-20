@@ -89,3 +89,28 @@ jobs:
       # Note: swift test builds automatically
       - name: Test (Swift 6.0)
         run: swift test -c release
+
+  # Windows validation (no container - use setup-swift action)
+  windows-latest:
+    name: Windows (Swift 6.2)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Swift
+        uses: SwiftyLab/setup-swift@latest
+        with:
+          swift-version: "6.2"
+
+      - name: Print Swift version
+        run: swift --version
+
+      - name: Cache Swift packages
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: windows-swift62-spm-v2-${{ hashFiles('Package.swift', 'Package@*.swift') }}
+          restore-keys: windows-swift62-spm-
+
+      - name: Build
+        run: swift build -c debug -v
