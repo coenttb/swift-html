@@ -5,7 +5,7 @@
 //  Tests for CSS fluent chaining pattern.
 //
 
-import Dependencies
+
 import Foundation
 import HTML
 import HTML_Rendering_TestSupport

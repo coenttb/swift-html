@@ -9,7 +9,7 @@
 //  - light == dark optimization: No redundant @media block
 //
 
-import Dependencies
+
 import HTML
 import HTML_Rendering_TestSupport
 import Testing

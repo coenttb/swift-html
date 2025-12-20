@@ -7,7 +7,7 @@
 
 import CSS
 import CSS_Standard
-import Dependencies
+
 import HTML
 import HTML_Rendering_TestSupport
 import Testing
