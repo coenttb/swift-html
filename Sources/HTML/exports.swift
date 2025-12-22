@@ -13,8 +13,3 @@
 @_exported import Markdown_HTML_Rendering
 @_exported import SVG
 @_exported import Standards
-
-/// Backward-compatible typealias for DarkModeColor.
-/// HTMLColor was the previous name, now unified as DarkModeColor in CSS module.
-@available(*, deprecated, renamed: "DarkModeColor")
-public typealias HTMLColor = DarkModeColor

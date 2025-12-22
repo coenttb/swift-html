@@ -5,11 +5,18 @@
 //  Created by Coen ten Thije Boonkkamp on 17/09/2024.
 //
 
-import Color_Standard
+import CSS
+import CSS_Standard
+
+/// Backward-compatible typealias for DarkModeColor.
+/// HTMLColor was the previous name, now unified as DarkModeColor in CSS module.
+@available(*, deprecated, renamed: "DarkModeColor")
+public typealias HTMLColor = DarkModeColor
+
 
 // MARK: - Text Color Definitions
 
-// extension HTMLColor {
+// extension DarkModeColor {
 //    public static let buttonText: Self = .primary.reverse()
 //    public static let primary: Self = .black.withDarkColor(.white)
 //    public static let text: Self = primary
@@ -19,12 +26,12 @@ import Color_Standard
 
 // MARK: - Background Color Definitions
 //
-// extension HTMLColor {
+// extension DarkModeColor {
 //    public static let offBackground: Self = .offWhite.withDarkColor(.offBlack)
 //    public static let background: Self = .white.withDarkColor(.black)
 // }
 
-// MARK: - HTMLColor Extensions
+// MARK: - DarkModeColor Extensions
 
 extension DarkModeColor {
     private typealias sRGB = IEC_61966.`2`.`1`.sRGB
@@ -38,7 +45,7 @@ extension DarkModeColor {
             _ c1: CSS_Standard.Color.Value,
             _ c2: CSS_Standard.Color.Value
         ) -> CSS_Standard.Color.Value? {
-            guard let srgb1 = toSRGB(c1), let srgb2 = toSRGB(c2) else { return nil }
+            guard let srgb1 = sRGB(c1), let srgb2 = sRGB(c2) else { return nil }
 
             let midR = (srgb1.r255 + srgb2.r255) / 2
             let midG = (srgb1.g255 + srgb2.g255) / 2
@@ -55,7 +62,7 @@ extension DarkModeColor {
     }
 
     public static func readablePrimaryColor(on backgroundColor: DarkModeColor) -> Self {
-        guard let srgb = toSRGB(backgroundColor.light) else {
+        guard let srgb = sRGB(backgroundColor.light) else {
             return .init(.hex("000000"))
         }
         // Perceived brightness using ITU-R BT.601 coefficients
@@ -71,8 +78,8 @@ extension DarkModeColor {
 extension HTML.View {
     /// Applies a gradient background to the HTML element
     public func gradient(
-        bottom: HTMLColor,
-        top: HTMLColor
+        bottom: DarkModeColor,
+        top: DarkModeColor
     ) -> some HTML.View {
         self
             .css
@@ -89,9 +96,9 @@ extension HTML.View {
     }
 
     public func gradient(
-        bottom: HTMLColor,
-        middle: HTMLColor,
-        top: HTMLColor
+        bottom: DarkModeColor,
+        middle: DarkModeColor,
+        top: DarkModeColor
     ) -> some HTML.View {
         self
             .css
@@ -105,71 +112,5 @@ extension HTML.View {
                     "linear-gradient(0deg, \(bottom.dark.description) 0%, \(middle.dark.description) 50%, \(top.dark.description) 100%);"
                 )
             }
-    }
-}
-
-// MARK: - Private Helper Functions
-
-extension DarkModeColor {
-    fileprivate static func toSRGB(_ color: CSS_Standard.Color.Value) -> IEC_61966.`2`.`1`.sRGB? {
-        typealias sRGB = IEC_61966.`2`.`1`.sRGB
-
-        switch color {
-        case .named(let namedColor):
-            return namedColor.toSRGB()
-        case .hex(let hexColor):
-            return sRGB(hex: hexColor.value)
-        case .rgb(let r, let g, let b):
-            return sRGB(r255: r, g255: g, b255: b)
-        case .rgba(let r, let g, let b, _):
-            return sRGB(r255: r, g255: g, b255: b)
-        case .hsl(let h, let s, let l):
-            return sRGB(h: h.normalizedDegrees(), s: s / 100, l: l / 100)
-        case .hsla(let h, let s, let l, _):
-            return sRGB(h: h.normalizedDegrees(), s: s / 100, l: l / 100)
-        case .hwb(let h, let w, let b):
-            return sRGB(hue: h.normalizedDegrees(), whiteness: w / 100, blackness: b / 100)
-        case .lab(let l, let a, let b):
-            return Color.LAB(l: l, a: a, b: b).converted(to: sRGB.self)
-        case .lch(let l, let c, let h):
-            return Color.LCH(l: l, c: c, h: h).converted(to: sRGB.self)
-        case .oklab(let l, let a, let b):
-            return Color.Oklab(l: l, a: a, b: b).converted(to: sRGB.self)
-        case .oklch(let l, let c, let h):
-            return Color.Oklch(l: l, c: c, h: h).converted(to: sRGB.self)
-        default:
-            return nil
-        }
-    }
-}
-
-// MARK: - Named Color sRGB Mapping
-
-extension W3C_CSS_Values.NamedColor {
-    /// Maps CSS named colors to sRGB values
-    fileprivate func toSRGB() -> IEC_61966.`2`.`1`.sRGB? {
-        typealias sRGB = IEC_61966.`2`.`1`.sRGB
-
-        switch self {
-        case .black: return .black
-        case .white: return .white
-        case .red: return .red
-        case .green: return sRGB(r255: 0, g255: 128, b255: 0)
-        case .lime: return sRGB(r255: 0, g255: 255, b255: 0)
-        case .blue: return .blue
-        case .yellow: return sRGB(r255: 255, g255: 255, b255: 0)
-        case .cyan: return sRGB(r255: 0, g255: 255, b255: 255)
-        case .magenta: return sRGB(r255: 255, g255: 0, b255: 255)
-        case .silver: return sRGB(r255: 192, g255: 192, b255: 192)
-        case .gray: return sRGB(r255: 128, g255: 128, b255: 128)
-        case .maroon: return sRGB(r255: 128, g255: 0, b255: 0)
-        case .purple: return sRGB(r255: 128, g255: 0, b255: 128)
-        case .fuchsia: return sRGB(r255: 255, g255: 0, b255: 255)
-        case .olive: return sRGB(r255: 128, g255: 128, b255: 0)
-        case .navy: return sRGB(r255: 0, g255: 0, b255: 128)
-        case .teal: return sRGB(r255: 0, g255: 128, b255: 128)
-        case .aqua: return sRGB(r255: 0, g255: 255, b255: 255)
-        default: return nil
-        }
     }
 }

@@ -14,19 +14,16 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var htmlStandard: Self { .product(name: "HTML Standard", package: "swift-html-standard") }
     static var htmlRendering: Self { .product(name: "HTML Rendering", package: "swift-html-rendering") }
     static var htmlRenderableTestSupport: Self { .product(name: "HTML Rendering TestSupport", package: "swift-html-rendering") }
     static var markdownHtmlRendering: Self { .product(name: "Markdown HTML Rendering", package: "swift-markdown-html-rendering") }
     static var css: Self { .product(name: "CSS", package: "swift-css") }
     static var cssTheming: Self { .product(name: "CSS Theming", package: "swift-css") }
-    static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var standards: Self { .product(name: "Standards", package: "swift-standards") }
     static var colorStandard: Self { .product(name: "Color Standard", package: "swift-color-standard") }
-    static var incits4_1986: Self { .product(name: "INCITS 4 1986", package: "swift-incits-4-1986") }
+    static var cssStandard: Self { .product(name: "CSS Standard", package: "swift-css-standard") }
     static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
-    static var iso9899: Self { .product(name: "ISO 9899", package: "swift-iso-9899") }
     static var whatwgFormURLEncoded: Self { .product(name: "WHATWG Form URL Encoded", package: "swift-whatwg-url") }
     static var standardsTestSupport: Self { .product(name: "StandardsTestSupport", package: "swift-standards") }
 }
@@ -41,11 +38,7 @@ let package = Package(
         .macCatalyst(.v26)
     ],
     products: [
-        // Individual targets
         .library(name: .html, targets: [.html]),
-        .library(name: .htmlComponents, targets: [.htmlComponents]),
-        // Convenience product with common features
-        .library(name: .htmlKit, targets: [.html, .htmlComponents])
     ],
     traits: [
         .trait(
@@ -54,19 +47,16 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-collections", from: "1.3.0"),
         .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.14"),
         .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.2"),
         .package(url: "https://github.com/coenttb/swift-css", from: "0.5.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.3.0"),
-        .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.6"),
         .package(url: "https://github.com/swift-standards/swift-standards", from: "0.20.0"),
-        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.7.1"),
         .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.6.0"),
-        .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.2.3"),
         .package(url: "https://github.com/swift-standards/swift-whatwg-url", from: "0.2.5"),
-        .package(url: "https://github.com/swift-standards/swift-color-standard", from: "0.1.0")
+        .package(url: "https://github.com/swift-standards/swift-color-standard", from: "0.1.0"),
+        .package(url: "https://github.com/swift-standards/swift-css-standard", from: "0.1.7")
     ],
     targets: [
         .target(
@@ -74,14 +64,11 @@ let package = Package(
             dependencies: [
                 .htmlRendering,
                 .css,
+                .cssStandard,
                 .markdownHtmlRendering,
-                .htmlStandard,
-                .orderedCollections,
                 .standards,
                 .colorStandard,
-                .incits4_1986,
                 .rfc4648,
-                .iso9899,
                 .whatwgFormURLEncoded,
                 .product(name: "SVG", package: "swift-svg"),
                 .product(
@@ -99,8 +86,7 @@ let package = Package(
             dependencies: [
                 .html,
                 .markdownHtmlRendering,
-                .cssTheming,
-                .orderedCollections
+                .cssTheming
             ]
         ),
         .testTarget(
