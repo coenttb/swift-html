@@ -55,7 +55,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-collections", from: "1.3.0"),
         .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.14"),
         .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.2"),
-        .package(url: "https://github.com/coenttb/swift-css", from: "0.4.0"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.5.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.3.0"),
         .package(url: "https://github.com/swift-standards/swift-html-standard", from: "0.1.6"),
