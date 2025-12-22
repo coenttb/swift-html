@@ -18,9 +18,6 @@ enum HTMLDocumentTests {
     #TestSuites
 }
 
-extension HTMLDocumentTests.Test {
-    typealias Snapshot = Test.Snapshot
-}
 
 // MARK: - Unit Tests
 
@@ -78,7 +75,7 @@ extension HTMLDocumentTests.Test.Unit {
 
     @Test("Grid Layout")
     func gridLayout() throws {
-        let grid = LazyVGrid(columns: [1, 2, 1]) {
+        let grid = LazyVGrid(columns: .fractions([1, 2, 1])) {
             div { "Item 1" }
             div { "Item 2" }
             div { "Item 3" }

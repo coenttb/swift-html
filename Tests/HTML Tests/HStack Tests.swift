@@ -16,9 +16,6 @@ enum HStackTests {
     #TestSuites
 }
 
-extension HStackTests.Test {
-    typealias Snapshot = Test.Snapshot
-}
 
 // MARK: - Snapshot Tests
 

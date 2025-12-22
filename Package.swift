@@ -21,6 +21,7 @@ extension Target.Dependency {
     static var cssTheming: Self { .product(name: "CSS Theming", package: "swift-css") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var standards: Self { .product(name: "Standards", package: "swift-standards") }
+    static var layout: Self { .product(name: "Layout", package: "swift-standards") }
     static var colorStandard: Self { .product(name: "Color Standard", package: "swift-color-standard") }
     static var cssStandard: Self { .product(name: "CSS Standard", package: "swift-css-standard") }
     static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
@@ -49,7 +50,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.14"),
         .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.2"),
-        .package(url: "https://github.com/coenttb/swift-css", from: "0.5.0"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.6.0"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.3.0"),
         .package(url: "https://github.com/swift-standards/swift-standards", from: "0.20.0"),
@@ -95,6 +96,7 @@ let package = Package(
                 .html,
                 .htmlRenderableTestSupport,
                 .standardsTestSupport,
+                .layout,
                 .product(
                     name: "Translating",
                     package: "swift-translating",
