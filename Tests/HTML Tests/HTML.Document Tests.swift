@@ -102,29 +102,30 @@ extension HTMLDocumentTests.Test.Unit {
 
     @Test("Reusable Components")
     func reusableComponents() throws {
-        struct CustomButton: HTML.View {
-            let title: String
-            let href: String
-
-            var body: some HTML.View {
-                a(href: .init(rawValue: href)) { title }
-                    .css
-                    .display(.inlineBlock)
-                    .padding(vertical: .rem(0.5), horizontal: .rem(1))
-                    .css
-                    .backgroundColor(.blue)
-                    .color(.white)
-                    .borderRadius(.px(6))
-                    .textDecoration(TextDecoration.none)
-            }
-        }
-
-        let button = CustomButton(title: "Learn More", href: "/docs")
+        let button = _CustomButton(title: "Learn More", href: "/docs")
         let string = try String(button)
 
         #expect(!string.isEmpty)
         #expect(string.contains("Learn More"))
         #expect(string.contains("/docs"))
+    }
+}
+
+// Helper type for reusable components test
+private struct _CustomButton: HTML.View {
+    let title: String
+    let href: String
+
+    var body: some HTML.View {
+        a(href: .init(rawValue: href)) { title }
+            .css
+            .display(.inlineBlock)
+            .padding(vertical: .rem(0.5), horizontal: .rem(1))
+            .css
+            .backgroundColor(.blue)
+            .color(.white)
+            .borderRadius(.px(6))
+            .textDecoration(TextDecoration.none)
     }
 }
 

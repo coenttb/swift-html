@@ -4,13 +4,10 @@ import PackageDescription
 
 extension String {
     static let html: Self = "HTML"
-    static let htmlComponents: Self = "HTMLComponents"
-    static let htmlKit: Self = "HTMLKit"
 }
 
 extension Target.Dependency {
     static var html: Self { .target(name: .html) }
-    static var htmlComponents: Self { .target(name: .htmlComponents) }
 }
 
 extension Target.Dependency {
@@ -65,6 +62,7 @@ let package = Package(
             dependencies: [
                 .htmlRendering,
                 .css,
+                .cssTheming,
                 .cssStandard,
                 .markdownHtmlRendering,
                 .standards,
@@ -82,14 +80,6 @@ let package = Package(
                 .define("TRANSLATING", .when(traits: ["Translating"]))
             ]
         ),
-        .target(
-            name: .htmlComponents,
-            dependencies: [
-                .html,
-                .markdownHtmlRendering,
-                .cssTheming
-            ]
-        ),
         .testTarget(
             name: .html.tests,
             dependencies: [
@@ -105,14 +95,6 @@ let package = Package(
             ],
             swiftSettings: [
                 .define("TRANSLATING", .when(traits: ["Translating"]))
-            ]
-        ),
-        .testTarget(
-            name: .htmlComponents.tests,
-            dependencies: [
-                .htmlComponents,
-                .htmlRenderableTestSupport,
-                .standardsTestSupport
             ]
         )
     ],

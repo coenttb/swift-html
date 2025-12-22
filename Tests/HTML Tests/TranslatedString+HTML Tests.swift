@@ -22,10 +22,6 @@
         #TestSuites
     }
 
-    extension TranslatedStringHTML.Test {
-        typealias Snapshot = Test.Snapshot
-    }
-
     // MARK: - Snapshot Tests
 
     extension TranslatedStringHTML.Test.Snapshot {
