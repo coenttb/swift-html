@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 22/12/2025.
 //
 
-import StandardsTestSupport
 import InlineSnapshotTesting
+import StandardsTestSupport
 
 extension Test {
     @MainActor

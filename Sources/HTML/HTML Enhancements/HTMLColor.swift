@@ -30,7 +30,10 @@ extension DarkModeColor {
     private typealias sRGB = IEC_61966.`2`.`1`.sRGB
 
     /// Calculates the midpoint color between two colors for gradients
-    public static func gradientMidpoint(from color1: DarkModeColor, to color2: DarkModeColor) -> DarkModeColor? {
+    public static func gradientMidpoint(
+        from color1: DarkModeColor,
+        to color2: DarkModeColor
+    ) -> DarkModeColor? {
         func midpoint(
             _ c1: CSS_Standard.Color.Value,
             _ c2: CSS_Standard.Color.Value
@@ -56,7 +59,8 @@ extension DarkModeColor {
             return .init(.hex("000000"))
         }
         // Perceived brightness using ITU-R BT.601 coefficients
-        let brightness = (Double(srgb.r255) * 299 + Double(srgb.g255) * 587 + Double(srgb.b255) * 114) / 255000
+        let brightness =
+            (Double(srgb.r255) * 299 + Double(srgb.g255) * 587 + Double(srgb.b255) * 114) / 255000
         let color: CSS_Standard.Color.Value = brightness > 0.5 ? .hex("000000") : .hex("FFFFFF")
         return .init(color)
     }
