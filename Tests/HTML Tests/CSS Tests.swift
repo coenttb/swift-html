@@ -17,7 +17,6 @@ enum CSSNamespace {
     #TestSuites
 }
 
-
 // MARK: - Snapshot Tests - Fluent Chaining
 
 extension CSSNamespace.Test.Snapshot {

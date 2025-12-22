@@ -16,7 +16,6 @@ enum HStackTests {
     #TestSuites
 }
 
-
 // MARK: - Snapshot Tests
 
 extension HStackTests.Test.Snapshot {

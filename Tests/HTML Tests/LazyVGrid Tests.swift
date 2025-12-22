@@ -18,7 +18,6 @@ enum LazyVGridTests {
     #TestSuites
 }
 
-
 // MARK: - Snapshot Tests
 
 extension LazyVGridTests.Test.Snapshot {

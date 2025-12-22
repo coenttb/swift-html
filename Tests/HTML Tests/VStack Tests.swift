@@ -16,7 +16,6 @@ enum VStackTests {
     #TestSuites
 }
 
-
 // MARK: - Snapshot Tests
 
 extension VStackTests.Test.Snapshot {

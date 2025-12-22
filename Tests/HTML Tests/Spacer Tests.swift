@@ -16,7 +16,6 @@ extension Spacer {
     #TestSuites
 }
 
-
 // MARK: - Snapshot Tests
 
 extension Spacer.Test.Snapshot {

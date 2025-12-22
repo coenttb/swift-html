@@ -18,7 +18,6 @@ enum HTMLDocumentTests {
     #TestSuites
 }
 
-
 // MARK: - Unit Tests
 
 extension HTMLDocumentTests.Test.Unit {
