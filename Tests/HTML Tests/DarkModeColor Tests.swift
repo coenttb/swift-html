@@ -17,10 +17,6 @@ extension DarkModeColor {
     #TestSuites
 }
 
-extension DarkModeColor.Test {
-    typealias Snapshot = Test.Snapshot
-}
-
 // MARK: - Unit Tests
 
 extension DarkModeColor.Test.Unit {

@@ -17,9 +17,6 @@ enum CSSNamespace {
     #TestSuites
 }
 
-extension CSSNamespace.Test {
-    typealias Snapshot = Test.Snapshot
-}
 
 // MARK: - Snapshot Tests - Fluent Chaining
 

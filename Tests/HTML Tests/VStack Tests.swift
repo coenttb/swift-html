@@ -16,9 +16,6 @@ enum VStackTests {
     #TestSuites
 }
 
-extension VStackTests.Test {
-    typealias Snapshot = Test.Snapshot
-}
 
 // MARK: - Snapshot Tests
 

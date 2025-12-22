@@ -16,9 +16,6 @@ extension Spacer {
     #TestSuites
 }
 
-extension Spacer.Test {
-    typealias Snapshot = Test.Snapshot
-}
 
 // MARK: - Snapshot Tests
 
