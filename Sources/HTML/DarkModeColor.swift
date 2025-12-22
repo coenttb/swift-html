@@ -13,7 +13,6 @@ import CSS_Standard
 @available(*, deprecated, renamed: "DarkModeColor")
 public typealias HTMLColor = DarkModeColor
 
-
 // MARK: - Text Color Definitions
 
 // extension DarkModeColor {
