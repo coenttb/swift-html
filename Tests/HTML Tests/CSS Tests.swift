@@ -10,9 +10,6 @@ import HTML_Rendering_TestSupport
 import StandardsTestSupport
 import Testing
 
-@testable import HTML
-
-// CSS is a namespace, so we create a dedicated test enum
 enum CSSNamespace {
     #TestSuites
 }

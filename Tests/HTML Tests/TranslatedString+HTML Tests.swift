@@ -15,9 +15,6 @@
     import Testing
     import Translating
 
-    @testable import HTML
-
-    // Create a dedicated test type for TranslatedString HTML integration
     enum TranslatedStringHTML {
         #TestSuites
     }

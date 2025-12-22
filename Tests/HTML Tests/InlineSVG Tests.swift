@@ -12,8 +12,6 @@ import SVG_Standard
 import StandardsTestSupport
 import Testing
 
-@testable import HTML
-
 extension InlineSVG {
     #TestSuites
 }

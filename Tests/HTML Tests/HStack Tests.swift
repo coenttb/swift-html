@@ -10,8 +10,6 @@ import HTML_Rendering_TestSupport
 import StandardsTestSupport
 import Testing
 
-@testable import HTML
-
 enum HStackTests {
     #TestSuites
 }

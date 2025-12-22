@@ -12,8 +12,6 @@ import OrderedCollections
 import StandardsTestSupport
 import Testing
 
-@testable import HTML
-
 enum LazyVGridTests {
     #TestSuites
 }

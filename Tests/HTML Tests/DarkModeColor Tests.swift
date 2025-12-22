@@ -11,8 +11,6 @@ import HTML_Rendering_TestSupport
 import StandardsTestSupport
 import Testing
 
-@testable import HTML
-
 extension DarkModeColor {
     #TestSuites
 }
