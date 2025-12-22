@@ -5,9 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 17/09/2024.
 //
 
-import INCITS_4_1986
-import ISO_9899
-import RFC_4648
+import Color_Standard
 
 // MARK: - Text Color Definitions
 
@@ -28,23 +26,20 @@ import RFC_4648
 
 // MARK: - HTMLColor Extensions
 
-extension HTMLColor {
+extension DarkModeColor {
+    private typealias sRGB = IEC_61966.`2`.`1`.sRGB
 
-    /// Calculates the midpoint color between two HTMLColors for gradients
-    public static func gradientMidpoint(from color1: HTMLColor, to color2: HTMLColor) -> HTMLColor?
-    {
+    /// Calculates the midpoint color between two colors for gradients
+    public static func gradientMidpoint(from color1: DarkModeColor, to color2: DarkModeColor) -> DarkModeColor? {
         func midpoint(
             _ c1: CSS_Standard.Color.Value,
             _ c2: CSS_Standard.Color.Value
         ) -> CSS_Standard.Color.Value? {
-            let rgb1 = toRGB(c1)
-            let rgb2 = toRGB(c2)
+            guard let srgb1 = toSRGB(c1), let srgb2 = toSRGB(c2) else { return nil }
 
-            guard let r1 = rgb1, let r2 = rgb2 else { return nil }
-
-            let midR = (r1.0 + r2.0) / 2
-            let midG = (r1.1 + r2.1) / 2
-            let midB = (r1.2 + r2.2) / 2
+            let midR = (srgb1.r255 + srgb2.r255) / 2
+            let midG = (srgb1.g255 + srgb2.g255) / 2
+            let midB = (srgb1.b255 + srgb2.b255) / 2
 
             return .rgb(red: midR, green: midG, blue: midB)
         }
@@ -53,24 +48,17 @@ extension HTMLColor {
         let darkMid = midpoint(color1.dark, color2.dark)
 
         guard let light = lightMid, let dark = darkMid else { return nil }
-        return HTMLColor(light: light, dark: dark)
+        return DarkModeColor(light: light, dark: dark)
     }
 
-    public static func readablePrimaryColor(on backgroundColor: HTMLColor) -> Self {
-        let brightness = calculateBrightness(from: backgroundColor.light.description)
+    public static func readablePrimaryColor(on backgroundColor: DarkModeColor) -> Self {
+        guard let srgb = toSRGB(backgroundColor.light) else {
+            return .init(.hex("000000"))
+        }
+        // Perceived brightness using ITU-R BT.601 coefficients
+        let brightness = (Double(srgb.r255) * 299 + Double(srgb.g255) * 587 + Double(srgb.b255) * 114) / 255000
         let color: CSS_Standard.Color.Value = brightness > 0.5 ? .hex("000000") : .hex("FFFFFF")
         return .init(color)
-    }
-
-    private static func calculateBrightness(from hex: String) -> Double {
-        guard let (red, green, blue) = hexToRGB(hex) else { return 0 }
-
-        let redComponent = Double(red) * 299
-        let greenComponent = Double(green) * 587
-        let blueComponent = Double(blue) * 114
-
-        let sum = redComponent + greenComponent + blueComponent
-        return sum / 1000
     }
 }
 
@@ -118,182 +106,66 @@ extension HTML.View {
 
 // MARK: - Private Helper Functions
 
-extension HTMLColor {
-    private static func toRGB(_ color: CSS_Standard.Color.Value) -> (Int, Int, Int)? {
+extension DarkModeColor {
+    fileprivate static func toSRGB(_ color: CSS_Standard.Color.Value) -> IEC_61966.`2`.`1`.sRGB? {
+        typealias sRGB = IEC_61966.`2`.`1`.sRGB
+
         switch color {
         case .named(let namedColor):
-            return namedColorToRGB(namedColor)
+            return namedColor.toSRGB()
         case .hex(let hexColor):
-            return hexToRGB(hexColor.value)
+            return sRGB(hex: hexColor.value)
         case .rgb(let r, let g, let b):
-            return (r, g, b)
+            return sRGB(r255: r, g255: g, b255: b)
         case .rgba(let r, let g, let b, _):
-            return (r, g, b)
+            return sRGB(r255: r, g255: g, b255: b)
         case .hsl(let h, let s, let l):
-            return hslToRGB(h: h, s: s, l: l)
+            return sRGB(h: h.normalizedDegrees(), s: s / 100, l: l / 100)
         case .hsla(let h, let s, let l, _):
-            return hslToRGB(h: h, s: s, l: l)
+            return sRGB(h: h.normalizedDegrees(), s: s / 100, l: l / 100)
         case .hwb(let h, let w, let b):
-            return hwbToRGB(h: h, w: w, b: b)
+            return sRGB(hue: h.normalizedDegrees(), whiteness: w / 100, blackness: b / 100)
         case .lab(let l, let a, let b):
-            return labToRGB(l: l, a: a, b: b)
+            return Color.LAB(l: l, a: a, b: b).converted(to: sRGB.self)
         case .lch(let l, let c, let h):
-            return lchToRGB(l: l, c: c, h: h)
+            return Color.LCH(l: l, c: c, h: h).converted(to: sRGB.self)
         case .oklab(let l, let a, let b):
-            return oklabToRGB(l: l, a: a, b: b)
+            return Color.Oklab(l: l, a: a, b: b).converted(to: sRGB.self)
         case .oklch(let l, let c, let h):
-            return oklchToRGB(l: l, c: c, h: h)
+            return Color.Oklch(l: l, c: c, h: h).converted(to: sRGB.self)
         default:
             return nil
         }
     }
+}
 
-    private static func hexToRGB(_ hex: String) -> (Int, Int, Int)? {
-        // Trim whitespace
-        var hex = hex.trimming(.ascii.whitespaces).uppercased()
+// MARK: - Named Color sRGB Mapping
 
-        if hex.hasPrefix("#") {
-            hex.removeFirst()
-        }
+extension W3C_CSS_Values.NamedColor {
+    /// Maps CSS named colors to sRGB values
+    fileprivate func toSRGB() -> IEC_61966.`2`.`1`.sRGB? {
+        typealias sRGB = IEC_61966.`2`.`1`.sRGB
 
-        if hex.count == 3 {
-            hex = hex.map { "\($0)\($0)" }.joined()
-        }
-
-        guard hex.count == 6 else { return nil }
-
-        // Parse hex manually without Foundation's Scanner
-        guard let rgbValue = UInt64(hex, radix: 16) else { return nil }
-
-        let r = Int((rgbValue & 0xFF0000) >> 16)
-        let g = Int((rgbValue & 0x00FF00) >> 8)
-        let b = Int(rgbValue & 0x0000FF)
-
-        return (r, g, b)
-    }
-
-    private static func hslToRGB(h: W3C_CSS_Values.Hue, s: Double, l: Double) -> (Int, Int, Int) {
-        let h = h.normalizedDegrees() / 360
-        let s = s / 100
-        let l = l / 100
-
-        func hue2rgb(_ p: Double, _ q: Double, _ t: Double) -> Double {
-            var t = t
-            if t < 0 { t += 1 }
-            if t > 1 { t -= 1 }
-            if t < 1 / 6 { return p + (q - p) * 6 * t }
-            if t < 1 / 2 { return q }
-            if t < 2 / 3 { return p + (q - p) * (2 / 3 - t) * 6 }
-            return p
-        }
-
-        if s == 0 {
-            let gray = Int(l * 255)
-            return (gray, gray, gray)
-        } else {
-            let q = l < 0.5 ? l * (1 + s) : l + s - l * s
-            let p = 2 * l - q
-            let r = hue2rgb(p, q, h + 1 / 3)
-            let g = hue2rgb(p, q, h)
-            let b = hue2rgb(p, q, h - 1 / 3)
-            return (Int(r * 255), Int(g * 255), Int(b * 255))
-        }
-    }
-
-    private static func hwbToRGB(h: W3C_CSS_Values.Hue, w: Double, b: Double) -> (Int, Int, Int) {
-        let rgb = hslToRGB(h: h, s: 100, l: 50)
-        let white = w / 100
-        let black = b / 100
-
-        let factor = 1 - white - black
-
-        let r = Int((Double(rgb.0) * factor + 255 * white).rounded())
-        let g = Int((Double(rgb.1) * factor + 255 * white).rounded())
-        let b = Int((Double(rgb.2) * factor + 255 * white).rounded())
-
-        return (r, g, b)
-    }
-
-    private static func labToRGB(l: Double, a: Double, b: Double) -> (Int, Int, Int) {
-        let y = (l + 16) / 116
-        let x = a / 500 + y
-        let z = y - b / 200
-
-        func fromLinear(_ c: Double) -> Double {
-            return c > 0.0031308 ? 1.055 * ISO_9899.Math.pow(c, 1 / 2.4) - 0.055 : 12.92 * c
-        }
-
-        let r = fromLinear(3.2404542 * x - 1.5371385 * y - 0.4985314 * z)
-        let g = fromLinear(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z)
-        let b = fromLinear(0.0556434 * x - 0.2040259 * y + 1.0572252 * z)
-
-        return (Int((r * 255).rounded()), Int((g * 255).rounded()), Int((b * 255).rounded()))
-    }
-
-    private static func lchToRGB(l: Double, c: Double, h: Double) -> (Int, Int, Int) {
-        let a = c * ISO_9899.Math.cos(h * .pi / 180)
-        let b = c * ISO_9899.Math.sin(h * .pi / 180)
-        return labToRGB(l: l, a: a, b: b)
-    }
-
-    private static func oklabToRGB(l: Double, a: Double, b: Double) -> (Int, Int, Int) {
-        // Oklab to linear RGB conversion
-        let l_ = l + 0.3963377774 * a + 0.2158037573 * b
-        let m_ = l - 0.1055613458 * a - 0.0638541728 * b
-        let s_ = l - 0.0894841775 * a - 1.2914855480 * b
-
-        let l = l_ * l_ * l_
-        let m = m_ * m_ * m_
-        let s = s_ * s_ * s_
-
-        let r = 4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s
-        let g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s
-        let b = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
-
-        func fromLinear(_ c: Double) -> Double {
-            return c > 0.0031308 ? 1.055 * ISO_9899.Math.pow(c, 1 / 2.4) - 0.055 : 12.92 * c
-        }
-
-        return (
-            Int((fromLinear(r) * 255).rounded()), Int((fromLinear(g) * 255).rounded()),
-            Int((fromLinear(b) * 255).rounded())
-        )
-    }
-
-    private static func oklchToRGB(l: Double, c: Double, h: Double) -> (Int, Int, Int) {
-        let a = c * ISO_9899.Math.cos(h * .pi / 180)
-        let b = c * ISO_9899.Math.sin(h * .pi / 180)
-        return oklabToRGB(l: l, a: a, b: b)
-    }
-
-    private static func namedColorToRGB(_ namedColor: NamedColor) -> (Int, Int, Int)? {
-        switch namedColor {
-        case .black: return (0, 0, 0)
-        case .white: return (255, 255, 255)
-        case .red: return (255, 0, 0)
-        case .green: return (0, 128, 0)
-        case .lime: return (0, 255, 0)
-        case .blue: return (0, 0, 255)
-        case .yellow: return (255, 255, 0)
-        case .cyan: return (0, 255, 255)
-        case .magenta: return (255, 0, 255)
-        case .silver: return (192, 192, 192)
-        case .gray: return (128, 128, 128)
-        case .maroon: return (128, 0, 0)
-        case .purple: return (128, 0, 128)
-        case .fuchsia: return (255, 0, 255)
-        case .olive: return (128, 128, 0)
-        case .navy: return (0, 0, 128)
-        case .teal: return (0, 128, 128)
-        case .aqua: return (0, 255, 255)
-        // Add more named colors as needed
+        switch self {
+        case .black: return .black
+        case .white: return .white
+        case .red: return .red
+        case .green: return sRGB(r255: 0, g255: 128, b255: 0)
+        case .lime: return sRGB(r255: 0, g255: 255, b255: 0)
+        case .blue: return .blue
+        case .yellow: return sRGB(r255: 255, g255: 255, b255: 0)
+        case .cyan: return sRGB(r255: 0, g255: 255, b255: 255)
+        case .magenta: return sRGB(r255: 255, g255: 0, b255: 255)
+        case .silver: return sRGB(r255: 192, g255: 192, b255: 192)
+        case .gray: return sRGB(r255: 128, g255: 128, b255: 128)
+        case .maroon: return sRGB(r255: 128, g255: 0, b255: 0)
+        case .purple: return sRGB(r255: 128, g255: 0, b255: 128)
+        case .fuchsia: return sRGB(r255: 255, g255: 0, b255: 255)
+        case .olive: return sRGB(r255: 128, g255: 128, b255: 0)
+        case .navy: return sRGB(r255: 0, g255: 0, b255: 128)
+        case .teal: return sRGB(r255: 0, g255: 128, b255: 128)
+        case .aqua: return sRGB(r255: 0, g255: 255, b255: 255)
         default: return nil
         }
-    }
-
-    private static func rgbToHex(red: Int, green: Int, blue: Int) -> String {
-        let bytes: [UInt8] = [UInt8(clamping: red), UInt8(clamping: green), UInt8(clamping: blue)]
-        let hexBytes: [UInt8] = RFC_4648.Base16.encode(bytes, uppercase: true)
-        return "#" + String(decoding: hexBytes, as: UTF8.self)
     }
 }

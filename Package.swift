@@ -23,10 +23,12 @@ extension Target.Dependency {
     static var orderedCollections: Self { .product(name: "OrderedCollections", package: "swift-collections") }
     static var translating: Self { .product(name: "Translating", package: "swift-translating") }
     static var standards: Self { .product(name: "Standards", package: "swift-standards") }
+    static var colorStandard: Self { .product(name: "Color Standard", package: "swift-color-standard") }
     static var incits4_1986: Self { .product(name: "INCITS 4 1986", package: "swift-incits-4-1986") }
     static var rfc4648: Self { .product(name: "RFC 4648", package: "swift-rfc-4648") }
     static var iso9899: Self { .product(name: "ISO 9899", package: "swift-iso-9899") }
     static var whatwgFormURLEncoded: Self { .product(name: "WHATWG Form URL Encoded", package: "swift-whatwg-url") }
+    static var standardsTestSupport: Self { .product(name: "StandardsTestSupport", package: "swift-standards") }
 }
 
 let package = Package(
@@ -63,7 +65,8 @@ let package = Package(
         .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.7.1"),
         .package(url: "https://github.com/swift-standards/swift-rfc-4648", from: "0.6.0"),
         .package(url: "https://github.com/swift-standards/swift-iso-9899", from: "0.2.3"),
-        .package(url: "https://github.com/swift-standards/swift-whatwg-url", from: "0.2.5")
+        .package(url: "https://github.com/swift-standards/swift-whatwg-url", from: "0.2.5"),
+        .package(url: "https://github.com/swift-standards/swift-color-standard", from: "0.1.0")
     ],
     targets: [
         .target(
@@ -75,6 +78,7 @@ let package = Package(
                 .htmlStandard,
                 .orderedCollections,
                 .standards,
+                .colorStandard,
                 .incits4_1986,
                 .rfc4648,
                 .iso9899,
@@ -104,6 +108,7 @@ let package = Package(
             dependencies: [
                 .html,
                 .htmlRenderableTestSupport,
+                .standardsTestSupport,
                 .product(
                     name: "Translating",
                     package: "swift-translating",
@@ -118,7 +123,8 @@ let package = Package(
             name: .htmlComponents.tests,
             dependencies: [
                 .htmlComponents,
-                .htmlRenderableTestSupport
+                .htmlRenderableTestSupport,
+                .standardsTestSupport
             ]
         )
     ],

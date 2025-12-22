@@ -1,5 +1,5 @@
 //
-//  SVGIntegrationTests.swift
+//  InlineSVG Tests.swift
 //  swift-html
 //
 //  Tests for SVG integration with HTML
@@ -7,13 +7,20 @@
 
 import Foundation
 import HTML
+import StandardsTestSupport
 import SVG
 import SVG_Standard
 import Testing
 
-@Suite("SVG Integration Tests")
-struct SVGIntegrationTests {
+@testable import HTML
 
+extension InlineSVG {
+    #TestSuites
+}
+
+// MARK: - Unit Tests
+
+extension InlineSVG.Test.Unit {
     @Test("InlineSVG renders correctly in HTML")
     func inlineSVGRendering() throws {
         let html = div {
@@ -107,8 +114,8 @@ struct SVGIntegrationTests {
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Orange circle\""))
         #expect(renderedString.contains("data:image/svg+xml;charset=utf-8,"))
-        #expect(renderedString.contains("%3Csvg"))  // URL encoded <svg
-        #expect(renderedString.contains("%3Ccircle"))  // URL encoded <circle
+        #expect(renderedString.contains("%3Csvg"))
+        #expect(renderedString.contains("%3Ccircle"))
     }
 
     @Test("img with SVG content as base64")
@@ -127,7 +134,6 @@ struct SVGIntegrationTests {
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Purple circle\""))
         #expect(renderedString.contains("data:image/svg+xml;base64,"))
-        // Verify it's base64 encoded - should not contain raw SVG characters
         #expect(!renderedString.contains("<svg"))
         #expect(!renderedString.contains("<circle"))
     }
@@ -149,8 +155,8 @@ struct SVGIntegrationTests {
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Green square\""))
         #expect(renderedString.contains("data:image/svg+xml;charset=utf-8,"))
-        #expect(renderedString.contains("%3Csvg"))  // URL encoded <svg
-        #expect(renderedString.contains("%3Crect"))  // URL encoded <rect
+        #expect(renderedString.contains("%3Csvg"))
+        #expect(renderedString.contains("%3Crect"))
     }
 
     @Test("img with raw SVG string as base64")
@@ -170,11 +176,9 @@ struct SVGIntegrationTests {
         #expect(renderedString.contains("<img"))
         #expect(renderedString.contains("alt=\"Blue square\""))
         #expect(renderedString.contains("data:image/svg+xml;base64,"))
-        // Verify it's base64 encoded
         #expect(!renderedString.contains("<svg"))
         #expect(!renderedString.contains("<rect"))
 
-        // Verify the base64 decodes correctly
         if let range = renderedString.range(of: "data:image/svg+xml;base64,") {
             let base64Part = renderedString[range.upperBound...]
             if let endRange = base64Part.range(of: "\"") {

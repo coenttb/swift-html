@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 29/07/2025.
 //
 
-import Foundation
 import HTML_Standard
 import WHATWG_HTML_Elements
 

@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 28/07/2024.
 //
 
-import Foundation
 import HTML
 
 // Version without custom head content

@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 09/10/2024.
 //
 
-import Foundation
 import HTML_Rendering
 
 extension HTML.View {

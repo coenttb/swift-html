@@ -5,9 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 28/08/2025.
 //
 
-import Foundation
 import HTML_Rendering
-import RFC_4648
 
 extension String.StringInterpolation {
     public mutating func appendInterpolation(html value: some HTML.View) {
@@ -17,24 +15,13 @@ extension String.StringInterpolation {
         // Escape characters that would break template literals
         let escapedString =
             htmlString
-            .replacingOccurrences(of: "\\", with: "\\\\")  // Escape backslashes first (must be first!)
-            .replacingOccurrences(of: "`", with: "\\`")  // Escape backticks
-            .replacingOccurrences(of: "${", with: "\\${")  // Escape template literal expressions
-            .replacingOccurrences(of: "\u{2028}", with: "\\u2028")  // Escape line separator
-            .replacingOccurrences(of: "\u{2029}", with: "\\u2029")  // Escape paragraph separator
+            .replacing("\\", with: "\\\\")  // Escape backslashes first (must be first!)
+            .replacing("`", with: "\\`")  // Escape backticks
+            .replacing("${", with: "\\${")  // Escape template literal expressions
+            .replacing("\u{2028}", with: "\\u2028")  // Escape line separator
+            .replacing("\u{2029}", with: "\\u2029")  // Escape paragraph separator
 
         // Wrap in backticks to create a template literal
         appendLiteral("`\(escapedString)`")
-    }
-}
-
-extension String.StringInterpolation {
-    public mutating func appendInterpolation(json value: some Codable) {
-        guard let data = try? JSONEncoder().encode(value) else {
-            appendLiteral("`null`")
-            return
-        }
-        let json = Array(data).base64.encoded()
-        appendLiteral(#"`\#(json)`"#)
     }
 }
