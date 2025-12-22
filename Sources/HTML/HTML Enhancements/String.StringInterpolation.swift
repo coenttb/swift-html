@@ -7,6 +7,7 @@
 
 import Foundation
 import HTML_Rendering
+import RFC_4648
 
 extension String.StringInterpolation {
     public mutating func appendInterpolation(html value: some HTML.View) {
@@ -29,7 +30,11 @@ extension String.StringInterpolation {
 
 extension String.StringInterpolation {
     public mutating func appendInterpolation(json value: some Codable) {
-        let json = try! JSONEncoder().encode(value).base64EncodedString()
+        guard let data = try? JSONEncoder().encode(value) else {
+            appendLiteral("`null`")
+            return
+        }
+        let json = Array(data).base64.encoded()
         appendLiteral(#"`\#(json)`"#)
     }
 }

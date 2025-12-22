@@ -23,3 +23,7 @@ Thumbs.db
 !CODE_OF_CONDUCT.md
 !SECURITY.md
 !**/*.docc/**/*.md
+
+
+# SwiftLint Remote Config Cache
+.swiftlint/RemoteConfigCache
