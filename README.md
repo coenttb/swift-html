@@ -2,7 +2,7 @@
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
-Type-safe HTML generation with CSS styling for Swift. Fluent CSS API, dark mode support, and SwiftUI-like component composition. Single import for server-side web applications.
+The Swift HTML library built on [swift-standards](https://github.com/swift-standards).
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ Type-safe HTML generation with CSS styling for Swift. Fluent CSS API, dark mode 
 
 ## Overview
 
-swift-html provides a unified import that re-exports swift-html-rendering, swift-css, swift-svg, and related packages. Build type-safe HTML with compile-time validated CSS, automatic dark mode handling, and component-based architecture.
+swift-html is a unified import for type-safe HTML generation. It re-exports [swift-html-rendering](https://github.com/coenttb/swift-html-rendering), [swift-css](https://github.com/coenttb/swift-css), [swift-svg](https://github.com/coenttb/swift-svg), and related packages—all grounded in [swift-standards](https://github.com/swift-standards) for domain-accurate representations of WHATWG and W3C specifications.
 
 ## Installation
 
