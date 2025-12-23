@@ -1,128 +1,249 @@
 # swift-html
 
-[![CI](https://github.com/coenttb/swift-html/workflows/CI/badge.svg)](https://github.com/coenttb/swift-html/actions/workflows/ci.yml)
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
-Type-safe HTML and CSS generation in Swift for building websites, email templates, and server-side rendered pages.
+Type-safe HTML generation with CSS styling for Swift. Fluent CSS API, dark mode support, and SwiftUI-like component composition. Single import for server-side web applications.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage Examples](#usage-examples)
+- [Architecture](#architecture)
+- [Features](#features)
+- [Requirements](#requirements)
+- [License](#license)
 
 ## Overview
 
-swift-html provides type-safe HTML elements and CSS properties with compile-time validation. It combines strongly-typed HTML elements, validated CSS properties, and an efficient rendering engine for web content generation in Swift.
-
-## Features
-
-- Compile-time HTML and CSS validation
-- Type-safe element attributes and CSS properties
-- First-class dark mode support with light/dark color schemes
-- Optional internationalization support via Translating trait
-- SwiftUI-like syntax for familiar API patterns
-- Direct byte-level rendering for server applications
-- Modular architecture with focused packages
+swift-html provides a unified import that re-exports swift-html-rendering, swift-css, swift-svg, and related packages. Build type-safe HTML with compile-time validated CSS, automatic dark mode handling, and component-based architecture.
 
 ## Installation
 
-Add swift-html to your Swift package dependencies:
+Add swift-html to your Package.swift:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/coenttb/swift-html", from: "0.0.1")
+    .package(url: "https://github.com/coenttb/swift-html", from: "0.1.0")
 ]
 ```
 
-## Quick Start
+Add to your target:
 
-### Basic HTML Generation
+```swift
+.target(
+    name: "YourTarget",
+    dependencies: [
+        .product(name: "HTML", package: "swift-html"),
+    ]
+)
+```
+
+### Requirements
+
+- Swift 6.2+
+- macOS 26.0+, iOS 26.0+
+- Xcode 26.0+ (for Apple platforms)
+
+## Quick Start
 
 ```swift
 import HTML
 
-let page = div {
-    h1 { "Welcome to swift-html" }
-        .color(.red)
-        .fontSize(.rem(2.5))
+let page = HTML.Document {
+    div {
+        h1 { "Welcome" }
+            .css
+            .color(.blue)
+            .fontSize(.px(24))
 
-    p { "Build type-safe web pages with Swift" }
-        .color(light: .gray800, dark: .gray200)
-        .lineHeight(1.6)
+        p { "Type-safe HTML with CSS" }
+            .css.color(light: .gray900, dark: .gray100)
+    }
 }
 
-let bytes: ContiguousArray<UInt8> = page.render()
-let string: String = String(decoding: bytes, as: UTF8.self)
+let html = try String(page)
+```
+
+## Usage Examples
+
+### Basic Elements
+
+```swift
+div { "Content" }
+h1 { "Heading" }
+p { "Paragraph" }
+a(href: "/path") { "Link" }
+button { "Click me" }
+```
+
+### CSS Styling (Fluent API)
+
+```swift
+div { "Styled" }
+    .css
+    .display(.flex)
+    .padding(.px(16))
+    .backgroundColor(.white)
+    .borderRadius(.px(8))
+```
+
+### Dark Mode
+
+```swift
+// Automatic light/dark variants
+div { "Adaptive" }
+    .css
+    .color(light: .gray900, dark: .gray100)
+    .backgroundColor(light: .white, dark: .hex("1a1a1a"))
+
+// Theme colors (auto-adaptive)
+div { "Themed" }
+    .css.color(.blue)  // DarkModeColor with light/dark variants
 ```
 
 ### Layout Components
 
 ```swift
-import HTML
-
-// Horizontal stack
-let header = HStack {
-    div { "Logo" }
+HStack(alignment: .top, spacing: .px(16)) {
+    div { "Left" }
     Spacer()
-    div { "Menu" }
+    div { "Right" }
 }
 
-// Vertical stack
-let content = VStack {
-    div { "Section 1" }
-    div { "Section 2" }
+VStack(alignment: .start, spacing: .px(12)) {
+    h2 { "Title" }
+    p { "Content" }
 }
 
-// Grid layout
-let grid = LazyVGrid(columns: [1, 2, 1]) {
-    div { "Item 1" }
-    div { "Item 2" }
-    div { "Item 3" }
+LazyVGrid(columns: [1, 2, 1]) {
+    div { "A" }
+    div { "B" }
+    div { "C" }
 }
 ```
 
-### Dark Mode Support
+### Custom Components
 
 ```swift
-import HTML
-
-let adaptiveContent = p { "Adaptive text" }
-    .color(light: .gray900, dark: .gray100)
-    .backgroundColor(light: .white, dark: .gray900)
-```
-
-### Reusable Components
-
-```swift
-import HTML
-
-struct CustomButton: HTML.View {
+struct Card: HTML.View {
     let title: String
-    let href: String
+    let content: String
 
     var body: some HTML.View {
-        a(href: .init(rawValue: href)) { title }
-            .display(.inlineBlock)
-            .padding(vertical: .rem(0.5), horizontal: .rem(1))
-            .backgroundColor(.blue)
-            .color(.white)
-            .borderRadius(.px(6))
-            .textDecoration(TextDecoration.none)
+        div {
+            h3 { title }
+            p { content }
+        }
+        .css
+        .padding(.px(24))
+        .backgroundColor(.white)
+        .borderRadius(.px(8))
     }
 }
 
 // Usage
-CustomButton(title: "Learn More", href: "/docs")
+Card(title: "Hello", content: "World")
 ```
 
-### Internationalization (Optional)
-
-Enable the Translating trait for internationalization support:
+### Media Queries
 
 ```swift
-// In Package.swift
+div { "Responsive" }
+    .css
+    .display(.block)
+    .media(.minWidth(.px(768))) {
+        $0.display(.flex)
+    }
+```
+
+### Inline SVG
+
+```swift
+InlineSVG {
+    svg(width: 100, height: 100) {
+        circle(cx: 50, cy: 50, r: 40)
+            .fill("red")
+            .stroke("black")
+            .strokeWidth(3)
+    }
+}
+
+// Raw SVG string
+svg("<svg width=\"50\" height=\"50\"><circle cx=\"25\" cy=\"25\" r=\"20\" fill=\"blue\"/></svg>")
+
+// SVG as data URI in img tag
+img(svg: svgContent, alt: "Icon", base64: false)
+```
+
+### Rendering
+
+```swift
+// To string (minified by default)
+let html = try String(document)
+
+// Pretty-printed
+try HTML.Context.Configuration.$current.withValue(.pretty) {
+    let pretty = try String(document)
+}
+
+// To bytes
+let bytes = [UInt8](document)
+```
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        swift-html                            │
+│                    (unified re-export)                       │
+├─────────────────────────────────────────────────────────────┤
+│  swift-html-rendering  │  swift-css  │  swift-svg  │  ...   │
+│  (HTML.View, Document) │  (.css API) │  (SVG DSL)  │        │
+├─────────────────────────────────────────────────────────────┤
+│         swift-standards (CSS Standard, Color, etc.)          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Re-exported modules:**
+
+| Module | Purpose |
+|--------|---------|
+| `HTML_Rendering` | Core HTML.View protocol and rendering |
+| `CSS` | Fluent CSS API with dark mode |
+| `CSS_Theming` | Theme system with semantic colors |
+| `SVG` | Type-safe SVG generation |
+| `Markdown_HTML_Rendering` | Markdown to HTML |
+| `Standards` | Layout, geometry types |
+
+## Features
+
+| Feature | Description |
+|---------|-------------|
+| **Type-safe HTML** | HTML5 elements with compile-time validation |
+| **Fluent CSS** | `.css.display(.flex).padding(.px(16))` chaining |
+| **Dark mode** | `DarkModeColor(light:dark:)` with automatic media queries |
+| **Theming** | Semantic color system (`.text.primary`, `.background.elevated`) |
+| **Layout** | HStack, VStack, Spacer, LazyVGrid components |
+| **SVG** | Inline SVG with type-safe elements |
+| **Media queries** | `.media(.minWidth(.px(768))) { ... }` |
+| **Rendering** | Single-pass byte rendering, pretty-print option |
+| **i18n (optional)** | TranslatedString support via "Translating" trait |
+
+### Optional: Translating Trait
+
+Enable internationalization support:
+
+```swift
+// Package.swift
 dependencies: [
-    .package(url: "https://github.com/coenttb/swift-html", from: "0.11.0",
+    .package(url: "https://github.com/coenttb/swift-html", from: "0.1.0",
              traits: ["Translating"])
 ]
 ```
 
-Then use TranslatedString in your HTML:
+Usage:
 
 ```swift
 import HTML
@@ -133,88 +254,15 @@ let greeting = TranslatedString(
     english: "Welcome"
 )
 
-let page = div {
-    h1 { greeting }
-    p {
-        TranslatedString(
-            dutch: "Dit is een voorbeeld",
-            english: "This is an example"
-        )
-    }
-}
+h1 { greeting }
 ```
-
-## Usage
-
-swift-html is composed of several focused packages:
-
-- **HTML** - Core HTML elements and rendering
-- **HTMLComponents** - Reusable UI components
-- **HTMLMarkdown** - Markdown to HTML conversion
-- **HTMLEmail** - Email template generation
-- **HTMLWebsite** - Website-specific components
-- **HTMLKit** - Convenience bundle (HTML + HTMLTheme + HTMLComponents)
-
-Import only what you need:
-
-```swift
-// Individual modules
-import HTML
-import CSS_Theming
-import HTMLComponents
-
-// Or use the kit
-import HTMLKit
-```
-
-## Related Packages
-
-### Dependencies
-
-- [pointfree-html](https://github.com/coenttb/pointfree-html): A fork of pointfreeco/swift-html with extended functionality.
-- [pointfree-html-translating](https://github.com/coenttb/pointfree-html-translating): A Swift package integrating pointfree-html with swift-translating.
-- [swift-builders](https://github.com/coenttb/swift-builders): A Swift package with result builders for Array, Dictionary, Set, String, and Markdown.
-- [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree): A Swift package integrating swift-html-standard and swift-css-types with pointfree-html.
-- [swift-html-standard](https://github.com/coenttb/swift-html-standard): A Swift package with foundational types for HTML.
-- [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
-- [swift-translating](https://github.com/coenttb/swift-translating): A Swift package for inline translations.
-
-### Used By
-
-This package is used by many packages across the ecosystem, including:
-
-- [coenttb-blog](https://github.com/coenttb/coenttb-blog): A Swift package for blog functionality with HTML generation.
-- [coenttb-com-blog-drafts](https://github.com/coenttb/coenttb-com-blog-drafts): Repository containing draft blog posts for coenttb.com.
-- [coenttb-com-server](https://github.com/coenttb/coenttb-com-server): Production server for coenttb.com built with Boiler.
-- [coenttb-google-analytics](https://github.com/coenttb/coenttb-google-analytics): A Swift package for Google Analytics integration.
-- [coenttb-hotjar](https://github.com/coenttb/coenttb-hotjar): A Swift package for Hotjar analytics integration.
-- [coenttb-newsletter](https://github.com/coenttb/coenttb-newsletter): A Swift package for newsletter subscription and email management.
-- [coenttb-syndication](https://github.com/coenttb/coenttb-syndication): A Swift package for RSS and Atom feed generation.
-- [coenttb-web](https://github.com/coenttb/coenttb-web): A Swift package with tools for web development building on swift-web.
-- [swift-document-templates](https://github.com/coenttb/swift-document-templates): A Swift package for data-driven business document creation.
-- [swift-favicon](https://github.com/coenttb/swift-favicon): A Swift package for type-safe favicons.
-
-*And 9 other packages in the ecosystem*
-
-### Third-Party Dependencies
-
-- [pointfreeco/swift-dependencies](https://github.com/pointfreeco/swift-dependencies): A dependency management library for controlling dependencies in Swift.
-- [apple/swift-collections](https://github.com/apple/swift-collections): Commonly used data structures for Swift.
 
 ## Requirements
 
-- Swift 5.9+
-- macOS 14+ / iOS 17+ / tvOS 17+ / watchOS 10+
-- Linux (via Swift 6.0+)
+- Swift 6.2+
+- macOS 26.0+, iOS 26.0+, tvOS 26.0+, watchOS 26.0+
+- Xcode 26.0+ (for Apple platforms)
 
 ## License
 
-This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.
-
-## Contributing
-
-Contributions are welcome. Please open an issue to discuss proposed changes before submitting a pull request.
-
----
-
-Made by [coenttb](https://coenttb.com)
+Apache 2.0 - See [LICENSE](LICENSE) for details.
