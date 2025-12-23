@@ -129,6 +129,7 @@ private struct _CustomButton: HTML.View {
 
 // MARK: - Snapshot Tests
 
+#if canImport(Darwin)
 extension HTMLDocumentTests.Test.Snapshot {
     @Test("Full document example")
     func fullDocumentExample() {
@@ -219,3 +220,4 @@ extension HTMLDocumentTests.Test.Snapshot {
         }
     }
 }
+#endif

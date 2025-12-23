@@ -16,6 +16,7 @@ extension Spacer {
 
 // MARK: - Snapshot Tests
 
+#if canImport(Darwin)
 extension Spacer.Test.Snapshot {
     @Test("Spacer pushes items apart in HStack")
     func spacer() {
@@ -41,3 +42,4 @@ extension Spacer.Test.Snapshot {
         }
     }
 }
+#endif

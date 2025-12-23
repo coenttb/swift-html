@@ -21,6 +21,7 @@
 
     // MARK: - Snapshot Tests
 
+    #if canImport(Darwin)
     extension TranslatedStringHTML.Test.Snapshot {
         @Test("TranslatedString renders as HTML")
         func translatedStringRendersAsHTML() {
@@ -241,4 +242,5 @@
             }
         }
     }
+    #endif
 #endif

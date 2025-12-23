@@ -16,6 +16,7 @@ enum HStackTests {
 
 // MARK: - Snapshot Tests
 
+#if canImport(Darwin)
 extension HStackTests.Test.Snapshot {
     @Test("HStack renders with default settings")
     func hstack() {
@@ -59,3 +60,4 @@ extension HStackTests.Test.Snapshot {
         }
     }
 }
+#endif

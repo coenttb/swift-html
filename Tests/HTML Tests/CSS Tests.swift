@@ -16,6 +16,7 @@ enum CSSNamespace {
 
 // MARK: - Snapshot Tests - Fluent Chaining
 
+#if canImport(Darwin)
 extension CSSNamespace.Test.Snapshot {
     @Test("Fluent chaining without repeated .css calls")
     func fluentChaining() {
@@ -1119,6 +1120,7 @@ extension CSSNamespace.Test.Snapshot {
         }
     }
 }
+#endif
 
 // MARK: - Unit Tests - CSS Color
 
@@ -1200,6 +1202,7 @@ extension CSSNamespace.Test.Unit {
 
 // MARK: - Snapshot Tests - Color with HTML
 
+#if canImport(Darwin)
 extension CSSNamespace.Test.Snapshot {
     @Test("General color styling")
     func general1() {
@@ -1438,6 +1441,7 @@ extension CSSNamespace.Test.Snapshot {
         }
     }
 }
+#endif
 
 // MARK: - Test Helpers
 

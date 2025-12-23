@@ -126,6 +126,7 @@ extension DarkModeColor.Test.Unit {
 
 // MARK: - Snapshot Tests
 
+#if canImport(Darwin)
 extension DarkModeColor.Test.Snapshot {
     @Test("HTMLColor with light only auto-darkens")
     func htmlColorAutoDarken() {
@@ -1052,3 +1053,4 @@ extension DarkModeColor.Test.Snapshot {
         }
     }
 }
+#endif

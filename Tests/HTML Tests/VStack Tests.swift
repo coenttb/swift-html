@@ -16,6 +16,7 @@ enum VStackTests {
 
 // MARK: - Snapshot Tests
 
+#if canImport(Darwin)
 extension VStackTests.Test.Snapshot {
     @Test("VStack renders with default settings")
     func vstack() {
@@ -59,3 +60,4 @@ extension VStackTests.Test.Snapshot {
         }
     }
 }
+#endif

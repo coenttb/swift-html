@@ -18,6 +18,7 @@ enum LazyVGridTests {
 
 // MARK: - Snapshot Tests
 
+#if canImport(Darwin)
 extension LazyVGridTests.Test.Snapshot {
     @Test("LazyVGrid with fractions columns")
     func lazyVGrid() {
@@ -116,3 +117,4 @@ extension LazyVGridTests.Test.Snapshot {
         }
     }
 }
+#endif
