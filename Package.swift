@@ -45,9 +45,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.14"),
-        .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.2"),
-        .package(url: "https://github.com/coenttb/swift-css", from: "0.6.0"),
+        .package(url: "https://github.com/coenttb/swift-html-rendering", from: "0.1.15"),
+        .package(url: "https://github.com/coenttb/swift-markdown-html-rendering", from: "0.1.3"),
+        .package(url: "https://github.com/coenttb/swift-css", from: "0.6.1"),
         .package(url: "https://github.com/coenttb/swift-svg", from: "0.3.0"),
         .package(url: "https://github.com/coenttb/swift-translating", from: "0.3.0"),
         .package(url: "https://github.com/swift-standards/swift-standards", from: "0.20.0"),
