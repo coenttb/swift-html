@@ -143,6 +143,7 @@ let package = Package(
             dependencies: [
                 .html,
                 .htmlRenderingCoreTestSupport,
+                .rfc4648,
             ],
             path: "Tests/HTML Tests"
         ),

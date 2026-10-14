@@ -1,6 +1,6 @@
-import Foundation
 import HTML
 import HTML_Rendering_Core_Test_Support
+import RFC_4648
 import SVG
 import SVG_Standard
 import Testing
@@ -185,18 +185,20 @@ extension InlineSVG.Test.Unit {
         #expect(!renderedString.contains("<svg"))
         #expect(!renderedString.contains("<rect"))
 
-        if let range = renderedString.range(of: "data:image/svg+xml;base64,") {
-            let base64Part = renderedString[range.upperBound...]
-            if let endRange = base64Part.range(of: "\"") {
-                let base64String = String(base64Part[..<endRange.lowerBound])
-                if let data = Data(base64Encoded: base64String) {
-                    let decoded = String(data: data, encoding: .utf8) ?? ""
-                    #expect(decoded.contains("<svg"))
-                    #expect(decoded.contains("<rect"))
-                    #expect(decoded.contains("blue"))
-                }
-            }
-        }
+        let prefix = "data:image/svg+xml;base64,"
+        let prefixStart = try #require(
+            renderedString.indices.first { renderedString[$0...].hasPrefix(prefix) }
+        )
+        let payloadStart = renderedString.index(prefixStart, offsetBy: prefix.count)
+        let payload = renderedString[payloadStart...]
+        let payloadEnd = try #require(payload.firstIndex(of: "\""))
+        let bytes = try #require(
+            RFC_4648.Base64.decode(payload[..<payloadEnd], strictness: .strict)
+        )
+        let decoded = String(decoding: bytes.map(\.underlying), as: UTF8.self)
+        #expect(decoded.contains("<svg"))
+        #expect(decoded.contains("<rect"))
+        #expect(decoded.contains("blue"))
     }
 }
 
