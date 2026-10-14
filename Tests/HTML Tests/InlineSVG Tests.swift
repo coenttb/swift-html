@@ -195,7 +195,7 @@ extension InlineSVG.Test.Unit {
         let bytes = try #require(
             RFC_4648.Base64.decode(payload[..<payloadEnd], strictness: .strict)
         )
-        let decoded = String(decoding: bytes.map(\.underlying), as: UTF8.self)
+        let decoded = try #require(String(validating: bytes.map(\.underlying), as: UTF8.self))
         #expect(decoded.contains("<svg"))
         #expect(decoded.contains("<rect"))
         #expect(decoded.contains("blue"))
