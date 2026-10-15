@@ -9,14 +9,14 @@ import WHATWG_HTML_MediaAttributes
 
 public struct InlineSVG: HTML.View {
 
-    private let content: any SVG.View
+    private let content: SVG.AnyView
 
     public init<Content: SVG.View>(@SVG.Builder _ content: () -> Content) {
-        self.content = content()
+        self.content = SVG.AnyView(content())
     }
 
     public init<Content: SVG.View>(_ content: Content) {
-        self.content = content
+        self.content = SVG.AnyView(content)
     }
 }
 
@@ -39,13 +39,12 @@ extension HTML.Image.Element {
         loading: HTML.Loading.Attribute? = .eager
     ) {
         var src: HTML.Src.Attribute {
-            if base64 {
-                return "data:image/svg+xml;base64,\([UInt8](svg).map(Byte.init(bitPattern:)).base64.encoded())"
-            } else {
+            guard base64 else {
 
                 return
                     "data:image/svg+xml;charset=utf-8,\(WHATWG_Form_URL_Encoded.PercentEncoding.encode(String(svg), space: .percentEscaped))"
             }
+            return "data:image/svg+xml;base64,\([UInt8](svg).map(Byte.init(bitPattern:)).base64.encoded())"
         }
 
         self = .init(
