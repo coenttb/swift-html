@@ -123,7 +123,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: .html,
+            name: "HTML",
             dependencies: [
                 .htmlRendering,
                 .css,
